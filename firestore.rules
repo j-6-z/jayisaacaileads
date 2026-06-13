@@ -1,0 +1,62 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /* ── users/{uid} ─────────────────────────────────────────
+       Each user owns exactly one doc: { credits, revealed[], email, name, createdAt }
+       Reads: own doc only.
+       Creates: own doc only, credits must equal the starting grant (100).
+       Updates: two legal shapes —
+         (a) REVEAL: credits drop by exactly 1 AND revealed grows by exactly 1
+         (b) PROFILE: credits and revealed untouched (name/email edits etc.)
+       Nobody can mint credits client-side. Credit grants from purchases
+       happen via the Admin SDK (webhook/script), which bypasses rules.   */
+    match /users/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+
+      allow create: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.data.credits == 100
+        && request.resource.data.revealed is list
+        && request.resource.data.revealed.size() == 0;
+
+      allow update: if request.auth != null
+        && request.auth.uid == uid
+        && (
+          /* (a) reveal: -1 credit, +1 revealed id, never below zero */
+          (
+            request.resource.data.credits == resource.data.credits - 1
+            && resource.data.credits > 0
+            && request.resource.data.revealed.size() == resource.data.revealed.size() + 1
+            && request.resource.data.revealed.hasAll(resource.data.revealed)
+          )
+          ||
+          /* (b) profile-only update: money fields untouched */
+          (
+            request.resource.data.credits == resource.data.credits
+            && request.resource.data.revealed == resource.data.revealed
+          )
+        );
+
+      allow delete: if false;
+    }
+
+    /* ── contacts/{id} ───────────────────────────────────────
+       PUBLIC fields only: name, title, company, employees, location,
+       industry, province, sizeBucket, titleCategory, emailDomain,
+       website, revenue. NO raw emails or phone numbers in here, ever. */
+    match /contacts/{id} {
+      allow read: if request.auth != null;
+      allow write: if false;   /* imports via Admin SDK only */
+    }
+
+    /* ── contacts_private/{id} ───────────────────────────────
+       The actual email + phone. Readable ONLY if the requesting
+       user has already paid for this id (it's in their revealed list). */
+    match /contacts_private/{id} {
+      allow read: if request.auth != null
+        && id in get(/databases/$(database)/documents/users/$(request.auth.uid)).data.revealed;
+      allow write: if false;   /* imports via Admin SDK only */
+    }
+  }
+}

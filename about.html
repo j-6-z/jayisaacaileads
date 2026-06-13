@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — JAYISAAC AI</title>
+<meta name="description" content="JAYISAAC AI is a B2B contact intelligence platform built in Saskatoon, Canada. Learn who we are and why we built it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --orange:#C95E1A;--orange-bright:#E8742E;--orange-dark:#A84B12;--orange-soft:#FBEEE4;
+  --charcoal:#1C1F24;--charcoal-deep:#141619;
+  --ink:#1A2433;--slate:#5B6878;--mist:#8C97A6;
+  --line:#E5E9EF;--bg:#F7F8FA;--white:#fff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--ink);background:var(--white);font-size:15px;line-height:1.7}
+a{color:var(--orange);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+/* hero */
+.page-hero{
+  background:
+    radial-gradient(800px 400px at 90% -20%, rgba(201,94,26,.22), transparent 60%),
+    var(--charcoal-deep);
+  color:#fff;padding:88px 0 72px;
+}
+.eyebrow{
+  display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--orange-bright);border:1px solid rgba(232,116,46,.35);background:rgba(232,116,46,.1);
+  padding:6px 14px;border-radius:20px;margin-bottom:18px;
+}
+.page-hero h1{font-size:clamp(30px,5vw,46px);font-weight:800;letter-spacing:-.02em;line-height:1.15;max-width:720px}
+.page-hero p{color:#A8B0BB;font-size:17px;max-width:620px;margin-top:16px}
+
+/* sections */
+section{padding:72px 0}
+section.alt{background:var(--bg)}
+.sec-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--orange);margin-bottom:10px}
+h2{font-size:clamp(24px,3.4vw,32px);font-weight:800;letter-spacing:-.02em;margin-bottom:16px}
+.lead{font-size:16.5px;color:var(--slate);max-width:720px}
+.prose{max-width:720px;color:var(--slate)}
+.prose p{margin-bottom:16px}
+.prose strong{color:var(--ink)}
+
+/* stats band */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:36px}
+.stat{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:24px}
+section.alt .stat{background:var(--white)}
+.stat .num{font-size:30px;font-weight:800;color:var(--orange);letter-spacing:-.02em}
+.stat .lbl{font-size:12.5px;font-weight:600;color:var(--slate);margin-top:4px}
+
+/* values grid */
+.values{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:36px}
+.value{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:26px}
+.value .vicon{
+  width:40px;height:40px;border-radius:10px;background:var(--orange-soft);
+  display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+}
+.value .vicon svg{width:19px;height:19px;color:var(--orange)}
+.value h3{font-size:16px;font-weight:800;margin-bottom:8px}
+.value p{font-size:13.5px;color:var(--slate)}
+
+/* CTA band */
+.cta-band{
+  background:
+    radial-gradient(700px 350px at 10% 120%, rgba(201,94,26,.25), transparent 60%),
+    var(--charcoal);
+  color:#fff;text-align:center;padding:72px 24px;
+}
+.cta-band h2{margin-bottom:10px}
+.cta-band p{color:#A8B0BB;margin-bottom:26px}
+.btn{
+  display:inline-block;background:var(--orange);color:#fff;font-weight:800;font-size:14.5px;
+  padding:14px 30px;border-radius:10px;box-shadow:0 6px 20px rgba(201,94,26,.35);transition:.15s;
+}
+.btn:hover{background:var(--orange-dark);text-decoration:none}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.25);box-shadow:none;margin-left:10px}
+.btn.ghost:hover{border-color:var(--orange-bright);color:var(--orange-bright)}
+</style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<header class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">About JAYISAAC AI</span>
+    <h1>B2B contact intelligence, built where the work actually happens.</h1>
+    <p>We help sales teams find and reach the businesses that pick up the phone — starting with the trades and service companies that keep North America running.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-label">Our Story</div>
+    <h2>Built in Saskatoon. Not Silicon Valley.</h2>
+    <div class="prose">
+      <p>JAYISAAC AI started with a simple frustration: the big contact databases are priced for enterprise teams and built around tech companies. If you sell to plumbers, HVAC shops, roofers, electricians, and contractors — the businesses that actually answer their phones — the data is thin, stale, or locked behind a five-figure annual contract.</p>
+      <p>So we built our own. <strong>JAYISAAC AI is a prospecting platform with verified contact data for North American businesses</strong>, with deep coverage of the trades and local service economy that other platforms treat as an afterthought.</p>
+      <p>We're founder-built and independent. Every feature ships because a real sales workflow needed it — not because a product committee approved it. That means fast iteration, straight answers, and pricing a small team can actually afford.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num">1M+</div><div class="lbl">North American business contacts</div></div>
+      <div class="stat"><div class="num">100%</div><div class="lbl">Canadian owned &amp; operated</div></div>
+      <div class="stat"><div class="num">10</div><div class="lbl">Provinces + 50 states covered</div></div>
+      <div class="stat"><div class="num">24/7</div><div class="lbl">Self-serve platform access</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-label">What We Believe</div>
+    <h2>The principles behind the product</h2>
+    <div class="values">
+      <div class="value">
+        <div class="vicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h3>Data you can dial</h3>
+        <p>A contact record is only worth something if the phone rings and the email lands. We prioritize verification and freshness over inflating our record count.</p>
+      </div>
+      <div class="value">
+        <div class="vicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+        <h3>Pricing without the ambush</h3>
+        <p>No forced annual contracts, no "talk to sales" wall, no surprise overage invoices. Plain plans, transparent credits, cancel whenever.</p>
+      </div>
+      <div class="value">
+        <div class="vicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L4 5.5V11c0 5 3.4 9.4 8 10.5 4.6-1.1 8-5.5 8-10.5V5.5L12 2z"/></svg></div>
+        <h3>Privacy isn't a footnote</h3>
+        <p>We operate under Canadian privacy law (PIPEDA) and honor removal requests fast. Business contact data, handled like it belongs to real people — because it does.</p>
+      </div>
+      <div class="value">
+        <div class="vicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+        <h3>AI that does work, not demos</h3>
+        <p>We use AI where it saves you hours — enrichment, list building, personalization — not as a buzzword to pad a pitch deck.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-label">The Company</div>
+    <h2>Independent and accountable</h2>
+    <div class="prose">
+      <p>JAYISAAC AI is a registered Canadian software company headquartered in Saskatoon, Saskatchewan. We're bootstrapped, which means our only customers are our actual customers — no investors steering the roadmap.</p>
+      <p>Questions, feedback, partnership ideas, or just want to talk shop? <a href="contact.html">Reach out directly</a> — a human reads everything.</p>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <h2>See the platform for yourself</h2>
+  <p>Create a free account and get 100 credits — no card required.</p>
+  <a class="btn" href="login.html">Start Free Trial</a>
+  <a class="btn ghost" href="pricing.html">View Pricing</a>
+</div>
+
+<div id="footer-placeholder"></div>
+<script type="module" src="./nav.js"></script>
+<script type="module" src="./footer.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found — JAYISAAC AI</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --orange:#C95E1A;--orange-bright:#E8742E;--orange-dark:#A84B12;
+  --charcoal-deep:#141619;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Plus Jakarta Sans',-apple-system,sans-serif;
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:
+    radial-gradient(900px 500px at 85% -10%, rgba(201,94,26,.2), transparent 60%),
+    radial-gradient(700px 500px at -10% 110%, rgba(201,94,26,.1), transparent 55%),
+    var(--charcoal-deep);
+  color:#fff;text-align:center;padding:24px;
+}
+.box{max-width:480px}
+.logo{
+  width:56px;height:56px;border-radius:14px;margin:0 auto 24px;
+  background:linear-gradient(135deg,var(--orange-bright),var(--orange-dark));
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 24px rgba(201,94,26,.45);
+}
+.logo svg{width:30px;height:30px}
+.code{
+  font-size:clamp(64px,14vw,96px);font-weight:800;letter-spacing:-.04em;line-height:1;
+  background:linear-gradient(135deg,#fff 30%,var(--orange-bright));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+h1{font-size:20px;font-weight:800;margin:14px 0 8px}
+p{font-size:14px;color:#A8B0BB;line-height:1.7;margin-bottom:28px}
+.btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+a{
+  display:inline-block;font-size:13.5px;font-weight:800;text-decoration:none;
+  padding:12px 24px;border-radius:10px;transition:.15s;
+}
+.solid{background:var(--orange);color:#fff;box-shadow:0 6px 20px rgba(201,94,26,.35)}
+.solid:hover{background:var(--orange-dark)}
+.ghost{color:#fff;border:1px solid rgba(255,255,255,.22)}
+.ghost:hover{border-color:var(--orange-bright);color:var(--orange-bright)}
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="logo">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L4 5.5V11c0 5 3.4 9.4 8 10.5 4.6-1.1 8-5.5 8-10.5V5.5L12 2z" fill="#fff"/></svg>
+  </div>
+  <div class="code">404</div>
+  <h1>This page isn't in the database</h1>
+  <p>The link is dead or the page moved. Unlike our contact records, we couldn't verify this one.</p>
+  <div class="btns">
+    <a class="solid" href="/">Back to Home</a>
+    <a class="ghost" href="/app.html">Open the App</a>
+    <a class="ghost" href="/contact.html">Report a Broken Link</a>
+  </div>
+</div>
+</body>
+</html>

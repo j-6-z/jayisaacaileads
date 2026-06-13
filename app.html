@@ -1,0 +1,2134 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JAYISAAC AI — Prospect Search</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   JAYISAAC AI — DARK COCKPIT
+   black glass · neon orange · glowing data readouts
+   ============================================================ */
+:root{
+  --o:#FF6B1A;            /* neon orange */
+  --o-hot:#FF8A3D;        /* hotter highlight */
+  --o-deep:#C44E10;       /* deep orange */
+  --o-glow:rgba(255,107,26,.55);
+  --o-dim:rgba(255,107,26,.13);
+  --o-line:rgba(255,107,26,.30);
+
+  --rail-w:70px;
+  --rail-w-open:224px;
+  --filters-w:280px;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --ease:cubic-bezier(.4,0,.2,1);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+}
+
+/* ===== DARK (Apollo grey) — default ===== */
+[data-theme="dark"]{
+  --black:#16181D;        /* base — slate */
+  --p0:#1A1D23;
+  --p1:#1E2128;
+  --p2:#23262E;
+  --p3:#2A2E37;
+  --hair:rgba(255,255,255,.08);
+  --hair-2:rgba(255,255,255,.05);
+  --ice:#E9EEF5;          /* primary text */
+  --steel:#8A93A2;        /* secondary */
+  --dim:#525A67;          /* tertiary */
+  --data:#BFE9FF;         /* data readout */
+  --green:#34E5A0;
+  --green-glow:rgba(52,229,160,.4);
+  --scroll:rgba(255,255,255,.08);
+  --hover:rgba(255,255,255,.05);
+  --hover-2:rgba(255,255,255,.025);
+}
+
+/* ===== LIGHT ===== */
+[data-theme="light"]{
+  --black:#F5F6F8;        /* base — soft off-white */
+  --p0:#FFFFFF;
+  --p1:#FFFFFF;
+  --p2:#F7F8FA;
+  --p3:#EEF0F4;
+  --hair:rgba(16,20,28,.10);
+  --hair-2:rgba(16,20,28,.06);
+  --ice:#181B22;          /* primary text */
+  --steel:#5B6573;        /* secondary */
+  --dim:#9AA3B0;          /* tertiary */
+  --data:#1B6FB0;         /* data readout (darker for light bg) */
+  --green:#12936A;
+  --green-glow:rgba(18,147,106,.3);
+  --scroll:rgba(16,20,28,.14);
+  --hover:rgba(16,20,28,.05);
+  --hover-2:rgba(16,20,28,.03);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family:'Plus Jakarta Sans',-apple-system,sans-serif;
+  background:var(--black);
+  color:var(--ice);
+  font-size:13px;
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+  display:flex;flex-direction:column;height:100vh;
+  transition:background .3s var(--ease), color .3s var(--ease);
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input{font-family:inherit}
+::placeholder{color:var(--dim)}
+::selection{background:var(--o-dim);color:var(--o-hot)}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--scroll);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:var(--o-line)}
+
+/* keep the theme toggle inert — we are dark-native now */
+.theme-toggle{display:none!important}
+
+/* ============ ALERT BANNER ============ */
+.alert-banner{
+  display:flex;align-items:center;gap:12px;flex-shrink:0;
+  padding:11px 20px;background:linear-gradient(90deg,var(--o-dim),rgba(255,107,26,.05));
+  border-bottom:1px solid var(--o-line);position:relative;z-index:30;
+}
+.alert-banner.hide{display:none}
+.alert-banner .ab-icon{width:17px;height:17px;color:var(--o);flex-shrink:0}
+.alert-banner .ab-text{font-size:12.5px;color:var(--ice);font-weight:500}
+.alert-banner .ab-text strong{font-weight:700}
+.alert-banner .ab-cta{
+  margin-left:auto;flex-shrink:0;
+  background:var(--o);color:#fff;font-size:11.5px;font-weight:800;
+  padding:6px 15px;border-radius:8px;transition:.15s var(--ease);
+}
+.alert-banner .ab-cta:hover{background:var(--o-hot);box-shadow:0 0 16px var(--o-glow)}
+.alert-banner .ab-close{
+  flex-shrink:0;width:26px;height:26px;border-radius:7px;color:var(--steel);
+  display:flex;align-items:center;justify-content:center;transition:.15s;
+}
+.alert-banner .ab-close:hover{background:var(--hover);color:var(--ice)}
+.alert-banner .ab-close svg{width:14px;height:14px}
+
+/* ============ APP SHELL ============ */
+.app{
+  display:grid;grid-template-columns:var(--rail-w-open) var(--filters-w) 1fr;flex:1;min-height:0;
+  transition:grid-template-columns .28s var(--ease);
+  background:
+    radial-gradient(1200px 600px at 78% -10%, rgba(255,107,26,.05), transparent 60%),
+    var(--black);
+}
+.app.rail-collapsed{grid-template-columns:var(--rail-w) var(--filters-w) 1fr}
+
+/* ============ COLLAPSIBLE RAIL ============ */
+.rail{
+  background:linear-gradient(180deg,var(--p1),var(--black));
+  border-right:1px solid var(--hair);
+  display:flex;flex-direction:column;
+  padding:16px 14px;gap:4px;position:relative;z-index:20;overflow:hidden;
+}
+.rail-top{display:flex;align-items:center;gap:12px;margin-bottom:12px;height:42px}
+.rail-logo{
+  width:42px;height:42px;border-radius:13px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--o-hot),var(--o-deep));
+  display:flex;align-items:center;justify-content:center;position:relative;
+  box-shadow:0 0 24px var(--o-glow), inset 0 1px 0 rgba(255,255,255,.25);
+}
+.rail-logo::after{
+  content:'';position:absolute;inset:-4px;border-radius:16px;z-index:-1;
+  background:var(--o);opacity:.35;filter:blur(12px);
+  animation:pulse-glow 3s ease-in-out infinite;
+}
+@keyframes pulse-glow{0%,100%{opacity:.25}50%{opacity:.5}}
+.rail-logo svg{width:22px;height:22px}
+.rail-wordmark{
+  font-size:15px;font-weight:800;letter-spacing:-.01em;color:var(--ice);white-space:nowrap;
+  flex:1;overflow:hidden;transition:opacity .2s var(--ease);
+}
+.rail-wordmark .wm-ai{color:var(--o)}
+.rail-collapse{
+  width:30px;height:30px;border-radius:9px;flex-shrink:0;color:var(--steel);
+  display:flex;align-items:center;justify-content:center;
+  background:var(--p2);border:1px solid var(--hair);
+  transition:.18s var(--ease);
+  margin:0 auto 12px;            /* its own row, centered, fixed spot under wordmark */
+}
+.rail-collapse:hover{background:var(--o-dim);border-color:var(--o-line);color:var(--o);transform:scale(1.05)}
+.rail-collapse:active{transform:scale(.95)}
+.rail-collapse svg{width:16px;height:16px;transition:transform .3s var(--ease)}
+.app.rail-collapsed .rail-collapse svg{transform:rotate(180deg)}
+
+.rail-btn{
+  height:44px;border-radius:11px;
+  display:flex;align-items:center;gap:13px;padding:0 11px;
+  color:var(--steel);position:relative;transition:color .15s var(--ease), background .15s var(--ease);
+  width:100%;
+}
+.rail-btn:hover{color:var(--ice);background:var(--hover)}
+.rail-btn.active{color:var(--o);background:var(--o-dim)}
+.rail-btn.active::before{
+  content:'';position:absolute;left:-14px;top:11px;bottom:11px;width:3px;border-radius:0 4px 4px 0;
+  background:var(--o);box-shadow:0 0 12px var(--o-glow),0 0 4px var(--o);
+}
+.rail-btn svg{width:21px;height:21px;flex-shrink:0}
+.rail-btn .rlabel{
+  font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;
+  transition:opacity .2s var(--ease);
+}
+/* the floating tooltip only shows when collapsed */
+.rail-btn .tip{
+  position:absolute;left:56px;top:50%;transform:translateY(-50%) translateX(-4px);
+  background:var(--p2);color:var(--ice);padding:7px 12px;border-radius:9px;
+  font-size:11.5px;font-weight:600;white-space:nowrap;opacity:0;pointer-events:none;
+  transition:.18s var(--ease);z-index:50;border:1px solid var(--hair);
+  box-shadow:0 10px 30px rgba(0,0,0,.4);display:none;
+}
+.app.rail-collapsed .rail-btn .tip{display:block}
+.app.rail-collapsed .rail-btn:hover .tip{opacity:1;transform:translateY(-50%) translateX(0)}
+
+/* collapsed state: hide labels + wordmark, center icons */
+.app.rail-collapsed .rail-wordmark{opacity:0;width:0;flex:0;margin:0}
+.app.rail-collapsed .rail-btn .rlabel{opacity:0;width:0}
+.app.rail-collapsed .rail-btn{justify-content:center;padding:0;gap:0}
+.app.rail-collapsed .rail-top{justify-content:center}
+
+.rail-spacer{flex:1;min-height:8px}
+.rail-divider{height:1px;background:var(--hair);margin:8px 4px}
+
+/* theme toggle row in the rail */
+.rail-theme{
+  height:44px;border-radius:11px;display:flex;align-items:center;gap:13px;padding:0 11px;width:100%;
+  color:var(--steel);transition:.15s;
+}
+.rail-theme:hover{background:var(--hover);color:var(--ice)}
+.rail-theme .tt-track{
+  width:38px;height:21px;border-radius:11px;background:var(--p3);border:1px solid var(--hair);
+  flex-shrink:0;position:relative;transition:.2s;
+}
+.rail-theme .tt-knob{
+  position:absolute;top:2px;left:2px;width:15px;height:15px;border-radius:50%;
+  background:var(--o);box-shadow:0 0 8px var(--o-glow);transition:.25s var(--spring);
+}
+[data-theme="light"] .rail-theme .tt-knob{transform:translateX(17px)}
+.rail-theme .tt-knob svg{width:9px;height:9px;color:#fff;position:absolute;top:3px;left:3px}
+.rail-theme .rlabel{font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;transition:opacity .2s}
+.app.rail-collapsed .rail-theme{justify-content:center;padding:0;gap:0}
+.app.rail-collapsed .rail-theme .rlabel{opacity:0;width:0}
+
+.rail-avatar{
+  width:38px;height:38px;border-radius:50%;
+  background:linear-gradient(135deg,var(--o-hot),var(--o-deep));
+  color:#fff;font-weight:800;font-size:13px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  border:1.5px solid var(--o-line);
+  box-shadow:0 0 16px var(--o-glow);transition:transform .2s var(--spring);
+}
+.rail-avatar:hover{transform:scale(1.08)}
+
+/* ============ FILTERS PANEL ============ */
+.filters{
+  background:var(--p0);border-right:1px solid var(--hair);
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.filters-head{padding:18px 18px 14px;border-bottom:1px solid var(--hair)}
+.filters-head h2{
+  font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.14em;
+  color:var(--steel);display:flex;align-items:center;justify-content:space-between;
+}
+.clear-btn{font-size:10.5px;font-weight:700;color:var(--o);letter-spacing:.04em;text-transform:none}
+.clear-btn:hover{text-shadow:0 0 10px var(--o-glow)}
+.filters-scroll{flex:1;overflow-y:auto;padding-bottom:20px}
+.fgroup{border-bottom:1px solid var(--hair-2)}
+.fgroup-head{
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;font-size:12.5px;font-weight:700;color:var(--ice);transition:.12s;
+}
+.fgroup-head:hover{background:rgba(255,255,255,.02)}
+.fgroup-head .chev{transition:transform .2s var(--ease);color:var(--dim);width:14px;height:14px}
+.fgroup.open .fgroup-head .chev{transform:rotate(90deg);color:var(--o)}
+.fgroup-head .count{
+  background:var(--o);color:#fff;font-size:10px;font-weight:800;font-family:var(--mono);
+  min-width:18px;height:18px;border-radius:9px;padding:0 5px;
+  display:none;align-items:center;justify-content:center;margin-left:auto;margin-right:8px;
+  box-shadow:0 0 12px var(--o-glow);
+}
+.fgroup-head .count.show{display:inline-flex}
+.fgroup-body{display:none;padding:2px 18px 16px}
+.fgroup.open .fgroup-body{display:block}
+.fopt{
+  display:flex;align-items:center;gap:10px;padding:7px 2px;
+  font-size:12.5px;color:var(--steel);cursor:pointer;user-select:none;transition:color .12s;
+}
+.fopt:hover{color:var(--ice)}
+.fopt input{display:none}
+.cbox{
+  width:16px;height:16px;border:1.5px solid var(--dim);border-radius:5px;
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.15s var(--ease);
+}
+.cbox svg{width:9px;height:9px;opacity:0;color:#fff}
+.fopt input:checked + .cbox{background:var(--o);border-color:var(--o);box-shadow:0 0 10px var(--o-glow)}
+.fopt input:checked + .cbox svg{opacity:1}
+
+/* ============ MAIN ============ */
+.main{display:flex;flex-direction:column;overflow:hidden;background:var(--black)}
+
+/* top bar */
+.topbar{
+  background:var(--p0);border-bottom:1px solid var(--hair);
+  display:flex;align-items:center;gap:12px;padding:0 22px;height:60px;flex-shrink:0;
+}
+.tabs{display:flex;gap:4px;height:100%}
+.tab{
+  padding:0 16px;font-size:13px;font-weight:700;color:var(--steel);
+  border-bottom:2px solid transparent;height:100%;display:flex;align-items:center;gap:8px;
+  transition:.15s var(--ease);
+}
+.tab:hover{color:var(--ice)}
+.tab.active{color:var(--o);border-bottom-color:var(--o)}
+.tab.active{text-shadow:0 0 16px var(--o-glow)}
+.tab .pill{
+  background:rgba(255,255,255,.05);border:1px solid var(--hair);color:var(--steel);
+  font-size:10.5px;font-weight:700;font-family:var(--mono);padding:1px 8px;border-radius:9px;transition:.15s;
+}
+.tab.active .pill{background:var(--o-dim);border-color:var(--o-line);color:var(--o)}
+.gsearch{
+  margin:0 auto;display:flex;align-items:center;gap:10px;
+  background:var(--p2);border:1px solid var(--hair);border-radius:11px;
+  padding:9px 14px;width:100%;max-width:640px;transition:.18s var(--ease);
+}
+.gsearch:focus-within{border-color:var(--o-line);box-shadow:0 0 0 3px var(--o-dim),0 0 20px rgba(255,107,26,.12)}
+.gsearch svg{width:15px;height:15px;color:var(--dim);flex-shrink:0;transition:.15s}
+.gsearch:focus-within svg{color:var(--o)}
+.gsearch input{border:none;outline:none;background:none;font-size:12.5px;width:100%;color:var(--ice);font-weight:500}
+.gsearch kbd{
+  font-size:10px;font-weight:700;font-family:var(--mono);color:var(--dim);
+  background:var(--black);border:1px solid var(--hair);border-radius:5px;padding:2px 7px;flex-shrink:0;
+}
+.credits{
+  display:flex;align-items:center;gap:8px;
+  background:var(--p2);border:1px solid var(--o-line);border-radius:11px;
+  padding:8px 14px;font-size:12.5px;font-weight:700;color:var(--o);white-space:nowrap;
+  box-shadow:inset 0 0 16px rgba(255,107,26,.06);
+}
+.credits #creditCount{font-family:var(--mono);font-weight:700;text-shadow:0 0 12px var(--o-glow)}
+.credits svg{width:14px;height:14px;filter:drop-shadow(0 0 4px var(--o-glow))}
+.upgrade{
+  background:linear-gradient(135deg,var(--o-hot),var(--o-deep));
+  color:#fff;font-size:12.5px;font-weight:800;
+  padding:9px 18px;border-radius:11px;transition:.18s var(--ease);white-space:nowrap;
+  box-shadow:0 0 20px var(--o-glow), inset 0 1px 0 rgba(255,255,255,.2);position:relative;overflow:hidden;
+}
+.upgrade::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.35),transparent);
+  transform:translateX(-100%);transition:transform .6s;
+}
+.upgrade:hover{transform:translateY(-1px);box-shadow:0 0 32px var(--o-glow)}
+.upgrade:hover::after{transform:translateX(100%)}
+
+/* top-right cluster: credits · upgrade · avatar */
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.topbar-right .rail-avatar{
+  width:38px;height:38px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--o-hot),var(--o-deep));
+  color:#fff;font-weight:800;font-size:13px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  border:1.5px solid var(--o-line);box-shadow:0 0 16px var(--o-glow);
+  transition:transform .2s var(--spring);
+}
+.topbar-right .rail-avatar:hover{transform:scale(1.08)}
+
+/* avatar dropdown menu */
+.avatar-wrap{position:relative}
+.avatar-menu{
+  position:absolute;top:48px;right:0;width:248px;z-index:120;
+  background:var(--p1);border:1px solid var(--hair);border-radius:14px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);padding:8px;
+  opacity:0;transform:translateY(-8px) scale(.97);pointer-events:none;
+  transition:.18s var(--ease);
+}
+.avatar-menu.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.am-head{display:flex;align-items:center;gap:11px;padding:10px 10px 12px}
+.am-avatar{
+  width:38px;height:38px;border-radius:10px;flex-shrink:0;background:#3A3F49;
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;
+  border:1px solid var(--hair);
+}
+[data-theme="light"] .am-avatar{background:#5B6573}
+.am-name{font-size:13.5px;font-weight:700;color:var(--ice)}
+.am-email{font-size:11.5px;color:var(--steel);margin-top:1px}
+.am-credits{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:9px 11px;margin:0 2px 6px;border-radius:9px;background:var(--o-dim);border:1px solid var(--o-line);
+  font-size:12px;color:var(--steel);font-weight:600;
+}
+.am-credits strong{font-family:var(--mono);font-size:14px;color:var(--o)}
+.am-item{
+  display:flex;align-items:center;gap:11px;width:100%;text-align:left;
+  padding:10px 11px;border-radius:9px;font-size:13px;font-weight:600;color:var(--ice);transition:.12s;
+}
+.am-item:hover{background:var(--hover)}
+.am-item svg{width:16px;height:16px;color:var(--steel);flex-shrink:0}
+.am-item.am-danger{color:#FF6B6B}
+.am-item.am-danger svg{color:#FF6B6B}
+.am-item.am-danger:hover{background:rgba(255,107,107,.1)}
+.am-divider{height:1px;background:var(--hair);margin:6px 4px}
+
+/* ============ SETTINGS VIEW ============ */
+.set-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;max-width:860px}
+.set-card{background:var(--p1);border:1px solid var(--hair);border-radius:16px;padding:22px 24px}
+.set-card-head{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.set-card-head h3{font-size:15px;font-weight:800;color:var(--ice)}
+.set-badge{margin-left:auto;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-family:var(--mono);color:var(--o);background:var(--o-dim);border:1px solid var(--o-line);padding:4px 10px;border-radius:20px}
+.set-row{display:flex;align-items:center;gap:14px;margin-bottom:13px}
+.set-k{font-size:12.5px;font-weight:600;color:var(--steel);width:80px;flex-shrink:0}
+.set-input{
+  flex:1;background:var(--p0);border:1px solid var(--hair);border-radius:9px;
+  padding:9px 12px;font-size:13px;color:var(--ice);outline:none;transition:.15s;
+}
+.set-input:focus{border-color:var(--o-line);box-shadow:0 0 0 3px var(--o-dim)}
+.set-actions{display:flex;gap:10px;margin-top:18px}
+.set-save{background:var(--o);color:#fff;font-size:12.5px;font-weight:800;padding:9px 18px;border-radius:9px;transition:.15s}
+.set-save:hover{background:var(--o-hot);box-shadow:0 0 16px var(--o-glow)}
+.set-ghost{background:var(--p2);border:1px solid var(--hair);color:var(--ice);font-size:12.5px;font-weight:700;padding:9px 16px;border-radius:9px;transition:.15s}
+.set-ghost:hover{border-color:var(--o-line);color:var(--o)}
+.set-bill{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+.set-bill-num{font-size:36px;font-weight:800;font-family:var(--mono);color:var(--o)}
+.set-bill-lbl{font-size:12.5px;color:var(--steel)}
+.set-note{font-size:12.5px;color:var(--steel);line-height:1.55;margin-top:6px}
+.set-note strong{color:var(--ice)}
+.set-toggle-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 0;border-top:1px solid var(--hair-2)}
+.set-toggle-row:first-of-type{border-top:none;padding-top:0}
+.set-sub{font-size:11.5px;color:var(--steel);margin-top:2px}
+.set-pill{background:var(--p2);border:1px solid var(--hair);color:var(--ice);font-size:11.5px;font-weight:700;padding:7px 13px;border-radius:8px;transition:.15s;white-space:nowrap}
+.set-pill:hover{border-color:var(--o-line);color:var(--o)}
+.set-static{font-size:12.5px;font-weight:700;color:var(--steel);font-family:var(--mono)}
+.set-switch{position:relative;width:40px;height:23px;flex-shrink:0;cursor:pointer}
+.set-switch input{display:none}
+.set-slider{position:absolute;inset:0;border-radius:12px;background:var(--p3);border:1px solid var(--hair);transition:.2s}
+.set-slider::before{content:'';position:absolute;top:2px;left:2px;width:17px;height:17px;border-radius:50%;background:var(--steel);transition:.2s var(--spring)}
+.set-switch input:checked + .set-slider{background:var(--o-dim);border-color:var(--o-line)}
+.set-switch input:checked + .set-slider::before{transform:translateX(17px);background:var(--o)}
+
+/* toolbar */
+.toolbar{display:flex;align-items:center;gap:10px;padding:16px 22px;flex-shrink:0}
+.results-n{font-size:14px;font-weight:800;letter-spacing:-.01em}
+.results-n span{color:var(--o);font-family:var(--mono);text-shadow:0 0 14px var(--o-glow)}
+.selected-n{font-size:12px;color:var(--steel);display:none;font-weight:600;font-family:var(--mono)}
+.selected-n.show{display:block}
+.toolbar .right{margin-left:auto;display:flex;gap:8px}
+.tbtn{
+  display:flex;align-items:center;gap:7px;
+  background:var(--p2);border:1px solid var(--hair);border-radius:10px;
+  padding:9px 15px;font-size:12px;font-weight:700;color:var(--ice);transition:.15s var(--ease);
+}
+.tbtn:hover{border-color:var(--o-line);background:var(--p3);transform:translateY(-1px)}
+.tbtn svg{width:14px;height:14px;color:var(--steel)}
+.tbtn:hover svg{color:var(--o)}
+.tbtn.primary{
+  background:linear-gradient(135deg,var(--o-hot),var(--o-deep));color:#fff;border-color:transparent;
+  box-shadow:0 0 18px var(--o-glow);
+}
+.tbtn.primary svg{color:#fff}
+.tbtn.primary:hover{transform:translateY(-1px);box-shadow:0 0 28px var(--o-glow)}
+
+/* ============ TABLE ============ */
+.table-wrap{
+  flex:1;overflow:auto;margin:0 22px;background:var(--p0);
+  border:1px solid var(--hair);border-radius:16px 16px 0 0;
+}
+table{width:100%;border-collapse:collapse;min-width:980px}
+thead th{
+  position:sticky;top:0;z-index:5;
+  background:linear-gradient(180deg,var(--p1),var(--p0));
+  text-align:left;font-size:10px;font-weight:800;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--dim);padding:13px 16px;
+  border-bottom:1px solid var(--hair);white-space:nowrap;
+}
+tbody td{
+  padding:13px 16px;border-bottom:1px solid var(--hair-2);
+  font-size:12.5px;vertical-align:middle;
+}
+tbody tr{transition:background .12s var(--ease);position:relative;animation:rowIn .35s var(--ease) backwards}
+tbody tr:nth-child(1){animation-delay:.02s}tbody tr:nth-child(2){animation-delay:.05s}
+tbody tr:nth-child(3){animation-delay:.08s}tbody tr:nth-child(4){animation-delay:.11s}
+tbody tr:nth-child(5){animation-delay:.14s}tbody tr:nth-child(6){animation-delay:.17s}
+tbody tr:nth-child(7){animation-delay:.20s}tbody tr:nth-child(8){animation-delay:.23s}
+@keyframes rowIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+tbody tr:hover{background:var(--hover-2)}
+tbody tr:hover td:first-child{box-shadow:inset 2px 0 0 var(--o-line)}
+tbody tr.checked{background:var(--o-dim)}
+tbody tr.checked td:first-child{box-shadow:inset 3px 0 0 var(--o),0 0 20px var(--o-glow)}
+.col-check{width:40px}
+.person{display:flex;align-items:center;gap:12px}
+.avatar{
+  width:36px;height:36px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11.5px;font-weight:800;color:#fff;letter-spacing:.02em;
+  background:#3A3F49;border:1px solid var(--hair);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+}
+[data-theme="light"] .avatar{background:#5B6573;border-color:transparent}
+.pname{font-weight:700;color:var(--ice);font-size:13px;letter-spacing:-.01em}
+.ptitle{font-size:11.5px;color:var(--steel);margin-top:1px}
+.comp{display:flex;align-items:center;gap:10px}
+.comp-logo{
+  width:30px;height:30px;border-radius:8px;background:var(--p2);
+  border:1px solid var(--hair);display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;color:var(--steel);flex-shrink:0;
+}
+.comp-name{font-weight:700;color:var(--ice)}
+.comp-meta{font-size:11px;color:var(--dim);font-family:var(--mono)}
+.loc{color:var(--steel);white-space:nowrap;font-size:12px}
+.ind-tag{
+  display:inline-block;background:rgba(255,255,255,.05);color:var(--steel);
+  border:1px solid var(--hair);
+  font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:7px;white-space:nowrap;
+  text-transform:uppercase;letter-spacing:.04em;
+}
+.access-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  border:1px solid var(--hair);border-radius:9px;background:var(--p2);
+  padding:7px 13px;font-size:11.5px;font-weight:700;color:var(--ice);
+  transition:all .15s var(--ease);white-space:nowrap;
+}
+.access-btn:hover{
+  border-color:var(--o-line);color:var(--o);background:var(--o-dim);
+  box-shadow:0 0 16px rgba(255,107,26,.18);
+}
+.access-btn svg{width:13px;height:13px}
+.revealed{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:12px;font-weight:600;font-family:var(--mono);color:var(--green);
+  background:rgba(52,229,160,.08);border:1px solid rgba(52,229,160,.22);
+  padding:5px 11px;border-radius:8px;white-space:nowrap;
+  text-shadow:0 0 12px var(--green-glow);animation:ignite .4s var(--spring);
+}
+@keyframes ignite{0%{transform:scale(.8);opacity:0;filter:brightness(2)}100%{transform:scale(1);opacity:1;filter:brightness(1)}}
+.revealed svg{width:13px;height:13px;filter:drop-shadow(0 0 5px var(--green-glow))}
+.phone{color:var(--data);white-space:nowrap;font-size:12px;font-family:var(--mono);font-weight:500}
+.phone-locked{
+  display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:500;font-family:var(--mono);
+  color:var(--dim);letter-spacing:.06em;
+}
+.phone-locked svg{width:12px;height:12px}
+
+/* sortable headers */
+th.sortable{cursor:pointer;user-select:none;transition:color .12s}
+th.sortable:hover{color:var(--o)}
+th.sortable .arrow{font-size:9px;margin-left:4px;opacity:.3}
+th.sortable.sorted{color:var(--o);text-shadow:0 0 10px var(--o-glow)}
+th.sortable.sorted .arrow{opacity:1}
+
+/* ============ CONTACT DRAWER ============ */
+.drawer-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:60;backdrop-filter:blur(3px);
+  opacity:0;pointer-events:none;transition:opacity .22s;
+}
+.drawer-overlay.show{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;bottom:0;width:420px;max-width:92vw;z-index:61;
+  background:var(--p1);border-left:1px solid var(--o-line);
+  transform:translateX(100%);transition:transform .3s var(--ease), box-shadow .3s var(--ease);
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.drawer.show{transform:translateX(0);box-shadow:-30px 0 80px rgba(0,0,0,.4), inset 1px 0 0 var(--hair)}
+.drawer-head{
+  display:flex;align-items:flex-start;gap:15px;padding:26px 24px 22px;
+  border-bottom:1px solid var(--hair);
+  background:radial-gradient(400px 200px at 100% 0%, rgba(255,107,26,.08), transparent 70%);
+}
+.drawer-head .avatar{width:54px;height:54px;font-size:18px;border-radius:14px}
+.drawer-name{font-size:19px;font-weight:800;line-height:1.25;letter-spacing:-.02em;color:var(--ice)}
+.drawer-title{font-size:12.5px;color:var(--steel);margin-top:3px}
+.drawer-close{
+  margin-left:auto;width:34px;height:34px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;color:var(--dim);transition:.15s;
+  border:1px solid var(--hair);
+}
+.drawer-close:hover{background:var(--p3);color:var(--ice)}
+.drawer-close svg{width:15px;height:15px}
+.drawer-body{flex:1;overflow-y:auto;padding:22px 24px 28px}
+.d-sec{margin-bottom:24px}
+.d-label{
+  font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--dim);margin-bottom:11px;
+}
+.d-card{background:var(--p0);border:1px solid var(--hair);border-radius:14px;padding:16px 18px}
+.d-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;font-size:13px}
+.d-row + .d-row{border-top:1px solid var(--hair-2)}
+.d-row .k{color:var(--steel);flex-shrink:0}
+.d-row .v{font-weight:700;text-align:right;color:var(--ice)}
+.channel{
+  display:flex;align-items:center;gap:13px;padding:14px 16px;
+  background:var(--p0);border:1px solid var(--hair);border-radius:13px;margin-bottom:10px;
+  transition:.15s;
+}
+.channel:hover{border-color:var(--o-line)}
+.channel .ch-icon{
+  width:36px;height:36px;border-radius:10px;background:var(--o-dim);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;border:1px solid var(--o-line);
+}
+.channel .ch-icon svg{width:15px;height:15px;color:var(--o);filter:drop-shadow(0 0 4px var(--o-glow))}
+.channel .ch-val{font-size:13px;font-weight:600;font-family:var(--mono);word-break:break-all;flex:1;color:var(--data)}
+.channel .ch-val.muted{color:var(--dim);letter-spacing:.06em;font-size:12px}
+.copy-btn{
+  flex-shrink:0;font-size:11px;font-weight:800;color:var(--o);
+  border:1px solid var(--o-line);background:var(--o-dim);
+  padding:6px 12px;border-radius:8px;transition:.15s;
+}
+.copy-btn:hover{background:var(--o);color:#fff;box-shadow:0 0 16px var(--o-glow)}
+.unlock-btn{
+  width:100%;padding:14px;border-radius:12px;
+  background:linear-gradient(135deg,var(--o-hot),var(--o-deep));color:#fff;
+  font-size:13.5px;font-weight:800;transition:.18s var(--ease);
+  box-shadow:0 0 24px var(--o-glow), inset 0 1px 0 rgba(255,255,255,.2);
+}
+.unlock-btn:hover{transform:translateY(-1px);box-shadow:0 0 36px var(--o-glow)}
+@media(max-width:520px){.drawer{width:100vw}}
+.verif{display:inline-flex;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:7px;box-shadow:0 0 8px var(--green-glow)}
+.empty{padding:70px 20px;text-align:center;color:var(--steel)}
+.empty h3{font-size:15px;font-weight:700;color:var(--ice);margin-bottom:6px}
+
+/* ============ PAGER ============ */
+.pager{
+  background:var(--p0);border:1px solid var(--hair);border-top:none;
+  border-radius:0 0 16px 16px;margin:0 22px 18px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 18px;font-size:12px;color:var(--steel);font-family:var(--mono);
+}
+.pager .btns{display:flex;gap:5px}
+.pg{
+  min-width:30px;height:30px;border-radius:8px;border:1px solid var(--hair);
+  font-size:12px;font-weight:600;font-family:var(--mono);color:var(--steel);background:var(--p2);
+  display:flex;align-items:center;justify-content:center;padding:0 7px;transition:.12s;
+}
+.pg:hover{border-color:var(--o-line);color:var(--ice)}
+.pg.active{background:var(--o);border-color:var(--o);color:#fff;box-shadow:0 0 16px var(--o-glow)}
+
+/* ============ AUTH VEIL ============ */
+.veil{
+  position:fixed;inset:0;background:var(--black);z-index:200;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+  transition:opacity .3s;
+}
+.veil.hide{opacity:0;pointer-events:none}
+.veil .spinner{
+  width:36px;height:36px;border-radius:50%;
+  border:3px solid var(--o-dim);border-top-color:var(--o);
+  animation:spin .8s linear infinite;box-shadow:0 0 24px var(--o-glow)
+}
+.veil span{color:var(--steel);font-size:12.5px;font-weight:600;font-family:var(--mono)}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ============ TOAST ============ */
+.toast{
+  position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(90px);
+  background:var(--p2);color:var(--ice);font-size:12.5px;font-weight:600;
+  padding:12px 20px;border-radius:12px;border:1px solid var(--o-line);
+  box-shadow:0 16px 50px rgba(0,0,0,.7), 0 0 24px rgba(255,107,26,.15);
+  transition:.3s var(--spring);z-index:100;display:flex;align-items:center;gap:9px;
+}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast svg{width:15px;height:15px;color:var(--green);filter:drop-shadow(0 0 5px var(--green-glow))}
+
+/* ============ DESKTOP-ONLY GATE ============ */
+.mobile-gate{display:none}
+@media(max-width:820px){
+  .app{display:none}
+  .mobile-gate{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    height:100vh;padding:32px;text-align:center;gap:18px;background:var(--black);color:var(--ice);
+  }
+  .mobile-gate .gate-logo{
+    width:58px;height:58px;border-radius:15px;
+    background:linear-gradient(135deg,var(--o-hot),var(--o-deep));
+    display:flex;align-items:center;justify-content:center;box-shadow:0 0 32px var(--o-glow);
+  }
+  .mobile-gate .gate-logo svg{width:30px;height:30px}
+  .mobile-gate h1{font-size:20px;font-weight:800}
+  .mobile-gate p{font-size:13.5px;line-height:1.6;color:var(--steel);max-width:320px}
+  .mobile-gate .gate-pill{
+    font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+    color:var(--o);border:1px solid var(--o-line);background:var(--o-dim);padding:6px 14px;border-radius:20px;
+  }
+  .mobile-gate a{
+    color:var(--ice);font-weight:700;font-size:13px;text-decoration:none;
+    border:1px solid var(--hair);padding:10px 20px;border-radius:10px;transition:.15s;
+  }
+  .mobile-gate a:hover{border-color:var(--o-line);color:var(--o)}
+}
+@media(min-width:821px) and (max-width:1000px){
+  .app{grid-template-columns:var(--rail-w) 1fr}
+  .app .rail-wordmark,.app .rail-btn .rlabel,.app .rail-theme .rlabel{opacity:0;width:0}
+  .app .rail-btn,.app .rail-theme{justify-content:center;padding:0;gap:0}
+  .app .rail-btn .tip{display:block}
+  .filters{display:none}
+  .gsearch{width:180px}
+}
+/* ============ VIEW SYSTEM ============ */
+.view{display:none;flex-direction:column;overflow:hidden;flex:1;animation:viewIn .3s var(--ease)}
+.view.active{display:flex}
+@keyframes viewIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.view-scroll{flex:1;overflow-y:auto;padding:24px 28px 40px}
+.vhead{margin-bottom:24px}
+.vhead h1{font-size:24px;font-weight:800;letter-spacing:-.02em;color:var(--ice);display:flex;align-items:center;gap:12px}
+.vhead h1 .vh-glow{
+  width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;
+  background:var(--o-dim);border:1px solid var(--o-line);
+}
+.vhead h1 .vh-glow svg{width:19px;height:19px;color:var(--o);filter:drop-shadow(0 0 6px var(--o-glow))}
+.vhead p{font-size:13.5px;color:var(--steel);margin-top:8px;max-width:560px;line-height:1.6}
+
+/* metric tiles (dashboard/analytics) */
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:26px}
+.metric{
+  background:linear-gradient(160deg,var(--p2),var(--p0));border:1px solid var(--hair);
+  border-radius:15px;padding:20px;position:relative;overflow:hidden;transition:.2s var(--ease);
+}
+.metric:hover{border-color:var(--o-line);transform:translateY(-2px)}
+.metric::before{
+  content:'';position:absolute;top:0;right:0;width:120px;height:120px;
+  background:radial-gradient(circle at 70% 30%, var(--o-dim), transparent 70%);opacity:.6;
+}
+.metric .m-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dim)}
+.metric .m-value{font-size:32px;font-weight:800;font-family:var(--mono);color:var(--ice);margin-top:8px;letter-spacing:-.02em}
+.metric .m-value.glow{color:var(--o);text-shadow:0 0 20px var(--o-glow)}
+.metric .m-sub{font-size:11.5px;color:var(--green);margin-top:6px;font-weight:600;display:flex;align-items:center;gap:4px}
+.metric .m-icon{position:absolute;top:18px;right:18px;width:18px;height:18px;color:var(--dim)}
+
+/* ============ ONBOARDING HUB ============ */
+.onboard-hero{
+  display:flex;align-items:center;gap:24px;
+  background:linear-gradient(135deg,var(--p2),var(--p0));
+  border:1px solid var(--hair);border-radius:18px;padding:26px 28px;margin-bottom:24px;
+  position:relative;overflow:hidden;
+}
+.onboard-hero::before{
+  content:'';position:absolute;top:-40%;right:-5%;width:340px;height:340px;
+  background:radial-gradient(circle,rgba(255,107,26,.12),transparent 65%);pointer-events:none;
+}
+.oh-left{flex:1;position:relative;z-index:1}
+.oh-title{font-size:18px;font-weight:800;color:var(--ice);letter-spacing:-.01em}
+.oh-sub{font-size:13px;color:var(--steel);margin-top:6px;max-width:440px;line-height:1.55}
+.oh-progress{margin-top:18px;max-width:480px}
+.oh-bar{height:7px;border-radius:5px;background:rgba(255,255,255,.08);overflow:hidden}
+.oh-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--o-deep),var(--o));box-shadow:0 0 14px var(--o-glow);transition:width .6s var(--ease)}
+.oh-progress-meta{display:flex;justify-content:space-between;margin-top:9px;font-size:11.5px;font-family:var(--mono);color:var(--steel)}
+.oh-credits{color:var(--o)}
+.oh-badge{
+  flex-shrink:0;width:110px;height:110px;border-radius:50%;position:relative;z-index:1;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:var(--p0);border:2px solid var(--o-line);box-shadow:inset 0 0 24px var(--o-dim);
+}
+.oh-badge-pct{font-size:28px;font-weight:800;font-family:var(--mono);color:var(--o)}
+.oh-badge-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);margin-top:2px}
+
+.task-list{display:flex;flex-direction:column;gap:12px}
+.task{
+  display:flex;align-items:flex-start;gap:16px;
+  background:var(--p1);border:1px solid var(--hair);border-radius:15px;padding:18px 20px;
+  transition:.2s var(--ease);
+}
+.task:hover{border-color:var(--o-line);transform:translateX(3px)}
+.task.done{opacity:.62}
+.task.done:hover{transform:none;border-color:var(--hair)}
+.task-check{
+  width:26px;height:26px;border-radius:50%;flex-shrink:0;margin-top:1px;
+  border:2px solid var(--dim);display:flex;align-items:center;justify-content:center;color:#fff;
+  transition:.2s;
+}
+.task.done .task-check{background:var(--green);border-color:var(--green);box-shadow:0 0 14px var(--green-glow)}
+.task-check svg{width:13px;height:13px}
+.task-main{flex:1;min-width:0}
+.task-title{font-size:14px;font-weight:700;color:var(--ice)}
+.task.done .task-title{text-decoration:line-through;color:var(--steel)}
+.task-desc{font-size:12.5px;color:var(--steel);margin-top:4px;line-height:1.5}
+.task-cta{
+  margin-top:12px;background:var(--o);color:#fff;font-size:12px;font-weight:800;
+  padding:8px 16px;border-radius:9px;transition:.15s var(--ease);
+}
+.task-cta:hover{background:var(--o-hot);box-shadow:0 0 18px var(--o-glow);transform:translateY(-1px)}
+.task-meta{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0}
+.task-cred{
+  font-size:11px;font-weight:700;font-family:var(--mono);color:var(--o);
+  background:var(--o-dim);border:1px solid var(--o-line);padding:3px 9px;border-radius:7px;white-space:nowrap;
+}
+.task-time{font-size:11px;color:var(--dim);font-family:var(--mono)}
+
+
+.panel{background:var(--p0);border:1px solid var(--hair);border-radius:16px;overflow:hidden;margin-bottom:18px}
+.panel-head{padding:16px 20px;border-bottom:1px solid var(--hair);display:flex;align-items:center;justify-content:between;gap:12px}
+.panel-head h3{font-size:14px;font-weight:700;color:var(--ice)}
+.panel-head .ph-tag{margin-left:auto;font-size:10.5px;font-family:var(--mono);color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+.lrow{
+  display:flex;align-items:center;gap:14px;padding:15px 20px;border-bottom:1px solid var(--hair-2);
+  transition:.12s;cursor:pointer;
+}
+.lrow:last-child{border-bottom:none}
+.lrow:hover{background:rgba(255,255,255,.02)}
+.lrow:hover .lrow-go{color:var(--o);transform:translateX(2px)}
+.lrow-icon{
+  width:40px;height:40px;border-radius:11px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  background:var(--o-dim);border:1px solid var(--o-line);
+}
+.lrow-icon svg{width:18px;height:18px;color:var(--o)}
+.lrow-main{flex:1;min-width:0}
+.lrow-title{font-size:13.5px;font-weight:700;color:var(--ice)}
+.lrow-meta{font-size:11.5px;color:var(--steel);margin-top:2px;font-family:var(--mono)}
+.lrow-count{font-size:13px;font-weight:700;font-family:var(--mono);color:var(--o);text-shadow:0 0 12px var(--o-glow)}
+.lrow-go{color:var(--dim);transition:.15s;width:16px;height:16px;flex-shrink:0}
+.lrow-go svg{width:16px;height:16px}
+
+/* empty/coming states inside views */
+.vstate{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:60px 24px;gap:14px;
+}
+.vstate-glow{
+  width:72px;height:72px;border-radius:20px;display:flex;align-items:center;justify-content:center;
+  background:var(--o-dim);border:1px solid var(--o-line);box-shadow:0 0 40px var(--o-dim);
+  animation:float 3s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.vstate-glow svg{width:32px;height:32px;color:var(--o);filter:drop-shadow(0 0 8px var(--o-glow))}
+.vstate h2{font-size:18px;font-weight:800;color:var(--ice)}
+.vstate p{font-size:13px;color:var(--steel);max-width:380px;line-height:1.6}
+.vstate-cta{
+  margin-top:6px;background:linear-gradient(135deg,var(--o-hot),var(--o-deep));color:#fff;
+  font-size:12.5px;font-weight:800;padding:11px 22px;border-radius:11px;box-shadow:0 0 24px var(--o-glow);
+  transition:.18s var(--ease);
+}
+.vstate-cta:hover{transform:translateY(-1px);box-shadow:0 0 36px var(--o-glow)}
+.vstate-badge{
+  font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-family:var(--mono);
+  color:var(--o);border:1px solid var(--o-line);background:var(--o-dim);padding:5px 12px;border-radius:20px;
+}
+
+/* outreach sequence steps */
+.seq{display:flex;flex-direction:column;gap:0;position:relative;padding-left:20px;margin-top:8px}
+.seq::before{content:'';position:absolute;left:7px;top:14px;bottom:14px;width:2px;background:var(--hair)}
+.seq-step{display:flex;align-items:flex-start;gap:14px;padding:14px 0;position:relative}
+.seq-dot{
+  position:absolute;left:-20px;top:16px;width:16px;height:16px;border-radius:50%;
+  background:var(--p0);border:2px solid var(--o);box-shadow:0 0 12px var(--o-glow);flex-shrink:0;z-index:1;
+}
+.seq-body{flex:1}
+.seq-title{font-size:13px;font-weight:700;color:var(--ice)}
+.seq-desc{font-size:12px;color:var(--steel);margin-top:3px;line-height:1.5}
+.seq-tag{font-size:10px;font-family:var(--mono);color:var(--dim);margin-top:6px;text-transform:uppercase;letter-spacing:.06em}
+
+/* mini bar chart for analytics */
+.chart{display:flex;align-items:flex-end;gap:10px;height:160px;padding:20px;margin-top:4px}
+.bar{flex:1;background:linear-gradient(180deg,var(--o-hot),var(--o-deep));border-radius:6px 6px 0 0;
+  position:relative;min-height:8px;box-shadow:0 0 16px var(--o-dim);transition:.3s var(--ease);animation:barUp .6s var(--ease) backwards}
+@keyframes barUp{from{height:0!important;opacity:0}}
+.bar:hover{filter:brightness(1.2)}
+.bar .bar-val{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:11px;font-family:var(--mono);color:var(--o);font-weight:700;white-space:nowrap}
+.bar .bar-lbl{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--dim);font-family:var(--mono)}
+.chart-wrap{padding-bottom:24px}
+
+/* ============ COMMAND PALETTE ============ */
+.cmdk-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);z-index:300;
+  opacity:0;pointer-events:none;transition:opacity .2s;
+}
+.cmdk-overlay.show{opacity:1;pointer-events:auto}
+.cmdk{
+  position:fixed;top:18vh;left:50%;transform:translateX(-50%) translateY(-12px) scale(.98);
+  width:560px;max-width:92vw;z-index:301;
+  background:var(--p1);border:1px solid var(--o-line);border-radius:16px;overflow:hidden;
+  box-shadow:0 30px 90px rgba(0,0,0,.7), 0 0 40px rgba(255,107,26,.12);
+  opacity:0;pointer-events:none;transition:.22s var(--spring);
+}
+.cmdk.show{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0) scale(1)}
+.cmdk-search{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--hair)}
+.cmdk-search svg{width:17px;height:17px;color:var(--o);flex-shrink:0;filter:drop-shadow(0 0 4px var(--o-glow))}
+.cmdk-search input{flex:1;border:none;outline:none;background:none;font-size:15px;color:var(--ice);font-weight:500}
+.cmdk-search kbd{font-size:10px;font-family:var(--mono);color:var(--dim);background:var(--black);border:1px solid var(--hair);border-radius:5px;padding:3px 7px}
+.cmdk-list{max-height:340px;overflow-y:auto;padding:8px}
+.cmdk-group{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);padding:10px 12px 6px}
+.cmdk-item{
+  display:flex;align-items:center;gap:13px;padding:11px 12px;border-radius:10px;cursor:pointer;transition:.1s;
+}
+.cmdk-item.sel{background:var(--o-dim)}
+.cmdk-item.sel .cmdk-ic{color:var(--o)}
+.cmdk-ic{width:18px;height:18px;color:var(--steel);flex-shrink:0}
+.cmdk-ic svg{width:18px;height:18px}
+.cmdk-label{font-size:13.5px;font-weight:600;color:var(--ice);flex:1}
+.cmdk-sub{font-size:11px;color:var(--dim);font-family:var(--mono)}
+.cmdk-enter{font-size:10px;font-family:var(--mono);color:var(--dim);opacity:0}
+.cmdk-item.sel .cmdk-enter{opacity:1}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="veil" id="authVeil">
+  <div class="spinner"></div>
+  <span>Checking your session…</span>
+</div>
+<div class="mobile-gate">
+  <div class="gate-logo">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L4 5.5V11c0 5 3.4 9.4 8 10.5 4.6-1.1 8-5.5 8-10.5V5.5L12 2z" fill="#fff"/></svg>
+  </div>
+  <span class="gate-pill">Desktop Required</span>
+  <h1>JAYISAAC AI is built for big screens</h1>
+  <p>Prospect search, filters, and bulk exports need room to work. Open this on your desktop or laptop to start finding leads.</p>
+  <a href="https://jayisaacai.com">Back to jayisaacai.com</a>
+</div>
+<div class="alert-banner" id="alertBanner">
+  <svg class="ab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+  <span class="ab-text"><strong>Your <span id="abCredits">187</span> trial credits</strong> are active. Upgrade to a paid plan for thousands of credits and full database access.</span>
+  <button class="ab-cta" onclick="document.querySelector('.upgrade').click()">Upgrade</button>
+  <button class="ab-close" onclick="dismissBanner()" aria-label="Dismiss">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+</div>
+<div class="app">
+
+  <!-- ICON RAIL -->
+  <nav class="rail">
+    <div class="rail-top">
+      <div class="rail-logo" title="JAYISAAC AI">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L4 5.5V11c0 5 3.4 9.4 8 10.5 4.6-1.1 8-5.5 8-10.5V5.5L12 2z" fill="#fff"/></svg>
+      </div>
+      <span class="rail-wordmark">JAYISAAC <span class="wm-ai">AI</span></span>
+    </div>
+    <button class="rail-collapse" id="railCollapse" onclick="toggleRail()" title="Collapse menu" aria-label="Toggle menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="rail-btn" data-view="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg><span class="rlabel">Home</span><span class="tip">Home</span></button>
+    <button class="rail-btn active" data-view="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span class="rlabel">Prospect Search</span><span class="tip">Prospect Search</span></button>
+    <button class="rail-btn" data-view="lists"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/></svg><span class="rlabel">Saved Lists</span><span class="tip">Saved Lists</span></button>
+    <button class="rail-btn" data-view="outreach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg><span class="rlabel">Outreach</span><span class="tip">Outreach</span></button>
+    <button class="rail-btn" data-view="enrich"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg><span class="rlabel">AI Enrich</span><span class="tip">AI Enrich</span></button>
+    <button class="rail-btn" data-view="analytics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg><span class="rlabel">Analytics</span><span class="tip">Analytics</span></button>
+    <div class="rail-spacer"></div>
+    <div class="rail-divider"></div>
+    <button class="rail-theme" onclick="toggleTheme()" title="Toggle theme">
+      <span class="tt-track"><span class="tt-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="5"/></svg></span></span>
+      <span class="rlabel" id="themeLabel">Dark mode</span>
+    </button>
+    <button class="rail-btn" data-view="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33h0a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51h0a1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82v0a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span class="rlabel">Settings</span><span class="tip">Settings</span></button>
+  </nav>
+
+  <!-- FILTERS -->
+  <aside class="filters">
+    <div class="filters-head">
+      <h2>Filters <button class="clear-btn" onclick="clearFilters()">Clear all</button></h2>
+    </div>
+    <div class="filters-scroll" id="filterGroups"></div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="topbar">
+      <div class="tabs">
+        <button class="tab active" data-tab="people">People <span class="pill" id="peoplePill">0</span></button>
+        <button class="tab" data-tab="companies">Companies <span class="pill" id="compPill">0</span></button>
+      </div>
+      <div class="gsearch">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" id="globalSearch" placeholder="Search name, title, or company…">
+        <kbd>/</kbd>
+      </div>
+      <div class="topbar-right">
+        <div class="credits">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+          <span id="creditCount">187</span> credits
+        </div>
+        <button class="upgrade">Upgrade</button>
+        <div class="avatar-wrap">
+          <div class="rail-avatar" id="railAvatar" title="Account" onclick="toggleAvatarMenu(event)">JT</div>
+          <div class="avatar-menu" id="avatarMenu">
+            <div class="am-head">
+              <div class="am-avatar">JT</div>
+              <div class="am-id">
+                <div class="am-name">JT Turner</div>
+                <div class="am-email">jayt@jayisaacai.com</div>
+              </div>
+            </div>
+            <div class="am-credits"><span>Credits</span><strong id="amCredits">187</strong></div>
+            <button class="am-item" onclick="closeAvatarMenu();switchView('settings')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33h0a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51h0a1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82v0a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+              Settings
+            </button>
+            <button class="am-item" onclick="closeAvatarMenu();switchView('analytics')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+              Usage & analytics
+            </button>
+            <button class="am-item" onclick="closeAvatarMenu();document.querySelector('.upgrade').click()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+              Upgrade plan
+            </button>
+            <div class="am-divider"></div>
+            <button class="am-item am-danger" onclick="closeAvatarMenu();window.__signOut?window.__signOut():toast('Dev mode — sign-out disabled')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg>
+              Sign out
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="view view-search active" id="view-search">
+    <div class="toolbar">
+      <div>
+        <div class="results-n"><span id="resultCount">0</span> results</div>
+        <div class="selected-n" id="selectedN"></div>
+      </div>
+      <div class="right">
+        <button class="tbtn" onclick="toast('Saved to list: Trades — North America')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z"/></svg>
+          Save to list
+        </button>
+        <button class="tbtn" onclick="exportCSV()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+          Export CSV
+        </button>
+        <button class="tbtn primary" onclick="toast('Added to outreach sequence')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          Add to sequence
+        </button>
+      </div>
+    </div>
+
+    <div class="table-wrap" id="tableWrap"></div>
+
+    <div class="pager">
+      <span id="pagerInfo">—</span>
+      <div class="btns" id="pagerBtns"></div>
+    </div>
+    </div><!-- /view-search -->
+
+    <!-- HOME / ONBOARDING VIEW -->
+    <div class="view" id="view-home"></div>
+    <!-- LISTS VIEW -->
+    <div class="view" id="view-lists"></div>
+    <!-- OUTREACH VIEW -->
+    <div class="view" id="view-outreach"></div>
+    <!-- AI ENRICH VIEW -->
+    <div class="view" id="view-enrich"></div>
+    <!-- ANALYTICS VIEW -->
+    <div class="view" id="view-analytics"></div>
+    <!-- SETTINGS VIEW -->
+    <div class="view" id="view-settings"></div>
+  </main>
+</div>
+
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<aside class="drawer" id="drawer" aria-label="Contact details">
+  <div class="drawer-head" id="drawerHead"></div>
+  <div class="drawer-body" id="drawerBody"></div>
+</aside>
+
+<!-- COMMAND PALETTE -->
+<div class="cmdk-overlay" id="cmdkOverlay" onclick="closeCmdk()"></div>
+<div class="cmdk" id="cmdk" role="dialog" aria-label="Command palette">
+  <div class="cmdk-search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+    <input type="text" id="cmdkInput" placeholder="Jump to… or type to search contacts" autocomplete="off">
+    <kbd>esc</kbd>
+  </div>
+  <div class="cmdk-list" id="cmdkList"></div>
+</div>
+
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+  <span id="toastMsg"></span>
+</div>
+
+<script>
+/* ================= MOCK DATA ================= */
+const PEOPLE = [
+  {n:"Mike Doherty",t:"Owner",c:"Doherty Plumbing & Heating",ce:14,l:"Edmonton, AB",i:"Plumbing",e:"mike@dohertyplumbing.ca",p:"(780) 412-8830"},
+  {n:"Sarah Lindqvist",t:"Operations Manager",c:"Apex Mechanical Group",ce:42,l:"Calgary, AB",i:"HVAC",e:"sarah.l@apexmech.com",p:"(403) 991-2247"},
+  {n:"Travis Boychuk",t:"Owner",c:"Boychuk Roofing Ltd",ce:9,l:"Saskatoon, SK",i:"Roofing",e:"travis@boychukroofing.ca",p:"(306) 220-4471"},
+  {n:"Danielle Mercer",t:"General Manager",c:"Mercer Electric",ce:23,l:"Winnipeg, MB",i:"Electrical",e:"danielle@mercerelectric.ca",p:"(204) 318-9920"},
+  {n:"Ray Castellano",t:"President",c:"Castellano HVAC Services",ce:31,l:"Phoenix, AZ",i:"HVAC",e:"ray@castellanohvac.com",p:"(602) 555-0143"},
+  {n:"Jenna Kowalski",t:"Owner",c:"Northside Plumbing Co",ce:6,l:"Regina, SK",i:"Plumbing",e:"jenna@northsideplumb.ca",p:"(306) 540-3318"},
+  {n:"Derek Hsu",t:"VP Operations",c:"Pacific Crest Builders",ce:88,l:"Vancouver, BC",i:"Construction",e:"d.hsu@pacificcrest.ca",p:"(604) 770-2256"},
+  {n:"Amanda Foley",t:"Office Manager",c:"Foley Bros Roofing",ce:17,l:"Denver, CO",i:"Roofing",e:"amanda@foleybros.com",p:"(303) 555-0188"},
+  {n:"Curtis Manyfingers",t:"Owner",c:"Prairie Sky Electrical",ce:11,l:"Lethbridge, AB",i:"Electrical",e:"curtis@prairieskyelec.ca",p:"(403) 327-6610"},
+  {n:"Lisa Tran",t:"CEO",c:"Tran Mechanical Inc",ce:54,l:"Toronto, ON",i:"HVAC",e:"lisa@tranmech.ca",p:"(416) 901-7733"},
+  {n:"Brent Olafson",t:"Owner",c:"Olafson Landscaping",ce:8,l:"Saskatoon, SK",i:"Landscaping",e:"brent@olafsonlandscape.ca",p:"(306) 222-9105"},
+  {n:"Marcus Webb",t:"Director of Sales",c:"Webb Construction Group",ce:120,l:"Dallas, TX",i:"Construction",e:"mwebb@webbgroup.com",p:"(214) 555-0119"},
+  {n:"Hailey Brooks",t:"Owner",c:"Brooks Comfort Heating",ce:12,l:"Minneapolis, MN",i:"HVAC",e:"hailey@brookscomfort.com",p:"(612) 555-0162"},
+  {n:"Tony Reyes",t:"Owner",c:"Reyes Plumbing Solutions",ce:19,l:"San Antonio, TX",i:"Plumbing",e:"tony@reyesplumbing.com",p:"(210) 555-0177"},
+  {n:"Karen Whitefeather",t:"GM",c:"True North Roofing",ce:27,l:"Thunder Bay, ON",i:"Roofing",e:"karen@truenorthroof.ca",p:"(807) 344-8821"},
+  {n:"Phil Demchuk",t:"Owner",c:"Demchuk Electric Ltd",ce:5,l:"Melfort, SK",i:"Electrical",e:"phil@demchukelectric.ca",p:"(306) 752-4490"},
+  {n:"Olivia Sandhu",t:"Operations Lead",c:"Evergreen Lawn & Snow",ce:34,l:"Surrey, BC",i:"Landscaping",e:"olivia@evergreenls.ca",p:"(604) 588-1207"},
+  {n:"Greg Tomlinson",t:"President",c:"Tomlinson Mechanical",ce:67,l:"Chicago, IL",i:"HVAC",e:"greg@tomlinsonmech.com",p:"(312) 555-0151"},
+  {n:"Nadia Petrov",t:"Owner",c:"Petrov Custom Builds",ce:15,l:"Kelowna, BC",i:"Construction",e:"nadia@petrovbuilds.ca",p:"(250) 762-3340"},
+  {n:"Shawn Gallagher",t:"Owner",c:"Gallagher Drain & Sewer",ce:7,l:"Halifax, NS",i:"Plumbing",e:"shawn@gallagherdrain.ca",p:"(902) 431-5562"},
+  {n:"Tracy Nguyen",t:"Office Administrator",c:"Summit Roofing Systems",ce:38,l:"Seattle, WA",i:"Roofing",e:"tracy@summitroofs.com",p:"(206) 555-0139"},
+  {n:"Doug Friesen",t:"Owner",c:"Friesen Heating & Air",ce:10,l:"Winkler, MB",i:"HVAC",e:"doug@friesenheating.ca",p:"(204) 325-7718"},
+  {n:"Renee Carter",t:"VP Sales",c:"Carter Industrial Electric",ce:96,l:"Houston, TX",i:"Electrical",e:"renee@carterindustrial.com",p:"(713) 555-0126"},
+  {n:"Jordan Bear",t:"Owner",c:"Bear Claw Landscaping",ce:13,l:"Prince Albert, SK",i:"Landscaping",e:"jordan@bearclawland.ca",p:"(306) 763-2284"},
+  {n:"Diego Ramirez",t:"Owner",c:"Ramirez Plumbing Co",ce:16,l:"Los Angeles, CA",i:"Plumbing",e:"diego@ramirezplumbing.com",p:"(213) 555-0190"},
+  {n:"Ashley Brooks",t:"Operations Manager",c:"Golden State HVAC",ce:64,l:"San Diego, CA",i:"HVAC",e:"ashley@goldenstatehvac.com",p:"(619) 555-0114"},
+  {n:"Kevin O'Brien",t:"President",c:"O'Brien Roofing Systems",ce:48,l:"Portland, OR",i:"Roofing",e:"kevin@obrienroofing.com",p:"(503) 555-0177"},
+  {n:"Maria Gonzalez",t:"Owner",c:"Desert Air Mechanical",ce:22,l:"Las Vegas, NV",i:"HVAC",e:"maria@desertairmech.com",p:"(702) 555-0163"},
+  {n:"Brandon Cole",t:"VP Operations",c:"Summit Electrical Group",ce:73,l:"Salt Lake City, UT",i:"Electrical",e:"brandon@summitelec.com",p:"(801) 555-0128"},
+  {n:"Jessica Tran",t:"Owner",c:"Tran Landscape Design",ce:9,l:"Sacramento, CA",i:"Landscaping",e:"jessica@tranlandscape.com",p:"(916) 555-0145"},
+  {n:"Carlos Mendez",t:"Owner",c:"Mendez Construction LLC",ce:31,l:"Austin, TX",i:"Construction",e:"carlos@mendezconstruction.com",p:"(512) 555-0192"},
+  {n:"Stephanie Hill",t:"Office Manager",c:"Lone Star Plumbing",ce:18,l:"El Paso, TX",i:"Plumbing",e:"stephanie@lonestarplumb.com",p:"(915) 555-0136"},
+  {n:"Robert Yazzie",t:"Owner",c:"Yazzie Electrical Services",ce:11,l:"Albuquerque, NM",i:"Electrical",e:"robert@yazzieelectric.com",p:"(505) 555-0158"},
+  {n:"Nicole Carter",t:"President",c:"Carter Roofing Co",ce:55,l:"Tucson, AZ",i:"Roofing",e:"nicole@carterroofing.com",p:"(520) 555-0171"},
+  {n:"James Whitaker",t:"Owner",c:"Whitaker Heating & Cooling",ce:14,l:"Oklahoma City, OK",i:"HVAC",e:"james@whitakerhvac.com",p:"(405) 555-0149"},
+  {n:"Emily Novak",t:"GM",c:"Prairie State Mechanical",ce:42,l:"Chicago, IL",i:"HVAC",e:"emily@prairiestatemech.com",p:"(773) 555-0167"},
+  {n:"Tyler Schmidt",t:"Owner",c:"Schmidt Plumbing & Drain",ce:12,l:"Minneapolis, MN",i:"Plumbing",e:"tyler@schmidtplumbing.com",p:"(612) 555-0183"},
+  {n:"Danielle Foster",t:"Owner",c:"Foster Electrical Contractors",ce:27,l:"St. Louis, MO",i:"Electrical",e:"danielle@fosterelectrical.com",p:"(314) 555-0125"},
+  {n:"Marcus Johnson",t:"VP Sales",c:"Buckeye Construction Group",ce:104,l:"Columbus, OH",i:"Construction",e:"marcus@buckeyeconstruction.com",p:"(614) 555-0119"},
+  {n:"Rachel Kowalczyk",t:"Operations Lead",c:"Motor City Roofing",ce:38,l:"Detroit, MI",i:"Roofing",e:"rachel@motorcityroofing.com",p:"(313) 555-0152"},
+  {n:"Brett Andersen",t:"Owner",c:"Andersen Lawn & Landscape",ce:10,l:"Milwaukee, WI",i:"Landscaping",e:"brett@andersenlawn.com",p:"(414) 555-0140"},
+  {n:"Amanda Reyes",t:"Owner",c:"Sunshine HVAC Services",ce:24,l:"Miami, FL",i:"HVAC",e:"amanda@sunshinehvac.com",p:"(305) 555-0188"},
+  {n:"Christopher Lee",t:"President",c:"Peachtree Electrical",ce:61,l:"Atlanta, GA",i:"Electrical",e:"chris@peachtreeelectric.com",p:"(404) 555-0133"},
+  {n:"Megan Wallace",t:"Office Manager",c:"Tar Heel Plumbing",ce:15,l:"Charlotte, NC",i:"Plumbing",e:"megan@tarheelplumbing.com",p:"(704) 555-0176"},
+  {n:"Justin Boudreaux",t:"Owner",c:"Bayou Roofing & Siding",ce:19,l:"New Orleans, LA",i:"Roofing",e:"justin@bayouroofing.com",p:"(504) 555-0161"},
+  {n:"Lauren Mitchell",t:"GM",c:"Volunteer Mechanical",ce:46,l:"Nashville, TN",i:"HVAC",e:"lauren@volunteermech.com",p:"(615) 555-0154"},
+  {n:"Anthony Russo",t:"Owner",c:"Russo Construction Inc",ce:88,l:"New York, NY",i:"Construction",e:"anthony@russoconstruction.com",p:"(212) 555-0107"},
+  {n:"Katherine Walsh",t:"VP Operations",c:"Bay State Electrical",ce:72,l:"Boston, MA",i:"Electrical",e:"katherine@baystateelec.com",p:"(617) 555-0122"},
+  {n:"Michael DiNardo",t:"Owner",c:"Liberty Plumbing Co",ce:20,l:"Philadelphia, PA",i:"Plumbing",e:"michael@libertyplumbing.com",p:"(215) 555-0148"},
+  {n:"Samantha Brooks",t:"Owner",c:"Garden State Roofing",ce:26,l:"Newark, NJ",i:"Roofing",e:"samantha@gardenstateroof.com",p:"(973) 555-0165"},
+  {n:"David Park",t:"President",c:"Constitution HVAC",ce:53,l:"Hartford, CT",i:"HVAC",e:"david@constitutionhvac.com",p:"(860) 555-0131"},
+];
+const COMPANIES = [
+  {c:"Doherty Plumbing & Heating",ce:14,l:"Edmonton, AB",i:"Plumbing",rev:"$1M–$5M",site:"dohertyplumbing.ca"},
+  {c:"Apex Mechanical Group",ce:42,l:"Calgary, AB",i:"HVAC",rev:"$5M–$10M",site:"apexmech.com"},
+  {c:"Boychuk Roofing Ltd",ce:9,l:"Saskatoon, SK",i:"Roofing",rev:"<$1M",site:"boychukroofing.ca"},
+  {c:"Mercer Electric",ce:23,l:"Winnipeg, MB",i:"Electrical",rev:"$1M–$5M",site:"mercerelectric.ca"},
+  {c:"Castellano HVAC Services",ce:31,l:"Phoenix, AZ",i:"HVAC",rev:"$5M–$10M",site:"castellanohvac.com"},
+  {c:"Pacific Crest Builders",ce:88,l:"Vancouver, BC",i:"Construction",rev:"$10M–$50M",site:"pacificcrest.ca"},
+  {c:"Webb Construction Group",ce:120,l:"Dallas, TX",i:"Construction",rev:"$10M–$50M",site:"webbgroup.com"},
+  {c:"Tran Mechanical Inc",ce:54,l:"Toronto, ON",i:"HVAC",rev:"$5M–$10M",site:"tranmech.ca"},
+  {c:"Evergreen Lawn & Snow",ce:34,l:"Surrey, BC",i:"Landscaping",rev:"$1M–$5M",site:"evergreenls.ca"},
+  {c:"Carter Industrial Electric",ce:96,l:"Houston, TX",i:"Electrical",rev:"$10M–$50M",site:"carterindustrial.com"},
+  {c:"Summit Roofing Systems",ce:38,l:"Seattle, WA",i:"Roofing",rev:"$5M–$10M",site:"summitroofs.com"},
+  {c:"Petrov Custom Builds",ce:15,l:"Kelowna, BC",i:"Construction",rev:"$1M–$5M",site:"petrovbuilds.ca"},
+  {c:"Golden State HVAC",ce:64,l:"San Diego, CA",i:"HVAC",rev:"$5M–$10M",site:"goldenstatehvac.com"},
+  {c:"O'Brien Roofing Systems",ce:48,l:"Portland, OR",i:"Roofing",rev:"$5M–$10M",site:"obrienroofing.com"},
+  {c:"Summit Electrical Group",ce:73,l:"Salt Lake City, UT",i:"Electrical",rev:"$10M–$50M",site:"summitelec.com"},
+  {c:"Mendez Construction LLC",ce:31,l:"Austin, TX",i:"Construction",rev:"$5M–$10M",site:"mendezconstruction.com"},
+  {c:"Carter Roofing Co",ce:55,l:"Tucson, AZ",i:"Roofing",rev:"$5M–$10M",site:"carterroofing.com"},
+  {c:"Prairie State Mechanical",ce:42,l:"Chicago, IL",i:"HVAC",rev:"$1M–$5M",site:"prairiestatemech.com"},
+  {c:"Buckeye Construction Group",ce:104,l:"Columbus, OH",i:"Construction",rev:"$10M–$50M",site:"buckeyeconstruction.com"},
+  {c:"Sunshine HVAC Services",ce:24,l:"Miami, FL",i:"HVAC",rev:"$1M–$5M",site:"sunshinehvac.com"},
+  {c:"Peachtree Electrical",ce:61,l:"Atlanta, GA",i:"Electrical",rev:"$5M–$10M",site:"peachtreeelectric.com"},
+  {c:"Russo Construction Inc",ce:88,l:"New York, NY",i:"Construction",rev:"$10M–$50M",site:"russoconstruction.com"},
+  {c:"Bay State Electrical",ce:72,l:"Boston, MA",i:"Electrical",rev:"$10M–$50M",site:"baystateelec.com"},
+  {c:"Constitution HVAC",ce:53,l:"Hartford, CT",i:"HVAC",rev:"$5M–$10M",site:"constitutionhvac.com"},
+];
+
+/* demo records share the real-data shape: id + masked email domain */
+PEOPLE.forEach(p => { p.id = p.e; p.eDomain = p.e.split("@")[1]; });
+
+/* ================= FILTER CONFIG ================= */
+const FILTERS = [
+  {key:"title",label:"Job Title",opts:["Owner","President / CEO","Operations","Office Manager","Sales"]},
+  {key:"industry",label:"Industry",opts:["Plumbing","HVAC","Roofing","Electrical","Construction","Landscaping"]},
+  {key:"region",label:"Location",opts:["Canada","US — West","US — Southwest","US — Midwest","US — South","US — Northeast"]},
+  {key:"size",label:"Company Size",opts:["1–10 employees","11–50 employees","51–200 employees"]},
+];
+const TITLE_MAP = {
+  "Owner":["Owner"],
+  "President / CEO":["President","CEO"],
+  "Operations":["Operations Manager","VP Operations","Operations Lead","GM","General Manager"],
+  "Office Manager":["Office Manager","Office Administrator"],
+  "Sales":["Director of Sales","VP Sales"],
+};
+const REGION_MAP = {
+  "Canada":["AB","SK","MB","BC","ON","NS","QC"],
+  "US — West":["CA","WA","OR","NV","CO","UT"],
+  "US — Southwest":["AZ","TX","NM","OK"],
+  "US — Midwest":["IL","MN","MO","OH","MI","WI","IN","KS"],
+  "US — South":["FL","GA","NC","TN","SC","LA","AL"],
+  "US — Northeast":["NY","MA","PA","NJ","CT"],
+};
+
+/* ================= STATE ================= */
+let state = {
+  tab:"people",
+  search:"",
+  filters:{title:new Set(),industry:new Set(),region:new Set(),size:new Set()},
+  checked:new Set(),
+  revealed:new Set(),
+  credits:187,
+  page:1,
+  sort:{key:null,dir:1},
+  drawerId:null,
+};
+const PER_PAGE = 10;
+const AV_COLORS = ["#C95E1A","#2563EB","#1B8A5A","#7C3AED","#0E7490","#B91C1C","#A16207"];
+
+/* ================= THEME ================= */
+function toggleTheme(){
+  const root = document.documentElement;
+  const next = root.getAttribute("data-theme")==="light" ? "dark" : "light";
+  root.setAttribute("data-theme", next);
+  const lbl = document.getElementById("themeLabel");
+  if(lbl) lbl.textContent = next==="dark" ? "Dark mode" : "Light mode";
+  toast(next==="dark" ? "Dark mode on" : "Light mode on");
+}
+
+function toggleRail(){
+  const collapsed = document.querySelector(".app").classList.toggle("rail-collapsed");
+  const btn = document.getElementById("railCollapse");
+  if(btn) btn.title = collapsed ? "Expand menu" : "Collapse menu";
+}
+
+/* ===== avatar dropdown menu ===== */
+function toggleAvatarMenu(e){
+  if(e) e.stopPropagation();
+  const m = document.getElementById("avatarMenu");
+  const wasOpen = m.classList.contains("show");
+  m.classList.toggle("show", !wasOpen);
+  if(!wasOpen){
+    const amc = document.getElementById("amCredits");
+    if(amc) amc.textContent = state.credits;
+  }
+}
+function closeAvatarMenu(){
+  const m = document.getElementById("avatarMenu");
+  if(m) m.classList.remove("show");
+}
+/* click anywhere else closes it */
+document.addEventListener("click", e=>{
+  const wrap = e.target.closest(".avatar-wrap");
+  if(!wrap) closeAvatarMenu();
+});
+
+/* ================= FILTER PANEL RENDER ================= */
+function buildFilters(){
+  const wrap = document.getElementById("filterGroups");
+  wrap.innerHTML = FILTERS.map((g,gi)=>`
+    <div class="fgroup ${gi<2?"open":""}" id="fg-${g.key}">
+      <button class="fgroup-head" onclick="this.parentElement.classList.toggle('open')">
+        ${g.label}
+        <span class="count" id="fc-${g.key}">0</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+      <div class="fgroup-body">
+        ${g.opts.map(o=>`
+          <label class="fopt">
+            <input type="checkbox" data-group="${g.key}" value="${o}" onchange="toggleFilter(this)">
+            <span class="cbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg></span>
+            ${o}
+          </label>`).join("")}
+      </div>
+    </div>`).join("");
+}
+function toggleFilter(el){
+  const s = state.filters[el.dataset.group];
+  el.checked ? s.add(el.value) : s.delete(el.value);
+  const badge = document.getElementById("fc-"+el.dataset.group);
+  badge.textContent = s.size;
+  badge.classList.toggle("show", s.size>0);
+  state.page = 1;
+  render();
+}
+function clearFilters(){
+  Object.values(state.filters).forEach(s=>s.clear());
+  document.querySelectorAll('.fopt input').forEach(i=>i.checked=false);
+  document.querySelectorAll('.count').forEach(b=>{b.textContent="0";b.classList.remove("show")});
+  state.page = 1;
+  render();
+}
+
+/* ================= FILTER LOGIC ================= */
+function provOf(loc){ return loc.split(", ")[1]; }
+function matchesPerson(p){
+  const f = state.filters;
+  if(f.title.size){
+    let ok=false;
+    f.title.forEach(t=>{ if(TITLE_MAP[t].some(m=>p.t.includes(m))) ok=true; });
+    if(!ok) return false;
+  }
+  if(f.industry.size && !f.industry.has(p.i)) return false;
+  if(f.region.size){
+    let ok=false;
+    f.region.forEach(r=>{ if(REGION_MAP[r].includes(provOf(p.l))) ok=true; });
+    if(!ok) return false;
+  }
+  if(f.size.size){
+    let ok=false;
+    f.size.forEach(s=>{
+      if(s.startsWith("1–10")&&p.ce<=10) ok=true;
+      if(s.startsWith("11–50")&&p.ce>=11&&p.ce<=50) ok=true;
+      if(s.startsWith("51–200")&&p.ce>=51) ok=true;
+    });
+    if(!ok) return false;
+  }
+  if(state.search){
+    const q = state.search.toLowerCase();
+    if(!(p.n+p.t+p.c+p.l+p.i).toLowerCase().includes(q)) return false;
+  }
+  return true;
+}
+function matchesCompany(co){
+  const f = state.filters;
+  if(f.industry.size && !f.industry.has(co.i)) return false;
+  if(f.region.size){
+    let ok=false;
+    f.region.forEach(r=>{ if(REGION_MAP[r].includes(provOf(co.l))) ok=true; });
+    if(!ok) return false;
+  }
+  if(f.size.size){
+    let ok=false;
+    f.size.forEach(s=>{
+      if(s.startsWith("1–10")&&co.ce<=10) ok=true;
+      if(s.startsWith("11–50")&&co.ce>=11&&co.ce<=50) ok=true;
+      if(s.startsWith("51–200")&&co.ce>=51) ok=true;
+    });
+    if(!ok) return false;
+  }
+  if(state.search){
+    const q = state.search.toLowerCase();
+    if(!(co.c+co.l+co.i).toLowerCase().includes(q)) return false;
+  }
+  return true;
+}
+
+/* ================= RENDER ================= */
+function initials(name){ return name.split(" ").map(w=>w[0]).slice(0,2).join(""); }
+function avColor(name){ let h=0; for(const ch of name) h=(h*31+ch.charCodeAt(0))%AV_COLORS.length; return AV_COLORS[h]; }
+
+function render(){
+  const peopleAll = PEOPLE.filter(matchesPerson);
+  const compAll = COMPANIES.filter(matchesCompany);
+  document.getElementById("peoplePill").textContent = peopleAll.length;
+  document.getElementById("compPill").textContent = compAll.length;
+
+  const rows = sortRows(state.tab==="people" ? peopleAll : compAll);
+  document.getElementById("resultCount").textContent = rows.length.toLocaleString();
+
+  const sel = document.getElementById("selectedN");
+  sel.textContent = state.checked.size + " selected";
+  sel.classList.toggle("show", state.checked.size>0);
+
+  const pages = Math.max(1, Math.ceil(rows.length/PER_PAGE));
+  if(state.page>pages) state.page = pages;
+  const start = (state.page-1)*PER_PAGE;
+  const pageRows = rows.slice(start, start+PER_PAGE);
+
+  const wrap = document.getElementById("tableWrap");
+  if(!rows.length){
+    wrap.innerHTML = `<div class="empty"><h3>No matches for these filters</h3>Try widening your location or industry filters, or clear all filters to start over.</div>`;
+  } else if(state.tab==="people"){
+    const allVisChecked = pageRows.length>0 && pageRows.every(p=>state.checked.has(p.id));
+    wrap.innerHTML = `<table>
+      <thead><tr>
+        <th class="col-check"><label class="fopt" style="padding:0"><input type="checkbox" id="checkAll" ${allVisChecked?"checked":""} onchange="toggleAll(this)"><span class="cbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg></span></label></th>
+        ${sortTh("Name","n")}${sortTh("Company","c")}${sortTh("Location","l")}${sortTh("Industry","i")}<th>Email</th><th>Phone</th>
+      </tr></thead>
+      <tbody>${pageRows.map(p=>{
+        const id = p.id;
+        const checked = state.checked.has(id);
+        const revealed = state.revealed.has(id);
+        return `<tr class="${checked?"checked":""}" onclick="rowClick(event,'${id}')" style="cursor:pointer">
+          <td><label class="fopt" style="padding:0"><input type="checkbox" ${checked?"checked":""} onchange="toggleRow('${id}',this)"><span class="cbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg></span></label></td>
+          <td><div class="person">
+            <div class="avatar">${initials(p.n)}</div>
+            <div><div class="pname">${p.n}</div><div class="ptitle">${p.t}</div></div>
+          </div></td>
+          <td><div class="comp">
+            <div class="comp-logo">${p.c[0]}</div>
+            <div><div class="comp-name">${p.c}</div><div class="comp-meta">${p.ce} employees</div></div>
+          </div></td>
+          <td class="loc">${p.l}</td>
+          <td><span class="ind-tag">${p.i}</span></td>
+          <td>${revealed
+            ? `<span class="revealed"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>${p.e}</span>`
+            : `<button class="access-btn" onclick="revealEmail('${id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>Access contact</button>`}
+          </td>
+          <td class="phone">${revealed
+            ? `<span class="verif"></span>${p.p}`
+            : `<span class="phone-locked"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>(•••) •••-••••</span>`}
+          </td>
+        </tr>`;
+      }).join("")}</tbody>
+    </table>`;
+  } else {
+    wrap.innerHTML = `<table>
+      <thead><tr>
+        <th class="col-check"></th>
+        ${sortTh("Company","c")}${sortTh("Location","l")}${sortTh("Industry","i")}${sortTh("Employees","ce")}${sortTh("Est. Revenue","rev")}<th>Website</th>
+      </tr></thead>
+      <tbody>${pageRows.map(co=>`
+        <tr>
+          <td></td>
+          <td><div class="comp">
+            <div class="comp-logo">${co.c[0]}</div>
+            <div class="comp-name">${co.c}</div>
+          </div></td>
+          <td class="loc">${co.l}</td>
+          <td><span class="ind-tag">${co.i}</span></td>
+          <td>${co.ce}</td>
+          <td>${co.rev}</td>
+          <td style="color:var(--orange);font-weight:600">${co.site}</td>
+        </tr>`).join("")}</tbody>
+    </table>`;
+  }
+
+  /* pager */
+  document.getElementById("pagerInfo").textContent =
+    rows.length ? `Showing ${start+1}–${Math.min(start+PER_PAGE,rows.length)} of ${rows.length}` : "0 results";
+  const btns = document.getElementById("pagerBtns");
+  let html = `<button class="pg" onclick="goPage(${state.page-1})" ${state.page===1?"disabled":""}>‹</button>`;
+  for(let i=1;i<=pages;i++) html += `<button class="pg ${i===state.page?"active":""}" onclick="goPage(${i})">${i}</button>`;
+  html += `<button class="pg" onclick="goPage(${state.page+1})" ${state.page===pages?"disabled":""}>›</button>`;
+  btns.innerHTML = html;
+  syncBannerCredits();
+}
+function goPage(p){
+  const total = state.tab==="people" ? PEOPLE.filter(matchesPerson).length : COMPANIES.filter(matchesCompany).length;
+  const pages = Math.max(1, Math.ceil(total/PER_PAGE));
+  state.page = Math.min(Math.max(1,p), pages);
+  render();
+}
+function toggleRow(id, el){
+  el.checked ? state.checked.add(id) : state.checked.delete(id);
+  render();
+}
+function toggleAll(el){
+  const visible = PEOPLE.filter(matchesPerson).slice((state.page-1)*PER_PAGE, state.page*PER_PAGE);
+  visible.forEach(p=> el.checked ? state.checked.add(p.id) : state.checked.delete(p.id));
+  render();
+}
+function revealEmail(id){
+  if(state.credits<=0){ toast("Out of credits — upgrade to keep prospecting"); return; }
+  if(state.revealed.has(id)) return;
+  /* real-database mode: server-enforced reveal via Firestore */
+  if(window.fbReveal){ window.fbReveal(id); return; }
+  /* demo mode: local-only */
+  state.revealed.add(id);
+  state.credits--;
+  document.getElementById("creditCount").textContent = state.credits;
+  toast("Contact unlocked · 1 credit used");
+  render();
+  if(state.drawerId===id) renderDrawer(id);
+  if(window.persistReveal) window.persistReveal(id);
+}
+
+/* ================= SORTING ================= */
+function sortTh(label, key){
+  const s = state.sort;
+  const active = s.key===key;
+  const arrow = active ? (s.dir===1 ? "&#9650;" : "&#9660;") : "&#9650;";
+  return `<th class="sortable ${active?"sorted":""}" onclick="setSort('${key}')">${label}<span class="arrow">${arrow}</span></th>`;
+}
+function setSort(key){
+  const s = state.sort;
+  if(s.key===key){ s.dir = -s.dir; } else { s.key = key; s.dir = 1; }
+  state.page = 1;
+  render();
+}
+function sortRows(rows){
+  const {key, dir} = state.sort;
+  if(!key) return rows;
+  return [...rows].sort((a,b)=>{
+    const va = a[key], vb = b[key];
+    if(typeof va==="number" && typeof vb==="number") return (va-vb)*dir;
+    return String(va).localeCompare(String(vb))*dir;
+  });
+}
+
+/* ================= CONTACT DRAWER ================= */
+function rowClick(e, id){
+  /* ignore clicks on interactive elements inside the row */
+  if(e.target.closest("button") || e.target.closest("label") || e.target.closest("input")) return;
+  openDrawer(id);
+}
+function openDrawer(id){
+  state.drawerId = id;
+  renderDrawer(id);
+  document.getElementById("drawer").classList.add("show");
+  document.getElementById("drawerOverlay").classList.add("show");
+}
+function closeDrawer(){
+  state.drawerId = null;
+  document.getElementById("drawer").classList.remove("show");
+  document.getElementById("drawerOverlay").classList.remove("show");
+}
+function copyText(text, what){
+  navigator.clipboard.writeText(text).then(
+    ()=>toast(what + " copied to clipboard"),
+    ()=>toast("Couldn't copy — select it manually")
+  );
+}
+function renderDrawer(id){
+  const p = PEOPLE.find(x=>x.id===id);
+  if(!p) return;
+  const revealed = state.revealed.has(id);
+  document.getElementById("drawerHead").innerHTML = `
+    <div class="avatar">${initials(p.n)}</div>
+    <div>
+      <div class="drawer-name">${p.n}</div>
+      <div class="drawer-title">${p.t} · ${p.c}</div>
+    </div>
+    <button class="drawer-close" onclick="closeDrawer()" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>`;
+  const lockIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>`;
+  const mailIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>`;
+  const phoneIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>`;
+  document.getElementById("drawerBody").innerHTML = `
+    <div class="d-sec">
+      <div class="d-label">Contact Channels</div>
+      ${revealed ? `
+        <div class="channel">
+          <div class="ch-icon">${mailIcon}</div>
+          <div class="ch-val">${p.e}</div>
+          <button class="copy-btn" onclick="copyText('${p.e}','Email')">Copy</button>
+        </div>
+        <div class="channel">
+          <div class="ch-icon">${phoneIcon}</div>
+          <div class="ch-val">${p.p}</div>
+          <button class="copy-btn" onclick="copyText('${p.p}','Phone')">Copy</button>
+        </div>
+      ` : `
+        <div class="channel">
+          <div class="ch-icon">${lockIcon}</div>
+          <div class="ch-val muted">••••••@${p.eDomain || "•••••.com"}</div>
+        </div>
+        <div class="channel">
+          <div class="ch-icon">${lockIcon}</div>
+          <div class="ch-val muted">(•••) •••-••••</div>
+        </div>
+        <button class="unlock-btn" onclick="revealEmail('${p.id}')">Unlock email &amp; phone · 1 credit</button>
+      `}
+    </div>
+    <div class="d-sec">
+      <div class="d-label">Company</div>
+      <div class="d-card">
+        <div class="d-row"><span class="k">Company</span><span class="v">${p.c}</span></div>
+        <div class="d-row"><span class="k">Industry</span><span class="v">${p.i}</span></div>
+        <div class="d-row"><span class="k">Employees</span><span class="v">${p.ce}</span></div>
+        <div class="d-row"><span class="k">Location</span><span class="v">${p.l}</span></div>
+      </div>
+    </div>
+    <div class="d-sec">
+      <div class="d-label">Record</div>
+      <div class="d-card">
+        <div class="d-row"><span class="k">Status</span><span class="v" style="color:var(--green)">Verified</span></div>
+        <div class="d-row"><span class="k">Unlocked</span><span class="v">${revealed ? "Yes — yours forever" : "Not yet"}</span></div>
+      </div>
+    </div>`;
+}
+document.addEventListener("keydown", e => { if(e.key==="Escape") closeDrawer(); });
+
+/* "/" focuses search like a real prospecting tool */
+document.addEventListener("keydown", e => {
+  if(e.key === "/" && document.activeElement.id !== "globalSearch"){
+    e.preventDefault();
+    document.getElementById("globalSearch").focus();
+  }
+});
+
+/* ================= REAL CSV EXPORT ================= */
+function csvCell(v){ v=String(v); return /[",\n]/.test(v) ? '"'+v.replace(/"/g,'""')+'"' : v; }
+function exportCSV(){
+  let rows, header, name;
+  if(state.tab==="people"){
+    let pool = PEOPLE.filter(matchesPerson);
+    if(state.checked.size) pool = pool.filter(p=>state.checked.has(p.id));
+    if(!pool.length){ toast("Nothing to export — select rows or widen filters"); return; }
+    header = ["Name","Title","Company","Employees","Location","Industry","Email","Phone","Unlocked"];
+    rows = pool.map(p=>{
+      const r = state.revealed.has(p.id);
+      return [p.n,p.t,p.c,p.ce,p.l,p.i, (r&&p.e)?p.e:"(locked — reveal in app)", (r&&p.p)?p.p:"(locked — reveal in app)", r?"yes":"no"];
+    });
+    name = "jayisaac-people-export.csv";
+  } else {
+    const pool = COMPANIES.filter(matchesCompany);
+    if(!pool.length){ toast("Nothing to export — widen filters"); return; }
+    header = ["Company","Employees","Location","Industry","Est. Revenue","Website"];
+    rows = pool.map(c=>[c.c,c.ce,c.l,c.i,c.rev,c.site]);
+    name = "jayisaac-companies-export.csv";
+  }
+  const csv = [header, ...rows].map(r=>r.map(csvCell).join(",")).join("\r\n");
+  const blob = new Blob(["\uFEFF"+csv], {type:"text/csv;charset=utf-8"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast("Exported " + rows.length + " rows to CSV");
+}
+
+/* ================= UI WIRING ================= */
+document.querySelectorAll(".tab").forEach(t=>{
+  t.addEventListener("click",()=>{
+    document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+    t.classList.add("active");
+    state.tab = t.dataset.tab;
+    state.page = 1;
+    render();
+  });
+});
+document.getElementById("globalSearch").addEventListener("input",e=>{
+  state.search = e.target.value.trim();
+  state.page = 1;
+  render();
+});
+let toastTimer;
+function toast(msg){
+  const el = document.getElementById("toast");
+  document.getElementById("toastMsg").textContent = msg;
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>el.classList.remove("show"), 2400);
+}
+
+function dismissBanner(){
+  document.getElementById("alertBanner").classList.add("hide");
+}
+/* keep the banner's credit number in sync with the live counter */
+function syncBannerCredits(){
+  const ab = document.getElementById("abCredits");
+  if(ab) ab.textContent = state.credits;
+}
+
+/* ================= VIEW ROUTER ================= */
+const VIEW_TITLES = {
+  home: "Home",
+  search: "Prospect Search",
+  lists: "Saved Lists",
+  outreach: "Outreach",
+  enrich: "AI Enrich",
+  analytics: "Analytics",
+  settings: "Settings",
+};
+let currentView = "search";
+
+function switchView(view){
+  if(!VIEW_TITLES[view]) return;
+  currentView = view;
+  /* rail active state */
+  document.querySelectorAll(".rail-btn[data-view]").forEach(b=>
+    b.classList.toggle("active", b.dataset.view===view));
+  /* view containers */
+  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+  document.getElementById("view-"+view).classList.add("active");
+  /* the search tabs only make sense on search view */
+  document.querySelector(".tabs").style.visibility = view==="search" ? "visible" : "hidden";
+  /* render the destination view's content on demand */
+  if(view==="home") renderHome();
+  if(view==="lists") renderLists();
+  if(view==="outreach") renderOutreach();
+  if(view==="enrich") renderEnrich();
+  if(view==="analytics") renderAnalytics();
+  if(view==="settings") renderSettings();
+  document.title = "JAYISAAC AI — " + VIEW_TITLES[view];
+}
+
+document.querySelectorAll(".rail-btn[data-view]").forEach(btn=>{
+  btn.addEventListener("click", ()=>switchView(btn.dataset.view));
+});
+
+/* ---- HOME / ONBOARDING HUB ---- */
+const ONBOARD_TASKS = [
+  {done:true,  title:"Create your account", desc:"You're in — welcome to JAYISAAC AI.", cred:5, time:"done", cta:null},
+  {done:false, title:"Find & save your first leads", desc:"Search 1M+ North American contacts and build your first list.", cred:5, time:"About 1 min", cta:"Search for leads", view:"search"},
+  {done:false, title:"Reveal a verified contact", desc:"Unlock a direct email and phone number — 1 credit each.", cred:5, time:"About 1 min", cta:"Try it", view:"search"},
+  {done:false, title:"Build an outreach sequence", desc:"Turn saved leads into a multi-step email + call campaign.", cred:5, time:"About 3 mins", cta:"Open Outreach", view:"outreach"},
+  {done:false, title:"Export your list to CSV", desc:"Take your revealed contacts anywhere — CRM, spreadsheet, dialer.", cred:5, time:"About 1 min", cta:"Go to Search", view:"search"},
+];
+function renderHome(){
+  const el = document.getElementById("view-home");
+  const doneCount = ONBOARD_TASKS.filter(t=>t.done).length;
+  const pct = Math.round(doneCount/ONBOARD_TASKS.length*100);
+  const earned = ONBOARD_TASKS.filter(t=>t.done).reduce((a,t)=>a+t.cred,0);
+  const total = ONBOARD_TASKS.reduce((a,t)=>a+t.cred,0);
+  el.innerHTML = `<div class="view-scroll">
+    <div class="vhead">
+      <h1><span class="vh-glow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg></span>Welcome back, JT</h1>
+      <p>Get set up in a few quick steps. Every task you finish earns bonus credits to spend on contact reveals.</p>
+    </div>
+
+    <div class="onboard-hero">
+      <div class="oh-left">
+        <div class="oh-title">Recommended setup</div>
+        <div class="oh-sub">Knock out these steps and you'll be pulling verified leads in minutes.</div>
+        <div class="oh-progress">
+          <div class="oh-bar"><div class="oh-fill" style="width:${pct}%"></div></div>
+          <div class="oh-progress-meta"><span>${doneCount}/${ONBOARD_TASKS.length} tasks</span><span class="oh-credits">${earned}/${total} credits earned</span></div>
+        </div>
+      </div>
+      <div class="oh-badge">
+        <div class="oh-badge-pct">${pct}%</div>
+        <div class="oh-badge-lbl">complete</div>
+      </div>
+    </div>
+
+    <div class="task-list">
+      ${ONBOARD_TASKS.map(t=>`
+        <div class="task ${t.done?"done":""}">
+          <div class="task-check">${t.done
+            ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>`
+            : ``}</div>
+          <div class="task-main">
+            <div class="task-title">${t.title}</div>
+            <div class="task-desc">${t.desc}</div>
+            ${t.cta && !t.done ? `<button class="task-cta" onclick="switchView('${t.view}')">${t.cta}</button>` : ``}
+          </div>
+          <div class="task-meta">
+            <span class="task-cred">+${t.cred} credits</span>
+            <span class="task-time">${t.time}</span>
+          </div>
+        </div>`).join("")}
+    </div>
+  </div>`;
+}
+
+
+const DEMO_LISTS = [
+  {name:"Trades — North America", count:842, updated:"2h ago", icon:"M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z"},
+  {name:"HVAC Owners — AB/SK", count:318, updated:"1d ago", icon:"M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"},
+  {name:"High-Intent — Q2 Push", count:127, updated:"3d ago", icon:"M13 2L3 14h7l-1 8 10-12h-7l1-8z"},
+  {name:"Roofing — US Sunbelt", count:204, updated:"1w ago", icon:"M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"},
+];
+function renderLists(){
+  const el = document.getElementById("view-lists");
+  el.innerHTML = `<div class="view-scroll">
+    <div class="vhead">
+      <h1><span class="vh-glow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z"/></svg></span>Saved Lists</h1>
+      <p>Your saved prospecting lists. Build a list from the search view, then work it as a focused campaign.</p>
+    </div>
+    <div class="metrics">
+      <div class="metric"><div class="m-label">Total Lists</div><div class="m-value">${DEMO_LISTS.length}</div><div class="m-sub">▲ active</div></div>
+      <div class="metric"><div class="m-label">Total Contacts</div><div class="m-value glow">${DEMO_LISTS.reduce((a,l)=>a+l.count,0).toLocaleString()}</div><div class="m-sub">across all lists</div></div>
+      <div class="metric"><div class="m-label">Revealed</div><div class="m-value">${state.revealed.size}</div><div class="m-sub">contacts unlocked</div></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h3>All Lists</h3><span class="ph-tag">${DEMO_LISTS.length} lists</span></div>
+      ${DEMO_LISTS.map(l=>`
+        <div class="lrow" onclick="toast('Opening &quot;${l.name}&quot;…'); switchView('search')">
+          <div class="lrow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="${l.icon}"/></svg></div>
+          <div class="lrow-main">
+            <div class="lrow-title">${l.name}</div>
+            <div class="lrow-meta">${l.count.toLocaleString()} contacts · updated ${l.updated}</div>
+          </div>
+          <div class="lrow-count">${l.count.toLocaleString()}</div>
+          <span class="lrow-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></span>
+        </div>`).join("")}
+    </div>
+  </div>`;
+}
+
+/* ---- OUTREACH ---- */
+function renderOutreach(){
+  const el = document.getElementById("view-outreach");
+  el.innerHTML = `<div class="view-scroll">
+    <div class="vhead">
+      <h1><span class="vh-glow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>Outreach</h1>
+      <p>Push revealed contacts into multi-step sequences. Email and call steps fire on a schedule so nobody slips through.</p>
+    </div>
+    <div class="metrics">
+      <div class="metric"><div class="m-label">Active Sequences</div><div class="m-value glow">3</div><div class="m-sub">▲ running</div></div>
+      <div class="metric"><div class="m-label">Contacts Enrolled</div><div class="m-value">486</div><div class="m-sub">in flight</div></div>
+      <div class="metric"><div class="m-label">Reply Rate</div><div class="m-value">14.2%</div><div class="m-sub">▲ 2.1% vs last month</div></div>
+      <div class="metric"><div class="m-label">Meetings Booked</div><div class="m-value">22</div><div class="m-sub">this month</div></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h3>Trades Cold Open — 4-step</h3><span class="ph-tag">running</span></div>
+      <div style="padding:8px 20px 20px">
+        <div class="seq">
+          <div class="seq-step"><div class="seq-dot"></div><div class="seq-body"><div class="seq-title">Day 1 — Intro email</div><div class="seq-desc">Short, personalized open referencing their service area.</div><div class="seq-tag">Email · 312 sent</div></div></div>
+          <div class="seq-step"><div class="seq-dot"></div><div class="seq-body"><div class="seq-title">Day 3 — Call task</div><div class="seq-desc">Direct dial during business hours. Leave voicemail if no answer.</div><div class="seq-tag">Call · 198 queued</div></div></div>
+          <div class="seq-step"><div class="seq-dot"></div><div class="seq-body"><div class="seq-title">Day 5 — Follow-up email</div><div class="seq-desc">Reply in-thread with a one-line value reminder.</div><div class="seq-tag">Email · 156 sent</div></div></div>
+          <div class="seq-step"><div class="seq-dot"></div><div class="seq-body"><div class="seq-title">Day 8 — Breakup</div><div class="seq-desc">Last-touch email. Closes the loop, leaves the door open.</div><div class="seq-tag">Email · 88 sent</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:center;margin-top:8px">
+      <button class="vstate-cta" onclick="toast('Sequence builder coming soon')">+ New Sequence</button>
+    </div>
+  </div>`;
+}
+
+/* ---- AI ENRICH ---- */
+function renderEnrich(){
+  const el = document.getElementById("view-enrich");
+  el.innerHTML = `<div class="view-scroll">
+    <div class="vhead">
+      <h1><span class="vh-glow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg></span>AI Enrich <span class="vstate-badge" style="margin-left:4px">Beta</span></h1>
+      <p>Select contacts in your search, then let AI write a personalized cold-open for each one based on their company, role, and signals. The bridge from list to first reply.</p>
+    </div>
+    <div class="metrics">
+      <div class="metric"><div class="m-label">Credits / enrichment</div><div class="m-value glow">1</div><div class="m-sub">per contact</div></div>
+      <div class="metric"><div class="m-label">Avg. generation</div><div class="m-value">2.4s</div><div class="m-sub">per opener</div></div>
+      <div class="metric"><div class="m-label">Selected now</div><div class="m-value">${state.checked.size}</div><div class="m-sub">ready to enrich</div></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h3>How it works</h3><span class="ph-tag">3 steps</span></div>
+      <div style="padding:8px 20px 20px">
+        <div class="seq">
+          <div class="seq-step"><div class="seq-dot"></div><div class="seq-body"><div class="seq-title">1 · Pick your contacts</div><div class="seq-desc">Select rows in Prospect Search — filter to your exact ICP first.</div></div></div>
+          <div class="seq-step"><div class="seq-dot"></div><div class="seq-body"><div class="seq-title">2 · AI drafts each opener</div><div class="seq-desc">Personalized first line per contact, grounded in their company and role.</div></div></div>
+          <div class="seq-step"><div class="seq-dot"></div><div class="seq-body"><div class="seq-title">3 · Push to Outreach</div><div class="seq-desc">Drop the enriched contacts straight into a sequence.</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="vstate" style="padding:30px 24px">
+      <div class="vstate-glow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+      <h2>Ready when you are</h2>
+      <p>Head to Prospect Search, select some contacts, and come back to generate AI openers in bulk.</p>
+      <button class="vstate-cta" onclick="switchView('search')">Go to Prospect Search →</button>
+    </div>
+  </div>`;
+}
+
+/* ---- ANALYTICS ---- */
+function renderAnalytics(){
+  const el = document.getElementById("view-analytics");
+  const bars = [
+    {l:"Mon",v:42},{l:"Tue",v:68},{l:"Wed",v:91},{l:"Thu",v:55},{l:"Fri",v:120},{l:"Sat",v:34},{l:"Sun",v:18},
+  ];
+  const max = Math.max(...bars.map(b=>b.v));
+  el.innerHTML = `<div class="view-scroll">
+    <div class="vhead">
+      <h1><span class="vh-glow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></span>Analytics</h1>
+      <p>Your prospecting activity at a glance — reveals, exports, and credit burn over time.</p>
+    </div>
+    <div class="metrics">
+      <div class="metric"><div class="m-label">Credits Remaining</div><div class="m-value glow">${state.credits}</div><div class="m-sub">on this account</div></div>
+      <div class="metric"><div class="m-label">Contacts Revealed</div><div class="m-value">${state.revealed.size}</div><div class="m-sub">all time</div></div>
+      <div class="metric"><div class="m-label">This Week</div><div class="m-value">428</div><div class="m-sub">▲ 18% vs last week</div></div>
+      <div class="metric"><div class="m-label">Exports</div><div class="m-value">7</div><div class="m-sub">CSV downloads</div></div>
+    </div>
+    <div class="panel chart-wrap">
+      <div class="panel-head"><h3>Reveals this week</h3><span class="ph-tag">last 7 days</span></div>
+      <div class="chart">
+        ${bars.map((b,i)=>`<div class="bar" style="height:${Math.round(b.v/max*100)}%;animation-delay:${i*.06}s">
+          <span class="bar-val">${b.v}</span><span class="bar-lbl">${b.l}</span></div>`).join("")}
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ---- SETTINGS ---- */
+function renderSettings(){
+  const el = document.getElementById("view-settings");
+  const theme = document.documentElement.getAttribute("data-theme")==="light" ? "Light" : "Dark";
+  el.innerHTML = `<div class="view-scroll">
+    <div class="vhead">
+      <h1><span class="vh-glow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33h0a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51h0a1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82v0a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></span>Settings</h1>
+      <p>Manage your account, billing, and preferences.</p>
+    </div>
+
+    <div class="set-grid">
+      <!-- Account -->
+      <div class="set-card">
+        <div class="set-card-head"><h3>Account</h3></div>
+        <div class="set-row"><span class="set-k">Name</span><input class="set-input" value="JT Turner" id="setName"></div>
+        <div class="set-row"><span class="set-k">Email</span><input class="set-input" value="jayt@jayisaacai.com" id="setEmail"></div>
+        <div class="set-row"><span class="set-k">Company</span><input class="set-input" value="JAYISAAC AI" id="setCompany"></div>
+        <div class="set-actions"><button class="set-save" onclick="toast('Account details saved')">Save changes</button></div>
+      </div>
+
+      <!-- Plan & Billing -->
+      <div class="set-card">
+        <div class="set-card-head"><h3>Plan & Billing</h3><span class="set-badge">Free trial</span></div>
+        <div class="set-bill">
+          <div class="set-bill-num">${state.credits}</div>
+          <div class="set-bill-lbl">credits remaining</div>
+        </div>
+        <p class="set-note">Upgrade to a paid plan for thousands of monthly credits and full database access.</p>
+        <div class="set-actions">
+          <button class="set-save" onclick="document.querySelector('.upgrade').click()">Upgrade plan</button>
+          <button class="set-ghost" onclick="switchView('analytics')">View usage</button>
+        </div>
+      </div>
+
+      <!-- Preferences -->
+      <div class="set-card">
+        <div class="set-card-head"><h3>Preferences</h3></div>
+        <div class="set-toggle-row" onclick="toggleTheme();renderSettings()">
+          <div><div class="set-k">Appearance</div><div class="set-sub">Currently ${theme} mode</div></div>
+          <button class="set-pill">${theme==="Dark"?"Switch to Light":"Switch to Dark"}</button>
+        </div>
+        <div class="set-toggle-row">
+          <div><div class="set-k">Email notifications</div><div class="set-sub">Product updates & credit alerts</div></div>
+          <label class="set-switch"><input type="checkbox" checked onchange="toast(this.checked?'Notifications on':'Notifications off')"><span class="set-slider"></span></label>
+        </div>
+        <div class="set-toggle-row">
+          <div><div class="set-k">Export format</div><div class="set-sub">Default download type</div></div>
+          <span class="set-static">CSV</span>
+        </div>
+      </div>
+
+      <!-- Danger / session -->
+      <div class="set-card">
+        <div class="set-card-head"><h3>Session</h3></div>
+        <p class="set-note">Signed in as <strong>jayt@jayisaacai.com</strong>.</p>
+        <div class="set-actions">
+          <button class="set-ghost" onclick="if(window.__signOut)window.__signOut();else toast('Dev mode — sign-out disabled')">Sign out</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ================= COMMAND PALETTE (Cmd/Ctrl+K) ================= */
+const CMDK_NAV = [
+  {label:"Home", sub:"onboarding", view:"home", icon:'<path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/>'},
+  {label:"Prospect Search", sub:"find contacts", view:"search", icon:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>'},
+  {label:"Saved Lists", sub:"your lists", view:"lists", icon:'<path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z"/>'},
+  {label:"Outreach", sub:"sequences", view:"outreach", icon:'<path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/>'},
+  {label:"AI Enrich", sub:"AI openers", view:"enrich", icon:'<path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>'},
+  {label:"Analytics", sub:"your activity", view:"analytics", icon:'<path d="M18 20V10M12 20V4M6 20v-6"/>'},
+];
+let cmdkSel = 0, cmdkResults = [];
+
+function openCmdk(){
+  document.getElementById("cmdkOverlay").classList.add("show");
+  document.getElementById("cmdk").classList.add("show");
+  const inp = document.getElementById("cmdkInput");
+  inp.value=""; inp.focus();
+  buildCmdk("");
+}
+function closeCmdk(){
+  document.getElementById("cmdkOverlay").classList.remove("show");
+  document.getElementById("cmdk").classList.remove("show");
+}
+function buildCmdk(q){
+  q = q.toLowerCase().trim();
+  const nav = CMDK_NAV.filter(n=>!q || n.label.toLowerCase().includes(q));
+  const people = q ? PEOPLE.filter(p=>(p.n+p.c+p.i+p.l).toLowerCase().includes(q)).slice(0,5) : [];
+  cmdkResults = [
+    ...nav.map(n=>({type:"nav", ...n})),
+    ...people.map(p=>({type:"person", label:p.n, sub:p.c+" · "+p.l, id:p.id})),
+  ];
+  cmdkSel = 0;
+  const list = document.getElementById("cmdkList");
+  let html = "";
+  if(nav.length){
+    html += `<div class="cmdk-group">Navigate</div>`;
+    nav.forEach((n)=>{
+      const idx = cmdkResults.findIndex(r=>r.type==="nav"&&r.view===n.view);
+      html += cmdkRow(idx, `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${n.icon}</svg>`, n.label, n.sub);
+    });
+  }
+  if(people.length){
+    html += `<div class="cmdk-group">Contacts</div>`;
+    people.forEach(p=>{
+      const idx = cmdkResults.findIndex(r=>r.type==="person"&&r.id===p.id);
+      html += cmdkRow(idx, `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>`, p.n, p.c);
+    });
+  }
+  if(!cmdkResults.length) html = `<div class="cmdk-group">No matches</div>`;
+  list.innerHTML = html;
+  highlightCmdk();
+}
+function cmdkRow(idx, icon, label, sub){
+  return `<div class="cmdk-item" data-idx="${idx}" onclick="runCmdk(${idx})" onmouseenter="cmdkSel=${idx};highlightCmdk()">
+    <span class="cmdk-ic">${icon}</span>
+    <span class="cmdk-label">${label}</span>
+    <span class="cmdk-sub">${sub||""}</span>
+    <span class="cmdk-enter">↵</span>
+  </div>`;
+}
+function highlightCmdk(){
+  document.querySelectorAll(".cmdk-item").forEach(it=>
+    it.classList.toggle("sel", +it.dataset.idx===cmdkSel));
+  const sel = document.querySelector(".cmdk-item.sel");
+  if(sel) sel.scrollIntoView({block:"nearest"});
+}
+function runCmdk(idx){
+  const r = cmdkResults[idx];
+  if(!r) return;
+  if(r.type==="nav"){ switchView(r.view); }
+  else if(r.type==="person"){ switchView("search"); openDrawer(r.id); }
+  closeCmdk();
+}
+document.getElementById("cmdkInput").addEventListener("input", e=>buildCmdk(e.target.value));
+document.getElementById("cmdkInput").addEventListener("keydown", e=>{
+  if(e.key==="ArrowDown"){ e.preventDefault(); cmdkSel=Math.min(cmdkSel+1,cmdkResults.length-1); highlightCmdk(); }
+  if(e.key==="ArrowUp"){ e.preventDefault(); cmdkSel=Math.max(cmdkSel-1,0); highlightCmdk(); }
+  if(e.key==="Enter"){ e.preventDefault(); runCmdk(cmdkSel); }
+});
+document.addEventListener("keydown", e=>{
+  if((e.metaKey||e.ctrlKey) && e.key.toLowerCase()==="k"){ e.preventDefault(); openCmdk(); }
+  if(e.key==="Escape") closeCmdk();
+});
+
+buildFilters();
+render();
+</script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, arrayUnion, serverTimestamp, collection, query, limit, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDHs92C3ariQ285KUkodOHV04sEVKr_dQ8",
+  authDomain: "jayisaac-ai.firebaseapp.com",
+  projectId: "jayisaac-ai",
+  storageBucket: "jayisaac-ai.firebasestorage.app",
+  messagingSenderId: "967801239356",
+  appId: "1:967801239356:web:0df3f35af72ce6e79b9039",
+  measurementId: "G-V91DS21PGE"
+};
+
+/* ⚠️⚠️⚠️ DEV BYPASS — SET TO false BEFORE DEPLOYING ⚠️⚠️⚠️
+   true  = no login wall, demo data + demo credits, fully editable for dev/styling.
+   false = real auth gate, identical to production behaviour.
+   Leaving this true in production lets ANYONE into the app. */
+const DEV_BYPASS = true;
+
+const fbApp = initializeApp(firebaseConfig);
+const auth = getAuth(fbApp);
+const db = getFirestore(fbApp);
+
+if (DEV_BYPASS) {
+  /* skip auth entirely: drop the veil, keep demo data running */
+  document.getElementById("railAvatar").textContent = "JT";
+  document.getElementById("authVeil").classList.add("hide");
+  console.warn("⚠️ DEV_BYPASS is ON — auth disabled, demo data only. Set to false before deploy.");
+}
+
+const STARTING_CREDITS = 100;
+let userRef = null;
+
+onAuthStateChanged(auth, async (user) => {
+  if (DEV_BYPASS) return;   /* ← dev bypass: never run the auth gate */
+  if (!user) { location.replace("login.html"); return; }
+
+  /* avatar initials from profile */
+  const label = user.displayName || user.email || "U";
+  const initials = label.split(/[\s@.]+/).filter(Boolean).slice(0,2).map(w=>w[0].toUpperCase()).join("");
+  document.getElementById("railAvatar").textContent = initials;
+
+  /* load or create user doc */
+  userRef = doc(db, "users", user.uid);
+  try {
+    const snap = await getDoc(userRef);
+    if (snap.exists()) {
+      const d = snap.data();
+      state.credits = typeof d.credits === "number" ? d.credits : STARTING_CREDITS;
+      (d.revealed || []).forEach(id => state.revealed.add(id));
+    } else {
+      await setDoc(userRef, {
+        email: user.email || null,
+        name: user.displayName || null,
+        credits: STARTING_CREDITS,
+        revealed: [],
+        createdAt: serverTimestamp(),
+      });
+      state.credits = STARTING_CREDITS;
+    }
+  } catch (e) {
+    console.error("Firestore load failed:", e);
+    toast("Couldn't load your account data — using session defaults");
+  }
+
+  document.getElementById("creditCount").textContent = state.credits;
+  await loadContacts(user);
+  render();
+  document.getElementById("authVeil").classList.add("hide");
+});
+
+/* ── real contact database ──────────────────────────────── */
+const MAX_LOAD = 2000;   /* client-side filtering is instant at this size;
+                            past ~5k contacts, move filters to Firestore queries */
+let realMode = false;
+
+async function loadContacts(user){
+  try {
+    const snap = await getDocs(query(collection(db, "contacts"), limit(MAX_LOAD)));
+    if (snap.empty) {
+      toast("Demo dataset active — import contacts to go live");
+      return; /* keep demo arrays */
+    }
+    realMode = true;
+    window.fbReveal = fbRevealImpl;
+    /* replace demo data in place so all existing logic keeps working */
+    PEOPLE.length = 0;
+    snap.forEach(d => {
+      const x = d.data();
+      PEOPLE.push({
+        id: d.id, n: x.n, t: x.t, c: x.c, ce: x.ce || 0, l: x.l, i: x.i,
+        eDomain: x.eDomain || "", e: null, p: null,
+        website: x.website || "", revenue: x.revenue || "",
+      });
+    });
+    /* rebuild companies tab by grouping */
+    const byCo = new Map();
+    PEOPLE.forEach(p => {
+      if(!byCo.has(p.c)) byCo.set(p.c, { c:p.c, ce:p.ce, l:p.l, i:p.i, rev:p.revenue||"—", site:p.website||"—" });
+    });
+    COMPANIES.length = 0;
+    byCo.forEach(v => COMPANIES.push(v));
+    /* hydrate contacts this user already paid for */
+    await hydrateRevealed();
+    toast(PEOPLE.length.toLocaleString() + " contacts loaded");
+  } catch (e) {
+    console.error("Contact load failed:", e);
+    toast("Couldn't load the contact database — running demo data");
+  }
+}
+
+async function hydrateRevealed(){
+  const ids = [...state.revealed].filter(id => PEOPLE.some(p => p.id === id)).slice(0, 300);
+  await Promise.all(ids.map(async id => {
+    try {
+      const ps = await getDoc(doc(db, "contacts_private", id));
+      if (ps.exists()) {
+        const p = PEOPLE.find(x => x.id === id);
+        if (p) { p.e = ps.data().e || null; p.p = ps.data().p || null; }
+      }
+    } catch(_) { /* not entitled or missing — leave locked */ }
+  }));
+}
+
+/* server-enforced reveal: pay 1 credit (validated by rules), then read private doc.
+   Installed on window ONLY in real-database mode (see loadContacts). */
+async function fbRevealImpl(id){
+  if (!userRef || state.credits <= 0) return;
+  try {
+    await updateDoc(userRef, { credits: increment(-1), revealed: arrayUnion(id) });
+    state.revealed.add(id);
+    state.credits--;
+    document.getElementById("creditCount").textContent = state.credits;
+    const ps = await getDoc(doc(db, "contacts_private", id));
+    const p = PEOPLE.find(x => x.id === id);
+    if (p && ps.exists()) { p.e = ps.data().e || null; p.p = ps.data().p || null; }
+    toast("Contact unlocked · 1 credit used");
+    render();
+    if (state.drawerId === id) renderDrawer(id);
+  } catch (e) {
+    console.error("Reveal failed:", e);
+    toast("Reveal didn't go through — check your credits and try again");
+  }
+}
+
+/* called by revealEmail() in the app script */
+window.persistReveal = async (id) => {
+  if (!userRef) return;
+  try {
+    await updateDoc(userRef, { credits: increment(-1), revealed: arrayUnion(id) });
+  } catch (e) {
+    console.error("Persist failed:", e);
+    toast("Sync issue — credit change may not have saved");
+  }
+};
+
+/* expose a guarded sign-out for the avatar menu + settings view */
+window.__signOut = async () => {
+  if (DEV_BYPASS) { toast("Dev mode — sign-out disabled"); return; }
+  if (confirm("Sign out of JAYISAAC AI?")) {
+    await signOut(auth);
+    location.replace("login.html");
+  }
+};
+</script>
+</body>
+</html>

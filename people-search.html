@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>People Search — Find Decision-Makers | JAYISAAC AI</title>
+<meta name="description" content="Search 1M+ verified North American business contacts by title, industry, and location. Find owners, GMs, and buyers with direct emails and phones.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --orange:#C95E1A;--orange-bright:#E8742E;--orange-dark:#A84B12;--orange-soft:#FBEEE4;
+  --charcoal:#1C1F24;--charcoal-deep:#141619;
+  --ink:#1A2433;--slate:#5B6878;--mist:#8C97A6;
+  --line:#E5E9EF;--bg:#F7F8FA;--white:#fff;
+  --green:#1B8A5A;--green-soft:#E5F4EC;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--ink);background:var(--white);font-size:15px;line-height:1.7}
+a{color:var(--orange);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.page-hero{
+  background:radial-gradient(800px 400px at 90% -20%, rgba(201,94,26,.22), transparent 60%),var(--charcoal-deep);
+  color:#fff;padding:84px 0 72px;
+}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:44px;align-items:center}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
+.eyebrow{
+  display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--orange-bright);border:1px solid rgba(232,116,46,.35);background:rgba(232,116,46,.1);
+  padding:6px 14px;border-radius:20px;margin-bottom:18px;
+}
+.page-hero h1{font-size:clamp(30px,5vw,44px);font-weight:800;letter-spacing:-.02em}
+.page-hero .sub{color:#A8B0BB;font-size:17px;margin-top:14px;max-width:500px}
+.hero-btns{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-block;background:var(--orange);color:#fff;font-weight:800;font-size:14.5px;
+  padding:13px 26px;border-radius:10px;box-shadow:0 6px 20px rgba(201,94,26,.35);transition:.15s;
+}
+.btn:hover{background:var(--orange-dark);text-decoration:none}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.25);box-shadow:none}
+.btn.ghost:hover{border-color:var(--orange-bright);color:var(--orange-bright)}
+
+/* mini product mock */
+.mock{
+  background:#1E2126;border:1px solid #2B2F36;border-radius:14px;overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,.45);font-size:12px;
+}
+.mock-bar{display:flex;gap:7px;padding:11px 14px;border-bottom:1px solid #2B2F36}
+.mock-bar i{width:10px;height:10px;border-radius:50%;display:block}
+.mock-bar i:nth-child(1){background:#FF5F57}.mock-bar i:nth-child(2){background:#FEBC2E}.mock-bar i:nth-child(3){background:#28C840}
+.mock-row{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid #24282E;color:#ECEEF1}
+.mock-av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:9px;color:#fff;flex-shrink:0}
+.mock-nm{font-weight:700;font-size:11.5px}
+.mock-tt{font-size:10px;color:#A8B0BB}
+.mock-pill{margin-left:auto;font-size:9.5px;font-weight:800;padding:3px 9px;border-radius:6px;background:rgba(232,116,46,.15);color:#E8742E;white-space:nowrap}
+.mock-pill.g{background:rgba(61,201,138,.15);color:#3DC98A}
+section{padding:64px 0}
+section.alt{background:var(--bg)}
+.sec-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--orange);margin-bottom:10px}
+h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+.lead{font-size:16px;color:var(--slate);max-width:700px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px;margin-top:32px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:26px}
+.card .icon{width:40px;height:40px;border-radius:10px;background:var(--orange-soft);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.card .icon svg{width:19px;height:19px;color:var(--orange)}
+.card h3{font-size:16px;font-weight:800;margin-bottom:8px}
+.card p{font-size:13.5px;color:var(--slate)}
+.steps{margin-top:32px}
+.step{display:grid;grid-template-columns:52px 1fr;gap:18px;padding:20px 0;border-bottom:1px solid var(--line)}
+.step:last-child{border-bottom:none}
+.step .num{width:40px;height:40px;border-radius:50%;background:var(--charcoal);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.step h3{font-size:16px;font-weight:800;margin-bottom:4px}
+.step p{font-size:13.5px;color:var(--slate);max-width:640px}
+.cta-band{
+  background:radial-gradient(700px 350px at 10% 120%, rgba(201,94,26,.25), transparent 60%),var(--charcoal);
+  color:#fff;text-align:center;padding:68px 24px;
+}
+.cta-band h2{margin-bottom:8px}
+.cta-band p{color:#A8B0BB;margin-bottom:24px}
+</style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<header class="page-hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Platform · People Search</span>
+        <h1>Find the person who signs the cheque</h1>
+        <p class="sub">Search 1M+ verified North American contacts by title, industry, and location — owners, GMs, and buyers with direct emails and phones, not info@ inboxes.</p>
+        <div class="hero-btns">
+          <a class="btn" href="login.html">Start Free Trial</a>
+          <a class="btn ghost" href="data.html">See the Data</a>
+        </div>
+      </div>
+      <div class="mock">
+        <div class="mock-bar"><i></i><i></i><i></i></div>
+        <div class="mock-row"><span class="mock-av" style="background:#C95E1A">MD</span><span><span class="mock-nm">Mike Doherty</span><br><span class="mock-tt">Owner · Doherty Plumbing</span></span><span class="mock-pill g">Verified</span></div>
+        <div class="mock-row"><span class="mock-av" style="background:#2563EB">SL</span><span><span class="mock-nm">Sarah Lindqvist</span><br><span class="mock-tt">Ops Manager · Apex Mechanical</span></span><span class="mock-pill">Owner/GM</span></div>
+        <div class="mock-row"><span class="mock-av" style="background:#1B8A5A">TB</span><span><span class="mock-nm">Travis Boychuk</span><br><span class="mock-tt">Owner · Boychuk Roofing</span></span><span class="mock-pill g">Direct line</span></div>
+        <div class="mock-row" style="border-bottom:none"><span class="mock-av" style="background:#7C3AED">LT</span><span><span class="mock-nm">Lisa Tran</span><br><span class="mock-tt">CEO · Tran Mechanical</span></span><span class="mock-pill">HVAC</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-label">Why People Search</div>
+    <h2>The gatekeeper problem, solved at the data layer</h2>
+    <p class="lead">Most outreach dies because it never reaches a decision-maker. People Search filters the entire database down to the humans with buying power.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h3>Title-level targeting</h3>
+        <p>Filter to Owners, Presidents, GMs, operations leads, or office managers. Pitch the person who decides — not whoever answers the phone.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg></div>
+        <h3>Direct channels, verified</h3>
+        <p>Every revealed contact comes with a validated email and a business phone. One credit unlocks both, and the record is yours forever.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <h3>Territory precision</h3>
+        <p>Slice by province, state, or city. Build a Saskatoon list and an Edmonton list in two searches — no manual cleanup between markets.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-label">How It Works</div>
+    <h2>From blank page to call list in minutes</h2>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><div><h3>Stack your filters</h3><p>Industry + region + title + company size. The result count updates live so you can see your market before spending a single credit.</p></div></div>
+      <div class="step"><div class="num">2</div><div><h3>Inspect before you unlock</h3><p>Click any row for the full profile — company, size, location, verification status. Searching and browsing never cost credits.</p></div></div>
+      <div class="step"><div class="num">3</div><div><h3>Unlock and go</h3><p>One credit reveals email and phone together. Copy to clipboard, or export your whole selection to CSV for your dialer or CRM.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <h2>Your first 100 contacts are on us</h2>
+  <p>Create a free account and search your territory right now — no card required.</p>
+  <a class="btn" href="login.html">Start Free Trial</a>
+</div>
+
+<div id="footer-placeholder"></div>
+<script type="module" src="./nav.js"></script>
+<script type="module" src="./footer.js"></script>
+</body>
+</html>

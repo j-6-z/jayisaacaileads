@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Data — JAYISAAC AI</title>
+<meta name="description" content="What's inside the JAYISAAC AI database — North American B2B contact coverage, update cadence, and verification process.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --orange:#C95E1A;--orange-bright:#E8742E;--orange-dark:#A84B12;--orange-soft:#FBEEE4;
+  --charcoal:#1C1F24;--charcoal-deep:#141619;
+  --ink:#1A2433;--slate:#5B6878;--mist:#8C97A6;
+  --line:#E5E9EF;--bg:#F7F8FA;--white:#fff;
+  --green:#1B8A5A;--green-soft:#E5F4EC;--blue:#2563EB;--blue-soft:#E9F0FE;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--ink);background:var(--white);font-size:15px;line-height:1.7}
+a{color:var(--orange);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+.page-hero{
+  background:
+    radial-gradient(800px 400px at 90% -20%, rgba(201,94,26,.22), transparent 60%),
+    var(--charcoal-deep);
+  color:#fff;padding:84px 0 64px;
+}
+.eyebrow{
+  display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--orange-bright);border:1px solid rgba(232,116,46,.35);background:rgba(232,116,46,.1);
+  padding:6px 14px;border-radius:20px;margin-bottom:18px;
+}
+.page-hero h1{font-size:clamp(30px,5vw,44px);font-weight:800;letter-spacing:-.02em;max-width:760px}
+.page-hero p{color:#A8B0BB;font-size:17px;max-width:620px;margin-top:14px}
+.hero-stats{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
+.hstat{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;
+  padding:16px 22px;min-width:150px;
+}
+.hstat .n{font-size:26px;font-weight:800;color:var(--orange-bright);letter-spacing:-.02em}
+.hstat .l{font-size:12px;color:#A8B0BB;font-weight:600;margin-top:2px}
+
+section{padding:68px 0;scroll-margin-top:80px}
+section.alt{background:var(--bg)}
+.sec-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--orange);margin-bottom:10px}
+h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+.lead{font-size:16px;color:var(--slate);max-width:720px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:32px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:26px}
+.card .icon{
+  width:40px;height:40px;border-radius:10px;background:var(--orange-soft);
+  display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+}
+.card .icon svg{width:19px;height:19px;color:var(--orange)}
+.card h3{font-size:16px;font-weight:800;margin-bottom:8px}
+.card p{font-size:13.5px;color:var(--slate)}
+
+/* field chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.chip{
+  font-size:12.5px;font-weight:700;border:1px solid var(--line);border-radius:8px;
+  padding:7px 13px;background:var(--white);color:var(--slate);
+}
+.chip.hot{background:var(--orange-soft);border-color:#F2D9C4;color:var(--orange)}
+
+/* industries */
+.ind-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:28px}
+.ind{
+  background:var(--white);border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+  font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:10px;
+}
+.ind .dot{width:8px;height:8px;border-radius:50%;background:var(--orange);flex-shrink:0}
+
+/* verification steps */
+.steps{margin-top:32px;display:grid;gap:0}
+.step{
+  display:grid;grid-template-columns:52px 1fr;gap:18px;padding:22px 0;
+  border-bottom:1px solid var(--line);
+}
+.step:last-child{border-bottom:none}
+.step .num{
+  width:40px;height:40px;border-radius:50%;background:var(--charcoal);color:#fff;
+  font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;
+}
+.step h3{font-size:16px;font-weight:800;margin-bottom:5px}
+.step p{font-size:13.5px;color:var(--slate);max-width:640px}
+
+.honest{
+  background:var(--orange-soft);border:1px solid #F2D9C4;border-radius:14px;
+  padding:22px 26px;margin-top:32px;font-size:14px;
+}
+.honest strong{display:block;margin-bottom:6px;font-size:14.5px}
+.honest p{color:var(--ink)}
+
+.cta-band{
+  background:
+    radial-gradient(700px 350px at 10% 120%, rgba(201,94,26,.25), transparent 60%),
+    var(--charcoal);
+  color:#fff;text-align:center;padding:68px 24px;
+}
+.cta-band h2{margin-bottom:8px}
+.cta-band p{color:#A8B0BB;margin-bottom:24px}
+.btn{
+  display:inline-block;background:var(--orange);color:#fff;font-weight:800;font-size:14.5px;
+  padding:13px 28px;border-radius:10px;box-shadow:0 6px 20px rgba(201,94,26,.35);transition:.15s;
+}
+.btn:hover{background:var(--orange-dark);text-decoration:none}
+</style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<header class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">Our Data</span>
+    <h1>The database built for people who sell to real businesses</h1>
+    <p>Owners, operators, and decision-makers across North America — with the trades and local service coverage the big platforms skip.</p>
+    <div class="hero-stats">
+      <div class="hstat"><div class="n">1M+</div><div class="l">Business contacts</div></div>
+      <div class="hstat"><div class="n">60+</div><div class="l">Industries covered</div></div>
+      <div class="hstat"><div class="n">CA + US</div><div class="l">Full coverage</div></div>
+      <div class="hstat"><div class="n">Monthly</div><div class="l">Refresh cycles</div></div>
+    </div>
+  </div>
+</header>
+
+<section id="coverage">
+  <div class="wrap">
+    <div class="sec-label">Coverage</div>
+    <h2>Every province. Every state. Deep in the trades.</h2>
+    <p class="lead">Most data platforms are built around tech and enterprise. Ours goes deep where the buying actually happens — owner-operated and SMB service businesses across Canada and the United States.</p>
+    <div class="ind-grid">
+      <div class="ind"><span class="dot"></span>Plumbing &amp; Drainage</div>
+      <div class="ind"><span class="dot"></span>HVAC &amp; Mechanical</div>
+      <div class="ind"><span class="dot"></span>Roofing &amp; Exteriors</div>
+      <div class="ind"><span class="dot"></span>Electrical Contractors</div>
+      <div class="ind"><span class="dot"></span>General Construction</div>
+      <div class="ind"><span class="dot"></span>Landscaping &amp; Snow</div>
+      <div class="ind"><span class="dot"></span>Moving &amp; Logistics</div>
+      <div class="ind"><span class="dot"></span>Auto Repair &amp; Towing</div>
+      <div class="ind"><span class="dot"></span>Cleaning &amp; Restoration</div>
+      <div class="ind"><span class="dot"></span>Real Estate &amp; Property</div>
+      <div class="ind"><span class="dot"></span>Professional Services</div>
+      <div class="ind"><span class="dot"></span>+ 50 more industries</div>
+    </div>
+    <h2 style="margin-top:48px;font-size:20px">What's on every record</h2>
+    <div class="chips">
+      <span class="chip hot">Decision-maker name</span>
+      <span class="chip hot">Job title</span>
+      <span class="chip hot">Direct business email</span>
+      <span class="chip hot">Business phone</span>
+      <span class="chip">Company name</span>
+      <span class="chip">Employee count</span>
+      <span class="chip">Industry</span>
+      <span class="chip">City &amp; province/state</span>
+      <span class="chip">Website</span>
+      <span class="chip">Est. revenue band</span>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="updates">
+  <div class="wrap">
+    <div class="sec-label">Freshness</div>
+    <h2>Data decays. We rebuild it on a cycle.</h2>
+    <p class="lead">B2B contact data goes stale fast — people change roles, businesses close, numbers get reassigned. Records cycle through re-verification continuously instead of sitting untouched for years.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg></div>
+        <h3>Rolling re-verification</h3>
+        <p>Records are revisited on rolling monthly cycles — emails revalidated, dead businesses flagged, changed roles updated rather than left to rot.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-6"/></svg></div>
+        <h3>Continuous additions</h3>
+        <p>New businesses enter the database every cycle from fresh public sources and licensed feeds — newly registered companies, new locations, new decision-makers.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/></svg></div>
+        <h3>Aggressive pruning</h3>
+        <p>A smaller, accurate database beats a bloated stale one. Bounced emails, disconnected numbers, and closed businesses get cut — they don't pad our contact count.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="verified">
+  <div class="wrap">
+    <div class="sec-label">Verification</div>
+    <h2>How a record earns its place</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <div>
+          <h3>Sourcing</h3>
+          <p>Records are compiled from public business sources — websites, registries, directories — plus licensed third-party data and businesses updating their own listings.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <div>
+          <h3>Cross-referencing</h3>
+          <p>Every record is matched across multiple sources. Conflicting data gets resolved or flagged; single-source records carry lower confidence until corroborated.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <div>
+          <h3>Technical validation</h3>
+          <p>Emails are checked against live mail servers for deliverability. Phone numbers are validated for format, region, and line status before a record is marked verified.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <div>
+          <h3>Suppression screening</h3>
+          <p>Records are screened against our opt-out suppression list. Anyone who has requested removal stays removed — permanently.</p>
+        </div>
+      </div>
+    </div>
+    <div class="honest">
+      <strong>The honest caveat</strong>
+      <p>No B2B database on earth is 100% accurate — anyone claiming otherwise is selling you something. People change jobs mid-cycle and businesses close overnight. Our commitment: verified-marked records meet our validation bar at time of verification, stale data gets cut fast, and if you hit a bad batch, <a href="contact.html">tell us</a> and we'll make it right.</p>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <h2>Run a search and judge the data yourself</h2>
+  <p>100 free credits on signup. No card. See your market in the database in under two minutes.</p>
+  <a class="btn" href="login.html">Start Free Trial</a>
+</div>
+
+<div id="footer-placeholder"></div>
+<script type="module" src="./nav.js"></script>
+<script type="module" src="./footer.js"></script>
+</body>
+</html>

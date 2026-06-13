@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — JAYISAAC AI</title>
+<meta name="description" content="Get in touch with JAYISAAC AI — support, sales, data removal requests, and partnerships.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --orange:#C95E1A;--orange-bright:#E8742E;--orange-dark:#A84B12;--orange-soft:#FBEEE4;
+  --charcoal:#1C1F24;--charcoal-deep:#141619;
+  --ink:#1A2433;--slate:#5B6878;--mist:#8C97A6;
+  --line:#E5E9EF;--bg:#F7F8FA;--white:#fff;
+  --green:#1B8A5A;--green-soft:#E5F4EC;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--ink);background:var(--white);font-size:15px;line-height:1.7}
+a{color:var(--orange);text-decoration:none}
+a:hover{text-decoration:underline}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+.page-hero{
+  background:
+    radial-gradient(800px 400px at 90% -20%, rgba(201,94,26,.22), transparent 60%),
+    var(--charcoal-deep);
+  color:#fff;padding:80px 0 64px;
+}
+.eyebrow{
+  display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--orange-bright);border:1px solid rgba(232,116,46,.35);background:rgba(232,116,46,.1);
+  padding:6px 14px;border-radius:20px;margin-bottom:18px;
+}
+.page-hero h1{font-size:clamp(30px,5vw,44px);font-weight:800;letter-spacing:-.02em}
+.page-hero p{color:#A8B0BB;font-size:17px;max-width:560px;margin-top:14px}
+
+.contact-grid{
+  display:grid;grid-template-columns:1.25fr 1fr;gap:28px;
+  padding:64px 0 80px;align-items:start;
+}
+@media(max-width:860px){.contact-grid{grid-template-columns:1fr}}
+
+/* form card */
+.form-card{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:30px;box-shadow:0 8px 30px rgba(14,27,44,.06)}
+.form-card h2{font-size:20px;font-weight:800;margin-bottom:4px}
+.form-card .sub{font-size:13.5px;color:var(--slate);margin-bottom:22px}
+label{display:block;font-size:12px;font-weight:700;margin-bottom:6px}
+.field{margin-bottom:16px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:520px){.row2{grid-template-columns:1fr}}
+input,select,textarea{
+  width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:9px;
+  font-size:13.5px;outline:none;transition:.12s;color:var(--ink);background:#fff;
+}
+input:focus,select:focus,textarea:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(201,94,26,.12)}
+textarea{min-height:130px;resize:vertical}
+::placeholder{color:var(--mist)}
+.submit{
+  width:100%;padding:13px;border:none;border-radius:10px;
+  background:var(--orange);color:#fff;font-size:14.5px;font-weight:800;
+  transition:.15s;box-shadow:0 4px 14px rgba(201,94,26,.3);
+}
+.submit:hover{background:var(--orange-dark)}
+.form-note{font-size:11.5px;color:var(--mist);margin-top:12px;text-align:center}
+.sent{
+  display:none;background:var(--green-soft);color:var(--green);
+  font-size:13px;font-weight:700;padding:12px 14px;border-radius:9px;margin-bottom:16px;
+}
+.sent.show{display:block}
+
+/* side cards */
+.side{display:flex;flex-direction:column;gap:14px}
+.side-card{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:22px}
+.side-card .icon{
+  width:38px;height:38px;border-radius:10px;background:var(--orange-soft);
+  display:flex;align-items:center;justify-content:center;margin-bottom:12px;
+}
+.side-card .icon svg{width:18px;height:18px;color:var(--orange)}
+.side-card h3{font-size:15px;font-weight:800;margin-bottom:4px}
+.side-card p{font-size:13px;color:var(--slate)}
+.side-card .mail{font-weight:700;font-size:13.5px;display:inline-block;margin-top:6px}
+.badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.badge{
+  font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  border:1px solid var(--line);border-radius:6px;padding:4px 9px;color:var(--slate);background:#fff;
+}
+</style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<header class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">Contact</span>
+    <h1>Talk to a human</h1>
+    <p>Support, sales, data questions, partnerships — every message lands in a real inbox and gets a real reply.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="contact-grid">
+
+    <div class="form-card">
+      <h2>Send us a message</h2>
+      <p class="sub">We typically reply within one business day.</p>
+      <div class="sent" id="sentMsg">Opening your email app with the message pre-filled — hit send and you're done.</div>
+
+      <div class="row2">
+        <div class="field">
+          <label for="cname">Name</label>
+          <input type="text" id="cname" placeholder="Your name">
+        </div>
+        <div class="field">
+          <label for="cemail">Email</label>
+          <input type="email" id="cemail" placeholder="you@company.com">
+        </div>
+      </div>
+      <div class="field">
+        <label for="ctopic">What's this about?</label>
+        <select id="ctopic">
+          <option>General question</option>
+          <option>Sales &amp; pricing</option>
+          <option>Support / technical issue</option>
+          <option>Billing</option>
+          <option>Data removal request</option>
+          <option>Partnership / reseller</option>
+          <option>Press / media</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="cmsg">Message</label>
+        <textarea id="cmsg" placeholder="Tell us what you need…"></textarea>
+      </div>
+      <button class="submit" onclick="sendMessage()">Send Message</button>
+      <p class="form-note">Prefer email directly? <a href="mailto:admin@jayisaacai.com">admin@jayisaacai.com</a></p>
+    </div>
+
+    <div class="side">
+      <div class="side-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg></div>
+        <h3>Support &amp; Sales</h3>
+        <p>Product questions, plan help, billing, onboarding for your team.</p>
+        <a class="mail" href="mailto:admin@jayisaacai.com">admin@jayisaacai.com</a>
+      </div>
+      <div class="side-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L4 5.5V11c0 5 3.4 9.4 8 10.5 4.6-1.1 8-5.5 8-10.5V5.5L12 2z"/></svg></div>
+        <h3>Privacy &amp; Data Removal</h3>
+        <p>Want your business or personal contact info removed from our database? Use the form with "Data removal request" or see our <a href="privacy.html">Privacy Policy</a>. Removals are processed within 30 days, usually much faster.</p>
+      </div>
+      <div class="side-card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <h3>Headquarters</h3>
+        <p>Saskatoon, Saskatchewan, Canada<br>Operating across Canada and the United States.</p>
+        <div class="badge-row">
+          <span class="badge">PIPEDA</span><span class="badge">GDPR</span><span class="badge">CCPA</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script type="module" src="./nav.js"></script>
+<script type="module" src="./footer.js"></script>
+<script>
+function sendMessage(){
+  const name = document.getElementById("cname").value.trim();
+  const email = document.getElementById("cemail").value.trim();
+  const topic = document.getElementById("ctopic").value;
+  const msg = document.getElementById("cmsg").value.trim();
+  if(!msg){ document.getElementById("cmsg").focus(); return; }
+  const subject = encodeURIComponent("[" + topic + "] Website contact from " + (name || "visitor"));
+  const body = encodeURIComponent(msg + "\n\n—\nFrom: " + (name||"(no name)") + "\nReply to: " + (email||"(no email)"));
+  document.getElementById("sentMsg").classList.add("show");
+  window.location.href = "mailto:admin@jayisaacai.com?subject=" + subject + "&body=" + body;
+}
+</script>
+</body>
+</html>

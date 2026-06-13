@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Verified B2B Leads — JAYISAAC AI</title>
+<meta name="description" content="Get a list of verified decision-makers in your market today. Names, direct emails, and phone numbers for businesses across North America. 100 free credits — no card required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script type="module" src="./nav.js"></script>
+<script type="module" src="./footer.js"></script>
+<style>
+:root{
+  --orange:#C95E1A;--orange-bright:#E8742E;--orange-dark:#A84B12;--orange-soft:#FBEEE4;
+  --charcoal:#1C1F24;--charcoal-deep:#141619;
+  --ink:#1A2433;--slate:#5B6878;--mist:#8C97A6;
+  --line:#E5E9EF;--bg:#F7F8FA;--white:#fff;
+  --green:#1B8A5A;--green-soft:#E5F4EC;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--ink);background:var(--white);font-size:15px;line-height:1.7}
+a{color:var(--orange);text-decoration:none}
+a:hover{text-decoration:underline}
+button,input,select{font-family:inherit}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+
+/* ── HERO: charcoal band, pitch left + white form card right ── */
+.page-hero{
+  background:
+    radial-gradient(900px 460px at 88% -10%, rgba(201,94,26,.24), transparent 60%),
+    radial-gradient(600px 380px at -5% 110%, rgba(201,94,26,.1), transparent 55%),
+    var(--charcoal-deep);
+  color:#fff;padding:72px 0 80px;
+}
+.hero-grid{
+  display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;
+}
+@media(max-width:980px){.hero-grid{grid-template-columns:1fr;gap:40px}}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--orange-bright);border:1px solid rgba(232,116,46,.35);background:rgba(232,116,46,.1);
+  padding:6px 14px;border-radius:20px;margin-bottom:20px;
+}
+.eyebrow-dot{width:5px;height:5px;background:var(--orange-bright);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+
+.page-hero h1{
+  font-size:clamp(30px,4.6vw,46px);font-weight:800;
+  letter-spacing:-.02em;line-height:1.12;max-width:560px;
+}
+.page-hero h1 span{color:var(--orange-bright)}
+.hero-sub{
+  color:#A8B0BB;font-size:16.5px;max-width:520px;margin-top:16px;line-height:1.75;
+}
+.hero-sub strong{color:#fff;font-weight:700}
+
+/* sample record card (in hero, dark) */
+.record{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+  border-radius:14px;padding:18px 20px;max-width:460px;margin-top:26px;
+  backdrop-filter:blur(6px);
+}
+.record-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.record-name{font-size:14.5px;font-weight:800;color:#fff}
+.record-name span{display:block;font-size:12px;font-weight:600;color:#A8B0BB;margin-top:2px}
+.record-badge{
+  font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  color:#4ade80;background:rgba(74,222,128,.1);
+  border:1px solid rgba(74,222,128,.3);border-radius:6px;padding:3px 9px;
+}
+.record-rows{display:flex;flex-direction:column;gap:8px}
+.record-row{display:flex;align-items:center;gap:10px;font-size:12.5px;color:#A8B0BB}
+.record-row svg{width:14px;height:14px;stroke:var(--orange-bright);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.record-row b{color:#fff;font-weight:600}
+
+/* ── FORM CARD (white, floats on charcoal) ── */
+.form-card{
+  background:var(--white);border:1px solid var(--line);border-radius:18px;
+  padding:32px;box-shadow:0 24px 70px rgba(0,0,0,.45);color:var(--ink);
+}
+.form-title{font-size:21px;font-weight:800;letter-spacing:-.01em;margin-bottom:5px}
+.form-sub{font-size:13.5px;color:var(--slate);margin-bottom:22px;line-height:1.6}
+.form-sub b{color:var(--orange);font-weight:800}
+
+.lead-form{display:flex;flex-direction:column;gap:14px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:520px){.field-row{grid-template-columns:1fr}}
+.field label{font-size:11.5px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.05em}
+.field input,.field select{
+  width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:9px;
+  font-size:13.5px;outline:none;transition:.12s;color:var(--ink);background:#fff;
+  -webkit-appearance:none;appearance:none;
+}
+.field input::placeholder{color:var(--mist)}
+.field input:focus,.field select:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(201,94,26,.12)}
+.field select{
+  cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238C97A6' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:38px;
+}
+.submit-btn{
+  width:100%;padding:14px;border:none;border-radius:10px;
+  background:var(--orange);color:#fff;font-size:15px;font-weight:800;cursor:pointer;
+  transition:.15s;box-shadow:0 6px 20px rgba(201,94,26,.35);margin-top:4px;
+}
+.submit-btn:hover{background:var(--orange-dark)}
+.submit-btn:active{transform:scale(.99)}
+.form-note{font-size:11px;color:var(--mist);line-height:1.6;text-align:center;margin-top:8px}
+.form-note a{color:var(--slate);text-decoration:underline}
+
+.trial-points{
+  display:flex;flex-direction:column;gap:9px;
+  margin-top:20px;padding-top:20px;border-top:1px solid var(--line);
+}
+.trial-point{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--slate);font-weight:600}
+.trial-point svg{width:15px;height:15px;stroke:var(--green);fill:none;stroke-width:2.25;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+
+/* ── STATS BAND ── */
+.stats-band{background:var(--white);border-bottom:1px solid var(--line);padding:48px 0}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:860px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:22px;text-align:center}
+.stat .num{font-size:28px;font-weight:800;color:var(--orange);letter-spacing:-.02em}
+.stat .lbl{font-size:12.5px;font-weight:600;color:var(--slate);margin-top:4px}
+
+/* ── SECTIONS ── */
+section{padding:68px 0;scroll-margin-top:120px}
+section.alt{background:var(--bg)}
+.sec-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--orange);margin-bottom:10px}
+h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+.lead{font-size:16px;color:var(--slate);max-width:720px}
+
+/* pillars */
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:32px}
+.pillar{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:26px}
+.pillar .picon{
+  width:40px;height:40px;border-radius:10px;background:var(--orange-soft);
+  display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+}
+.pillar .picon svg{width:19px;height:19px;stroke:var(--orange);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.pillar h3{font-size:16px;font-weight:800;margin-bottom:8px}
+.pillar p{font-size:13.5px;color:var(--slate)}
+
+/* steps */
+.steps{margin-top:32px;display:grid;gap:0}
+.step{
+  display:grid;grid-template-columns:52px 1fr;gap:18px;padding:22px 0;
+  border-bottom:1px solid var(--line);
+}
+.step:last-child{border-bottom:none}
+.step .num{
+  width:40px;height:40px;border-radius:50%;background:var(--charcoal);color:#fff;
+  font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;
+}
+.step h3{font-size:16px;font-weight:800;margin-bottom:5px}
+.step p{font-size:13.5px;color:var(--slate);max-width:640px}
+
+/* FAQ */
+.faq-wrap{max-width:800px}
+.faq-item{border-bottom:1px solid var(--line);padding:20px 0}
+.faq-item:last-child{border-bottom:none}
+.faq-q{font-size:15px;font-weight:800;margin-bottom:8px}
+.faq-a{font-size:13.5px;color:var(--slate);line-height:1.7}
+
+/* ── CTA BAND (charcoal, same as other pages) ── */
+.cta-band{
+  background:
+    radial-gradient(700px 350px at 10% 120%, rgba(201,94,26,.25), transparent 60%),
+    var(--charcoal);
+  color:#fff;text-align:center;padding:72px 24px;
+}
+.cta-band h2{margin-bottom:10px}
+.cta-band h2 span{color:var(--orange-bright)}
+.cta-band p{color:#A8B0BB;margin-bottom:26px;max-width:480px;margin-left:auto;margin-right:auto}
+.btn{
+  display:inline-block;background:var(--orange);color:#fff;font-weight:800;font-size:14.5px;
+  padding:14px 30px;border-radius:10px;box-shadow:0 6px 20px rgba(201,94,26,.35);transition:.15s;
+}
+.btn:hover{background:var(--orange-dark);text-decoration:none}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.25);box-shadow:none;margin-left:10px}
+.btn.ghost:hover{border-color:var(--orange-bright);color:var(--orange-bright)}
+@media(max-width:520px){.btn.ghost{margin-left:0;margin-top:10px}}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- nav injected by nav.js -->
+
+<!-- HERO: pitch + form card -->
+<header class="page-hero">
+  <div class="wrap">
+    <div class="hero-grid">
+
+      <div>
+        <span class="eyebrow"><span class="eyebrow-dot"></span>100 Free Credits &mdash; No Card Required</span>
+        <h1>Get a list of verified decision-makers in your market. <span>Today.</span></h1>
+        <p class="hero-sub">
+          Stop guessing who to call. JAYISAAC AI gives you the <strong>owner's name, direct email, and phone number</strong> for businesses across North America &mdash; filtered by industry, location, and company size. Build your first list in minutes.
+        </p>
+
+        <div class="record">
+          <div class="record-top">
+            <div class="record-name">
+              Mike Reyes
+              <span>Owner &middot; Summit Plumbing &amp; Heating</span>
+            </div>
+            <div class="record-badge">Verified</div>
+          </div>
+          <div class="record-rows">
+            <div class="record-row">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <b>mike@summitplumbingco.com</b>
+            </div>
+            <div class="record-row">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+              <b>(303) 555-0184</b>
+            </div>
+            <div class="record-row">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Denver, CO &middot; Plumbing &middot; 1&ndash;10 employees
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <div class="form-title">Start your free trial</div>
+        <div class="form-sub"><b>100 free credits</b> on signup &mdash; enough to reveal 100 full contacts. No credit card. No sales call.</div>
+
+        <form class="lead-form" id="leadForm">
+          <div class="field">
+            <label for="lfEmail">Work Email</label>
+            <input type="email" id="lfEmail" placeholder="you@yourcompany.com" required autocomplete="email">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="lfSell">Who do you sell to?</label>
+              <select id="lfSell">
+                <option value="" disabled selected>Select industry</option>
+                <option>Plumbing &amp; HVAC</option>
+                <option>Roofing &amp; Exteriors</option>
+                <option>Electrical</option>
+                <option>Construction</option>
+                <option>Landscaping</option>
+                <option>Moving &amp; Logistics</option>
+                <option>Auto &amp; Towing</option>
+                <option>Cleaning &amp; Restoration</option>
+                <option>Real Estate</option>
+                <option>Professional Services</option>
+                <option>Other / Multiple</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="lfMarket">Target market</label>
+              <input type="text" id="lfMarket" placeholder="e.g. Dallas, TX or Calgary, AB" autocomplete="off">
+            </div>
+          </div>
+          <button type="submit" class="submit-btn">Get My Free Credits &rarr;</button>
+          <p class="form-note">By signing up, you agree to our <a href="./terms.html">Terms of Use</a> and <a href="./privacy.html">Privacy Policy</a>.</p>
+        </form>
+
+        <div class="trial-points">
+          <div class="trial-point">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Full platform access &mdash; nothing locked
+          </div>
+          <div class="trial-point">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Contacts you reveal are yours forever
+          </div>
+          <div class="trial-point">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Cancel anytime &mdash; no contracts, no calls
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<!-- STATS BAND -->
+<div class="stats-band">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat"><div class="num">1M+</div><div class="lbl">Verified business contacts</div></div>
+      <div class="stat"><div class="num">60+</div><div class="lbl">Industries covered</div></div>
+      <div class="stat"><div class="num">60+</div><div class="lbl">States &amp; provinces</div></div>
+      <div class="stat"><div class="num">100</div><div class="lbl">Free credits on signup</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY -->
+<section>
+  <div class="wrap">
+    <div class="sec-label">Why JAYISAAC AI</div>
+    <h2>Built for people who sell to real businesses</h2>
+    <p class="lead">The big data platforms go deep on tech and enterprise. Ours goes deep on the trades and local service economy across North America &mdash; the owner-operated businesses that actually pick up the phone.</p>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="picon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
+        <h3>Filter to exactly who you sell to</h3>
+        <p>Industry, state or province, city, company size, job title. Plumbers in Phoenix with under 10 employees? Two clicks and the list is on your screen.</p>
+      </div>
+      <div class="pillar">
+        <div class="picon"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h3>Verified emails and direct phones</h3>
+        <p>Records are validated before they're marked verified &mdash; so your emails land and your calls connect instead of bouncing into dead numbers.</p>
+      </div>
+      <div class="pillar">
+        <div class="picon"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+        <h3>Export and start dialing</h3>
+        <p>One-click CSV export on every plan. Drop your list into your dialer, CRM, or cold email tool and run your outreach the same day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="alt" id="how">
+  <div class="wrap">
+    <div class="sec-label">How It Works</div>
+    <h2>From signup to your first call list in minutes</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <div>
+          <h3>Create your free account</h3>
+          <p>Sign up with your email or Google &mdash; no card, no sales call. You get 100 credits the moment you're in.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <div>
+          <h3>Filter to your exact market</h3>
+          <p>Pick the industry, location, company size, and job titles you sell to. The list narrows in real time as you filter.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <div>
+          <h3>Reveal contacts &mdash; 1 credit each</h3>
+          <p>Each credit unlocks a full contact: direct email and phone number. Once revealed, it's yours forever &mdash; no re-paying.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <div>
+          <h3>Export and run outreach</h3>
+          <p>Export your list to CSV and drop it into your dialer, CRM, or cold email tool. Most users are dialing the same day.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap">
+    <div class="faq-wrap">
+      <div class="sec-label">FAQ</div>
+      <h2>Common questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">Is the trial actually free?</div>
+        <p class="faq-a">Yes. You get 100 credits on signup with no credit card required. That's 100 fully revealed contacts &mdash; enough to build and test a real call list before you spend a dollar. Paid plans start at $49/mo when you need more.</p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What exactly is a credit?</div>
+        <p class="faq-a">1 credit reveals 1 full contact &mdash; the direct email and phone number for a decision-maker. Searching and filtering the database is unlimited and free; you only spend credits when you reveal. Revealed contacts stay unlocked on your account forever.</p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How is this different from Apollo or ZoomInfo?</div>
+        <p class="faq-a">The big platforms are built around tech and enterprise contacts. Our database goes deep on the trades and local service economy &mdash; plumbers, HVAC, roofers, electricians, contractors &mdash; the owner-operated businesses they treat as an afterthought. And there's no annual contract or "talk to sales" wall. <a href="./data.html">See what's in our data</a>.</p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Where does the data come from?</div>
+        <p class="faq-a">Records are compiled from public business sources, licensed data providers, and businesses updating their own information &mdash; then cross-referenced and validated before being marked verified. Full details on our <a href="./data.html#verified">verification process</a>.</p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Can I export the contacts I unlock?</div>
+        <p class="faq-a">Yes &mdash; one-click CSV export on every plan, including the free trial. Your lists work in any dialer, CRM, or cold email tool.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<div class="cta-band">
+  <h2>Your next customer's number is in here <span>right now</span></h2>
+  <p>100 free credits. No card. Search your market and judge the data yourself &mdash; you'll have a call list before your coffee's done.</p>
+  <a class="btn" href="./login.html">Start Free Trial</a>
+  <a class="btn ghost" href="./pricing.html">View Pricing</a>
+</div>
+
+<!-- footer injected by footer.js -->
+
+<script>
+document.getElementById('leadForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var email = document.getElementById('lfEmail').value.trim();
+  // feed the real funnel: login.html picks the email up from the hash
+  window.location.href = './login.html' + (email ? '#' + encodeURIComponent(email) : '');
+});
+</script>
+
+</body>
+</html>

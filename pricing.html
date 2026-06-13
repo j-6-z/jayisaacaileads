@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — JAYISAAC AI</title>
+<meta name="description" content="JAYISAAC AI pricing — the most affordable B2B contact data in North America. Plans from $26.99/mo. Start free with 100 credits, no card required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script type="module" src="./nav.js"></script>
+<script type="module" src="./footer.js"></script>
+<style>
+:root{
+  --orange:#C95E1A;--orange-bright:#E8742E;--orange-dark:#A84B12;--orange-soft:#FBEEE4;
+  --charcoal:#1C1F24;--charcoal-deep:#141619;
+  --ink:#1A2433;--slate:#5B6878;--mist:#8C97A6;
+  --line:#E5E9EF;--bg:#F7F8FA;--white:#fff;
+  --green:#1B8A5A;--green-soft:#E5F4EC;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--ink);background:var(--white);font-size:15px;line-height:1.7}
+a{color:var(--orange);text-decoration:none}
+a:hover{text-decoration:underline}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+
+/* ── HERO ── */
+.page-hero{
+  background:
+    radial-gradient(900px 460px at 88% -10%, rgba(201,94,26,.28), transparent 60%),
+    radial-gradient(600px 380px at -5% 110%, rgba(201,94,26,.12), transparent 55%),
+    var(--charcoal-deep);
+  color:#fff;padding:80px 0 140px;text-align:center;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--orange-bright);border:1px solid rgba(232,116,46,.35);background:rgba(232,116,46,.1);
+  padding:6px 14px;border-radius:20px;margin-bottom:18px;
+}
+.eyebrow-dot{width:5px;height:5px;background:var(--orange-bright);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.page-hero h1{font-size:clamp(30px,5vw,46px);font-weight:800;letter-spacing:-.02em}
+.page-hero h1 span{color:var(--orange-bright)}
+.page-hero p{color:#A8B0BB;font-size:17px;max-width:600px;margin:14px auto 0}
+.hero-hook{
+  display:inline-block;margin-top:18px;font-size:13px;font-weight:700;color:#fff;
+  background:rgba(232,116,46,.15);border:1px solid rgba(232,116,46,.35);
+  padding:8px 16px;border-radius:10px;
+}
+.hero-hook span{color:var(--orange-bright)}
+
+/* billing toggle */
+.toggle-row{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:30px}
+.toggle-row span{font-size:13.5px;font-weight:700;color:#A8B0BB;transition:.15s}
+.toggle-row span.on{color:#fff}
+.bill-toggle{
+  width:52px;height:28px;border-radius:14px;background:rgba(255,255,255,.15);
+  position:relative;transition:.2s;flex-shrink:0;
+}
+.bill-toggle::after{
+  content:'';position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;
+  background:var(--orange-bright);box-shadow:0 2px 8px rgba(201,94,26,.4);transition:.2s;
+}
+.bill-toggle.annual::after{left:27px}
+.save-pill{
+  font-size:10.5px;font-weight:800;background:rgba(232,116,46,.15);color:var(--orange-bright);
+  border:1px solid rgba(232,116,46,.3);padding:3px 9px;border-radius:10px;margin-left:-4px;
+}
+.usd-note{
+  margin-top:14px;font-size:12px;font-weight:600;color:#A8B0BB;letter-spacing:.04em;
+}
+
+/* ── PLAN CARDS ── */
+.plans{
+  max-width:1140px;margin:-90px auto 0;padding:0 24px 24px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;position:relative;z-index:2;
+}
+@media(max-width:920px){.plans{grid-template-columns:1fr;max-width:480px}}
+
+.plan{
+  background:var(--white);border:1px solid var(--line);border-radius:18px;
+  box-shadow:0 16px 44px rgba(14,27,44,.08);display:flex;flex-direction:column;
+  overflow:hidden;transition:transform .2s,box-shadow .2s;
+}
+.plan:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(14,27,44,.12)}
+
+/* orange top strip on every card */
+.plan-head{
+  padding:28px 28px 0;position:relative;
+}
+.plan-head::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--orange),var(--orange-bright));
+}
+.plan-body{padding:0 28px 30px;flex:1;display:flex;flex-direction:column}
+
+/* featured card */
+.plan.featured{
+  border:2px solid var(--orange);
+  box-shadow:0 20px 56px rgba(201,94,26,.15);
+}
+.plan.featured .plan-head::before{height:5px;background:linear-gradient(90deg,var(--orange-dark),var(--orange-bright),#FF9A55)}
+.plan.featured:hover{box-shadow:0 24px 60px rgba(201,94,26,.22)}
+.pop-badge{
+  position:absolute;top:-1px;right:24px;
+  background:linear-gradient(135deg,var(--orange),var(--orange-bright));color:#fff;
+  font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;
+  padding:6px 14px 8px;border-radius:0 0 10px 10px;white-space:nowrap;
+  box-shadow:0 4px 12px rgba(201,94,26,.3);
+}
+
+.plan h2{font-size:18px;font-weight:800;margin-top:22px}
+.plan .for{font-size:12.5px;color:var(--slate);margin:4px 0 18px}
+
+/* price — orange numbers */
+.price-row{display:flex;align-items:baseline;gap:6px}
+.price{font-size:44px;font-weight:800;letter-spacing:-.03em;color:var(--orange)}
+.per{font-size:13px;color:var(--mist);font-weight:600}
+.annual-note{font-size:11.5px;color:var(--orange-bright);font-weight:700;height:16px;margin-top:2px}
+.was-price{font-size:12px;color:var(--mist);font-weight:600;margin-top:4px;height:16px}
+.was-price s{color:var(--mist)}
+
+/* credits callout */
+.credits-line{
+  margin:16px 0;
+  background:linear-gradient(135deg,var(--orange-soft),#FFF4EE);
+  border:1px solid rgba(201,94,26,.2);border-radius:10px;
+  padding:10px 14px;font-size:13px;font-weight:800;color:var(--orange-dark);text-align:center;
+}
+
+/* feature list */
+.plan ul{list-style:none;margin:6px 0 24px;flex:1}
+.plan li{
+  font-size:13.5px;color:var(--slate);padding:6px 0;display:flex;gap:9px;align-items:flex-start;
+}
+.plan li svg{width:15px;height:15px;flex-shrink:0;margin-top:3px}
+.plan li .ck{color:var(--orange)}
+.plan li.dim{color:var(--mist)}
+.plan li.dim .ck{color:#D4DAE1}
+
+/* buttons */
+.plan-btn{
+  display:block;text-align:center;padding:13px;border-radius:10px;font-size:14px;font-weight:800;
+  transition:.15s;
+}
+.plan-btn.solid{
+  background:linear-gradient(135deg,var(--orange),var(--orange-bright));
+  color:#fff;box-shadow:0 6px 20px rgba(201,94,26,.35);
+}
+.plan-btn.solid:hover{background:var(--orange-dark);text-decoration:none}
+.plan-btn.outline{border:2px solid var(--orange);color:var(--orange)}
+.plan-btn.outline:hover{background:var(--orange);color:#fff;text-decoration:none}
+.trial-line{text-align:center;font-size:12px;color:var(--mist);margin-top:10px}
+
+/* ── SECTIONS ── */
+section{padding:64px 0;scroll-margin-top:80px}
+section.alt{background:var(--bg)}
+.sec-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--orange);margin-bottom:10px}
+h2.sec-h{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+.lead{font-size:16px;color:var(--slate);max-width:680px}
+
+/* ── CREDIT PACKS ── */
+.packs{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:32px}
+.pack{
+  background:var(--white);border:1px solid var(--line);border-radius:14px;padding:26px;text-align:center;
+  transition:.2s;position:relative;overflow:hidden;
+}
+.pack::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--orange),var(--orange-bright));
+  opacity:0;transition:.2s;
+}
+.pack:hover{border-color:var(--orange);box-shadow:0 10px 30px rgba(201,94,26,.12);transform:translateY(-2px)}
+.pack:hover::before{opacity:1}
+.pack .amt{font-size:30px;font-weight:800;color:var(--orange);letter-spacing:-.02em}
+.pack .lbl{font-size:12px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.06em;margin:2px 0 12px}
+.pack .pprice{font-size:21px;font-weight:800;margin-bottom:4px}
+.pack .pper{font-size:11.5px;color:var(--mist);margin-bottom:16px}
+.pack a{
+  display:block;padding:10px;border-radius:9px;border:2px solid var(--orange);
+  font-size:13px;font-weight:800;color:var(--orange);transition:.15s;
+}
+.pack a:hover{background:var(--orange);color:#fff;text-decoration:none}
+
+/* ── COMPARISON TABLE ── */
+.cmp{width:100%;border-collapse:collapse;margin-top:32px;background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.cmp th,.cmp td{padding:13px 16px;font-size:13.5px;border-bottom:1px solid var(--line);text-align:center}
+.cmp th{background:var(--bg);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--slate)}
+.cmp td:first-child,.cmp th:first-child{text-align:left;font-weight:700}
+.cmp tr:last-child td{border-bottom:none}
+.cmp tr:hover td{background:rgba(201,94,26,.03)}
+.cmp .yes{color:var(--orange);font-weight:800}
+.cmp .no{color:#D4DAE1}
+.cmp th.feat{color:var(--orange);background:var(--orange-soft)}
+
+/* ── FAQ ── */
+.qa{border:1px solid var(--line);border-radius:12px;margin-bottom:10px;background:var(--white);overflow:hidden;transition:border-color .2s}
+.qa.open{border-color:var(--orange)}
+.qa-q{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:16px 18px;font-size:14.5px;font-weight:700;text-align:left;
+}
+.qa-q .chev{width:15px;height:15px;color:var(--mist);transition:transform .2s,color .2s;flex-shrink:0}
+.qa.open .qa-q .chev{transform:rotate(180deg);color:var(--orange)}
+.qa-a{display:none;padding:0 18px 18px;font-size:14px;color:var(--slate)}
+.qa.open .qa-a{display:block}
+.faq-wrap{max-width:760px;margin:32px auto 0}
+
+/* ── CTA BAND ── */
+.cta-band{
+  background:
+    radial-gradient(700px 350px at 10% 120%, rgba(201,94,26,.25), transparent 60%),
+    var(--charcoal);
+  color:#fff;text-align:center;padding:68px 24px;
+}
+.cta-band h2{font-size:clamp(22px,3vw,30px);font-weight:800;margin-bottom:8px}
+.cta-band h2 span{color:var(--orange-bright)}
+.cta-band p{color:#A8B0BB;margin-bottom:24px}
+.btn{
+  display:inline-block;
+  background:linear-gradient(135deg,var(--orange),var(--orange-bright));
+  color:#fff;font-weight:800;font-size:14.5px;
+  padding:14px 30px;border-radius:10px;box-shadow:0 6px 20px rgba(201,94,26,.35);transition:.15s;
+}
+.btn:hover{background:var(--orange-dark);text-decoration:none}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- nav injected by nav.js -->
+
+<header class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow"><span class="eyebrow-dot"></span>Pricing</span>
+    <h1>The most affordable B2B data in <span>North America</span></h1>
+    <p>Verified emails and direct dials for a fraction of what the big platforms charge. Every plan starts with a free trial — 100 credits, no card.</p>
+    <div class="hero-hook">Plans from <span>$26.99/mo</span> — about half the price of Apollo</div>
+    <div class="toggle-row">
+      <span id="lblMonthly" class="on">Monthly</span>
+      <button class="bill-toggle" id="billToggle" aria-label="Toggle annual billing"></button>
+      <span id="lblAnnual">Annual</span>
+      <span class="save-pill">Save 20%</span>
+    </div>
+    <div class="usd-note">All prices in USD</div>
+  </div>
+</header>
+
+<div class="plans">
+
+  <div class="plan">
+    <div class="plan-head">
+      <h2>Starter</h2>
+      <p class="for">Solo founders and one-person sales ops</p>
+    </div>
+    <div class="plan-body">
+      <div class="price-row"><span class="price" data-monthly="26.99" data-annual="21.99">$26.99</span><span class="per">/month</span></div>
+      <div class="annual-note" data-note></div>
+      <div class="credits-line">500 credits / month</div>
+      <ul>
+        <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Full database access — every industry &amp; region</li>
+        <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Unlimited searching &amp; filtering</li>
+        <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Verified emails &amp; direct phone numbers</li>
+        <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>CSV exports</li>
+        <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Revealed contacts unlocked forever</li>
+        <li class="dim"><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Priority support</li>
+      </ul>
+      <a class="plan-btn outline plan-cta" href="login.html"
+         data-checkout-monthly="https://jayisaacai.lemonsqueezy.com/checkout/buy/cfdeffb4-d776-4fdb-a9e6-9bf5b8b9a0d6"
+         data-checkout-annual="https://jayisaacai.lemonsqueezy.com/checkout/buy/19150486-6b7f-46c3-920f-26ed44d9ea70">Start Free Trial</a>
+      <p class="trial-line">100 free credits · no card required</p>
+    </div>
+  </div>
+
+  <div class="plan featured">
+    <div class="plan-head">
+      <span class="pop-badge">Most Popular</span>
+      <h2>Pro</h2>
+      <p class="for">Active sales teams running daily outreach</p>
+    </div>
+    <div class="plan-body">
+      <div class="price-row"><span class="price" data-monthly="74.99" data-annual="59.99">$74.99</span><span class="per">/month</span></div>
+      <div class="annual-note" data-note></div>
+      <div class="credits-line">2,000 credits / month</div>
+      <ul>
+        <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Everything in Starter</li>
+        <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>4× the monthly credits</li>
+        <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Bulk reveal &amp; bulk export</li>
+        <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Priority support — direct line to the builder</li>
+        <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Early access to AI enrichment features</li>
+        <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Discounted credit top-ups</li>
+      </ul>
+      <a class="plan-btn solid plan-cta" href="login.html"
+         data-checkout-monthly="https://jayisaacai.lemonsqueezy.com/checkout/buy/5c19de98-b924-4976-81ac-e15b6dc1143c"
+         data-checkout-annual="https://jayisaacai.lemonsqueezy.com/checkout/buy/a6c113cc-5612-4c1c-9fa5-453e16f872cb">Start Free Trial</a>
+      <p class="trial-line">100 free credits · no card required</p>
+    </div>
+  </div>
+
+  <div class="plan">
+    <div class="plan-head">
+      <h2>Agency</h2>
+      <p class="for">Agencies &amp; teams running multi-market campaigns</p>
+    </div>
+    <div class="plan-body">
+      <div class="price-row"><span class="price" data-monthly="199" data-annual="159">$199</span><span class="per">/month</span></div>
+      <div class="annual-note" data-note></div>
+      <div class="credits-line">7,500 credits / month</div>
+      <ul>
+        <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Everything in Pro</li>
+        <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Highest credit allocation — built for volume</li>
+        <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Multi-seat access for your team</li>
+        <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Custom list builds (Data as a Service)</li>
+        <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>API early access priority</li>
+        <li><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>White-glove onboarding</li>
+      </ul>
+      <a class="plan-btn outline" href="contact.html">Talk to Us</a>
+      <p class="trial-line">Custom volumes available</p>
+    </div>
+  </div>
+
+</div>
+
+<section id="leads">
+  <div class="wrap">
+    <div class="sec-label">Credit Packs</div>
+    <h2 class="sec-h">Need more? Top up anytime.</h2>
+    <p class="lead">One-time credit packs that stack on any plan. Pack credits don't expire while your account is active.</p>
+    <div class="packs">
+      <div class="pack">
+        <div class="amt">250</div><div class="lbl">credits</div>
+        <div class="pprice">$14.99</div><div class="pper">$0.060 per credit</div>
+        <a href="https://jayisaacai.lemonsqueezy.com/checkout/buy/dabe539b-6f29-446f-9769-3562c7b03e39" class="buy-pack">Get Pack</a>
+      </div>
+      <div class="pack">
+        <div class="amt">1,000</div><div class="lbl">credits</div>
+        <div class="pprice">$49</div><div class="pper">$0.049 per credit</div>
+        <a href="https://jayisaacai.lemonsqueezy.com/checkout/buy/9e3f42b1-27f9-45cf-861d-9f3b86640bf4" class="buy-pack">Get Pack</a>
+      </div>
+      <div class="pack">
+        <div class="amt">3,500</div><div class="lbl">credits</div>
+        <div class="pprice">$149</div><div class="pper">$0.043 per credit</div>
+        <a href="https://jayisaacai.lemonsqueezy.com/checkout/buy/6f65ef82-db73-4615-b456-e4fadba51e48" class="buy-pack">Get Pack</a>
+      </div>
+      <div class="pack">
+        <div class="amt">10,000+</div><div class="lbl">credits</div>
+        <div class="pprice">Custom</div><div class="pper">Volume pricing</div>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-label">Compare</div>
+    <h2 class="sec-h">Plans side by side</h2>
+    <table class="cmp">
+      <thead><tr><th>Feature</th><th>Starter</th><th class="feat">Pro</th><th>Agency</th></tr></thead>
+      <tbody>
+        <tr><td>Monthly price</td><td>$26.99</td><td>$74.99</td><td>$199</td></tr>
+        <tr><td>Monthly credits</td><td>500</td><td>2,000</td><td>7,500</td></tr>
+        <tr><td>Unlimited search &amp; filters</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+        <tr><td>Verified emails &amp; phones</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+        <tr><td>CSV export</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+        <tr><td>Bulk reveal &amp; export</td><td class="no">—</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+        <tr><td>Priority support</td><td class="no">—</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+        <tr><td>AI enrichment early access</td><td class="no">—</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+        <tr><td>Multi-seat access</td><td class="no">—</td><td class="no">—</td><td class="yes">&#10003;</td></tr>
+        <tr><td>Custom list builds (DaaS)</td><td class="no">—</td><td class="no">—</td><td class="yes">&#10003;</td></tr>
+        <tr><td>Discounted top-ups</td><td class="no">—</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-label">FAQ</div>
+    <h2 class="sec-h" style="text-align:center">Pricing questions, answered straight</h2>
+    <div class="faq-wrap">
+      <div class="qa"><button class="qa-q">How are you this much cheaper than Apollo and ZoomInfo?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a">No enterprise sales team, no bloated overhead, no annual lock-in contracts. We're lean and built for the people who actually pick up the phone and sell — so we pass the savings straight to you instead of funneling them into a sales org.</div></div>
+      <div class="qa"><button class="qa-q">What exactly is a credit?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a">One credit reveals one contact's email address and phone number. Searching, filtering, and browsing are unlimited and free on every plan. Once you reveal a contact, it's unlocked on your account permanently — you never pay twice for the same record.</div></div>
+      <div class="qa"><button class="qa-q">Do credits roll over?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a">Monthly plan credits reset each cycle. One-time credit pack purchases don't expire while your account is active — so if your usage is spiky, packs are your friend.</div></div>
+      <div class="qa"><button class="qa-q">Is there really no card required for the trial?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a">Really. Create an account, get 100 credits, search your actual market and judge the data. You only enter payment details if you decide to upgrade.</div></div>
+      <div class="qa"><button class="qa-q">Can I cancel anytime?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a">Yes — self-serve, no calls, no guilt trips. Access continues until the end of your paid period. Refund details are in the <a href="terms.html#refunds">Terms of Use</a>.</div></div>
+      <div class="qa"><button class="qa-q">What if I hit a batch of bad data?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a">No database is perfect — anyone claiming 100% accuracy is lying to you. Report bounced or dead records through the <a href="contact.html">contact form</a> and verified bad reveals get credited back in good faith.</div></div>
+      <div class="qa"><button class="qa-q">How does annual billing work?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a">Annual plans bill once per year at roughly 20% off the monthly rate — the prices shown with the toggle are the effective monthly cost. Credits still allocate monthly.</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <h2>Try it before you <span>pay for it</span></h2>
+  <p>100 free credits. Search your territory in the next two minutes.</p>
+  <a class="btn" href="login.html">Start Free Trial</a>
+</div>
+
+<!-- footer injected by footer.js -->
+
+<script>
+/* billing toggle */
+const tgl = document.getElementById("billToggle");
+const lblM = document.getElementById("lblMonthly");
+const lblA = document.getElementById("lblAnnual");
+let annual = false;
+tgl.addEventListener("click", () => {
+  annual = !annual;
+  tgl.classList.toggle("annual", annual);
+  lblM.classList.toggle("on", !annual);
+  lblA.classList.toggle("on", annual);
+  document.querySelectorAll(".price").forEach(p => {
+    p.textContent = "$" + (annual ? p.dataset.annual : p.dataset.monthly);
+  });
+  document.querySelectorAll("[data-note]").forEach(n => {
+    n.textContent = annual ? "billed annually" : "";
+  });
+});
+
+/* Plan CTAs: these say "Start Free Trial" and route to login.html so
+   new users hit the free-credit funnel first (no card). The Lemon Squeezy
+   checkout URLs are stored on each button as data-checkout-monthly /
+   data-checkout-annual — the app reads these to send an already-logged-in
+   user straight to the right checkout when they choose to UPGRADE.
+   We expose the current selection so the upgrade flow knows which to use. */
+window.JIA_BILLING = () => (annual ? "annual" : "monthly");
+
+/* FAQ accordion */
+document.querySelectorAll(".qa-q").forEach(btn => {
+  btn.addEventListener("click", () => btn.parentElement.classList.toggle("open"));
+});
+</script>
+</body>
+</html>

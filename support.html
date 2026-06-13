@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Help Center — JAYISAAC AI</title>
+<meta name="description" content="JAYISAAC AI Help Center — answers about accounts, credits, data quality, billing, exports, and troubleshooting.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --orange:#C95E1A;--orange-bright:#E8742E;--orange-dark:#A84B12;--orange-soft:#FBEEE4;
+  --charcoal:#1C1F24;--charcoal-deep:#141619;
+  --ink:#1A2433;--slate:#5B6878;--mist:#8C97A6;
+  --line:#E5E9EF;--bg:#F7F8FA;--white:#fff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--ink);background:var(--white);font-size:15px;line-height:1.7}
+a{color:var(--orange);text-decoration:none}
+a:hover{text-decoration:underline}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input{font-family:inherit}
+.wrap{max-width:860px;margin:0 auto;padding:0 24px}
+
+.page-hero{
+  background:radial-gradient(800px 400px at 90% -20%, rgba(201,94,26,.22), transparent 60%),var(--charcoal-deep);
+  color:#fff;padding:80px 0 56px;text-align:center;
+}
+.eyebrow{
+  display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--orange-bright);border:1px solid rgba(232,116,46,.35);background:rgba(232,116,46,.1);
+  padding:6px 14px;border-radius:20px;margin-bottom:18px;
+}
+.page-hero h1{font-size:clamp(28px,4.6vw,42px);font-weight:800;letter-spacing:-.02em}
+.searchbar{
+  max-width:520px;margin:26px auto 0;display:flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:12px;
+  padding:13px 16px;transition:.15s;
+}
+.searchbar:focus-within{border-color:var(--orange-bright);background:rgba(255,255,255,.1)}
+.searchbar svg{width:16px;height:16px;color:#A8B0BB;flex-shrink:0}
+.searchbar input{background:none;border:none;outline:none;color:#fff;font-size:14px;width:100%}
+.searchbar input::placeholder{color:#6E7782}
+
+.faq-zone{padding:56px 0 80px}
+.cat{margin-bottom:36px}
+.cat h2{
+  font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--orange);margin-bottom:14px;
+}
+.qa{border:1px solid var(--line);border-radius:12px;margin-bottom:10px;background:var(--white);overflow:hidden;transition:.15s}
+.qa.open{border-color:#D9C5B5;box-shadow:0 4px 18px rgba(14,27,44,.05)}
+.qa-q{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:16px 18px;font-size:14.5px;font-weight:700;text-align:left;color:var(--ink);
+}
+.qa-q .chev{width:15px;height:15px;color:var(--mist);flex-shrink:0;transition:transform .2s}
+.qa.open .qa-q .chev{transform:rotate(180deg);color:var(--orange)}
+.qa-a{display:none;padding:0 18px 18px;font-size:14px;color:var(--slate)}
+.qa.open .qa-a{display:block}
+.qa-a p{margin-bottom:10px}
+.qa-a p:last-child{margin-bottom:0}
+.no-results{display:none;text-align:center;padding:40px 20px;color:var(--slate)}
+.no-results.show{display:block}
+.no-results h3{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:6px}
+
+.cta-band{
+  background:radial-gradient(700px 350px at 10% 120%, rgba(201,94,26,.25), transparent 60%),var(--charcoal);
+  color:#fff;text-align:center;padding:64px 24px;
+}
+.cta-band h2{font-size:clamp(22px,3vw,28px);font-weight:800;margin-bottom:8px}
+.cta-band p{color:#A8B0BB;margin-bottom:24px}
+.btn{
+  display:inline-block;background:var(--orange);color:#fff;font-weight:800;font-size:14.5px;
+  padding:13px 28px;border-radius:10px;box-shadow:0 6px 20px rgba(201,94,26,.35);transition:.15s;
+}
+.btn:hover{background:var(--orange-dark);text-decoration:none}
+</style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<header class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">Help Center</span>
+    <h1>How can we help?</h1>
+    <div class="searchbar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" id="faqSearch" placeholder="Search answers… (credits, export, billing)">
+    </div>
+  </div>
+</header>
+
+<div class="faq-zone">
+  <div class="wrap" id="faqWrap">
+
+    <div class="cat">
+      <h2>Getting Started</h2>
+      <div class="qa"><button class="qa-q">What is JAYISAAC AI?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a"><p>A B2B prospecting platform with verified contact data for North American businesses — names, titles, direct emails, and phone numbers for decision-makers, with deep coverage of trades and service businesses. You search, filter, reveal contacts, and export lists for your outreach.</p></div></div>
+      <div class="qa"><button class="qa-q">How does the free trial work?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a"><p>Create an account and you get 100 free credits — no credit card required. Searching and filtering is unlimited and free; credits are only spent when you reveal a contact's email. Trial credits are a one-time grant per person or company.</p></div></div>
+      <div class="qa"><button class="qa-q">Do I need to install anything?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a"><p>No. The platform runs entirely in your browser on desktop or laptop. Note the app is built for big screens — phones get a "desktop required" notice because a serious prospecting table needs the room.</p></div></div>
+    </div>
+
+    <div class="cat">
+      <h2>Credits &amp; Searching</h2>
+      <div class="qa"><button class="qa-q">What costs credits and what's free?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a"><p><strong>Free:</strong> searching, filtering by industry/location/title/size, viewing company info, and browsing results.</p><p><strong>Costs 1 credit:</strong> revealing a contact's email address. Once revealed, that contact stays unlocked on your account forever — you're never charged twice for the same record.</p></div></div>
+      <div class="qa"><button class="qa-q">Do unused credits roll over?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a"><p>Monthly plan credits reset each billing cycle and don't roll over unless your plan specifically says otherwise. Use them — they're cheapest when they're working.</p></div></div>
+      <div class="qa"><button class="qa-q">I revealed a contact and the email bounced. Now what?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a"><p>It happens — B2B data decays and no provider is 100%. Report it through the <a href="contact.html">contact form</a> with the record details. We'll flag the record for re-verification, and verified bad reveals get credited back in good faith.</p></div></div>
+    </div>
+
+    <div class="cat">
+      <h2>Data Quality</h2>
+      <div class="qa"><button class="qa-q">Where does your data come from?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a"><p>Public business sources (websites, registries, directories), licensed third-party providers, and businesses updating their own information. Every record is cross-referenced across sources and technically validated before it's marked verified. Full breakdown on our <a href="data.html">data page</a>.</p></div></div>
+      <div class="qa"><button class="qa-q">How fresh is the data?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a"><p>Records move through rolling re-verification cycles — emails are revalidated, dead businesses get cut, and changed roles get updated. We'd rather have a smaller accurate database than a big stale one.</p></div></div>
+      <div class="qa"><button class="qa-q">How do I get my information removed from the database?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a"><p>Email <a href="mailto:admin@jayisaacai.com">admin@jayisaacai.com</a> or use the <a href="contact.html">contact form</a> with the "Data removal request" topic. No account needed, no hoops. Removals are processed within 30 days — usually much faster — and stay permanent. Details in our <a href="privacy.html#removal">Privacy Policy</a>.</p></div></div>
+    </div>
+
+    <div class="cat">
+      <h2>Exports &amp; Outreach</h2>
+      <div class="qa"><button class="qa-q">How do CSV exports work?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a"><p>Select the rows you want (or export everything matching your filters) and hit Export CSV. The file downloads instantly and opens clean in Excel and Google Sheets. Emails you haven't revealed export as locked — exporting doesn't bypass credits.</p></div></div>
+      <div class="qa"><button class="qa-q">Can I use the data for cold email and cold calling?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a"><p>That's what it's for — legitimate B2B outreach. But the laws that govern your outreach (CASL in Canada, CAN-SPAM and TCPA in the US, and others) are your responsibility to follow. Identify yourself, honor unsubscribes, don't spam. Our <a href="terms.html#acceptable">acceptable use terms</a> spell it out.</p></div></div>
+      <div class="qa"><button class="qa-q">Can I import lists into my CRM or dialer?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a"><p>Yes — the CSV export is standard format and imports into HubSpot, Pipedrive, GoHighLevel, most dialers, and spreadsheet tools without massaging. Direct API integrations are in <a href="api.html">early access</a>.</p></div></div>
+    </div>
+
+    <div class="cat">
+      <h2>Billing &amp; Account</h2>
+      <div class="qa"><button class="qa-q">How do I cancel?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a"><p>Cancel anytime — no calls, no retention scripts. Your access runs until the end of the period you've paid for. If you hit any friction, <a href="contact.html">contact us</a> and we'll handle it directly.</p></div></div>
+      <div class="qa"><button class="qa-q">What's your refund policy?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a"><p>Paid fees and consumed credits are generally non-refundable, but verified billing errors and material service failures get made right. Flag billing issues within 30 days of the charge. Full details in the <a href="terms.html#refunds">Terms of Use</a>.</p></div></div>
+      <div class="qa"><button class="qa-q">I forgot my password.<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a"><p>On the <a href="login.html">login page</a>, type your email and hit "Forgot password?" — a reset link lands in your inbox within a minute or two. Check spam if it doesn't show.</p></div></div>
+      <div class="qa"><button class="qa-q">Google sign-in isn't working.<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a"><p>Usually a popup blocker — allow popups for jayisaacai.com and retry. Still stuck? Use email/password with the same email address, or <a href="contact.html">contact support</a> and we'll sort the account out.</p></div></div>
+    </div>
+
+    <div class="no-results" id="noResults">
+      <h3>No matches for that search</h3>
+      <p>Try a different term, or <a href="contact.html">ask us directly</a> — we answer fast.</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="cta-band">
+  <h2>Didn't find your answer?</h2>
+  <p>A human reads every message and replies within one business day.</p>
+  <a class="btn" href="contact.html">Contact Support</a>
+</div>
+
+<div id="footer-placeholder"></div>
+<script type="module" src="./nav.js"></script>
+<script type="module" src="./footer.js"></script>
+<script>
+/* accordion */
+document.querySelectorAll(".qa-q").forEach(btn=>{
+  btn.addEventListener("click",()=>btn.parentElement.classList.toggle("open"));
+});
+/* live search */
+const search = document.getElementById("faqSearch");
+search.addEventListener("input",()=>{
+  const q = search.value.trim().toLowerCase();
+  let any = false;
+  document.querySelectorAll(".qa").forEach(qa=>{
+    const hit = !q || qa.textContent.toLowerCase().includes(q);
+    qa.style.display = hit ? "" : "none";
+    if(hit){ any = true; if(q) qa.classList.add("open"); else qa.classList.remove("open"); }
+  });
+  document.querySelectorAll(".cat").forEach(cat=>{
+    const visible = [...cat.querySelectorAll(".qa")].some(qa=>qa.style.display!=="none");
+    cat.style.display = visible ? "" : "none";
+  });
+  document.getElementById("noResults").classList.toggle("show", !any);
+});
+</script>
+</body>
+</html>

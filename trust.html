@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trust Center — JAYISAAC AI</title>
+<meta name="description" content="How JAYISAAC AI secures your data — infrastructure, encryption, privacy compliance, and responsible data practices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --orange:#C95E1A;--orange-bright:#E8742E;--orange-dark:#A84B12;--orange-soft:#FBEEE4;
+  --charcoal:#1C1F24;--charcoal-deep:#141619;
+  --ink:#1A2433;--slate:#5B6878;--mist:#8C97A6;
+  --line:#E5E9EF;--bg:#F7F8FA;--white:#fff;
+  --green:#1B8A5A;--green-soft:#E5F4EC;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--ink);background:var(--white);font-size:15px;line-height:1.7}
+a{color:var(--orange);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+.page-hero{
+  background:
+    radial-gradient(800px 400px at 90% -20%, rgba(201,94,26,.22), transparent 60%),
+    var(--charcoal-deep);
+  color:#fff;padding:84px 0 64px;
+}
+.eyebrow{
+  display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--orange-bright);border:1px solid rgba(232,116,46,.35);background:rgba(232,116,46,.1);
+  padding:6px 14px;border-radius:20px;margin-bottom:18px;
+}
+.page-hero h1{font-size:clamp(30px,5vw,44px);font-weight:800;letter-spacing:-.02em}
+.page-hero p{color:#A8B0BB;font-size:17px;max-width:640px;margin-top:14px}
+
+section{padding:64px 0}
+section.alt{background:var(--bg)}
+.sec-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--orange);margin-bottom:10px}
+h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+.lead{font-size:16px;color:var(--slate);max-width:720px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:32px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:26px}
+.card .icon{
+  width:40px;height:40px;border-radius:10px;background:var(--orange-soft);
+  display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+}
+.card .icon svg{width:19px;height:19px;color:var(--orange)}
+.card h3{font-size:16px;font-weight:800;margin-bottom:8px}
+.card p{font-size:13.5px;color:var(--slate)}
+.card ul{padding-left:18px;margin-top:8px}
+.card li{font-size:13.5px;color:var(--slate);margin-bottom:5px}
+
+/* compliance table */
+.comp-table{width:100%;border-collapse:collapse;margin-top:28px;background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.comp-table th{
+  text-align:left;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;
+  color:var(--mist);background:var(--bg);padding:13px 18px;border-bottom:1px solid var(--line);
+}
+.comp-table td{padding:15px 18px;border-bottom:1px solid var(--line);font-size:13.5px;vertical-align:top}
+.comp-table tr:last-child td{border-bottom:none}
+.comp-table td:first-child{font-weight:800;white-space:nowrap}
+.comp-table td:nth-child(2){color:var(--slate)}
+.status{
+  display:inline-block;font-size:11px;font-weight:800;padding:4px 10px;border-radius:6px;white-space:nowrap;
+}
+.status.active{background:var(--green-soft);color:var(--green)}
+.status.aligned{background:var(--orange-soft);color:var(--orange)}
+
+.cta-band{
+  background:
+    radial-gradient(700px 350px at 10% 120%, rgba(201,94,26,.25), transparent 60%),
+    var(--charcoal);
+  color:#fff;text-align:center;padding:64px 24px;
+}
+.cta-band h2{margin-bottom:8px}
+.cta-band p{color:#A8B0BB;margin-bottom:24px}
+.btn{
+  display:inline-block;background:var(--orange);color:#fff;font-weight:800;font-size:14.5px;
+  padding:13px 28px;border-radius:10px;box-shadow:0 6px 20px rgba(201,94,26,.35);transition:.15s;
+}
+.btn:hover{background:var(--orange-dark);text-decoration:none}
+</style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<header class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">Trust Center</span>
+    <h1>Security and privacy, stated plainly</h1>
+    <p>How we protect your account, handle business contact data responsibly, and where we stand on compliance — without the enterprise theater.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-label">Infrastructure</div>
+    <h2>Built on hardened, proven platforms</h2>
+    <p class="lead">We don't roll our own security primitives. Authentication, data storage, and payments run on platforms that protect billions of users.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+        <h3>Authentication</h3>
+        <p>Sign-in is handled by Google Firebase Authentication — the same identity infrastructure used across Google Cloud. We never see or store your raw password.</p>
+        <ul>
+          <li>Email/password with secure hashing</li>
+          <li>Google OAuth sign-in</li>
+          <li>Session tokens, revocable on sign-out</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+        <h3>Data storage</h3>
+        <p>Customer and platform data lives in Google Cloud Firestore with per-user security rules — your account data is readable and writable only by you.</p>
+        <ul>
+          <li>Encryption in transit (TLS 1.2+)</li>
+          <li>Encryption at rest (Google-managed)</li>
+          <li>Rule-enforced data isolation per account</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg></div>
+        <h3>Payments</h3>
+        <p>All payments are processed by PCI-DSS compliant payment providers. Full card numbers never touch our servers — we store only what's needed to manage your subscription.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L4 5.5V11c0 5 3.4 9.4 8 10.5 4.6-1.1 8-5.5 8-10.5V5.5L12 2z"/></svg></div>
+        <h3>Application security</h3>
+        <p>Smaller attack surface by design — minimal third-party scripts, authenticated API access, and least-privilege access to production systems.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-label">Compliance</div>
+    <h2>Where we stand, honestly</h2>
+    <p class="lead">Badges are easy to print. Here's the actual status of each framework and what it means for you.</p>
+    <table class="comp-table">
+      <thead><tr><th>Framework</th><th>What it covers</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>PIPEDA</td>
+          <td>Canada's federal privacy law. As a Canadian company, this is the legal foundation of how we collect, use, and disclose personal information — including the professional contact data in our platform.</td>
+          <td><span class="status active">We comply</span></td>
+        </tr>
+        <tr>
+          <td>GDPR</td>
+          <td>EU privacy regulation. We extend GDPR's core rights — access, correction, erasure, objection — to all users and data subjects regardless of location, and honor removal requests from anyone.</td>
+          <td><span class="status aligned">Principles honored</span></td>
+        </tr>
+        <tr>
+          <td>CCPA</td>
+          <td>California's privacy law. California residents can request access to and deletion of their information through the same simple process as everyone else.</td>
+          <td><span class="status aligned">Principles honored</span></td>
+        </tr>
+        <tr>
+          <td>ISO 27701</td>
+          <td>International privacy information management standard. We use it as a design reference for our privacy practices. We are not yet independently certified — and we won't claim to be until we are.</td>
+          <td><span class="status aligned">Design reference</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-label">Responsible Data</div>
+    <h2>Our data ethics commitments</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Business contacts only</h3>
+        <p>Our database covers people in their professional capacity — business roles, business emails, business phones. We don't deal in consumer data, sensitive categories, or anything about minors.</p>
+      </div>
+      <div class="card">
+        <h3>Opt-out that actually works</h3>
+        <p>Anyone can request removal from our database — no account, no friction, no dark patterns. Suppressed records stay suppressed. <a href="privacy.html#removal">How to request removal</a>.</p>
+      </div>
+      <div class="card">
+        <h3>Anti-abuse stance</h3>
+        <p>The platform is for legitimate B2B outreach. Accounts using our data for spam, harassment, or unlawful purposes get terminated. Customers are responsible for complying with anti-spam laws like CASL and CAN-SPAM in their outreach.</p>
+      </div>
+      <div class="card">
+        <h3>Report a concern</h3>
+        <p>Found a security issue or a data accuracy problem? Email <a href="mailto:admin@jayisaacai.com">admin@jayisaacai.com</a> — security reports go to the top of the queue and you'll get a direct human response.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <h2>Questions about security or privacy?</h2>
+  <p>Ask directly — you'll get a straight answer from the people who built it.</p>
+  <a class="btn" href="contact.html">Contact Us</a>
+</div>
+
+<div id="footer-placeholder"></div>
+<script type="module" src="./nav.js"></script>
+<script type="module" src="./footer.js"></script>
+</body>
+</html>

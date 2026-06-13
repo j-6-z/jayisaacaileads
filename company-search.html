@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Company Search — Map Your Market | JAYISAAC AI</title>
+<meta name="description" content="Search North American businesses by industry, size, revenue, and location. Map your total market and target the right accounts.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --orange:#C95E1A;--orange-bright:#E8742E;--orange-dark:#A84B12;--orange-soft:#FBEEE4;
+  --charcoal:#1C1F24;--charcoal-deep:#141619;
+  --ink:#1A2433;--slate:#5B6878;--mist:#8C97A6;
+  --line:#E5E9EF;--bg:#F7F8FA;--white:#fff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--ink);background:var(--white);font-size:15px;line-height:1.7}
+a{color:var(--orange);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.page-hero{
+  background:radial-gradient(800px 400px at 90% -20%, rgba(201,94,26,.22), transparent 60%),var(--charcoal-deep);
+  color:#fff;padding:84px 0 72px;
+}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:44px;align-items:center}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
+.eyebrow{
+  display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--orange-bright);border:1px solid rgba(232,116,46,.35);background:rgba(232,116,46,.1);
+  padding:6px 14px;border-radius:20px;margin-bottom:18px;
+}
+.page-hero h1{font-size:clamp(30px,5vw,44px);font-weight:800;letter-spacing:-.02em}
+.page-hero .sub{color:#A8B0BB;font-size:17px;margin-top:14px;max-width:500px}
+.hero-btns{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-block;background:var(--orange);color:#fff;font-weight:800;font-size:14.5px;
+  padding:13px 26px;border-radius:10px;box-shadow:0 6px 20px rgba(201,94,26,.35);transition:.15s;
+}
+.btn:hover{background:var(--orange-dark);text-decoration:none}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.25);box-shadow:none}
+.btn.ghost:hover{border-color:var(--orange-bright);color:var(--orange-bright)}
+.mock{
+  background:#1E2126;border:1px solid #2B2F36;border-radius:14px;overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,.45);font-size:12px;
+}
+.mock-bar{display:flex;gap:7px;padding:11px 14px;border-bottom:1px solid #2B2F36}
+.mock-bar i{width:10px;height:10px;border-radius:50%;display:block}
+.mock-bar i:nth-child(1){background:#FF5F57}.mock-bar i:nth-child(2){background:#FEBC2E}.mock-bar i:nth-child(3){background:#28C840}
+.mock-row{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid #24282E;color:#ECEEF1}
+.mock-lg{width:26px;height:26px;border-radius:7px;background:#24282E;border:1px solid #2B2F36;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:10px;color:#A8B0BB;flex-shrink:0}
+.mock-nm{font-weight:700;font-size:11.5px}
+.mock-tt{font-size:10px;color:#A8B0BB}
+.mock-pill{margin-left:auto;font-size:9.5px;font-weight:800;padding:3px 9px;border-radius:6px;background:rgba(107,157,250,.15);color:#6B9DFA;white-space:nowrap}
+section{padding:64px 0}
+section.alt{background:var(--bg)}
+.sec-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--orange);margin-bottom:10px}
+h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+.lead{font-size:16px;color:var(--slate);max-width:700px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px;margin-top:32px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:26px}
+.card .icon{width:40px;height:40px;border-radius:10px;background:var(--orange-soft);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.card .icon svg{width:19px;height:19px;color:var(--orange)}
+.card h3{font-size:16px;font-weight:800;margin-bottom:8px}
+.card p{font-size:13.5px;color:var(--slate)}
+.usecases{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px;margin-top:32px}
+.uc{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:24px}
+.uc h3{font-size:15px;font-weight:800;margin-bottom:6px;color:var(--orange)}
+.uc p{font-size:13.5px;color:var(--slate)}
+.cta-band{
+  background:radial-gradient(700px 350px at 10% 120%, rgba(201,94,26,.25), transparent 60%),var(--charcoal);
+  color:#fff;text-align:center;padding:68px 24px;
+}
+.cta-band h2{margin-bottom:8px}
+.cta-band p{color:#A8B0BB;margin-bottom:24px}
+</style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<header class="page-hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Platform · Company Search</span>
+        <h1>Map every business in your market</h1>
+        <p class="sub">Filter North American companies by industry, headcount, revenue band, and location. Know your total market before you spend a dollar chasing it.</p>
+        <div class="hero-btns">
+          <a class="btn" href="login.html">Start Free Trial</a>
+          <a class="btn ghost" href="people-search.html">See People Search</a>
+        </div>
+      </div>
+      <div class="mock">
+        <div class="mock-bar"><i></i><i></i><i></i></div>
+        <div class="mock-row"><span class="mock-lg">W</span><span><span class="mock-nm">Webb Construction Group</span><br><span class="mock-tt">120 employees · Dallas, TX</span></span><span class="mock-pill">$10M–$50M</span></div>
+        <div class="mock-row"><span class="mock-lg">A</span><span><span class="mock-nm">Apex Mechanical Group</span><br><span class="mock-tt">42 employees · Calgary, AB</span></span><span class="mock-pill">$5M–$10M</span></div>
+        <div class="mock-row"><span class="mock-lg">T</span><span><span class="mock-nm">Tran Mechanical Inc</span><br><span class="mock-tt">54 employees · Toronto, ON</span></span><span class="mock-pill">$5M–$10M</span></div>
+        <div class="mock-row" style="border-bottom:none"><span class="mock-lg">P</span><span><span class="mock-nm">Pacific Crest Builders</span><br><span class="mock-tt">88 employees · Vancouver, BC</span></span><span class="mock-pill">$10M–$50M</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-label">Why Company Search</div>
+    <h2>Account-first prospecting, firmographics included</h2>
+    <p class="lead">Sometimes the question isn't "who do I call" — it's "which companies are even worth calling." Company Search answers that with hard numbers.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg></div>
+        <h3>Firmographic filters</h3>
+        <p>Industry, employee count, estimated revenue band, and geography — slice the market down to the exact profile of company that buys from you.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
+        <h3>Market sizing, free</h3>
+        <p>Result counts update live as you filter and never cost a credit. "How many roofers over 10 staff are in BC?" — answered in five seconds.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h3>Pivot to the people</h3>
+        <p>Found the right accounts? Flip to the People tab to see the decision-makers inside them — one platform, one filter set, both views.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-label">Use Cases</div>
+    <h2>What teams use it for</h2>
+    <div class="usecases">
+      <div class="uc"><h3>Territory planning</h3><p>Size each rep's patch with real company counts instead of gut feel — then split markets evenly by actual opportunity.</p></div>
+      <div class="uc"><h3>ICP validation</h3><p>Test whether your "ideal customer" actually exists at volume before building a campaign around it.</p></div>
+      <div class="uc"><h3>Competitor market mapping</h3><p>See every player in a vertical and a region — who's big, who's small, who's worth partnering with versus selling against.</p></div>
+      <div class="uc"><h3>Account list building</h3><p>Export company lists for ABM campaigns, direct mail drops, or door-knocking routes sorted by city.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <h2>Size your market in the next five minutes</h2>
+  <p>Free account, 100 credits, unlimited searching. See exactly what's out there.</p>
+  <a class="btn" href="login.html">Start Free Trial</a>
+</div>
+
+<div id="footer-placeholder"></div>
+<script type="module" src="./nav.js"></script>
+<script type="module" src="./footer.js"></script>
+</body>
+</html>

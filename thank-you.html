@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You — JAYISAAC AI</title>
+<meta name="description" content="Your JAYISAAC AI purchase is confirmed. Jump into the app and start finding decision-makers.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script type="module" src="./nav.js"></script>
+<script type="module" src="./footer.js"></script>
+<style>
+:root{
+  --orange:#C95E1A;--orange-bright:#E8742E;--orange-dark:#A84B12;--orange-soft:#FBEEE4;
+  --charcoal:#1C1F24;--charcoal-deep:#141619;
+  --ink:#1A2433;--slate:#5B6878;--mist:#8C97A6;
+  --line:#E5E9EF;--bg:#F7F8FA;--white:#fff;
+  --green:#1B8A5A;--green-soft:#E5F4EC;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--ink);background:var(--white);font-size:15px;line-height:1.7}
+a{color:var(--orange);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:680px;margin:0 auto;padding:0 24px}
+
+/* hero band */
+.ty-hero{
+  background:
+    radial-gradient(800px 400px at 50% -20%, rgba(201,94,26,.22), transparent 60%),
+    var(--charcoal-deep);
+  color:#fff;padding:90px 0 120px;text-align:center;
+}
+.ty-check{
+  width:74px;height:74px;border-radius:50%;margin:0 auto 24px;
+  background:linear-gradient(135deg,var(--orange),var(--orange-bright));
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 30px rgba(201,94,26,.4);
+  animation:pop .5s cubic-bezier(.34,1.56,.64,1);
+}
+.ty-check svg{width:36px;height:36px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+@keyframes pop{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
+.ty-hero h1{font-size:clamp(28px,5vw,40px);font-weight:800;letter-spacing:-.02em}
+.ty-hero h1 span{color:var(--orange-bright)}
+.ty-hero p{color:#A8B0BB;font-size:17px;max-width:460px;margin:14px auto 0}
+
+/* card */
+.ty-card{
+  background:var(--white);border:1px solid var(--line);border-radius:18px;
+  box-shadow:0 16px 44px rgba(14,27,44,.1);
+  margin:-70px auto 0;padding:36px 32px;position:relative;z-index:2;text-align:center;
+}
+.ty-card h2{font-size:19px;font-weight:800;margin-bottom:6px}
+.ty-card .sub{font-size:14px;color:var(--slate);margin-bottom:26px}
+
+/* next-steps list */
+.steps{text-align:left;margin:0 auto 28px;max-width:420px;display:flex;flex-direction:column;gap:14px}
+.step{display:flex;gap:13px;align-items:flex-start}
+.step-num{
+  width:26px;height:26px;border-radius:50%;flex-shrink:0;
+  background:var(--orange-soft);border:1px solid rgba(201,94,26,.25);
+  color:var(--orange-dark);font-size:12.5px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+}
+.step-txt{font-size:13.5px;color:var(--slate);line-height:1.5}
+.step-txt b{color:var(--ink);font-weight:700}
+
+/* buttons */
+.ty-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.ty-btn{
+  display:inline-block;padding:13px 26px;border-radius:10px;font-size:14px;font-weight:800;transition:.15s;
+}
+.ty-btn.solid{
+  background:linear-gradient(135deg,var(--orange),var(--orange-bright));
+  color:#fff;box-shadow:0 6px 20px rgba(201,94,26,.35);
+}
+.ty-btn.solid:hover{background:var(--orange-dark);text-decoration:none}
+.ty-btn.outline{border:2px solid var(--orange);color:var(--orange)}
+.ty-btn.outline:hover{background:var(--orange);color:#fff;text-decoration:none}
+
+.ty-note{font-size:12px;color:var(--mist);margin-top:22px}
+.ty-note a{font-weight:700}
+
+.ty-spacer{height:80px}
+</style>
+</head>
+<body>
+
+<!-- nav injected by nav.js -->
+
+<header class="ty-hero">
+  <div class="wrap">
+    <div class="ty-check">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h1>You're <span>in.</span></h1>
+    <p>Payment confirmed. Your credits are being added to your account right now.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="ty-card">
+    <h2>Welcome to JAYISAAC AI</h2>
+    <p class="sub">Here's how to get your first leads in the next two minutes.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-txt">Open the app and <b>search your market</b> — filter by industry, role, and location.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-txt"><b>Reveal contacts</b> to unlock verified emails and direct dials. Each reveal is yours forever.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-txt"><b>Export to CSV</b> or push to your CRM, and start reaching out.</div>
+      </div>
+    </div>
+
+    <div class="ty-btns">
+      <a class="ty-btn solid" href="app.html">Go to App &rarr;</a>
+      <a class="ty-btn outline" href="pricing.html#leads">View Plans &amp; Credits</a>
+    </div>
+
+    <p class="ty-note">
+      Credits not showing yet? Give it a minute to process, then refresh.
+      Still stuck? <a href="contact.html">Contact support</a>.
+    </p>
+  </div>
+</div>
+
+<div class="ty-spacer"></div>
+
+<!-- footer injected by footer.js -->
+
+</body>
+</html>
