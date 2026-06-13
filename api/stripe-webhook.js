@@ -34,17 +34,43 @@ import admin from "firebase-admin";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-/* ── Firebase Admin init (once per cold start) ─────────────── */
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.cert({
-      projectId:   process.env.FIREBASE_PROJECT_ID,
-      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-      privateKey:  process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-    }),
-  });
+/* ── Firebase Admin init (lazy, fault-tolerant) ─────────────
+   The private key is the #1 source of pain in serverless because
+   newlines get mangled in env vars. We support TWO formats:
+     1. FIREBASE_PRIVATE_KEY_B64  — the key base64-encoded (BULLETPROOF,
+        no newline issues possible). Preferred.
+     2. FIREBASE_PRIVATE_KEY      — raw PEM, with literal \n or real
+        newlines. We normalize both.
+   Init runs lazily inside the handler so a bad key returns a clear
+   error instead of crashing the whole function on load. */
+function resolvePrivateKey() {
+  const b64 = process.env.FIREBASE_PRIVATE_KEY_B64;
+  if (b64 && b64.trim()) {
+    return Buffer.from(b64.trim(), "base64").toString("utf8");
+  }
+  let k = process.env.FIREBASE_PRIVATE_KEY;
+  if (!k) return k;
+  k = k.trim();
+  if ((k.startsWith('"') && k.endsWith('"')) || (k.startsWith("'") && k.endsWith("'"))) {
+    k = k.slice(1, -1);
+  }
+  k = k.replace(/\\n/g, "\n");   // literal \n  → real newline
+  k = k.replace(/\r\n/g, "\n");  // CRLF         → LF
+  return k;
 }
-const db = admin.firestore();
+
+function getDb() {
+  if (!admin.apps.length) {
+    admin.initializeApp({
+      credential: admin.credential.cert({
+        projectId:   process.env.FIREBASE_PROJECT_ID,
+        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+        privateKey:  resolvePrivateKey(),
+      }),
+    });
+  }
+  return admin.firestore();
+}
 
 /* Vercel: need the raw body to verify the Stripe signature, so disable
    the automatic JSON body parser. */
@@ -96,6 +122,16 @@ export default async function handler(req, res) {
   } catch (err) {
     console.warn("Rejected webhook: bad signature —", err.message);
     return res.status(400).json({ error: "Invalid signature" });
+  }
+
+  /* init Firebase now (lazy) — if the key is malformed we get a clear
+     error here instead of a silent function-load crash. */
+  let db;
+  try {
+    db = getDb();
+  } catch (err) {
+    console.error("Firebase init failed — check FIREBASE_PRIVATE_KEY(_B64):", err.message);
+    return res.status(500).json({ error: "Firebase init failed", detail: err.message });
   }
 
   /* We grant credits on:
@@ -207,7 +243,12 @@ export default async function handler(req, res) {
     return res.status(200).json({ ok: true, granted: totalCredits });
   } catch (err) {
     console.error("Grant failed:", err);
-    // 500 so Stripe retries — the transaction is idempotent so retries are safe
-    return res.status(500).json({ error: "Grant failed" });
+    // TEMP DEBUG: return the real error so it shows in Stripe's delivery log.
+    // Revert to a generic message once the webhook is confirmed working.
+    return res.status(500).json({
+      error: "Grant failed",
+      debug: String(err && err.message ? err.message : err),
+      code: err && err.code ? err.code : null,
+    });
   }
 }
