@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Account — JAYISAAC AI</title>
+<meta name="description" content="Manage your JAYISAAC AI account, plan, billing, and preferences.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script type="module" src="./nav.js"></script>
+<script type="module" src="./footer.js"></script>
+<style>
+:root{
+  --orange:#C95E1A;--orange-bright:#E8742E;--orange-dark:#A84B12;--orange-soft:#FBEEE4;
+  --charcoal:#1C1F24;--charcoal-deep:#141619;
+  --ink:#1A2433;--slate:#5B6878;--mist:#8C97A6;
+  --line:#E5E9EF;--bg:#F7F8FA;--white:#fff;
+  --green:#1B8A5A;--green-soft:#E5F4EC;
+  --red:#C0392B;--red-soft:#FCEBEA;--red-line:#F0C5C0;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--ink);background:var(--bg);font-size:15px;line-height:1.6}
+a{color:var(--orange);text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px}
+
+/* loading veil while we check auth */
+.veil{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:999;transition:opacity .3s}
+.veil.hide{opacity:0;pointer-events:none}
+.veil .spin{width:34px;height:34px;border:3px solid var(--line);border-top-color:var(--orange);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* hero */
+.acct-hero{
+  background:
+    radial-gradient(700px 360px at 85% -20%, rgba(201,94,26,.22), transparent 60%),
+    var(--charcoal-deep);
+  color:#fff;padding:70px 0 90px;
+}
+.acct-hero .wrap{display:flex;align-items:center;gap:18px}
+.acct-av{
+  width:64px;height:64px;border-radius:16px;flex-shrink:0;
+  background:var(--orange);display:flex;align-items:center;justify-content:center;
+  font-size:24px;font-weight:800;color:#fff;
+  box-shadow:0 8px 24px rgba(201,94,26,.4);
+}
+.acct-hero h1{font-size:clamp(24px,4vw,32px);font-weight:800;letter-spacing:-.02em}
+.acct-hero .em{color:#A8B0BB;font-size:14px;margin-top:2px}
+
+/* cards float up over hero */
+.acct-body{margin-top:-50px;padding-bottom:80px;position:relative;z-index:2}
+.card{
+  background:var(--white);border:1px solid var(--line);border-radius:16px;
+  box-shadow:0 12px 36px rgba(14,27,44,.08);padding:26px 28px;margin-bottom:18px;
+}
+.card h2{font-size:16px;font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:9px}
+.card h2 svg{width:17px;height:17px;color:var(--orange)}
+.card .sub{font-size:13px;color:var(--slate);margin-bottom:20px}
+
+/* form rows */
+.row{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.row label{font-size:13px;font-weight:600;color:var(--slate);width:90px;flex-shrink:0}
+.row input{
+  flex:1;background:var(--bg);border:1px solid var(--line);border-radius:9px;
+  padding:10px 13px;font-size:14px;color:var(--ink);outline:none;transition:.15s;font-family:inherit;
+}
+.row input:focus{border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-soft);background:#fff}
+.row input:disabled{color:var(--mist);cursor:not-allowed}
+.row .ro-tag{font-size:11px;font-weight:700;color:var(--mist);text-transform:uppercase;letter-spacing:.05em}
+
+.btn{
+  display:inline-flex;align-items:center;gap:7px;
+  background:linear-gradient(135deg,var(--orange),var(--orange-bright));
+  color:#fff;font-weight:800;font-size:13.5px;padding:11px 20px;border-radius:9px;
+  box-shadow:0 5px 16px rgba(201,94,26,.3);transition:.15s;
+}
+.btn:hover{background:var(--orange-dark)}
+.btn:disabled{opacity:.6;cursor:wait;box-shadow:none}
+.btn-ghost{
+  background:var(--bg);border:1px solid var(--line);color:var(--ink);
+  font-weight:700;font-size:13.5px;padding:11px 18px;border-radius:9px;transition:.15s;
+}
+.btn-ghost:hover{border-color:var(--orange);color:var(--orange)}
+.actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+
+/* billing */
+.bill{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-bottom:6px}
+.bill-stat .n{font-size:34px;font-weight:800;color:var(--orange);letter-spacing:-.02em;line-height:1}
+.bill-stat .l{font-size:12px;color:var(--slate);margin-top:4px;font-weight:600}
+.plan-tag{
+  font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;
+  color:var(--orange);background:var(--orange-soft);border:1px solid rgba(201,94,26,.25);
+  padding:5px 12px;border-radius:20px;
+}
+
+/* danger zone */
+.card.danger{border-color:var(--red-line);background:linear-gradient(180deg,#fff,var(--red-soft))}
+.card.danger h2{color:var(--red)}
+.card.danger h2 svg{color:var(--red)}
+.btn-danger{
+  background:#fff;border:1.5px solid var(--red-line);color:var(--red);
+  font-weight:800;font-size:13.5px;padding:11px 20px;border-radius:9px;transition:.15s;
+}
+.btn-danger:hover{background:var(--red);color:#fff;border-color:var(--red)}
+
+/* delete modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(20,22,25,.6);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;z-index:200;padding:20px}
+.modal-overlay.show{display:flex}
+.modal{background:#fff;border-radius:18px;max-width:440px;width:100%;padding:30px;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+.modal h3{font-size:19px;font-weight:800;color:var(--red);margin-bottom:10px}
+.modal p{font-size:14px;color:var(--slate);margin-bottom:8px}
+.modal strong{color:var(--ink)}
+.modal .confirm-input{width:100%;border:1px solid var(--line);border-radius:9px;padding:11px 13px;font-size:14px;margin:14px 0 4px;outline:none;font-family:inherit}
+.modal .confirm-input:focus{border-color:var(--red);box-shadow:0 0 0 3px var(--red-soft)}
+.modal-actions{display:flex;gap:10px;margin-top:18px}
+.modal-actions .btn-danger{flex:1;text-align:center;justify-content:center}
+.modal-actions .btn-danger:disabled{opacity:.45;cursor:not-allowed;background:#fff;color:var(--red)}
+.modal-actions .btn-ghost{flex:1;text-align:center}
+
+/* toast */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:#fff;padding:12px 22px;border-radius:10px;font-size:13.5px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.3);transition:transform .3s;z-index:300}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast.err{background:var(--red)}
+.toast.ok{background:var(--green)}
+
+@media(max-width:560px){
+  .row{flex-wrap:wrap;gap:6px}
+  .row label{width:auto}
+  .row input{width:100%}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- nav injected by nav.js -->
+
+<div class="veil" id="veil"><div class="spin"></div></div>
+
+<header class="acct-hero">
+  <div class="wrap">
+    <div class="acct-av" id="heroAv">U</div>
+    <div>
+      <h1 id="heroName">My Account</h1>
+      <div class="em" id="heroEmail"></div>
+    </div>
+  </div>
+</header>
+
+<main class="acct-body">
+  <div class="wrap">
+
+    <!-- Profile -->
+    <div class="card">
+      <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</h2>
+      <p class="sub">Update the name shown on your account.</p>
+      <div class="row">
+        <label for="fName">Name</label>
+        <input id="fName" type="text" placeholder="Your name" autocomplete="name">
+      </div>
+      <div class="row">
+        <label for="fEmail">Email</label>
+        <input id="fEmail" type="email" disabled>
+        <span class="ro-tag">Read-only</span>
+      </div>
+      <div class="actions">
+        <button class="btn" id="saveProfile">Save changes</button>
+      </div>
+    </div>
+
+    <!-- Plan & Billing -->
+    <div class="card">
+      <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Plan &amp; Billing</h2>
+      <p class="sub">Your current credits and subscription.</p>
+      <div class="bill">
+        <div class="bill-stat">
+          <div class="n" id="credits">—</div>
+          <div class="l">credits remaining</div>
+        </div>
+        <span class="plan-tag" id="planTag">Free Trial</span>
+      </div>
+      <div class="actions">
+        <a class="btn" href="pricing.html">Upgrade / view plans</a>
+        <button class="btn-ghost" id="manageBilling">Manage subscription</button>
+      </div>
+    </div>
+
+    <!-- Danger Zone -->
+    <div class="card danger">
+      <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Danger Zone</h2>
+      <p class="sub">Permanently delete your account and all associated data. This cannot be undone.</p>
+      <div class="actions">
+        <button class="btn-danger" id="deleteBtn">Delete my account</button>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- delete confirmation modal -->
+<div class="modal-overlay" id="delModal">
+  <div class="modal">
+    <h3>Delete your account?</h3>
+    <p>This permanently removes your account, your remaining credits, and your revealed contacts. <strong>This can't be undone.</strong></p>
+    <p>Type <strong>DELETE</strong> below to confirm.</p>
+    <input class="confirm-input" id="delConfirm" placeholder="DELETE" autocomplete="off">
+    <div class="modal-actions">
+      <button class="btn-ghost" id="delCancel">Cancel</button>
+      <button class="btn-danger" id="delConfirmBtn" disabled>Delete forever</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- footer injected by footer.js -->
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut, updateProfile, deleteUser, GoogleAuthProvider, reauthenticateWithPopup }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, getDoc, updateDoc, deleteDoc, serverTimestamp }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDHs92C3ariQ285KUkodOHV04sEVKr_dQ8",
+  authDomain: "jayisaac-ai.firebaseapp.com",
+  projectId: "jayisaac-ai",
+  storageBucket: "jayisaac-ai.firebasestorage.app",
+  messagingSenderId: "967801239356",
+  appId: "1:967801239356:web:0df3f35af72ce6e79b9039",
+  measurementId: "G-V91DS21PGE"
+};
+
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+
+const $ = id => document.getElementById(id);
+let currentUser = null;
+let userRef = null;
+
+function toast(msg, type){
+  const t = $("toast");
+  t.textContent = msg;
+  t.className = "toast show" + (type ? " " + type : "");
+  setTimeout(() => t.className = "toast", 2600);
+}
+
+const PLAN_LABELS = {
+  starter:"Starter", pro:"Pro", agency:"Agency",
+  starter_monthly:"Starter", starter_annual:"Starter",
+  pro_monthly:"Pro", pro_annual:"Pro",
+  agency_monthly:"Agency", agency_annual:"Agency",
+};
+
+/* ── gate: must be signed in ─────────────────────────────── */
+onAuthStateChanged(auth, async (user) => {
+  if (!user) { location.replace("login.html"); return; }
+  currentUser = user;
+
+  /* hero + profile fields */
+  const name = user.displayName || "";
+  const email = user.email || "";
+  const initials = (name || email || "U").split(/[\s@.]+/).filter(Boolean).slice(0,2).map(w=>w[0].toUpperCase()).join("");
+  $("heroAv").textContent = initials;
+  $("heroName").textContent = name || "My Account";
+  $("heroEmail").textContent = email;
+  $("fName").value = name;
+  $("fEmail").value = email;
+
+  /* load credits + plan from Firestore */
+  userRef = doc(db, "users", user.uid);
+  try {
+    const snap = await getDoc(userRef);
+    if (snap.exists()) {
+      const d = snap.data();
+      $("credits").textContent = typeof d.credits === "number" ? d.credits.toLocaleString() : "—";
+      if (d.plan && PLAN_LABELS[d.plan]) $("planTag").textContent = PLAN_LABELS[d.plan];
+    } else {
+      $("credits").textContent = "0";
+    }
+  } catch(e){
+    console.error("Load failed:", e);
+    $("credits").textContent = "—";
+  }
+
+  $("veil").classList.add("hide");
+});
+
+/* ── save profile (name) ─────────────────────────────────── */
+$("saveProfile").addEventListener("click", async () => {
+  const btn = $("saveProfile");
+  const newName = $("fName").value.trim();
+  if (!newName) { toast("Name can't be empty", "err"); return; }
+  btn.disabled = true;
+  try {
+    await updateProfile(currentUser, { displayName: newName });
+    if (userRef) {
+      try { await updateDoc(userRef, { name: newName }); } catch(_){}
+    }
+    $("heroName").textContent = newName;
+    toast("Profile updated", "ok");
+  } catch(e){
+    console.error(e);
+    toast("Couldn't save — try again", "err");
+  }
+  btn.disabled = false;
+});
+
+/* ── manage subscription (Stripe billing portal) ─────────── */
+$("manageBilling").addEventListener("click", () => {
+  /* Stripe's hosted billing portal lets users update card / cancel.
+     Wire this to your portal link once configured in Stripe:
+     Stripe Dashboard → Settings → Billing → Customer portal → copy link. */
+  toast("Billing portal opens here once configured");
+  /* When ready, replace the line above with:
+     window.location.href = "https://billing.stripe.com/p/login/XXXX"; */
+});
+
+/* ── delete account flow ─────────────────────────────────── */
+const delModal = $("delModal");
+$("deleteBtn").addEventListener("click", () => { delModal.classList.add("show"); $("delConfirm").value=""; $("delConfirmBtn").disabled=true; $("delConfirm").focus(); });
+$("delCancel").addEventListener("click", () => delModal.classList.remove("show"));
+delModal.addEventListener("click", e => { if (e.target === delModal) delModal.classList.remove("show"); });
+$("delConfirm").addEventListener("input", e => {
+  $("delConfirmBtn").disabled = e.target.value.trim().toUpperCase() !== "DELETE";
+});
+
+$("delConfirmBtn").addEventListener("click", async () => {
+  const btn = $("delConfirmBtn");
+  btn.disabled = true; btn.textContent = "Deleting…";
+  try {
+    /* 1) delete their Firestore user doc (their data) */
+    if (userRef) { try { await deleteDoc(userRef); } catch(_){} }
+    /* 2) delete the Firebase Auth account */
+    await deleteUser(currentUser);
+    toast("Account deleted", "ok");
+    setTimeout(() => location.replace("index.html"), 1200);
+  } catch(e){
+    console.error(e);
+    /* Firebase requires a recent login to delete. If it's stale, re-auth. */
+    if (e.code === "auth/requires-recent-login") {
+      try {
+        await reauthenticateWithPopup(currentUser, new GoogleAuthProvider());
+        if (userRef) { try { await deleteDoc(userRef); } catch(_){} }
+        await deleteUser(currentUser);
+        toast("Account deleted", "ok");
+        setTimeout(() => location.replace("index.html"), 1200);
+        return;
+      } catch(re){
+        console.error(re);
+        toast("Please sign in again, then retry delete", "err");
+      }
+    } else {
+      toast("Couldn't delete — try again", "err");
+    }
+    btn.disabled = false; btn.textContent = "Delete forever";
+  }
+});
+</script>
+</body>
+</html>

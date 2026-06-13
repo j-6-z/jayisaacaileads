@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Private / gated pages — no need to index these
+Disallow: /app.html
+Disallow: /login.html
+Disallow: /account.html
+Disallow: /thank-you.html
+Disallow: /api/
+
+Sitemap: https://jayisaacai.com/sitemap.xml
