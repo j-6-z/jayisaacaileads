@@ -222,8 +222,22 @@ export default async function handler(req, res) {
       if (plan) planName = plan;
     }
 
+    /* FALLBACK: if no credits found on product/price metadata, check the
+       checkout SESSION metadata. Payment links copy their metadata to the
+       session, so `plan` lives there even when the product has no metadata.
+       This covers the test→live metadata gap. */
     if (totalCredits <= 0) {
-      console.warn("No credits resolved from line items. Check product metadata. event:", event.type);
+      const sessionMeta = event.data?.object?.metadata || {};
+      const sessionPlan = sessionMeta.plan || null;
+      if (sessionPlan && PLAN_CREDITS[sessionPlan] != null) {
+        totalCredits = PLAN_CREDITS[sessionPlan];
+        planName = sessionPlan;
+        console.log("Resolved credits via session metadata plan:", sessionPlan, "→", totalCredits);
+      }
+    }
+
+    if (totalCredits <= 0) {
+      console.warn("No credits resolved from line items OR session metadata. event:", event.type);
       return res.status(200).json({ ok: true, note: "no credits in metadata" });
     }
 
