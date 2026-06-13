@@ -1,45 +1,38 @@
 /* ============================================================
-   JAYISAAC AI — Lemon Squeezy webhook → Firestore credit grant
-   Deploy on Vercel at:  /api/lemon-webhook
+   JAYISAAC AI — Stripe webhook → Firestore credit grant
+   Deploy on Vercel at:  /api/stripe-webhook
    ------------------------------------------------------------
-   Set the LS webhook callback URL to:
-     https://YOUR-DOMAIN.vercel.app/api/lemon-webhook
-   and subscribe to events:
-     order_created, subscription_created, subscription_payment_success
+   In the Stripe dashboard (Developers → Webhooks → Add endpoint):
+     Endpoint URL:  https://YOUR-DOMAIN.vercel.app/api/stripe-webhook
+     Events to send:
+       checkout.session.completed     (first payment — subs + one-time packs)
+       invoice.paid                   (recurring renewals on subscriptions)
 
-   REQUIRED ENV VARS (set in Vercel → Settings → Environment Variables):
-     LEMON_WEBHOOK_SECRET   = the signing secret you set on the LS webhook
+   Stripe gives you a signing secret (starts with whsec_...) when you
+   create the endpoint. That goes in Vercel as STRIPE_WEBHOOK_SECRET.
+
+   REQUIRED ENV VARS (Vercel → Settings → Environment Variables):
+     STRIPE_SECRET_KEY      = sk_test_... (test) / sk_live_... (live)
+     STRIPE_WEBHOOK_SECRET  = whsec_... (from the webhook endpoint)
      FIREBASE_PROJECT_ID    = jayisaac-ai
      FIREBASE_CLIENT_EMAIL  = from the service account JSON
      FIREBASE_PRIVATE_KEY   = from the service account JSON (keep the \n escapes)
 
    NEVER hardcode these in the file. They live only in Vercel.
+
+   HOW CREDITS ARE DETERMINED:
+     Each Stripe Product carries metadata you set:
+       credits = 500 | 2000 | 7500 | 250 | 1000 | 3500
+       plan    = starter_monthly | pro_annual | pack_1000 | ...
+     The webhook reads `credits` off the purchased line item's product.
+     No hardcoded price-ID map to maintain — add a product, set its
+     metadata, and it just works.
    ============================================================ */
 
-import crypto from "crypto";
+import Stripe from "stripe";
 import admin from "firebase-admin";
 
-/* ── variant → credits map ──────────────────────────────────
-   Subscriptions grant their monthly allotment per payment.
-   One-time packs grant the pack size, once.                    */
-const VARIANT_CREDITS = {
-  "1778380": 500,   // Starter monthly
-  "1778429": 500,   // Starter annual  (monthly allotment per cycle)
-  "1778424": 2000,  // Pro monthly
-  "1778431": 2000,  // Pro annual
-  "1778427": 7500,  // Agency monthly
-  "1778435": 7500,  // Agency annual
-  "1778436": 250,   // 250 credit pack (one-time)
-  "1778439": 1000,  // 1,000 credit pack (one-time)
-  "1778441": 3500,  // 3,500 credit pack (one-time)
-};
-
-/* plan name for the user doc (subscriptions only) */
-const VARIANT_PLAN = {
-  "1778380": "starter", "1778429": "starter",
-  "1778424": "pro",     "1778431": "pro",
-  "1778427": "agency",  "1778435": "agency",
-};
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 /* ── Firebase Admin init (once per cold start) ─────────────── */
 if (!admin.apps.length) {
@@ -53,17 +46,33 @@ if (!admin.apps.length) {
 }
 const db = admin.firestore();
 
-/* Vercel: need the raw body to verify the signature, so disable
+/* Vercel: need the raw body to verify the Stripe signature, so disable
    the automatic JSON body parser. */
 export const config = { api: { bodyParser: false } };
 
 function readRawBody(req) {
   return new Promise((resolve, reject) => {
-    let data = "";
-    req.on("data", chunk => (data += chunk));
-    req.on("end", () => resolve(data));
+    const chunks = [];
+    req.on("data", chunk => chunks.push(chunk));
+    req.on("end", () => resolve(Buffer.concat(chunks)));
     req.on("error", reject);
   });
+}
+
+/* Pull credits + plan from a line item's product metadata.
+   Works for both checkout sessions and invoices. */
+async function creditsFromLineItem(item) {
+  // item.price.product may be an id (string) or an expanded object
+  let product = item?.price?.product;
+  if (typeof product === "string") {
+    product = await stripe.products.retrieve(product);
+  }
+  const md = product?.metadata || {};
+  const credits = parseInt(md.credits, 10);
+  return {
+    credits: Number.isFinite(credits) ? credits : 0,
+    plan: md.plan || null,
+  };
 }
 
 export default async function handler(req, res) {
@@ -71,126 +80,134 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  /* 1 ── read raw body + verify HMAC signature ─────────────── */
+  /* 1 ── verify the Stripe signature ───────────────────────── */
   const raw = await readRawBody(req);
-  const secret = process.env.LEMON_WEBHOOK_SECRET;
-  const signature = req.headers["x-signature"];
+  const sig = req.headers["stripe-signature"];
+  const secret = process.env.STRIPE_WEBHOOK_SECRET;
 
   if (!secret) {
-    console.error("Missing LEMON_WEBHOOK_SECRET env var");
+    console.error("Missing STRIPE_WEBHOOK_SECRET env var");
     return res.status(500).json({ error: "Server not configured" });
   }
 
-  const expected = crypto.createHmac("sha256", secret).update(raw).digest("hex");
-
-  // timing-safe compare; reject anything that isn't a genuine LS signature
-  const sigOk =
-    typeof signature === "string" &&
-    signature.length === expected.length &&
-    crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected));
-
-  if (!sigOk) {
-    console.warn("Rejected webhook: bad signature");
-    return res.status(401).json({ error: "Invalid signature" });
-  }
-
-  /* 2 ── parse the verified payload ────────────────────────── */
   let event;
   try {
-    event = JSON.parse(raw);
-  } catch {
-    return res.status(400).json({ error: "Bad JSON" });
+    event = stripe.webhooks.constructEvent(raw, sig, secret);
+  } catch (err) {
+    console.warn("Rejected webhook: bad signature —", err.message);
+    return res.status(400).json({ error: "Invalid signature" });
   }
 
-  const eventName = event?.meta?.event_name;
-  const attrs     = event?.data?.attributes || {};
-
-  /* We grant credits on these events:
-       order_created               → one-time credit packs
-       subscription_payment_success → recurring plan payments (incl. first)
-     We deliberately ignore subscription_created on its own to avoid
-     double-granting alongside the first payment_success.               */
-  const GRANTING_EVENTS = ["order_created", "subscription_payment_success"];
-  if (!GRANTING_EVENTS.includes(eventName)) {
-    // acknowledge so LS doesn't retry, but do nothing
-    return res.status(200).json({ ok: true, ignored: eventName });
+  /* We grant credits on:
+       checkout.session.completed → first payment (subs + one-time packs)
+       invoice.paid               → recurring subscription renewals
+     For invoice.paid we SKIP the very first invoice, because
+     checkout.session.completed already granted those credits — this
+     avoids double-granting on the first cycle.                        */
+  const GRANTING = ["checkout.session.completed", "invoice.paid"];
+  if (!GRANTING.includes(event.type)) {
+    return res.status(200).json({ ok: true, ignored: event.type });
   }
-
-  /* 3 ── figure out which variant was purchased ────────────── */
-  let variantId =
-    attrs.variant_id ??
-    attrs.first_order_item?.variant_id ??
-    attrs.order_item?.variant_id ??
-    null;
-  variantId = variantId != null ? String(variantId) : null;
-
-  const credits = VARIANT_CREDITS[variantId];
-  if (!credits) {
-    console.warn("Unknown or unmapped variant:", variantId, "event:", eventName);
-    return res.status(200).json({ ok: true, note: "variant not mapped" });
-  }
-
-  /* 4 ── identify the user ─────────────────────────────────────
-     We match by the email LS has on the order. The checkout must
-     carry the buyer's account email. The user doc id is the Firebase
-     uid, so we look the uid up by email.                            */
-  const email = (attrs.user_email || attrs.customer_email || "").toLowerCase().trim();
-  if (!email) {
-    console.error("No email on event", eventName);
-    return res.status(200).json({ ok: true, note: "no email" });
-  }
-
-  /* idempotency: each LS event has a unique id we record so a retry
-     can't grant twice. */
-  const eventId =
-    event?.meta?.event_id ||
-    attrs.identifier ||
-    `${eventName}:${attrs.order_number || attrs.first_subscription_item?.id || raw.length}`;
 
   try {
-    // find the user by email via Firebase Auth
+    let email = "";
+    let lineItems = [];
+    let isRenewal = false;
+
+    if (event.type === "checkout.session.completed") {
+      const session = event.data.object;
+      // only act on actually-paid sessions
+      if (session.payment_status && session.payment_status !== "paid") {
+        return res.status(200).json({ ok: true, note: "session not paid" });
+      }
+      email = (session.customer_details?.email || session.customer_email || "").toLowerCase().trim();
+      // fetch the line items (not included on the session object by default)
+      const li = await stripe.checkout.sessions.listLineItems(session.id, {
+        limit: 10,
+        expand: ["data.price.product"],
+      });
+      lineItems = li.data;
+    } else if (event.type === "invoice.paid") {
+      const invoice = event.data.object;
+      // skip the first invoice of a subscription — checkout.session.completed
+      // handles the initial grant. billing_reason === "subscription_create"
+      // marks that first invoice.
+      if (invoice.billing_reason === "subscription_create") {
+        return res.status(200).json({ ok: true, note: "first invoice — handled by checkout" });
+      }
+      isRenewal = true;
+      email = (invoice.customer_email || "").toLowerCase().trim();
+      lineItems = (invoice.lines?.data || []).map(l => ({
+        price: l.price,
+        quantity: l.quantity || 1,
+      }));
+    }
+
+    if (!email) {
+      console.error("No email on event", event.type);
+      return res.status(200).json({ ok: true, note: "no email" });
+    }
+
+    /* sum up credits across all purchased line items */
+    let totalCredits = 0;
+    let planName = null;
+    for (const item of lineItems) {
+      const { credits, plan } = await creditsFromLineItem(item);
+      const qty = item.quantity || 1;
+      totalCredits += credits * qty;
+      if (plan) planName = plan;
+    }
+
+    if (totalCredits <= 0) {
+      console.warn("No credits resolved from line items. Check product metadata. event:", event.type);
+      return res.status(200).json({ ok: true, note: "no credits in metadata" });
+    }
+
+    /* 2 ── find the user by email via Firebase Auth ──────────── */
     let uid;
     try {
       const userRecord = await admin.auth().getUserByEmail(email);
       uid = userRecord.uid;
     } catch {
       console.warn("No Firebase user for email:", email);
-      // still 200 so LS doesn't hammer retries; you can reconcile manually
+      // 200 so Stripe doesn't hammer retries; reconcile manually if needed
       return res.status(200).json({ ok: true, note: "no matching user yet" });
     }
 
     const userRef  = db.collection("users").doc(uid);
-    const eventRef = userRef.collection("ledger").doc(eventId);
+    // idempotency: Stripe event.id is unique per event, so a retry of the
+    // same event won't double-grant.
+    const eventRef = userRef.collection("ledger").doc(event.id);
 
     await db.runTransaction(async (tx) => {
       const already = await tx.get(eventRef);
-      if (already.exists) return; // idempotent: already processed
+      if (already.exists) return; // already processed
 
       const userSnap = await tx.get(userRef);
       if (!userSnap.exists) {
-        // create a minimal doc if somehow missing
         tx.set(userRef, { credits: 0, revealed: [], email });
       }
 
       tx.update(userRef, {
-        credits: admin.firestore.FieldValue.increment(credits),
-        ...(VARIANT_PLAN[variantId] ? { plan: VARIANT_PLAN[variantId] } : {}),
+        credits: admin.firestore.FieldValue.increment(totalCredits),
+        ...(planName ? { plan: planName } : {}),
         lastPurchaseAt: admin.firestore.FieldValue.serverTimestamp(),
       });
 
       tx.set(eventRef, {
-        event: eventName,
-        variantId,
-        creditsGranted: credits,
+        event: event.type,
+        plan: planName,
+        creditsGranted: totalCredits,
+        renewal: isRenewal,
         at: admin.firestore.FieldValue.serverTimestamp(),
       });
     });
 
-    console.log(`Granted ${credits} credits to ${email} (variant ${variantId})`);
-    return res.status(200).json({ ok: true, granted: credits });
+    console.log(`Granted ${totalCredits} credits to ${email} (${event.type}${isRenewal ? " · renewal" : ""})`);
+    return res.status(200).json({ ok: true, granted: totalCredits });
   } catch (err) {
     console.error("Grant failed:", err);
-    // 500 so LS retries — the transaction is idempotent so retries are safe
+    // 500 so Stripe retries — the transaction is idempotent so retries are safe
     return res.status(500).json({ error: "Grant failed" });
   }
 }

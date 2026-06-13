@@ -1,0 +1,11 @@
+# keep the local data importer + any service-account key out of the deploy
+import-contacts.js
+serviceAccountKey.json
+*serviceAccount*.json
+*firebase-adminsdk*.json
+*.csv
+
+# backups
+*.bak
+app.html.*.bak
+pricing.html.*.bak

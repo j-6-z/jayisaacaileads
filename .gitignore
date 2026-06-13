@@ -1,0 +1,18 @@
+# ── SECRETS — never commit these ──
+serviceAccountKey.json
+*serviceAccount*.json
+*firebase-adminsdk*.json
+.env
+.env.local
+.env*.local
+
+# ── local-only tooling ──
+node_modules/
+import-contacts.js
+*.csv
+
+# ── editor / OS junk ──
+.DS_Store
+*.bak
+app.html.*.bak
+pricing.html.*.bak

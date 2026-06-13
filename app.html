@@ -1982,7 +1982,7 @@ const firebaseConfig = {
    true  = no login wall, demo data + demo credits, fully editable for dev/styling.
    false = real auth gate, identical to production behaviour.
    Leaving this true in production lets ANYONE into the app. */
-const DEV_BYPASS = true;
+const DEV_BYPASS = false;
 
 const fbApp = initializeApp(firebaseConfig);
 const auth = getAuth(fbApp);
