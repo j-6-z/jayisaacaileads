@@ -85,19 +85,47 @@ function readRawBody(req) {
   });
 }
 
-/* Pull credits + plan from a line item's product metadata.
-   Works for both checkout sessions and invoices. */
+/* Fallback map: if a product/price is missing the `credits` metadata
+   (e.g. it didn't carry over from test to live), we can still resolve
+   credits from the plan key. This is a safety net so a missing metadata
+   field never silently grants 0 credits to a paying customer. */
+const PLAN_CREDITS = {
+  starter_monthly: 500,  starter_annual: 500,
+  pro_monthly:     2000, pro_annual:     2000,
+  agency_monthly:  7500, agency_annual:  7500,
+  pack_250:        250,
+  pack_1000:       1000,
+  pack_3500:       3500,
+};
+
+/* Pull credits + plan from a line item.
+   Reads in priority order:
+     1. product.metadata.credits
+     2. price.metadata.credits
+     3. plan-name lookup (PLAN_CREDITS) using product/price plan metadata
+   Plan is read from product, then price metadata. */
 async function creditsFromLineItem(item) {
-  // item.price.product may be an id (string) or an expanded object
   let product = item?.price?.product;
   if (typeof product === "string") {
     product = await stripe.products.retrieve(product);
   }
-  const md = product?.metadata || {};
-  const credits = parseInt(md.credits, 10);
+  const pmd = product?.metadata || {};
+  const prmd = item?.price?.metadata || {};
+
+  const plan = pmd.plan || prmd.plan || null;
+
+  // 1 + 2: explicit credits metadata on product or price
+  let credits = parseInt(pmd.credits, 10);
+  if (!Number.isFinite(credits)) credits = parseInt(prmd.credits, 10);
+
+  // 3: fall back to plan-name lookup
+  if (!Number.isFinite(credits) && plan && PLAN_CREDITS[plan] != null) {
+    credits = PLAN_CREDITS[plan];
+  }
+
   return {
     credits: Number.isFinite(credits) ? credits : 0,
-    plan: md.plan || null,
+    plan: plan,
   };
 }
 
