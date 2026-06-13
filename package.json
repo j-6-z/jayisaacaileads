@@ -1,0 +1,10 @@
+{
+  "name": "jayisaac-ai",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "stripe": "^17.0.0",
+    "firebase-admin": "^12.0.0"
+  }
+}
