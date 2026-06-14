@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Remove My Data — JAYISAAC AI</title>
+<meta name="description" content="Request removal of your personal or business data from the JAYISAAC AI database. We process all requests within 30 days.">
+<link rel="icon" href="/my-favicon/favicon.ico" sizes="any">
+<link rel="icon" href="/my-favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/my-favicon/favicon-96x96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/my-favicon/apple-touch-icon.png" sizes="180x180">
+<link rel="manifest" href="/my-favicon/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script type="module" src="./nav.js"></script>
+<script type="module" src="./footer.js"></script>
+<style>
+:root{
+  --orange:#C95E1A;--ob:#E8742E;--od:#A84B12;--os:#FBEEE4;
+  --charcoal:#1C1F24;--charcoal-deep:#141619;
+  --ink:#1A2433;--slate:#5B6878;--mist:#8C97A6;
+  --line:#E5E9EF;--bg:#F7F8FA;--white:#fff;
+  --green:#1B8A5A;--green-soft:#E5F4EC;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--ink);background:var(--white);font-size:15px;line-height:1.7}
+a{color:var(--orange);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:680px;margin:0 auto;padding:0 24px}
+
+.page-hero{
+  background:radial-gradient(600px 300px at 80% -20%,rgba(201,94,26,.18),transparent 60%),var(--charcoal-deep);
+  color:#fff;padding:80px 0 68px;
+}
+.page-hero h1{font-size:clamp(26px,4vw,36px);font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+.page-hero p{color:#A8B0BB;font-size:16px;max-width:540px}
+
+section{padding:48px 0 64px}
+
+/* info block */
+.info-block{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:20px 24px;margin-bottom:28px;font-size:14px;color:var(--slate)}
+.info-block strong{color:var(--ink)}
+
+/* form */
+.form-card{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:28px;box-shadow:0 8px 30px rgba(14,27,44,.06)}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:.78rem;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px}
+.field input,.field textarea{
+  width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:9px;
+  font-size:14px;font-family:inherit;background:var(--bg);outline:none;transition:.15s;color:var(--ink)
+}
+.field input:focus,.field textarea:focus{border-color:var(--orange);box-shadow:0 0 0 3px var(--os);background:#fff}
+.field textarea{min-height:100px;resize:vertical}
+.field .hint{font-size:.72rem;color:var(--mist);margin-top:4px}
+
+.submit-btn{
+  width:100%;background:var(--orange);color:#fff;border:none;padding:14px;border-radius:10px;
+  font-size:15px;font-weight:800;font-family:inherit;cursor:pointer;
+  box-shadow:0 6px 20px rgba(201,94,26,.3);transition:.15s;
+}
+.submit-btn:hover{background:var(--od)}
+.submit-btn:disabled{opacity:.6;cursor:not-allowed}
+
+/* success state */
+.success-card{
+  background:var(--green-soft);border:1px solid rgba(27,138,90,.2);border-radius:16px;
+  padding:36px 28px;text-align:center;display:none;
+}
+.success-card.show{display:block}
+.success-card svg{width:48px;height:48px;stroke:var(--green);margin-bottom:12px}
+.success-card h2{font-size:1.2rem;font-weight:800;color:var(--green);margin-bottom:8px}
+.success-card p{font-size:.9rem;color:var(--slate)}
+
+/* error */
+.error-msg{background:#FCEBEA;border:1px solid #F0C5C0;color:#C0392B;border-radius:9px;padding:10px 14px;font-size:.85rem;margin-bottom:14px;display:none}
+.error-msg.show{display:block}
+
+/* rights list */
+.rights{margin-top:28px}
+.rights h3{font-size:.9rem;font-weight:800;margin-bottom:12px}
+.rights-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.right-item{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px;font-size:.82rem}
+.right-item strong{display:block;margin-bottom:2px;color:var(--ink)}
+.right-item span{color:var(--slate)}
+@media(max-width:600px){.rights-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- nav injected by nav.js -->
+
+<header class="page-hero">
+  <div class="wrap">
+    <h1>Remove My Data</h1>
+    <p>Request removal of your personal or business information from the JAYISAAC AI database. No account needed, no hoops.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="info-block">
+      <strong>How this works:</strong> Submit your email below and we'll locate any records associated with it in our database. All removal requests are processed within <strong>30 days</strong> (usually much faster) and the removal is permanent. You'll receive an email confirmation when your data has been deleted. This applies to both contact records in our B2B database and any user accounts.
+    </div>
+
+    <!-- the form -->
+    <div class="form-card" id="formCard">
+      <div class="error-msg" id="errorMsg"></div>
+      <div class="field">
+        <label>Email Address <span style="color:var(--orange)">*</span></label>
+        <input type="email" id="drEmail" placeholder="The email associated with your data" required>
+        <div class="hint">We'll search our database for records matching this email.</div>
+      </div>
+      <div class="field">
+        <label>Full Name</label>
+        <input type="text" id="drName" placeholder="Your name (optional, helps us locate records faster)">
+      </div>
+      <div class="field">
+        <label>Additional Details</label>
+        <textarea id="drReason" placeholder="Any additional context — e.g. specific data you want removed, your company name, etc. (optional)"></textarea>
+      </div>
+      <button class="submit-btn" id="submitBtn" onclick="submitRemoval()">Submit Removal Request</button>
+    </div>
+
+    <!-- success state (hidden until submission) -->
+    <div class="success-card" id="successCard">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+      <h2>Request Received</h2>
+      <p>We've logged your data removal request. You'll receive a confirmation email at <strong id="confirmEmail"></strong> once your data has been removed. Most requests are processed within 5 business days.</p>
+    </div>
+
+    <!-- your rights -->
+    <div class="rights">
+      <h3>Your data rights</h3>
+      <div class="rights-grid">
+        <div class="right-item"><strong>Right to Deletion</strong><span>Request complete removal of your personal data from our database.</span></div>
+        <div class="right-item"><strong>Right to Access</strong><span>Request a copy of any data we hold about you.</span></div>
+        <div class="right-item"><strong>Right to Correction</strong><span>Request corrections to inaccurate data.</span></div>
+        <div class="right-item"><strong>Right to Opt-Out</strong><span>Opt out of having your data included in our B2B database.</span></div>
+      </div>
+      <p style="margin-top:16px;font-size:.82rem;color:var(--mist)">Protected under PIPEDA (Canada), GDPR (EU), CCPA (California), and applicable provincial privacy legislation. For any questions, email <a href="mailto:admin@jayisaacai.com">admin@jayisaacai.com</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- footer injected by footer.js -->
+
+<script>
+async function submitRemoval(){
+  const email = document.getElementById("drEmail").value.trim();
+  const name = document.getElementById("drName").value.trim();
+  const reason = document.getElementById("drReason").value.trim();
+  const btn = document.getElementById("submitBtn");
+  const errEl = document.getElementById("errorMsg");
+
+  errEl.classList.remove("show");
+
+  if(!email || !email.includes("@")){
+    errEl.textContent = "Please enter a valid email address.";
+    errEl.classList.add("show");
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = "Submitting...";
+
+  try {
+    const resp = await fetch("/api/data-removal", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, name, reason }),
+    });
+    const data = await resp.json();
+
+    if(!resp.ok || data.error){
+      errEl.textContent = data.error || "Something went wrong. Please try again.";
+      errEl.classList.add("show");
+      btn.disabled = false;
+      btn.textContent = "Submit Removal Request";
+      return;
+    }
+
+    /* success */
+    document.getElementById("formCard").style.display = "none";
+    document.getElementById("confirmEmail").textContent = email;
+    document.getElementById("successCard").classList.add("show");
+
+  } catch(e){
+    errEl.textContent = "Network error. Please try again or email admin@jayisaacai.com directly.";
+    errEl.classList.add("show");
+    btn.disabled = false;
+    btn.textContent = "Submit Removal Request";
+  }
+}
+</script>
+</body>
+</html>

@@ -98,6 +98,12 @@
   </url>
 
   <url>
+    <loc>https://jayisaacai.com/data-removal.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
     <loc>https://jayisaacai.com/terms.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

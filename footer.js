@@ -361,7 +361,7 @@ const FOOTER_HTML = `
       <a href="/privacy.html">Privacy Policy</a>
       <a href="/terms.html">Terms of Use</a>
       <a href="/trust.html">Trust Center</a>
-      <a href="/privacy.html#removal">Do Not Sell My Information</a>
+      <a href="/data-removal.html">Do Not Sell My Information</a>
       <a href="/privacy.html#cookies">Cookies</a>
     </nav>
   </div>
