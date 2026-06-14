@@ -74,11 +74,16 @@ const LOGO_SRC = "/public/new-logo1.jpg";
 
 /* ── CSS ──────────────────────────────────────────────────── */
 const CSS = `
+/* prevent white gap below the dark footer on short pages / mobile */
+html { background: #0C0C0C; }
+
 .jia-footer {
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   background: #0C0C0C;
   border-top: 1px solid #2A2A2A;
   color: #F2F2F2;
+  margin: 0;
+  padding-bottom: 0;
 }
 
 /* ── CTA band above footer ── */

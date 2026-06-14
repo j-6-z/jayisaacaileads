@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="icon" href="/my-favicon/favicon.ico" sizes="any">
+<link rel="icon" href="/my-favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/my-favicon/favicon-96x96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/my-favicon/apple-touch-icon.png" sizes="180x180">
+<link rel="manifest" href="/my-favicon/site.webmanifest">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Account — JAYISAAC AI</title>
-<meta name="description" content="Manage your JAYISAAC AI account, plan, billing, and preferences.">
+<meta name="description" content="Manage your JAYISAAC AI account, plan, billing, usage, and order history.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -12,7 +17,7 @@
 <script type="module" src="./footer.js"></script>
 <style>
 :root{
-  --orange:#C95E1A;--orange-bright:#E8742E;--orange-dark:#A84B12;--orange-soft:#FBEEE4;
+  --or:#C95E1A;--ob:#E8742E;--od:#A84B12;--os:#FBEEE4;
   --charcoal:#1C1F24;--charcoal-deep:#141619;
   --ink:#1A2433;--slate:#5B6878;--mist:#8C97A6;
   --line:#E5E9EF;--bg:#F7F8FA;--white:#fff;
@@ -21,193 +26,242 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--ink);background:var(--bg);font-size:15px;line-height:1.6}
-a{color:var(--orange);text-decoration:none}
+a{color:var(--or);text-decoration:none}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
-.wrap{max-width:820px;margin:0 auto;padding:0 24px}
 
-/* loading veil while we check auth */
+/* loading veil */
 .veil{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:999;transition:opacity .3s}
 .veil.hide{opacity:0;pointer-events:none}
-.veil .spin{width:34px;height:34px;border:3px solid var(--line);border-top-color:var(--orange);border-radius:50%;animation:spin .8s linear infinite}
+.veil .spin{width:34px;height:34px;border:3px solid var(--line);border-top-color:var(--or);border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* hero */
 .acct-hero{
-  background:
-    radial-gradient(700px 360px at 85% -20%, rgba(201,94,26,.22), transparent 60%),
-    var(--charcoal-deep);
+  background:radial-gradient(700px 360px at 85% -20%,rgba(201,94,26,.22),transparent 60%),var(--charcoal-deep);
   color:#fff;padding:70px 0 90px;
 }
-.acct-hero .wrap{display:flex;align-items:center;gap:18px}
-.acct-av{
-  width:64px;height:64px;border-radius:16px;flex-shrink:0;
-  background:var(--orange);display:flex;align-items:center;justify-content:center;
-  font-size:24px;font-weight:800;color:#fff;
-  box-shadow:0 8px 24px rgba(201,94,26,.4);
-}
+.acct-hero .wrap{display:flex;align-items:center;gap:18px;max-width:1100px;margin:0 auto;padding:0 24px}
+.acct-av{width:64px;height:64px;border-radius:16px;flex-shrink:0;background:var(--or);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:#fff;box-shadow:0 8px 24px rgba(201,94,26,.4)}
 .acct-hero h1{font-size:clamp(24px,4vw,32px);font-weight:800;letter-spacing:-.02em}
 .acct-hero .em{color:#A8B0BB;font-size:14px;margin-top:2px}
 
-/* cards float up over hero */
-.acct-body{margin-top:-50px;padding-bottom:80px;position:relative;z-index:2}
-.card{
-  background:var(--white);border:1px solid var(--line);border-radius:16px;
-  box-shadow:0 12px 36px rgba(14,27,44,.08);padding:26px 28px;margin-bottom:18px;
+/* layout */
+.acct-body{max-width:1100px;margin:-50px auto 0;padding:0 24px 80px;position:relative;z-index:2;display:grid;grid-template-columns:240px 1fr;gap:24px}
+
+/* sidebar nav */
+.acct-nav{position:sticky;top:100px;align-self:start}
+.acct-nav-item{
+  display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;
+  font-size:.85rem;font-weight:600;color:var(--slate);cursor:pointer;transition:.15s;
+  width:100%;text-align:left;
 }
-.card h2{font-size:16px;font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:9px}
-.card h2 svg{width:17px;height:17px;color:var(--orange)}
-.card .sub{font-size:13px;color:var(--slate);margin-bottom:20px}
+.acct-nav-item:hover{background:rgba(201,94,26,.06);color:var(--ink)}
+.acct-nav-item.active{background:var(--os);color:var(--or);font-weight:700}
+.acct-nav-item svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.nav-sep{height:1px;background:var(--line);margin:8px 14px}
+
+/* content area */
+.acct-content{}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.card{background:var(--white);border:1px solid var(--line);border-radius:16px;box-shadow:0 4px 20px rgba(14,27,44,.06);padding:26px 28px;margin-bottom:18px}
+.card-head{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.card-head svg{width:20px;height:20px;stroke:var(--or);fill:none;stroke-width:2;flex-shrink:0}
+.card-head h2{font-size:1rem;font-weight:800}
+
+/* overview cards */
+.overview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+.ov-card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:20px;text-align:center}
+.ov-num{font-size:2rem;font-weight:800;color:var(--ink);letter-spacing:-.5px}
+.ov-num em{color:var(--or);font-style:normal}
+.ov-label{font-size:.75rem;color:var(--slate);margin-top:4px}
+.plan-badge{display:inline-block;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--or);background:var(--os);border:1px solid rgba(201,94,26,.25);padding:5px 12px;border-radius:20px;margin-top:4px}
+
+/* buttons */
+.btn{display:inline-block;font-weight:800;font-size:13.5px;padding:11px 20px;border-radius:9px;transition:.15s;text-decoration:none;text-align:center}
+.btn-primary{background:var(--or);color:#fff;box-shadow:0 4px 14px rgba(201,94,26,.3)}
+.btn-primary:hover{background:var(--od);text-decoration:none}
+.btn-ghost{background:var(--bg);border:1px solid var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--or);color:var(--or)}
+.btn-danger{background:#fff;border:1.5px solid var(--red-line);color:var(--red)}
+.btn-danger:hover{background:var(--red);color:#fff;border-color:var(--red)}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 
 /* form rows */
-.row{display:flex;align-items:center;gap:16px;margin-bottom:14px}
-.row label{font-size:13px;font-weight:600;color:var(--slate);width:90px;flex-shrink:0}
-.row input{
-  flex:1;background:var(--bg);border:1px solid var(--line);border-radius:9px;
-  padding:10px 13px;font-size:14px;color:var(--ink);outline:none;transition:.15s;font-family:inherit;
-}
-.row input:focus{border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-soft);background:#fff}
-.row input:disabled{color:var(--mist);cursor:not-allowed}
-.row .ro-tag{font-size:11px;font-weight:700;color:var(--mist);text-transform:uppercase;letter-spacing:.05em}
+.row{margin-bottom:14px}
+.row label{display:block;font-size:.75rem;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px}
+.row input{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:9px;font-size:14px;background:var(--bg);outline:none;font-family:inherit;transition:.15s}
+.row input:focus{border-color:var(--or);box-shadow:0 0 0 3px var(--os);background:#fff}
+.row input[readonly]{opacity:.55;cursor:not-allowed}
 
-.btn{
-  display:inline-flex;align-items:center;gap:7px;
-  background:linear-gradient(135deg,var(--orange),var(--orange-bright));
-  color:#fff;font-weight:800;font-size:13.5px;padding:11px 20px;border-radius:9px;
-  box-shadow:0 5px 16px rgba(201,94,26,.3);transition:.15s;
-}
-.btn:hover{background:var(--orange-dark)}
-.btn:disabled{opacity:.6;cursor:wait;box-shadow:none}
-.btn-ghost{
-  background:var(--bg);border:1px solid var(--line);color:var(--ink);
-  font-weight:700;font-size:13.5px;padding:11px 18px;border-radius:9px;transition:.15s;
-}
-.btn-ghost:hover{border-color:var(--orange);color:var(--orange)}
-.actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+/* order history table */
+.order-table{width:100%;border-collapse:collapse}
+.order-table th{text-align:left;font-size:.68rem;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.06em;padding:10px 12px;border-bottom:2px solid var(--line)}
+.order-table td{padding:12px;border-bottom:1px solid var(--line);font-size:.85rem}
+.order-table tr:last-child td{border-bottom:none}
+.order-table tr:hover td{background:rgba(201,94,26,.03)}
+.order-type{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:3px 8px;border-radius:6px;display:inline-block}
+.order-type.purchase{background:var(--os);color:var(--or)}
+.order-type.renewal{background:var(--green-soft);color:var(--green)}
+.order-credits{font-weight:800;color:var(--green)}
+.order-empty{text-align:center;padding:40px 20px;color:var(--mist);font-size:.9rem}
 
-/* billing */
-.bill{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-bottom:6px}
-.bill-stat .n{font-size:34px;font-weight:800;color:var(--orange);letter-spacing:-.02em;line-height:1}
-.bill-stat .l{font-size:12px;color:var(--slate);margin-top:4px;font-weight:600}
-.plan-tag{
-  font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;
-  color:var(--orange);background:var(--orange-soft);border:1px solid rgba(201,94,26,.25);
-  padding:5px 12px;border-radius:20px;
-}
-
-/* danger zone */
+/* danger card */
 .card.danger{border-color:var(--red-line);background:linear-gradient(180deg,#fff,var(--red-soft))}
-.card.danger h2{color:var(--red)}
-.card.danger h2 svg{color:var(--red)}
-.btn-danger{
-  background:#fff;border:1.5px solid var(--red-line);color:var(--red);
-  font-weight:800;font-size:13.5px;padding:11px 20px;border-radius:9px;transition:.15s;
-}
-.btn-danger:hover{background:var(--red);color:#fff;border-color:var(--red)}
 
 /* delete modal */
-.modal-overlay{position:fixed;inset:0;background:rgba(20,22,25,.6);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;z-index:200;padding:20px}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;padding:20px}
 .modal-overlay.show{display:flex}
 .modal{background:#fff;border-radius:18px;max-width:440px;width:100%;padding:30px;box-shadow:0 30px 80px rgba(0,0,0,.4)}
-.modal h3{font-size:19px;font-weight:800;color:var(--red);margin-bottom:10px}
-.modal p{font-size:14px;color:var(--slate);margin-bottom:8px}
-.modal strong{color:var(--ink)}
+.modal h3{font-size:1.1rem;font-weight:800;margin-bottom:8px}
+.modal p{font-size:.88rem;color:var(--slate);margin-bottom:4px}
 .modal .confirm-input{width:100%;border:1px solid var(--line);border-radius:9px;padding:11px 13px;font-size:14px;margin:14px 0 4px;outline:none;font-family:inherit}
 .modal .confirm-input:focus{border-color:var(--red);box-shadow:0 0 0 3px var(--red-soft)}
-.modal-actions{display:flex;gap:10px;margin-top:18px}
-.modal-actions .btn-danger{flex:1;text-align:center;justify-content:center}
-.modal-actions .btn-danger:disabled{opacity:.45;cursor:not-allowed;background:#fff;color:var(--red)}
-.modal-actions .btn-ghost{flex:1;text-align:center}
 
 /* toast */
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:#fff;padding:12px 22px;border-radius:10px;font-size:13.5px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.3);transition:transform .3s;z-index:300}
 .toast.show{transform:translateX(-50%) translateY(0)}
-.toast.err{background:var(--red)}
-.toast.ok{background:var(--green)}
+.toast.ok{background:var(--green)}.toast.err{background:var(--red)}
 
-@media(max-width:560px){
-  .row{flex-wrap:wrap;gap:6px}
-  .row label{width:auto}
-  .row input{width:100%}
+/* responsive */
+@media(max-width:768px){
+  .acct-body{grid-template-columns:1fr}
+  .acct-nav{position:static;display:flex;overflow-x:auto;gap:4px;padding-bottom:8px;border-bottom:1px solid var(--line);margin-bottom:16px}
+  .acct-nav-item{white-space:nowrap;padding:8px 12px;font-size:.78rem}
+  .acct-nav-item svg{display:none}
+  .nav-sep{display:none}
+  .overview-grid{grid-template-columns:1fr}
 }
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 
-<!-- nav injected by nav.js -->
-
 <div class="veil" id="veil"><div class="spin"></div></div>
+
+<!-- nav injected by nav.js -->
 
 <header class="acct-hero">
   <div class="wrap">
     <div class="acct-av" id="heroAv">U</div>
     <div>
       <h1 id="heroName">My Account</h1>
-      <div class="em" id="heroEmail"></div>
+      <div class="em" id="heroEmail">Loading...</div>
     </div>
   </div>
 </header>
 
-<main class="acct-body">
-  <div class="wrap">
+<div class="acct-body">
+  <!-- sidebar navigation -->
+  <nav class="acct-nav">
+    <button class="acct-nav-item active" data-tab="overview"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Overview</button>
+    <button class="acct-nav-item" data-tab="orders"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Order History</button>
+    <button class="acct-nav-item" data-tab="profile"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</button>
+    <div class="nav-sep"></div>
+    <button class="acct-nav-item" data-tab="billing"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Billing</button>
+    <button class="acct-nav-item" data-tab="danger"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Account</button>
+  </nav>
 
-    <!-- Profile -->
-    <div class="card">
-      <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</h2>
-      <p class="sub">Update the name shown on your account.</p>
-      <div class="row">
-        <label for="fName">Name</label>
-        <input id="fName" type="text" placeholder="Your name" autocomplete="name">
-      </div>
-      <div class="row">
-        <label for="fEmail">Email</label>
-        <input id="fEmail" type="email" disabled>
-        <span class="ro-tag">Read-only</span>
-      </div>
-      <div class="actions">
-        <button class="btn" id="saveProfile">Save changes</button>
-      </div>
-    </div>
+  <!-- content panels -->
+  <div class="acct-content">
 
-    <!-- Plan & Billing -->
-    <div class="card">
-      <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Plan &amp; Billing</h2>
-      <p class="sub">Your current credits and subscription.</p>
-      <div class="bill">
-        <div class="bill-stat">
-          <div class="n" id="credits">—</div>
-          <div class="l">credits remaining</div>
+    <!-- ═══ OVERVIEW ═══ -->
+    <div class="tab-panel active" id="tab-overview">
+      <div class="overview-grid">
+        <div class="ov-card">
+          <div class="ov-num" id="credits">—</div>
+          <div class="ov-label">Credits Remaining</div>
         </div>
-        <span class="plan-tag" id="planTag">Free Trial</span>
+        <div class="ov-card">
+          <div id="planDisplay"><span class="plan-badge" id="planTag">FREE TRIAL</span></div>
+          <div class="ov-label" style="margin-top:8px">Current Plan</div>
+        </div>
+        <div class="ov-card">
+          <div class="ov-num" id="totalPurchased">0</div>
+          <div class="ov-label">Credits Purchased (All Time)</div>
+        </div>
       </div>
-      <div class="actions">
-        <a class="btn" href="pricing.html">Upgrade / view plans</a>
-        <button class="btn-ghost" id="manageBilling">Manage subscription</button>
+
+      <div class="card">
+        <div class="card-head"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><h2>Quick Actions</h2></div>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="pricing.html">Upgrade / Buy Credits</a>
+          <a class="btn btn-ghost" href="app.html">Open App →</a>
+          <a class="btn btn-ghost" href="support.html">Help Center</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><h2>Recent Activity</h2></div>
+        <div id="recentActivity">
+          <p style="color:var(--mist);font-size:.85rem">Loading order history...</p>
+        </div>
       </div>
     </div>
 
-    <!-- Danger Zone -->
-    <div class="card danger">
-      <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Danger Zone</h2>
-      <p class="sub">Permanently delete your account and all associated data. This cannot be undone.</p>
-      <div class="actions">
-        <button class="btn-danger" id="deleteBtn">Delete my account</button>
+    <!-- ═══ ORDER HISTORY ═══ -->
+    <div class="tab-panel" id="tab-orders">
+      <div class="card">
+        <div class="card-head"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><h2>Order History</h2></div>
+        <div id="orderHistory">
+          <p style="color:var(--mist);font-size:.85rem">Loading...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PROFILE ═══ -->
+    <div class="tab-panel" id="tab-profile">
+      <div class="card">
+        <div class="card-head"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><h2>Profile</h2></div>
+        <div class="row"><label>Full Name</label><input type="text" id="fName" placeholder="Your name"></div>
+        <div class="row"><label>Email Address</label><input type="email" id="fEmail" readonly></div>
+        <div class="btn-row"><button class="btn btn-primary" id="saveProfile">Save Changes</button></div>
+      </div>
+    </div>
+
+    <!-- ═══ BILLING ═══ -->
+    <div class="tab-panel" id="tab-billing">
+      <div class="card">
+        <div class="card-head"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg><h2>Plan &amp; Billing</h2></div>
+        <p style="font-size:.88rem;color:var(--slate);margin-bottom:14px">Manage your subscription, view invoices, or update your payment method through the Stripe billing portal.</p>
+        <div class="overview-grid" style="grid-template-columns:1fr 1fr;margin-bottom:14px">
+          <div class="ov-card">
+            <div class="ov-num" id="billCredits">—</div>
+            <div class="ov-label">Credits Remaining</div>
+          </div>
+          <div class="ov-card">
+            <div id="billPlanDisplay"><span class="plan-badge" id="billPlanTag">FREE TRIAL</span></div>
+            <div class="ov-label" style="margin-top:8px">Current Plan</div>
+          </div>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="pricing.html">Upgrade / Buy Credits</a>
+          <button class="btn btn-ghost" id="manageBilling">Manage Subscription</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ DANGER ZONE ═══ -->
+    <div class="tab-panel" id="tab-danger">
+      <div class="card danger">
+        <div class="card-head"><svg viewBox="0 0 24 24" style="stroke:var(--red)"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><h2>Danger Zone</h2></div>
+        <p style="font-size:.88rem;color:var(--slate);margin-bottom:14px">Permanently delete your account and all associated data. This cannot be undone. Your revealed contacts, credits, and order history will be permanently erased.</p>
+        <button class="btn btn-danger" id="deleteBtn">Delete my account</button>
       </div>
     </div>
 
   </div>
-</main>
+</div>
 
 <!-- delete confirmation modal -->
 <div class="modal-overlay" id="delModal">
   <div class="modal">
     <h3>Delete your account?</h3>
-    <p>This permanently removes your account, your remaining credits, and your revealed contacts. <strong>This can't be undone.</strong></p>
-    <p>Type <strong>DELETE</strong> below to confirm.</p>
-    <input class="confirm-input" id="delConfirm" placeholder="DELETE" autocomplete="off">
-    <div class="modal-actions">
-      <button class="btn-ghost" id="delCancel">Cancel</button>
-      <button class="btn-danger" id="delConfirmBtn" disabled>Delete forever</button>
+    <p>This permanently deletes your account, all data, revealed contacts, and credits. This action <strong>cannot be undone</strong>.</p>
+    <p style="font-size:.82rem;margin-top:8px">Type <strong>DELETE</strong> to confirm:</p>
+    <input class="confirm-input" id="delConfirm" type="text" autocomplete="off" spellcheck="false">
+    <div class="btn-row" style="margin-top:14px">
+      <button class="btn btn-danger" id="delConfirmBtn" disabled>Delete forever</button>
+      <button class="btn btn-ghost" id="delCancel">Cancel</button>
     </div>
   </div>
 </div>
@@ -220,7 +274,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut, updateProfile, deleteUser, GoogleAuthProvider, reauthenticateWithPopup }
   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, doc, getDoc, updateDoc, deleteDoc, serverTimestamp }
+import { getFirestore, doc, getDoc, updateDoc, deleteDoc, collection, getDocs, query, orderBy, serverTimestamp }
   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -253,14 +307,70 @@ const PLAN_LABELS = {
   starter_monthly:"Starter", starter_annual:"Starter",
   pro_monthly:"Pro", pro_annual:"Pro",
   agency_monthly:"Agency", agency_annual:"Agency",
+  pack_250:"Credit Pack", pack_1000:"Credit Pack", pack_3500:"Credit Pack",
 };
+
+/* ── tab switching ─────────────────────────────────────────── */
+document.querySelectorAll(".acct-nav-item").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".acct-nav-item").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+    btn.classList.add("active");
+    const panel = $("tab-" + btn.dataset.tab);
+    if (panel) panel.classList.add("active");
+  });
+});
+
+/* ── format date ── */
+function fmtDate(ts){
+  if (!ts) return "—";
+  const d = ts.toDate ? ts.toDate() : new Date(ts);
+  return d.toLocaleDateString("en-US", { year:"numeric", month:"short", day:"numeric", hour:"2-digit", minute:"2-digit" });
+}
+
+/* ── render order history ── */
+function renderOrders(orders){
+  if (!orders.length){
+    const empty = '<div class="order-empty">No orders yet. <a href="pricing.html">Buy your first credit pack</a> to get started.</div>';
+    $("orderHistory").innerHTML = empty;
+    $("recentActivity").innerHTML = empty;
+    $("totalPurchased").textContent = "0";
+    return;
+  }
+
+  let total = 0;
+  orders.forEach(o => total += (o.creditsGranted || 0));
+  $("totalPurchased").textContent = total.toLocaleString();
+
+  const rows = orders.map(o => `
+    <tr>
+      <td>${fmtDate(o.at)}</td>
+      <td><span class="order-type ${o.renewal ? 'renewal' : 'purchase'}">${o.renewal ? 'Renewal' : 'Purchase'}</span></td>
+      <td>${PLAN_LABELS[o.plan] || o.plan || '—'} ${o.plan && o.plan.includes('pack_') ? '(' + (o.plan.replace('pack_','')) + ')' : ''}</td>
+      <td class="order-credits">+${(o.creditsGranted || 0).toLocaleString()}</td>
+    </tr>
+  `).join("");
+
+  const table = `<table class="order-table"><thead><tr><th>Date</th><th>Type</th><th>Plan / Pack</th><th>Credits</th></tr></thead><tbody>${rows}</tbody></table>`;
+  $("orderHistory").innerHTML = table;
+
+  /* show last 3 in recent activity on overview */
+  const recent = orders.slice(0, 3);
+  const recentRows = recent.map(o => `
+    <tr>
+      <td>${fmtDate(o.at)}</td>
+      <td><span class="order-type ${o.renewal ? 'renewal' : 'purchase'}">${o.renewal ? 'Renewal' : 'Purchase'}</span></td>
+      <td class="order-credits">+${(o.creditsGranted || 0).toLocaleString()}</td>
+    </tr>
+  `).join("");
+  $("recentActivity").innerHTML = `<table class="order-table"><thead><tr><th>Date</th><th>Type</th><th>Credits</th></tr></thead><tbody>${recentRows}</tbody></table>`;
+}
 
 /* ── gate: must be signed in ─────────────────────────────── */
 onAuthStateChanged(auth, async (user) => {
   if (!user) { location.replace("login.html"); return; }
   currentUser = user;
 
-  /* hero + profile fields */
   const name = user.displayName || "";
   const email = user.email || "";
   const initials = (name || email || "U").split(/[\s@.]+/).filter(Boolean).slice(0,2).map(w=>w[0].toUpperCase()).join("");
@@ -276,14 +386,34 @@ onAuthStateChanged(auth, async (user) => {
     const snap = await getDoc(userRef);
     if (snap.exists()) {
       const d = snap.data();
-      $("credits").textContent = typeof d.credits === "number" ? d.credits.toLocaleString() : "—";
-      if (d.plan && PLAN_LABELS[d.plan]) $("planTag").textContent = PLAN_LABELS[d.plan];
+      const cr = typeof d.credits === "number" ? d.credits.toLocaleString() : "—";
+      $("credits").textContent = cr;
+      $("billCredits").textContent = cr;
+      if (d.plan && PLAN_LABELS[d.plan]) {
+        $("planTag").textContent = PLAN_LABELS[d.plan];
+        $("billPlanTag").textContent = PLAN_LABELS[d.plan];
+      }
     } else {
       $("credits").textContent = "0";
+      $("billCredits").textContent = "0";
     }
   } catch(e){
     console.error("Load failed:", e);
     $("credits").textContent = "—";
+  }
+
+  /* load order history from ledger subcollection */
+  try {
+    const ledgerRef = collection(db, "users", user.uid, "ledger");
+    const q = query(ledgerRef, orderBy("at", "desc"));
+    const snap = await getDocs(q);
+    const orders = [];
+    snap.forEach(d => orders.push({ id: d.id, ...d.data() }));
+    renderOrders(orders);
+  } catch(e){
+    console.error("Ledger load:", e);
+    $("orderHistory").innerHTML = '<div class="order-empty">Could not load order history.</div>';
+    $("recentActivity").innerHTML = '<p style="color:var(--mist);font-size:.85rem">Could not load recent activity.</p>';
   }
 
   $("veil").classList.add("hide");
@@ -297,9 +427,7 @@ $("saveProfile").addEventListener("click", async () => {
   btn.disabled = true;
   try {
     await updateProfile(currentUser, { displayName: newName });
-    if (userRef) {
-      try { await updateDoc(userRef, { name: newName }); } catch(_){}
-    }
+    if (userRef) { try { await updateDoc(userRef, { name: newName }); } catch(_){} }
     $("heroName").textContent = newName;
     toast("Profile updated", "ok");
   } catch(e){
@@ -309,14 +437,10 @@ $("saveProfile").addEventListener("click", async () => {
   btn.disabled = false;
 });
 
-/* ── manage subscription (Stripe billing portal) ─────────── */
+/* ── manage subscription ─────────────────────────────────── */
+const STRIPE_PORTAL_URL = "https://billing.stripe.com/p/login/9B628k3u38PZ8N246Zc3m00";
 $("manageBilling").addEventListener("click", () => {
-  /* Stripe's hosted billing portal lets users update card / cancel.
-     Wire this to your portal link once configured in Stripe:
-     Stripe Dashboard → Settings → Billing → Customer portal → copy link. */
-  toast("Billing portal opens here once configured");
-  /* When ready, replace the line above with:
-     window.location.href = "https://billing.stripe.com/p/login/XXXX"; */
+  window.open(STRIPE_PORTAL_URL, "_blank", "noopener");
 });
 
 /* ── delete account flow ─────────────────────────────────── */
@@ -332,15 +456,12 @@ $("delConfirmBtn").addEventListener("click", async () => {
   const btn = $("delConfirmBtn");
   btn.disabled = true; btn.textContent = "Deleting…";
   try {
-    /* 1) delete their Firestore user doc (their data) */
     if (userRef) { try { await deleteDoc(userRef); } catch(_){} }
-    /* 2) delete the Firebase Auth account */
     await deleteUser(currentUser);
     toast("Account deleted", "ok");
     setTimeout(() => location.replace("index.html"), 1200);
   } catch(e){
     console.error(e);
-    /* Firebase requires a recent login to delete. If it's stale, re-auth. */
     if (e.code === "auth/requires-recent-login") {
       try {
         await reauthenticateWithPopup(currentUser, new GoogleAuthProvider());
