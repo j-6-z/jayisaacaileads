@@ -912,7 +912,7 @@ th.sortable.sorted .arrow{opacity:1}
     <button class="rail-btn active" data-view="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span class="rlabel">Prospect Search</span><span class="tip">Prospect Search</span></button>
     <button class="rail-btn" data-view="lists"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/></svg><span class="rlabel">Saved Lists</span><span class="tip">Saved Lists</span></button>
     <button class="rail-btn" data-view="outreach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg><span class="rlabel">Outreach</span><span class="tip">Outreach</span></button>
-    <button class="rail-btn" data-view="enrich"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg><span class="rlabel">AI Enrich</span><span class="tip">AI Enrich</span></button>
+    <button class="rail-btn" data-view="enrich"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg><span class="rlabel">AI Leads</span><span class="tip">AI Leads</span></button>
     <button class="rail-btn" data-view="analytics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg><span class="rlabel">Analytics</span><span class="tip">Analytics</span></button>
     <div class="rail-spacer"></div>
     <div class="rail-divider"></div>
@@ -1606,7 +1606,7 @@ const VIEW_TITLES = {
   search: "Prospect Search",
   lists: "Saved Lists",
   outreach: "Outreach",
-  enrich: "AI Enrich",
+  enrich: "AI Leads",
   analytics: "Analytics",
   settings: "Settings",
 };
@@ -1763,32 +1763,269 @@ function renderEnrich(){
   const el = document.getElementById("view-enrich");
   el.innerHTML = `<div class="view-scroll">
     <div class="vhead">
-      <h1><span class="vh-glow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg></span>AI Enrich <span class="vstate-badge" style="margin-left:4px">Beta</span></h1>
-      <p>Select contacts in your search, then let AI write a personalized cold-open for each one based on their company, role, and signals. The bridge from list to first reply.</p>
+      <h1><span class="vh-glow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg></span>AI Leads <span class="vstate-badge" style="margin-left:4px">Beta</span></h1>
+      <p>Describe your ideal customer in plain English. AI will parse your query and find matching contacts from the database.</p>
     </div>
-    <div class="metrics">
-      <div class="metric"><div class="m-label">Credits / enrichment</div><div class="m-value glow">1</div><div class="m-sub">per contact</div></div>
-      <div class="metric"><div class="m-label">Avg. generation</div><div class="m-value">2.4s</div><div class="m-sub">per opener</div></div>
-      <div class="metric"><div class="m-label">Selected now</div><div class="m-value">${state.checked.size}</div><div class="m-sub">ready to enrich</div></div>
-    </div>
-    <div class="panel">
-      <div class="panel-head"><h3>How it works</h3><span class="ph-tag">3 steps</span></div>
-      <div style="padding:8px 20px 20px">
-        <div class="seq">
-          <div class="seq-step"><div class="seq-dot"></div><div class="seq-body"><div class="seq-title">1 · Pick your contacts</div><div class="seq-desc">Select rows in Prospect Search — filter to your exact ICP first.</div></div></div>
-          <div class="seq-step"><div class="seq-dot"></div><div class="seq-body"><div class="seq-title">2 · AI drafts each opener</div><div class="seq-desc">Personalized first line per contact, grounded in their company and role.</div></div></div>
-          <div class="seq-step"><div class="seq-dot"></div><div class="seq-body"><div class="seq-title">3 · Push to Outreach</div><div class="seq-desc">Drop the enriched contacts straight into a sequence.</div></div></div>
+
+    <!-- chat area -->
+    <div id="aiChat" style="padding:0 4px">
+      <div id="aiMessages" style="display:flex;flex-direction:column;gap:12px;margin-bottom:16px">
+        <div style="background:var(--p2);border:1px solid var(--hair);border-radius:12px;padding:14px 18px;max-width:85%;font-size:.88rem;color:var(--t2)">
+          <strong style="color:var(--o)">AI Leads</strong> — Tell me who you're looking for. Try something like:<br><br>
+          <em style="opacity:.7">"HVAC owners in Alberta"</em><br>
+          <em style="opacity:.7">"Plumbing companies under 20 employees"</em><br>
+          <em style="opacity:.7">"Roofing managers in Texas"</em><br>
+          <em style="opacity:.7">"Construction CEOs Denver"</em>
         </div>
       </div>
+      <div style="display:flex;gap:8px">
+        <input type="text" id="aiInput" placeholder="Describe your ideal customer..." style="flex:1;background:var(--p2);border:1px solid var(--hair);border-radius:10px;padding:12px 16px;color:var(--t1);font-size:.88rem;font-family:inherit;outline:none" />
+        <button id="aiSend" style="background:var(--o);color:#fff;border:none;border-radius:10px;padding:12px 20px;font-weight:800;font-size:.85rem;font-family:inherit;cursor:pointer;white-space:nowrap;transition:.15s">Search →</button>
+      </div>
     </div>
-    <div class="vstate" style="padding:30px 24px">
-      <div class="vstate-glow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
-      <h2>Ready when you are</h2>
-      <p>Head to Prospect Search, select some contacts, and come back to generate AI openers in bulk.</p>
-      <button class="vstate-cta" onclick="switchView('search')">Go to Prospect Search →</button>
-    </div>
+
+    <div id="aiResults" style="margin-top:20px"></div>
   </div>`;
+
+  /* ── AI Query Parser ── */
+  const INDUSTRY_MAP = {
+    hvac:["HVAC","Heating","Cooling","Air Conditioning"],
+    plumbing:["Plumbing"],
+    roofing:["Roofing"],
+    electrical:["Electrical"],
+    landscaping:["Landscaping","Lawn","Garden"],
+    construction:["Construction","Building","Builders"],
+    cleaning:["Cleaning","Janitorial"],
+    moving:["Moving","Movers"],
+    pest:["Pest Control","Pest"],
+    painting:["Painting","Painters"],
+    property:["Property Maintenance","Property Management"],
+  };
+
+  const ROLE_KEYWORDS = {
+    owner:["Owner","Co-Owner"],
+    ceo:["CEO","Chief Executive"],
+    president:["President"],
+    founder:["Founder","Co-Founder"],
+    manager:["Manager","General Manager","Office Manager"],
+    director:["Director","Director of Sales","Director of Operations"],
+    vp:["VP","VP Operations","Vice President"],
+  };
+
+  const LOCATION_MAP = {};
+  /* provinces */
+  const provs = {ab:"AB",alberta:"AB",bc:"BC",sk:"SK",saskatchewan:"SK",mb:"MB",manitoba:"MB",on:"ON",ontario:"ON",qc:"QC",quebec:"QC"};
+  /* states */
+  const sts = {tx:"TX",texas:"TX",az:"AZ",arizona:"AZ",co:"CO",colorado:"CO",mn:"MN",minnesota:"MN",ca:"CA",california:"CA",ny:"NY",wa:"WA",washington:"WA",il:"IL",illinois:"IL",fl:"FL",florida:"FL",oh:"OH",ohio:"OH",ga:"GA",georgia:"GA",nc:"NC",pa:"PA",mi:"MI",michigan:"MI",nv:"NV",nevada:"NV",ut:"UT",utah:"UT",nm:"NM",ok:"OK",oklahoma:"OK",la:"LA",louisiana:"LA",tn:"TN",tennessee:"TN",ma:"MA",ct:"CT",nj:"NJ"};
+  Object.assign(LOCATION_MAP, provs, sts);
+
+  /* city lookup */
+  const CITIES = {};
+  PEOPLE.forEach(p => {
+    const parts = p.l.split(",").map(s=>s.trim());
+    if(parts.length===2) CITIES[parts[0].toLowerCase()] = parts[0];
+  });
+
+  function parseQuery(q){
+    const lower = q.toLowerCase();
+    const tokens = lower.split(/[\s,]+/).filter(Boolean);
+    const filters = { industries:[], roles:[], locations:[], cities:[], maxEmp:null, minEmp:null };
+
+    /* industry */
+    for(const [key,names] of Object.entries(INDUSTRY_MAP)){
+      if(tokens.some(t=>t.includes(key)) || names.some(n=>lower.includes(n.toLowerCase()))){
+        filters.industries.push(...names);
+      }
+    }
+
+    /* role */
+    for(const [key,titles] of Object.entries(ROLE_KEYWORDS)){
+      if(tokens.some(t=>t===key || t===key+"s")){
+        filters.roles.push(...titles);
+      }
+    }
+
+    /* location (state/province) */
+    for(const [key,code] of Object.entries(LOCATION_MAP)){
+      if(tokens.includes(key)){
+        filters.locations.push(code);
+      }
+    }
+
+    /* city */
+    for(const [cityLower,cityProper] of Object.entries(CITIES)){
+      if(lower.includes(cityLower)){
+        filters.cities.push(cityProper);
+      }
+    }
+
+    /* company size */
+    const sizeMatch = lower.match(/under\s+(\d+)|less\s+than\s+(\d+)|<\s*(\d+)|(\d+)\s*-\s*(\d+)|max\s+(\d+)/);
+    if(sizeMatch){
+      if(sizeMatch[1]) filters.maxEmp = parseInt(sizeMatch[1]);
+      else if(sizeMatch[2]) filters.maxEmp = parseInt(sizeMatch[2]);
+      else if(sizeMatch[3]) filters.maxEmp = parseInt(sizeMatch[3]);
+      else if(sizeMatch[4] && sizeMatch[5]){ filters.minEmp=parseInt(sizeMatch[4]); filters.maxEmp=parseInt(sizeMatch[5]); }
+      else if(sizeMatch[6]) filters.maxEmp = parseInt(sizeMatch[6]);
+    }
+    if(lower.includes("small")) filters.maxEmp = filters.maxEmp || 20;
+    if(lower.includes("large") || lower.includes("big")) filters.minEmp = filters.minEmp || 50;
+
+    return filters;
+  }
+
+  function searchPeople(filters){
+    return PEOPLE.filter(p => {
+      if(filters.industries.length && !filters.industries.some(ind => p.i.toLowerCase().includes(ind.toLowerCase()))) return false;
+      if(filters.roles.length && !filters.roles.some(r => p.t.toLowerCase().includes(r.toLowerCase()))) return false;
+      if(filters.locations.length){
+        const ploc = p.l.split(",").map(s=>s.trim());
+        const pState = ploc[ploc.length-1];
+        if(!filters.locations.includes(pState)) return false;
+      }
+      if(filters.cities.length){
+        if(!filters.cities.some(city => p.l.toLowerCase().includes(city.toLowerCase()))) return false;
+      }
+      if(filters.maxEmp && p.ce > filters.maxEmp) return false;
+      if(filters.minEmp && p.ce < filters.minEmp) return false;
+      return true;
+    });
+  }
+
+  function renderFilters(filters){
+    const chips = [];
+    if(filters.industries.length) chips.push("Industry: " + [...new Set(filters.industries)].join(", "));
+    if(filters.roles.length) chips.push("Role: " + [...new Set(filters.roles)].join(", "));
+    if(filters.locations.length) chips.push("Region: " + [...new Set(filters.locations)].join(", "));
+    if(filters.cities.length) chips.push("City: " + [...new Set(filters.cities)].join(", "));
+    if(filters.maxEmp) chips.push("Max employees: " + filters.maxEmp);
+    if(filters.minEmp) chips.push("Min employees: " + filters.minEmp);
+    if(!chips.length) return '<span style="opacity:.5">No specific filters detected — showing all contacts</span>';
+    return chips.map(c=>'<span style="display:inline-block;background:rgba(201,94,26,.12);border:1px solid rgba(201,94,26,.25);color:var(--o);padding:3px 10px;border-radius:20px;font-size:.75rem;font-weight:700;margin:2px 4px 2px 0">'+c+'</span>').join("");
+  }
+
+  function renderResults(results){
+    if(!results.length) return '<div style="text-align:center;padding:30px;color:var(--t3)">No matching contacts found. Try a broader search.</div>';
+    const rows = results.slice(0,20).map(p=>{
+      const init = p.n.split(/\s+/).map(w=>w[0]).join("").slice(0,2);
+      const revealed = state.revealed.has(p.n);
+      return `<div style="display:grid;grid-template-columns:36px 1.4fr 1fr .6fr 90px;gap:8px;padding:10px 12px;align-items:center;border-bottom:1px solid var(--hair);font-size:.82rem">
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--p2);border:1px solid var(--hair);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:var(--o)">${init}</div>
+        <div><div style="font-weight:700;color:var(--t1)">${p.n}</div><div style="font-size:.75rem;color:var(--t3)">${p.t} · ${p.l}</div></div>
+        <div><div style="font-weight:600;color:var(--t1)">${p.c}</div><div style="font-size:.75rem;color:var(--t3)">${p.ce} employees · ${p.i}</div></div>
+        <div style="font-size:.72rem;color:var(--t3)">${p.ce<15?'<span style="color:#4ADE80;font-weight:700">● High</span>':'<span style="color:var(--t3)">● Medium</span>'}</div>
+        <div><button style="background:var(--o);color:#fff;border:none;padding:6px 12px;border-radius:7px;font-size:.72rem;font-weight:700;cursor:pointer;font-family:inherit" onclick="revealFromAI('${p.n.replace(/'/g,"\\'")}')">${revealed?'Revealed':'Reveal'}</button></div>
+      </div>`;
+    }).join("");
+    return `<div style="background:var(--p1);border:1px solid var(--hair);border-radius:12px;overflow:hidden">
+      <div style="display:grid;grid-template-columns:36px 1.4fr 1fr .6fr 90px;gap:8px;padding:8px 12px;border-bottom:2px solid var(--hair)">
+        <div></div><div style="font-size:.68rem;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.06em">Contact</div><div style="font-size:.68rem;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.06em">Company</div><div style="font-size:.68rem;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.06em">Intent</div><div></div>
+      </div>
+      ${rows}
+    </div>
+    <div style="text-align:center;padding:12px;font-size:.78rem;color:var(--t3)">${results.length} contact${results.length!==1?'s':''} found${results.length>20?' (showing first 20)':''}</div>`;
+  }
+
+  async function handleAISearch(){
+    const input = document.getElementById("aiInput");
+    const q = input.value.trim();
+    if(!q) return;
+    input.value = "";
+
+    const msgs = document.getElementById("aiMessages");
+    const results = document.getElementById("aiResults");
+    const sendBtn = document.getElementById("aiSend");
+
+    /* user message */
+    msgs.innerHTML += `<div style="background:var(--o);color:#fff;border-radius:12px;padding:10px 16px;max-width:75%;align-self:flex-end;font-size:.88rem;margin-left:auto">${q}</div>`;
+
+    /* thinking indicator */
+    const thinkId = "think-"+Date.now();
+    msgs.innerHTML += `<div id="${thinkId}" style="background:var(--p2);border:1px solid var(--hair);border-radius:12px;padding:14px 18px;max-width:85%;font-size:.85rem;color:var(--t3)"><span style="color:var(--o);font-weight:700">⚡ AI is thinking...</span></div>`;
+    sendBtn.disabled = true;
+    sendBtn.textContent = "Thinking...";
+    msgs.scrollTop = msgs.scrollHeight;
+
+    let filters;
+    let aiPowered = false;
+
+    /* try real Claude API first */
+    try {
+      const resp = await fetch("/api/ai-search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: q }),
+      });
+      const data = await resp.json();
+      if(data.ok && data.filters){
+        /* map AI response to our filter format */
+        const f = data.filters;
+        filters = {
+          industries: f.industry ? [f.industry] : [],
+          roles: f.role ? [f.role] : [],
+          locations: f.location ? [f.location] : [],
+          cities: f.city ? [f.city] : [],
+          maxEmp: f.maxEmployees || null,
+          minEmp: f.minEmployees || null,
+          summary: f.summary || null,
+        };
+        aiPowered = true;
+      }
+    } catch(e){
+      console.warn("AI API unavailable, using local parser:", e.message);
+    }
+
+    /* fallback to local keyword parser */
+    if(!filters){
+      filters = parseQuery(q);
+    }
+
+    const matches = searchPeople(filters);
+
+    /* remove thinking indicator */
+    const thinkEl = document.getElementById(thinkId);
+    if(thinkEl) thinkEl.remove();
+
+    /* AI response */
+    const filterHTML = renderFilters(filters);
+    const summaryLine = filters.summary ? `<div style="margin-bottom:8px;font-style:italic;color:var(--t2)">"${filters.summary}"</div>` : "";
+    const aiLabel = aiPowered
+      ? '<span style="background:rgba(74,222,128,.15);color:#4ADE80;padding:2px 8px;border-radius:10px;font-size:.68rem;font-weight:700;margin-left:6px">AI-Powered</span>'
+      : '<span style="background:rgba(255,255,255,.08);color:var(--t3);padding:2px 8px;border-radius:10px;font-size:.68rem;font-weight:700;margin-left:6px">Local Parser</span>';
+
+    msgs.innerHTML += `<div style="background:var(--p2);border:1px solid var(--hair);border-radius:12px;padding:14px 18px;max-width:85%;font-size:.85rem;color:var(--t2)">
+      ${summaryLine}
+      <div style="margin-bottom:8px"><strong style="color:var(--o)">Filters detected:</strong>${aiLabel}</div>
+      <div style="margin-bottom:10px">${filterHTML}</div>
+      <div style="color:var(--t1);font-weight:700">Found ${matches.length} matching contact${matches.length!==1?'s':''}${matches.length?'.' :' — try broadening your search.'}</div>
+    </div>`;
+
+    /* results table */
+    results.innerHTML = renderResults(matches);
+
+    sendBtn.disabled = false;
+    sendBtn.textContent = "Search →";
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  document.getElementById("aiSend").addEventListener("click", handleAISearch);
+  document.getElementById("aiInput").addEventListener("keydown", e => {
+    if(e.key === "Enter") handleAISearch();
+  });
 }
+
+/* global reveal from AI view */
+window.revealFromAI = function(name){
+  const p = PEOPLE.find(x=>x.n===name);
+  if(!p) return;
+  if(state.revealed.has(name)){ toast("Already revealed","info"); return; }
+  if(state.credits<1){ toast("No credits left","err"); return; }
+  state.credits--;
+  state.revealed.add(name);
+  document.getElementById("creditBadge").textContent = state.credits;
+  toast("Revealed: " + name,"ok");
+  renderEnrich();
+};
 
 /* ---- ANALYTICS ---- */
 function renderAnalytics(){
@@ -1887,7 +2124,7 @@ const CMDK_NAV = [
   {label:"Prospect Search", sub:"find contacts", view:"search", icon:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>'},
   {label:"Saved Lists", sub:"your lists", view:"lists", icon:'<path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z"/>'},
   {label:"Outreach", sub:"sequences", view:"outreach", icon:'<path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/>'},
-  {label:"AI Enrich", sub:"AI openers", view:"enrich", icon:'<path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>'},
+  {label:"AI Leads", sub:"AI openers", view:"enrich", icon:'<path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>'},
   {label:"Analytics", sub:"your activity", view:"analytics", icon:'<path d="M18 20V10M12 20V4M6 20v-6"/>'},
 ];
 let cmdkSel = 0, cmdkResults = [];
