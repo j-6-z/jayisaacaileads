@@ -211,7 +211,7 @@ body { padding-top: var(--jia-h); }
 /* ── mega panel ── */
 .jia-mega {
   position: absolute;
-  top: calc(100% + 12px);
+  top: 100%;                    /* sit flush against the nav so no hover gap */
   left: 50%; transform: translateX(-50%) translateY(8px);
   background: var(--jia-card);
   border: 1px solid var(--jia-b);
@@ -220,12 +220,36 @@ body { padding-top: var(--jia-h); }
   padding: 1.1rem;
   display: flex; gap: .5rem;
   opacity:0; visibility:hidden; pointer-events:none;
-  transition: opacity .22s, transform .22s, visibility .22s;
+  /* slow leave transition prevents the menu from disappearing if user briefly drifts off */
+  transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+  transition-delay: .15s;       /* delay on close so user has time to reach the menu */
   min-width: 520px;
+  margin-top: 12px;             /* visual gap kept via margin, not actual gap */
 }
-.jia-links > li.has-mega:hover .jia-mega {
+
+/* invisible "bridge" between trigger link and dropdown — kills the hover gap.
+   Must be as wide as the dropdown itself, not just the link. */
+.jia-links > li.has-mega::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 560px;                 /* wider than .jia-mega min-width (520px) */
+  height: 24px;                 /* covers the 12px gap + 12px breathing room */
+  background: transparent;
+  pointer-events: none;
+}
+.jia-links > li.has-mega:hover::after,
+.jia-links > li.has-mega.mega-open::after {
+  pointer-events: auto;         /* only active during hover, keeps the bridge alive */
+}
+
+.jia-links > li.has-mega:hover .jia-mega,
+.jia-links > li.has-mega.mega-open .jia-mega {
   opacity:1; visibility:visible; pointer-events:auto;
   transform: translateX(-50%) translateY(0);
+  transition-delay: 0s;         /* open instantly */
 }
 
 /* arrow tip */
@@ -255,7 +279,8 @@ body { padding-top: var(--jia-h); }
   display:flex; flex-direction:column; gap:.18rem;
   padding: .65rem .85rem;
   border-radius:9px; text-decoration:none;
-  transition:background .17s;
+  transition: background .12s ease;  /* faster, snappier hover feedback */
+  cursor: pointer;
 }
 .jia-mega-row:hover { background:rgba(255,255,255,.05); }
 .jia-mega-row:hover .jia-ml { color:var(--jia-orange-h); }
@@ -427,7 +452,8 @@ body { padding-top: var(--jia-h); }
 }
 
 /* hide shield when a mega dropdown is open (hovering Platform / Our Data / Resources) */
-.jia-nav:has(.jia-links > li.has-mega:hover) .jia-shield {
+.jia-nav:has(.jia-links > li.has-mega:hover) .jia-shield,
+.jia-nav:has(.jia-links > li.has-mega.mega-open) .jia-shield {
   opacity: 0; transform: translateX(-50%) translateY(-12px) scale(.8);
   pointer-events: none;
 }
@@ -763,6 +789,40 @@ mobEl.querySelectorAll("a").forEach(a => a.addEventListener("click", closeAll));
 /* scroll shadow */
 addEventListener("scroll", () =>
   hdr.classList.toggle("scrolled", scrollY > 40), { passive: true });
+
+/* ── BULLETPROOF MEGA-MENU HOVER ──────────────────────────
+   CSS :hover handles 95% of cases, but the 12px gap between
+   the trigger link and dropdown can cause flickering closes.
+   The JS layer below uses a 300ms close timer that any movement
+   onto the dropdown cancels. Three layers of defense:
+   1. Wide invisible bridge (CSS, 560px)
+   2. CSS :hover with transition-delay
+   3. JS class toggle with timeout (this) */
+hdr.querySelectorAll(".jia-links > li.has-mega").forEach(li => {
+  let closeTimer = null;
+  const open = () => {
+    clearTimeout(closeTimer);
+    closeTimer = null;
+    li.classList.add("mega-open");
+  };
+  const scheduleClose = () => {
+    clearTimeout(closeTimer);
+    closeTimer = setTimeout(() => {
+      li.classList.remove("mega-open");
+      closeTimer = null;
+    }, 300);
+  };
+  /* mouseenter/leave do NOT bubble, so they fire correctly when
+     transitioning between the link and the mega panel inside the li */
+  li.addEventListener("mouseenter", open);
+  li.addEventListener("mouseleave", scheduleClose);
+  /* Also bind directly to the mega panel so quick mouse jumps work */
+  const mega = li.querySelector(".jia-mega");
+  if(mega){
+    mega.addEventListener("mouseenter", open);
+    mega.addEventListener("mouseleave", scheduleClose);
+  }
+});
 
 /* smooth scroll on homepage */
 if (isHome()) {
