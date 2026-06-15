@@ -77,6 +77,17 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
 }
 .cta-band h2{margin-bottom:8px}
 .cta-band p{color:#A8B0BB;margin-bottom:24px}
+
+/* hero image layout — image right of text */
+.page-hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
+.page-hero-img{border-radius:18px;overflow:hidden;box-shadow:0 28px 80px rgba(201,94,26,.18),0 0 0 1px rgba(255,255,255,.08);transform:perspective(1200px) rotateY(-3deg);transition:transform .4s}
+.page-hero-img:hover{transform:perspective(1200px) rotateY(0deg)}
+.page-hero-img img{width:100%;display:block}
+@media(max-width:900px){
+  .page-hero .wrap{grid-template-columns:1fr;gap:32px}
+  .page-hero-img{transform:none;max-width:540px;margin:0 auto}
+}
+
 </style>
 </head>
 <body>
@@ -85,6 +96,7 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
 
 <header class="page-hero">
   <div class="wrap">
+    <div>
     <span class="eyebrow">Solutions · Cold Calling</span>
     <h1>Lists your reps can dial the second they download</h1>
     <p class="sub">Verified direct phone numbers for owners and decision-makers — filtered to your territory, exported to your dialer, ready before your coffee cools.</p>
@@ -96,6 +108,10 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
       <div class="hstat"><div class="n">1M+</div><div class="l">Contacts with phones</div></div>
       <div class="hstat"><div class="n">~5 min</div><div class="l">Search to dial-ready CSV</div></div>
       <div class="hstat"><div class="n">60+</div><div class="l">Industries covered</div></div>
+    </div>
+  </div>
+    <div class="page-hero-img">
+      <img src="/public/feat-export.jpg" alt="Cold calling lists workspace" loading="lazy">
     </div>
   </div>
 </header>

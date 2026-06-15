@@ -185,6 +185,74 @@ input{font-family:inherit}
   font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;
   transition:opacity .2s var(--ease);
 }
+
+/* ── AI LEADS — flagship feature treatment ── */
+.rail-btn.ai-leads{
+  background:linear-gradient(135deg, rgba(255,107,26,.12), rgba(255,107,26,.04));
+  border:1px solid var(--o-line);
+  margin:6px 0;
+  position:relative;
+  overflow:hidden;
+}
+.rail-btn.ai-leads::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(120deg, transparent, rgba(255,107,26,.15), transparent);
+  transform:translateX(-100%);
+  animation:ai-shimmer 4s ease-in-out infinite;
+}
+@keyframes ai-shimmer{
+  0%,100%{transform:translateX(-100%)}
+  50%{transform:translateX(200%)}
+}
+.rail-btn.ai-leads svg{
+  color:var(--o);
+  filter:drop-shadow(0 0 6px var(--o-glow));
+  animation:ai-pulse 2.5s ease-in-out infinite;
+}
+@keyframes ai-pulse{
+  0%,100%{filter:drop-shadow(0 0 6px var(--o-glow))}
+  50%{filter:drop-shadow(0 0 14px var(--o-glow)) drop-shadow(0 0 4px var(--o))}
+}
+.rail-btn.ai-leads .rlabel{
+  color:var(--o);
+  font-weight:800;
+  background:linear-gradient(120deg, var(--o-hot), var(--o), var(--o-hot));
+  background-size:200% 100%;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:ai-text-shift 3s ease-in-out infinite;
+}
+@keyframes ai-text-shift{
+  0%,100%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+}
+.rail-btn.ai-leads:hover{
+  background:linear-gradient(135deg, rgba(255,107,26,.2), rgba(255,107,26,.08));
+  border-color:var(--o);
+  box-shadow:0 0 24px var(--o-dim), inset 0 1px 0 rgba(255,255,255,.05);
+  transform:translateX(2px);
+}
+.rail-btn.ai-leads.active{
+  background:linear-gradient(135deg, rgba(255,107,26,.22), rgba(255,107,26,.1));
+  border-color:var(--o);
+  box-shadow:0 0 28px var(--o-dim);
+}
+.rail-btn.ai-leads.active::before{
+  display:none;        /* don't double up with the orange edge bar */
+}
+
+/* "NEW" badge on the AI Leads pill */
+.ai-new-badge{
+  position:absolute;right:8px;top:50%;transform:translateY(-50%);
+  background:linear-gradient(135deg, var(--o-hot), var(--o-deep));
+  color:#fff;font-size:9px;font-weight:800;font-family:var(--mono);
+  letter-spacing:.08em;padding:2px 6px;border-radius:5px;
+  box-shadow:0 0 10px var(--o-glow);
+  text-transform:uppercase;
+  z-index:2;
+}
+.app.rail-collapsed .ai-new-badge{display:none}
 /* the floating tooltip only shows when collapsed */
 .rail-btn .tip{
   position:absolute;left:56px;top:50%;transform:translateY(-50%) translateX(-4px);
@@ -912,7 +980,7 @@ th.sortable.sorted .arrow{opacity:1}
     <button class="rail-btn active" data-view="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span class="rlabel">Prospect Search</span><span class="tip">Prospect Search</span></button>
     <button class="rail-btn" data-view="lists"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/></svg><span class="rlabel">Saved Lists</span><span class="tip">Saved Lists</span></button>
     <button class="rail-btn" data-view="outreach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg><span class="rlabel">Outreach</span><span class="tip">Outreach</span></button>
-    <button class="rail-btn" data-view="enrich"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg><span class="rlabel">AI Leads</span><span class="tip">AI Leads</span></button>
+    <button class="rail-btn ai-leads" data-view="enrich"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg><span class="rlabel">AI Leads</span><span class="ai-new-badge">NEW</span><span class="tip">AI Leads</span></button>
     <button class="rail-btn" data-view="analytics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg><span class="rlabel">Analytics</span><span class="tip">Analytics</span></button>
     <div class="rail-spacer"></div>
     <div class="rail-divider"></div>
@@ -993,10 +1061,49 @@ th.sortable.sorted .arrow{opacity:1}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z"/></svg>
           Save to list
         </button>
-        <button class="tbtn" onclick="exportCSV()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
-          Export CSV
-        </button>
+        <div class="export-wrap" style="position:relative;display:inline-block">
+          <button class="tbtn" onclick="toggleExportMenu()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+            Export ▾
+          </button>
+          <div id="exportMenu" style="display:none;position:absolute;top:100%;left:0;margin-top:4px;background:var(--p1);border:1px solid var(--hair);border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,.25);z-index:50;min-width:240px;overflow:hidden;max-height:420px;overflow-y:auto">
+            <div style="padding:8px 14px;font-size:.62rem;font-weight:800;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--hair);background:var(--p2)">Standard Formats</div>
+            <button class="export-opt" onclick="exportData('csv')" style="width:100%;display:flex;align-items:center;gap:10px;padding:10px 14px;background:none;border:none;border-bottom:1px solid var(--hair);color:var(--t1);font-size:.82rem;font-weight:600;cursor:pointer;font-family:inherit;text-align:left">
+              <span style="background:rgba(74,222,128,.12);color:#4ADE80;font-size:.6rem;font-weight:800;padding:2px 6px;border-radius:4px;width:44px;text-align:center">CSV</span>
+              <div><div>Comma-separated</div><div style="font-size:.7rem;color:var(--t3);font-weight:500">Universal format</div></div>
+            </button>
+            <button class="export-opt" onclick="exportData('json')" style="width:100%;display:flex;align-items:center;gap:10px;padding:10px 14px;background:none;border:none;border-bottom:1px solid var(--hair);color:var(--t1);font-size:.82rem;font-weight:600;cursor:pointer;font-family:inherit;text-align:left">
+              <span style="background:rgba(99,102,241,.12);color:#818CF8;font-size:.6rem;font-weight:800;padding:2px 6px;border-radius:4px;width:44px;text-align:center">JSON</span>
+              <div><div>Structured data</div><div style="font-size:.7rem;color:var(--t3);font-weight:500">Developers & APIs</div></div>
+            </button>
+            <button class="export-opt" onclick="exportData('xlsx')" style="width:100%;display:flex;align-items:center;gap:10px;padding:10px 14px;background:none;border:none;border-bottom:1px solid var(--hair);color:var(--t1);font-size:.82rem;font-weight:600;cursor:pointer;font-family:inherit;text-align:left">
+              <span style="background:rgba(201,94,26,.12);color:var(--o);font-size:.6rem;font-weight:800;padding:2px 6px;border-radius:4px;width:44px;text-align:center">XLSX</span>
+              <div><div>Excel spreadsheet</div><div style="font-size:.7rem;color:var(--t3);font-weight:500">With formatting</div></div>
+            </button>
+            <button class="export-opt" onclick="exportData('pdf')" style="width:100%;display:flex;align-items:center;gap:10px;padding:10px 14px;background:none;border:none;border-bottom:1px solid var(--hair);color:var(--t1);font-size:.82rem;font-weight:600;cursor:pointer;font-family:inherit;text-align:left">
+              <span style="background:rgba(220,38,38,.12);color:#DC2626;font-size:.6rem;font-weight:800;padding:2px 6px;border-radius:4px;width:44px;text-align:center">PDF</span>
+              <div><div>Shareable report</div><div style="font-size:.7rem;color:var(--t3);font-weight:500">Client-ready</div></div>
+            </button>
+
+            <div style="padding:8px 14px;font-size:.62rem;font-weight:800;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--hair);border-top:1px solid var(--hair);background:var(--p2)">CRM-Ready (one-click import)</div>
+            <button class="export-opt" onclick="exportData('hubspot')" style="width:100%;display:flex;align-items:center;gap:10px;padding:10px 14px;background:none;border:none;border-bottom:1px solid var(--hair);color:var(--t1);font-size:.82rem;font-weight:600;cursor:pointer;font-family:inherit;text-align:left">
+              <span style="background:rgba(255,122,89,.12);color:#FF7A59;font-size:.6rem;font-weight:800;padding:2px 6px;border-radius:4px;width:44px;text-align:center">HUB</span>
+              <div><div>HubSpot CRM</div><div style="font-size:.7rem;color:var(--t3);font-weight:500">Contacts import format</div></div>
+            </button>
+            <button class="export-opt" onclick="exportData('salesforce')" style="width:100%;display:flex;align-items:center;gap:10px;padding:10px 14px;background:none;border:none;border-bottom:1px solid var(--hair);color:var(--t1);font-size:.82rem;font-weight:600;cursor:pointer;font-family:inherit;text-align:left">
+              <span style="background:rgba(0,161,224,.12);color:#00A1E0;font-size:.6rem;font-weight:800;padding:2px 6px;border-radius:4px;width:44px;text-align:center">SF</span>
+              <div><div>Salesforce</div><div style="font-size:.7rem;color:var(--t3);font-weight:500">Lead/Contact format</div></div>
+            </button>
+            <button class="export-opt" onclick="exportData('pipedrive')" style="width:100%;display:flex;align-items:center;gap:10px;padding:10px 14px;background:none;border:none;border-bottom:1px solid var(--hair);color:var(--t1);font-size:.82rem;font-weight:600;cursor:pointer;font-family:inherit;text-align:left">
+              <span style="background:rgba(20,28,38,.12);color:#6B7280;font-size:.6rem;font-weight:800;padding:2px 6px;border-radius:4px;width:44px;text-align:center">PD</span>
+              <div><div>Pipedrive</div><div style="font-size:.7rem;color:var(--t3);font-weight:500">People import</div></div>
+            </button>
+            <button class="export-opt" onclick="exportData('outreach')" style="width:100%;display:flex;align-items:center;gap:10px;padding:10px 14px;background:none;border:none;color:var(--t1);font-size:.82rem;font-weight:600;cursor:pointer;font-family:inherit;text-align:left">
+              <span style="background:rgba(99,102,241,.12);color:#5B47F7;font-size:.6rem;font-weight:800;padding:2px 6px;border-radius:4px;width:44px;text-align:center">OR</span>
+              <div><div>Outreach.io</div><div style="font-size:.7rem;color:var(--t3);font-weight:500">Sequence-ready</div></div>
+            </button>
+          </div>
+        </div>
         <button class="tbtn primary" onclick="toast('Added to outreach sequence')">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
           Add to sequence
@@ -1536,36 +1643,273 @@ document.addEventListener("keydown", e => {
   }
 });
 
-/* ================= REAL CSV EXPORT ================= */
+/* ================= MULTI-FORMAT EXPORT ================= */
 function csvCell(v){ v=String(v); return /[",\n]/.test(v) ? '"'+v.replace(/"/g,'""')+'"' : v; }
-function exportCSV(){
-  let rows, header, name;
+
+/* toggle export dropdown */
+function toggleExportMenu(){
+  const m = document.getElementById("exportMenu");
+  m.style.display = m.style.display === "none" ? "block" : "none";
+}
+document.addEventListener("click", e => {
+  if(!e.target.closest(".export-wrap")){
+    const m = document.getElementById("exportMenu");
+    if(m) m.style.display = "none";
+  }
+});
+
+/* gather export data based on current tab + filters */
+function getExportData(){
+  let rows, header, baseName;
   if(state.tab==="people"){
     let pool = PEOPLE.filter(matchesPerson);
     if(state.checked.size) pool = pool.filter(p=>state.checked.has(p.id));
-    if(!pool.length){ toast("Nothing to export — select rows or widen filters"); return; }
+    if(!pool.length){ toast("Nothing to export — select rows or widen filters"); return null; }
     header = ["Name","Title","Company","Employees","Location","Industry","Email","Phone","Unlocked"];
     rows = pool.map(p=>{
       const r = state.revealed.has(p.id);
-      return [p.n,p.t,p.c,p.ce,p.l,p.i, (r&&p.e)?p.e:"(locked — reveal in app)", (r&&p.p)?p.p:"(locked — reveal in app)", r?"yes":"no"];
+      return [p.n,p.t,p.c,p.ce,p.l,p.i, (r&&p.e)?p.e:"(locked)", (r&&p.p)?p.p:"(locked)", r?"yes":"no"];
     });
-    name = "jayisaac-people-export.csv";
+    baseName = "jayisaac-people-export";
   } else {
     const pool = COMPANIES.filter(matchesCompany);
-    if(!pool.length){ toast("Nothing to export — widen filters"); return; }
+    if(!pool.length){ toast("Nothing to export — widen filters"); return null; }
     header = ["Company","Employees","Location","Industry","Est. Revenue","Website"];
     rows = pool.map(c=>[c.c,c.ce,c.l,c.i,c.rev,c.site]);
-    name = "jayisaac-companies-export.csv";
+    baseName = "jayisaac-companies-export";
   }
-  const csv = [header, ...rows].map(r=>r.map(csvCell).join(",")).join("\r\n");
-  const blob = new Blob(["\uFEFF"+csv], {type:"text/csv;charset=utf-8"});
+  return { header, rows, baseName };
+}
+
+/* download helper */
+function downloadBlob(blob, filename){
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = name;
+  a.download = filename;
   a.click();
   URL.revokeObjectURL(a.href);
-  toast("Exported " + rows.length + " rows to CSV");
 }
+
+/* main export dispatcher */
+function exportData(format){
+  document.getElementById("exportMenu").style.display = "none";
+  const data = getExportData();
+  if(!data) return;
+
+  switch(format){
+    case "csv": exportAsCSV(data); break;
+    case "json": exportAsJSON(data); break;
+    case "xlsx": exportAsXLSX(data); break;
+    case "pdf": exportAsPDF(data); break;
+    case "hubspot": exportForCRM(data, "hubspot"); break;
+    case "salesforce": exportForCRM(data, "salesforce"); break;
+    case "pipedrive": exportForCRM(data, "pipedrive"); break;
+    case "outreach": exportForCRM(data, "outreach"); break;
+    default: exportAsCSV(data);
+  }
+}
+
+/* CSV export */
+function exportAsCSV(data){
+  const csv = [data.header, ...data.rows].map(r=>r.map(csvCell).join(",")).join("\r\n");
+  const blob = new Blob(["\uFEFF"+csv], {type:"text/csv;charset=utf-8"});
+  downloadBlob(blob, data.baseName + ".csv");
+  toast("Exported " + data.rows.length + " rows to CSV","ok");
+}
+
+/* JSON export */
+function exportAsJSON(data){
+  const objects = data.rows.map(row => {
+    const obj = {};
+    data.header.forEach((h, i) => obj[h] = row[i]);
+    return obj;
+  });
+  const json = JSON.stringify(objects, null, 2);
+  const blob = new Blob([json], {type:"application/json;charset=utf-8"});
+  downloadBlob(blob, data.baseName + ".json");
+  toast("Exported " + data.rows.length + " rows to JSON","ok");
+}
+
+/* XLSX export (uses SheetJS loaded from CDN) */
+async function exportAsXLSX(data){
+  /* lazy-load SheetJS if not already loaded */
+  if(typeof XLSX === "undefined"){
+    toast("Loading Excel engine...","info");
+    await new Promise((resolve, reject) => {
+      const s = document.createElement("script");
+      s.src = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";
+      s.onload = resolve;
+      s.onerror = () => { toast("Couldn't load Excel engine — try CSV instead","err"); reject(); };
+      document.head.appendChild(s);
+    });
+  }
+  try {
+    const ws = XLSX.utils.aoa_to_sheet([data.header, ...data.rows]);
+    /* auto-size columns */
+    ws["!cols"] = data.header.map((h, i) => {
+      const maxLen = Math.max(h.length, ...data.rows.map(r => String(r[i]||"").length));
+      return { wch: Math.min(maxLen + 2, 40) };
+    });
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, state.tab==="people" ? "People" : "Companies");
+    XLSX.writeFile(wb, data.baseName + ".xlsx");
+    toast("Exported " + data.rows.length + " rows to Excel","ok");
+  } catch(e){
+    console.error("XLSX export failed:", e);
+    toast("Excel export failed — try CSV instead","err");
+  }
+}
+
+/* PDF export — branded, client-shareable report */
+async function exportAsPDF(data){
+  /* lazy-load jsPDF + autotable */
+  if(typeof window.jspdf === "undefined"){
+    toast("Loading PDF engine...","info");
+    try {
+      await loadScript("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js");
+      await loadScript("https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js");
+    } catch(e){
+      toast("Couldn't load PDF engine — try CSV instead","err"); return;
+    }
+  }
+  try {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation: "landscape", unit: "pt", format: "a4" });
+
+    /* branded header */
+    doc.setFillColor(11, 14, 19);
+    doc.rect(0, 0, doc.internal.pageSize.getWidth(), 50, "F");
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(16); doc.setFont("helvetica", "bold");
+    doc.text("JAYISAAC AI", 30, 32);
+    doc.setFontSize(9); doc.setFont("helvetica", "normal");
+    doc.setTextColor(232, 116, 46);
+    doc.text("Canadian B2B Contact Intelligence", 130, 32);
+
+    /* title + meta */
+    doc.setTextColor(26, 36, 51);
+    doc.setFontSize(14); doc.setFont("helvetica", "bold");
+    const title = state.tab==="people" ? "Contact Export" : "Company Export";
+    doc.text(title, 30, 80);
+    doc.setFontSize(9); doc.setFont("helvetica", "normal");
+    doc.setTextColor(107, 114, 128);
+    const now = new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
+    doc.text(`Generated ${now} · ${data.rows.length} record${data.rows.length!==1?"s":""}`, 30, 96);
+
+    /* table */
+    doc.autoTable({
+      head: [data.header],
+      body: data.rows,
+      startY: 110,
+      theme: "grid",
+      headStyles: { fillColor: [201,94,26], textColor: [255,255,255], fontStyle: "bold", fontSize: 8 },
+      bodyStyles: { fontSize: 7.5, textColor: [55,65,81] },
+      alternateRowStyles: { fillColor: [249,250,251] },
+      margin: { left: 30, right: 30 },
+      didDrawPage: () => {
+        const pageHeight = doc.internal.pageSize.getHeight();
+        doc.setFontSize(7); doc.setTextColor(156,163,175);
+        doc.text("jayisaacai.com · admin@jayisaacai.com", 30, pageHeight - 20);
+        doc.text(`Page ${doc.internal.getNumberOfPages()}`, doc.internal.pageSize.getWidth() - 60, pageHeight - 20);
+      },
+    });
+
+    doc.save(data.baseName + ".pdf");
+    toast("Exported " + data.rows.length + " rows to PDF","ok");
+  } catch(e){
+    console.error("PDF export failed:", e);
+    toast("PDF export failed — try CSV instead","err");
+  }
+}
+
+/* CRM-specific exports — remaps columns to match each platform's import format */
+function exportForCRM(data, crm){
+  if(state.tab !== "people"){
+    toast(crm.toUpperCase() + " export only works on People tab","err");
+    return;
+  }
+
+  /* re-pull raw people data so we have direct field access */
+  let pool = PEOPLE.filter(matchesPerson);
+  if(state.checked.size) pool = pool.filter(p=>state.checked.has(p.id));
+  if(!pool.length){ toast("Nothing to export","err"); return; }
+
+  let header, rows, name;
+
+  const splitName = (full) => {
+    const parts = full.trim().split(/\s+/);
+    return { first: parts[0]||"", last: parts.slice(1).join(" ")||"" };
+  };
+
+  if(crm === "hubspot"){
+    /* HubSpot's standard contact import columns */
+    header = ["First Name","Last Name","Email","Phone Number","Job Title","Company Name","Industry","City","State","Number of Employees","Lifecycle Stage","Lead Source"];
+    rows = pool.map(p=>{
+      const r = state.revealed.has(p.id);
+      const { first, last } = splitName(p.n);
+      const [city, state] = p.l.split(",").map(s=>s.trim());
+      return [first, last, r&&p.e?p.e:"", r&&p.p?p.p:"", p.t, p.c, p.i, city||"", state||"", p.ce, "Lead", "JAYISAAC AI"];
+    });
+    name = "jayisaac-hubspot-import";
+  }
+  else if(crm === "salesforce"){
+    /* Salesforce Lead/Contact import format */
+    header = ["FirstName","LastName","Email","Phone","Title","Company","Industry","City","State","NumberOfEmployees","LeadSource","Status"];
+    rows = pool.map(p=>{
+      const r = state.revealed.has(p.id);
+      const { first, last } = splitName(p.n);
+      const [city, state] = p.l.split(",").map(s=>s.trim());
+      return [first, last, r&&p.e?p.e:"", r&&p.p?p.p:"", p.t, p.c, p.i, city||"", state||"", p.ce, "JAYISAAC AI", "Open - Not Contacted"];
+    });
+    name = "jayisaac-salesforce-import";
+  }
+  else if(crm === "pipedrive"){
+    /* Pipedrive people import format */
+    header = ["Name","Email","Phone","Job title","Organization","Industry","Address","Owner","Label"];
+    rows = pool.map(p=>{
+      const r = state.revealed.has(p.id);
+      return [p.n, r&&p.e?p.e:"", r&&p.p?p.p:"", p.t, p.c, p.i, p.l, "", "JAYISAAC Lead"];
+    });
+    name = "jayisaac-pipedrive-import";
+  }
+  else if(crm === "outreach"){
+    /* Outreach.io sequence/prospect format */
+    header = ["First Name","Last Name","Email","Phone","Title","Company","Industry","City","State","Tags"];
+    rows = pool.map(p=>{
+      const r = state.revealed.has(p.id);
+      const { first, last } = splitName(p.n);
+      const [city, state] = p.l.split(",").map(s=>s.trim());
+      return [first, last, r&&p.e?p.e:"", r&&p.p?p.p:"", p.t, p.c, p.i, city||"", state||"", "jayisaac-ai"];
+    });
+    name = "jayisaac-outreach-import";
+  }
+
+  /* write as CSV (every CRM accepts CSV) */
+  const csv = [header, ...rows].map(r=>r.map(csvCell).join(",")).join("\r\n");
+  const blob = new Blob(["\uFEFF"+csv], {type:"text/csv;charset=utf-8"});
+  downloadBlob(blob, name + ".csv");
+
+  /* friendly per-CRM toast with next-step hint */
+  const hints = {
+    hubspot:    "HubSpot ready: Contacts → Import → File from computer",
+    salesforce: "Salesforce ready: Setup → Data Import Wizard → Leads",
+    pipedrive:  "Pipedrive ready: Contacts → People → Import data",
+    outreach:   "Outreach ready: Prospects → Import Prospects",
+  };
+  toast(hints[crm] + " (" + rows.length + " rows)","ok");
+}
+
+/* shared script loader */
+function loadScript(src){
+  return new Promise((resolve, reject) => {
+    const s = document.createElement("script");
+    s.src = src; s.onload = resolve; s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+
+/* keep old exportCSV as alias for backward compat */
+function exportCSV(){ exportData("csv"); }
 
 /* ================= UI WIRING ================= */
 document.querySelectorAll(".tab").forEach(t=>{
@@ -1643,7 +1987,7 @@ const ONBOARD_TASKS = [
   {done:false, title:"Find & save your first leads", desc:"Search 1M+ North American contacts and build your first list.", cred:5, time:"About 1 min", cta:"Search for leads", view:"search"},
   {done:false, title:"Reveal a verified contact", desc:"Unlock a direct email and phone number — 1 credit each.", cred:5, time:"About 1 min", cta:"Try it", view:"search"},
   {done:false, title:"Build an outreach sequence", desc:"Turn saved leads into a multi-step email + call campaign.", cred:5, time:"About 3 mins", cta:"Open Outreach", view:"outreach"},
-  {done:false, title:"Export your list to CSV", desc:"Take your revealed contacts anywhere — CRM, spreadsheet, dialer.", cred:5, time:"About 1 min", cta:"Go to Search", view:"search"},
+  {done:false, title:"Export your list (CSV, JSON, or Excel)", desc:"Take your revealed contacts anywhere — CRM, spreadsheet, dialer.", cred:5, time:"About 1 min", cta:"Go to Search", view:"search"},
 ];
 function renderHome(){
   const el = document.getElementById("view-home");
@@ -2022,7 +2366,10 @@ window.revealFromAI = function(name){
   if(state.credits<1){ toast("No credits left","err"); return; }
   state.credits--;
   state.revealed.add(name);
-  document.getElementById("creditBadge").textContent = state.credits;
+  document.getElementById("creditCount").textContent = state.credits;
+  /* also update avatar menu credits if visible */
+  const amc = document.getElementById("amCredits");
+  if(amc) amc.textContent = state.credits;
   toast("Revealed: " + name,"ok");
   renderEnrich();
 };
@@ -2043,7 +2390,7 @@ function renderAnalytics(){
       <div class="metric"><div class="m-label">Credits Remaining</div><div class="m-value glow">${state.credits}</div><div class="m-sub">on this account</div></div>
       <div class="metric"><div class="m-label">Contacts Revealed</div><div class="m-value">${state.revealed.size}</div><div class="m-sub">all time</div></div>
       <div class="metric"><div class="m-label">This Week</div><div class="m-value">428</div><div class="m-sub">▲ 18% vs last week</div></div>
-      <div class="metric"><div class="m-label">Exports</div><div class="m-value">7</div><div class="m-sub">CSV downloads</div></div>
+      <div class="metric"><div class="m-label">Exports</div><div class="m-value">7</div><div class="m-sub">downloads</div></div>
     </div>
     <div class="panel chart-wrap">
       <div class="panel-head"><h3>Reveals this week</h3><span class="ph-tag">last 7 days</span></div>
@@ -2102,7 +2449,11 @@ function renderSettings(){
         </div>
         <div class="set-toggle-row">
           <div><div class="set-k">Export format</div><div class="set-sub">Default download type</div></div>
-          <span class="set-static">CSV</span>
+          <select style="background:var(--p2);border:1px solid var(--hair);border-radius:7px;padding:5px 10px;color:var(--t1);font-size:.82rem;font-weight:700;font-family:inherit;cursor:pointer;outline:none" onchange="toast('Default set to '+this.value.toUpperCase())">
+            <option value="csv">CSV</option>
+            <option value="json">JSON</option>
+            <option value="xlsx">XLSX</option>
+          </select>
         </div>
       </div>
 

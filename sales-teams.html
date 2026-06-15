@@ -68,6 +68,17 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
 }
 .cta-band h2{margin-bottom:8px}
 .cta-band p{color:#A8B0BB;margin-bottom:24px}
+
+/* hero image layout — image right of text */
+.page-hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
+.page-hero-img{border-radius:18px;overflow:hidden;box-shadow:0 28px 80px rgba(201,94,26,.18),0 0 0 1px rgba(255,255,255,.08);transform:perspective(1200px) rotateY(-3deg);transition:transform .4s}
+.page-hero-img:hover{transform:perspective(1200px) rotateY(0deg)}
+.page-hero-img img{width:100%;display:block}
+@media(max-width:900px){
+  .page-hero .wrap{grid-template-columns:1fr;gap:32px}
+  .page-hero-img{transform:none;max-width:540px;margin:0 auto}
+}
+
 </style>
 </head>
 <body>
@@ -76,12 +87,17 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
 
 <header class="page-hero">
   <div class="wrap">
+    <div>
     <span class="eyebrow">Solutions · Sales Teams</span>
     <h1>Your reps should be selling, not spreadsheeting</h1>
-    <p class="sub">Verified contacts, territory filters, and instant exports — the data layer for teams that live on outbound, priced so a small team can actually afford it.</p>
+    <p class="sub">Verified contacts, territory filters, and CRM-ready exports — push leads straight into HubSpot, Salesforce, Pipedrive, or Outreach in one click. The data layer for teams that live on outbound.</p>
     <div class="hero-btns">
       <a class="btn" href="login.html">Start Free Trial</a>
       <a class="btn ghost" href="pricing.html">See Pricing</a>
+    </div>
+  </div>
+    <div class="page-hero-img">
+      <img src="/public/feat-search.jpg" alt="Sales team analytics dashboard" loading="lazy">
     </div>
   </div>
 </header>
@@ -104,7 +120,7 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
       <div class="card">
         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg></div>
         <h3>Fits your existing stack</h3>
-        <p>CSV exports drop into HubSpot, Pipedrive, GoHighLevel, OpenPhone, or whatever dialer you run. We're the data layer, not another tool to babysit.</p>
+        <p>One-click CRM imports for HubSpot, Salesforce, Pipedrive, and Outreach — pre-mapped columns so leads drop straight into your pipeline with zero cleanup. Plus CSV, JSON, XLSX, and branded PDF if you need them. We're the data layer, not another tool to babysit.</p>
       </div>
     </div>
   </div>

@@ -449,7 +449,7 @@ body { padding-top: var(--jia-h); }
 /* ── mobile menu ── */
 @media(max-width:1100px){
   .jia-center { display:none; }
-  .jia-btn-login, .jia-btn-sales { display:none; }
+  .jia-btn-login, .jia-btn-sales, .jia-btn-trial { display:none; }
   .jia-burger { display:flex; }
   .jia-shield img { height:46px; width:46px; }
   /* corner logo stays hidden on mobile — the wordmark already anchors the corner */

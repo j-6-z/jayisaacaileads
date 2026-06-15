@@ -192,6 +192,17 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
 @media(max-width:520px){.btn.ghost{margin-left:0;margin-top:10px}}
 
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* hero image layout — image right of text */
+.page-hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
+.page-hero-img{border-radius:18px;overflow:hidden;box-shadow:0 28px 80px rgba(201,94,26,.18),0 0 0 1px rgba(255,255,255,.08);transform:perspective(1200px) rotateY(-3deg);transition:transform .4s}
+.page-hero-img:hover{transform:perspective(1200px) rotateY(0deg)}
+.page-hero-img img{width:100%;display:block}
+@media(max-width:900px){
+  .page-hero .wrap{grid-template-columns:1fr;gap:32px}
+  .page-hero-img{transform:none;max-width:540px;margin:0 auto}
+}
+
 </style>
 </head>
 <body>
@@ -201,6 +212,7 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
 <!-- HERO: pitch + form card -->
 <header class="page-hero">
   <div class="wrap">
+    <div>
     <div class="hero-grid">
 
       <div>
@@ -289,6 +301,10 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
 
     </div>
   </div>
+    <div class="page-hero-img">
+      <img src="/public/feat-search.jpg" alt="Lead search platform" loading="lazy">
+    </div>
+  </div>
 </header>
 
 <!-- STATS BAND -->
@@ -323,7 +339,7 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
       <div class="pillar">
         <div class="picon"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
         <h3>Export and start dialing</h3>
-        <p>One-click CSV export on every plan. Drop your list into your dialer, CRM, or cold email tool and run your outreach the same day.</p>
+        <p>Export to CSV, JSON, Excel, or branded PDF — or push directly into HubSpot, Salesforce, Pipedrive, or Outreach with one click. Drop your list into your dialer or cold email tool and run your outreach the same day.</p>
       </div>
     </div>
   </div>
@@ -360,7 +376,7 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
         <div class="num">4</div>
         <div>
           <h3>Export and run outreach</h3>
-          <p>Export your list to CSV and drop it into your dialer, CRM, or cold email tool. Most users are dialing the same day.</p>
+          <p>Export to CSV, Excel, PDF, or any major CRM format and drop it into your dialer or cold email tool. Most users are dialing the same day.</p>
         </div>
       </div>
     </div>
@@ -396,7 +412,7 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
 
       <div class="faq-item">
         <div class="faq-q">Can I export the contacts I unlock?</div>
-        <p class="faq-a">Yes &mdash; one-click CSV export on every plan, including the free trial. Your lists work in any dialer, CRM, or cold email tool.</p>
+        <p class="faq-a">Yes &mdash; export to CSV, JSON, XLSX, or PDF on every plan, including the free trial. We also offer one-click CRM-ready exports for HubSpot, Salesforce, Pipedrive, and Outreach.</p>
       </div>
     </div>
   </div>

@@ -114,6 +114,17 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
   padding:13px 28px;border-radius:10px;box-shadow:0 6px 20px rgba(201,94,26,.35);transition:.15s;
 }
 .btn:hover{background:var(--orange-dark);text-decoration:none}
+
+/* hero image layout — image right of text */
+.page-hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
+.page-hero-img{border-radius:18px;overflow:hidden;box-shadow:0 28px 80px rgba(201,94,26,.18),0 0 0 1px rgba(255,255,255,.08);transform:perspective(1200px) rotateY(-3deg);transition:transform .4s}
+.page-hero-img:hover{transform:perspective(1200px) rotateY(0deg)}
+.page-hero-img img{width:100%;display:block}
+@media(max-width:900px){
+  .page-hero .wrap{grid-template-columns:1fr;gap:32px}
+  .page-hero-img{transform:none;max-width:540px;margin:0 auto}
+}
+
 </style>
 </head>
 <body>
@@ -122,6 +133,7 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
 
 <header class="page-hero">
   <div class="wrap">
+    <div>
     <span class="eyebrow">Our Data</span>
     <h1>The database built for people who sell to real businesses</h1>
     <p>Owners, operators, and decision-makers across North America — with the trades and local service coverage the big platforms skip.</p>
@@ -130,6 +142,10 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
       <div class="hstat"><div class="n">60+</div><div class="l">Industries covered</div></div>
       <div class="hstat"><div class="n">CA + US</div><div class="l">Full coverage</div></div>
       <div class="hstat"><div class="n">Monthly</div><div class="l">Refresh cycles</div></div>
+    </div>
+  </div>
+    <div class="page-hero-img">
+      <img src="/public/feat-data.jpg" alt="Data verification and quality pipeline" loading="lazy">
     </div>
   </div>
 </header>

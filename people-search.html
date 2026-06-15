@@ -85,6 +85,17 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
 }
 .cta-band h2{margin-bottom:8px}
 .cta-band p{color:#A8B0BB;margin-bottom:24px}
+
+/* hero image layout — image right of text */
+.page-hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
+.page-hero-img{border-radius:18px;overflow:hidden;box-shadow:0 28px 80px rgba(201,94,26,.18),0 0 0 1px rgba(255,255,255,.08);transform:perspective(1200px) rotateY(-3deg);transition:transform .4s}
+.page-hero-img:hover{transform:perspective(1200px) rotateY(0deg)}
+.page-hero-img img{width:100%;display:block}
+@media(max-width:900px){
+  .page-hero .wrap{grid-template-columns:1fr;gap:32px}
+  .page-hero-img{transform:none;max-width:540px;margin:0 auto}
+}
+
 </style>
 </head>
 <body>
@@ -93,6 +104,7 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
 
 <header class="page-hero">
   <div class="wrap">
+    <div>
     <div class="hero-grid">
       <div>
         <span class="eyebrow">Platform · People Search</span>
@@ -110,6 +122,10 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
         <div class="mock-row"><span class="mock-av" style="background:#1B8A5A">TB</span><span><span class="mock-nm">Travis Boychuk</span><br><span class="mock-tt">Owner · Boychuk Roofing</span></span><span class="mock-pill g">Direct line</span></div>
         <div class="mock-row" style="border-bottom:none"><span class="mock-av" style="background:#7C3AED">LT</span><span><span class="mock-nm">Lisa Tran</span><br><span class="mock-tt">CEO · Tran Mechanical</span></span><span class="mock-pill">HVAC</span></div>
       </div>
+    </div>
+  </div>
+    <div class="page-hero-img">
+      <img src="/public/feat-search.jpg" alt="People search analytics dashboard" loading="lazy">
     </div>
   </div>
 </header>
@@ -146,7 +162,7 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
     <div class="steps">
       <div class="step"><div class="num">1</div><div><h3>Stack your filters</h3><p>Industry + region + title + company size. The result count updates live so you can see your market before spending a single credit.</p></div></div>
       <div class="step"><div class="num">2</div><div><h3>Inspect before you unlock</h3><p>Click any row for the full profile — company, size, location, verification status. Searching and browsing never cost credits.</p></div></div>
-      <div class="step"><div class="num">3</div><div><h3>Unlock and go</h3><p>One credit reveals email and phone together. Copy to clipboard, or export your whole selection to CSV for your dialer or CRM.</p></div></div>
+      <div class="step"><div class="num">3</div><div><h3>Unlock and go</h3><p>One credit reveals email and phone together. Copy to clipboard, or export your selection to CSV, Excel, PDF, or one-click CRM formats (HubSpot, Salesforce, Pipedrive, Outreach).</p></div></div>
     </div>
   </div>
 </section>

@@ -104,6 +104,17 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
 .cta-band h2 span{color:var(--orange-bright)}
 .cta-band p{color:#A8B0BB;margin-bottom:24px}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* hero image layout — image right of text */
+.page-hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
+.page-hero-img{border-radius:18px;overflow:hidden;box-shadow:0 28px 80px rgba(201,94,26,.18),0 0 0 1px rgba(255,255,255,.08);transform:perspective(1200px) rotateY(-3deg);transition:transform .4s}
+.page-hero-img:hover{transform:perspective(1200px) rotateY(0deg)}
+.page-hero-img img{width:100%;display:block}
+@media(max-width:900px){
+  .page-hero .wrap{grid-template-columns:1fr;gap:32px}
+  .page-hero-img{transform:none;max-width:540px;margin:0 auto}
+}
+
 </style>
 </head>
 <body>
@@ -112,6 +123,7 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
 
 <header class="page-hero">
   <div class="wrap">
+    <div>
     <span class="eyebrow"><span class="eyebrow-dot"></span>Solutions &middot; Agencies</span>
     <h1>Every client. Every market. <span>One data standard.</span></h1>
     <p class="sub">Roofers in Denver, landscapers in Surrey, movers in Winnipeg &mdash; build per-client prospect lists from one platform instead of gambling on a different sketchy list vendor every campaign.</p>
@@ -124,6 +136,10 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
       <div class="stat"><div class="n">7,500</div><div class="l">monthly credits on Agency</div></div>
       <div class="stat"><div class="n">Multi-seat</div><div class="l">access for your whole team</div></div>
       <div class="stat"><div class="n">$0.04</div><div class="l">per contact at volume</div></div>
+    </div>
+  </div>
+    <div class="page-hero-img">
+      <img src="/public/feat-export.jpg" alt="Agency workspace with multi-client dashboards" loading="lazy">
     </div>
   </div>
 </header>
@@ -159,7 +175,7 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
     <h2>New client onboarding, data included</h2>
     <div class="steps">
       <div class="step"><div class="num">1</div><div><h3>Scope the market live on the sales call</h3><p>"There are 312 roofing companies over 10 staff in your metro" &mdash; said with the platform open in front of the prospect. Market sizing becomes a closing tool, at no extra cost.</p></div></div>
-      <div class="step"><div class="num">2</div><div><h3>Build the campaign segment</h3><p>Filter to the client's exact ICP, reveal the contacts the campaign needs, and export a clean per-client CSV in minutes.</p></div></div>
+      <div class="step"><div class="num">2</div><div><h3>Build the campaign segment</h3><p>Filter to the client's exact ICP, reveal the contacts the campaign needs, and export per-client lists in CSV, Excel, PDF, or push directly into the client's CRM (HubSpot, Salesforce, Pipedrive, Outreach) in minutes.</p></div></div>
       <div class="step"><div class="num">3</div><div><h3>Run it through your stack</h3><p>Load into the client's outreach tools or your white-labeled system &mdash; cold email, dialers, direct mail, whatever the retainer covers.</p></div></div>
       <div class="step"><div class="num">4</div><div><h3>Refresh every cycle</h3><p>Re-run the saved filters next month for new businesses and updated records. Recurring data for recurring retainers.</p></div></div>
     </div>

@@ -79,6 +79,17 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
 }
 .cta-band h2{margin-bottom:8px}
 .cta-band p{color:#A8B0BB;margin-bottom:24px}
+
+/* hero image layout — image right of text */
+.page-hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
+.page-hero-img{border-radius:18px;overflow:hidden;box-shadow:0 28px 80px rgba(201,94,26,.18),0 0 0 1px rgba(255,255,255,.08);transform:perspective(1200px) rotateY(-3deg);transition:transform .4s}
+.page-hero-img:hover{transform:perspective(1200px) rotateY(0deg)}
+.page-hero-img img{width:100%;display:block}
+@media(max-width:900px){
+  .page-hero .wrap{grid-template-columns:1fr;gap:32px}
+  .page-hero-img{transform:none;max-width:540px;margin:0 auto}
+}
+
 </style>
 </head>
 <body>
@@ -87,6 +98,7 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
 
 <header class="page-hero">
   <div class="wrap">
+    <div>
     <div class="hero-grid">
       <div>
         <span class="eyebrow">Platform · Company Search</span>
@@ -104,6 +116,10 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
         <div class="mock-row"><span class="mock-lg">T</span><span><span class="mock-nm">Tran Mechanical Inc</span><br><span class="mock-tt">54 employees · Toronto, ON</span></span><span class="mock-pill">$5M–$10M</span></div>
         <div class="mock-row" style="border-bottom:none"><span class="mock-lg">P</span><span><span class="mock-nm">Pacific Crest Builders</span><br><span class="mock-tt">88 employees · Vancouver, BC</span></span><span class="mock-pill">$10M–$50M</span></div>
       </div>
+    </div>
+  </div>
+    <div class="page-hero-img">
+      <img src="/public/feat-data.jpg" alt="Company intelligence dashboard" loading="lazy">
     </div>
   </div>
 </header>
