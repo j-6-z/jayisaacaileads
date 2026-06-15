@@ -1354,18 +1354,20 @@ function clearFilters(){
 }
 
 /* ================= FILTER LOGIC ================= */
-function provOf(loc){ return loc.split(", ")[1]; }
+function provOf(loc){ return (loc || "").split(", ")[1] || ""; }
 function matchesPerson(p){
   const f = state.filters;
+  /* Coerce nulls to empty strings so string ops never crash */
+  const pn = p.n || "", pt = p.t || "", pc = p.c || "", pl = p.l || "", pi = p.i || "";
   if(f.title.size){
     let ok=false;
-    f.title.forEach(t=>{ if(TITLE_MAP[t].some(m=>p.t.includes(m))) ok=true; });
+    f.title.forEach(t=>{ if(TITLE_MAP[t].some(m=>pt.includes(m))) ok=true; });
     if(!ok) return false;
   }
-  if(f.industry.size && !f.industry.has(p.i)) return false;
+  if(f.industry.size && !f.industry.has(pi)) return false;
   if(f.region.size){
     let ok=false;
-    f.region.forEach(r=>{ if(REGION_MAP[r].includes(provOf(p.l))) ok=true; });
+    f.region.forEach(r=>{ if(REGION_MAP[r].includes(provOf(pl))) ok=true; });
     if(!ok) return false;
   }
   if(f.size.size){
@@ -1379,16 +1381,17 @@ function matchesPerson(p){
   }
   if(state.search){
     const q = state.search.toLowerCase();
-    if(!(p.n+p.t+p.c+p.l+p.i).toLowerCase().includes(q)) return false;
+    if(!(pn+pt+pc+pl+pi).toLowerCase().includes(q)) return false;
   }
   return true;
 }
 function matchesCompany(co){
   const f = state.filters;
-  if(f.industry.size && !f.industry.has(co.i)) return false;
+  const cc = co.c || "", cl = co.l || "", ci = co.i || "";
+  if(f.industry.size && !f.industry.has(ci)) return false;
   if(f.region.size){
     let ok=false;
-    f.region.forEach(r=>{ if(REGION_MAP[r].includes(provOf(co.l))) ok=true; });
+    f.region.forEach(r=>{ if(REGION_MAP[r].includes(provOf(cl))) ok=true; });
     if(!ok) return false;
   }
   if(f.size.size){
@@ -1402,13 +1405,17 @@ function matchesCompany(co){
   }
   if(state.search){
     const q = state.search.toLowerCase();
-    if(!(co.c+co.l+co.i).toLowerCase().includes(q)) return false;
+    if(!(cc+cl+ci).toLowerCase().includes(q)) return false;
   }
   return true;
 }
 
 /* ================= RENDER ================= */
-function initials(name){ return name.split(" ").map(w=>w[0]).slice(0,2).join(""); }
+function initials(name){
+  if(!name || typeof name !== "string") return "??";
+  const parts = name.split(" ").map(w=>w[0]).filter(Boolean);
+  return parts.slice(0,2).join("") || "??";
+}
 function avColor(name){ let h=0; for(const ch of name) h=(h*31+ch.charCodeAt(0))%AV_COLORS.length; return AV_COLORS[h]; }
 
 function render(){
@@ -2220,15 +2227,18 @@ function renderEnrich(){
 
   function searchPeople(filters){
     return PEOPLE.filter(p => {
-      if(filters.industries.length && !filters.industries.some(ind => p.i.toLowerCase().includes(ind.toLowerCase()))) return false;
-      if(filters.roles.length && !filters.roles.some(r => p.t.toLowerCase().includes(r.toLowerCase()))) return false;
+      const pi = (p.i || "").toLowerCase();
+      const pt = (p.t || "").toLowerCase();
+      const pl = (p.l || "").toLowerCase();
+      if(filters.industries.length && !filters.industries.some(ind => pi.includes(ind.toLowerCase()))) return false;
+      if(filters.roles.length && !filters.roles.some(r => pt.includes(r.toLowerCase()))) return false;
       if(filters.locations.length){
-        const ploc = p.l.split(",").map(s=>s.trim());
+        const ploc = (p.l || "").split(",").map(s=>s.trim());
         const pState = ploc[ploc.length-1];
         if(!filters.locations.includes(pState)) return false;
       }
       if(filters.cities.length){
-        if(!filters.cities.some(city => p.l.toLowerCase().includes(city.toLowerCase()))) return false;
+        if(!filters.cities.some(city => pl.includes(city.toLowerCase()))) return false;
       }
       if(filters.maxEmp && p.ce > filters.maxEmp) return false;
       if(filters.minEmp && p.ce < filters.minEmp) return false;
@@ -2251,14 +2261,18 @@ function renderEnrich(){
   function renderResults(results){
     if(!results.length) return '<div style="text-align:center;padding:30px;color:var(--t3)">No matching contacts found. Try a broader search.</div>';
     const rows = results.slice(0,20).map(p=>{
-      const init = p.n.split(/\s+/).map(w=>w[0]).join("").slice(0,2);
-      const revealed = state.revealed.has(p.n);
+      /* Fall back through name → company → "??" so we never call split() on null */
+      const labelSource = (p.n && p.n.trim()) || (p.c && p.c.trim()) || "??";
+      const init = labelSource.split(/\s+/).map(w=>w[0]).filter(Boolean).join("").slice(0,2) || "??";
+      const displayName = (p.n && p.n.trim()) || "(No owner listed)";
+      const safeName = (p.n || p.c || "").replace(/'/g,"\\'");
+      const revealed = state.revealed.has(p.n || p.id);
       return `<div style="display:grid;grid-template-columns:36px 1.4fr 1fr .6fr 90px;gap:8px;padding:10px 12px;align-items:center;border-bottom:1px solid var(--hair);font-size:.82rem">
         <div style="width:32px;height:32px;border-radius:50%;background:var(--p2);border:1px solid var(--hair);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:var(--o)">${init}</div>
-        <div><div style="font-weight:700;color:var(--t1)">${p.n}</div><div style="font-size:.75rem;color:var(--t3)">${p.t} · ${p.l}</div></div>
-        <div><div style="font-weight:600;color:var(--t1)">${p.c}</div><div style="font-size:.75rem;color:var(--t3)">${p.ce} employees · ${p.i}</div></div>
+        <div><div style="font-weight:700;color:var(--t1)">${displayName}</div><div style="font-size:.75rem;color:var(--t3)">${p.t || "—"} · ${p.l || "—"}</div></div>
+        <div><div style="font-weight:600;color:var(--t1)">${p.c || "—"}</div><div style="font-size:.75rem;color:var(--t3)">${p.ce || 0} employees · ${p.i || "—"}</div></div>
         <div style="font-size:.72rem;color:var(--t3)">${p.ce<15?'<span style="color:#4ADE80;font-weight:700">● High</span>':'<span style="color:var(--t3)">● Medium</span>'}</div>
-        <div><button style="background:var(--o);color:#fff;border:none;padding:6px 12px;border-radius:7px;font-size:.72rem;font-weight:700;cursor:pointer;font-family:inherit" onclick="revealFromAI('${p.n.replace(/'/g,"\\'")}')">${revealed?'Revealed':'Reveal'}</button></div>
+        <div><button style="background:var(--o);color:#fff;border:none;padding:6px 12px;border-radius:7px;font-size:.72rem;font-weight:700;cursor:pointer;font-family:inherit" onclick="revealFromAI('${safeName}')">${revealed?'Revealed':'Reveal'}</button></div>
       </div>`;
     }).join("");
     return `<div style="background:var(--p1);border:1px solid var(--hair);border-radius:12px;overflow:hidden">
@@ -2300,20 +2314,23 @@ function renderEnrich(){
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: q }),
       });
-      const data = await resp.json();
-      if(data.ok && data.filters){
-        /* map AI response to our filter format */
-        const f = data.filters;
-        filters = {
-          industries: f.industry ? [f.industry] : [],
-          roles: f.role ? [f.role] : [],
-          locations: f.location ? [f.location] : [],
-          cities: f.city ? [f.city] : [],
-          maxEmp: f.maxEmployees || null,
-          minEmp: f.minEmployees || null,
-          summary: f.summary || null,
-        };
-        aiPowered = true;
+      if(!resp.ok){
+        console.warn(`AI API returned ${resp.status} — using local parser`);
+      } else {
+        const data = await resp.json();
+        if(data.ok && data.filters){
+          const f = data.filters;
+          filters = {
+            industries: f.industry ? [f.industry] : [],
+            roles: f.role ? [f.role] : [],
+            locations: f.location ? [f.location] : [],
+            cities: f.city ? [f.city] : [],
+            maxEmp: f.maxEmployees || null,
+            minEmp: f.minEmployees || null,
+            summary: f.summary || null,
+          };
+          aiPowered = true;
+        }
       }
     } catch(e){
       console.warn("AI API unavailable, using local parser:", e.message);
@@ -2359,18 +2376,21 @@ function renderEnrich(){
 }
 
 /* global reveal from AI view */
-window.revealFromAI = function(name){
-  const p = PEOPLE.find(x=>x.n===name);
-  if(!p) return;
-  if(state.revealed.has(name)){ toast("Already revealed","info"); return; }
+window.revealFromAI = function(nameOrId){
+  /* Match by id first (real Firestore records), fall back to name (demo data) */
+  const p = PEOPLE.find(x => x.id === nameOrId) || PEOPLE.find(x => x.n === nameOrId);
+  if(!p){ toast("Contact not found","err"); return; }
+  const key = p.id || p.n;
+  if(state.revealed.has(key)){ toast("Already revealed","info"); return; }
   if(state.credits<1){ toast("No credits left","err"); return; }
+  /* real-database mode: server-enforced */
+  if(window.fbReveal){ window.fbReveal(p.id); return; }
   state.credits--;
-  state.revealed.add(name);
+  state.revealed.add(key);
   document.getElementById("creditCount").textContent = state.credits;
-  /* also update avatar menu credits if visible */
   const amc = document.getElementById("amCredits");
   if(amc) amc.textContent = state.credits;
-  toast("Revealed: " + name,"ok");
+  toast("Revealed: " + (p.n || p.c),"ok");
   renderEnrich();
 };
 
