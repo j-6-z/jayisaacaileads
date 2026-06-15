@@ -2591,9 +2591,19 @@ if (DEV_BYPASS) {
 const STARTING_CREDITS = 100;
 let userRef = null;
 
+/* HARD FALLBACK — veil hides after 6 seconds no matter what.
+   Keeps the app from hanging on a slow Firestore round-trip. */
+const veilFallback = setTimeout(() => {
+  const veil = document.getElementById("authVeil");
+  if (veil && !veil.classList.contains("hide")) {
+    console.warn("Auth veil timeout — showing app anyway");
+    veil.classList.add("hide");
+  }
+}, 6000);
+
 onAuthStateChanged(auth, async (user) => {
   if (DEV_BYPASS) return;   /* ← dev bypass: never run the auth gate */
-  if (!user) { location.replace("login.html"); return; }
+  if (!user) { clearTimeout(veilFallback); location.replace("login.html"); return; }
 
   /* avatar initials from profile */
   const label = user.displayName || user.email || "U";
@@ -2626,6 +2636,7 @@ onAuthStateChanged(auth, async (user) => {
   document.getElementById("creditCount").textContent = state.credits;
   await loadContacts(user);
   render();
+  clearTimeout(veilFallback);   /* ← auth completed, cancel the timeout */
   document.getElementById("authVeil").classList.add("hide");
 });
 
@@ -2636,7 +2647,12 @@ let realMode = false;
 
 async function loadContacts(user){
   try {
-    const snap = await getDocs(query(collection(db, "contacts"), limit(MAX_LOAD)));
+    /* Race the query against a 4s timeout — never block the UI on Firestore */
+    const queryPromise = getDocs(query(collection(db, "contacts"), limit(MAX_LOAD)));
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error("contacts query timeout")), 4000)
+    );
+    const snap = await Promise.race([queryPromise, timeoutPromise]);
     if (snap.empty) {
       toast("Demo dataset active — import contacts to go live");
       return; /* keep demo arrays */
