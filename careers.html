@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" href="/my-favicon/favicon.ico" sizes="any">
+<link rel="icon" href="/my-favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/my-favicon/favicon-96x96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/my-favicon/apple-touch-icon.png" sizes="180x180">
+<link rel="manifest" href="/my-favicon/site.webmanifest">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Careers — JAYISAAC AI</title>
+<meta name="description" content="Help us build the B2B sales intelligence platform that should exist. We're a small, ambitious team based in Saskatoon — building for North America.">
+<meta property="og:title" content="Careers at JAYISAAC AI">
+<meta property="og:description" content="Help us build the B2B sales intelligence platform that should exist.">
+<meta property="og:image" content="/public/og-default.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<script type="module" src="./nav.js"></script>
+<script type="module" src="./footer.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:       #FFFFFF;
+    --surf:     #F9FAFB;
+    --card:     #FFFFFF;
+    --border:   #E5E7EB;
+    --borderl:  #D1D5DB;
+    --or:       #C95E1A;
+    --orh:      #E06B1E;
+    --ordim:    rgba(201,94,26,.12);
+    --ore:      rgba(201,94,26,.28);
+    --ink:      #111827;
+    --ink2:     #1F2937;
+    --muted:    #6B7280;
+    --faint:    #F3F4F6;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px; line-height: 1.6; overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 80vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 160px 5vw 90px; position: relative; overflow: hidden;
+    background: #0B0E13;
+    color: #F2F2F2;
+  }
+  .hero > *:not(canvas) { position: relative; z-index: 2; }
+  #heroCanvas { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .hero::after {
+    content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(255,107,26,.13), transparent 50%),
+      radial-gradient(circle at 70% 80%, rgba(123,92,250,.08), transparent 50%);
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+    font-weight: 700; color: rgba(255,107,26,.95);
+    background: rgba(201,94,26,.1); border: 1px solid rgba(201,94,26,.25);
+    padding: 8px 16px; border-radius: 999px; margin-bottom: 28px;
+  }
+  .hero-dot { width: 6px; height: 6px; border-radius: 50%; background: #FF6B1A; box-shadow: 0 0 8px #FF6B1A; }
+  .hero h1 {
+    font-size: clamp(40px, 6vw, 72px); font-weight: 800;
+    letter-spacing: -.025em; line-height: 1.05; margin-bottom: 24px;
+    max-width: 880px;
+  }
+  .hero h1 .g {
+    background: linear-gradient(135deg, #FF8A3D 0%, #C44E10 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero-sub {
+    font-size: clamp(16px, 1.6vw, 19px); color: rgba(242,242,242,.7);
+    max-width: 640px; margin-bottom: 36px; line-height: 1.55;
+  }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+  .hero-btn-primary, .hero-btn-ghost {
+    padding: 14px 28px; border-radius: 12px; font-weight: 700; font-size: 14px;
+    text-decoration: none; transition: all .2s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .hero-btn-primary {
+    background: linear-gradient(135deg, #FF8A3D, #C44E10); color: #fff;
+    box-shadow: 0 0 24px rgba(255,107,26,.35);
+  }
+  .hero-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 32px rgba(255,107,26,.55); }
+  .hero-btn-ghost { background: transparent; color: #F2F2F2; border: 1px solid rgba(255,255,255,.18); }
+  .hero-btn-ghost:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.3); }
+
+  /* ── SECTION FRAME ── */
+  .sec { padding: 110px 5vw; }
+  .sec-inner { max-width: 1180px; margin: 0 auto; }
+  .sec-eyebrow {
+    display: inline-block; font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--or); font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .sec-title {
+    font-size: clamp(32px, 4vw, 48px); font-weight: 800;
+    letter-spacing: -.02em; line-height: 1.1; margin-bottom: 18px; color: var(--ink);
+  }
+  .sec-title .g {
+    background: linear-gradient(135deg, #FF8A3D 0%, #C44E10 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .sec-sub { font-size: 18px; color: var(--muted); max-width: 720px; line-height: 1.55; }
+  .sec.dark { background: #0B0E13; color: #F2F2F2; }
+  .sec.dark .sec-title { color: #F2F2F2; }
+  .sec.dark .sec-sub { color: rgba(242,242,242,.65); }
+  .sec.surf { background: var(--surf); }
+
+  /* ── MISSION ── */
+  .mission {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .mission-quote {
+    font-size: clamp(22px, 2.4vw, 30px); font-weight: 600; letter-spacing: -.01em;
+    line-height: 1.35; color: var(--ink);
+  }
+  .mission-quote .accent { color: var(--or); }
+  .mission-by {
+    margin-top: 24px; display: flex; align-items: center; gap: 12px;
+    font-size: 13px; color: var(--muted); font-weight: 500;
+  }
+  .mission-by-av {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, #FF8A3D, #C44E10); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 13px;
+  }
+  @media(max-width: 800px){ .mission { grid-template-columns: 1fr; gap: 36px; } }
+
+  /* ── VALUES ── */
+  .values-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 56px;
+  }
+  .vcard {
+    background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08);
+    border-radius: 16px; padding: 32px; transition: all .25s;
+  }
+  .vcard:hover {
+    background: rgba(255,107,26,.04); border-color: rgba(255,107,26,.25);
+    transform: translateY(-2px);
+  }
+  .vcard-num {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: rgba(255,107,26,.7); letter-spacing: 2px; margin-bottom: 14px;
+  }
+  .vcard-title {
+    font-size: 22px; font-weight: 700; color: #F2F2F2;
+    letter-spacing: -.01em; margin-bottom: 10px;
+  }
+  .vcard-desc { color: rgba(242,242,242,.65); font-size: 15px; line-height: 1.55; }
+  @media(max-width: 720px){ .values-grid { grid-template-columns: 1fr; } }
+
+  /* ── HOW WE WORK ── */
+  .work-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px;
+  }
+  .wcard {
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+    padding: 32px; transition: all .25s;
+  }
+  .wcard:hover {
+    border-color: rgba(201,94,26,.35);
+    box-shadow: 0 12px 32px rgba(201,94,26,.08);
+    transform: translateY(-2px);
+  }
+  .wcard-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--ordim); border: 1px solid var(--ore);
+    display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+  }
+  .wcard-icon svg { width: 22px; height: 22px; color: var(--or); }
+  .wcard-title { font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 8px; letter-spacing: -.01em; }
+  .wcard-desc { color: var(--muted); font-size: 14.5px; line-height: 1.55; }
+  @media(max-width: 900px){ .work-grid { grid-template-columns: 1fr; } }
+
+  /* ── ROLES ── */
+  .roles-intro { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end; }
+  .roles-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 48px;
+  }
+  .rcard {
+    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+    padding: 26px 28px; transition: all .2s;
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  }
+  .rcard:hover {
+    border-color: var(--or); background: var(--surf);
+    transform: translateX(4px);
+  }
+  .rcard-left { flex: 1; }
+  .rcard-dept {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--or); letter-spacing: 1.5px; text-transform: uppercase;
+    font-weight: 600; margin-bottom: 6px;
+  }
+  .rcard-title {
+    font-size: 17px; font-weight: 700; color: var(--ink);
+    letter-spacing: -.01em; margin-bottom: 4px;
+  }
+  .rcard-meta { font-size: 13px; color: var(--muted); }
+  .rcard-status {
+    flex-shrink: 0; padding: 6px 12px; border-radius: 999px;
+    font-size: 11px; font-weight: 700; letter-spacing: .5px;
+    background: rgba(107,114,128,.1); color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  .rcard-status.open {
+    background: rgba(34,197,94,.08); color: #16A34A; border-color: rgba(34,197,94,.2);
+  }
+  @media(max-width: 720px){
+    .roles-grid { grid-template-columns: 1fr; }
+    .roles-intro { grid-template-columns: 1fr; }
+  }
+
+  /* ── COMP & BENEFITS ── */
+  .benefits-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 56px;
+  }
+  .bcard {
+    background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08);
+    border-radius: 14px; padding: 24px;
+  }
+  .bcard-icon { width: 36px; height: 36px; margin-bottom: 14px; color: var(--or); }
+  .bcard-icon svg { width: 100%; height: 100%; }
+  .bcard-title { font-size: 15px; font-weight: 700; color: #F2F2F2; margin-bottom: 6px; }
+  .bcard-desc { font-size: 13.5px; color: rgba(242,242,242,.6); line-height: 1.5; }
+  @media(max-width: 900px){ .benefits-grid { grid-template-columns: repeat(2,1fr); } }
+  @media(max-width: 520px){ .benefits-grid { grid-template-columns: 1fr; } }
+
+  /* ── WAITLIST FORM ── */
+  .waitlist-wrap {
+    max-width: 720px; margin: 0 auto; padding: 48px 40px;
+    background: linear-gradient(135deg, rgba(255,107,26,.06), rgba(201,94,26,.02));
+    border: 1px solid rgba(201,94,26,.2); border-radius: 24px;
+    text-align: center; margin-top: 64px;
+  }
+  .waitlist-title {
+    font-size: 28px; font-weight: 800; color: var(--ink);
+    letter-spacing: -.02em; margin-bottom: 10px;
+  }
+  .waitlist-sub { font-size: 15px; color: var(--muted); margin-bottom: 28px; }
+  .wl-form { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .wl-form input, .wl-form select, .wl-form textarea {
+    width: 100%; padding: 14px 16px; border-radius: 10px;
+    border: 1px solid var(--borderl); background: #fff;
+    font-family: inherit; font-size: 14.5px; color: var(--ink);
+    transition: border-color .15s;
+  }
+  .wl-form input:focus, .wl-form select:focus, .wl-form textarea:focus {
+    outline: none; border-color: var(--or); box-shadow: 0 0 0 3px var(--ordim);
+  }
+  .wl-form .full { grid-column: 1 / -1; }
+  .wl-form textarea { resize: vertical; min-height: 110px; font-family: inherit; }
+  .wl-submit {
+    grid-column: 1 / -1;
+    padding: 14px 32px; border-radius: 10px; border: none;
+    background: linear-gradient(135deg, #FF8A3D, #C44E10); color: #fff;
+    font-family: inherit; font-size: 14px; font-weight: 700; letter-spacing: .3px;
+    cursor: pointer; transition: all .2s; box-shadow: 0 0 18px rgba(255,107,26,.3);
+  }
+  .wl-submit:hover { transform: translateY(-1px); box-shadow: 0 0 28px rgba(255,107,26,.5); }
+  .wl-submit:active { transform: scale(.98); }
+  .wl-note { font-size: 12px; color: var(--muted); margin-top: 16px; }
+  .wl-success {
+    display: none; padding: 18px; border-radius: 10px;
+    background: rgba(34,197,94,.08); color: #15803D;
+    border: 1px solid rgba(34,197,94,.2);
+    font-size: 14px; font-weight: 600;
+  }
+  .wl-success.show { display: block; }
+  @media(max-width: 600px){ .wl-form { grid-template-columns: 1fr; } }
+
+  /* ── FOUNDER NOTE ── */
+  .founder {
+    max-width: 760px; margin: 0 auto; text-align: center;
+  }
+  .founder-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px; padding: 48px 40px; margin-top: 40px;
+    text-align: left;
+  }
+  .founder-text {
+    font-size: 17px; color: var(--ink2); line-height: 1.7; margin-bottom: 20px;
+  }
+  .founder-text:last-of-type { margin-bottom: 32px; }
+  .founder-sig {
+    display: flex; align-items: center; gap: 16px;
+    padding-top: 24px; border-top: 1px solid var(--border);
+  }
+  .founder-av {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: linear-gradient(135deg, #FF8A3D, #C44E10); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 18px;
+  }
+  .founder-name { font-size: 16px; font-weight: 700; color: var(--ink); }
+  .founder-role { font-size: 13px; color: var(--muted); }
+
+  /* ── REVEAL ANIM ── */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.show { opacity: 1; transform: translateY(0); }
+
+  /* ── REDUCED MOTION ── */
+  @media(prefers-reduced-motion:reduce){
+    *, *::before, *::after { animation:none!important; transition:none!important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-eyebrow"><span class="hero-dot"></span>We're hiring soon</div>
+  <h1>Help us build the B2B sales platform <span class="g">that should exist.</span></h1>
+  <p class="hero-sub">We're a small team in Saskatoon building intelligent B2B prospecting for sales teams across North America. We move fast, ship constantly, and treat customers like adults.</p>
+  <div class="hero-btns">
+    <a class="hero-btn-primary" href="#openings">See open roles &rarr;</a>
+    <a class="hero-btn-ghost" href="#values">Our principles</a>
+  </div>
+</section>
+
+<!-- ═══ MISSION ═══ -->
+<section class="sec">
+  <div class="sec-inner">
+    <div class="mission reveal">
+      <div>
+        <div class="sec-eyebrow">Our Mission</div>
+        <h2 class="sec-title">Make B2B prospecting <span class="g">feel like 2026.</span></h2>
+        <p class="sec-sub">Sales teams shouldn't need three tools, two CSVs, and a college degree in dropdown menus to find a decision-maker. JAYISAAC AI is what Apollo and ZoomInfo would be if you rebuilt them from scratch in 2026 — with AI that actually understands what you're asking, contact data that's actually current, and pricing that doesn't require an enterprise contract.</p>
+      </div>
+      <div>
+        <p class="mission-quote">"I built JAYISAAC AI because I spent two years cold-emailing for my own businesses and watching prospecting tools <span class="accent">charge thousands of dollars for stale, scraped data.</span> Sales reps deserve better. So do the buyers they're trying to reach."</p>
+        <div class="mission-by">
+          <div class="mission-by-av">JT</div>
+          <div><strong style="color:var(--ink)">Jay Turner</strong> &middot; Founder, JAYISAAC AI</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VALUES ═══ -->
+<section class="sec dark" id="values">
+  <div class="sec-inner">
+    <div style="max-width:620px">
+      <div class="sec-eyebrow">Our Principles</div>
+      <h2 class="sec-title">Five things we <span class="g">actually believe.</span></h2>
+      <p class="sec-sub">Not posters on a wall. These are how we make decisions when it gets hard.</p>
+    </div>
+
+    <div class="values-grid reveal">
+      <div class="vcard">
+        <div class="vcard-num">01 / SPEED</div>
+        <div class="vcard-title">Ship daily. Iterate constantly.</div>
+        <div class="vcard-desc">We'd rather ship 50% of an idea today and learn from real users than spend a quarter perfecting something nobody asked for. Big companies move slow because they have to. We don't.</div>
+      </div>
+
+      <div class="vcard">
+        <div class="vcard-num">02 / HONESTY</div>
+        <div class="vcard-title">Say the real thing.</div>
+        <div class="vcard-desc">To each other, to customers, to investors. Sales theatre is the enemy. If a feature isn't working, we say so. If a customer is asking for something we can't build, we tell them. Direct &gt; comfortable.</div>
+      </div>
+
+      <div class="vcard">
+        <div class="vcard-num">03 / CUSTOMERS</div>
+        <div class="vcard-title">Talk to users. Constantly.</div>
+        <div class="vcard-desc">Every person on the team — engineering, design, ops — talks to customers regularly. Not just sales. The closer everyone is to the user, the better the product gets.</div>
+      </div>
+
+      <div class="vcard">
+        <div class="vcard-num">04 / OWNERSHIP</div>
+        <div class="vcard-title">No "that's not my job."</div>
+        <div class="vcard-desc">Everyone here is expected to own outcomes, not tasks. See a bug? Fix it. See an unhappy customer? Reach out. See an opportunity? Pursue it. We hire people who don't wait for permission.</div>
+      </div>
+
+      <div class="vcard" style="grid-column:1 / -1;">
+        <div class="vcard-num">05 / STAY SMALL, STAY SHARP</div>
+        <div class="vcard-title">Hire slowly. Pay well. Stay lean.</div>
+        <div class="vcard-desc">Bigger isn't better. We'd rather have 12 brilliant people than 60 average ones. Every hire has to clear a high bar. In exchange, we pay top of market, give serious equity, and trust people to do their job without micromanagement.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW WE WORK ═══ -->
+<section class="sec surf">
+  <div class="sec-inner">
+    <div style="max-width:680px">
+      <div class="sec-eyebrow">How We Work</div>
+      <h2 class="sec-title">No theatre. No meetings about meetings. <span class="g">Just work.</span></h2>
+    </div>
+
+    <div class="work-grid reveal">
+      <div class="wcard">
+        <div class="wcard-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </div>
+        <div class="wcard-title">Remote-first, North America</div>
+        <div class="wcard-desc">Work from wherever in Canada or the US. We sync async-first, meet only when necessary, and run on Slack + Linear. HQ is Saskatoon, but you don't need to be.</div>
+      </div>
+
+      <div class="wcard">
+        <div class="wcard-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="wcard-title">Your hours, your output</div>
+        <div class="wcard-desc">We don't track time. We track shipped work. Want to take Wednesday afternoon to take your kid to the dentist? Cool. Want to start your day at noon? Cool. Just deliver.</div>
+      </div>
+
+      <div class="wcard">
+        <div class="wcard-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div class="wcard-title">Minimal process</div>
+        <div class="wcard-desc">No stand-ups. No status meetings. No quarterly OKR theatre. We have a roadmap, a shared sense of urgency, and trust. If you need 6 layers of process to do your job, this isn't the team for you.</div>
+      </div>
+
+      <div class="wcard">
+        <div class="wcard-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="wcard-title">Real ownership</div>
+        <div class="wcard-desc">If you own a project, you actually own it — decision authority included. We hire smart people and get out of their way. No PMs writing tickets for engineers.</div>
+      </div>
+
+      <div class="wcard">
+        <div class="wcard-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="wcard-title">Tools you actually want</div>
+        <div class="wcard-desc">Cursor, Linear, Vercel, Firebase, Stripe, Slack. Modern stack, no legacy enterprise software, no IT department gatekeeping which apps you can install.</div>
+      </div>
+
+      <div class="wcard">
+        <div class="wcard-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="wcard-title">Ship the product, not the company</div>
+        <div class="wcard-desc">Brag-deck SaaS metrics are easy. Building software people actually use is hard. We focus on the second one. Your work matters because customers feel it — not because it ladders to a board slide.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ OPEN ROLES ═══ -->
+<section class="sec" id="openings">
+  <div class="sec-inner">
+    <div class="roles-intro">
+      <div>
+        <div class="sec-eyebrow">Open Roles</div>
+        <h2 class="sec-title">We're growing. <span class="g">Slowly. On purpose.</span></h2>
+        <p class="sec-sub">No active openings right now, but here's what we'll be hiring for next. Drop your info below and we'll reach out when we open up the role you're a fit for.</p>
+      </div>
+    </div>
+
+    <div class="roles-grid reveal">
+      <div class="rcard">
+        <div class="rcard-left">
+          <div class="rcard-dept">Engineering</div>
+          <div class="rcard-title">Founding Full-Stack Engineer</div>
+          <div class="rcard-meta">Remote (Canada/US) &middot; Equity + Salary</div>
+        </div>
+        <div class="rcard-status">Coming soon</div>
+      </div>
+
+      <div class="rcard">
+        <div class="rcard-left">
+          <div class="rcard-dept">Sales</div>
+          <div class="rcard-title">Founding Account Executive</div>
+          <div class="rcard-meta">Remote (Canada/US) &middot; Base + Commission</div>
+        </div>
+        <div class="rcard-status">Coming soon</div>
+      </div>
+
+      <div class="rcard">
+        <div class="rcard-left">
+          <div class="rcard-dept">Customer Success</div>
+          <div class="rcard-title">Founding Customer Success Lead</div>
+          <div class="rcard-meta">Remote (Canada/US) &middot; Salary + Equity</div>
+        </div>
+        <div class="rcard-status">Coming soon</div>
+      </div>
+
+      <div class="rcard">
+        <div class="rcard-left">
+          <div class="rcard-dept">Marketing</div>
+          <div class="rcard-title">Growth &amp; Content Marketer</div>
+          <div class="rcard-meta">Remote (Canada/US) &middot; Contract or FT</div>
+        </div>
+        <div class="rcard-status">Coming soon</div>
+      </div>
+
+      <div class="rcard">
+        <div class="rcard-left">
+          <div class="rcard-dept">Engineering</div>
+          <div class="rcard-title">Data Engineer</div>
+          <div class="rcard-meta">Remote (Canada/US) &middot; Equity + Salary</div>
+        </div>
+        <div class="rcard-status">Coming soon</div>
+      </div>
+
+      <div class="rcard">
+        <div class="rcard-left">
+          <div class="rcard-dept">Open</div>
+          <div class="rcard-title">Don't see your role? Pitch us anyway.</div>
+          <div class="rcard-meta">We hire generalists who do real work over titles</div>
+        </div>
+        <div class="rcard-status open">Always open</div>
+      </div>
+    </div>
+
+    <!-- WAITLIST FORM -->
+    <div class="waitlist-wrap reveal">
+      <div class="waitlist-title">Get on the list.</div>
+      <div class="waitlist-sub">Tell us a bit about you. We'll reach out when a role opens up that fits.</div>
+
+      <form class="wl-form" id="careersForm" action="https://formspree.io/f/mqavdkwr" method="POST">
+        <input type="text" name="name" placeholder="Your full name" required>
+        <input type="email" name="email" placeholder="Email address" required>
+
+        <select name="role_interest" required>
+          <option value="">What role interests you?</option>
+          <option>Engineering — Full-stack</option>
+          <option>Engineering — Data / Backend</option>
+          <option>Sales — Account Executive</option>
+          <option>Customer Success</option>
+          <option>Marketing — Growth / Content</option>
+          <option>Design — Product / Brand</option>
+          <option>Operations / Other</option>
+        </select>
+
+        <input type="url" name="linkedin" placeholder="LinkedIn URL (optional)">
+
+        <textarea class="full" name="message" placeholder="What are you working on right now? What would you want to build here? (Be honest — generic answers go to the bottom of the pile.)" required></textarea>
+
+        <input type="hidden" name="_subject" value="JAYISAAC AI — Careers application">
+        <input type="hidden" name="source" value="careers.html">
+
+        <button class="wl-submit" type="submit">Send it &rarr;</button>
+      </form>
+
+      <div class="wl-success" id="wlSuccess">
+        Got it. We'll be in touch when something opens up that fits.
+      </div>
+
+      <div class="wl-note">We respond to every submission within 5 business days, even if it's not a fit right now.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COMP & BENEFITS ═══ -->
+<section class="sec dark">
+  <div class="sec-inner">
+    <div style="max-width:680px">
+      <div class="sec-eyebrow">Compensation &amp; Benefits</div>
+      <h2 class="sec-title">Pay people well. <span class="g">Treat them like adults.</span></h2>
+      <p class="sec-sub">We're a startup, so we can't compete with FAANG cash. But we don't try to underpay you "for the equity upside" either. Here's the deal:</p>
+    </div>
+
+    <div class="benefits-grid reveal">
+      <div class="bcard">
+        <div class="bcard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+        <div class="bcard-title">Top-of-market salary</div>
+        <div class="bcard-desc">Benchmarked against startup salary data (Levels.fyi, Pave). No "below market because equity."</div>
+      </div>
+      <div class="bcard">
+        <div class="bcard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="bcard-title">Real equity</div>
+        <div class="bcard-desc">Meaningful stake in a company you'll help build. Standard 4-year vest with a 1-year cliff.</div>
+      </div>
+      <div class="bcard">
+        <div class="bcard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="bcard-title">Work from anywhere</div>
+        <div class="bcard-desc">Canada or US. No mandatory office days. We meet in person 1-2x a year as a team.</div>
+      </div>
+      <div class="bcard">
+        <div class="bcard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div class="bcard-title">Health benefits</div>
+        <div class="bcard-desc">Comprehensive health, dental, and vision coverage. Mental health support included.</div>
+      </div>
+      <div class="bcard">
+        <div class="bcard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <div class="bcard-title">Real PTO</div>
+        <div class="bcard-desc">Unlimited PTO that we actually expect you to use. We track minimums, not maximums.</div>
+      </div>
+      <div class="bcard">
+        <div class="bcard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <div class="bcard-title">Gear budget</div>
+        <div class="bcard-desc">Pick your own laptop and home office setup. Stipend up to $3,000 USD on start.</div>
+      </div>
+      <div class="bcard">
+        <div class="bcard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div class="bcard-title">Learning &amp; growth</div>
+        <div class="bcard-desc">$1,500/yr stipend for books, courses, conferences. We invest in you getting sharper.</div>
+      </div>
+      <div class="bcard">
+        <div class="bcard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <div class="bcard-title">Speed bonus</div>
+        <div class="bcard-desc">Ship something that moves the needle? You get rewarded. Cash. No bureaucracy.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOUNDER NOTE ═══ -->
+<section class="sec surf">
+  <div class="sec-inner founder">
+    <div class="sec-eyebrow">A Note From The Founder</div>
+    <h2 class="sec-title">If you've read this far, <span class="g">we should probably talk.</span></h2>
+
+    <div class="founder-card reveal">
+      <p class="founder-text">
+        I started JAYISAAC AI because every prospecting tool I tried as a business owner was either too expensive, full of stale data, or designed for someone who already has a sales team of 200 people. I built the thing I wanted to use.
+      </p>
+      <p class="founder-text">
+        Right now it's mostly me, a small group of contractors, and a roadmap. By this time next year I want it to be a team of 10-12 ridiculously good people who care about the craft. That's where you come in.
+      </p>
+      <p class="founder-text">
+        I'm not going to oversell this. We're early. The product is good but not done. There's risk. But if you want to do the best work of your career — actually build something, not push pixels on legacy enterprise software — and you want real ownership while we're still small enough that it matters, I want to hear from you.
+      </p>
+      <p class="founder-text" style="color:var(--or); font-weight:600;">
+        Send me your application. I read every single one.
+      </p>
+
+      <div class="founder-sig">
+        <div class="founder-av">JT</div>
+        <div>
+          <div class="founder-name">Jay Turner</div>
+          <div class="founder-role">Founder &middot; JAYISAAC AI &middot; Saskatoon, SK</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- footer injected by footer.js -->
+
+<script>
+/* ── Reveal animations on scroll ── */
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); } });
+}, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+reveals.forEach(r => io.observe(r));
+
+/* ── Form submit (Formspree posts XHR for clean UX) ── */
+const form = document.getElementById('careersForm');
+const success = document.getElementById('wlSuccess');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = form.querySelector('.wl-submit');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { Accept: 'application/json' }
+    });
+    if (res.ok) {
+      form.style.display = 'none';
+      success.classList.add('show');
+    } else {
+      btn.textContent = 'Send it →';
+      btn.disabled = false;
+      alert('Something went wrong. Please try again or email jaythomasturner@gmail.com directly.');
+    }
+  } catch (err) {
+    btn.textContent = 'Send it →';
+    btn.disabled = false;
+    alert('Network error. Please try again or email jaythomasturner@gmail.com directly.');
+  }
+});
+</script>
+
+<script>
+/* ── 3D Rotating Infinity (Lemniscate) — matches hero on index.html ── */
+(function(){
+  const c = document.getElementById("heroCanvas");
+  if(!c) return;
+  const ctx = c.getContext("2d");
+  let W, H, t = 0;
+  function resize(){ W = c.width = window.innerWidth; H = c.height = c.parentElement.offsetHeight; }
+  resize(); window.addEventListener('resize', resize);
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const cx = W/2, cy = H/2;
+    const scale = Math.min(W,H)/5;
+    const pts = 300;
+    ctx.lineWidth = 1.5;
+    for(let i=0;i<pts;i++){
+      const u = (i/pts)*Math.PI*2;
+      const x = scale * Math.cos(u) / (1 + Math.sin(u)*Math.sin(u));
+      const y = scale * Math.sin(u)*Math.cos(u) / (1 + Math.sin(u)*Math.sin(u));
+      const rotY = u + t;
+      const z = Math.sin(rotY)*0.7;
+      const perspective = 1 / (1 + z*0.3);
+      const px = cx + x * perspective;
+      const py = cy + y * perspective * 0.6;
+      const alpha = 0.15 + (z+1)*0.25;
+      ctx.fillStyle = `rgba(255,107,26,${alpha})`;
+      ctx.beginPath();
+      ctx.arc(px, py, 1.5*perspective, 0, Math.PI*2);
+      ctx.fill();
+    }
+    t += 0.008;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+
+</body>
+</html>

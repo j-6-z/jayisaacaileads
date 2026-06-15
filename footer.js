@@ -54,6 +54,7 @@ const COLS = [
     heading: "Company",
     links: [
       { label: "About Us",             href: "/about.html"             },
+      { label: "Careers",              href: "/careers.html"           },
       { label: "Contact",              href: "/contact.html"           },
       { label: "Trust Center",         href: "/trust.html"             },
       { label: "Privacy Policy",       href: "/privacy.html"           },

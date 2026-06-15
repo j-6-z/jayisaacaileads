@@ -849,8 +849,14 @@ const app = initializeApp({
   projectId:         "jayisaac-ai",
   storageBucket:     "jayisaac-ai.firebasestorage.app",
   messagingSenderId: "967801239356",
-  appId:             "1:967801239356:web:0df3f35af72ce6e79b9039"
+  appId:             "1:967801239356:web:0df3f35af72ce6e79b9039",
+  measurementId:     "G-V91DS21PGE"
 });
+
+/* ── Cookie consent + Firebase Analytics (lazy-loaded after consent) ── */
+import("/cookie-consent.js").then(({ initCookieConsent }) => {
+  initCookieConsent({ firebaseApp: app });
+}).catch(e => console.warn("[nav] cookie-consent module failed:", e?.message));
 
 const auth     = getAuth(app);
 const provider = new GoogleAuthProvider();
