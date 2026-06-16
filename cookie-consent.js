@@ -111,7 +111,7 @@ function injectStyles() {
 .jia-cc-banner{
   position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(140%);
   width:calc(100% - 40px); max-width:920px; z-index:9998;
-  background:#141414; border:1px solid rgba(201,94,26,.3);
+  background:#141414; border:1px solid rgba(99,102,241,.3);
   border-radius:14px; padding:18px 22px;
   box-shadow:0 24px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.04);
   font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
@@ -123,10 +123,10 @@ function injectStyles() {
 .jia-cc-banner.hide{ transform:translateX(-50%) translateY(140%); opacity:0; }
 .jia-cc-icon{
   flex-shrink:0; width:38px; height:38px; border-radius:10px;
-  background:rgba(201,94,26,.12); border:1px solid rgba(201,94,26,.3);
+  background:rgba(99,102,241,.12); border:1px solid rgba(99,102,241,.3);
   display:flex; align-items:center; justify-content:center;
 }
-.jia-cc-icon svg{ width:18px; height:18px; color:#FF6B1A; filter:drop-shadow(0 0 6px rgba(255,107,26,.55)); }
+.jia-cc-icon svg{ width:18px; height:18px; color:#6366F1; filter:drop-shadow(0 0 6px rgba(99,102,241,.55)); }
 .jia-cc-body{ flex:1; min-width:0; }
 .jia-cc-title{
   font-size:13.5px; font-weight:800; color:#F2F2F2;
@@ -135,7 +135,7 @@ function injectStyles() {
 .jia-cc-text{
   font-size:12px; color:rgba(242,242,242,.7); line-height:1.5;
 }
-.jia-cc-text a{ color:#FF6B1A; text-decoration:none; font-weight:600; }
+.jia-cc-text a{ color:#6366F1; text-decoration:none; font-weight:600; }
 .jia-cc-text a:hover{ text-decoration:underline; }
 .jia-cc-btns{ display:flex; gap:8px; flex-shrink:0; }
 .jia-cc-btn{
@@ -149,10 +149,10 @@ function injectStyles() {
 }
 .jia-cc-decline:hover{ color:#F2F2F2; border-color:rgba(255,255,255,.2); background:rgba(255,255,255,.03); }
 .jia-cc-accept{
-  background:linear-gradient(135deg, #FF8A3D, #C44E10);
-  color:#fff; box-shadow:0 0 18px rgba(255,107,26,.3);
+  background:linear-gradient(135deg, #818CF8, #4F46E5);
+  color:#fff; box-shadow:0 0 18px rgba(99,102,241,.3);
 }
-.jia-cc-accept:hover{ transform:translateY(-1px); box-shadow:0 0 26px rgba(255,107,26,.5); }
+.jia-cc-accept:hover{ transform:translateY(-1px); box-shadow:0 0 26px rgba(99,102,241,.5); }
 .jia-cc-accept:active{ transform:scale(.97); }
 @media(max-width:680px){
   .jia-cc-banner{
