@@ -670,6 +670,210 @@ th.sortable.sorted .arrow{opacity:1}
 }
 .unlock-btn:hover{transform:translateY(-1px);box-shadow:0 0 36px var(--o-glow)}
 @media(max-width:520px){.drawer{width:100vw}}
+
+/* ============ AI COLD EMAIL WRITER ============ */
+.ai-email-trigger{
+  display:flex;align-items:center;gap:8px;width:100%;
+  padding:11px 14px;margin-top:10px;
+  background:linear-gradient(135deg,rgba(255,138,61,.12),rgba(196,78,16,.06));
+  border:1px solid rgba(255,138,61,.3);border-radius:10px;
+  color:var(--o-hot);font-family:inherit;font-weight:700;font-size:12.5px;
+  cursor:pointer;transition:.2s;letter-spacing:.2px;
+  position:relative;overflow:hidden;
+}
+.ai-email-trigger::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,138,61,.15),transparent);
+  transform:translateX(-100%);transition:transform .6s;
+}
+.ai-email-trigger:hover{
+  border-color:var(--o-hot);background:linear-gradient(135deg,rgba(255,138,61,.2),rgba(196,78,16,.1));
+  box-shadow:0 0 18px rgba(255,138,61,.25);transform:translateY(-1px);
+}
+.ai-email-trigger:hover::before{transform:translateX(100%)}
+.ai-email-trigger svg{width:14px;height:14px;filter:drop-shadow(0 0 4px rgba(255,138,61,.5))}
+.ai-email-trigger .ai-cost{
+  margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10.5px;
+  padding:3px 8px;border-radius:5px;background:rgba(255,138,61,.15);
+  border:1px solid rgba(255,138,61,.3);
+}
+
+.cem-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);
+  z-index:9000;opacity:0;pointer-events:none;transition:opacity .25s;
+}
+.cem-overlay.show{opacity:1;pointer-events:auto}
+.cem-modal{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-46%) scale(.96);
+  width:min(720px,calc(100% - 32px));max-height:calc(100vh - 80px);overflow-y:auto;
+  z-index:9001;background:var(--p1);border:1px solid var(--hair);border-radius:18px;
+  box-shadow:0 40px 100px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.04);
+  opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.34,1.56,.64,1);
+  display:flex;flex-direction:column;
+}
+.cem-modal.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+
+.cem-head{
+  padding:22px 26px 18px;border-bottom:1px solid var(--hair);
+  display:flex;align-items:center;gap:14px;
+}
+.cem-head-icon{
+  width:42px;height:42px;border-radius:12px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--o-hot),var(--o-deep));
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 18px rgba(255,138,61,.35);
+}
+.cem-head-icon svg{width:20px;height:20px;color:#fff}
+.cem-head-text{flex:1}
+.cem-head h2{font-size:17px;font-weight:800;color:var(--ice);letter-spacing:-.01em;margin:0}
+.cem-head .sub{font-size:12px;color:var(--steel);margin-top:2px}
+.cem-head .for{
+  font-size:11px;color:var(--o-hot);font-weight:700;
+  background:rgba(255,138,61,.1);border:1px solid rgba(255,138,61,.25);
+  padding:4px 10px;border-radius:999px;
+}
+.cem-close{
+  width:32px;height:32px;border-radius:8px;background:transparent;
+  border:1px solid var(--hair);color:var(--steel);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:.15s;
+}
+.cem-close:hover{background:var(--p3);color:var(--ice);border-color:var(--p3)}
+.cem-close svg{width:14px;height:14px}
+
+.cem-body{padding:22px 26px;flex:1;overflow-y:auto}
+
+.cem-step{display:none}
+.cem-step.active{display:block;animation:cemIn .25s var(--ease)}
+@keyframes cemIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+.cem-field{margin-bottom:16px}
+.cem-field label{
+  display:block;font-size:11px;font-weight:700;color:var(--steel);
+  letter-spacing:1px;text-transform:uppercase;margin-bottom:7px;
+}
+.cem-field input,.cem-field textarea{
+  width:100%;padding:11px 13px;border-radius:9px;
+  background:var(--p2);border:1px solid var(--hair);color:var(--ice);
+  font-family:inherit;font-size:13.5px;transition:border-color .15s;
+}
+.cem-field input:focus,.cem-field textarea:focus{
+  outline:none;border-color:var(--o-hot);box-shadow:0 0 0 3px rgba(255,138,61,.15);
+}
+.cem-field textarea{resize:vertical;min-height:80px;line-height:1.5}
+.cem-field .hint{font-size:11.5px;color:var(--steel);margin-top:6px;line-height:1.5}
+
+.cem-pickers{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+.cem-picker label{
+  display:block;font-size:11px;font-weight:700;color:var(--steel);
+  letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;
+}
+.cem-opts{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.cem-opt{
+  padding:9px 10px;border:1px solid var(--hair);border-radius:8px;
+  background:var(--p2);color:var(--steel);font-family:inherit;
+  font-size:12px;font-weight:600;cursor:pointer;transition:.15s;
+  text-align:center;
+}
+.cem-opt:hover{border-color:var(--p3);color:var(--ice)}
+.cem-opt.active{
+  background:rgba(255,138,61,.12);border-color:var(--o-hot);color:var(--o-hot);
+  box-shadow:inset 0 0 0 1px rgba(255,138,61,.2);
+}
+
+.cem-footer{
+  padding:18px 26px;border-top:1px solid var(--hair);
+  display:flex;align-items:center;gap:12px;
+}
+.cem-footer .credits-note{
+  flex:1;font-size:11.5px;color:var(--steel);
+}
+.cem-footer .credits-note strong{color:var(--ice)}
+.cem-btn-cancel{
+  padding:10px 16px;background:transparent;border:1px solid var(--hair);
+  color:var(--steel);border-radius:9px;font-family:inherit;font-size:12.5px;
+  font-weight:700;cursor:pointer;transition:.15s;
+}
+.cem-btn-cancel:hover{color:var(--ice);border-color:var(--p3)}
+.cem-btn-gen{
+  padding:11px 22px;border:none;border-radius:9px;
+  background:linear-gradient(135deg,var(--o-hot),var(--o-deep));color:#fff;
+  font-family:inherit;font-size:12.5px;font-weight:700;letter-spacing:.3px;
+  cursor:pointer;transition:.2s;box-shadow:0 0 18px rgba(255,138,61,.3);
+  display:flex;align-items:center;gap:8px;
+}
+.cem-btn-gen:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 0 26px rgba(255,138,61,.5)}
+.cem-btn-gen:disabled{opacity:.5;cursor:not-allowed}
+.cem-btn-gen svg{width:13px;height:13px}
+
+/* ── Loading state ── */
+.cem-loading{padding:60px 26px;text-align:center}
+.cem-spinner{
+  width:42px;height:42px;border-radius:50%;margin:0 auto 18px;
+  background:conic-gradient(from 0deg,transparent 0deg,var(--o-hot) 360deg);
+  animation:cemSpin 1s linear infinite;
+  -webkit-mask:radial-gradient(circle,transparent 14px,#000 15px);
+          mask:radial-gradient(circle,transparent 14px,#000 15px);
+}
+@keyframes cemSpin{to{transform:rotate(360deg)}}
+.cem-loading-text{font-size:13.5px;color:var(--ice);font-weight:600;margin-bottom:6px}
+.cem-loading-sub{font-size:11.5px;color:var(--steel)}
+
+/* ── Result view ── */
+.cem-result-meta{
+  display:flex;align-items:center;gap:8px;padding:10px 14px;
+  background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2);
+  border-radius:9px;margin-bottom:18px;font-size:12px;color:var(--green);
+  font-weight:600;
+}
+.cem-result-meta svg{width:13px;height:13px}
+.cem-email{
+  background:var(--p2);border:1px solid var(--hair);border-radius:11px;
+  overflow:hidden;
+}
+.cem-email-subject{
+  padding:14px 18px;border-bottom:1px solid var(--hair);
+  display:flex;align-items:flex-start;gap:12px;
+}
+.cem-email-label{
+  font-size:10px;font-weight:700;color:var(--steel);letter-spacing:1.5px;
+  text-transform:uppercase;flex-shrink:0;padding-top:2px;width:50px;
+}
+.cem-email-subject-text{
+  flex:1;color:var(--ice);font-size:14.5px;font-weight:700;letter-spacing:-.01em;
+}
+.cem-email-body{padding:16px 18px}
+.cem-email-body-content{
+  white-space:pre-wrap;color:var(--ice);font-size:13.5px;line-height:1.65;
+  font-family:'Plus Jakarta Sans',sans-serif;
+}
+.cem-actions{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+.cem-action{
+  flex:1;min-width:120px;padding:10px 12px;
+  background:var(--p2);border:1px solid var(--hair);border-radius:9px;
+  color:var(--ice);font-family:inherit;font-size:12px;font-weight:700;
+  cursor:pointer;transition:.15s;display:flex;align-items:center;
+  justify-content:center;gap:7px;text-decoration:none;
+}
+.cem-action:hover{background:var(--p3);border-color:var(--p3)}
+.cem-action.primary{
+  background:rgba(255,138,61,.12);border-color:rgba(255,138,61,.35);color:var(--o-hot);
+}
+.cem-action.primary:hover{background:rgba(255,138,61,.2);border-color:var(--o-hot)}
+.cem-action svg{width:13px;height:13px}
+.cem-action.copied{background:rgba(34,197,94,.15);border-color:rgba(34,197,94,.3);color:var(--green)}
+
+.cem-err{
+  padding:14px 18px;background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.25);
+  border-radius:9px;color:#FCA5A5;font-size:12.5px;line-height:1.5;
+  display:flex;align-items:flex-start;gap:10px;
+}
+.cem-err svg{width:16px;height:16px;flex-shrink:0;margin-top:1px}
+
+@media(max-width:600px){
+  .cem-pickers{grid-template-columns:1fr}
+  .cem-actions .cem-action{min-width:0}
+}
+/* ============ END AI COLD EMAIL WRITER ============ */
 .verif{display:inline-flex;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:7px;box-shadow:0 0 8px var(--green-glow)}
 .empty{padding:70px 20px;text-align:center;color:var(--steel)}
 .empty h3{font-size:15px;font-weight:700;color:var(--ice);margin-bottom:6px}
@@ -1757,6 +1961,11 @@ function renderDrawer(id){
           <div class="ch-val">${p.p}</div>
           <button class="copy-btn" onclick="copyText('${p.p}','Phone')">Copy</button>
         </div>
+        <button class="ai-email-trigger" onclick="openColdEmailModal('${p.id}')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Write cold email with AI
+          <span class="ai-cost">5 cr</span>
+        </button>
       ` : `
         <div class="channel">
           <div class="ch-icon">${lockIcon}</div>
@@ -1787,6 +1996,242 @@ function renderDrawer(id){
     </div>`;
 }
 document.addEventListener("keydown", e => { if(e.key==="Escape") closeDrawer(); });
+
+/* ================= AI COLD EMAIL WRITER ================= */
+const COLD_EMAIL_COST = 5;
+let cemState = {
+  contactId: null,
+  lastEmail: null,
+  lastConfig: null,
+};
+
+/* Open the modal for a specific contact */
+function openColdEmailModal(contactId){
+  const p = PEOPLE.find(x => x.id === contactId);
+  if(!p) return;
+  if(!state.revealed.has(contactId)){
+    toast("Reveal the contact first");
+    return;
+  }
+  if(state.credits < COLD_EMAIL_COST){
+    toast(`Need ${COLD_EMAIL_COST} credits — you have ${state.credits}`);
+    return;
+  }
+
+  cemState.contactId = contactId;
+  cemState.lastEmail = null;
+
+  /* Pre-fill the header */
+  document.getElementById("cemForName").textContent = `${p.n} · ${p.c}`;
+  document.getElementById("cemCreditBalance").textContent = state.credits;
+
+  /* Restore last config from localStorage if available */
+  try {
+    const saved = localStorage.getItem("jia_cem_config");
+    if(saved){
+      const cfg = JSON.parse(saved);
+      if(cfg.pitch) document.getElementById("cemPitch").value = cfg.pitch;
+      if(cfg.cta) document.getElementById("cemCta").value = cfg.cta;
+      if(cfg.senderName) document.getElementById("cemSenderName").value = cfg.senderName;
+      if(cfg.senderCompany) document.getElementById("cemSenderCompany").value = cfg.senderCompany;
+      if(cfg.tone) setCemPicker("tone", cfg.tone);
+      if(cfg.length) setCemPicker("length", cfg.length);
+    }
+  } catch(_){}
+
+  showCemStep("cemStepConfig");
+  document.getElementById("cemOverlay").classList.add("show");
+  document.getElementById("cemModal").classList.add("show");
+}
+
+function closeColdEmailModal(){
+  document.getElementById("cemOverlay").classList.remove("show");
+  document.getElementById("cemModal").classList.remove("show");
+}
+
+/* Step switcher */
+function showCemStep(stepId){
+  document.querySelectorAll(".cem-step").forEach(s => s.classList.remove("active"));
+  document.getElementById(stepId).classList.add("active");
+}
+
+/* Tone / length picker buttons */
+document.addEventListener("click", e => {
+  const opt = e.target.closest(".cem-opt");
+  if(!opt) return;
+  const field = opt.dataset.field;
+  setCemPicker(field, opt.dataset.val);
+});
+function setCemPicker(field, val){
+  document.querySelectorAll(`.cem-opt[data-field="${field}"]`).forEach(b => {
+    b.classList.toggle("active", b.dataset.val === val);
+  });
+}
+function getCemPicker(field){
+  const active = document.querySelector(`.cem-opt[data-field="${field}"].active`);
+  return active ? active.dataset.val : null;
+}
+
+/* Generate */
+async function generateColdEmail(){
+  const p = PEOPLE.find(x => x.id === cemState.contactId);
+  if(!p) return;
+
+  const pitch = document.getElementById("cemPitch").value.trim();
+  if(!pitch || pitch.length < 15){
+    toast("Add a value prop first — at least one sentence");
+    return;
+  }
+  const tone = getCemPicker("tone") || "direct";
+  const length = getCemPicker("length") || "medium";
+  const cta = document.getElementById("cemCta").value.trim();
+  const senderName = document.getElementById("cemSenderName").value.trim();
+  const senderCompany = document.getElementById("cemSenderCompany").value.trim();
+
+  /* Save config for next time */
+  try {
+    localStorage.setItem("jia_cem_config", JSON.stringify({
+      pitch, tone, length, cta, senderName, senderCompany
+    }));
+  } catch(_){}
+
+  cemState.lastConfig = { pitch, tone, length, cta, senderName, senderCompany };
+
+  showCemStep("cemStepLoading");
+
+  try {
+    /* Get Firebase ID token for server auth */
+    let idToken = "DEV_BYPASS";
+    if(window.auth && window.auth.currentUser){
+      idToken = await window.auth.currentUser.getIdToken();
+    }
+
+    const resp = await fetch("/api/generate-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        idToken,
+        contactId: cemState.contactId,
+        contact: {
+          name:     p.n,
+          title:    p.t,
+          company:  p.c,
+          industry: p.i,
+          location: p.l,
+        },
+        sender: {
+          name:         senderName,
+          company:      senderCompany,
+          productPitch: pitch,
+          tone, length, cta,
+        },
+      }),
+    });
+
+    if(!resp.ok){
+      const errData = await resp.json().catch(() => ({}));
+      let msg = errData.message || errData.error || "Generation failed";
+      if(errData.error === "insufficient_credits"){
+        msg = `You need ${COLD_EMAIL_COST} credits and only have ${errData.credits || state.credits}.`;
+      }
+      document.getElementById("cemErrMsg").textContent = msg;
+      showCemStep("cemStepError");
+      return;
+    }
+
+    const data = await resp.json();
+    if(!data.ok || !data.subject || !data.body){
+      document.getElementById("cemErrMsg").textContent = "AI returned an invalid response. Try again.";
+      showCemStep("cemStepError");
+      return;
+    }
+
+    /* Update local credit count from server response (source of truth) */
+    if(typeof data.credits_remaining === "number"){
+      state.credits = data.credits_remaining;
+      const cc = document.getElementById("creditCount");
+      if(cc) cc.textContent = state.credits;
+      const cb = document.getElementById("cemCreditBalance");
+      if(cb) cb.textContent = state.credits;
+    }
+
+    cemState.lastEmail = { subject: data.subject, body: data.body };
+    renderColdEmailResult(p);
+    /* Optional analytics event */
+    if(window.jiaTrack) window.jiaTrack("cold_email_generated", { tone, length, industry: p.i });
+  } catch(err){
+    console.error("Cold email gen failed:", err);
+    document.getElementById("cemErrMsg").textContent =
+      "Network issue or server error. Your credits weren't charged. Try again.";
+    showCemStep("cemStepError");
+  }
+}
+
+function renderColdEmailResult(p){
+  const email = cemState.lastEmail;
+  if(!email) return;
+
+  document.getElementById("cemSubject").textContent = email.subject;
+  document.getElementById("cemBody").textContent = email.body;
+  document.getElementById("cemCreditsLeft").textContent = state.credits;
+
+  /* Wire mailto: links for Gmail and Outlook */
+  const to = encodeURIComponent(p.e || "");
+  const subj = encodeURIComponent(email.subject);
+  const body = encodeURIComponent(email.body);
+
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${subj}&body=${body}`;
+  const outlookUrl = `https://outlook.live.com/mail/0/deeplink/compose?to=${to}&subject=${subj}&body=${body}`;
+  document.getElementById("cemGmailBtn").href = gmailUrl;
+  document.getElementById("cemOutlookBtn").href = outlookUrl;
+
+  /* Reset copy button state */
+  document.getElementById("cemCopyBtn").classList.remove("copied");
+  document.getElementById("cemCopyLabel").textContent = "Copy email";
+
+  showCemStep("cemStepResult");
+}
+
+function copyColdEmail(){
+  const email = cemState.lastEmail;
+  if(!email) return;
+  const text = `Subject: ${email.subject}\n\n${email.body}`;
+  const btn = document.getElementById("cemCopyBtn");
+  const label = document.getElementById("cemCopyLabel");
+  const flash = () => {
+    btn.classList.add("copied");
+    label.textContent = "✓ Copied!";
+    setTimeout(() => { btn.classList.remove("copied"); label.textContent = "Copy email"; }, 2000);
+  };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(flash).catch(() => fallbackCopy(text, flash));
+  } else {
+    fallbackCopy(text, flash);
+  }
+}
+function fallbackCopy(text, cb){
+  const t = document.createElement("textarea");
+  t.value = text; t.style.position="fixed"; t.style.opacity="0";
+  document.body.appendChild(t); t.select();
+  try { document.execCommand("copy"); cb(); } catch(_){}
+  document.body.removeChild(t);
+}
+
+function regenerateColdEmail(){
+  if(state.credits < COLD_EMAIL_COST){
+    toast(`Need ${COLD_EMAIL_COST} credits to regenerate`);
+    return;
+  }
+  generateColdEmail();
+}
+
+/* Close on Escape */
+document.addEventListener("keydown", e => {
+  if(e.key === "Escape" && document.getElementById("cemModal").classList.contains("show")){
+    closeColdEmailModal();
+  }
+});
+/* ================= END AI COLD EMAIL WRITER ================= */
 
 /* "/" focuses search like a real prospecting tool */
 document.addEventListener("keydown", e => {
@@ -2751,6 +3196,9 @@ const fbApp = initializeApp(firebaseConfig);
 const auth = getAuth(fbApp);
 const db = getFirestore(fbApp);
 
+/* Expose auth to window so non-module scripts (cold email writer, etc.) can use it for ID tokens */
+window.auth = auth;
+
 /* ── Cookie consent + Firebase Analytics (lazy-loaded after consent) ── */
 import("/cookie-consent.js").then(({ initCookieConsent, logAnalyticsEvent }) => {
   initCookieConsent({ firebaseApp: fbApp });
@@ -2916,5 +3364,154 @@ window.__signOut = async () => {
   }
 };
 </script>
+<!-- ═══ AI COLD EMAIL WRITER MODAL ═══ -->
+<div class="cem-overlay" id="cemOverlay" onclick="closeColdEmailModal()"></div>
+<div class="cem-modal" id="cemModal" role="dialog" aria-label="AI Cold Email Writer">
+
+  <div class="cem-head">
+    <div class="cem-head-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+    </div>
+    <div class="cem-head-text">
+      <h2>AI Cold Email Writer</h2>
+      <div class="sub">Personalized for <span id="cemForName" class="for" style="display:inline-block;background:none;border:none;padding:0;color:var(--ice);font-weight:700"></span></div>
+    </div>
+    <button class="cem-close" onclick="closeColdEmailModal()" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+
+  <!-- STEP 1: Configure -->
+  <div class="cem-step active" id="cemStepConfig">
+    <div class="cem-body">
+
+      <div class="cem-field">
+        <label for="cemPitch">Your value prop (1-2 sentences)</label>
+        <textarea id="cemPitch" placeholder="e.g. We help HVAC business owners book 30+ qualified discovery calls per month using AI-powered cold outreach, without hiring more SDRs."></textarea>
+        <div class="hint">Be specific. What outcome do you create for someone like them? This is what Claude will personalize around.</div>
+      </div>
+
+      <div class="cem-pickers">
+        <div class="cem-picker">
+          <label>Tone</label>
+          <div class="cem-opts">
+            <button type="button" class="cem-opt active" data-field="tone" data-val="direct">Direct</button>
+            <button type="button" class="cem-opt" data-field="tone" data-val="friendly">Friendly</button>
+            <button type="button" class="cem-opt" data-field="tone" data-val="casual">Casual</button>
+            <button type="button" class="cem-opt" data-field="tone" data-val="formal">Formal</button>
+          </div>
+        </div>
+
+        <div class="cem-picker">
+          <label>Length</label>
+          <div class="cem-opts">
+            <button type="button" class="cem-opt" data-field="length" data-val="short">Short</button>
+            <button type="button" class="cem-opt active" data-field="length" data-val="medium">Medium</button>
+            <button type="button" class="cem-opt" data-field="length" data-val="long">Long</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cem-field">
+        <label for="cemCta">Your ideal next step (optional)</label>
+        <input type="text" id="cemCta" placeholder="e.g. a quick 15-min call this week">
+        <div class="hint">Leave blank for a soft default ("a quick 15-min call to see if it makes sense to keep talking").</div>
+      </div>
+
+      <div class="cem-field">
+        <label for="cemSenderName">Your name</label>
+        <input type="text" id="cemSenderName" placeholder="Jay Turner">
+      </div>
+
+      <div class="cem-field">
+        <label for="cemSenderCompany">Your company</label>
+        <input type="text" id="cemSenderCompany" placeholder="JAYISAAC AI">
+      </div>
+
+    </div>
+
+    <div class="cem-footer">
+      <div class="credits-note">
+        Cost: <strong>5 credits</strong> per email · Your balance: <strong id="cemCreditBalance">—</strong>
+      </div>
+      <button class="cem-btn-cancel" onclick="closeColdEmailModal()">Cancel</button>
+      <button class="cem-btn-gen" id="cemGenBtn" onclick="generateColdEmail()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Generate email
+      </button>
+    </div>
+  </div>
+
+  <!-- STEP 2: Loading -->
+  <div class="cem-step" id="cemStepLoading">
+    <div class="cem-loading">
+      <div class="cem-spinner"></div>
+      <div class="cem-loading-text">Writing your email…</div>
+      <div class="cem-loading-sub">Claude is personalizing it based on the prospect's role and industry.</div>
+    </div>
+  </div>
+
+  <!-- STEP 3: Result -->
+  <div class="cem-step" id="cemStepResult">
+    <div class="cem-body">
+      <div class="cem-result-meta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+        <span>Email generated · <span id="cemCreditsLeft"></span> credits remaining</span>
+      </div>
+
+      <div class="cem-email">
+        <div class="cem-email-subject">
+          <div class="cem-email-label">Subject</div>
+          <div class="cem-email-subject-text" id="cemSubject"></div>
+        </div>
+        <div class="cem-email-body">
+          <div class="cem-email-body-content" id="cemBody"></div>
+        </div>
+      </div>
+
+      <div class="cem-actions">
+        <button class="cem-action primary" id="cemCopyBtn" onclick="copyColdEmail()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          <span id="cemCopyLabel">Copy email</span>
+        </button>
+        <a class="cem-action" id="cemGmailBtn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+          Open in Gmail
+        </a>
+        <a class="cem-action" id="cemOutlookBtn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+          Outlook
+        </a>
+        <button class="cem-action" onclick="regenerateColdEmail()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+          Regenerate (5)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4: Error -->
+  <div class="cem-step" id="cemStepError">
+    <div class="cem-body">
+      <div class="cem-err">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <div>
+          <strong style="display:block;margin-bottom:4px;color:#FECACA">Couldn't generate the email</strong>
+          <span id="cemErrMsg"></span>
+        </div>
+      </div>
+      <div style="margin-top:18px;display:flex;gap:8px">
+        <button class="cem-btn-cancel" onclick="closeColdEmailModal()">Close</button>
+        <button class="cem-btn-gen" onclick="showCemStep('cemStepConfig')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10"/></svg>
+          Try again
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- ═══ END AI COLD EMAIL WRITER MODAL ═══ -->
+
 </body>
 </html>
