@@ -8,18 +8,18 @@
 <link rel="manifest" href="/my-favicon/site.webmanifest">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Data — JAYISAAC AI</title>
-<meta name="description" content="What's inside the JAYISAAC AI database — North American B2B contact coverage, update cadence, and verification process.">
+<title>API Access — JAYISAAC AI</title>
+<meta name="description" content="Pull verified North American B2B contact data into your own stack with the JAYISAAC AI API and Data as a Service.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --orange:#C95E1A;--orange-bright:#E8742E;--orange-dark:#A84B12;--orange-soft:#FBEEE4;
+  --orange:#6366F1;--orange-bright:#818CF8;--orange-dark:#A84B12;--orange-soft:#FBEEE4;
   --charcoal:#1C1F24;--charcoal-deep:#141619;
   --ink:#1A2433;--slate:#5B6878;--mist:#8C97A6;
   --line:#E5E9EF;--bg:#F7F8FA;--white:#fff;
-  --green:#1B8A5A;--green-soft:#E5F4EC;--blue:#2563EB;--blue-soft:#E9F0FE;
+  --green:#3DC98A;--code-bg:#17191D;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--ink);background:var(--white);font-size:15px;line-height:1.7}
@@ -28,25 +28,41 @@ a:hover{text-decoration:underline}
 .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
 
 .page-hero{
-  background:
-    radial-gradient(800px 400px at 90% -20%, rgba(201,94,26,.22), transparent 60%),
-    var(--charcoal-deep);
-  color:#fff;padding:84px 0 64px;
+  background:radial-gradient(800px 400px at 90% -20%, rgba(99,102,241,.22), transparent 60%),var(--charcoal-deep);
+  color:#fff;padding:84px 0 72px;
 }
+.hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
 .eyebrow{
   display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
-  color:var(--orange-bright);border:1px solid rgba(232,116,46,.35);background:rgba(232,116,46,.1);
+  color:var(--orange-bright);border:1px solid rgba(129,140,248,.35);background:rgba(129,140,248,.1);
   padding:6px 14px;border-radius:20px;margin-bottom:18px;
 }
-.page-hero h1{font-size:clamp(30px,5vw,44px);font-weight:800;letter-spacing:-.02em;max-width:760px}
-.page-hero p{color:#A8B0BB;font-size:17px;max-width:620px;margin-top:14px}
-.hero-stats{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
-.hstat{
-  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;
-  padding:16px 22px;min-width:150px;
+.page-hero h1{font-size:clamp(30px,5vw,44px);font-weight:800;letter-spacing:-.02em}
+.page-hero .sub{color:#A8B0BB;font-size:17px;margin-top:14px;max-width:520px}
+.hero-btns{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-block;background:var(--orange);color:#fff;font-weight:800;font-size:14.5px;
+  padding:13px 26px;border-radius:10px;box-shadow:0 6px 20px rgba(99,102,241,.35);transition:.15s;
 }
-.hstat .n{font-size:26px;font-weight:800;color:var(--orange-bright);letter-spacing:-.02em}
-.hstat .l{font-size:12px;color:#A8B0BB;font-weight:600;margin-top:2px}
+.btn:hover{background:var(--orange-dark);text-decoration:none}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.25);box-shadow:none}
+.btn.ghost:hover{border-color:var(--orange-bright);color:var(--orange-bright)}
+
+/* code window */
+.code-win{
+  background:var(--code-bg);border:1px solid #2B2F36;border-radius:14px;overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,.45);
+}
+.code-head{display:flex;align-items:center;gap:7px;padding:12px 16px;border-bottom:1px solid #2B2F36}
+.code-head .d{width:11px;height:11px;border-radius:50%}
+.code-head .d:nth-child(1){background:#FF5F57}.code-head .d:nth-child(2){background:#FEBC2E}.code-head .d:nth-child(3){background:#28C840}
+.code-head span{margin-left:8px;font-size:11.5px;color:#6E7782;font-family:'JetBrains Mono',monospace}
+pre{
+  padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:12.3px;line-height:1.7;
+  color:#ECEEF1;overflow-x:auto;white-space:pre;
+}
+.c-k{color:var(--orange-bright)}.c-s{color:#7FB5FF}.c-g{color:var(--green)}.c-m{color:#6E7782}
 
 section{padding:68px 0;scroll-margin-top:80px}
 section.alt{background:var(--bg)}
@@ -63,61 +79,27 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
 .card .icon svg{width:19px;height:19px;color:var(--orange)}
 .card h3{font-size:16px;font-weight:800;margin-bottom:8px}
 .card p{font-size:13.5px;color:var(--slate)}
-
-/* field chips */
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
-.chip{
-  font-size:12.5px;font-weight:700;border:1px solid var(--line);border-radius:8px;
-  padding:7px 13px;background:var(--white);color:var(--slate);
+.card code{
+  font-family:'JetBrains Mono',monospace;font-size:11.5px;background:var(--bg);
+  border:1px solid var(--line);border-radius:5px;padding:2px 6px;color:var(--ink);
 }
-.chip.hot{background:var(--orange-soft);border-color:#F2D9C4;color:var(--orange)}
-
-/* industries */
-.ind-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:28px}
-.ind{
-  background:var(--white);border:1px solid var(--line);border-radius:12px;padding:16px 18px;
-  font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:10px;
-}
-.ind .dot{width:8px;height:8px;border-radius:50%;background:var(--orange);flex-shrink:0}
-
-/* verification steps */
-.steps{margin-top:32px;display:grid;gap:0}
-.step{
-  display:grid;grid-template-columns:52px 1fr;gap:18px;padding:22px 0;
-  border-bottom:1px solid var(--line);
-}
-.step:last-child{border-bottom:none}
-.step .num{
-  width:40px;height:40px;border-radius:50%;background:var(--charcoal);color:#fff;
-  font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;
-}
-.step h3{font-size:16px;font-weight:800;margin-bottom:5px}
-.step p{font-size:13.5px;color:var(--slate);max-width:640px}
 
 .honest{
   background:var(--orange-soft);border:1px solid #F2D9C4;border-radius:14px;
-  padding:22px 26px;margin-top:32px;font-size:14px;
+  padding:22px 26px;margin-top:36px;font-size:14px;
 }
 .honest strong{display:block;margin-bottom:6px;font-size:14.5px}
-.honest p{color:var(--ink)}
 
 .cta-band{
-  background:
-    radial-gradient(700px 350px at 10% 120%, rgba(201,94,26,.25), transparent 60%),
-    var(--charcoal);
+  background:radial-gradient(700px 350px at 10% 120%, rgba(99,102,241,.25), transparent 60%),var(--charcoal);
   color:#fff;text-align:center;padding:68px 24px;
 }
 .cta-band h2{margin-bottom:8px}
 .cta-band p{color:#A8B0BB;margin-bottom:24px}
-.btn{
-  display:inline-block;background:var(--orange);color:#fff;font-weight:800;font-size:14.5px;
-  padding:13px 28px;border-radius:10px;box-shadow:0 6px 20px rgba(201,94,26,.35);transition:.15s;
-}
-.btn:hover{background:var(--orange-dark);text-decoration:none}
 
 /* hero image layout — image right of text */
 .page-hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
-.page-hero-img{border-radius:18px;overflow:hidden;box-shadow:0 28px 80px rgba(201,94,26,.18),0 0 0 1px rgba(255,255,255,.08);transform:perspective(1200px) rotateY(-3deg);transition:transform .4s}
+.page-hero-img{border-radius:18px;overflow:hidden;box-shadow:0 28px 80px rgba(99,102,241,.18),0 0 0 1px rgba(255,255,255,.08);transform:perspective(1200px) rotateY(-3deg);transition:transform .4s}
 .page-hero-img:hover{transform:perspective(1200px) rotateY(0deg)}
 .page-hero-img img{width:100%;display:block}
 @media(max-width:900px){
@@ -134,127 +116,117 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
 <header class="page-hero">
   <div class="wrap">
     <div>
-    <span class="eyebrow">Our Data</span>
-    <h1>The database built for people who sell to real businesses</h1>
-    <p>Owners, operators, and decision-makers across North America — with the trades and local service coverage the big platforms skip.</p>
-    <div class="hero-stats">
-      <div class="hstat"><div class="n">1M+</div><div class="l">Business contacts</div></div>
-      <div class="hstat"><div class="n">60+</div><div class="l">Industries covered</div></div>
-      <div class="hstat"><div class="n">CA + US</div><div class="l">Full coverage</div></div>
-      <div class="hstat"><div class="n">Monthly</div><div class="l">Refresh cycles</div></div>
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">For Developers · Early Access</span>
+        <h1>The database, in your stack</h1>
+        <p class="sub">Search, enrich, and pull verified North American B2B contacts programmatically — into your CRM, your dialer, your product.</p>
+        <div class="hero-btns">
+          <a class="btn" href="contact.html">Request Early Access</a>
+          <a class="btn ghost" href="data.html">Explore the Data</a>
+        </div>
+      </div>
+      <div class="code-win">
+        <div class="code-head"><span class="d"></span><span class="d"></span><span class="d"></span><span>search.sh</span></div>
+<pre><span class="c-m"># Search plumbing companies in Alberta</span>
+<span class="c-k">curl</span> https://api.jayisaacai.com/v1/contacts/search \
+  -H <span class="c-s">"Authorization: Bearer $API_KEY"</span> \
+  -d <span class="c-s">'{
+    "industry": "plumbing",
+    "region": "AB",
+    "title": ["Owner", "GM"],
+    "limit": 25
+  }'</span>
+
+<span class="c-g">{ "results": 25, "credits_used": 0,
+  "contacts": [ { "name": "Mike Doherty",
+    "title": "Owner", "company": "Doherty
+    Plumbing &amp; Heating", ... } ] }</span></pre>
+      </div>
     </div>
   </div>
     <div class="page-hero-img">
-      <img src="/public/feat-data.jpg" alt="Data verification and quality pipeline" loading="lazy">
+      <img src="/public/feat-ai.jpg" alt="API and AI integration network" loading="lazy">
     </div>
   </div>
 </header>
 
-<section id="coverage">
+<section>
   <div class="wrap">
-    <div class="sec-label">Coverage</div>
-    <h2>Every province. Every state. Deep in the trades.</h2>
-    <p class="lead">Most data platforms are built around tech and enterprise. Ours goes deep where the buying actually happens — owner-operated and SMB service businesses across Canada and the United States.</p>
-    <div class="ind-grid">
-      <div class="ind"><span class="dot"></span>Plumbing &amp; Drainage</div>
-      <div class="ind"><span class="dot"></span>HVAC &amp; Mechanical</div>
-      <div class="ind"><span class="dot"></span>Roofing &amp; Exteriors</div>
-      <div class="ind"><span class="dot"></span>Electrical Contractors</div>
-      <div class="ind"><span class="dot"></span>General Construction</div>
-      <div class="ind"><span class="dot"></span>Landscaping &amp; Snow</div>
-      <div class="ind"><span class="dot"></span>Moving &amp; Logistics</div>
-      <div class="ind"><span class="dot"></span>Auto Repair &amp; Towing</div>
-      <div class="ind"><span class="dot"></span>Cleaning &amp; Restoration</div>
-      <div class="ind"><span class="dot"></span>Real Estate &amp; Property</div>
-      <div class="ind"><span class="dot"></span>Professional Services</div>
-      <div class="ind"><span class="dot"></span>+ 50 more industries</div>
-    </div>
-    <h2 style="margin-top:48px;font-size:20px">What's on every record</h2>
-    <div class="chips">
-      <span class="chip hot">Decision-maker name</span>
-      <span class="chip hot">Job title</span>
-      <span class="chip hot">Direct business email</span>
-      <span class="chip hot">Business phone</span>
-      <span class="chip">Company name</span>
-      <span class="chip">Employee count</span>
-      <span class="chip">Industry</span>
-      <span class="chip">City &amp; province/state</span>
-      <span class="chip">Website</span>
-      <span class="chip">Est. revenue band</span>
-    </div>
-  </div>
-</section>
-
-<section class="alt" id="updates">
-  <div class="wrap">
-    <div class="sec-label">Freshness</div>
-    <h2>Data decays. We rebuild it on a cycle.</h2>
-    <p class="lead">B2B contact data goes stale fast — people change roles, businesses close, numbers get reassigned. Records cycle through re-verification continuously instead of sitting untouched for years.</p>
+    <div class="sec-label">Capabilities</div>
+    <h2>What the API will do</h2>
+    <p class="lead">Same data as the platform, same credit system — programmatic instead of point-and-click.</p>
     <div class="grid">
       <div class="card">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg></div>
-        <h3>Rolling re-verification</h3>
-        <p>Records are revisited on rolling monthly cycles — emails revalidated, dead businesses flagged, changed roles updated rather than left to rot.</p>
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+        <h3>Contact Search</h3>
+        <p><code>POST /v1/contacts/search</code> — filter by industry, region, title, and company size. Searching is free; revealing emails and phones consumes credits, same as the app.</p>
       </div>
       <div class="card">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-6"/></svg></div>
-        <h3>Continuous additions</h3>
-        <p>New businesses enter the database every cycle from fresh public sources and licensed feeds — newly registered companies, new locations, new decision-makers.</p>
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+        <h3>Enrichment</h3>
+        <p><code>POST /v1/enrich</code> — send a domain or company name, get back the decision-maker, verified contact channels, and firmographics to fill gaps in your CRM.</p>
       </div>
       <div class="card">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/></svg></div>
-        <h3>Aggressive pruning</h3>
-        <p>A smaller, accurate database beats a bloated stale one. Bounced emails, disconnected numbers, and closed businesses get cut — they don't pad our contact count.</p>
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg></div>
+        <h3>Bulk Export</h3>
+        <p><code>POST /v1/exports</code> — generate large list pulls as CSV or JSON jobs, scoped to your plan's export limits, delivered by webhook when ready.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="verified">
+<section class="alt" id="daas">
   <div class="wrap">
-    <div class="sec-label">Verification</div>
-    <h2>How a record earns its place</h2>
-    <div class="steps">
-      <div class="step">
-        <div class="num">1</div>
-        <div>
-          <h3>Sourcing</h3>
-          <p>Records are compiled from public business sources — websites, registries, directories — plus licensed third-party data and businesses updating their own listings.</p>
-        </div>
+    <div class="sec-label">Data as a Service</div>
+    <h2>Don't want an API? Take the data itself.</h2>
+    <p class="lead">For teams that need volume — agencies, dialer platforms, market researchers — we deliver custom data feeds without you writing a line of code.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Custom list builds</h3>
+        <p>Tell us the industry, geography, and titles. We build, verify, and deliver the segment as a clean CSV — sized from a few hundred records to full-market pulls.</p>
       </div>
-      <div class="step">
-        <div class="num">2</div>
-        <div>
-          <h3>Cross-referencing</h3>
-          <p>Every record is matched across multiple sources. Conflicting data gets resolved or flagged; single-source records carry lower confidence until corroborated.</p>
-        </div>
+      <div class="card">
+        <h3>Recurring feeds</h3>
+        <p>Monthly or weekly refreshed datasets delivered to you automatically — new businesses in your territory, updated records, and removals applied.</p>
       </div>
-      <div class="step">
-        <div class="num">3</div>
-        <div>
-          <h3>Technical validation</h3>
-          <p>Emails are checked against live mail servers for deliverability. Phone numbers are validated for format, region, and line status before a record is marked verified.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="num">4</div>
-        <div>
-          <h3>Suppression screening</h3>
-          <p>Records are screened against our opt-out suppression list. Anyone who has requested removal stays removed — permanently.</p>
-        </div>
+      <div class="card">
+        <h3>Licensed for your use case</h3>
+        <p>DaaS agreements are scoped per use case with clear license terms — internal prospecting, CRM enrichment, or platform integration. No grey areas.</p>
       </div>
     </div>
     <div class="honest">
-      <strong>The honest caveat</strong>
-      <p>No B2B database on earth is 100% accurate — anyone claiming otherwise is selling you something. People change jobs mid-cycle and businesses close overnight. Our commitment: verified-marked records meet our validation bar at time of verification, stale data gets cut fast, and if you hit a bad batch, <a href="contact.html">tell us</a> and we'll make it right.</p>
+      <strong>Straight up: the API is in early access.</strong>
+      Endpoints above reflect what's being built, and early-access partners get input on the spec plus locked-in early pricing. DaaS custom list builds are available today. <a href="contact.html">Contact us</a> with your use case and volume, and you'll get a real answer about timelines — not a marketing maybe.
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-label">Principles</div>
+    <h2>Built like an API should be</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Credit-metered, not surprise-billed</h3>
+        <p>API usage draws from the same credit balance as your platform account. You always know the cost of a call before you make it.</p>
+      </div>
+      <div class="card">
+        <h3>Keys you control</h3>
+        <p>Scoped API keys, revocable instantly, with per-key usage visibility. Compromised key? Kill it without touching your account.</p>
+      </div>
+      <div class="card">
+        <h3>Suppression built in</h3>
+        <p>Opt-outs are enforced at the API layer — removed records never appear in responses or exports, so your compliance posture is protected automatically.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <div class="cta-band">
-  <h2>Run a search and judge the data yourself</h2>
-  <p>100 free credits on signup. No card. See your market in the database in under two minutes.</p>
-  <a class="btn" href="login.html">Start Free Trial</a>
+  <h2>Want in early?</h2>
+  <p>Tell us what you're building and the volume you need. Early partners shape the spec.</p>
+  <a class="btn" href="contact.html">Request Early Access</a>
 </div>
 
 <!-- nav/footer injected by JS -->

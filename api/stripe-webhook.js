@@ -257,9 +257,11 @@ export default async function handler(req, res) {
     // same event won't double-grant.
     const eventRef = userRef.collection("ledger").doc(event.id);
 
-    await db.runTransaction(async (tx) => {
+    /* Returns "granted" when the credits were actually applied, or
+       "duplicate" when the event was already processed in a prior delivery. */
+    const outcome = await db.runTransaction(async (tx) => {
       const already = await tx.get(eventRef);
-      if (already.exists) return; // already processed
+      if (already.exists) return "duplicate"; // already processed — no-op
 
       const userSnap = await tx.get(userRef);
       if (!userSnap.exists) {
@@ -279,18 +281,26 @@ export default async function handler(req, res) {
         renewal: isRenewal,
         at: admin.firestore.FieldValue.serverTimestamp(),
       });
+
+      return "granted";
     });
 
+    if (outcome === "duplicate") {
+      console.log(`Skipped duplicate event ${event.id} for ${email} (already processed)`);
+      return res.status(200).json({
+        ok: true,
+        already_processed: true,
+        event_id: event.id,
+        granted: 0,
+      });
+    }
+
     console.log(`Granted ${totalCredits} credits to ${email} (${event.type}${isRenewal ? " · renewal" : ""})`);
-    return res.status(200).json({ ok: true, granted: totalCredits });
+    return res.status(200).json({ ok: true, granted: totalCredits, event_id: event.id });
   } catch (err) {
     console.error("Grant failed:", err);
-    // TEMP DEBUG: return the real error so it shows in Stripe's delivery log.
-    // Revert to a generic message once the webhook is confirmed working.
-    return res.status(500).json({
-      error: "Grant failed",
-      debug: String(err && err.message ? err.message : err),
-      code: err && err.code ? err.code : null,
-    });
+    // Generic 500 — don't leak internals to Stripe's delivery log.
+    // Real details are in Vercel function logs via console.error above.
+    return res.status(500).json({ error: "Grant failed" });
   }
 }

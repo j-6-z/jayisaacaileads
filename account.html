@@ -17,7 +17,7 @@
 <script type="module" src="./footer.js"></script>
 <style>
 :root{
-  --or:#C95E1A;--ob:#E8742E;--od:#A84B12;--os:#FBEEE4;
+  --or:#6366F1;--ob:#818CF8;--od:#4F46E5;--os:#EEF2FF;
   --charcoal:#1C1F24;--charcoal-deep:#141619;
   --ink:#1A2433;--slate:#5B6878;--mist:#8C97A6;
   --line:#E5E9EF;--bg:#F7F8FA;--white:#fff;
@@ -37,11 +37,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* hero */
 .acct-hero{
-  background:radial-gradient(700px 360px at 85% -20%,rgba(201,94,26,.22),transparent 60%),var(--charcoal-deep);
+  background:radial-gradient(700px 360px at 85% -20%,rgba(99,102,241,.22),transparent 60%),var(--charcoal-deep);
   color:#fff;padding:70px 0 90px;
 }
 .acct-hero .wrap{display:flex;align-items:center;gap:18px;max-width:1100px;margin:0 auto;padding:0 24px}
-.acct-av{width:64px;height:64px;border-radius:16px;flex-shrink:0;background:var(--or);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:#fff;box-shadow:0 8px 24px rgba(201,94,26,.4)}
+.acct-av{width:64px;height:64px;border-radius:16px;flex-shrink:0;background:var(--or);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:#fff;box-shadow:0 8px 24px rgba(99,102,241,.4)}
 .acct-hero h1{font-size:clamp(24px,4vw,32px);font-weight:800;letter-spacing:-.02em}
 .acct-hero .em{color:#A8B0BB;font-size:14px;margin-top:2px}
 
@@ -55,13 +55,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   font-size:.85rem;font-weight:600;color:var(--slate);cursor:pointer;transition:.15s;
   width:100%;text-align:left;
 }
-.acct-nav-item:hover{background:rgba(201,94,26,.06);color:var(--ink)}
+.acct-nav-item:hover{background:rgba(99,102,241,.06);color:var(--ink)}
 .acct-nav-item.active{background:var(--os);color:var(--or);font-weight:700}
 .acct-nav-item svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 .nav-sep{height:1px;background:var(--line);margin:8px 14px}
 
 /* content area */
-.acct-content{}
+.acct-content{min-width:0}
 .tab-panel{display:none}
 .tab-panel.active{display:block}
 .card{background:var(--white);border:1px solid var(--line);border-radius:16px;box-shadow:0 4px 20px rgba(14,27,44,.06);padding:26px 28px;margin-bottom:18px}
@@ -75,11 +75,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .ov-num{font-size:2rem;font-weight:800;color:var(--ink);letter-spacing:-.5px}
 .ov-num em{color:var(--or);font-style:normal}
 .ov-label{font-size:.75rem;color:var(--slate);margin-top:4px}
-.plan-badge{display:inline-block;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--or);background:var(--os);border:1px solid rgba(201,94,26,.25);padding:5px 12px;border-radius:20px;margin-top:4px}
+.plan-badge{display:inline-block;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--or);background:var(--os);border:1px solid rgba(99,102,241,.25);padding:5px 12px;border-radius:20px;margin-top:4px}
 
 /* buttons */
 .btn{display:inline-block;font-weight:800;font-size:13.5px;padding:11px 20px;border-radius:9px;transition:.15s;text-decoration:none;text-align:center}
-.btn-primary{background:var(--or);color:#fff;box-shadow:0 4px 14px rgba(201,94,26,.3)}
+.btn-primary{background:var(--or);color:#fff;box-shadow:0 4px 14px rgba(99,102,241,.3)}
 .btn-primary:hover{background:var(--od);text-decoration:none}
 .btn-ghost{background:var(--bg);border:1px solid var(--line);color:var(--ink)}
 .btn-ghost:hover{border-color:var(--or);color:var(--or)}
@@ -99,7 +99,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .order-table th{text-align:left;font-size:.68rem;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.06em;padding:10px 12px;border-bottom:2px solid var(--line)}
 .order-table td{padding:12px;border-bottom:1px solid var(--line);font-size:.85rem}
 .order-table tr:last-child td{border-bottom:none}
-.order-table tr:hover td{background:rgba(201,94,26,.03)}
+.order-table tr:hover td{background:rgba(99,102,241,.03)}
 .order-type{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:3px 8px;border-radius:6px;display:inline-block}
 .order-type.purchase{background:var(--os);color:var(--or)}
 .order-type.renewal{background:var(--green-soft);color:var(--green)}

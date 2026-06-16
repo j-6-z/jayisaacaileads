@@ -17,7 +17,7 @@
 <script type="module" src="./footer.js"></script>
 <style>
 :root{
-  --orange:#C95E1A;--orange-bright:#E8742E;--orange-dark:#A84B12;--orange-soft:#FBEEE4;
+  --orange:#6366F1;--orange-bright:#818CF8;--orange-dark:#A84B12;--orange-soft:#FBEEE4;
   --charcoal:#1C1F24;--charcoal-deep:#141619;
   --ink:#1A2433;--slate:#5B6878;--mist:#8C97A6;
   --line:#E5E9EF;--bg:#F7F8FA;--white:#fff;
@@ -34,8 +34,8 @@ button,input,select{font-family:inherit}
 /* ── HERO: charcoal band, pitch left + white form card right ── */
 .page-hero{
   background:
-    radial-gradient(900px 460px at 88% -10%, rgba(201,94,26,.24), transparent 60%),
-    radial-gradient(600px 380px at -5% 110%, rgba(201,94,26,.1), transparent 55%),
+    radial-gradient(900px 460px at 88% -10%, rgba(99,102,241,.24), transparent 60%),
+    radial-gradient(600px 380px at -5% 110%, rgba(99,102,241,.1), transparent 55%),
     var(--charcoal-deep);
   color:#fff;padding:72px 0 80px;
 }
@@ -47,7 +47,7 @@ button,input,select{font-family:inherit}
 .eyebrow{
   display:inline-flex;align-items:center;gap:.5rem;
   font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
-  color:var(--orange-bright);border:1px solid rgba(232,116,46,.35);background:rgba(232,116,46,.1);
+  color:var(--orange-bright);border:1px solid rgba(129,140,248,.35);background:rgba(129,140,248,.1);
   padding:6px 14px;border-radius:20px;margin-bottom:20px;
 }
 .eyebrow-dot{width:5px;height:5px;background:var(--orange-bright);border-radius:50%;animation:blink 2s infinite}
@@ -102,7 +102,7 @@ button,input,select{font-family:inherit}
   -webkit-appearance:none;appearance:none;
 }
 .field input::placeholder{color:var(--mist)}
-.field input:focus,.field select:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(201,94,26,.12)}
+.field input:focus,.field select:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(99,102,241,.12)}
 .field select{
   cursor:pointer;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238C97A6' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
@@ -111,7 +111,7 @@ button,input,select{font-family:inherit}
 .submit-btn{
   width:100%;padding:14px;border:none;border-radius:10px;
   background:var(--orange);color:#fff;font-size:15px;font-weight:800;cursor:pointer;
-  transition:.15s;box-shadow:0 6px 20px rgba(201,94,26,.35);margin-top:4px;
+  transition:.15s;box-shadow:0 6px 20px rgba(99,102,241,.35);margin-top:4px;
 }
 .submit-btn:hover{background:var(--orange-dark)}
 .submit-btn:active{transform:scale(.99)}
@@ -175,7 +175,7 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
 /* ── CTA BAND (charcoal, same as other pages) ── */
 .cta-band{
   background:
-    radial-gradient(700px 350px at 10% 120%, rgba(201,94,26,.25), transparent 60%),
+    radial-gradient(700px 350px at 10% 120%, rgba(99,102,241,.25), transparent 60%),
     var(--charcoal);
   color:#fff;text-align:center;padding:72px 24px;
 }
@@ -184,7 +184,7 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
 .cta-band p{color:#A8B0BB;margin-bottom:26px;max-width:480px;margin-left:auto;margin-right:auto}
 .btn{
   display:inline-block;background:var(--orange);color:#fff;font-weight:800;font-size:14.5px;
-  padding:14px 30px;border-radius:10px;box-shadow:0 6px 20px rgba(201,94,26,.35);transition:.15s;
+  padding:14px 30px;border-radius:10px;box-shadow:0 6px 20px rgba(99,102,241,.35);transition:.15s;
 }
 .btn:hover{background:var(--orange-dark);text-decoration:none}
 .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.25);box-shadow:none;margin-left:10px}
@@ -195,7 +195,7 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
 
 /* hero image layout — image right of text */
 .page-hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
-.page-hero-img{border-radius:18px;overflow:hidden;box-shadow:0 28px 80px rgba(201,94,26,.18),0 0 0 1px rgba(255,255,255,.08);transform:perspective(1200px) rotateY(-3deg);transition:transform .4s}
+.page-hero-img{border-radius:18px;overflow:hidden;box-shadow:0 28px 80px rgba(99,102,241,.18),0 0 0 1px rgba(255,255,255,.08);transform:perspective(1200px) rotateY(-3deg);transition:transform .4s}
 .page-hero-img:hover{transform:perspective(1200px) rotateY(0deg)}
 .page-hero-img img{width:100%;display:block}
 @media(max-width:900px){

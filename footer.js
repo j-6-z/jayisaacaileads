@@ -71,7 +71,7 @@ const BADGES = [
 ];
 
 const YEAR = new Date().getFullYear();
-const LOGO_SRC = "/public/new-logo1.jpg";
+const LOGO_SRC = "/public/new-logo2.jpg";
 
 /* ── CSS ──────────────────────────────────────────────────── */
 const CSS = `
@@ -104,12 +104,12 @@ html { background: #0C0C0C; }
   color: #F2F2F2;
   letter-spacing: -.02em;
 }
-.jia-ft-cta-text span { color: #C95E1A; }
+.jia-ft-cta-text span { color: #6366F1; }
 .jia-ft-cta-btns {
   display: flex; gap: .75rem; flex-wrap: wrap;
 }
 .jia-ft-btn-trial {
-  background: #C95E1A;
+  background: #6366F1;
   color: #F2F2F2;
   text-decoration: none;
   padding: .62rem 1.4rem;
@@ -120,7 +120,7 @@ html { background: #0C0C0C; }
   white-space: nowrap;
   display: inline-block;
 }
-.jia-ft-btn-trial:hover { background: #E06B1E; }
+.jia-ft-btn-trial:hover { background: #818CF8; }
 .jia-ft-btn-sales {
   color: #F2F2F2;
   text-decoration: none;
@@ -164,22 +164,22 @@ html { background: #0C0C0C; }
   text-transform: uppercase;
   transition: filter .3s;
 }
-.jia-ft-logo:hover { text-decoration: none; filter: drop-shadow(0 0 8px rgba(201,94,26,.45)); }
+.jia-ft-logo:hover { text-decoration: none; filter: drop-shadow(0 0 8px rgba(99,102,241,.45)); }
 .jia-ft-logo span {
-  background: linear-gradient(135deg, #E8742E, #FF9A55);
+  background: linear-gradient(135deg, #818CF8, #A5B4FC);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 .jia-ft-logo-img {
   width: 34px; height: 34px; border-radius: 50%;
   object-fit: cover; flex-shrink: 0;
-  border: 1.5px solid rgba(201,94,26,.38);
-  box-shadow: 0 0 0 3px rgba(201,94,26,.1);
+  border: 1.5px solid rgba(99,102,241,.38);
+  box-shadow: 0 0 0 3px rgba(99,102,241,.1);
 }
 .jia-ft-dot {
   width: 7px; height: 7px;
   border-radius: 50%;
-  background: #C95E1A;
+  background: #6366F1;
   flex-shrink: 0;
 }
 .jia-ft-tagline {
@@ -211,7 +211,7 @@ html { background: #0C0C0C; }
   transition: border-color .18s, color .18s;
 }
 .jia-ft-badge:hover {
-  border-color: rgba(201,94,26,.35);
+  border-color: rgba(99,102,241,.35);
   color: rgba(242,242,242,.7);
 }
 
@@ -263,7 +263,7 @@ html { background: #0C0C0C; }
   font-size: .75rem;
   color: rgba(242,242,242,.35);
 }
-.jia-ft-copy span { color: #C95E1A; }
+.jia-ft-copy span { color: #6366F1; }
 .jia-ft-legal {
   display: flex;
   gap: 1.5rem;

@@ -2043,16 +2043,19 @@ let state = {
   emailsGenerated:0,
 };
 
-/* ================= ACTIVITY LOG (localStorage) ================= */
+/* ================= ACTIVITY LOG (localStorage + Firestore) ================= */
 const ACTIVITY_KEY = "jia_activity_v1";
 function logActivity(type, meta){
+  const event = { t: Date.now(), type, ...(meta || {}) };
+  /* 1. localStorage — instant UI cache */
   try {
     const log = JSON.parse(localStorage.getItem(ACTIVITY_KEY) || "[]");
-    log.push({ t: Date.now(), type, ...(meta || {}) });
-    /* keep last 1000 events to prevent localStorage bloat */
+    log.push(event);
     if(log.length > 1000) log.splice(0, log.length - 1000);
     localStorage.setItem(ACTIVITY_KEY, JSON.stringify(log));
   } catch(_){}
+  /* 2. Firestore — cross-device persistence, fire and forget */
+  if(window.persistActivity) window.persistActivity(event);
 }
 function getActivityLog(){
   try { return JSON.parse(localStorage.getItem(ACTIVITY_KEY) || "[]"); }
@@ -3060,6 +3063,7 @@ let currentView = "search";
 function switchView(view){
   if(!VIEW_TITLES[view]) return;
   currentView = view;
+  window.currentView = view;  /* expose for module-script syncs that need to know the active view */
   /* rail active state */
   document.querySelectorAll(".rail-btn[data-view]").forEach(b=>
     b.classList.toggle("active", b.dataset.view===view));
@@ -4010,7 +4014,7 @@ render();
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, arrayUnion, serverTimestamp, collection, query, limit, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, arrayUnion, serverTimestamp, collection, query, limit, getDocs, orderBy, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDHs92C3ariQ285KUkodOHV04sEVKr_dQ8",
@@ -4096,6 +4100,8 @@ onAuthStateChanged(auth, async (user) => {
 
   document.getElementById("creditCount").textContent = state.credits;
   await loadContacts(user);
+  /* sync activity log from Firestore in background — don't await, never block UI */
+  loadActivityFromFirestore();
   render();
   clearTimeout(veilFallback);   /* ← auth completed, cancel the timeout */
   document.getElementById("authVeil").classList.add("hide");
@@ -4192,6 +4198,73 @@ window.persistReveal = async (id) => {
     toast("Sync issue — credit change may not have saved");
   }
 };
+
+/* ─────────── ACTIVITY SYNC: localStorage ⇄ Firestore ─────────── */
+/* Activity events flow:
+     1. logActivity() in non-module script writes to localStorage instantly (UI cache)
+     2. window.persistActivity (below) writes the same event to Firestore in the
+        background, so it's available across all the user's devices.
+     3. On app boot, loadActivityFromFirestore() pulls the last 500 events and
+        replaces the local cache with the canonical Firestore data.
+   Lifetime counters are kept on the user doc for instant reads. */
+
+window.persistActivity = async (event) => {
+  if (!userRef || !auth.currentUser) return;
+  try {
+    const activityCol = collection(db, "users", auth.currentUser.uid, "activity");
+    /* write event doc (fire and forget — don't await, never block the UI) */
+    addDoc(activityCol, event).catch(e =>
+      console.warn("[activity] write failed:", e?.message));
+
+    /* increment the matching lifetime counter on the user doc */
+    const counterField = {
+      reveal:    "stats.totalReveals",
+      email_gen: "stats.totalEmails",
+      export:    "stats.totalExports",
+      search:    "stats.totalSearches",
+    }[event.type];
+    if (counterField) {
+      updateDoc(userRef, { [counterField]: increment(1) }).catch(_ => {});
+    }
+  } catch (e) {
+    console.warn("[activity] persist crashed:", e?.message);
+  }
+};
+
+async function loadActivityFromFirestore() {
+  if (!userRef || !auth.currentUser) return;
+  try {
+    const activityCol = collection(db, "users", auth.currentUser.uid, "activity");
+    const q = query(activityCol, orderBy("t", "desc"), limit(500));
+    const snap = await getDocs(q);
+
+    if (snap.empty) {
+      /* No remote events yet. If localStorage has data, backfill it to Firestore
+         so first-time-sync doesn't lose existing local history. */
+      const local = JSON.parse(localStorage.getItem("jia_activity_v1") || "[]");
+      if (local.length > 0) {
+        console.log(`[activity] Backfilling ${local.length} local events to Firestore`);
+        local.forEach(e => { addDoc(activityCol, e).catch(_ => {}); });
+      }
+      return;
+    }
+
+    const events = [];
+    snap.forEach(d => events.push(d.data()));
+    events.reverse(); /* Firestore gave us newest-first; localStorage expects oldest-first */
+    localStorage.setItem("jia_activity_v1", JSON.stringify(events));
+
+    /* If user already loaded the analytics or email-writer view, refresh it */
+    if (window.currentView === "analytics" && typeof window.renderAnalytics === "function") {
+      window.renderAnalytics();
+    }
+    if (window.currentView === "email-writer" && typeof window.renderEmailWriter === "function") {
+      window.renderEmailWriter();
+    }
+  } catch (e) {
+    console.warn("[activity] Firestore load failed:", e?.message);
+  }
+}
 
 /* expose a guarded sign-out for the avatar menu + settings view */
 window.__signOut = async () => {

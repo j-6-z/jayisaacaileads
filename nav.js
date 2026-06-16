@@ -88,15 +88,15 @@ const LINKS = [
   },
 ];
 
-const LOGO_SRC = "/public/new-logo1.jpg";
+const LOGO_SRC = "/public/new-logo2.jpg";
 
 /* ── CSS ─────────────────────────────────────────────────── */
 const CSS = `
 :root {
-  --jia-orange:      #C95E1A;
-  --jia-orange-h:    #E06B1E;
-  --jia-orange-dim:  rgba(201,94,26,.13);
-  --jia-orange-edge: rgba(201,94,26,.38);
+  --jia-orange:      #6366F1;
+  --jia-orange-h:    #818CF8;
+  --jia-orange-dim:  rgba(99,102,241,.13);
+  --jia-orange-edge: rgba(99,102,241,.38);
   --jia-bg:          #0C0C0C;
   --jia-surface:     #141414;
   --jia-card:        #191919;
@@ -143,14 +143,14 @@ body { padding-top: var(--jia-h); }
   z-index: 2; text-transform: uppercase;
   transition: filter .3s;
 }
-.jia-brand:hover { text-decoration: none; filter: drop-shadow(0 0 8px rgba(201,94,26,.45)); }
+.jia-brand:hover { text-decoration: none; filter: drop-shadow(0 0 8px rgba(99,102,241,.45)); }
 
 /* corner logo — hidden until scrolled, then swaps in for the shield */
 .jia-brand-logo {
   width: 0; height: 36px; border-radius: 50%;
   object-fit: cover; opacity: 0;
   border: 1.5px solid var(--jia-orange-edge);
-  box-shadow: 0 0 0 3px rgba(201,94,26,.1);
+  box-shadow: 0 0 0 3px rgba(99,102,241,.1);
   transition: width .3s cubic-bezier(.34,1.56,.64,1), opacity .25s, margin-right .3s;
   margin-right: 0; flex-shrink: 0;
 }
@@ -158,7 +158,7 @@ body { padding-top: var(--jia-h); }
   width: 36px; opacity: 1; margin-right: .2rem;
 }
 .jia-brand-ai {
-  background: linear-gradient(135deg, #E8742E, #FF9A55);
+  background: linear-gradient(135deg, #818CF8, #A5B4FC);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
   font-weight: 800;
@@ -360,7 +360,7 @@ body { padding-top: var(--jia-h); }
   font-family:inherit;
   transition:background .17s;
 }
-.jia-acct-toggle:hover { background:rgba(201,94,26,.22); }
+.jia-acct-toggle:hover { background:rgba(99,102,241,.22); }
 .jia-acct-photo {
   width:26px; height:26px; border-radius:50%;
   object-fit:cover; border:1.5px solid var(--jia-orange-edge);
@@ -425,20 +425,20 @@ body { padding-top: var(--jia-h); }
   content:''; position:absolute; inset:0;
   clip-path: polygon(0 0,100% 0,100% 62%,50% 100%,0 62%);
   border:1.5px solid transparent;
-  border-image:linear-gradient(180deg,rgba(201,94,26,0) 0%,rgba(201,94,26,.5) 55%,rgba(201,94,26,0) 100%) 1;
+  border-image:linear-gradient(180deg,rgba(99,102,241,0) 0%,rgba(99,102,241,.5) 55%,rgba(99,102,241,0) 100%) 1;
   pointer-events:none;
 }
 .jia-shield img {
   height:54px; width:54px; border-radius:50%;
   border:2px solid var(--jia-orange-edge);
-  box-shadow: 0 0 0 4px rgba(201,94,26,.1), 0 4px 18px rgba(0,0,0,.5);
+  box-shadow: 0 0 0 4px rgba(99,102,241,.1), 0 4px 18px rgba(0,0,0,.5);
   object-fit:cover;
   transition:transform .45s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
   display:block;
 }
 .jia-shield img:hover {
   transform:scale(1.1) rotate(3deg);
-  box-shadow:0 0 0 7px rgba(201,94,26,.18), 0 6px 24px rgba(0,0,0,.55);
+  box-shadow:0 0 0 7px rgba(99,102,241,.18), 0 6px 24px rgba(0,0,0,.55);
 }
 .jia-shield.hide { display:none; }
 
