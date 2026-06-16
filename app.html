@@ -14,16 +14,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   JAYISAAC AI — DARK COCKPIT
-   black glass · neon orange · glowing data readouts
+   JAYISAAC AI — MIDNIGHT INDIGO
+   deep indigo glass · electric indigo accents · violet AI features
    ============================================================ */
 :root{
-  --o:#FF6B1A;            /* neon orange */
-  --o-hot:#FF8A3D;        /* hotter highlight */
-  --o-deep:#C44E10;       /* deep orange */
-  --o-glow:rgba(255,107,26,.55);
-  --o-dim:rgba(255,107,26,.13);
-  --o-line:rgba(255,107,26,.30);
+  --o:#6366F1;            /* electric indigo — primary brand */
+  --o-hot:#818CF8;        /* hotter highlight (indigo-400) */
+  --o-deep:#4F46E5;       /* deep indigo (indigo-600) */
+  --o-glow:rgba(99,102,241,.55);
+  --o-dim:rgba(99,102,241,.13);
+  --o-line:rgba(99,102,241,.30);
 
   --rail-w:70px;
   --rail-w-open:224px;
@@ -33,44 +33,44 @@
   --spring:cubic-bezier(.34,1.56,.64,1);
 }
 
-/* ===== DARK (Apollo grey) — default ===== */
+/* ===== DARK (Midnight Indigo) — default ===== */
 [data-theme="dark"]{
-  --black:#16181D;        /* base — slate */
-  --p0:#1A1D23;
-  --p1:#1E2128;
-  --p2:#23262E;
-  --p3:#2A2E37;
-  --hair:rgba(255,255,255,.08);
-  --hair-2:rgba(255,255,255,.05);
-  --ice:#E9EEF5;          /* primary text */
-  --steel:#8A93A2;        /* secondary */
-  --dim:#525A67;          /* tertiary */
-  --data:#BFE9FF;         /* data readout */
+  --black:#0E1117;        /* base — deep indigo-black */
+  --p0:#13171F;
+  --p1:#181D27;
+  --p2:#1F2530;
+  --p3:#28303D;
+  --hair:rgba(170,200,240,.08);   /* indigo-tinted hairlines */
+  --hair-2:rgba(170,200,240,.05);
+  --ice:#E6EDFD;          /* cool off-white text */
+  --steel:#8B96AB;        /* secondary */
+  --dim:#4F586B;          /* tertiary */
+  --data:#A5C8FF;         /* data readout — soft sky */
   --green:#34E5A0;
   --green-glow:rgba(52,229,160,.4);
-  --scroll:rgba(255,255,255,.08);
-  --hover:rgba(255,255,255,.05);
-  --hover-2:rgba(255,255,255,.025);
+  --scroll:rgba(170,200,240,.10);
+  --hover:rgba(170,200,240,.05);
+  --hover-2:rgba(170,200,240,.025);
 }
 
-/* ===== LIGHT ===== */
+/* ===== LIGHT (Crisp Indigo) ===== */
 [data-theme="light"]{
-  --black:#F5F6F8;        /* base — soft off-white */
+  --black:#F7F8FB;        /* base — slightly cool off-white */
   --p0:#FFFFFF;
   --p1:#FFFFFF;
-  --p2:#F7F8FA;
-  --p3:#EEF0F4;
-  --hair:rgba(16,20,28,.10);
-  --hair-2:rgba(16,20,28,.06);
-  --ice:#181B22;          /* primary text */
-  --steel:#5B6573;        /* secondary */
-  --dim:#9AA3B0;          /* tertiary */
-  --data:#1B6FB0;         /* data readout (darker for light bg) */
-  --green:#12936A;
-  --green-glow:rgba(18,147,106,.3);
-  --scroll:rgba(16,20,28,.14);
-  --hover:rgba(16,20,28,.05);
-  --hover-2:rgba(16,20,28,.03);
+  --p2:#F5F7FA;
+  --p3:#EDF0F6;
+  --hair:rgba(20,30,55,.10);
+  --hair-2:rgba(20,30,55,.06);
+  --ice:#101424;          /* deep indigo-ink text */
+  --steel:#4D5668;        /* secondary */
+  --dim:#9AA3B5;          /* tertiary */
+  --data:#3B43A8;         /* data readout (darker for light bg) */
+  --green:#0F8B5F;
+  --green-glow:rgba(15,139,95,.3);
+  --scroll:rgba(20,30,55,.14);
+  --hover:rgba(20,30,55,.05);
+  --hover-2:rgba(20,30,55,.03);
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -100,7 +100,7 @@ input{font-family:inherit}
 /* ============ ALERT BANNER ============ */
 .alert-banner{
   display:flex;align-items:center;gap:12px;flex-shrink:0;
-  padding:11px 20px;background:linear-gradient(90deg,var(--o-dim),rgba(255,107,26,.05));
+  padding:11px 20px;background:linear-gradient(90deg,var(--o-dim),rgba(99,102,241,.05));
   border-bottom:1px solid var(--o-line);position:relative;z-index:30;
 }
 .alert-banner.hide{display:none}
@@ -125,7 +125,7 @@ input{font-family:inherit}
   display:grid;grid-template-columns:var(--rail-w-open) var(--filters-w) 1fr;flex:1;min-height:0;
   transition:grid-template-columns .28s var(--ease);
   background:
-    radial-gradient(1200px 600px at 78% -10%, rgba(255,107,26,.05), transparent 60%),
+    radial-gradient(1200px 600px at 78% -10%, rgba(99,102,241,.05), transparent 60%),
     var(--black);
 }
 .app.rail-collapsed{grid-template-columns:var(--rail-w) var(--filters-w) 1fr}
@@ -205,7 +205,7 @@ input{font-family:inherit}
   padding:6px 6px 8px;
   border-radius:12px;
   background:linear-gradient(135deg,
-    rgba(255,107,26,.04),
+    rgba(99,102,241,.04),
     rgba(168,85,247,.04));
   border:1px solid rgba(255,255,255,.04);
   position:relative;
@@ -248,7 +248,7 @@ input{font-family:inherit}
 }
 .rail-btn.ai-feature::before{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(120deg, transparent, var(--ai-shimmer, rgba(255,107,26,.15)), transparent);
+  background:linear-gradient(120deg, transparent, var(--ai-shimmer, rgba(99,102,241,.15)), transparent);
   transform:translateX(-100%);
   animation:ai-shimmer 4s ease-in-out infinite;
   pointer-events:none;
@@ -284,11 +284,11 @@ input{font-family:inherit}
 }
 .rail-btn.ai-feature.active::before{display:none}
 
-/* AI LEADS — orange accent (find/discover) */
+/* AI LEADS — indigo accent (find/discover) */
 .rail-btn.ai-leads{
-  background:linear-gradient(135deg, rgba(255,107,26,.12), rgba(255,107,26,.04));
+  background:linear-gradient(135deg, rgba(99,102,241,.12), rgba(99,102,241,.04));
   border-color:var(--o-line);
-  --ai-shimmer: rgba(255,107,26,.15);
+  --ai-shimmer: rgba(99,102,241,.15);
   --ai-glow:    var(--o-glow);
   --ai-color:   var(--o);
   --ai-shadow:  var(--o-dim);
@@ -296,11 +296,11 @@ input{font-family:inherit}
 }
 .rail-btn.ai-leads svg{color:var(--o)}
 .rail-btn.ai-leads:hover{
-  background:linear-gradient(135deg, rgba(255,107,26,.2), rgba(255,107,26,.08));
+  background:linear-gradient(135deg, rgba(99,102,241,.2), rgba(99,102,241,.08));
   border-color:var(--o);
 }
 .rail-btn.ai-leads.active{
-  background:linear-gradient(135deg, rgba(255,107,26,.22), rgba(255,107,26,.1));
+  background:linear-gradient(135deg, rgba(99,102,241,.22), rgba(99,102,241,.1));
   border-color:var(--o);
   box-shadow:0 0 28px var(--o-dim);
 }
@@ -326,7 +326,7 @@ input{font-family:inherit}
   box-shadow:0 0 28px var(--ai-violet-dim);
 }
 
-/* "NEW" badge — orange OR violet depending on parent */
+/* "NEW" badge — indigo OR violet depending on parent */
 .ai-new-badge{
   position:absolute;right:8px;top:50%;transform:translateY(-50%);
   background:linear-gradient(135deg, var(--o-hot), var(--o-deep));
@@ -462,7 +462,7 @@ input{font-family:inherit}
   background:var(--p2);border:1px solid var(--hair);border-radius:11px;
   padding:9px 14px;width:100%;max-width:640px;transition:.18s var(--ease);
 }
-.gsearch:focus-within{border-color:var(--o-line);box-shadow:0 0 0 3px var(--o-dim),0 0 20px rgba(255,107,26,.12)}
+.gsearch:focus-within{border-color:var(--o-line);box-shadow:0 0 0 3px var(--o-dim),0 0 20px rgba(99,102,241,.12)}
 .gsearch svg{width:15px;height:15px;color:var(--dim);flex-shrink:0;transition:.15s}
 .gsearch:focus-within svg{color:var(--o)}
 .gsearch input{border:none;outline:none;background:none;font-size:12.5px;width:100%;color:var(--ice);font-weight:500}
@@ -474,7 +474,7 @@ input{font-family:inherit}
   display:flex;align-items:center;gap:8px;
   background:var(--p2);border:1px solid var(--o-line);border-radius:11px;
   padding:8px 14px;font-size:12.5px;font-weight:700;color:var(--o);white-space:nowrap;
-  box-shadow:inset 0 0 16px rgba(255,107,26,.06);
+  box-shadow:inset 0 0 16px rgba(99,102,241,.06);
 }
 .credits #creditCount{font-family:var(--mono);font-weight:700;text-shadow:0 0 12px var(--o-glow)}
 .credits svg{width:14px;height:14px;filter:drop-shadow(0 0 4px var(--o-glow))}
@@ -661,7 +661,7 @@ tbody tr.checked td:first-child{box-shadow:inset 3px 0 0 var(--o),0 0 20px var(-
 }
 .access-btn:hover{
   border-color:var(--o-line);color:var(--o);background:var(--o-dim);
-  box-shadow:0 0 16px rgba(255,107,26,.18);
+  box-shadow:0 0 16px rgba(99,102,241,.18);
 }
 .access-btn svg{width:13px;height:13px}
 .revealed{
@@ -703,7 +703,7 @@ th.sortable.sorted .arrow{opacity:1}
 .drawer-head{
   display:flex;align-items:flex-start;gap:15px;padding:26px 24px 22px;
   border-bottom:1px solid var(--hair);
-  background:radial-gradient(400px 200px at 100% 0%, rgba(255,107,26,.08), transparent 70%);
+  background:radial-gradient(400px 200px at 100% 0%, rgba(99,102,241,.08), transparent 70%);
 }
 .drawer-head .avatar{width:54px;height:54px;font-size:18px;border-radius:14px}
 .drawer-name{font-size:19px;font-weight:800;line-height:1.25;letter-spacing:-.02em;color:var(--ice)}
@@ -1170,7 +1170,7 @@ th.sortable.sorted .arrow{opacity:1}
   position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(90px);
   background:var(--p2);color:var(--ice);font-size:12.5px;font-weight:600;
   padding:12px 20px;border-radius:12px;border:1px solid var(--o-line);
-  box-shadow:0 16px 50px rgba(0,0,0,.7), 0 0 24px rgba(255,107,26,.15);
+  box-shadow:0 16px 50px rgba(0,0,0,.7), 0 0 24px rgba(99,102,241,.15);
   transition:.3s var(--spring);z-index:100;display:flex;align-items:center;gap:9px;
 }
 .toast.show{transform:translateX(-50%) translateY(0)}
@@ -1260,7 +1260,7 @@ th.sortable.sorted .arrow{opacity:1}
 }
 .onboard-hero::before{
   content:'';position:absolute;top:-40%;right:-5%;width:340px;height:340px;
-  background:radial-gradient(circle,rgba(255,107,26,.12),transparent 65%);pointer-events:none;
+  background:radial-gradient(circle,rgba(99,102,241,.12),transparent 65%);pointer-events:none;
 }
 .oh-left{flex:1;position:relative;z-index:1}
 .oh-title{font-size:18px;font-weight:800;color:var(--ice);letter-spacing:-.01em}
@@ -1498,7 +1498,7 @@ th.sortable.sorted .arrow{opacity:1}
   background:var(--p2);border:1px solid var(--hair);
 }
 .activity-icon svg{width:14px;height:14px}
-.activity-item.reveal .activity-icon{background:rgba(255,107,26,.08);border-color:var(--o-line)}
+.activity-item.reveal .activity-icon{background:rgba(99,102,241,.08);border-color:var(--o-line)}
 .activity-item.reveal .activity-icon svg{color:var(--o)}
 .activity-item.email_gen .activity-icon{background:rgba(168,85,247,.08);border-color:var(--ai-violet-line)}
 .activity-item.email_gen .activity-icon svg{color:var(--ai-violet)}
@@ -1543,7 +1543,7 @@ th.sortable.sorted .arrow{opacity:1}
   position:fixed;top:18vh;left:50%;transform:translateX(-50%) translateY(-12px) scale(.98);
   width:560px;max-width:92vw;z-index:301;
   background:var(--p1);border:1px solid var(--o-line);border-radius:16px;overflow:hidden;
-  box-shadow:0 30px 90px rgba(0,0,0,.7), 0 0 40px rgba(255,107,26,.12);
+  box-shadow:0 30px 90px rgba(0,0,0,.7), 0 0 40px rgba(99,102,241,.12);
   opacity:0;pointer-events:none;transition:.22s var(--spring);
 }
 .cmdk.show{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0) scale(1)}
@@ -1587,7 +1587,7 @@ th.sortable.sorted .arrow{opacity:1}
   font-size:10px;font-weight:800;font-family:var(--mono);
   color:var(--dim);text-transform:uppercase;letter-spacing:.12em;
   border-bottom:1px solid var(--hair-2);
-  background:linear-gradient(180deg,rgba(255,107,26,.04),transparent);
+  background:linear-gradient(180deg,rgba(99,102,241,.04),transparent);
 }
 .exp-section + .exp-section,
 .exp-opt + .exp-section{border-top:1px solid var(--hair)}
@@ -1708,8 +1708,8 @@ function fallback(text, cb){
 
     <div class="ai-group">
       <div class="ai-group-label">AI Suite</div>
-      <button class="rail-btn ai-feature ai-leads" data-view="enrich"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg><span class="rlabel">AI Leads</span><span class="ai-new-badge">NEW</span><span class="tip">AI Leads · Natural language search</span></button>
-      <button class="rail-btn ai-feature ai-email-writer" data-view="email-writer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/><path d="M16 2l1.5 3 3 .5-2.2 2.1.5 3-2.8-1.5L13 10.6l.5-3L11.3 5.5l3-.5z" fill="currentColor" stroke="none"/></svg><span class="rlabel">AI Email Writer</span><span class="ai-new-badge">NEW</span><span class="tip">AI Email Writer · Personalized cold emails</span></button>
+      <button class="rail-btn ai-feature ai-leads" data-view="enrich"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg><span class="rlabel">AI Leads</span><span class="tip">AI Leads · Natural language search</span></button>
+      <button class="rail-btn ai-feature ai-email-writer" data-view="email-writer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/><path d="M16 2l1.5 3 3 .5-2.2 2.1.5 3-2.8-1.5L13 10.6l.5-3L11.3 5.5l3-.5z" fill="currentColor" stroke="none"/></svg><span class="rlabel">AI Email Writer</span><span class="tip">AI Email Writer · Personalized cold emails</span></button>
     </div>
 
     <button class="rail-btn" data-view="analytics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg><span class="rlabel">Analytics</span><span class="tip">Analytics</span></button>
@@ -2059,7 +2059,7 @@ function getActivityLog(){
   catch(_){ return []; }
 }
 const PER_PAGE = 10;
-const AV_COLORS = ["#C95E1A","#2563EB","#1B8A5A","#7C3AED","#0E7490","#B91C1C","#A16207"];
+const AV_COLORS = ["#6366F1","#2563EB","#1B8A5A","#A855F7","#0891B2","#0E7490","#EC4899"];
 
 /* ================= THEME ================= */
 function toggleTheme(){
@@ -2272,7 +2272,7 @@ function render(){
           <td><span class="ind-tag">${co.i}</span></td>
           <td>${co.ce}</td>
           <td>${co.rev}</td>
-          <td style="color:var(--orange);font-weight:600">${co.site}</td>
+          <td style="color:var(--o);font-weight:600">${co.site}</td>
         </tr>`).join("")}</tbody>
     </table>`;
   }
