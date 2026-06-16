@@ -180,6 +180,289 @@
     .stat-num span { color: var(--or); }
     .stat-label { font-size: .76rem; color: var(--muted); margin-top: .2rem; display: block; }
 
+    /* ════════════ AI SHOWCASE (flagship two-product section) ════════════ */
+    .ai-showcase {
+      position: relative;
+      background: #0B0E13;
+      padding: 110px 5vw 130px;
+      overflow: hidden;
+    }
+    .ai-showcase-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 50% at 25% 30%, rgba(99,102,241,.16), transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 70%, rgba(168,85,247,.13), transparent 60%),
+        radial-gradient(ellipse 80% 40% at 50% 50%, rgba(99,102,241,.03), transparent 70%);
+    }
+    .ai-showcase-inner { max-width: 1280px; margin: 0 auto; position: relative; z-index: 1; }
+    .ai-showcase-head { text-align: center; margin-bottom: 60px; max-width: 760px; margin-left: auto; margin-right: auto; }
+    .ai-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px;
+      background: rgba(99,102,241,.12);
+      border: 1px solid rgba(99,102,241,.28);
+      border-radius: 100px;
+      color: #818CF8;
+      font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+    .ai-eyebrow-pip {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #6366F1;
+      box-shadow: 0 0 10px #6366F1;
+      animation: ai-pulse 2s infinite;
+    }
+    @keyframes ai-pulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
+    .ai-showcase-head h2 {
+      font-size: clamp(28px, 4.5vw, 48px);
+      font-weight: 800;
+      letter-spacing: -.025em;
+      line-height: 1.1;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .ai-grad-text {
+      background: linear-gradient(120deg, #818CF8, #6366F1, #A855F7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .ai-showcase-sub {
+      font-size: 17px;
+      color: rgba(255,255,255,.6);
+      line-height: 1.6;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+    .ai-showcase-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    /* ── individual product cards ── */
+    .ai-card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(20,25,40,.7), rgba(15,20,33,.9));
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 22px;
+      padding: 34px 32px;
+      overflow: hidden;
+      transition: transform .3s cubic-bezier(.4,0,.2,1), border-color .3s, box-shadow .3s;
+      backdrop-filter: blur(20px);
+    }
+    .ai-card:hover {
+      transform: translateY(-4px);
+    }
+    .ai-card-leads:hover { border-color: rgba(99,102,241,.4); box-shadow: 0 20px 50px rgba(99,102,241,.18); }
+    .ai-card-email:hover { border-color: rgba(168,85,247,.4); box-shadow: 0 20px 50px rgba(168,85,247,.18); }
+
+    .ai-card-glow {
+      position: absolute; top: -100px; right: -100px;
+      width: 280px; height: 280px;
+      background: radial-gradient(circle, rgba(99,102,241,.35), transparent 70%);
+      pointer-events: none;
+      filter: blur(40px);
+    }
+    .ai-card-glow.ai-glow-email {
+      background: radial-gradient(circle, rgba(168,85,247,.35), transparent 70%);
+    }
+
+    .ai-card-header {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 22px;
+      position: relative; z-index: 1;
+    }
+    .ai-card-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .ai-card-icon svg { width: 24px; height: 24px; color: #fff; }
+    .ai-icon-leads {
+      background: linear-gradient(135deg, #818CF8, #6366F1, #4F46E5);
+      box-shadow: 0 8px 20px rgba(99,102,241,.4);
+    }
+    .ai-icon-email {
+      background: linear-gradient(135deg, #C084FC, #A855F7, #7E22CE);
+      box-shadow: 0 8px 20px rgba(168,85,247,.4);
+    }
+    .ai-card-meta { display: flex; flex-direction: column; gap: 2px; }
+    .ai-card-tag {
+      font-size: 11px; font-weight: 800; letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .ai-tag-leads { color: #818CF8; }
+    .ai-tag-email { color: #C084FC; }
+    .ai-card-subtitle { font-size: 13px; color: rgba(255,255,255,.55); }
+
+    .ai-card h3 {
+      font-size: 22px; font-weight: 800;
+      letter-spacing: -.015em;
+      line-height: 1.25;
+      color: #fff;
+      margin-bottom: 12px;
+      position: relative; z-index: 1;
+    }
+    .ai-card-desc {
+      font-size: 14.5px;
+      color: rgba(255,255,255,.62);
+      line-height: 1.6;
+      margin-bottom: 22px;
+      position: relative; z-index: 1;
+    }
+
+    /* ── demo visual inside each card ── */
+    .ai-demo {
+      background: rgba(8,11,18,.6);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin-bottom: 22px;
+      position: relative; z-index: 1;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+    }
+    .ai-demo-label {
+      font-size: 10px; font-weight: 700; letter-spacing: .15em;
+      color: rgba(255,255,255,.35);
+      margin-bottom: 10px;
+    }
+    .ai-demo-input {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px;
+      color: #fff;
+      padding: 8px 10px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 8px;
+    }
+    .ai-demo-caret { color: #6366F1; font-weight: 800; }
+    .ai-demo-text { color: rgba(255,255,255,.92); }
+    .ai-demo-arrow {
+      text-align: center;
+      color: #818CF8;
+      font-size: 14px;
+      margin: 8px 0;
+      opacity: .6;
+    }
+    .ai-demo-chips {
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .ai-chip {
+      font-size: 11px; font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .ai-chip-leads {
+      background: rgba(99,102,241,.15);
+      border: 1px solid rgba(99,102,241,.3);
+      color: #C7D2FE;
+    }
+
+    /* email preview demo */
+    .ai-email-preview {
+      background: rgba(255,255,255,.03);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .ai-email-subject {
+      font-size: 13px; font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .ai-email-divider {
+      height: 1px;
+      background: rgba(255,255,255,.08);
+      margin-bottom: 10px;
+    }
+    .ai-email-body {
+      font-size: 12.5px;
+      color: rgba(255,255,255,.72);
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+    .ai-email-tone {
+      display: flex; gap: 10px; flex-wrap: wrap;
+      font-size: 10px; font-weight: 600;
+      color: rgba(255,255,255,.5);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: .04em;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+    .ai-credit {
+      margin-left: auto;
+      color: #C084FC;
+      background: rgba(168,85,247,.12);
+      padding: 2px 8px;
+      border-radius: 100px;
+    }
+
+    /* ── feature list ── */
+    .ai-card-features {
+      list-style: none;
+      margin: 0 0 24px 0;
+      padding: 0;
+      position: relative; z-index: 1;
+    }
+    .ai-card-features li {
+      position: relative;
+      padding: 7px 0 7px 24px;
+      font-size: 14px;
+      color: rgba(255,255,255,.78);
+      line-height: 1.5;
+    }
+    .ai-card-features li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 14px;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #6366F1;
+      box-shadow: 0 0 8px #6366F1;
+    }
+    .ai-card-email .ai-card-features li::before {
+      background: #A855F7;
+      box-shadow: 0 0 8px #A855F7;
+    }
+
+    /* ── CTA buttons ── */
+    .ai-card-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 22px;
+      border-radius: 11px;
+      font-size: 14px; font-weight: 700;
+      text-decoration: none;
+      transition: transform .15s, box-shadow .2s;
+      position: relative; z-index: 1;
+    }
+    .ai-card-cta span { transition: transform .15s; }
+    .ai-card-cta:hover span { transform: translateX(3px); }
+    .ai-card-cta:hover { transform: translateY(-1px); }
+    .ai-cta-leads {
+      background: linear-gradient(135deg, #818CF8, #6366F1);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(99,102,241,.35);
+    }
+    .ai-cta-leads:hover { box-shadow: 0 12px 32px rgba(99,102,241,.5); }
+    .ai-cta-email {
+      background: linear-gradient(135deg, #C084FC, #A855F7);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(168,85,247,.35);
+    }
+    .ai-cta-email:hover { box-shadow: 0 12px 32px rgba(168,85,247,.5); }
+
+    @media (max-width: 880px) {
+      .ai-showcase { padding: 70px 5vw 90px; }
+      .ai-showcase-grid { grid-template-columns: 1fr; }
+      .ai-card { padding: 26px 24px; }
+      .ai-showcase-head { margin-bottom: 40px; }
+    }
+    /* ════════════ END AI SHOWCASE ════════════ */
+
     /* ── IMAGE FEATURE SECTIONS ── */
     .imgfeat { padding: 80px 0; overflow: hidden; }
     .imgfeat.dark { background: #0B0E13; color: #F2F2F2; }
@@ -404,21 +687,189 @@
     .role-title { font-size: .93rem; font-weight: 700; color: #111827; margin-bottom: .38rem; }
     .role-desc { font-size: .8rem; color: #6B7280; line-height: 1.55; }
 
-    /* ── COMPARE ── */
-    .compare { padding: 80px 5vw; max-width: 1100px; margin: 0 auto; }
-    .compare-map { display: block; width: 100%; max-width: 720px; height: auto; margin: 0 auto 2.5rem; border-radius: 16px; box-shadow: 0 12px 40px rgba(0,0,0,.08); }
-    .compare-wrap { overflow-x: auto; margin-top: 2.5rem; }
-    .compare-table { width: 100%; border-collapse: collapse; min-width: 600px; }
-    .compare-table th { padding: 1rem 1.25rem; text-align: left; font-size: .75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; border-bottom: 1px solid var(--border); }
-    .compare-table th.hi { color: var(--or); }
-    .compare-table td { padding: .88rem 1.25rem; font-size: .835rem; color: #374151; border-bottom: 1px solid var(--border); }
-    .compare-table td.c { text-align: center; }
-    .compare-table tr:last-child td { border-bottom: none; }
-    .compare-table tr:hover td { background: rgba(0,0,0,.015); }
-    .compare-table .sr td { font-size: .67rem; font-weight: 700; color: var(--or); text-transform: uppercase; letter-spacing: .1em; padding-top: 1.4rem; background: transparent; }
-    .ck { display: inline-flex; align-items: center; justify-content: center; }
-    .ck svg { width: 16px; height: 16px; stroke: var(--or); fill: none; stroke-width: 2.5; stroke-linecap: round; }
-    .dash { color: var(--border); }
+    /* ── COMPARE — Apollo vs Us battle cards ── */
+    .compare { padding: 100px 5vw 110px; max-width: 1200px; margin: 0 auto; }
+    .compare .sec-eyebrow { display: inline-block; }
+    .compare .sec-title .g {
+      background: linear-gradient(120deg, #818CF8, #6366F1, #A855F7);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .vs-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin: 50px 0 40px;
+    }
+    .vs-card {
+      position: relative;
+      background: #FFFFFF;
+      border: 1px solid #E5E7EB;
+      border-radius: 20px;
+      padding: 36px 32px;
+      display: flex; flex-direction: column;
+    }
+    .vs-them {
+      opacity: .92;
+    }
+    .vs-us {
+      border: 2px solid #6366F1;
+      background: linear-gradient(180deg, #FFFFFF, #F8F8FF);
+      box-shadow: 0 24px 60px rgba(99,102,241,.18), 0 0 0 1px rgba(99,102,241,.1);
+      transform: translateY(-4px);
+    }
+    .vs-card-tag {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: linear-gradient(135deg, #818CF8, #6366F1);
+      color: #FFFFFF;
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 11px; font-weight: 800; letter-spacing: .14em;
+      box-shadow: 0 6px 16px rgba(99,102,241,.4);
+    }
+    .vs-card-label {
+      font-size: 13px; font-weight: 800; letter-spacing: .15em;
+      color: #6B7280;
+      margin-bottom: 14px;
+    }
+    .vs-us .vs-card-label { color: #6366F1; }
+
+    .vs-card-price { display: flex; align-items: baseline; gap: 6px; margin-bottom: 6px; }
+    .vs-amt {
+      font-size: 56px; font-weight: 800;
+      letter-spacing: -.03em; line-height: 1;
+      color: #111827;
+    }
+    .vs-us .vs-amt { color: #4F46E5; }
+    .vs-per {
+      font-size: 14px; color: #6B7280; font-weight: 600;
+    }
+    .vs-card-note {
+      font-size: 13px; color: #6B7280;
+      margin-bottom: 26px; padding-bottom: 22px;
+      border-bottom: 1px dashed #E5E7EB;
+    }
+
+    .vs-list {
+      list-style: none; padding: 0; margin: 0;
+      flex: 1;
+    }
+    .vs-list li {
+      font-size: 14.5px;
+      color: #374151;
+      line-height: 1.5;
+      padding: 10px 0;
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .vs-stat {
+      font-size: 16px; font-weight: 800;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      flex-shrink: 0;
+      min-width: 56px;
+    }
+    .vs-stat-bad { color: #DC2626; }
+    .vs-stat-good { color: #059669; }
+    .vs-x {
+      color: #DC2626; font-weight: 800;
+      font-size: 16px; line-height: 1.4;
+      flex-shrink: 0;
+      width: 18px;
+    }
+    .vs-check {
+      color: #059669; font-weight: 800;
+      font-size: 16px; line-height: 1.4;
+      flex-shrink: 0;
+      width: 18px;
+    }
+    .vs-fine {
+      display: block;
+      font-size: 12px;
+      color: #9CA3AF;
+      font-weight: 400;
+      margin-top: 2px;
+      font-style: italic;
+    }
+    .vs-list em {
+      color: #DC2626;
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    .vs-card-foot {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid #E5E7EB;
+      font-size: 13px;
+      color: #6B7280;
+    }
+    .vs-card-foot strong {
+      color: #111827; font-size: 17px; margin-left: 4px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+    }
+    .vs-us .vs-card-foot strong { color: #4F46E5; }
+
+    /* the "math" receipt below */
+    .vs-receipt {
+      background: linear-gradient(135deg, #0E1117 0%, #181D27 100%);
+      border-radius: 20px;
+      padding: 36px 32px 30px;
+      color: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+      margin-top: 24px;
+    }
+    .vs-receipt::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 50% 70% at 15% 20%, rgba(99,102,241,.2), transparent 60%),
+        radial-gradient(ellipse 50% 70% at 85% 80%, rgba(168,85,247,.15), transparent 60%);
+    }
+    .vs-receipt-head {
+      font-size: 13px; font-weight: 800; letter-spacing: .14em;
+      color: #818CF8;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      position: relative; z-index: 1;
+    }
+    .vs-receipt-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      position: relative; z-index: 1;
+    }
+    .vs-receipt-row {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .vs-receipt-num {
+      font-size: 44px;
+      font-weight: 800;
+      letter-spacing: -.025em;
+      line-height: 1;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      background: linear-gradient(135deg, #818CF8, #6366F1, #A855F7);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .vs-receipt-text {
+      font-size: 14px; color: rgba(255,255,255,.7); line-height: 1.4;
+    }
+    .vs-receipt-note {
+      font-size: 12.5px; color: rgba(255,255,255,.45);
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      font-style: italic;
+      position: relative; z-index: 1;
+    }
+
+    @media (max-width: 880px) {
+      .vs-cards { grid-template-columns: 1fr; gap: 28px; }
+      .vs-us { transform: none; }
+      .vs-amt { font-size: 44px; }
+      .vs-receipt-grid { grid-template-columns: 1fr; gap: 20px; }
+      .vs-receipt-num { font-size: 36px; }
+    }
 
     /* ── TESTIMONIALS ── */
     .testimonials { background: #F9FAFB; border-top: 1px solid #E5E7EB; padding: 80px 5vw; }
@@ -591,6 +1042,97 @@
   </div>
 </div>
 
+<!-- ═══ AI SHOWCASE — flagship features ═══ -->
+<section class="ai-showcase">
+  <div class="ai-showcase-bg"></div>
+  <div class="ai-showcase-inner">
+    <div class="ai-showcase-head">
+      <div class="ai-eyebrow"><span class="ai-eyebrow-pip"></span>AI-Native Platform</div>
+      <h2>Two AI tools that <span class="ai-grad-text">never stop working</span> for your pipeline.</h2>
+      <p class="ai-showcase-sub">Built into the platform, not bolted on. Powered by Claude — the same model behind Cursor, Notion AI, and Slack AI.</p>
+    </div>
+
+    <div class="ai-showcase-grid">
+
+      <!-- AI Leads card -->
+      <div class="ai-card ai-card-leads">
+        <div class="ai-card-glow"></div>
+        <div class="ai-card-header">
+          <div class="ai-card-icon ai-icon-leads">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+          </div>
+          <div class="ai-card-meta">
+            <div class="ai-card-tag ai-tag-leads">AI LEADS</div>
+            <div class="ai-card-subtitle">Natural language search</div>
+          </div>
+        </div>
+        <h3>Find perfect prospects in plain English.</h3>
+        <p class="ai-card-desc">Describe your ideal customer the way you'd describe it to a teammate. AI parses your query into filters and returns matches across 1M+ contacts in seconds.</p>
+
+        <div class="ai-demo ai-demo-leads">
+          <div class="ai-demo-label">YOU TYPE</div>
+          <div class="ai-demo-input">
+            <span class="ai-demo-caret">›</span>
+            <span class="ai-demo-text">HVAC owners in Alberta under 20 employees</span>
+          </div>
+          <div class="ai-demo-arrow">↓</div>
+          <div class="ai-demo-chips">
+            <span class="ai-chip ai-chip-leads">Industry: HVAC</span>
+            <span class="ai-chip ai-chip-leads">Role: Owner</span>
+            <span class="ai-chip ai-chip-leads">Region: AB</span>
+            <span class="ai-chip ai-chip-leads">Max emp: 20</span>
+          </div>
+        </div>
+
+        <ul class="ai-card-features">
+          <li>Multi-filter parsing in one query</li>
+          <li>Handles umbrella terms: "trades," "home services," "contractors"</li>
+          <li>Instant matches across the full contact database</li>
+          <li>No dropdowns, no guesswork</li>
+        </ul>
+        <a class="ai-card-cta ai-cta-leads" href="login.html">Try AI Leads <span>→</span></a>
+      </div>
+
+      <!-- AI Email Writer card -->
+      <div class="ai-card ai-card-email">
+        <div class="ai-card-glow ai-glow-email"></div>
+        <div class="ai-card-header">
+          <div class="ai-card-icon ai-icon-email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+          </div>
+          <div class="ai-card-meta">
+            <div class="ai-card-tag ai-tag-email">AI EMAIL WRITER</div>
+            <div class="ai-card-subtitle">Personalized cold outreach</div>
+          </div>
+        </div>
+        <h3>Cold emails that don't sound like cold emails.</h3>
+        <p class="ai-card-desc">For every revealed contact, generate a personalized email tailored to their role, industry, and company. No "hope this finds you well." No "circle back." Just outreach that gets replies.</p>
+
+        <div class="ai-demo ai-demo-email">
+          <div class="ai-demo-label">AI WRITES</div>
+          <div class="ai-email-preview">
+            <div class="ai-email-subject">Quick Q about your equipment rotation</div>
+            <div class="ai-email-divider"></div>
+            <div class="ai-email-body">Hey Mike — saw Eastside HVAC just hit your busy season. With 12 trucks on the road, you're probably feeling the parts lookup grind. Got 10 min next week to show you something?</div>
+            <div class="ai-email-tone">
+              <span>Tone: Direct</span><span>Length: Short</span><span class="ai-credit">5 credits</span>
+            </div>
+          </div>
+        </div>
+
+        <ul class="ai-card-features">
+          <li>Personalized to role, company, and industry</li>
+          <li>Tone presets (direct, friendly, casual, formal)</li>
+          <li>Length presets (short, medium, long)</li>
+          <li>One-click copy or open in Gmail / Outlook</li>
+        </ul>
+        <a class="ai-card-cta ai-cta-email" href="login.html">Try AI Email Writer <span>→</span></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ═══ IMAGE FEATURE 1: CONTACT SEARCH ═══ -->
 <section class="imgfeat">
   <div class="imgfeat-inner">
@@ -650,27 +1192,6 @@
     </div>
     <div class="imgfeat-img">
       <img src="/public/feat-export.jpg" alt="Sales team workspace with CRM dashboards" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900">
-    </div>
-  </div>
-</section>
-
-<!-- ═══ IMAGE FEATURE 4: AI INTELLIGENCE ═══ -->
-<section class="imgfeat dark">
-  <div class="imgfeat-inner rev">
-    <div>
-      <div class="imgfeat-eyebrow"><span class="imgfeat-pip"></span>AI Intelligence</div>
-      <h2>Just tell AI who you need. <span class="g">It finds them.</span></h2>
-      <p class="imgfeat-desc">Type "plumbing owners in Alberta under 20 employees" and watch AI find every matching contact in seconds. No dropdowns, no filters, no guesswork. Just results. This is how prospecting should feel.</p>
-      <ul class="imgfeat-list">
-        <li>Type plain English — AI parses it into perfect filters</li>
-        <li>Powered by Claude AI for deep intent understanding</li>
-        <li>Handles complex queries: "growing HVAC companies hiring in BC"</li>
-        <li>AI-drafted cold outreach for every revealed contact</li>
-      </ul>
-      <a class="imgfeat-link" href="data.html">Explore AI features →</a>
-    </div>
-    <div class="imgfeat-img">
-      <img src="/public/feat-ai.jpg" alt="AI-powered B2B data intelligence" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900">
     </div>
   </div>
 </section>
@@ -978,29 +1499,62 @@
 
 <!-- ═══ COMPARE ═══ -->
 <section class="compare">
-  <div class="sec-eyebrow">Why JAYISAAC AI</div>
-  <h2 class="sec-title">B2B intelligence built in Canada — made for North America</h2>
-  <p class="sec-sub">A North American database with the deepest Canadian coverage you'll find anywhere — plus full US coverage. Apollo and ZoomInfo are US-first; we're North-America-complete.</p>
-  <img class="compare-map" src="./public/na-map.jpg" alt="JAYISAAC AI North American data coverage map" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900" />
-  <div class="compare-wrap">
-    <table class="compare-table">
-      <thead><tr><th style="width:40%">Feature</th><th class="hi" style="text-align:center">JAYISAAC AI</th><th style="text-align:center">Apollo</th><th style="text-align:center">ZoomInfo</th></tr></thead>
-      <tbody>
-        <tr class="sr"><td colspan="4">Data</td></tr>
-        <tr><td>Deep Canadian + US coverage</td><td class="c"><span class="ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td><td class="c"><span class="dash">&mdash;</span></td><td class="c"><span class="dash">&mdash;</span></td></tr>
-        <tr><td>Verified emails</td><td class="c"><span class="ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td><td class="c"><span class="ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td><td class="c"><span class="ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td></tr>
-        <tr><td>Direct dial phone numbers</td><td class="c"><span class="ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td><td class="c"><span class="ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td><td class="c"><span class="ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td></tr>
-        <tr><td>Intent signals</td><td class="c"><span class="ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td><td class="c"><span class="ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td><td class="c"><span class="ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td></tr>
-        <tr class="sr"><td colspan="4">Platform</td></tr>
-        <tr><td>Email sequences</td><td class="c"><span class="ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td><td class="c"><span class="ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td><td class="c">Add-on</td></tr>
-        <tr><td>AI-personalized copy</td><td class="c"><span class="ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td><td class="c"><span class="ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td><td class="c"><span class="dash">&mdash;</span></td></tr>
-        <tr><td>Free plan</td><td class="c"><span class="ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td><td class="c"><span class="ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td><td class="c"><span class="dash">&mdash;</span></td></tr>
-        <tr class="sr"><td colspan="4">Pricing</td></tr>
-        <tr><td>Starter plan</td><td class="c">$49/mo</td><td class="c">$49/mo</td><td class="c">$15,000+/yr</td></tr>
-        <tr><td>CAD &amp; USD billing</td><td class="c"><span class="ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td><td class="c"><span class="dash">&mdash;</span></td><td class="c"><span class="dash">&mdash;</span></td></tr>
-        <tr><td>No annual contract</td><td class="c"><span class="ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td><td class="c"><span class="ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td><td class="c"><span class="dash">&mdash;</span></td></tr>
-      </tbody>
-    </table>
+  <div class="sec-eyebrow">Apollo vs JAYISAAC AI</div>
+  <h2 class="sec-title">Half the price. <span class="g">55x more phone numbers.</span></h2>
+  <p class="sec-sub">We pulled Apollo's pricing page side-by-side with ours. The math is brutal — and the math is real. Every number on this page comes from each company's official pricing.</p>
+
+  <div class="vs-cards">
+    <!-- THEM -->
+    <div class="vs-card vs-them">
+      <div class="vs-card-label">APOLLO BASIC</div>
+      <div class="vs-card-price"><span class="vs-amt">$59</span><span class="vs-per">/user/month</span></div>
+      <div class="vs-card-note">$49/user if you commit to a full year upfront</div>
+      <ul class="vs-list">
+        <li><span class="vs-stat vs-stat-bad">~9</span> phone numbers per month <span class="vs-fine">(75 mobile credits ÷ 8 per reveal)</span></li>
+        <li><span class="vs-stat vs-stat-bad">1,000</span> export credits — and they expire monthly</li>
+        <li><span class="vs-x">✕</span> Charged per user (3-person team = $177/mo minimum)</li>
+        <li><span class="vs-x">✕</span> AI email writing locked behind $99/mo Professional plan</li>
+        <li><span class="vs-x">✕</span> Credit overages — <em>$0.20 each</em>, 250-credit minimum buy</li>
+        <li><span class="vs-x">✕</span> Active teams report real costs of $150–$400/user/mo</li>
+      </ul>
+      <div class="vs-card-foot">Per phone number: <strong>$6.56</strong></div>
+    </div>
+
+    <!-- US -->
+    <div class="vs-card vs-us">
+      <div class="vs-card-tag">YOUR MOVE</div>
+      <div class="vs-card-label">JAYISAAC AI</div>
+      <div class="vs-card-price"><span class="vs-amt">$26.99</span><span class="vs-per">/month</span></div>
+      <div class="vs-card-note">No per-user fees. No annual lock-in.</div>
+      <ul class="vs-list">
+        <li><span class="vs-stat vs-stat-good">500</span> phone numbers per month <span class="vs-fine">(55x more than Apollo Basic)</span></li>
+        <li><span class="vs-stat vs-stat-good">Unlimited</span> email reveals — and credits never expire</li>
+        <li><span class="vs-check">✓</span> One flat price for the whole team — no per-seat upcharge</li>
+        <li><span class="vs-check">✓</span> AI Email Writer included — not gated behind a higher plan</li>
+        <li><span class="vs-check">✓</span> AI Leads (natural language search) included</li>
+        <li><span class="vs-check">✓</span> Deepest Canadian coverage of any platform on the market</li>
+      </ul>
+      <div class="vs-card-foot">Per phone number: <strong>$0.054</strong></div>
+    </div>
+  </div>
+
+  <div class="vs-receipt">
+    <div class="vs-receipt-head">The math, in plain English</div>
+    <div class="vs-receipt-grid">
+      <div class="vs-receipt-row">
+        <div class="vs-receipt-num">$32</div>
+        <div class="vs-receipt-text">cheaper than Apollo Basic, every month</div>
+      </div>
+      <div class="vs-receipt-row">
+        <div class="vs-receipt-num">55x</div>
+        <div class="vs-receipt-text">more phone numbers per month</div>
+      </div>
+      <div class="vs-receipt-row">
+        <div class="vs-receipt-num">120x</div>
+        <div class="vs-receipt-text">lower cost per phone number revealed</div>
+      </div>
+    </div>
+    <div class="vs-receipt-note">All Apollo figures verified against Apollo's published 2026 pricing page. We're not making this up — they really do charge 8 credits per phone reveal.</div>
   </div>
 </section>
 

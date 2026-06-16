@@ -3241,17 +3241,32 @@ function renderEnrich(){
 
   /* ── AI Query Parser ── */
   const INDUSTRY_MAP = {
+    /* Specific trades */
     hvac:["HVAC","Heating","Cooling","Air Conditioning"],
-    plumbing:["Plumbing"],
-    roofing:["Roofing"],
-    electrical:["Electrical"],
-    landscaping:["Landscaping","Lawn","Garden"],
-    construction:["Construction","Building","Builders"],
-    cleaning:["Cleaning","Janitorial"],
+    plumbing:["Plumbing","Plumber","Plumbers"],
+    roofing:["Roofing","Roofer","Roofers"],
+    electrical:["Electrical","Electrician","Electricians"],
+    landscaping:["Landscaping","Lawn","Garden","Landscape"],
+    construction:["Construction","Building","Builders","General Contractor","Contracting"],
+    cleaning:["Cleaning","Janitorial","Cleaners"],
     moving:["Moving","Movers"],
-    pest:["Pest Control","Pest"],
-    painting:["Painting","Painters"],
+    pest:["Pest Control","Pest","Exterminator"],
+    painting:["Painting","Painters","Painter"],
     property:["Property Maintenance","Property Management"],
+    carpentry:["Carpentry","Carpenter","Woodwork"],
+    flooring:["Flooring","Floors"],
+    concrete:["Concrete","Masonry"],
+    drywall:["Drywall"],
+    excavation:["Excavation","Excavating"],
+    "auto repair":["Auto Repair","Mechanic","Automotive","Auto Body","Garage"],
+
+    /* Umbrella categories — these expand to ALL related industries */
+    trades:["HVAC","Heating","Cooling","Air Conditioning","Plumbing","Plumber","Roofing","Roofer","Electrical","Electrician","Landscaping","Lawn","Construction","Building","Builders","General Contractor","Contracting","Painting","Painter","Carpentry","Carpenter","Flooring","Concrete","Masonry","Drywall","Excavation","Property Maintenance"],
+    "skilled trades":["HVAC","Plumbing","Electrical","Roofing","Carpentry","Welding","Construction"],
+    "home services":["HVAC","Plumbing","Electrical","Roofing","Landscaping","Cleaning","Painting","Property Maintenance","Pest Control"],
+    "field services":["HVAC","Plumbing","Electrical","Roofing","Landscaping","Property Maintenance","Pest Control","Cleaning"],
+    contractors:["Construction","General Contractor","Contracting","Builders"],
+    contracting:["Construction","General Contractor","Contracting","Builders"],
   };
 
   const ROLE_KEYWORDS = {
@@ -3385,6 +3400,68 @@ function renderEnrich(){
     <div style="text-align:center;padding:12px;font-size:.78rem;color:var(--t3)">${results.length} contact${results.length!==1?'s':''} found${results.length>20?' (showing first 20)':''}</div>`;
   }
 
+  /* Normalize raw filters (from API or anywhere) through the same maps the
+     local parser uses. Handles case, umbrella terms, full-name → 2-letter codes. */
+  function normalizeFilters(raw){
+    const out = { industries:[], roles:[], locations:[], cities:[], maxEmp:null, minEmp:null, summary:null };
+
+    /* Industries — expand umbrella terms ("trades" → all trade industries) */
+    const rawInd = Array.isArray(raw.industries) ? raw.industries
+                  : raw.industry ? [raw.industry] : [];
+    rawInd.forEach(ind => {
+      if(!ind) return;
+      const key = String(ind).toLowerCase().trim();
+      if(INDUSTRY_MAP[key]){
+        out.industries.push(...INDUSTRY_MAP[key]);
+      } else {
+        /* Unknown industry — keep raw value for substring fallback match */
+        out.industries.push(ind);
+      }
+    });
+    out.industries = [...new Set(out.industries)];
+
+    /* Roles — expand via ROLE_KEYWORDS */
+    const rawRoles = Array.isArray(raw.roles) ? raw.roles
+                    : raw.role ? [raw.role] : [];
+    rawRoles.forEach(r => {
+      if(!r) return;
+      const key = String(r).toLowerCase().trim();
+      if(ROLE_KEYWORDS[key]){
+        out.roles.push(...ROLE_KEYWORDS[key]);
+      } else {
+        out.roles.push(r);
+      }
+    });
+    out.roles = [...new Set(out.roles)];
+
+    /* Locations — convert "Alberta" → "AB" via LOCATION_MAP */
+    const rawLoc = Array.isArray(raw.locations) ? raw.locations
+                  : raw.location ? [raw.location] : [];
+    rawLoc.forEach(loc => {
+      if(!loc) return;
+      const key = String(loc).toLowerCase().trim();
+      if(LOCATION_MAP[key]){
+        out.locations.push(LOCATION_MAP[key]);
+      } else if(/^[A-Z]{2}$/.test(loc)){
+        out.locations.push(loc);  /* already a 2-letter code */
+      } else {
+        out.locations.push(loc);  /* unknown — keep raw */
+      }
+    });
+    out.locations = [...new Set(out.locations)];
+
+    /* Cities */
+    const rawCity = Array.isArray(raw.cities) ? raw.cities
+                   : raw.city ? [raw.city] : [];
+    rawCity.forEach(c => { if(c) out.cities.push(c); });
+
+    out.maxEmp = raw.maxEmp ?? raw.maxEmployees ?? null;
+    out.minEmp = raw.minEmp ?? raw.minEmployees ?? null;
+    out.summary = raw.summary || null;
+
+    return out;
+  }
+
   async function handleAISearch(){
     const input = document.getElementById("aiInput");
     const q = input.value.trim();
@@ -3420,17 +3497,11 @@ function renderEnrich(){
       } else {
         const data = await resp.json();
         if(data.ok && data.filters){
-          const f = data.filters;
-          filters = {
-            industries: f.industry ? [f.industry] : [],
-            roles: f.role ? [f.role] : [],
-            locations: f.location ? [f.location] : [],
-            cities: f.city ? [f.city] : [],
-            maxEmp: f.maxEmployees || null,
-            minEmp: f.minEmployees || null,
-            summary: f.summary || null,
-          };
+          /* Normalize API output through the same maps as the local parser.
+             This expands "trades" → all trade industries, "Alberta" → "AB", etc. */
+          filters = normalizeFilters(data.filters);
           aiPowered = true;
+          console.log("[AI Leads] Normalized filters:", filters);
         }
       }
     } catch(e){
