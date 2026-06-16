@@ -191,37 +191,82 @@ input{font-family:inherit}
   transition:opacity .2s var(--ease);
 }
 
-/* ── AI LEADS — flagship feature treatment ── */
-.rail-btn.ai-leads{
-  background:linear-gradient(135deg, rgba(255,107,26,.12), rgba(255,107,26,.04));
-  border:1px solid var(--o-line);
-  margin:6px 0;
+/* ── AI SUITE — unified premium-feature group ── */
+:root{
+  --ai-violet:      #A855F7;
+  --ai-violet-hot:  #C084FC;
+  --ai-violet-deep: #7C3AED;
+  --ai-violet-dim:  rgba(168,85,247,.12);
+  --ai-violet-line: rgba(168,85,247,.3);
+  --ai-violet-glow: rgba(168,85,247,.45);
+}
+.ai-group{
+  margin:8px 0;
+  padding:6px 6px 8px;
+  border-radius:12px;
+  background:linear-gradient(135deg,
+    rgba(255,107,26,.04),
+    rgba(168,85,247,.04));
+  border:1px solid rgba(255,255,255,.04);
+  position:relative;
+}
+.ai-group-label{
+  font-family:var(--mono);
+  font-size:9px;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;
+  padding:4px 10px 6px;
+  display:flex;align-items:center;gap:6px;
+  background:linear-gradient(90deg,var(--o-hot),var(--ai-violet));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.ai-group-label::before{
+  content:"";width:5px;height:5px;border-radius:50%;
+  background:linear-gradient(135deg,var(--o-hot),var(--ai-violet));
+  box-shadow:0 0 8px var(--o-glow), 0 0 12px var(--ai-violet-glow);
+  animation:ai-orb 2.2s ease-in-out infinite;
+  flex-shrink:0;
+}
+@keyframes ai-orb{
+  0%,100%{transform:scale(1);opacity:1}
+  50%{transform:scale(1.4);opacity:.6}
+}
+.app.rail-collapsed .ai-group-label{
+  font-size:0;padding:8px 0;justify-content:center;
+}
+.app.rail-collapsed .ai-group-label::before{
+  width:6px;height:6px;
+}
+
+/* Shared treatment for ALL AI feature buttons */
+.rail-btn.ai-feature{
+  margin:3px 0;
   position:relative;
   overflow:hidden;
+  border:1px solid transparent;
 }
-.rail-btn.ai-leads::before{
+.rail-btn.ai-feature::before{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(120deg, transparent, rgba(255,107,26,.15), transparent);
+  background:linear-gradient(120deg, transparent, var(--ai-shimmer, rgba(255,107,26,.15)), transparent);
   transform:translateX(-100%);
   animation:ai-shimmer 4s ease-in-out infinite;
+  pointer-events:none;
 }
 @keyframes ai-shimmer{
   0%,100%{transform:translateX(-100%)}
   50%{transform:translateX(200%)}
 }
-.rail-btn.ai-leads svg{
-  color:var(--o);
-  filter:drop-shadow(0 0 6px var(--o-glow));
-  animation:ai-pulse 2.5s ease-in-out infinite;
+.rail-btn.ai-feature svg{
+  animation:ai-pulse-icon 2.5s ease-in-out infinite;
 }
-@keyframes ai-pulse{
-  0%,100%{filter:drop-shadow(0 0 6px var(--o-glow))}
-  50%{filter:drop-shadow(0 0 14px var(--o-glow)) drop-shadow(0 0 4px var(--o))}
+@keyframes ai-pulse-icon{
+  0%,100%{filter:drop-shadow(0 0 6px var(--ai-glow, var(--o-glow)))}
+  50%{filter:drop-shadow(0 0 14px var(--ai-glow, var(--o-glow))) drop-shadow(0 0 4px var(--ai-color, var(--o)))}
 }
-.rail-btn.ai-leads .rlabel{
-  color:var(--o);
+.rail-btn.ai-feature .rlabel{
   font-weight:800;
-  background:linear-gradient(120deg, var(--o-hot), var(--o), var(--o-hot));
+  background:var(--ai-text-gradient, linear-gradient(120deg, var(--o-hot), var(--o), var(--o-hot)));
   background-size:200% 100%;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
@@ -232,22 +277,56 @@ input{font-family:inherit}
   0%,100%{background-position:0% 50%}
   50%{background-position:100% 50%}
 }
+.rail-btn.ai-feature:hover{
+  transform:translateX(2px);
+  box-shadow:0 0 24px var(--ai-shadow, var(--o-dim)),
+             inset 0 1px 0 rgba(255,255,255,.05);
+}
+.rail-btn.ai-feature.active::before{display:none}
+
+/* AI LEADS — orange accent (find/discover) */
+.rail-btn.ai-leads{
+  background:linear-gradient(135deg, rgba(255,107,26,.12), rgba(255,107,26,.04));
+  border-color:var(--o-line);
+  --ai-shimmer: rgba(255,107,26,.15);
+  --ai-glow:    var(--o-glow);
+  --ai-color:   var(--o);
+  --ai-shadow:  var(--o-dim);
+  --ai-text-gradient: linear-gradient(120deg, var(--o-hot), var(--o), var(--o-hot));
+}
+.rail-btn.ai-leads svg{color:var(--o)}
 .rail-btn.ai-leads:hover{
   background:linear-gradient(135deg, rgba(255,107,26,.2), rgba(255,107,26,.08));
   border-color:var(--o);
-  box-shadow:0 0 24px var(--o-dim), inset 0 1px 0 rgba(255,255,255,.05);
-  transform:translateX(2px);
 }
 .rail-btn.ai-leads.active{
   background:linear-gradient(135deg, rgba(255,107,26,.22), rgba(255,107,26,.1));
   border-color:var(--o);
   box-shadow:0 0 28px var(--o-dim);
 }
-.rail-btn.ai-leads.active::before{
-  display:none;        /* don't double up with the orange edge bar */
+
+/* AI EMAIL WRITER — violet accent (compose/intelligence) */
+.rail-btn.ai-email-writer{
+  background:linear-gradient(135deg, rgba(168,85,247,.12), rgba(168,85,247,.04));
+  border-color:var(--ai-violet-line);
+  --ai-shimmer: rgba(168,85,247,.18);
+  --ai-glow:    var(--ai-violet-glow);
+  --ai-color:   var(--ai-violet);
+  --ai-shadow:  var(--ai-violet-dim);
+  --ai-text-gradient: linear-gradient(120deg, var(--ai-violet-hot), var(--ai-violet), var(--ai-violet-hot));
+}
+.rail-btn.ai-email-writer svg{color:var(--ai-violet)}
+.rail-btn.ai-email-writer:hover{
+  background:linear-gradient(135deg, rgba(168,85,247,.2), rgba(168,85,247,.08));
+  border-color:var(--ai-violet);
+}
+.rail-btn.ai-email-writer.active{
+  background:linear-gradient(135deg, rgba(168,85,247,.22), rgba(168,85,247,.1));
+  border-color:var(--ai-violet);
+  box-shadow:0 0 28px var(--ai-violet-dim);
 }
 
-/* "NEW" badge on the AI Leads pill */
+/* "NEW" badge — orange OR violet depending on parent */
 .ai-new-badge{
   position:absolute;right:8px;top:50%;transform:translateY(-50%);
   background:linear-gradient(135deg, var(--o-hot), var(--o-deep));
@@ -256,6 +335,10 @@ input{font-family:inherit}
   box-shadow:0 0 10px var(--o-glow);
   text-transform:uppercase;
   z-index:2;
+}
+.rail-btn.ai-email-writer .ai-new-badge{
+  background:linear-gradient(135deg, var(--ai-violet-hot), var(--ai-violet-deep));
+  box-shadow:0 0 10px var(--ai-violet-glow);
 }
 .app.rail-collapsed .ai-new-badge{display:none}
 /* the floating tooltip only shows when collapsed */
@@ -874,6 +957,156 @@ th.sortable.sorted .arrow{opacity:1}
   .cem-actions .cem-action{min-width:0}
 }
 /* ============ END AI COLD EMAIL WRITER ============ */
+
+/* ============ AI EMAIL WRITER — VIEW (main content) ============ */
+.ew-vhead h1{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.ew-vh-glow{
+  background:rgba(168,85,247,.12)!important;
+  border:1px solid rgba(168,85,247,.3)!important;
+}
+.ew-vh-glow svg{color:var(--ai-violet)!important;filter:drop-shadow(0 0 6px var(--ai-violet-glow))!important}
+.ew-pill{
+  font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;color:var(--ai-violet);
+  background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.3);
+  padding:4px 10px;border-radius:999px;
+}
+
+.ew-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:30px;
+}
+.ew-stat{
+  padding:20px 22px;background:linear-gradient(160deg,var(--p2),var(--p0));
+  border:1px solid var(--hair);border-radius:14px;
+  position:relative;overflow:hidden;transition:.25s;
+}
+.ew-stat::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--ai-violet),transparent);
+  opacity:0;transition:.3s;
+}
+.ew-stat:hover{border-color:var(--ai-violet-line);transform:translateY(-2px)}
+.ew-stat:hover::before{opacity:.6}
+.ew-stat-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.25);
+  display:flex;align-items:center;justify-content:center;margin-bottom:12px;
+}
+.ew-stat-icon svg{width:17px;height:17px;color:var(--ai-violet)}
+.ew-stat-val{
+  font-size:26px;font-weight:800;color:var(--ice);letter-spacing:-.02em;
+  font-family:var(--mono);line-height:1;margin-bottom:4px;
+}
+.ew-stat-label{font-size:11px;color:var(--steel);font-weight:600;letter-spacing:.4px}
+
+.ew-howto{
+  padding:22px 24px;margin-bottom:26px;
+  background:linear-gradient(135deg,rgba(168,85,247,.05),rgba(168,85,247,.02));
+  border:1px solid rgba(168,85,247,.18);border-radius:14px;
+}
+.ew-howto-title{
+  font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--ai-violet);margin-bottom:14px;
+}
+.ew-howto-steps{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 22px}
+.ew-howto-step{
+  display:flex;align-items:flex-start;gap:11px;
+  font-size:13px;color:var(--ice);line-height:1.5;
+}
+.ew-howto-num{
+  flex-shrink:0;width:24px;height:24px;border-radius:50%;
+  background:linear-gradient(135deg,var(--ai-violet-hot),var(--ai-violet-deep));
+  color:#fff;font-weight:800;font-size:12px;font-family:var(--mono);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 12px var(--ai-violet-glow);
+}
+@media(max-width:760px){
+  .ew-howto-steps{grid-template-columns:1fr}
+  .ew-stats{grid-template-columns:1fr}
+}
+
+.ew-section{margin-top:6px}
+.ew-section-head{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding-bottom:14px;border-bottom:1px solid var(--hair);margin-bottom:14px;
+}
+.ew-section-title{
+  font-size:14px;font-weight:800;color:var(--ice);letter-spacing:-.01em;
+}
+.ew-section-sub{font-size:12px;color:var(--steel);margin-top:3px}
+.ew-section-action{
+  padding:8px 13px;background:rgba(168,85,247,.1);
+  border:1px solid rgba(168,85,247,.3);border-radius:8px;
+  color:var(--ai-violet);font-family:inherit;font-size:11.5px;font-weight:700;
+  cursor:pointer;transition:.15s;display:flex;align-items:center;gap:6px;
+}
+.ew-section-action svg{width:13px;height:13px}
+.ew-section-action:hover{background:rgba(168,85,247,.18);border-color:var(--ai-violet)}
+
+.ew-contacts{display:flex;flex-direction:column;gap:6px}
+.ew-contact-row{
+  display:flex;align-items:center;gap:14px;padding:12px 14px;
+  background:var(--p1);border:1px solid var(--hair);border-radius:10px;
+  transition:.15s;cursor:pointer;
+}
+.ew-contact-row:hover{
+  background:var(--p2);border-color:rgba(168,85,247,.3);
+  box-shadow:0 0 0 1px rgba(168,85,247,.1);
+}
+.ew-contact-av{
+  width:38px;height:38px;border-radius:10px;flex-shrink:0;
+  background:var(--p3);color:var(--ice);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:13px;letter-spacing:-.01em;
+}
+.ew-contact-info{flex:1;min-width:0}
+.ew-contact-name{
+  font-size:13.5px;font-weight:700;color:var(--ice);letter-spacing:-.01em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.ew-contact-meta{font-size:11.5px;color:var(--steel);margin-top:2px}
+.ew-contact-btn{
+  flex-shrink:0;padding:8px 14px;
+  background:linear-gradient(135deg,rgba(168,85,247,.15),rgba(168,85,247,.06));
+  border:1px solid rgba(168,85,247,.3);border-radius:8px;
+  color:var(--ai-violet);font-family:inherit;font-size:11.5px;font-weight:700;
+  cursor:pointer;transition:.15s;display:flex;align-items:center;gap:6px;
+}
+.ew-contact-btn svg{width:13px;height:13px}
+.ew-contact-btn:hover{
+  background:linear-gradient(135deg,rgba(168,85,247,.25),rgba(168,85,247,.12));
+  border-color:var(--ai-violet);
+  box-shadow:0 0 14px var(--ai-violet-dim);
+}
+
+.ew-empty{
+  text-align:center;padding:50px 28px;
+  background:var(--p1);border:1px dashed var(--hair);border-radius:14px;
+}
+.ew-empty-icon{
+  width:52px;height:52px;margin:0 auto 16px;border-radius:14px;
+  background:rgba(168,85,247,.08);border:1px solid rgba(168,85,247,.2);
+  display:flex;align-items:center;justify-content:center;
+}
+.ew-empty-icon svg{width:24px;height:24px;color:var(--ai-violet);opacity:.7}
+.ew-empty-title{
+  font-size:16px;font-weight:800;color:var(--ice);
+  letter-spacing:-.01em;margin-bottom:8px;
+}
+.ew-empty-sub{
+  font-size:13px;color:var(--steel);max-width:420px;margin:0 auto 22px;
+  line-height:1.55;
+}
+.ew-empty-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 18px;border-radius:9px;border:none;
+  background:linear-gradient(135deg,var(--ai-violet-hot),var(--ai-violet-deep));
+  color:#fff;font-family:inherit;font-size:12.5px;font-weight:700;
+  cursor:pointer;transition:.2s;box-shadow:0 0 18px var(--ai-violet-glow);
+}
+.ew-empty-cta svg{width:14px;height:14px}
+.ew-empty-cta:hover{transform:translateY(-1px);box-shadow:0 0 26px var(--ai-violet-glow)}
+/* ============ END AI EMAIL WRITER VIEW ============ */
 .verif{display:inline-flex;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:7px;box-shadow:0 0 8px var(--green-glow)}
 .empty{padding:70px 20px;text-align:center;color:var(--steel)}
 .empty h3{font-size:15px;font-weight:700;color:var(--ice);margin-bottom:6px}
@@ -884,15 +1117,38 @@ th.sortable.sorted .arrow{opacity:1}
   border-radius:0 0 16px 16px;margin:0 22px 18px;flex-shrink:0;
   display:flex;align-items:center;justify-content:space-between;
   padding:12px 18px;font-size:12px;color:var(--steel);font-family:var(--mono);
+  gap:14px;flex-wrap:wrap;
 }
-.pager .btns{display:flex;gap:5px}
+.pager .btns{display:flex;gap:5px;align-items:center;flex-wrap:wrap}
 .pg{
   min-width:30px;height:30px;border-radius:8px;border:1px solid var(--hair);
   font-size:12px;font-weight:600;font-family:var(--mono);color:var(--steel);background:var(--p2);
-  display:flex;align-items:center;justify-content:center;padding:0 7px;transition:.12s;
+  display:flex;align-items:center;justify-content:center;padding:0 8px;transition:.12s;
+  cursor:pointer;
 }
-.pg:hover{border-color:var(--o-line);color:var(--ice)}
+.pg:hover:not(:disabled):not(.dots){border-color:var(--o-line);color:var(--ice)}
 .pg.active{background:var(--o);border-color:var(--o);color:#fff;box-shadow:0 0 16px var(--o-glow)}
+.pg:disabled{opacity:.35;cursor:not-allowed}
+.pg.dots{cursor:default;border-color:transparent;background:transparent;letter-spacing:1px;color:var(--steel);min-width:18px;padding:0 2px}
+.pg.dots:hover{border-color:transparent;color:var(--steel)}
+.pager-jump{
+  display:flex;align-items:center;gap:6px;font-size:11px;font-family:var(--mono);
+  color:var(--steel);
+}
+.pager-jump input{
+  width:54px;height:28px;border:1px solid var(--hair);background:var(--p2);
+  border-radius:7px;color:var(--ice);font-family:var(--mono);font-size:12px;font-weight:600;
+  text-align:center;padding:0 6px;transition:border-color .15s;
+}
+.pager-jump input:focus{outline:none;border-color:var(--o);box-shadow:0 0 0 3px var(--o-dim)}
+.pager-jump input::-webkit-inner-spin-button,.pager-jump input::-webkit-outer-spin-button{
+  -webkit-appearance:none;margin:0;
+}
+.pager-jump input[type=number]{-moz-appearance:textfield}
+@media(max-width:980px){
+  .pager{flex-direction:column;align-items:stretch;gap:10px}
+  .pager .btns{justify-content:center}
+}
 
 /* ============ AUTH VEIL ============ */
 .veil{
@@ -1126,6 +1382,157 @@ th.sortable.sorted .arrow{opacity:1}
 .bar .bar-lbl{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--dim);font-family:var(--mono)}
 .chart-wrap{padding-bottom:24px}
 
+/* ============ REAL ANALYTICS CHARTS ============ */
+.real-chart{
+  align-items:flex-end;gap:14px;padding:30px 24px 30px;
+  position:relative;
+}
+.bar-stack{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;
+  position:relative;min-width:0;
+}
+.bar-stack-cols{
+  width:100%;max-width:46px;height:100px;display:flex;flex-direction:column;
+  justify-content:flex-end;gap:2px;
+}
+.bs-col{
+  width:100%;border-radius:5px 5px 0 0;min-height:2px;
+  transition:.3s var(--ease);animation:barUp .6s var(--ease) backwards;
+  position:relative;
+}
+.bs-col.reveal{
+  background:linear-gradient(180deg,var(--o-hot),var(--o-deep));
+  box-shadow:0 0 14px var(--o-dim);
+}
+.bs-col.email{
+  background:linear-gradient(180deg,var(--ai-violet-hot),var(--ai-violet-deep));
+  box-shadow:0 0 14px var(--ai-violet-dim);
+}
+.bs-col.empty{
+  background:var(--p3);opacity:.3;border-radius:5px;
+}
+.bs-col:hover{filter:brightness(1.2)}
+.bar-stack.today .bar-lbl{color:var(--o);font-weight:700}
+.bar-stack-vals{
+  display:flex;gap:5px;font-family:var(--mono);font-size:10.5px;font-weight:700;
+  position:absolute;top:-2px;left:50%;transform:translateX(-50%);
+  white-space:nowrap;
+}
+.bsv.reveal{color:var(--o)}
+.bsv.email{color:var(--ai-violet)}
+.bar-lbl{font-size:10px;color:var(--steel);font-family:var(--mono);font-weight:600}
+.chart-legend{
+  display:flex;justify-content:center;gap:24px;padding:0 24px 16px;
+  font-size:11.5px;color:var(--steel);font-weight:600;
+}
+.legend-item{display:flex;align-items:center;gap:7px}
+.legend-swatch{
+  width:11px;height:11px;border-radius:3px;display:inline-block;
+}
+.legend-swatch.reveal{background:linear-gradient(180deg,var(--o-hot),var(--o-deep))}
+.legend-swatch.email{background:linear-gradient(180deg,var(--ai-violet-hot),var(--ai-violet-deep))}
+
+.empty-chart{
+  padding:50px 24px;text-align:center;
+}
+.empty-chart-icon{
+  width:48px;height:48px;margin:0 auto 14px;border-radius:12px;
+  background:var(--p2);border:1px solid var(--hair);
+  display:flex;align-items:center;justify-content:center;
+}
+.empty-chart-icon svg{width:22px;height:22px;color:var(--steel);opacity:.6}
+.empty-chart-title{font-size:14px;font-weight:700;color:var(--ice);margin-bottom:6px}
+.empty-chart-sub{font-size:12.5px;color:var(--steel);max-width:340px;margin:0 auto;line-height:1.5}
+
+.analytics-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px;
+}
+@media(max-width:900px){
+  .analytics-grid{grid-template-columns:1fr}
+}
+
+/* Horizontal bars (industries / geo) */
+.hbars{padding:16px 22px 22px;display:flex;flex-direction:column;gap:12px}
+.hbar{
+  display:grid;grid-template-columns:130px 1fr 40px;gap:14px;align-items:center;
+}
+.hbar-label{
+  font-size:12.5px;font-weight:600;color:var(--ice);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.hbar-track{
+  height:8px;background:var(--p2);border-radius:5px;overflow:hidden;
+  border:1px solid var(--hair);
+}
+.hbar-fill{
+  height:100%;background:linear-gradient(90deg,var(--o-hot),var(--o));
+  border-radius:5px;animation:hbarFill .8s var(--ease) backwards;
+  box-shadow:0 0 10px var(--o-dim);
+}
+.hbar-fill.geo{
+  background:linear-gradient(90deg,var(--ai-violet-hot),var(--ai-violet));
+  box-shadow:0 0 10px var(--ai-violet-dim);
+}
+@keyframes hbarFill{from{width:0!important}}
+.hbar-val{
+  font-family:var(--mono);font-size:12px;font-weight:700;color:var(--ice);
+  text-align:right;
+}
+
+.empty-mini{
+  padding:18px;text-align:center;color:var(--steel);font-size:12.5px;
+  font-style:italic;
+}
+
+/* Recent activity feed */
+.activity-list{padding:8px 14px 14px}
+.activity-item{
+  display:grid;grid-template-columns:32px 1fr auto;gap:14px;align-items:center;
+  padding:11px 10px;border-radius:9px;transition:.12s;
+  border-bottom:1px solid var(--hair);
+}
+.activity-item:last-child{border-bottom:none}
+.activity-item:hover{background:var(--p2)}
+.activity-icon{
+  width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;
+  background:var(--p2);border:1px solid var(--hair);
+}
+.activity-icon svg{width:14px;height:14px}
+.activity-item.reveal .activity-icon{background:rgba(255,107,26,.08);border-color:var(--o-line)}
+.activity-item.reveal .activity-icon svg{color:var(--o)}
+.activity-item.email_gen .activity-icon{background:rgba(168,85,247,.08);border-color:var(--ai-violet-line)}
+.activity-item.email_gen .activity-icon svg{color:var(--ai-violet)}
+.activity-item.export .activity-icon{background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.25)}
+.activity-item.export .activity-icon svg{color:#60A5FA}
+.activity-item.search .activity-icon{background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.25)}
+.activity-item.search .activity-icon svg{color:#4ADE80}
+.activity-text{font-size:12.5px;color:var(--ice);font-weight:600}
+.activity-time{font-size:11px;color:var(--steel);font-family:var(--mono)}
+
+/* Lifetime totals panel */
+.lifetime-panel{margin-bottom:30px}
+.lifetime-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  padding:18px 22px 22px;gap:18px;
+}
+.lifetime-item{
+  padding:14px 16px;background:var(--p2);border:1px solid var(--hair);
+  border-radius:11px;
+}
+.lifetime-val{
+  font-size:24px;font-weight:800;color:var(--ice);
+  font-family:var(--mono);letter-spacing:-.02em;line-height:1;
+}
+.lifetime-label{
+  font-size:11px;color:var(--steel);font-weight:600;
+  margin-top:6px;letter-spacing:.4px;
+}
+@media(max-width:760px){
+  .lifetime-grid{grid-template-columns:repeat(2,1fr)}
+  .hbar{grid-template-columns:90px 1fr 32px}
+}
+/* ============ END REAL ANALYTICS ============ */
+
 /* ============ COMMAND PALETTE ============ */
 .cmdk-overlay{
   position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);z-index:300;
@@ -1298,7 +1705,13 @@ function fallback(text, cb){
     <button class="rail-btn active" data-view="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span class="rlabel">Prospect Search</span><span class="tip">Prospect Search</span></button>
     <button class="rail-btn" data-view="lists"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/></svg><span class="rlabel">Saved Lists</span><span class="tip">Saved Lists</span></button>
     <button class="rail-btn" data-view="outreach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg><span class="rlabel">Outreach</span><span class="tip">Outreach</span></button>
-    <button class="rail-btn ai-leads" data-view="enrich"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg><span class="rlabel">AI Leads</span><span class="ai-new-badge">NEW</span><span class="tip">AI Leads</span></button>
+
+    <div class="ai-group">
+      <div class="ai-group-label">AI Suite</div>
+      <button class="rail-btn ai-feature ai-leads" data-view="enrich"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg><span class="rlabel">AI Leads</span><span class="ai-new-badge">NEW</span><span class="tip">AI Leads · Natural language search</span></button>
+      <button class="rail-btn ai-feature ai-email-writer" data-view="email-writer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/><path d="M16 2l1.5 3 3 .5-2.2 2.1.5 3-2.8-1.5L13 10.6l.5-3L11.3 5.5l3-.5z" fill="currentColor" stroke="none"/></svg><span class="rlabel">AI Email Writer</span><span class="ai-new-badge">NEW</span><span class="tip">AI Email Writer · Personalized cold emails</span></button>
+    </div>
+
     <button class="rail-btn" data-view="analytics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg><span class="rlabel">Analytics</span><span class="tip">Analytics</span></button>
     <div class="rail-spacer"></div>
     <div class="rail-divider"></div>
@@ -1477,6 +1890,8 @@ function fallback(text, cb){
     <div class="view" id="view-outreach"></div>
     <!-- AI ENRICH VIEW -->
     <div class="view" id="view-enrich"></div>
+    <!-- AI EMAIL WRITER VIEW -->
+    <div class="view" id="view-email-writer"></div>
     <!-- ANALYTICS VIEW -->
     <div class="view" id="view-analytics"></div>
     <!-- SETTINGS VIEW -->
@@ -1625,7 +2040,24 @@ let state = {
   page:1,
   sort:{key:null,dir:1},
   drawerId:null,
+  emailsGenerated:0,
 };
+
+/* ================= ACTIVITY LOG (localStorage) ================= */
+const ACTIVITY_KEY = "jia_activity_v1";
+function logActivity(type, meta){
+  try {
+    const log = JSON.parse(localStorage.getItem(ACTIVITY_KEY) || "[]");
+    log.push({ t: Date.now(), type, ...(meta || {}) });
+    /* keep last 1000 events to prevent localStorage bloat */
+    if(log.length > 1000) log.splice(0, log.length - 1000);
+    localStorage.setItem(ACTIVITY_KEY, JSON.stringify(log));
+  } catch(_){}
+}
+function getActivityLog(){
+  try { return JSON.parse(localStorage.getItem(ACTIVITY_KEY) || "[]"); }
+  catch(_){ return []; }
+}
 const PER_PAGE = 10;
 const AV_COLORS = ["#C95E1A","#2563EB","#1B8A5A","#7C3AED","#0E7490","#B91C1C","#A16207"];
 
@@ -1847,13 +2279,70 @@ function render(){
 
   /* pager */
   document.getElementById("pagerInfo").textContent =
-    rows.length ? `Showing ${start+1}–${Math.min(start+PER_PAGE,rows.length)} of ${rows.length}` : "0 results";
+    rows.length ? `Showing ${start+1}–${Math.min(start+PER_PAGE,rows.length)} of ${rows.length.toLocaleString()}` : "0 results";
   const btns = document.getElementById("pagerBtns");
-  let html = `<button class="pg" onclick="goPage(${state.page-1})" ${state.page===1?"disabled":""}>‹</button>`;
-  for(let i=1;i<=pages;i++) html += `<button class="pg ${i===state.page?"active":""}" onclick="goPage(${i})">${i}</button>`;
-  html += `<button class="pg" onclick="goPage(${state.page+1})" ${state.page===pages?"disabled":""}>›</button>`;
-  btns.innerHTML = html;
+  btns.innerHTML = buildPagerHTML(state.page, pages);
   syncBannerCredits();
+}
+
+/* Smart pager: shows max ~7 page buttons with ellipsis for large page counts */
+function buildPagerHTML(current, total){
+  /* First/Prev arrows */
+  let html = `<button class="pg" onclick="goPage(1)" ${current===1?"disabled":""} title="First page">«</button>`;
+  html += `<button class="pg" onclick="goPage(${current-1})" ${current===1?"disabled":""} title="Previous">‹</button>`;
+
+  if(total <= 7){
+    /* small page count → show all */
+    for(let i=1;i<=total;i++){
+      html += `<button class="pg ${i===current?"active":""}" onclick="goPage(${i})">${i}</button>`;
+    }
+  } else {
+    /* large page count → compressed with ellipsis */
+    const pages = computePagerWindow(current, total);
+    pages.forEach(p => {
+      if(p === "..."){
+        html += `<span class="pg dots">…</span>`;
+      } else {
+        html += `<button class="pg ${p===current?"active":""}" onclick="goPage(${p})">${p}</button>`;
+      }
+    });
+  }
+
+  /* Next/Last arrows */
+  html += `<button class="pg" onclick="goPage(${current+1})" ${current===total?"disabled":""} title="Next">›</button>`;
+  html += `<button class="pg" onclick="goPage(${total})" ${current===total?"disabled":""} title="Last page">»</button>`;
+
+  /* Jump-to-page input — only useful when there are many pages */
+  if(total > 12){
+    html += `<span class="pager-jump">
+      Go to
+      <input type="number" min="1" max="${total}" placeholder="${current}"
+             onkeydown="if(event.key==='Enter'){goPage(parseInt(this.value)||1);this.value='';this.blur()}"
+             onblur="if(this.value){goPage(parseInt(this.value)||1);this.value=''}">
+      <span style="opacity:.6">of ${total.toLocaleString()}</span>
+    </span>`;
+  }
+  return html;
+}
+
+/* Compute which page numbers to display.
+   Always shows: 1, last, current-1, current, current+1, with "..." for gaps. */
+function computePagerWindow(current, total){
+  const out = new Set([1, total, current-1, current, current+1]);
+  /* Anchor extras when near the ends so we always have ~5 numbers visible */
+  if(current <= 4){ out.add(2); out.add(3); out.add(4); out.add(5); }
+  if(current >= total-3){ out.add(total-1); out.add(total-2); out.add(total-3); out.add(total-4); }
+  /* Drop anything out of bounds */
+  const sorted = [...out].filter(p => p >= 1 && p <= total).sort((a,b) => a-b);
+  /* Insert "..." for gaps > 1 */
+  const result = [];
+  for(let i=0;i<sorted.length;i++){
+    result.push(sorted[i]);
+    if(i < sorted.length-1 && sorted[i+1] > sorted[i]+1){
+      result.push("...");
+    }
+  }
+  return result;
 }
 function goPage(p){
   const total = state.tab==="people" ? PEOPLE.filter(matchesPerson).length : COMPANIES.filter(matchesCompany).length;
@@ -2156,7 +2645,11 @@ async function generateColdEmail(){
     }
 
     cemState.lastEmail = { subject: data.subject, body: data.body };
+    state.emailsGenerated = (state.emailsGenerated || 0) + 1;
+    logActivity("email_gen", { tone, length, industry: p.i || "", contactId: p.id });
     renderColdEmailResult(p);
+    /* if the user is viewing the AI Email Writer hub, refresh its stats */
+    if(currentView === "email-writer") renderEmailWriter();
     /* Optional analytics event */
     if(window.jiaTrack) window.jiaTrack("cold_email_generated", { tone, length, industry: p.i });
   } catch(err){
@@ -2293,6 +2786,9 @@ function exportData(format){
   document.getElementById("exportMenu").classList.remove("show");
   const data = getExportData();
   if(!data) return;
+
+  /* log activity */
+  logActivity("export", { format, rows: (data.rows || []).length });
 
   switch(format){
     case "csv": exportAsCSV(data); break;
@@ -2519,10 +3015,16 @@ document.querySelectorAll(".tab").forEach(t=>{
     render();
   });
 });
+let searchLogTimer = null;
 document.getElementById("globalSearch").addEventListener("input",e=>{
   state.search = e.target.value.trim();
   state.page = 1;
   render();
+  /* debounced activity log — only log meaningful searches after 800ms of inactivity */
+  clearTimeout(searchLogTimer);
+  if(state.search.length >= 3){
+    searchLogTimer = setTimeout(() => logActivity("search", { q: state.search }), 800);
+  }
 });
 let toastTimer;
 function toast(msg){
@@ -2549,6 +3051,7 @@ const VIEW_TITLES = {
   lists: "Saved Lists",
   outreach: "Outreach",
   enrich: "AI Leads",
+  "email-writer": "AI Email Writer",
   analytics: "Analytics",
   settings: "Settings",
 };
@@ -2572,6 +3075,7 @@ function switchView(view){
   if(view==="lists") renderLists();
   if(view==="outreach") renderOutreach();
   if(view==="enrich") renderEnrich();
+  if(view==="email-writer") renderEmailWriter();
   if(view==="analytics") renderAnalytics();
   if(view==="settings") renderSettings();
   document.title = "JAYISAAC AI — " + VIEW_TITLES[view];
@@ -2987,31 +3491,363 @@ window.revealFromAI = function(nameOrId){
   renderEnrich();
 };
 
+/* ---- AI EMAIL WRITER (view) ---- */
+function renderEmailWriter(){
+  const el = document.getElementById("view-email-writer");
+  const revealedContacts = PEOPLE.filter(p => state.revealed.has(p.id));
+  const emailsGen = (typeof state.emailsGenerated === "number") ? state.emailsGenerated : 0;
+
+  /* Recent revealed contacts list (last 8) */
+  const recent = revealedContacts.slice(-8).reverse();
+
+  const recentHTML = recent.length ? recent.map(p => `
+    <div class="ew-contact-row">
+      <div class="ew-contact-av">${initials(p.n || p.c)}</div>
+      <div class="ew-contact-info">
+        <div class="ew-contact-name">${p.n || "(no name)"}</div>
+        <div class="ew-contact-meta">${[p.t, p.c].filter(Boolean).join(" · ")}</div>
+      </div>
+      <button class="ew-contact-btn" onclick="openColdEmailModal('${p.id}')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Write email
+      </button>
+    </div>
+  `).join("") : `
+    <div class="ew-empty">
+      <div class="ew-empty-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+      </div>
+      <div class="ew-empty-title">No revealed contacts yet</div>
+      <div class="ew-empty-sub">Head to Prospect Search, reveal a contact, then come back here to generate personalized cold emails in one click.</div>
+      <button class="ew-empty-cta" onclick="switchView('search')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        Go to Prospect Search
+      </button>
+    </div>
+  `;
+
+  el.innerHTML = `<div class="view-scroll">
+    <div class="vhead ew-vhead">
+      <h1>
+        <span class="vh-glow ew-vh-glow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/><path d="M16 2l1.5 3 3 .5-2.2 2.1.5 3-2.8-1.5L13 10.6l.5-3L11.3 5.5l3-.5z" fill="currentColor" stroke="none"/></svg>
+        </span>
+        AI Email Writer
+        <span class="ew-pill">5 credits per email</span>
+      </h1>
+      <p>Generate personalized cold emails in 3 seconds. Powered by Claude. Just pick a revealed contact, describe your value prop, and Claude writes the email — using their role, industry, and company for personalization.</p>
+    </div>
+
+    <div class="ew-stats">
+      <div class="ew-stat">
+        <div class="ew-stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg></div>
+        <div class="ew-stat-val">${emailsGen}</div>
+        <div class="ew-stat-label">Emails generated</div>
+      </div>
+      <div class="ew-stat">
+        <div class="ew-stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+        <div class="ew-stat-val">${revealedContacts.length}</div>
+        <div class="ew-stat-label">Unlocked contacts</div>
+      </div>
+      <div class="ew-stat">
+        <div class="ew-stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+        <div class="ew-stat-val">${state.credits}</div>
+        <div class="ew-stat-label">Credits remaining</div>
+      </div>
+    </div>
+
+    <div class="ew-howto">
+      <div class="ew-howto-title">How it works</div>
+      <div class="ew-howto-steps">
+        <div class="ew-howto-step">
+          <div class="ew-howto-num">1</div>
+          <div>Reveal any contact from <a onclick="switchView('search')" style="color:var(--ai-violet);cursor:pointer;font-weight:700">Prospect Search</a> (1 credit)</div>
+        </div>
+        <div class="ew-howto-step">
+          <div class="ew-howto-num">2</div>
+          <div>Click <strong style="color:var(--o-hot)">Write cold email with AI</strong> in the contact drawer</div>
+        </div>
+        <div class="ew-howto-step">
+          <div class="ew-howto-num">3</div>
+          <div>Choose tone, length, paste your value prop — Claude generates a personalized email in 3 sec (5 credits)</div>
+        </div>
+        <div class="ew-howto-step">
+          <div class="ew-howto-num">4</div>
+          <div>One-click open in Gmail / Outlook, or copy and send anywhere</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ew-section">
+      <div class="ew-section-head">
+        <div>
+          <div class="ew-section-title">Your unlocked contacts</div>
+          <div class="ew-section-sub">${revealedContacts.length === 0 ? "Reveal a contact in Prospect Search to start." : `${revealedContacts.length} contact${revealedContacts.length === 1 ? "" : "s"} ready to email — click to generate.`}</div>
+        </div>
+        ${revealedContacts.length > 0 ? `<button class="ew-section-action" onclick="switchView('search')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Unlock more</button>` : ""}
+      </div>
+      <div class="ew-contacts">
+        ${recentHTML}
+      </div>
+    </div>
+
+  </div>`;
+}
+
 /* ---- ANALYTICS ---- */
 function renderAnalytics(){
   const el = document.getElementById("view-analytics");
-  const bars = [
-    {l:"Mon",v:42},{l:"Tue",v:68},{l:"Wed",v:91},{l:"Thu",v:55},{l:"Fri",v:120},{l:"Sat",v:34},{l:"Sun",v:18},
-  ];
-  const max = Math.max(...bars.map(b=>b.v));
+  const log = getActivityLog();
+
+  /* ── KPI totals from real data ── */
+  const totalReveals = log.filter(e => e.type === "reveal").length;
+  const totalEmails  = log.filter(e => e.type === "email_gen").length;
+  const totalExports = log.filter(e => e.type === "export").length;
+  const totalSearches = log.filter(e => e.type === "search").length;
+  /* Fall back to state if log is empty (e.g. existed before logging was added) */
+  const revealsCount = Math.max(totalReveals, state.revealed.size);
+  const emailsCount  = Math.max(totalEmails, state.emailsGenerated || 0);
+
+  /* ── 7-day reveal chart from REAL activity log ── */
+  const now = new Date();
+  const dayLabels = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  const days = [];
+  for(let i = 6; i >= 0; i--){
+    const d = new Date(now);
+    d.setDate(d.getDate() - i);
+    d.setHours(0,0,0,0);
+    const next = new Date(d);
+    next.setDate(d.getDate() + 1);
+    const dayStart = d.getTime();
+    const dayEnd = next.getTime();
+    const revealsThisDay = log.filter(e => e.type === "reveal" && e.t >= dayStart && e.t < dayEnd).length;
+    const emailsThisDay  = log.filter(e => e.type === "email_gen" && e.t >= dayStart && e.t < dayEnd).length;
+    days.push({
+      label: dayLabels[d.getDay()],
+      reveals: revealsThisDay,
+      emails: emailsThisDay,
+      isToday: i === 0,
+    });
+  }
+  const maxBarVal = Math.max(1, ...days.map(d => d.reveals + d.emails));
+  const weekReveals = days.reduce((s,d) => s+d.reveals, 0);
+  const weekEmails  = days.reduce((s,d) => s+d.emails, 0);
+  const hasActivity = log.length > 0;
+
+  /* ── Industry breakdown from revealed contacts ── */
+  const industryMap = new Map();
+  PEOPLE.forEach(p => {
+    if(state.revealed.has(p.id) && p.i){
+      industryMap.set(p.i, (industryMap.get(p.i) || 0) + 1);
+    }
+  });
+  const topIndustries = [...industryMap.entries()].sort((a,b) => b[1]-a[1]).slice(0, 6);
+  const maxIndustryCount = Math.max(1, ...topIndustries.map(i => i[1]));
+
+  /* ── Geographic breakdown ── */
+  const geoMap = new Map();
+  PEOPLE.forEach(p => {
+    if(state.revealed.has(p.id) && p.l){
+      /* extract province/state code from "City, AB" or just use as-is */
+      const parts = String(p.l).split(",").map(s => s.trim());
+      const region = parts[parts.length-1] || p.l;
+      geoMap.set(region, (geoMap.get(region) || 0) + 1);
+    }
+  });
+  const topGeo = [...geoMap.entries()].sort((a,b) => b[1]-a[1]).slice(0, 5);
+  const maxGeoCount = Math.max(1, ...topGeo.map(g => g[1]));
+
+  /* ── Recent activity feed (last 8 events) ── */
+  const recent = [...log].sort((a,b) => b.t - a.t).slice(0, 8);
+  function timeAgo(t){
+    const s = Math.floor((Date.now() - t) / 1000);
+    if(s < 60) return `${s}s ago`;
+    if(s < 3600) return `${Math.floor(s/60)}m ago`;
+    if(s < 86400) return `${Math.floor(s/3600)}h ago`;
+    return `${Math.floor(s/86400)}d ago`;
+  }
+  function activityIcon(type){
+    if(type === "reveal") return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+    if(type === "email_gen") return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>`;
+    if(type === "export") return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
+    if(type === "search") return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>`;
+    return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>`;
+  }
+  function activityText(e){
+    if(e.type === "reveal") return `Unlocked contact${e.company ? ` at ${e.company}` : ""}`;
+    if(e.type === "email_gen") return `Generated cold email${e.industry ? ` for ${e.industry}` : ""}`;
+    if(e.type === "export") return `Exported ${e.rows || 0} rows as ${(e.format || "").toUpperCase()}`;
+    if(e.type === "search") return `Searched "${e.q || ""}"`;
+    return e.type;
+  }
+
+  /* ── Credit usage progress bar (rough — assumes 250 trial credits) ── */
+  /* if you sold them more credits we'd need to read from Firestore.
+     For now we just calc: shown stat = "credits used in this session vs current balance" */
+  const totalCreditsBurnedFromLog = log.reduce((s,e) => {
+    if(e.type === "reveal") return s + 1;
+    if(e.type === "email_gen") return s + 5;
+    return s;
+  }, 0);
+
   el.innerHTML = `<div class="view-scroll">
     <div class="vhead">
       <h1><span class="vh-glow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></span>Analytics</h1>
-      <p>Your prospecting activity at a glance — reveals, exports, and credit burn over time.</p>
+      <p>Your prospecting activity, tracked locally on this device. All data is real — pulled from your actual reveals, emails, exports, and searches.</p>
     </div>
+
+    <!-- KPI tiles -->
     <div class="metrics">
-      <div class="metric"><div class="m-label">Credits Remaining</div><div class="m-value glow">${state.credits}</div><div class="m-sub">on this account</div></div>
-      <div class="metric"><div class="m-label">Contacts Revealed</div><div class="m-value">${state.revealed.size}</div><div class="m-sub">all time</div></div>
-      <div class="metric"><div class="m-label">This Week</div><div class="m-value">428</div><div class="m-sub">▲ 18% vs last week</div></div>
-      <div class="metric"><div class="m-label">Exports</div><div class="m-value">7</div><div class="m-sub">downloads</div></div>
-    </div>
-    <div class="panel chart-wrap">
-      <div class="panel-head"><h3>Reveals this week</h3><span class="ph-tag">last 7 days</span></div>
-      <div class="chart">
-        ${bars.map((b,i)=>`<div class="bar" style="height:${Math.round(b.v/max*100)}%;animation-delay:${i*.06}s">
-          <span class="bar-val">${b.v}</span><span class="bar-lbl">${b.l}</span></div>`).join("")}
+      <div class="metric">
+        <div class="m-label">Credits Remaining</div>
+        <div class="m-value glow">${state.credits.toLocaleString()}</div>
+        <div class="m-sub">on this account</div>
+      </div>
+      <div class="metric">
+        <div class="m-label">Contacts Revealed</div>
+        <div class="m-value">${revealsCount.toLocaleString()}</div>
+        <div class="m-sub">${weekReveals} this week</div>
+      </div>
+      <div class="metric">
+        <div class="m-label">AI Emails Generated</div>
+        <div class="m-value" style="color:var(--ai-violet)">${emailsCount.toLocaleString()}</div>
+        <div class="m-sub">${weekEmails} this week</div>
+      </div>
+      <div class="metric">
+        <div class="m-label">Credits Used</div>
+        <div class="m-value">${totalCreditsBurnedFromLog.toLocaleString()}</div>
+        <div class="m-sub">tracked on this device</div>
       </div>
     </div>
+
+    <!-- 7-day activity chart -->
+    <div class="panel chart-wrap">
+      <div class="panel-head">
+        <h3>Activity over the last 7 days</h3>
+        <span class="ph-tag">${hasActivity ? `${weekReveals + weekEmails} total events` : "No activity yet"}</span>
+      </div>
+      ${hasActivity ? `
+        <div class="chart real-chart">
+          ${days.map((d,i) => {
+            const stackTotal = d.reveals + d.emails;
+            const heightPct = Math.round((stackTotal / maxBarVal) * 100);
+            const revealH = stackTotal ? Math.round((d.reveals / stackTotal) * heightPct) : 0;
+            const emailH = stackTotal ? heightPct - revealH : 0;
+            return `<div class="bar-stack ${d.isToday ? "today" : ""}" style="animation-delay:${i*.06}s">
+              <div class="bar-stack-vals">
+                ${d.reveals ? `<span class="bsv reveal">${d.reveals}</span>` : ""}
+                ${d.emails ? `<span class="bsv email">${d.emails}</span>` : ""}
+              </div>
+              <div class="bar-stack-cols">
+                ${d.emails ? `<div class="bs-col email" style="height:${emailH}%" title="${d.emails} email${d.emails===1?"":"s"}"></div>` : ""}
+                ${d.reveals ? `<div class="bs-col reveal" style="height:${revealH}%" title="${d.reveals} reveal${d.reveals===1?"":"s"}"></div>` : ""}
+                ${(!d.reveals && !d.emails) ? `<div class="bs-col empty" style="height:2%"></div>` : ""}
+              </div>
+              <span class="bar-lbl">${d.label}</span>
+            </div>`;
+          }).join("")}
+        </div>
+        <div class="chart-legend">
+          <span class="legend-item"><span class="legend-swatch reveal"></span> Reveals</span>
+          <span class="legend-item"><span class="legend-swatch email"></span> AI Emails</span>
+        </div>
+      ` : `
+        <div class="empty-chart">
+          <div class="empty-chart-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 6-6"/></svg>
+          </div>
+          <div class="empty-chart-title">No activity yet</div>
+          <div class="empty-chart-sub">Reveal a contact or generate an email — your data will appear here.</div>
+        </div>
+      `}
+    </div>
+
+    <!-- Breakdown grids -->
+    <div class="analytics-grid">
+
+      <!-- Industry breakdown -->
+      <div class="panel">
+        <div class="panel-head">
+          <h3>Top industries unlocked</h3>
+          <span class="ph-tag">${topIndustries.length ? `${industryMap.size} unique` : "No data"}</span>
+        </div>
+        <div class="hbars">
+          ${topIndustries.length ? topIndustries.map(([name, count]) => `
+            <div class="hbar">
+              <div class="hbar-label">${name}</div>
+              <div class="hbar-track">
+                <div class="hbar-fill" style="width:${(count / maxIndustryCount * 100).toFixed(0)}%"></div>
+              </div>
+              <div class="hbar-val">${count}</div>
+            </div>
+          `).join("") : `<div class="empty-mini">Unlock some contacts to see your top industries.</div>`}
+        </div>
+      </div>
+
+      <!-- Geographic breakdown -->
+      <div class="panel">
+        <div class="panel-head">
+          <h3>Geographic spread</h3>
+          <span class="ph-tag">${topGeo.length ? `${geoMap.size} regions` : "No data"}</span>
+        </div>
+        <div class="hbars">
+          ${topGeo.length ? topGeo.map(([region, count]) => `
+            <div class="hbar">
+              <div class="hbar-label">${region}</div>
+              <div class="hbar-track">
+                <div class="hbar-fill geo" style="width:${(count / maxGeoCount * 100).toFixed(0)}%"></div>
+              </div>
+              <div class="hbar-val">${count}</div>
+            </div>
+          `).join("") : `<div class="empty-mini">Unlock contacts to see geographic distribution.</div>`}
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Recent activity feed -->
+    <div class="panel">
+      <div class="panel-head">
+        <h3>Recent activity</h3>
+        <span class="ph-tag">${log.length} event${log.length === 1 ? "" : "s"} tracked</span>
+      </div>
+      <div class="activity-list">
+        ${recent.length ? recent.map(e => `
+          <div class="activity-item ${e.type}">
+            <div class="activity-icon">${activityIcon(e.type)}</div>
+            <div class="activity-text">${activityText(e)}</div>
+            <div class="activity-time">${timeAgo(e.t)}</div>
+          </div>
+        `).join("") : `<div class="empty-mini">Start prospecting — your actions will appear here in real time.</div>`}
+      </div>
+    </div>
+
+    <!-- Lifetime totals (compact summary) -->
+    <div class="panel lifetime-panel">
+      <div class="panel-head">
+        <h3>Lifetime totals</h3>
+        <span class="ph-tag">since you started</span>
+      </div>
+      <div class="lifetime-grid">
+        <div class="lifetime-item">
+          <div class="lifetime-val">${revealsCount.toLocaleString()}</div>
+          <div class="lifetime-label">Contacts revealed</div>
+        </div>
+        <div class="lifetime-item">
+          <div class="lifetime-val" style="color:var(--ai-violet)">${emailsCount.toLocaleString()}</div>
+          <div class="lifetime-label">AI emails written</div>
+        </div>
+        <div class="lifetime-item">
+          <div class="lifetime-val">${totalExports.toLocaleString()}</div>
+          <div class="lifetime-label">Exports downloaded</div>
+        </div>
+        <div class="lifetime-item">
+          <div class="lifetime-val">${totalSearches.toLocaleString()}</div>
+          <div class="lifetime-label">Searches run</div>
+        </div>
+      </div>
+    </div>
+
   </div>`;
 }
 
@@ -3335,6 +4171,8 @@ async function fbRevealImpl(id){
     const ps = await getDoc(doc(db, "contacts_private", id));
     const p = PEOPLE.find(x => x.id === id);
     if (p && ps.exists()) { p.e = ps.data().e || null; p.p = ps.data().p || null; }
+    /* log to activity feed */
+    logActivity("reveal", { id, industry: p?.i || "", company: p?.c || "" });
     toast("Contact unlocked · 1 credit used");
     render();
     if (state.drawerId === id) renderDrawer(id);
