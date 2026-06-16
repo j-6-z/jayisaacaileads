@@ -91,22 +91,26 @@
     }
     .hero-btn-ghost:hover { border-color: #818CF8; color: #818CF8; text-decoration: none; }
 
-    /* scrolling trust ticker */
+    /* honest trust pill row */
     .trust-section { margin-bottom: 2.5rem; }
-    .trust-headline { font-size: .68rem; font-weight: 700; color: #8B95A5; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 16px; }
-    .ticker-wrap { overflow: hidden; width: 100%; max-width: 800px; margin: 0 auto; mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%); }
-    .ticker-track {
-      display: flex; gap: 16px; width: max-content;
-      animation: ticker 25s linear infinite;
+    .trust-pill-row {
+      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+      max-width: 720px; margin: 0 auto;
     }
-    @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-    .ticker-item {
-      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
-      border-radius: 8px; padding: 8px 20px; font-size: .78rem; font-weight: 700;
-      color: rgba(255,255,255,.45); white-space: nowrap; flex-shrink: 0;
-      transition: border-color .2s, color .2s;
+    .trust-pill {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(99,102,241,.2);
+      border-radius: 100px; padding: 7px 16px;
+      font-size: .78rem; font-weight: 600;
+      color: rgba(255,255,255,.78);
+      white-space: nowrap; flex-shrink: 0;
+      transition: border-color .2s, transform .2s, background .2s;
     }
-    .ticker-item:hover { border-color: rgba(99,102,241,.4); color: rgba(255,255,255,.7); }
+    .trust-pill:hover {
+      border-color: rgba(99,102,241,.5);
+      background: rgba(99,102,241,.08);
+      transform: translateY(-1px);
+    }
 
     /* compliance badges */
     .compliance-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
@@ -168,7 +172,6 @@
     @media(max-width:768px) {
       .app-body { grid-template-columns: 1fr; }
       .app-nav { display: none; }
-      .ticker-track { animation-duration: 15s; }
     }
 
     /* ── STATS ── */
@@ -176,9 +179,9 @@
     .stats-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); }
     .stat-item { padding: 2rem 1.5rem; text-align: center; position: relative; }
     .stat-item:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 20%; bottom: 20%; width: 1px; background: var(--border); }
-    .stat-num { font-size: 2.4rem; font-weight: 800; color: var(--white); display: block; line-height: 1.1; letter-spacing: -.5px; }
+    .stat-num { font-size: clamp(1.65rem, 3.2vw, 2.4rem); font-weight: 800; color: var(--white); display: block; line-height: 1.1; letter-spacing: -.5px; white-space: nowrap; }
     .stat-num span { color: var(--or); }
-    .stat-label { font-size: .76rem; color: var(--muted); margin-top: .2rem; display: block; }
+    .stat-label { font-size: .76rem; color: var(--muted); margin-top: .4rem; display: block; }
 
     /* ════════════ AI SHOWCASE (flagship two-product section) ════════════ */
     .ai-showcase {
@@ -533,15 +536,39 @@
 
     /* top: headline + bullets + btns */
     .pp-head { margin-bottom: 2rem; }
+    .pp-tab-pos { display: inline-flex; align-items: center; gap: .5rem; font-size: .68rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #6366F1; margin-bottom: .85rem; }
+    .pp-tab-pos::before { content: ''; width: 18px; height: 2px; background: linear-gradient(90deg, #6366F1, #A855F7); border-radius: 1px; }
     .pp-title { font-size: clamp(1.3rem,2.5vw,2rem); font-weight: 800; color: #111827; letter-spacing: -.4px; line-height: 1.2; margin-bottom: 1.1rem; }
-    .pp-bullets { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: .55rem 1.5rem; margin-bottom: 1.6rem; }
-    .pp-bullets li { display: flex; align-items: flex-start; gap: .55rem; font-size: .9rem; color: #374151; line-height: 1.45; }
-    .pp-bullets li::before { content: ''; width: 5px; height: 5px; background: var(--or); border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
+    .pp-title::after { content: ''; display: block; width: 56px; height: 3px; background: linear-gradient(90deg, #6366F1, #A855F7, #FF8A3D); border-radius: 2px; margin-top: .9rem; }
+    .pp-chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.4rem; }
+    .pp-chip {
+      display: inline-flex; align-items: center; gap: .42rem;
+      font-size: .72rem; font-weight: 700;
+      letter-spacing: .005em;
+      color: #4F46E5;
+      background: linear-gradient(135deg, rgba(99,102,241,.06), rgba(168,85,247,.06));
+      border: 1px solid rgba(99,102,241,.22);
+      padding: .38rem .78rem;
+      border-radius: 100px;
+      transition: transform .15s, border-color .15s, box-shadow .15s;
+    }
+    .pp-chip:hover {
+      transform: translateY(-1px);
+      border-color: rgba(99,102,241,.45);
+      box-shadow: 0 4px 12px rgba(99,102,241,.12);
+    }
+    .pp-chip svg { width: 11px; height: 11px; stroke: #6366F1; fill: none; stroke-width: 2.2; stroke-linecap: round; }
+    .pp-bullets { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: .7rem 1.5rem; margin-bottom: 1.6rem; padding: 0; }
+    .pp-bullets li { display: flex; align-items: flex-start; gap: .65rem; font-size: .9rem; color: #374151; line-height: 1.5; }
+    .pp-bullets li::before { content: ''; width: 7px; height: 7px; background: linear-gradient(135deg, #6366F1, #A855F7); border-radius: 50%; flex-shrink: 0; margin-top: 6px; box-shadow: 0 0 0 3px rgba(99,102,241,.08); }
     .pp-btns { display: flex; gap: .75rem; }
     .pp-btn-or { background: var(--or); color: #fff; text-decoration: none; padding: .68rem 1.35rem; border-radius: 9px; font-size: .855rem; font-weight: 700; transition: background .18s; }
     .pp-btn-or:hover { background: var(--orh); }
     .pp-btn-gh { background: transparent; color: #111827; text-decoration: none; padding: .68rem 1.35rem; border-radius: 9px; font-size: .855rem; font-weight: 600; border: 1.5px solid #D1D5DB; transition: border-color .18s, background .18s; }
     .pp-btn-gh:hover { border-color: #9CA3AF; background: #F9FAFB; }
+    .pp-btns { flex-wrap: wrap; align-items: center; }
+    .pp-btn-note { width: 100%; font-size: .72rem; color: #6B7280; margin-top: .65rem; display: flex; align-items: center; gap: .4rem; }
+    .pp-btn-note::before { content: ''; width: 5px; height: 5px; background: linear-gradient(135deg, #6366F1, #A855F7); border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 6px rgba(99,102,241,.5); }
 
     /* THE WINDOW */
     .pp-window { border: 1.5px solid #E5E7EB; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,.04), 0 20px 60px rgba(0,0,0,.10), 0 0 0 1px rgba(99,102,241,.06); background: #FAFAFA; transition: box-shadow .3s; }
@@ -871,21 +898,6 @@
       .vs-receipt-num { font-size: 36px; }
     }
 
-    /* ── TESTIMONIALS ── */
-    .testimonials { background: #F9FAFB; border-top: 1px solid #E5E7EB; padding: 80px 5vw; }
-    .test-inner { max-width: 1200px; margin: 0 auto; }
-    .test-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem; }
-    .test-badges { display: flex; gap: .55rem; flex-wrap: wrap; }
-    .g2-badge { background: var(--card); border: 1px solid var(--border); border-radius: 9px; padding: .45rem .85rem; font-size: .7rem; font-weight: 700; color: rgba(235,235,235,.55); display: flex; align-items: center; gap: .38rem; }
-    .g2-s { color: #FF492C; }
-    .test-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.1rem; }
-    .tcard { background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 14px; padding: 1.5rem; }
-    .tcard-stars { color: #F5A623; font-size: .8rem; letter-spacing: 1px; margin-bottom: .7rem; }
-    .tcard-text { font-size: .845rem; color: #374151; line-height: 1.65; margin-bottom: 1rem; font-style: italic; }
-    .tcard-author { display: flex; align-items: center; gap: .7rem; }
-    .tcard-av { width: 32px; height: 32px; border-radius: 50%; background: var(--ordim); border: 1px solid var(--ore); display: flex; align-items: center; justify-content: center; font-size: .68rem; font-weight: 800; color: var(--orh); flex-shrink: 0; }
-    .tcard-name { font-size: .8rem; font-weight: 700; color: #111827; }
-    .tcard-role { font-size: .71rem; color: var(--muted); }
 
     /* ── FINAL CTA ── */
     .final-cta {
@@ -922,7 +934,6 @@
       .sol-header { grid-template-columns: 1fr; }
       .sol-art { max-width: 320px; margin: 0 auto; }
       .roles-grid { grid-template-columns: 1fr 1fr; }
-      .test-grid { grid-template-columns: 1fr; }
     }
     @media(max-width:700px){
       .stats-inner { grid-template-columns: 1fr 1fr; }
@@ -931,7 +942,6 @@
       .int-grid { grid-template-columns: repeat(2,1fr); }
       .roles-grid { grid-template-columns: 1fr; }
       .oauth-btns { flex-direction: column; }
-      .test-header { flex-direction: column; align-items: flex-start; }
       .pw-body { height: 400px; }
     }
     @media(prefers-reduced-motion:reduce){ *, *::before, *::after { animation:none!important; transition:none!important; } }
@@ -944,40 +954,20 @@
   <canvas id="heroCanvas"></canvas>
   <div class="hero-eyebrow"><span class="hero-dot"></span>AI-Powered North American B2B Intelligence</div>
   <h1>AI finds every decision-maker.<br><span class="g">Verified. Reachable. Yours.</span></h1>
-  <p class="hero-sub">1M+ North American B2B contacts with verified emails and direct dials — with deeper Canadian coverage than Apollo or ZoomInfo. Just describe who you're looking for and our AI finds them instantly.</p>
+  <p class="hero-sub">AI finds your next customer. AI writes the cold email that gets them to reply. One flat price — no per-seat fees, no credit traps, no contracts.</p>
 
   <div class="hero-btns">
     <a class="hero-btn-primary" href="login.html">Start Free Trial &rarr;</a>
     <a class="hero-btn-ghost" href="contact.html">Talk to Sales</a>
   </div>
 
-  <!-- scrolling trust ticker -->
+  <!-- honest tagline strip -->
   <div class="trust-section">
-    <div class="trust-headline">Exports into the tools you already use</div>
-    <div class="ticker-wrap">
-      <div class="ticker-track">
-        <div class="ticker-item">HubSpot</div>
-        <div class="ticker-item">Salesforce</div>
-        <div class="ticker-item">Pipedrive</div>
-        <div class="ticker-item">Outreach</div>
-        <div class="ticker-item">Excel / CSV</div>
-        <div class="ticker-item">Zoho CRM</div>
-        <div class="ticker-item">Monday.com</div>
-        <div class="ticker-item">Close.io</div>
-        <div class="ticker-item">REST API</div>
-        <div class="ticker-item">Google Sheets</div>
-        <!-- duplicate for seamless loop -->
-        <div class="ticker-item">HubSpot</div>
-        <div class="ticker-item">Salesforce</div>
-        <div class="ticker-item">Pipedrive</div>
-        <div class="ticker-item">Outreach</div>
-        <div class="ticker-item">Excel / CSV</div>
-        <div class="ticker-item">Zoho CRM</div>
-        <div class="ticker-item">Monday.com</div>
-        <div class="ticker-item">Close.io</div>
-        <div class="ticker-item">REST API</div>
-        <div class="ticker-item">Google Sheets</div>
-      </div>
+    <div class="trust-pill-row">
+      <span class="trust-pill">🇨🇦 Built in Canada</span>
+      <span class="trust-pill">💳 No per-seat fees</span>
+      <span class="trust-pill">📭 No credit expiry</span>
+      <span class="trust-pill">📜 No annual contract</span>
     </div>
   </div>
 
@@ -1035,10 +1025,10 @@
 <!-- ═══ STATS ═══ -->
 <div class="stats-band">
   <div class="stats-inner">
-    <div class="stat-item"><span class="stat-num">1M<span>+</span></span><span class="stat-label">North American Contacts</span></div>
-    <div class="stat-item"><span class="stat-num">500<span>K+</span></span><span class="stat-label">Companies</span></div>
-    <div class="stat-item"><span class="stat-num">95<span>%</span></span><span class="stat-label">Data Accuracy</span></div>
-    <div class="stat-item"><span class="stat-num">60<span>+</span></span><span class="stat-label">States &amp; Provinces</span></div>
+    <div class="stat-item"><span class="stat-num">$26<span>.99</span></span><span class="stat-label">Flat Monthly Price</span></div>
+    <div class="stat-item"><span class="stat-num">500<span></span></span><span class="stat-label">Phone Numbers / Month</span></div>
+    <div class="stat-item"><span class="stat-num">Unlimited<span></span></span><span class="stat-label">Email Reveals</span></div>
+    <div class="stat-item"><span class="stat-num">2<span></span></span><span class="stat-label">AI Tools Built-In</span></div>
   </div>
 </div>
 
@@ -1067,7 +1057,7 @@
           </div>
         </div>
         <h3>Find perfect prospects in plain English.</h3>
-        <p class="ai-card-desc">Describe your ideal customer the way you'd describe it to a teammate. AI parses your query into filters and returns matches across 1M+ contacts in seconds.</p>
+        <p class="ai-card-desc">Describe your ideal customer the way you'd describe it to a teammate. AI parses your query into filters and returns matching verified contacts in seconds — no dropdowns, no clicking through 14 filter menus.</p>
 
         <div class="ai-demo ai-demo-leads">
           <div class="ai-demo-label">YOU TYPE</div>
@@ -1139,7 +1129,7 @@
     <div>
       <div class="imgfeat-eyebrow"><span class="imgfeat-pip"></span>Prospect Search</div>
       <h2>Search by industry, role, and city — <span class="g">get verified contacts instantly</span></h2>
-      <p class="imgfeat-desc">Filter 1M+ North American contacts by vertical, job title, company size, and location. Every record comes with a verified email and direct dial — not a switchboard number or a generic info@ address.</p>
+      <p class="imgfeat-desc">Filter verified contacts by vertical, job title, company size, and location. Every record comes with a verified email and direct dial — not a switchboard number or a generic info@ address.</p>
       <ul class="imgfeat-list">
         <li>Filter by 30+ industries, roles, and metros</li>
         <li>Verified emails with 95% deliverability</li>
@@ -1202,7 +1192,7 @@
     <div class="plat-header">
       <div class="plat-eyebrow"><span class="plat-pip"></span>The Platform</div>
       <h2 class="plat-title">One platform.<br /><span class="g">Every stage of your pipeline.</span></h2>
-      <p class="plat-sub">Search, enrich, sequence, and close — powered by the most complete North American B2B contact database, with deeper Canadian coverage than US-first competitors. Now with AI-powered natural language search.</p>
+      <p class="plat-sub">From prospect to reply in minutes — not days. Natural language search, verified contact reveals, AI-personalized email writing, and live intent signals. All in one place. All for $26.99 a month.</p>
     </div>
 
     <div class="plat-layout">
@@ -1211,19 +1201,19 @@
       <div class="plat-tabs">
         <div class="ptab on" onclick="sw(0)">
           <div class="ptab-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
-          <div><div class="ptab-name">Prospecting</div><div class="ptab-sub">Turn hours of prospecting into minutes</div></div>
+          <div><div class="ptab-name">Prospecting</div><div class="ptab-sub">Plain English in. Verified contacts out.</div></div>
         </div>
         <div class="ptab" onclick="sw(1)">
           <div class="ptab-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-          <div><div class="ptab-name">Data Enrichment</div><div class="ptab-sub">Fuel smarter selling with always-fresh data</div></div>
+          <div><div class="ptab-name">Data Enrichment</div><div class="ptab-sub">Verified contacts. Direct dials. Always fresh.</div></div>
         </div>
         <div class="ptab" onclick="sw(2)">
           <div class="ptab-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-          <div><div class="ptab-name">Outreach Sequences</div><div class="ptab-sub">AI-powered multichannel campaigns in a click</div></div>
+          <div><div class="ptab-name">AI Email Writer</div><div class="ptab-sub">Cold emails that actually get replies.</div></div>
         </div>
         <div class="ptab" onclick="sw(3)">
           <div class="ptab-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-          <div><div class="ptab-name">Intent Signals</div><div class="ptab-sub">Reach buyers at exactly the right moment</div></div>
+          <div><div class="ptab-name">Intent Signals</div><div class="ptab-sub">Hiring · Funding · Tech signals — live.</div></div>
         </div>
       </div>
 
@@ -1233,16 +1223,23 @@
         <!-- PROSPECTING -->
         <div class="ppanel on" id="p0">
           <div class="pp-head">
-            <h3 class="pp-title">Find North American decision-makers in minutes, not hours</h3>
+            <div class="pp-tab-pos">01 / Prospecting</div>
+            <h3 class="pp-title">Find North American decision-makers in minutes, not hours.</h3>
+            <div class="pp-chips">
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>4-second AI parse</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Verified emails + dials</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>CSV · JSON · XLSX · PDF</span>
+            </div>
             <ul class="pp-bullets">
-              <li>1M+ North American contacts with 20+ firmographic filters</li>
-              <li>Verified emails &amp; direct dials on every contact</li>
-              <li>Save searches — get new matches automatically</li>
-              <li>Export to CSV, JSON, XLSX, PDF — or CRM-ready formats</li>
+              <li>Type plain English — AI parses it into perfect filters in milliseconds</li>
+              <li>Verified emails and direct dial phone numbers on every revealed contact</li>
+              <li>Save any search — get notified the moment new matches appear</li>
+              <li>One-click export to CSV, JSON, XLSX, PDF, or straight into your CRM</li>
             </ul>
             <div class="pp-btns">
-              <a href="./login.html" class="pp-btn-or">Get started for free</a>
-              <a href="./pricing.html" class="pp-btn-gh">Learn more</a>
+              <a href="./login.html" class="pp-btn-or">Get started</a>
+              <a href="./pricing.html" class="pp-btn-gh">See pricing</a>
+              <div class="pp-btn-note">$26.99/month flat · No contracts · Cancel anytime</div>
             </div>
           </div>
           <div class="pp-window">
@@ -1278,16 +1275,23 @@
         <!-- DATA ENRICHMENT -->
         <div class="ppanel" id="p1">
           <div class="pp-head">
-            <h3 class="pp-title">Fuel smarter selling with always-fresh data</h3>
+            <div class="pp-tab-pos">02 / Data Enrichment</div>
+            <h3 class="pp-title">Fuel smarter selling with always-fresh data.</h3>
+            <div class="pp-chips">
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 1 0-18 0"/><path d="M3 12c0-5 4-9 9-9"/></svg>Multi-source verification</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Direct dials only</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><line x1="8" y1="11" x2="8" y2="16"/><line x1="8" y1="8" x2="8" y2="8.01"/><line x1="12" y1="16" x2="12" y2="11"/><path d="M16 16v-3a2 2 0 0 0-4 0"/></svg>LinkedIn included</span>
+            </div>
             <ul class="pp-bullets">
-              <li>1M+ North American contacts and 500K+ companies</li>
-              <li>Verified emails &amp; phone numbers for faster reach</li>
-              <li>Better targeting and personalization at scale</li>
-              <li>Clean data across your entire stack and CRM</li>
+              <li>Multi-source verification pipeline catches stale data before it reaches you</li>
+              <li>Direct dial mobile numbers — not switchboards, not generic info@ addresses</li>
+              <li>Firmographic depth: revenue band, headcount, tech stack, growth signals</li>
+              <li>Personal LinkedIn URLs so you walk into every call with full context</li>
             </ul>
             <div class="pp-btns">
-              <a href="./login.html" class="pp-btn-or">Get started for free</a>
-              <a href="./pricing.html" class="pp-btn-gh">Learn more</a>
+              <a href="./login.html" class="pp-btn-or">Get started</a>
+              <a href="./pricing.html" class="pp-btn-gh">See pricing</a>
+              <div class="pp-btn-note">$26.99/month flat · No contracts · Cancel anytime</div>
             </div>
           </div>
           <div class="pp-window">
@@ -1328,16 +1332,23 @@
         <!-- OUTREACH SEQUENCES -->
         <div class="ppanel" id="p2">
           <div class="pp-head">
-            <h3 class="pp-title">AI-powered multichannel campaigns in a click</h3>
+            <div class="pp-tab-pos">03 / Outreach</div>
+            <h3 class="pp-title">Cold emails that don't sound like cold emails.</h3>
+            <div class="pp-chips">
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>AI-personalized per contact</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>5 credits per email</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Gmail · Outlook ready</span>
+            </div>
             <ul class="pp-bullets">
-              <li>AI-personalized email sequences at scale</li>
-              <li>Built-in email deliverability guardrails</li>
-              <li>Prioritized task lists to maximize selling time</li>
-              <li>Workflow automations to identify and scale what works</li>
+              <li>AI Email Writer personalizes every send — no "hope this finds you well"</li>
+              <li>Tone presets: direct, friendly, casual, formal — pick the voice for the prospect</li>
+              <li>Length presets: short (60w), medium (110w), or long (165w) — match the channel</li>
+              <li>One-click copy or open straight in Gmail or Outlook with subject pre-filled</li>
             </ul>
             <div class="pp-btns">
-              <a href="./login.html" class="pp-btn-or">Get started for free</a>
-              <a href="./pricing.html" class="pp-btn-gh">Learn more</a>
+              <a href="./login.html" class="pp-btn-or">Get started</a>
+              <a href="./pricing.html" class="pp-btn-gh">See pricing</a>
+              <div class="pp-btn-note">$26.99/month flat · No contracts · Cancel anytime</div>
             </div>
           </div>
           <div class="pp-window">
@@ -1382,7 +1393,13 @@
         <!-- INTENT SIGNALS -->
         <div class="ppanel" id="p3">
           <div class="pp-head">
-            <h3 class="pp-title">Reach buyers at exactly the right moment</h3>
+            <div class="pp-tab-pos">04 / Intent Signals</div>
+            <h3 class="pp-title">Reach buyers at exactly the right moment.</h3>
+            <div class="pp-chips">
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Hiring + funding signals</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="14 7 21 7 21 14"/></svg>Tech adoption tracked</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Live intent scoring</span>
+            </div>
             <ul class="pp-bullets">
               <li>Hiring signals — companies growing fast right now</li>
               <li>Funding signals — fresh capital, new budgets unlocked</li>
@@ -1390,8 +1407,9 @@
               <li>Intent score on every contact and company</li>
             </ul>
             <div class="pp-btns">
-              <a href="./login.html" class="pp-btn-or">Get started for free</a>
-              <a href="./pricing.html" class="pp-btn-gh">Learn more</a>
+              <a href="./login.html" class="pp-btn-or">Get started</a>
+              <a href="./pricing.html" class="pp-btn-gh">See pricing</a>
+              <div class="pp-btn-note">$26.99/month flat · No contracts · Cancel anytime</div>
             </div>
           </div>
           <div class="pp-window">
@@ -1558,26 +1576,11 @@
   </div>
 </section>
 
-<!-- ═══ TESTIMONIALS ═══ -->
-<section class="testimonials">
-  <div class="test-inner">
-    <div class="test-header">
-      <div><div class="sec-eyebrow">Customer Stories</div><h2 class="sec-title" style="margin-bottom:0">Trusted by sales teams<br />that run on pipeline</h2></div>
-      <div class="test-badges"><div class="g2-badge"><span class="g2-s">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4.9 on G2</div><div class="g2-badge"><span class="g2-s">&#9733;&#9733;&#9733;&#9733;&#9733;</span> Leader &mdash; North America</div></div>
-    </div>
-    <div class="test-grid">
-      <div class="tcard"><div class="tcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="tcard-text">"We replaced three different tools with JAYISAAC AI. The Canadian data quality blows Apollo away, and the US coverage is just as solid. We booked 14 meetings in the first week."</p><div class="tcard-author"><div class="tcard-av">KP</div><div><div class="tcard-name">Kevin Park</div><div class="tcard-role">Head of Sales &middot; TechStart Inc., Toronto</div></div></div></div>
-      <div class="tcard"><div class="tcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="tcard-text">"We sell into both US and Canadian SMBs. Most platforms are great at one and weak at the other. JAYISAAC AI is the first that gives us solid coverage across both."</p><div class="tcard-author"><div class="tcard-av">MR</div><div><div class="tcard-name">Marcus Reyes</div><div class="tcard-role">VP Sales &middot; Beacon Outbound, Austin, TX</div></div></div></div>
-      <div class="tcard"><div class="tcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="tcard-text">"Our agency builds outreach lists for 12 clients across North America. Before JAYISAAC AI it took days. Now it takes an hour. We've grown our client base 40% since switching."</p><div class="tcard-author"><div class="tcard-av">DM</div><div><div class="tcard-name">Derek Munroe</div><div class="tcard-role">Founder &middot; Northfield Digital, Calgary</div></div></div></div>
-    </div>
-  </div>
-</section>
-
 <!-- ═══ FINAL CTA ═══ -->
 <section class="final-cta">
-  <h2>Start closing<br /><span>more deals</span> today.</h2>
-  <p>Free plan available. No credit card required. Join the sales teams across North America already using JAYISAAC AI to close deals faster with AI-powered prospecting.</p>
-  <div class="final-form"><input id="ctaEmail" type="email" placeholder="Enter your work email" /><button onclick="goSignup('ctaEmail')">Get started free</button></div>
+  <h2>Stop paying<br /><span>per seat.</span></h2>
+  <p>One flat price. AI-powered prospect search. AI-personalized cold emails. No contracts, no credit traps, no hidden fees — just the tools you actually need.</p>
+  <div class="final-form"><input id="ctaEmail" type="email" placeholder="Enter your work email" /><button onclick="goSignup('ctaEmail')">Get started</button></div>
   <div class="final-note">By signing up you agree to our <a href="./terms.html">Terms of Use</a> and <a href="./privacy.html">Privacy Policy</a></div>
 </section>
 
