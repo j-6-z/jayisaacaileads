@@ -206,13 +206,14 @@ body { padding-top: var(--jia-h); }
   stroke-width:2; stroke-linecap:round; stroke-linejoin:round;
   opacity:.45; transition:transform .2s, opacity .2s; flex-shrink:0;
 }
-.jia-links > li.has-mega:hover .jia-chev { transform:rotate(180deg); opacity:.9; }
+.jia-links > li.has-mega.mega-open .jia-chev { transform:rotate(180deg); opacity:.9; }
 
 /* ── mega panel ── */
+/* left-anchored under its own trigger so neighbouring panels never overlap */
 .jia-mega {
   position: absolute;
   top: 100%;                    /* sit flush against the nav so no hover gap */
-  left: 50%; transform: translateX(-50%) translateY(8px);
+  left: 0; transform: translateY(8px);
   background: var(--jia-card);
   border: 1px solid var(--jia-b);
   border-radius: 16px;
@@ -228,38 +229,47 @@ body { padding-top: var(--jia-h); }
 }
 
 /* invisible "bridge" between trigger link and dropdown — kills the hover gap.
-   Must be as wide as the dropdown itself, not just the link. */
+   Aligned to the panel's left edge (not centered) so it only covers
+   this trigger's own dropdown and never sits over the neighbour link. */
 .jia-links > li.has-mega::after {
   content: '';
   position: absolute;
   top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 560px;                 /* wider than .jia-mega min-width (520px) */
+  left: 0;
+  width: 520px;                 /* matches .jia-mega min-width */
   height: 24px;                 /* covers the 12px gap + 12px breathing room */
   background: transparent;
   pointer-events: none;
 }
-.jia-links > li.has-mega:hover::after,
 .jia-links > li.has-mega.mega-open::after {
-  pointer-events: auto;         /* only active during hover, keeps the bridge alive */
+  pointer-events: auto;         /* only active while open, keeps the bridge alive */
 }
 
-.jia-links > li.has-mega:hover .jia-mega,
 .jia-links > li.has-mega.mega-open .jia-mega {
   opacity:1; visibility:visible; pointer-events:auto;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
   transition-delay: 0s;         /* open instantly */
 }
 
-/* arrow tip */
+/* arrow tip — sits over the trigger, not the panel centre */
 .jia-mega::before {
   content:''; position:absolute;
-  top:-5px; left:50%; transform:translateX(-50%) rotate(45deg);
+  top:-5px; left:32px; transform:rotate(45deg);
   width:9px; height:9px;
   background:var(--jia-card);
   border-left:1px solid var(--jia-b);
   border-top:1px solid var(--jia-b);
+}
+
+/* rightmost mega (Resources) opens leftward so it never runs off-screen */
+.jia-links > li.has-mega:last-child .jia-mega {
+  left: auto; right: 0;
+}
+.jia-links > li.has-mega:last-child .jia-mega::before {
+  left: auto; right: 32px;
+}
+.jia-links > li.has-mega:last-child::after {
+  left: auto; right: 0;
 }
 
 /* single col */
@@ -451,8 +461,7 @@ body { padding-top: var(--jia-h); }
   transition: opacity .3s, transform .3s;
 }
 
-/* hide shield when a mega dropdown is open (hovering Platform / Our Data / Resources) */
-.jia-nav:has(.jia-links > li.has-mega:hover) .jia-shield,
+/* hide shield when a mega dropdown is open (Platform / Our Data / Resources) */
 .jia-nav:has(.jia-links > li.has-mega.mega-open) .jia-shield {
   opacity: 0; transform: translateX(-50%) translateY(-12px) scale(.8);
   pointer-events: none;
@@ -790,19 +799,21 @@ mobEl.querySelectorAll("a").forEach(a => a.addEventListener("click", closeAll));
 addEventListener("scroll", () =>
   hdr.classList.toggle("scrolled", scrollY > 40), { passive: true });
 
-/* ── BULLETPROOF MEGA-MENU HOVER ──────────────────────────
-   CSS :hover handles 95% of cases, but the 12px gap between
-   the trigger link and dropdown can cause flickering closes.
-   The JS layer below uses a 300ms close timer that any movement
-   onto the dropdown cancels. Three layers of defense:
-   1. Wide invisible bridge (CSS, 560px)
-   2. CSS :hover with transition-delay
-   3. JS class toggle with timeout (this) */
+/* ── MEGA-MENU HOVER — single source of truth ─────────────
+   Panels open ONLY when JS adds the .mega-open class (CSS no
+   longer reacts to raw :hover). open() force-closes every
+   other mega first, so exactly one can be open at a time.
+   A 300ms close timer on leave lets the mouse cross the gap
+   onto the panel without it snapping shut. */
 hdr.querySelectorAll(".jia-links > li.has-mega").forEach(li => {
   let closeTimer = null;
   const open = () => {
     clearTimeout(closeTimer);
     closeTimer = null;
+    /* close every other mega before opening this one — only one open at a time */
+    hdr.querySelectorAll(".jia-links > li.has-mega.mega-open").forEach(other => {
+      if (other !== li) other.classList.remove("mega-open");
+    });
     li.classList.add("mega-open");
   };
   const scheduleClose = () => {
