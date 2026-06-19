@@ -43,18 +43,27 @@
 
 import admin from "firebase-admin";
 
+/* Resolve the Firebase private key the same way stripe-webhook.js does:
+   prefer FIREBASE_PRIVATE_KEY_B64 (base64), fall back to raw FIREBASE_PRIVATE_KEY
+   (PEM with literal \n escapes). This matches the env vars already set in prod. */
+function resolvePrivateKey() {
+  const b64 = process.env.FIREBASE_PRIVATE_KEY_B64;
+  if (b64 && b64.trim()) {
+    return Buffer.from(b64, "base64").toString("utf8");
+  }
+  let k = process.env.FIREBASE_PRIVATE_KEY || "";
+  /* turn literal \n into real newlines, strip wrapping quotes if present */
+  k = k.replace(/\\n/g, "\n").replace(/^"|"$/g, "");
+  return k;
+}
+
 /* ── Init Firebase Admin (once per cold start) ── */
 if (!admin.apps.length) {
-  const privateKey = Buffer.from(
-    process.env.FIREBASE_PRIVATE_KEY_B64 || "",
-    "base64"
-  ).toString("utf8");
-
   admin.initializeApp({
     credential: admin.credential.cert({
       projectId:   process.env.FIREBASE_PROJECT_ID,
       clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-      privateKey:  privateKey,
+      privateKey:  resolvePrivateKey(),
     }),
   });
 }
