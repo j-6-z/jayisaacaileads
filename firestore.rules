@@ -1,8 +1,7 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-
-    /* ── users/{uid} ─────────────────────────────────────────
+    /* ── users/{uid} ──────────────────────────────────────────────
        Each user owns exactly one doc: { credits, revealed[], email, name, createdAt }
        Reads: own doc only.
        Creates: own doc only, credits must equal the starting grant (100).
@@ -13,13 +12,11 @@ service cloud.firestore {
        happen via the Admin SDK (webhook/script), which bypasses rules.   */
     match /users/{uid} {
       allow read: if request.auth != null && request.auth.uid == uid;
-
       allow create: if request.auth != null
         && request.auth.uid == uid
         && request.resource.data.credits == 100
         && request.resource.data.revealed is list
         && request.resource.data.revealed.size() == 0;
-
       allow update: if request.auth != null
         && request.auth.uid == uid
         && (
@@ -37,22 +34,67 @@ service cloud.firestore {
             && request.resource.data.revealed == resource.data.revealed
           )
         );
-
       allow delete: if false;
+
+      /* ── users/{uid}/activity/{eventId} ─────────────────────────
+         Activity feed events. Owner can read/create their own.       */
+      match /activity/{eventId} {
+        allow read, create: if request.auth != null && request.auth.uid == uid;
+        allow update, delete: if false;
+      }
     }
 
-    /* ── contacts/{id} ───────────────────────────────────────
-       PUBLIC fields only: name, title, company, employees, location,
-       industry, province, sizeBucket, titleCategory, emailDomain,
-       website, revenue. NO raw emails or phone numbers in here, ever. */
+    /* ════════════════════════════════════════════════════════════
+       NEW SCHEMA (post-migration) — people / companies split
+       ════════════════════════════════════════════════════════════ */
+
+    /* ── people/{id} ──────────────────────────────────────────────
+       PUBLIC person fields only: personName, title, companyName,
+       employeeCount, location, industry, emailDomain, website, etc.
+       NO raw emails or phones in here, ever. */
+    match /people/{id} {
+      allow read: if request.auth != null;
+      allow write: if false;   /* imports via Admin SDK only */
+    }
+
+    /* ── people_private/{id} ──────────────────────────────────────
+       The actual email + phone. Readable ONLY if the requesting
+       user has already paid for this id (it's in their revealed list). */
+    match /people_private/{id} {
+      allow read: if request.auth != null
+        && id in get(/databases/$(database)/documents/users/$(request.auth.uid)).data.revealed;
+      allow write: if false;   /* imports via Admin SDK only */
+    }
+
+    /* ── companies/{id} ───────────────────────────────────────────
+       PUBLIC company fields only: companyName, employeeCount,
+       location, industry, website, revenue, etc. No PII. */
+    match /companies/{id} {
+      allow read: if request.auth != null;
+      allow write: if false;   /* imports via Admin SDK only */
+    }
+
+    /* ── companies_private/{id} ───────────────────────────────────
+       Company PII (main phone/email). Same paid-reveal gate. */
+    match /companies_private/{id} {
+      allow read: if request.auth != null
+        && id in get(/databases/$(database)/documents/users/$(request.auth.uid)).data.revealed;
+      allow write: if false;   /* imports via Admin SDK only */
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       OLD SCHEMA — kept as backup until DELETE_OLD cleanup is run.
+       Safe to remove these two blocks once the old collections
+       are deleted from Firestore.
+       ════════════════════════════════════════════════════════════ */
+
+    /* ── contacts/{id} (legacy) ── */
     match /contacts/{id} {
       allow read: if request.auth != null;
       allow write: if false;   /* imports via Admin SDK only */
     }
 
-    /* ── contacts_private/{id} ───────────────────────────────
-       The actual email + phone. Readable ONLY if the requesting
-       user has already paid for this id (it's in their revealed list). */
+    /* ── contacts_private/{id} (legacy) ── */
     match /contacts_private/{id} {
       allow read: if request.auth != null
         && id in get(/databases/$(database)/documents/users/$(request.auth.uid)).data.revealed;
