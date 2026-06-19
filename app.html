@@ -600,6 +600,17 @@ input{font-family:inherit}
 .results-n span{color:var(--o);font-family:var(--mono);text-shadow:0 0 14px var(--o-glow)}
 .selected-n{font-size:12px;color:var(--steel);display:none;font-weight:600;font-family:var(--mono)}
 .selected-n.show{display:block}
+.list-banner{
+  display:none;align-items:center;gap:10px;margin-top:4px;
+  background:var(--o-dim);border:1px solid var(--o-line);border-radius:9px;
+  padding:5px 6px 5px 12px;font-size:12px;color:var(--ice);font-weight:600;
+}
+.list-banner strong{color:var(--o)}
+.list-banner button{
+  background:var(--p2);border:1px solid var(--hair);border-radius:7px;
+  color:var(--steel);font-size:11px;font-weight:700;padding:4px 9px;cursor:pointer;transition:.15s;
+}
+.list-banner button:hover{border-color:var(--o-line);color:var(--o)}
 .toolbar .right{margin-left:auto;display:flex;gap:8px}
 .tbtn{
   display:flex;align-items:center;gap:7px;
@@ -1727,7 +1738,6 @@ function fallback(text, cb){
     <button class="rail-btn" onclick="location.href='/index.html'" title="Back to homepage"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg><span class="rlabel">Home</span><span class="tip">Home</span></button>
     <button class="rail-btn active" data-view="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span class="rlabel">Prospect Search</span><span class="tip">Prospect Search</span></button>
     <button class="rail-btn" data-view="lists"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/></svg><span class="rlabel">Saved Lists</span><span class="tip">Saved Lists</span></button>
-    <button class="rail-btn" data-view="outreach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg><span class="rlabel">Outreach</span><span class="tip">Outreach</span></button>
 
     <div class="ai-group">
       <div class="ai-group-label">AI Suite</div>
@@ -1809,9 +1819,10 @@ function fallback(text, cb){
       <div>
         <div class="results-n" style="display:none"><span id="resultCount">0</span></div>
         <div class="selected-n" id="selectedN"></div>
+        <div class="list-banner" id="listBanner" style="display:none"></div>
       </div>
       <div class="right">
-        <button class="tbtn" onclick="toast('Saved to list: Trades — North America')">
+        <button class="tbtn" onclick="saveToList()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z"/></svg>
           Save to list
         </button>
@@ -1890,10 +1901,6 @@ function fallback(text, cb){
             </button>
           </div>
         </div>
-        <button class="tbtn primary" onclick="toast('Added to outreach sequence')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-          Add to sequence
-        </button>
       </div>
     </div>
 
@@ -2052,6 +2059,8 @@ let state = {
   sort:{key:null,dir:1},
   drawerId:null,
   emailsGenerated:0,
+  lists:[],
+  activeList:null,
 };
 
 /* ================= ACTIVITY LOG (localStorage + Firestore) ================= */
@@ -2074,6 +2083,69 @@ function getActivityLog(){
 }
 const PER_PAGE = 10;
 const AV_COLORS = ["#6366F1","#2563EB","#1B8A5A","#A855F7","#0891B2","#0E7490","#EC4899"];
+
+/* ================= SAVED LISTS (localStorage) ================= */
+const LISTS_KEY = "jia_lists_v1";
+function loadLists(){
+  try { state.lists = JSON.parse(localStorage.getItem(LISTS_KEY) || "[]"); }
+  catch(_){ state.lists = []; }
+}
+function saveLists(){
+  try { localStorage.setItem(LISTS_KEY, JSON.stringify(state.lists)); } catch(_){}
+}
+function saveToList(){
+  let pool = state.tab === "people" ? PEOPLE.filter(matchesPerson) : COMPANIES.filter(matchesCompany);
+  if(state.checked.size) pool = pool.filter(r => state.checked.has(r.id));
+  const ids = pool.map(r => r.id).filter(Boolean);
+  if(!ids.length){ toast("Nothing to save — check some rows or set filters first"); return; }
+  const name = prompt(`Name this list (${ids.length} ${state.tab}):`, "");
+  if(name === null) return;
+  const finalName = (name || "").trim() || ("List " + (state.lists.length + 1));
+  loadLists();
+  state.lists.push({ id: "list_" + Date.now(), name: finalName, ids, tab: state.tab, created: Date.now() });
+  saveLists();
+  logActivity("save_list", { name: finalName, count: ids.length });
+  toast(`Saved ${ids.length} to "${finalName}"`);
+}
+function deleteList(id){
+  loadLists();
+  state.lists = state.lists.filter(l => l.id !== id);
+  saveLists();
+  if(state.activeList === id) state.activeList = null;
+  renderLists();
+}
+function openList(id){
+  loadLists();
+  const lst = state.lists.find(l => l.id === id);
+  if(!lst){ toast("List not found"); return; }
+  state.activeList = id;
+  state.tab = lst.tab || "people";
+  document.querySelectorAll(".tab").forEach(x => x.classList.toggle("active", x.dataset.tab === state.tab));
+  state.renderLimit = 50;
+  switchView("search");
+  render();
+  toast(`Viewing "${lst.name}" · ${lst.ids.length} contacts`);
+}
+function clearActiveList(){
+  state.activeList = null;
+  state.renderLimit = 50;
+  render();
+}
+function renderListBanner(){
+  const b = document.getElementById("listBanner");
+  if(!b) return;
+  if(state.activeList){
+    const lst = (state.lists || []).find(l => l.id === state.activeList);
+    if(lst){
+      b.style.display = "inline-flex";
+      b.innerHTML = `<span>Viewing list: <strong>${lst.name}</strong></span><button onclick="clearActiveList()" title="Clear list view">Clear &#10005;</button>`;
+      return;
+    }
+    state.activeList = null;
+  }
+  b.style.display = "none";
+  b.innerHTML = "";
+}
 
 /* ================= THEME ================= */
 function toggleTheme(){
@@ -2269,7 +2341,13 @@ function render(){
   document.getElementById("peoplePill").textContent = peopleAll.length;
   document.getElementById("compPill").textContent = compAll.length;
 
-  const rows = sortRows(state.tab==="people" ? peopleAll : compAll);
+  let rows = sortRows(state.tab==="people" ? peopleAll : compAll);
+  if(state.activeList){
+    const lst = (state.lists || []).find(l => l.id === state.activeList);
+    if(lst){ const set = new Set(lst.ids); rows = rows.filter(r => set.has(r.id)); }
+    else { state.activeList = null; }
+  }
+  renderListBanner();
   document.getElementById("resultCount").textContent = rows.length.toLocaleString();
 
   const sel = document.getElementById("selectedN");
@@ -3157,7 +3235,6 @@ const ONBOARD_TASKS = [
   {done:true,  title:"Create your account", desc:"You're in — welcome to JAYISAAC AI.", cred:5, time:"done", cta:null},
   {done:false, title:"Find & save your first leads", desc:"Search 1M+ North American contacts and build your first list.", cred:5, time:"About 1 min", cta:"Search for leads", view:"search"},
   {done:false, title:"Reveal a verified contact", desc:"Unlock a direct email and phone number — 1 credit each.", cred:5, time:"About 1 min", cta:"Try it", view:"search"},
-  {done:false, title:"Build an outreach sequence", desc:"Turn saved leads into a multi-step email + call campaign.", cred:5, time:"About 3 mins", cta:"Open Outreach", view:"outreach"},
   {done:false, title:"Export your list (CSV, JSON, or Excel)", desc:"Take your revealed contacts anywhere — CRM, spreadsheet, dialer.", cred:5, time:"About 1 min", cta:"Go to Search", view:"search"},
 ];
 function renderHome(){
@@ -3208,36 +3285,35 @@ function renderHome(){
 }
 
 
-const DEMO_LISTS = [
-  {name:"Trades — North America", count:842, updated:"2h ago", icon:"M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z"},
-  {name:"HVAC Owners — AB/SK", count:318, updated:"1d ago", icon:"M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"},
-  {name:"High-Intent — Q2 Push", count:127, updated:"3d ago", icon:"M13 2L3 14h7l-1 8 10-12h-7l1-8z"},
-  {name:"Roofing — US Sunbelt", count:204, updated:"1w ago", icon:"M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"},
-];
 function renderLists(){
+  loadLists();
   const el = document.getElementById("view-lists");
+  const lists = state.lists || [];
+  const totalContacts = lists.reduce((a,l)=>a+(l.ids?l.ids.length:0),0);
+  const fmtAgo = (t)=>{ if(!t) return ""; const s=Math.floor((Date.now()-t)/1000); if(s<60)return"just now"; if(s<3600)return Math.floor(s/60)+"m ago"; if(s<86400)return Math.floor(s/3600)+"h ago"; return Math.floor(s/86400)+"d ago"; };
+  const listsHTML = lists.length ? lists.slice().reverse().map(l=>`
+        <div class="lrow">
+          <div class="lrow-icon" onclick="openList('${l.id}')" style="cursor:pointer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z"/></svg></div>
+          <div class="lrow-main" onclick="openList('${l.id}')" style="cursor:pointer">
+            <div class="lrow-title">${l.name}</div>
+            <div class="lrow-meta">${(l.ids?l.ids.length:0).toLocaleString()} ${l.tab||"people"} · saved ${fmtAgo(l.created)}</div>
+          </div>
+          <button class="tbtn" onclick="openList('${l.id}')" style="margin-right:8px">Open</button>
+          <button class="tbtn" onclick="if(confirm('Delete this list?'))deleteList('${l.id}')">Delete</button>
+        </div>`).join("") : `<div class="empty" style="padding:48px 20px"><h3>No saved lists yet</h3>Go to Prospect Search, check some contacts (or set filters), then hit <strong>Save to list</strong>.</div>`;
   el.innerHTML = `<div class="view-scroll">
     <div class="vhead">
       <h1><span class="vh-glow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z"/></svg></span>Saved Lists</h1>
-      <p>Your saved prospecting lists. Build a list from the search view, then work it as a focused campaign.</p>
+      <p>Lists you've saved from Prospect Search. Stored on this device. Click a list to open it in the table.</p>
     </div>
     <div class="metrics">
-      <div class="metric"><div class="m-label">Total Lists</div><div class="m-value">${DEMO_LISTS.length}</div><div class="m-sub">▲ active</div></div>
-      <div class="metric"><div class="m-label">Total Contacts</div><div class="m-value glow">${DEMO_LISTS.reduce((a,l)=>a+l.count,0).toLocaleString()}</div><div class="m-sub">across all lists</div></div>
-      <div class="metric"><div class="m-label">Revealed</div><div class="m-value">${state.revealed.size}</div><div class="m-sub">contacts unlocked</div></div>
+      <div class="metric"><div class="m-label">Total Lists</div><div class="m-value">${lists.length}</div></div>
+      <div class="metric"><div class="m-label">Total Contacts</div><div class="m-value glow">${totalContacts.toLocaleString()}</div></div>
+      <div class="metric"><div class="m-label">Revealed</div><div class="m-value">${state.revealed.size}</div></div>
     </div>
     <div class="panel">
-      <div class="panel-head"><h3>All Lists</h3><span class="ph-tag">${DEMO_LISTS.length} lists</span></div>
-      ${DEMO_LISTS.map(l=>`
-        <div class="lrow" onclick="toast('Opening &quot;${l.name}&quot;…'); switchView('search')">
-          <div class="lrow-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="${l.icon}"/></svg></div>
-          <div class="lrow-main">
-            <div class="lrow-title">${l.name}</div>
-            <div class="lrow-meta">${l.count.toLocaleString()} contacts · updated ${l.updated}</div>
-          </div>
-          <div class="lrow-count">${l.count.toLocaleString()}</div>
-          <span class="lrow-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></span>
-        </div>`).join("")}
+      <div class="panel-head"><h3>All Lists</h3><span class="ph-tag">${lists.length} list${lists.length===1?"":"s"}</span></div>
+      ${listsHTML}
     </div>
   </div>`;
 }
@@ -4071,7 +4147,6 @@ const CMDK_NAV = [
   {label:"Homepage", sub:"jayisaacai.com", url:"/index.html", icon:'<path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/>'},
   {label:"Prospect Search", sub:"find contacts", view:"search", icon:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>'},
   {label:"Saved Lists", sub:"your lists", view:"lists", icon:'<path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2v16z"/>'},
-  {label:"Outreach", sub:"sequences", view:"outreach", icon:'<path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/>'},
   {label:"AI Leads", sub:"AI search", view:"enrich", icon:'<path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>'},
   {label:"Analytics", sub:"your activity", view:"analytics", icon:'<path d="M18 20V10M12 20V4M6 20v-6"/>'},
   {label:"Pricing", sub:"upgrade your plan", url:"/pricing.html", icon:'<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>'},
@@ -4151,6 +4226,7 @@ document.addEventListener("keydown", e=>{
   if(e.key==="Escape") closeCmdk();
 });
 
+loadLists();
 buildFilters();
 render();
 
@@ -4289,7 +4365,7 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 /* ── real contact database ──────────────────────────────── */
-const MAX_LOAD = 10000;   /* client-side filtering is instant at this size;
+const MAX_LOAD = 12000;   /* client-side filtering is instant at this size;
                             past ~5k contacts, move filters to Firestore queries */
 let realMode = false;
 
@@ -4626,6 +4702,6 @@ window.__signOut = async () => {
 
 </div>
 <!-- ═══ END AI COLD EMAIL WRITER MODAL ═══ -->
- 
+
 </body>
 </html>
