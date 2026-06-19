@@ -4331,7 +4331,7 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 /* ── real contact database ──────────────────────────────── */
-const MAX_LOAD = 12000;   /* client-side filtering is instant at this size;
+const MAX_LOAD = 8000;   /* client-side filtering is instant at this size;
                             past ~5k contacts, move filters to Firestore queries */
 let realMode = false;
 
