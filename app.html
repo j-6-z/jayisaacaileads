@@ -438,16 +438,17 @@ input{font-family:inherit}
 /* hierarchical location tree (Canada / United States -> states) */
 .loc-country{border-top:1px solid var(--hair-2)}
 .loc-country:first-child{border-top:none}
-.loc-country-head{
-  width:100%;display:flex;align-items:center;gap:8px;
-  padding:10px 2px;font-size:12px;font-weight:700;color:var(--ice);transition:.12s;
-}
-.loc-country-head:hover{color:var(--o)}
-.loc-country-head .loc-chev{
-  width:13px;height:13px;color:var(--dim);transition:transform .2s var(--ease);flex-shrink:0;
-}
-.loc-country.open .loc-country-head .loc-chev{transform:rotate(90deg);color:var(--o)}
-.loc-country-head .loc-flag{margin-left:auto;font-size:10.5px;color:var(--dim);font-family:var(--mono);font-weight:600}
+.loc-country-head{display:flex;align-items:center;gap:9px;padding:9px 2px}
+.loc-all{display:flex;align-items:center;cursor:pointer;flex-shrink:0;padding:0;user-select:none}
+.loc-all input{display:none}
+.loc-all input:checked + .cbox{background:var(--o);border-color:var(--o);box-shadow:0 0 10px var(--o-glow)}
+.loc-all input:checked + .cbox svg{opacity:1}
+.loc-all input:indeterminate + .cbox{background:var(--o-dim);border-color:var(--o)}
+.loc-expand{flex:1;display:flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;color:var(--ice);font-size:12px;font-weight:700;padding:0;transition:.12s}
+.loc-expand:hover{color:var(--o)}
+.loc-expand .loc-flag{margin-left:auto;font-size:10.5px;color:var(--dim);font-family:var(--mono);font-weight:600}
+.loc-expand .loc-chev{width:13px;height:13px;color:var(--dim);transition:transform .2s var(--ease);flex-shrink:0}
+.loc-country.open .loc-expand .loc-chev{transform:rotate(90deg);color:var(--o)}
 .loc-states{display:none;padding:2px 0 8px 16px}
 .loc-country.open .loc-states{display:block}
 
@@ -2140,6 +2141,18 @@ function locationTreeHTML(){
       <span class="cbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg></span>
       ${name}
     </label>`;
+  const head = (country,name,flag)=>`
+    <div class="loc-country-head">
+      <label class="loc-all" title="Select all of ${name}">
+        <input type="checkbox" id="all-${country}" onchange="toggleCountryAll('${country}',this)">
+        <span class="cbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg></span>
+      </label>
+      <button class="loc-expand" onclick="toggleCountry('loc-${country}')">
+        <span>${name}</span>
+        <span class="loc-flag">${flag}</span>
+        <svg class="loc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>`;
   const ca = CA_PROVINCES.map(([c,n])=>cb(c,n)).join("");
   const us = US_STATES.map(([c,n])=>cb(c,n)).join("");
   return `
@@ -2151,17 +2164,11 @@ function locationTreeHTML(){
       </button>
       <div class="fgroup-body">
         <div class="loc-country open" id="loc-ca">
-          <button class="loc-country-head" onclick="toggleCountry('loc-ca')">
-            <svg class="loc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
-            Canada<span class="loc-flag">CA</span>
-          </button>
+          ${head('ca','Canada','CA')}
           <div class="loc-states">${ca}</div>
         </div>
         <div class="loc-country" id="loc-us">
-          <button class="loc-country-head" onclick="toggleCountry('loc-us')">
-            <svg class="loc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
-            United States<span class="loc-flag">US</span>
-          </button>
+          ${head('us','United States','US')}
           <div class="loc-states">${us}</div>
         </div>
       </div>
@@ -2171,12 +2178,37 @@ function toggleCountry(id){
   const el = document.getElementById(id);
   if(el) el.classList.toggle("open");
 }
+function toggleCountryAll(country, el){
+  const list = country === "ca" ? CA_PROVINCES : US_STATES;
+  const on = el.checked;
+  const s = state.filters.region;
+  list.forEach(([code]) => { on ? s.add(code) : s.delete(code); });
+  /* reflect onto every child state checkbox */
+  document.querySelectorAll("#loc-" + country + " .loc-states input[type=checkbox]")
+    .forEach(c => { c.checked = on; });
+  const badge = document.getElementById("fc-region");
+  if(badge){ badge.textContent = s.size; badge.classList.toggle("show", s.size > 0); }
+  el.indeterminate = false;
+  state.page = 1;
+  state.renderLimit = 50;
+  render();
+}
+function syncCountryMasters(){
+  [["ca", CA_PROVINCES], ["us", US_STATES]].forEach(([country, list]) => {
+    const master = document.getElementById("all-" + country);
+    if(!master) return;
+    const sel = list.filter(([code]) => state.filters.region.has(code)).length;
+    master.checked = sel === list.length && sel > 0;
+    master.indeterminate = sel > 0 && sel < list.length;
+  });
+}
 function toggleFilter(el){
   const s = state.filters[el.dataset.group];
   el.checked ? s.add(el.value) : s.delete(el.value);
   const badge = document.getElementById("fc-"+el.dataset.group);
   badge.textContent = s.size;
   badge.classList.toggle("show", s.size>0);
+  if(el.dataset.group === "region") syncCountryMasters();
   state.page = 1;
   state.renderLimit = 50;
   render();
@@ -2186,6 +2218,7 @@ function clearFilters(){
   document.querySelectorAll('.fopt input').forEach(i=>i.checked=false);
   document.querySelectorAll('.count').forEach(b=>{b.textContent="0";b.classList.remove("show")});
   document.querySelectorAll('.loc-country').forEach((el,idx)=>el.classList.toggle('open', idx===0));
+  if(typeof syncCountryMasters === "function") syncCountryMasters();
   state.page = 1;
   state.renderLimit = 50;
   render();
@@ -2312,6 +2345,7 @@ function render(){
     wrap.appendChild(sent);
   }
   syncBannerCredits();
+  ensureFill();
 }
 
 /* Smart pager: shows max ~7 page buttons with ellipsis for large page counts */
@@ -4120,21 +4154,41 @@ document.addEventListener("keydown", e=>{
 buildFilters();
 render();
 
-/* ===== infinite scroll: load more rows as the table scrolls ===== */
+/* ===== infinite scroll: keep the table filled, and load more on scroll ===== */
+var _inFill = false;
+function ensureFill(){
+  if(_inFill) return;
+  const wrap = document.getElementById("tableWrap");
+  if(!wrap || wrap.clientHeight <= 0) return;   /* skip if the view is hidden */
+  const total = state.tab==="people"
+    ? PEOPLE.filter(matchesPerson).length
+    : COMPANIES.filter(matchesCompany).length;
+  _inFill = true;
+  let guard = 0;
+  /* grow the rendered set until the table actually overflows (so a scrollbar exists) */
+  while(state.renderLimit < total && wrap.scrollHeight <= wrap.clientHeight + 8 && guard < 400){
+    state.renderLimit = Math.min(total, state.renderLimit + 50);
+    render();
+    guard++;
+  }
+  _inFill = false;
+}
 (function(){
   const wrap = document.getElementById("tableWrap");
   if(!wrap) return;
   wrap.addEventListener("scroll", () => {
-    if(wrap.scrollTop + wrap.clientHeight >= wrap.scrollHeight - 320){
+    if(wrap.scrollTop + wrap.clientHeight >= wrap.scrollHeight - 400){
       const total = state.tab==="people"
         ? PEOPLE.filter(matchesPerson).length
         : COMPANIES.filter(matchesCompany).length;
       if(state.renderLimit < total){
-        state.renderLimit += 50;
+        state.renderLimit = Math.min(total, state.renderLimit + 50);
         render();
       }
     }
   });
+  /* re-fill when the window resizes (viewport height changes) */
+  window.addEventListener("resize", () => { if(typeof ensureFill === "function") ensureFill(); });
 })();
 </script>
 
