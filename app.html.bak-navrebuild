@@ -435,22 +435,6 @@ input{font-family:inherit}
 .fopt input:checked + .cbox{background:var(--o);border-color:var(--o);box-shadow:0 0 10px var(--o-glow)}
 .fopt input:checked + .cbox svg{opacity:1}
 
-/* hierarchical location tree (Canada / United States -> states) */
-.loc-country{border-top:1px solid var(--hair-2)}
-.loc-country:first-child{border-top:none}
-.loc-country-head{
-  width:100%;display:flex;align-items:center;gap:8px;
-  padding:10px 2px;font-size:12px;font-weight:700;color:var(--ice);transition:.12s;
-}
-.loc-country-head:hover{color:var(--o)}
-.loc-country-head .loc-chev{
-  width:13px;height:13px;color:var(--dim);transition:transform .2s var(--ease);flex-shrink:0;
-}
-.loc-country.open .loc-country-head .loc-chev{transform:rotate(90deg);color:var(--o)}
-.loc-country-head .loc-flag{margin-left:auto;font-size:10.5px;color:var(--dim);font-family:var(--mono);font-weight:600}
-.loc-states{display:none;padding:2px 0 8px 16px}
-.loc-country.open .loc-states{display:block}
-
 /* ============ MAIN ============ */
 .main{display:flex;flex-direction:column;overflow:hidden;background:var(--black)}
 
@@ -702,12 +686,6 @@ th.sortable:hover{color:var(--o)}
 th.sortable .arrow{font-size:9px;margin-left:4px;opacity:.3}
 th.sortable.sorted{color:var(--o);text-shadow:0 0 10px var(--o-glow)}
 th.sortable.sorted .arrow{opacity:1}
-
-/* infinite-scroll "loading more" sentinel */
-.scroll-sentinel{
-  padding:16px;text-align:center;font-size:11px;font-family:var(--mono);
-  color:var(--dim);letter-spacing:.04em;
-}
 
 /* ============ CONTACT DRAWER ============ */
 .drawer-overlay{
@@ -1756,8 +1734,8 @@ function fallback(text, cb){
   <main class="main">
     <div class="topbar">
       <div class="tabs">
-        <button class="tab active" data-tab="people">People<span class="pill" id="peoplePill" style="display:none">0</span></button>
-        <button class="tab" data-tab="companies">Companies<span class="pill" id="compPill" style="display:none">0</span></button>
+        <button class="tab active" data-tab="people">People <span class="pill" id="peoplePill">0</span></button>
+        <button class="tab" data-tab="companies">Companies <span class="pill" id="compPill">0</span></button>
       </div>
       <div class="gsearch">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
@@ -1806,7 +1784,7 @@ function fallback(text, cb){
     <div class="view view-search active" id="view-search">
     <div class="toolbar">
       <div>
-        <div class="results-n" style="display:none"><span id="resultCount">0</span></div>
+        <div class="results-n"><span id="resultCount">0</span> results</div>
         <div class="selected-n" id="selectedN"></div>
       </div>
       <div class="right">
@@ -1897,6 +1875,11 @@ function fallback(text, cb){
     </div>
 
     <div class="table-wrap" id="tableWrap"></div>
+
+    <div class="pager">
+      <span id="pagerInfo">—</span>
+      <div class="btns" id="pagerBtns"></div>
+    </div>
     </div><!-- /view-search -->
 
     <!-- HOME / ONBOARDING VIEW -->
@@ -2026,7 +2009,9 @@ PEOPLE.forEach(p => { p.id = p.e; p.eDomain = p.e.split("@")[1]; });
 /* ================= FILTER CONFIG ================= */
 const FILTERS = [
   {key:"title",label:"Job Title",opts:["Owner","President / CEO","Operations","Office Manager","Sales"]},
-  {key:"industry",label:"Industry",opts:["HVAC","Plumbing","Roofing","Electrical","Construction","Landscaping","Dental","Legal","Medical","Painting","Cleaning","Restaurants","Hauling","Other"]},
+  {key:"industry",label:"Industry",opts:["Plumbing","HVAC","Roofing","Electrical","Construction","Landscaping"]},
+  {key:"region",label:"Location",opts:["Canada","US — West","US — Southwest","US — Midwest","US — South","US — Northeast"]},
+  {key:"size",label:"Company Size",opts:["1–10 employees","11–50 employees","51–200 employees"]},
 ];
 const TITLE_MAP = {
   "Owner":["Owner"],
@@ -2035,19 +2020,24 @@ const TITLE_MAP = {
   "Office Manager":["Office Manager","Office Administrator"],
   "Sales":["Director of Sales","VP Sales"],
 };
-const CA_PROVINCES = [["AB","Alberta"],["BC","British Columbia"],["MB","Manitoba"],["NB","New Brunswick"],["NL","Newfoundland & Labrador"],["NS","Nova Scotia"],["NT","Northwest Territories"],["NU","Nunavut"],["ON","Ontario"],["PE","Prince Edward Island"],["QC","Quebec"],["SK","Saskatchewan"],["YT","Yukon"]];
-const US_STATES = [["AL","Alabama"],["AK","Alaska"],["AZ","Arizona"],["AR","Arkansas"],["CA","California"],["CO","Colorado"],["CT","Connecticut"],["DE","Delaware"],["FL","Florida"],["GA","Georgia"],["HI","Hawaii"],["ID","Idaho"],["IL","Illinois"],["IN","Indiana"],["IA","Iowa"],["KS","Kansas"],["KY","Kentucky"],["LA","Louisiana"],["ME","Maine"],["MD","Maryland"],["MA","Massachusetts"],["MI","Michigan"],["MN","Minnesota"],["MS","Mississippi"],["MO","Missouri"],["MT","Montana"],["NE","Nebraska"],["NV","Nevada"],["NH","New Hampshire"],["NJ","New Jersey"],["NM","New Mexico"],["NY","New York"],["NC","North Carolina"],["ND","North Dakota"],["OH","Ohio"],["OK","Oklahoma"],["OR","Oregon"],["PA","Pennsylvania"],["RI","Rhode Island"],["SC","South Carolina"],["SD","South Dakota"],["TN","Tennessee"],["TX","Texas"],["UT","Utah"],["VT","Vermont"],["VA","Virginia"],["WA","Washington"],["WV","West Virginia"],["WI","Wisconsin"],["WY","Wyoming"]];
+const REGION_MAP = {
+  "Canada":["AB","SK","MB","BC","ON","NS","QC"],
+  "US — West":["CA","WA","OR","NV","CO","UT"],
+  "US — Southwest":["AZ","TX","NM","OK"],
+  "US — Midwest":["IL","MN","MO","OH","MI","WI","IN","KS"],
+  "US — South":["FL","GA","NC","TN","SC","LA","AL"],
+  "US — Northeast":["NY","MA","PA","NJ","CT"],
+};
 
 /* ================= STATE ================= */
 let state = {
   tab:"people",
   search:"",
-  filters:{title:new Set(),industry:new Set(),region:new Set()},
+  filters:{title:new Set(),industry:new Set(),region:new Set(),size:new Set()},
   checked:new Set(),
   revealed:new Set(),
   credits:187,
   page:1,
-  renderLimit:50,
   sort:{key:null,dir:1},
   drawerId:null,
   emailsGenerated:0,
@@ -2114,8 +2104,8 @@ document.addEventListener("click", e=>{
 /* ================= FILTER PANEL RENDER ================= */
 function buildFilters(){
   const wrap = document.getElementById("filterGroups");
-  let html = FILTERS.map((g,gi)=>`
-    <div class="fgroup open" id="fg-${g.key}">
+  wrap.innerHTML = FILTERS.map((g,gi)=>`
+    <div class="fgroup ${gi<2?"open":""}" id="fg-${g.key}">
       <button class="fgroup-head" onclick="this.parentElement.classList.toggle('open')">
         ${g.label}
         <span class="count" id="fc-${g.key}">0</span>
@@ -2130,46 +2120,6 @@ function buildFilters(){
           </label>`).join("")}
       </div>
     </div>`).join("");
-  html += locationTreeHTML();
-  wrap.innerHTML = html;
-}
-function locationTreeHTML(){
-  const cb = (code,name)=>`
-    <label class="fopt">
-      <input type="checkbox" data-group="region" value="${code}" onchange="toggleFilter(this)">
-      <span class="cbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg></span>
-      ${name}
-    </label>`;
-  const ca = CA_PROVINCES.map(([c,n])=>cb(c,n)).join("");
-  const us = US_STATES.map(([c,n])=>cb(c,n)).join("");
-  return `
-    <div class="fgroup open" id="fg-region">
-      <button class="fgroup-head" onclick="this.parentElement.classList.toggle('open')">
-        Location
-        <span class="count" id="fc-region">0</span>
-        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
-      </button>
-      <div class="fgroup-body">
-        <div class="loc-country open" id="loc-ca">
-          <button class="loc-country-head" onclick="toggleCountry('loc-ca')">
-            <svg class="loc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
-            Canada<span class="loc-flag">CA</span>
-          </button>
-          <div class="loc-states">${ca}</div>
-        </div>
-        <div class="loc-country" id="loc-us">
-          <button class="loc-country-head" onclick="toggleCountry('loc-us')">
-            <svg class="loc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
-            United States<span class="loc-flag">US</span>
-          </button>
-          <div class="loc-states">${us}</div>
-        </div>
-      </div>
-    </div>`;
-}
-function toggleCountry(id){
-  const el = document.getElementById(id);
-  if(el) el.classList.toggle("open");
 }
 function toggleFilter(el){
   const s = state.filters[el.dataset.group];
@@ -2178,16 +2128,13 @@ function toggleFilter(el){
   badge.textContent = s.size;
   badge.classList.toggle("show", s.size>0);
   state.page = 1;
-  state.renderLimit = 50;
   render();
 }
 function clearFilters(){
   Object.values(state.filters).forEach(s=>s.clear());
   document.querySelectorAll('.fopt input').forEach(i=>i.checked=false);
   document.querySelectorAll('.count').forEach(b=>{b.textContent="0";b.classList.remove("show")});
-  document.querySelectorAll('.loc-country').forEach((el,idx)=>el.classList.toggle('open', idx===0));
   state.page = 1;
-  state.renderLimit = 50;
   render();
 }
 
@@ -2203,7 +2150,20 @@ function matchesPerson(p){
     if(!ok) return false;
   }
   if(f.industry.size && !f.industry.has(pi)) return false;
-  if(f.region.size && !f.region.has(provOf(pl))) return false;
+  if(f.region.size){
+    let ok=false;
+    f.region.forEach(r=>{ if(REGION_MAP[r].includes(provOf(pl))) ok=true; });
+    if(!ok) return false;
+  }
+  if(f.size.size){
+    let ok=false;
+    f.size.forEach(s=>{
+      if(s.startsWith("1–10")&&p.ce<=10) ok=true;
+      if(s.startsWith("11–50")&&p.ce>=11&&p.ce<=50) ok=true;
+      if(s.startsWith("51–200")&&p.ce>=51) ok=true;
+    });
+    if(!ok) return false;
+  }
   if(state.search){
     const q = state.search.toLowerCase();
     if(!(pn+pt+pc+pl+pi).toLowerCase().includes(q)) return false;
@@ -2214,7 +2174,20 @@ function matchesCompany(co){
   const f = state.filters;
   const cc = co.c || "", cl = co.l || "", ci = co.i || "";
   if(f.industry.size && !f.industry.has(ci)) return false;
-  if(f.region.size && !f.region.has(provOf(cl))) return false;
+  if(f.region.size){
+    let ok=false;
+    f.region.forEach(r=>{ if(REGION_MAP[r].includes(provOf(cl))) ok=true; });
+    if(!ok) return false;
+  }
+  if(f.size.size){
+    let ok=false;
+    f.size.forEach(s=>{
+      if(s.startsWith("1–10")&&co.ce<=10) ok=true;
+      if(s.startsWith("11–50")&&co.ce>=11&&co.ce<=50) ok=true;
+      if(s.startsWith("51–200")&&co.ce>=51) ok=true;
+    });
+    if(!ok) return false;
+  }
   if(state.search){
     const q = state.search.toLowerCase();
     if(!(cc+cl+ci).toLowerCase().includes(q)) return false;
@@ -2243,7 +2216,10 @@ function render(){
   sel.textContent = state.checked.size + " selected";
   sel.classList.toggle("show", state.checked.size>0);
 
-  const pageRows = rows.slice(0, state.renderLimit);
+  const pages = Math.max(1, Math.ceil(rows.length/PER_PAGE));
+  if(state.page>pages) state.page = pages;
+  const start = (state.page-1)*PER_PAGE;
+  const pageRows = rows.slice(start, start+PER_PAGE);
 
   const wrap = document.getElementById("tableWrap");
   if(!rows.length){
@@ -2304,13 +2280,11 @@ function render(){
     </table>`;
   }
 
-  /* infinite scroll — sentinel shows how many of the total are loaded */
-  if(rows.length > pageRows.length){
-    const sent = document.createElement("div");
-    sent.className = "scroll-sentinel";
-    sent.textContent = `Showing ${pageRows.length.toLocaleString()} of ${rows.length.toLocaleString()} — scroll for more`;
-    wrap.appendChild(sent);
-  }
+  /* pager */
+  document.getElementById("pagerInfo").textContent =
+    rows.length ? `Showing ${start+1}–${Math.min(start+PER_PAGE,rows.length)} of ${rows.length.toLocaleString()}` : "0 results";
+  const btns = document.getElementById("pagerBtns");
+  btns.innerHTML = buildPagerHTML(state.page, pages);
   syncBannerCredits();
 }
 
@@ -2384,7 +2358,7 @@ function toggleRow(id, el){
   render();
 }
 function toggleAll(el){
-  const visible = PEOPLE.filter(matchesPerson).slice(0, state.renderLimit);
+  const visible = PEOPLE.filter(matchesPerson).slice((state.page-1)*PER_PAGE, state.page*PER_PAGE);
   visible.forEach(p=> el.checked ? state.checked.add(p.id) : state.checked.delete(p.id));
   render();
 }
@@ -2414,7 +2388,6 @@ function setSort(key){
   const s = state.sort;
   if(s.key===key){ s.dir = -s.dir; } else { s.key = key; s.dir = 1; }
   state.page = 1;
-  state.renderLimit = 50;
   render();
 }
 function sortRows(rows){
@@ -3042,7 +3015,6 @@ document.querySelectorAll(".tab").forEach(t=>{
     t.classList.add("active");
     state.tab = t.dataset.tab;
     state.page = 1;
-    state.renderLimit = 50;
     render();
   });
 });
@@ -3050,7 +3022,6 @@ let searchLogTimer = null;
 document.getElementById("globalSearch").addEventListener("input",e=>{
   state.search = e.target.value.trim();
   state.page = 1;
-  state.renderLimit = 50;
   render();
   /* debounced activity log — only log meaningful searches after 800ms of inactivity */
   clearTimeout(searchLogTimer);
@@ -3288,11 +3259,6 @@ function renderEnrich(){
     drywall:["Drywall"],
     excavation:["Excavation","Excavating"],
     "auto repair":["Auto Repair","Mechanic","Automotive","Auto Body","Garage"],
-    dental:["Dental","Dentist","Dentistry","Orthodontic","Orthodontist"],
-    legal:["Legal","Law","Lawyer","Lawyers","Attorney","Law Firm"],
-    medical:["Medical","Doctor","Doctors","Clinic","Physician","Health","Healthcare"],
-    restaurants:["Restaurants","Restaurant","Food","Dining","Cafe","Catering"],
-    hauling:["Hauling","Junk Removal","Haul","Junk"],
 
     /* Umbrella categories — these expand to ALL related industries */
     trades:["HVAC","Heating","Cooling","Air Conditioning","Plumbing","Plumber","Roofing","Roofer","Electrical","Electrician","Landscaping","Lawn","Construction","Building","Builders","General Contractor","Contracting","Painting","Painter","Carpentry","Carpenter","Flooring","Concrete","Masonry","Drywall","Excavation","Property Maintenance"],
@@ -4119,23 +4085,6 @@ document.addEventListener("keydown", e=>{
 
 buildFilters();
 render();
-
-/* ===== infinite scroll: load more rows as the table scrolls ===== */
-(function(){
-  const wrap = document.getElementById("tableWrap");
-  if(!wrap) return;
-  wrap.addEventListener("scroll", () => {
-    if(wrap.scrollTop + wrap.clientHeight >= wrap.scrollHeight - 320){
-      const total = state.tab==="people"
-        ? PEOPLE.filter(matchesPerson).length
-        : COMPANIES.filter(matchesCompany).length;
-      if(state.renderLimit < total){
-        state.renderLimit += 50;
-        render();
-      }
-    }
-  });
-})();
 </script>
 
 <script type="module">
@@ -4235,7 +4184,7 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 /* ── real contact database ──────────────────────────────── */
-const MAX_LOAD = 12000;   /* client-side filtering is instant at this size;
+const MAX_LOAD = 5000;   /* client-side filtering is instant at this size;
                             past ~5k contacts, move filters to Firestore queries */
 let realMode = false;
 
