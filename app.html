@@ -3341,25 +3341,30 @@ function renderEnrich(){
     return filters;
   }
 
-  function searchPeople(filters){
-    return PEOPLE.filter(p => {
-      const pi = (p.i || "").toLowerCase();
-      const pt = (p.t || "").toLowerCase();
-      const pl = (p.l || "").toLowerCase();
-      if(filters.industries.length && !filters.industries.some(ind => pi.includes(ind.toLowerCase()))) return false;
-      if(filters.roles.length && !filters.roles.some(r => pt.includes(r.toLowerCase()))) return false;
+function searchPeople(filters){
+    const matchRecord = (r, isCompany) => {
+      const ri = (r.i || "").toLowerCase();
+      const rt = (r.t || "").toLowerCase();
+      const rl = (r.l || "").toLowerCase();
+      if(filters.industries.length && !filters.industries.some(ind => ri.includes(ind.toLowerCase()))) return false;
+      /* roles only apply to people (companies have no title) — skip role filter for companies */
+      if(!isCompany && filters.roles.length && !filters.roles.some(role => rt.includes(role.toLowerCase()))) return false;
       if(filters.locations.length){
-        const ploc = (p.l || "").split(",").map(s=>s.trim());
-        const pState = ploc[ploc.length-1];
-        if(!filters.locations.includes(pState)) return false;
+        const loc = (r.l || "").split(",").map(s=>s.trim());
+        const state = loc[loc.length-1];
+        if(!filters.locations.includes(state)) return false;
       }
       if(filters.cities.length){
-        if(!filters.cities.some(city => pl.includes(city.toLowerCase()))) return false;
+        if(!filters.cities.some(city => rl.includes(city.toLowerCase()))) return false;
       }
-      if(filters.maxEmp && p.ce > filters.maxEmp) return false;
-      if(filters.minEmp && p.ce < filters.minEmp) return false;
+      if(filters.maxEmp && r.ce > filters.maxEmp) return false;
+      if(filters.minEmp && r.ce < filters.minEmp) return false;
       return true;
-    });
+    };
+    const people = PEOPLE.filter(p => matchRecord(p, false));
+    /* if a role was explicitly requested, only people can satisfy it — skip companies */
+    const comps = filters.roles.length ? [] : COMPANIES.filter(c => matchRecord(c, true));
+    return [...people, ...comps];
   }
 
   function renderFilters(filters){
