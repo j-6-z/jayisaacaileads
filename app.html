@@ -1785,10 +1785,10 @@ function fallback(text, cb){
           <div class="rail-avatar" id="railAvatar" title="Account" onclick="toggleAvatarMenu(event)">JT</div>
           <div class="avatar-menu" id="avatarMenu">
             <div class="am-head">
-              <div class="am-avatar">JT</div>
+              <div class="am-avatar" id="amAvatar">JT</div>
               <div class="am-id">
-                <div class="am-name">JT Turner</div>
-                <div class="am-email">jayt@jayisaacai.com</div>
+                <div class="am-name" id="amName">Account</div>
+                <div class="am-email" id="amEmail"></div>
               </div>
             </div>
             <div class="am-credits"><span>Credits</span><strong id="amCredits">187</strong></div>
@@ -4055,8 +4055,8 @@ function renderSettings(){
       <!-- Account -->
       <div class="set-card">
         <div class="set-card-head"><h3>Account</h3></div>
-        <div class="set-row"><span class="set-k">Name</span><input class="set-input" value="JT Turner" id="setName"></div>
-        <div class="set-row"><span class="set-k">Email</span><input class="set-input" value="jayt@jayisaacai.com" id="setEmail"></div>
+        <div class="set-row"><span class="set-k">Name</span><input class="set-input" value="${(window.__profile&&window.__profile.name)||''}" id="setName"></div>
+        <div class="set-row"><span class="set-k">Email</span><input class="set-input" value="${(window.__profile&&window.__profile.email)||''}" id="setEmail"></div>
         <div class="set-row"><span class="set-k">Company</span><input class="set-input" value="JAYISAAC AI" id="setCompany"></div>
         <div class="set-actions"><button class="set-save" onclick="toast('Account details saved')">Save changes</button></div>
       </div>
@@ -4099,7 +4099,7 @@ function renderSettings(){
       <!-- Danger / session -->
       <div class="set-card">
         <div class="set-card-head"><h3>Session</h3></div>
-        <p class="set-note">Signed in as <strong>jayt@jayisaacai.com</strong>.</p>
+        <p class="set-note">Signed in as <strong>${(window.__profile&&window.__profile.email)||'your account'}</strong>.</p>
         <div class="set-actions">
           <button class="set-ghost" onclick="if(window.__signOut)window.__signOut();else toast('Dev mode — sign-out disabled')">Sign out</button>
         </div>
@@ -4293,10 +4293,17 @@ onAuthStateChanged(auth, async (user) => {
   if (DEV_BYPASS) return;   /* ← dev bypass: never run the auth gate */
   if (!user) { clearTimeout(veilFallback); location.replace("login.html"); return; }
 
-  /* avatar initials from profile */
+  /* avatar initials + real identity from the signed-in user */
   const label = user.displayName || user.email || "U";
   const initials = label.split(/[\s@.]+/).filter(Boolean).slice(0,2).map(w=>w[0].toUpperCase()).join("");
+  const niceName = user.displayName || (user.email ? user.email.split("@")[0] : "Account");
+  window.__profile = { name: user.displayName || "", email: user.email || "" };
   document.getElementById("railAvatar").textContent = initials;
+  const _amAvatar = document.getElementById("amAvatar"); if (_amAvatar) _amAvatar.textContent = initials;
+  const _amName = document.getElementById("amName"); if (_amName) _amName.textContent = niceName;
+  const _amEmail = document.getElementById("amEmail"); if (_amEmail) _amEmail.textContent = user.email || "";
+  const _setName = document.getElementById("setName"); if (_setName) _setName.value = user.displayName || "";
+  const _setEmail = document.getElementById("setEmail"); if (_setEmail) _setEmail.value = user.email || "";
 
   /* load or create user doc */
   userRef = doc(db, "users", user.uid);
@@ -4322,12 +4329,16 @@ onAuthStateChanged(auth, async (user) => {
   }
 
   document.getElementById("creditCount").textContent = state.credits;
-  await loadContacts(user);
-  /* sync activity log from Firestore in background — don't await, never block UI */
-  loadActivityFromFirestore();
+
+  /* Show the app shell and drop the veil the moment auth + the user doc are ready.
+     The contact database is heavy (up to 8k+8k docs) and must NOT block first paint. */
   render();
   clearTimeout(veilFallback);   /* ← auth completed, cancel the timeout */
   document.getElementById("authVeil").classList.add("hide");
+
+  /* Heavy lifting runs in the background; each re-renders when its data lands. */
+  loadContacts(user);
+  loadActivityFromFirestore();
 });
 
 /* ── real contact database ──────────────────────────────── */
@@ -4390,6 +4401,7 @@ async function loadContacts(user){
 
     /* hydrate contacts this user already paid for */
     await hydrateRevealed();
+    render();   /* live data is in — repaint the table/results */
     toast(PEOPLE.length.toLocaleString() + " people · " + COMPANIES.length.toLocaleString() + " companies loaded");
   } catch (e) {
     console.error("Contact load failed:", e);
