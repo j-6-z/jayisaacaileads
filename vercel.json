@@ -1,4 +1,20 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "",
+  "outputDirectory": ".",
+  "functions": {
+    "api/stripe-webhook.js": {
+      "maxDuration": 30
+    }
+  },
+  "headers": [
+    {
+      "source": "/api/stripe-webhook",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    }
+  ],
   "crons": [
     {
       "path": "/api/cron/generate-article",
