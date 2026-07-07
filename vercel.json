@@ -1,18 +1,13 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "",
-  "outputDirectory": ".",
-  "functions": {
-    "api/stripe-webhook.js": {
-      "maxDuration": 30
-    }
-  },
-  "headers": [
+  "crons": [
     {
-      "source": "/api/stripe-webhook",
-      "headers": [
-        { "key": "Cache-Control", "value": "no-store" }
-      ]
+      "path": "/api/cron/generate-article",
+      "schedule": "0 13 * * *"
     }
+  ],
+  "rewrites": [
+    { "source": "/blog", "destination": "/api/blog" },
+    { "source": "/blog/:slug", "destination": "/api/blog/:slug" },
+    { "source": "/sitemap.xml", "destination": "/api/sitemap.xml" }
   ]
 }
