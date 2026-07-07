@@ -5,6 +5,9 @@
   "functions": {
     "api/stripe-webhook.js": {
       "maxDuration": 30
+    },
+    "api/cron/generate-article.js": {
+      "maxDuration": 60
     }
   },
   "headers": [
