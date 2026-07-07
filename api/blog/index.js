@@ -1,9 +1,7 @@
 // api/blog/index.js
-// Server-rendered list of all published posts, mapped to /blog via vercel.json.
+import { getFirebaseAdmin } from '../../lib/firebaseAdmin.js';
 
-const { getFirebaseAdmin } = require('../../lib/firebaseAdmin');
-
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   try {
     const admin = getFirebaseAdmin();
     const db = admin.firestore();
@@ -47,4 +45,4 @@ module.exports = async (req, res) => {
     console.error(err);
     res.status(500).send('<h1>Something went wrong</h1>');
   }
-};
+}

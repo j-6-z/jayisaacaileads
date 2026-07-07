@@ -1,10 +1,5 @@
 // api/blog/[slug].js
-// Renders a single blog post as real server-side HTML so Google and AI
-// crawlers (ChatGPT, Perplexity, etc.) see full content, not a JS shell.
-// Vercel route: /api/blog/some-post-slug  -> map this to /blog/[slug] via
-// a rewrite in vercel.json so it appears as a normal URL.
-
-const { getFirebaseAdmin } = require('../../lib/firebaseAdmin');
+import { getFirebaseAdmin } from '../../lib/firebaseAdmin.js';
 
 function escapeHtml(str = '') {
   return str
@@ -84,7 +79,7 @@ function renderPage(post) {
 </html>`;
 }
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   const { slug } = req.query;
 
   try {
@@ -99,12 +94,10 @@ module.exports = async (req, res) => {
 
     const post = doc.data();
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    // Cache at the edge for an hour, revalidate in background — keeps
-    // crawl-cost low without needing a full rebuild per post.
     res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate=86400');
     res.status(200).send(renderPage(post));
   } catch (err) {
     console.error(err);
     res.status(500).send('<h1>Something went wrong</h1>');
   }
-};
+}

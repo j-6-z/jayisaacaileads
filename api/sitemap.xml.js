@@ -1,10 +1,7 @@
 // api/sitemap.xml.js
-// Auto-updating sitemap. Submit this URL once in Google Search Console:
-// https://jayisaacai.com/sitemap.xml
+import { getFirebaseAdmin } from '../lib/firebaseAdmin.js';
 
-const { getFirebaseAdmin } = require('../lib/firebaseAdmin');
-
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   try {
     const admin = getFirebaseAdmin();
     const db = admin.firestore();
@@ -27,4 +24,4 @@ module.exports = async (req, res) => {
     console.error(err);
     res.status(500).send('Error generating sitemap');
   }
-};
+}
