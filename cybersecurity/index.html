@@ -12,8 +12,7 @@
 <link rel="manifest" href="/my-favicon/site.webmanifest">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="JAYISAAC AI is one platform with three AI products: Lead Generation, Chief of Staff, and Cybersecurity. Built in Canada. Powered by Claude." />
-  <title>JAYISAAC AI — Sell, Run &amp; Defend Your Business with AI</title>
+  <title>AI Cybersecurity — JAYISAAC AI</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <script type="module" src="/nav.js"></script>
   <script type="module" src="/footer.js"></script>
@@ -953,48 +952,25 @@
   </style>
 </head>
 <body>
-<!-- hub-specific tweaks: 3-up product grid + cyan (cyber) accent -->
-<style>
-  .prod-grid { grid-template-columns: repeat(3, 1fr) !important; }
-  @media(max-width:1000px){ .prod-grid { grid-template-columns: 1fr !important; } }
-  .ai-card-cyber:hover { border-color: rgba(34,211,238,.4); box-shadow: 0 20px 50px rgba(34,211,238,.16); }
-  .ai-card-glow.ai-glow-cyber { background: radial-gradient(circle, rgba(34,211,238,.32), transparent 70%); }
-  .ai-icon-cyber { background: linear-gradient(135deg,#67E8F9,#22D3EE,#0891B2); box-shadow: 0 8px 20px rgba(34,211,238,.35); }
-  .ai-tag-cyber { color: #22D3EE; }
-  .ai-chip-cyber { background: rgba(34,211,238,.15); border: 1px solid rgba(34,211,238,.3); color: #A5F3FC; }
-  .ai-card-cyber .ai-card-features li::before { background: #22D3EE; box-shadow: 0 0 8px #22D3EE; }
-  .ai-cta-cyber { background: linear-gradient(135deg,#67E8F9,#0891B2); color: #052E33; box-shadow: 0 8px 24px rgba(34,211,238,.3); }
-  .ai-cta-cyber:hover { box-shadow: 0 12px 32px rgba(34,211,238,.5); }
-  .prod-card-cta-row { margin-top:auto; }
-  /* who-we-are value grid */
-  .who-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:#E5E7EB; border:1px solid #E5E7EB; border-radius:18px; overflow:hidden; margin-top:2.5rem; }
-  @media(max-width:900px){ .who-grid{ grid-template-columns:1fr 1fr; } }
-  @media(max-width:560px){ .who-grid{ grid-template-columns:1fr; } }
-  .who-cell { background:#fff; padding:1.8rem 1.6rem; }
-  .who-cell .ic { width:42px; height:42px; border-radius:11px; background:var(--ordim); border:1px solid var(--ore); display:flex; align-items:center; justify-content:center; margin-bottom:1rem; }
-  .who-cell .ic svg { width:19px; height:19px; stroke:var(--or); fill:none; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
-  .who-cell b { display:block; font-size:.98rem; font-weight:800; color:#111827; margin-bottom:.3rem; }
-  .who-cell p { font-size:.82rem; color:#6B7280; line-height:1.6; }
-</style>
 
 <!-- ═══ HERO ═══ -->
 <section class="hero">
   <canvas id="heroCanvas"></canvas>
-  <div class="hero-eyebrow"><span class="hero-dot"></span>One Platform · Three AI Products</div>
-  <h1>AI that sells, runs,<br><span class="g">and defends your business.</span></h1>
-  <p class="hero-sub">JAYISAAC AI is three products on one platform — find your next customer, run your operations, and lock down your security. Built in Canada. Powered by Claude.</p>
+  <div class="hero-eyebrow"><span class="hero-dot"></span>AI Cybersecurity</div>
+  <h1>[ AI Cybersecurity headline ]<br><span class="g">[ gradient subhead ]</span></h1>
+  <p class="hero-sub">[ One or two sentence subheadline for AI Cybersecurity. Fill in. ]</p>
 
   <div class="hero-btns">
     <a class="hero-btn-primary" href="/login.html">Start Free Trial &rarr;</a>
-    <a class="hero-btn-ghost" href="#products">Explore Products</a>
+    <a class="hero-btn-ghost" href="/contact.html">Talk to Sales</a>
   </div>
 
   <div class="trust-section">
     <div class="trust-pill-row">
       <span class="trust-pill">Built in Canada</span>
-      <span class="trust-pill">One login, all three products</span>
-      <span class="trust-pill">Flat pricing</span>
-      <span class="trust-pill">Powered by Claude</span>
+      <span class="trust-pill">[ Trust point ]</span>
+      <span class="trust-pill">[ Trust point ]</span>
+      <span class="trust-pill">[ Trust point ]</span>
     </div>
   </div>
 
@@ -1005,374 +981,457 @@
     <div class="compliance-badge"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>SOC 2 Framework</div>
     <div class="compliance-badge"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>99.9% Uptime</div>
   </div>
+
+  <div class="hero-app-wrap">
+    <div class="hero-app">
+      <div class="app-topbar">
+        <div class="app-dots"><div class="app-dot"></div><div class="app-dot"></div><div class="app-dot"></div></div>
+        <div class="app-url">app.jayisaacai.com/security</div>
+      </div>
+      <div class="app-body">
+        <div class="app-nav">
+          <div class="app-nav-sec">Monitor</div>
+          <div class="app-nav-item on"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Threats</div>
+          <div class="app-nav-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Alerts</div>
+          <div class="app-nav-sec">Respond</div>
+          <div class="app-nav-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Playbooks</div>
+          <div class="app-nav-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81"/></svg>Incidents</div>
+          <div class="app-nav-sec">Analyze</div>
+          <div class="app-nav-item"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Risk Score</div>
+          <div class="app-nav-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Scans</div>
+        </div>
+        <div class="app-main">
+          <div class="app-search-row">
+            <input class="app-search-in" type="text" value="[ example query — fill in ]" readonly />
+            <button class="app-search-go">Go</button>
+          </div>
+          <div class="app-chips">
+            <span class="app-chip on">[ filter ]</span>
+            <span class="app-chip on">[ filter ]</span>
+            <span class="app-chip on">[ filter ]</span>
+            <span class="app-chip">[ filter ]</span>
+          </div>
+          <div class="app-thead"><div></div><div class="app-th">[ Col ]</div><div class="app-th">[ Col ]</div><div class="app-th">[ Col ]</div><div class="app-th">Actions</div></div>
+          <div class="app-row"><div class="app-av">AB</div><div><div class="app-nm">[ Name ]</div><div class="app-sm">[ detail ]</div></div><div><div class="app-nm">[ Item ]</div><div class="app-sm">[ detail ]</div></div><div><div class="app-intent-hi">High</div></div><div class="app-acts"><div class="app-act"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="app-act"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81"/></svg></div></div></div>
+          <div class="app-row"><div class="app-av">CD</div><div><div class="app-nm">[ Name ]</div><div class="app-sm">[ detail ]</div></div><div><div class="app-nm">[ Item ]</div><div class="app-sm">[ detail ]</div></div><div><div class="app-intent-hi">High</div></div><div class="app-acts"><div class="app-act"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="app-act"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81"/></svg></div></div></div>
+          <div class="app-row"><div class="app-av">EF</div><div><div class="app-nm">[ Name ]</div><div class="app-sm">[ detail ]</div></div><div><div class="app-nm">[ Item ]</div><div class="app-sm">[ detail ]</div></div><div><div class="app-intent-hi">High</div></div><div class="app-acts"><div class="app-act"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="app-act"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81"/></svg></div></div></div>
+          <div class="app-row"><div class="app-av">GH</div><div><div class="app-nm">[ Name ]</div><div class="app-sm">[ detail ]</div></div><div><div class="app-nm">[ Item ]</div><div class="app-sm">[ detail ]</div></div><div><div class="app-intent-hi">High</div></div><div class="app-acts"><div class="app-act"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="app-act"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81"/></svg></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ═══ STATS ═══ -->
 <div class="stats-band">
   <div class="stats-inner">
-    <div class="stat-item"><span class="stat-num">3<span></span></span><span class="stat-label">AI Products</span></div>
-    <div class="stat-item"><span class="stat-num">1<span></span></span><span class="stat-label">Login &amp; One Bill</span></div>
-    <div class="stat-item"><span class="stat-num">24/7<span></span></span><span class="stat-label">Always Working</span></div>
-    <div class="stat-item"><span class="stat-num">🍁<span></span></span><span class="stat-label">Built in Canada</span></div>
+    <div class="stat-item"><span class="stat-num">—<span></span></span><span class="stat-label">[ Stat label ]</span></div>
+    <div class="stat-item"><span class="stat-num">—<span></span></span><span class="stat-label">[ Stat label ]</span></div>
+    <div class="stat-item"><span class="stat-num">—<span></span></span><span class="stat-label">[ Stat label ]</span></div>
+    <div class="stat-item"><span class="stat-num">—<span></span></span><span class="stat-label">[ Stat label ]</span></div>
   </div>
 </div>
 
-<!-- ═══ THREE PRODUCTS ═══ -->
-<section class="ai-showcase" id="products">
+<!-- ═══ AI SHOWCASE ═══ -->
+<section class="ai-showcase">
   <div class="ai-showcase-bg"></div>
   <div class="ai-showcase-inner">
     <div class="ai-showcase-head">
-      <div class="ai-eyebrow"><span class="ai-eyebrow-pip"></span>The Platform</div>
-      <h2>Three products. <span class="ai-grad-text">One login, one bill.</span></h2>
-      <p class="ai-showcase-sub">Start with the one you need today — run all three when you're ready. Shared account, shared data, one flat platform.</p>
+      <div class="ai-eyebrow"><span class="ai-eyebrow-pip"></span>AI-Native Platform</div>
+      <h2>[ Two AI tools headline ] <span class="ai-grad-text">[ gradient bit ]</span> [ tail ].</h2>
+      <p class="ai-showcase-sub">Built into the platform, not bolted on. Powered by Claude.</p>
     </div>
+    <div class="ai-showcase-grid">
 
-    <div class="ai-showcase-grid prod-grid">
-
-      <!-- LEAD GENERATION -->
       <div class="ai-card ai-card-leads">
         <div class="ai-card-glow"></div>
         <div class="ai-card-header">
           <div class="ai-card-icon ai-icon-leads">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
           </div>
           <div class="ai-card-meta">
-            <div class="ai-card-tag ai-tag-leads">AI LEAD GENERATION</div>
-            <div class="ai-card-subtitle">Find your next customer</div>
+            <div class="ai-card-tag ai-tag-leads">AI DETECTION</div>
+            <div class="ai-card-subtitle">Real-time threats</div>
           </div>
         </div>
-        <h3>Find every decision-maker. Verified.</h3>
-        <p class="ai-card-desc">Natural-language prospect search, verified emails and direct dials, and AI-written cold outreach — the Apollo alternative built for North American teams.</p>
+        <h3>[ Card A headline — fill in. ]</h3>
+        <p class="ai-card-desc">[ Card A description. What this AI tool does and the outcome it drives. Fill in. ]</p>
         <div class="ai-demo ai-demo-leads">
-          <div class="ai-demo-label">YOU TYPE</div>
-          <div class="ai-demo-input"><span class="ai-demo-caret">›</span><span class="ai-demo-text">HVAC owners in Alberta under 20 staff</span></div>
+          <div class="ai-demo-label">EXAMPLE</div>
+          <div class="ai-demo-input"><span class="ai-demo-caret">›</span><span class="ai-demo-text">[ example input ]</span></div>
           <div class="ai-demo-arrow">↓</div>
-          <div class="ai-demo-chips"><span class="ai-chip ai-chip-leads">Verified emails</span><span class="ai-chip ai-chip-leads">Direct dials</span><span class="ai-chip ai-chip-leads">Instant export</span></div>
+          <div class="ai-demo-chips">
+            <span class="ai-chip ai-chip-leads">[ output ]</span>
+            <span class="ai-chip ai-chip-leads">[ output ]</span>
+            <span class="ai-chip ai-chip-leads">[ output ]</span>
+          </div>
         </div>
         <ul class="ai-card-features">
-          <li>Plain-English search across the full database</li>
-          <li>Verified emails + direct dials on every reveal</li>
-          <li>AI Email Writer that gets replies</li>
-          <li>Flat price — no per-seat fees</li>
+          <li>[ Feature — fill in ]</li>
+          <li>[ Feature — fill in ]</li>
+          <li>[ Feature — fill in ]</li>
+          <li>[ Feature — fill in ]</li>
         </ul>
-        <a class="ai-card-cta ai-cta-leads" href="/lead-generation/">Explore Lead Generation <span>→</span></a>
+        <a class="ai-card-cta ai-cta-leads" href="/login.html">[ CTA ] <span>→</span></a>
       </div>
 
-      <!-- CHIEF OF STAFF -->
       <div class="ai-card ai-card-email">
         <div class="ai-card-glow ai-glow-email"></div>
         <div class="ai-card-header">
           <div class="ai-card-icon ai-icon-email">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16v4H4z"/><path d="M4 12h10v8H4z"/><path d="M18 12h2v8h-2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
           </div>
           <div class="ai-card-meta">
-            <div class="ai-card-tag ai-tag-email">AI CHIEF OF STAFF</div>
-            <div class="ai-card-subtitle">Run the operation</div>
+            <div class="ai-card-tag ai-tag-email">AI RESPONSE</div>
+            <div class="ai-card-subtitle">Automated playbooks</div>
           </div>
         </div>
-        <h3>The operator you can't afford, on duty 24/7.</h3>
-        <p class="ai-card-desc">AI reads your inbox, calendar, and docs — then briefs you, preps your meetings, and chases the follow-ups you'd otherwise forget. No headcount required.</p>
+        <h3>[ Card B headline — fill in. ]</h3>
+        <p class="ai-card-desc">[ Card B description. What this AI tool does and the outcome it drives. Fill in. ]</p>
         <div class="ai-demo ai-demo-email">
-          <div class="ai-demo-label">YOUR MORNING BRIEF</div>
+          <div class="ai-demo-label">EXAMPLE</div>
           <div class="ai-email-preview">
-            <div class="ai-email-subject">3 things need you today</div>
+            <div class="ai-email-subject">[ example subject line ]</div>
             <div class="ai-email-divider"></div>
-            <div class="ai-email-body">Sign the Q3 contract (legal flagged 1 clause), prep for your 10am board sync (brief attached), and Dana's hiring reply is 5 days quiet — nudge drafted.</div>
-            <div class="ai-email-tone"><span>Ready 7:00am</span><span>90-sec read</span><span class="ai-credit">Auto</span></div>
+            <div class="ai-email-body">[ example body — fill in. ]</div>
+            <div class="ai-email-tone"><span>[ preset ]</span><span>[ preset ]</span><span class="ai-credit">[ meta ]</span></div>
           </div>
         </div>
         <ul class="ai-card-features">
-          <li>A prioritized morning brief, every day</li>
-          <li>Delegation tracking that never drops a thread</li>
-          <li>Meeting prep and notes, handled</li>
-          <li>Reports that draft themselves</li>
+          <li>[ Feature — fill in ]</li>
+          <li>[ Feature — fill in ]</li>
+          <li>[ Feature — fill in ]</li>
+          <li>[ Feature — fill in ]</li>
         </ul>
-        <a class="ai-card-cta ai-cta-email" href="/chief-of-staff/">Explore Chief of Staff <span>→</span></a>
-      </div>
-
-      <!-- CYBERSECURITY -->
-      <div class="ai-card ai-card-cyber">
-        <div class="ai-card-glow ai-glow-cyber"></div>
-        <div class="ai-card-header">
-          <div class="ai-card-icon ai-icon-cyber">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <div class="ai-card-meta">
-            <div class="ai-card-tag ai-tag-cyber">AI CYBERSECURITY</div>
-            <div class="ai-card-subtitle">Defend the business</div>
-          </div>
-        </div>
-        <h3>Threats caught before they land.</h3>
-        <p class="ai-card-desc">AI-driven detection, response, and posture monitoring that watches your stack around the clock and escalates only what actually needs a human.</p>
-        <div class="ai-demo ai-demo-leads" style="border-color:rgba(34,211,238,.18)">
-          <div class="ai-demo-label">LIVE MONITOR</div>
-          <div class="ai-demo-input"><span class="ai-demo-caret" style="color:#22D3EE">›</span><span class="ai-demo-text">Suspicious login blocked · 02:14 UTC</span></div>
-          <div class="ai-demo-arrow" style="color:#22D3EE">↓</div>
-          <div class="ai-demo-chips"><span class="ai-chip ai-chip-cyber">Auto-contained</span><span class="ai-chip ai-chip-cyber">Risk: Low</span><span class="ai-chip ai-chip-cyber">No action needed</span></div>
-        </div>
-        <ul class="ai-card-features">
-          <li>Real-time threat detection and alerting</li>
-          <li>Automated response playbooks</li>
-          <li>Vulnerability scans on a schedule</li>
-          <li>Always-current risk scoring</li>
-        </ul>
-        <a class="ai-card-cta ai-cta-cyber" href="/cybersecurity/">Explore Cybersecurity <span>→</span></a>
+        <a class="ai-card-cta ai-cta-email" href="/login.html">[ CTA ] <span>→</span></a>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- ═══ WHAT WE DO — one row per product ═══ -->
+<!-- ═══ IMAGE FEATURE 1 ═══ -->
 <section class="imgfeat">
   <div class="imgfeat-inner">
     <div>
-      <div class="imgfeat-eyebrow"><span class="imgfeat-pip"></span>01 · Sell</div>
-      <h2>Find your next customer <span class="g">before your competitor does</span></h2>
-      <p class="imgfeat-desc">AI Lead Generation turns plain-English searches into verified contacts — real emails, real direct dials — then writes the cold outreach that actually gets a reply. The Apollo alternative, at a flat price.</p>
+      <div class="imgfeat-eyebrow"><span class="imgfeat-pip"></span>[ Eyebrow ]</div>
+      <h2>[ Feature headline ] <span class="g">[ gradient bit ]</span></h2>
+      <p class="imgfeat-desc">[ Feature description — fill in. ]</p>
       <ul class="imgfeat-list">
-        <li>Natural-language prospect search</li>
-        <li>Verified emails and direct dials</li>
-        <li>AI-written outreach that lands</li>
-        <li>Deepest Canadian coverage on the market</li>
+        <li>[ Point — fill in ]</li>
+        <li>[ Point — fill in ]</li>
+        <li>[ Point — fill in ]</li>
+        <li>[ Point — fill in ]</li>
       </ul>
-      <a class="imgfeat-link" href="/lead-generation/">Explore Lead Generation →</a>
+      <a class="imgfeat-link" href="#">[ Link text ] →</a>
     </div>
     <div class="imgfeat-img">
-      <img src="/public/feat-search.jpg" alt="AI Lead Generation search dashboard" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900">
+      <img src="/public/feat-search.jpg" alt="[ replace image ]" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900">
     </div>
   </div>
 </section>
 
+<!-- ═══ IMAGE FEATURE 2 ═══ -->
 <section class="imgfeat dark">
   <div class="imgfeat-inner rev">
     <div>
-      <div class="imgfeat-eyebrow"><span class="imgfeat-pip"></span>02 · Run</div>
-      <h2>Run the business, <span class="g">not the busywork</span></h2>
-      <p class="imgfeat-desc">AI Chief of Staff reads your inbox, calendar, and docs, then hands you a prioritized brief every morning, preps your meetings, chases your follow-ups, and drafts your reports. The operator you couldn't otherwise afford.</p>
+      <div class="imgfeat-eyebrow"><span class="imgfeat-pip"></span>[ Eyebrow ]</div>
+      <h2>[ Feature headline ] <span class="g">[ gradient bit ]</span></h2>
+      <p class="imgfeat-desc">[ Feature description — fill in. ]</p>
       <ul class="imgfeat-list">
-        <li>A prioritized brief, every morning</li>
-        <li>Delegation that never drops a thread</li>
-        <li>Meeting prep and notes, automatic</li>
-        <li>Status reports that write themselves</li>
+        <li>[ Point — fill in ]</li>
+        <li>[ Point — fill in ]</li>
+        <li>[ Point — fill in ]</li>
+        <li>[ Point — fill in ]</li>
       </ul>
-      <a class="imgfeat-link" href="/chief-of-staff/">Explore Chief of Staff →</a>
+      <a class="imgfeat-link" href="#">[ Link text ] →</a>
     </div>
     <div class="imgfeat-img">
-      <img src="/public/feat-data.jpg" alt="AI Chief of Staff briefing dashboard" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900">
+      <img src="/public/feat-data.jpg" alt="[ replace image ]" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900">
     </div>
   </div>
 </section>
 
+<!-- ═══ IMAGE FEATURE 3 ═══ -->
 <section class="imgfeat">
   <div class="imgfeat-inner">
     <div>
-      <div class="imgfeat-eyebrow"><span class="imgfeat-pip"></span>03 · Defend</div>
-      <h2>Lock down what <span class="g">you've built</span></h2>
-      <p class="imgfeat-desc">AI Cybersecurity watches your stack around the clock — detecting threats, running response playbooks, and scoring your risk in real time. It handles the noise and escalates only what needs you.</p>
+      <div class="imgfeat-eyebrow"><span class="imgfeat-pip"></span>[ Eyebrow ]</div>
+      <h2>[ Feature headline ] <span class="g">[ gradient bit ]</span></h2>
+      <p class="imgfeat-desc">[ Feature description — fill in. ]</p>
       <ul class="imgfeat-list">
-        <li>Real-time threat detection</li>
-        <li>Automated response playbooks</li>
-        <li>Scheduled vulnerability scans</li>
-        <li>Live, always-current risk posture</li>
+        <li>[ Point — fill in ]</li>
+        <li>[ Point — fill in ]</li>
+        <li>[ Point — fill in ]</li>
+        <li>[ Point — fill in ]</li>
       </ul>
-      <a class="imgfeat-link" href="/cybersecurity/">Explore Cybersecurity →</a>
+      <a class="imgfeat-link" href="#">[ Link text ] →</a>
     </div>
     <div class="imgfeat-img">
-      <img src="/public/feat-export.jpg" alt="AI Cybersecurity monitoring dashboard" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900">
+      <img src="/public/feat-export.jpg" alt="[ replace image ]" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900">
     </div>
   </div>
 </section>
 
-<!-- ═══ SEE IT IN ACTION (tabbed) ═══ -->
+<!-- ═══ PLATFORM ═══ -->
 <section class="platform">
   <div class="plat-inner">
     <div class="plat-header">
-      <div class="plat-eyebrow"><span class="plat-pip"></span>See It In Action</div>
-      <h2 class="plat-title">One platform.<br /><span class="g">Three jobs, done.</span></h2>
-      <p class="plat-sub">Every product lives in the same account, on the same data, under one flat bill. Flip through to see each one at work.</p>
+      <div class="plat-eyebrow"><span class="plat-pip"></span>The Platform</div>
+      <h2 class="plat-title">[ Platform headline ]<br /><span class="g">[ gradient subhead ]</span></h2>
+      <p class="plat-sub">[ Platform subheadline — fill in. ]</p>
     </div>
-
     <div class="plat-layout">
       <div class="plat-tabs">
         <div class="ptab on" onclick="sw(0)">
           <div class="ptab-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
-          <div><div class="ptab-name">Lead Generation</div><div class="ptab-sub">Plain English in. Verified contacts out.</div></div>
+          <div><div class="ptab-name">Threat Detection</div><div class="ptab-sub">Catch it before it lands.</div></div>
         </div>
         <div class="ptab" onclick="sw(1)">
-          <div class="ptab-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4zM4 12h10v8H4zM18 12h2v8h-2z"/></svg></div>
-          <div><div class="ptab-name">Chief of Staff</div><div class="ptab-sub">Your day, briefed and handled.</div></div>
+          <div class="ptab-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          <div><div class="ptab-name">Incident Response</div><div class="ptab-sub">Contain, remediate, move on.</div></div>
         </div>
         <div class="ptab" onclick="sw(2)">
-          <div class="ptab-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <div><div class="ptab-name">Cybersecurity</div><div class="ptab-sub">Threats caught around the clock.</div></div>
+          <div class="ptab-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><div class="ptab-name">Vulnerability Scans</div><div class="ptab-sub">Know your gaps before they do.</div></div>
+        </div>
+        <div class="ptab" onclick="sw(3)">
+          <div class="ptab-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81"/></svg></div>
+          <div><div class="ptab-name">Risk Scoring</div><div class="ptab-sub">Live posture, always current.</div></div>
         </div>
       </div>
-
       <div class="plat-panels">
-
-        <!-- LEAD GEN -->
         <div class="ppanel on" id="p0">
           <div class="pp-head">
-            <div class="pp-tab-pos">01 / Lead Generation</div>
-            <h3 class="pp-title">Find North American decision-makers in minutes.</h3>
+            <div class="pp-tab-pos">01 / Threat Detection</div>
+            <h3 class="pp-title">[ Threat Detection — headline goes here ]</h3>
             <div class="pp-chips">
-              <span class="pp-chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Natural-language search</span>
-              <span class="pp-chip"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Verified emails + dials</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>[ chip ]</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>[ chip ]</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>[ chip ]</span>
             </div>
             <ul class="pp-bullets">
-              <li>Type plain English — AI turns it into perfect filters</li>
-              <li>Verified email and direct dial on every contact</li>
-              <li>AI writes the outreach that gets a reply</li>
-              <li>One flat price — no per-seat fees</li>
+              <li>[ Benefit bullet — fill in ]</li>
+              <li>[ Benefit bullet — fill in ]</li>
+              <li>[ Benefit bullet — fill in ]</li>
+              <li>[ Benefit bullet — fill in ]</li>
             </ul>
             <div class="pp-btns">
-              <a href="/lead-generation/" class="pp-btn-or">Explore Lead Generation</a>
-              <a href="/login.html" class="pp-btn-gh">Start free</a>
-            </div>
-          </div>
-          <div class="pp-window">
-            <div class="pw-bar"><div class="pw-dots"><span></span><span></span><span></span></div><div class="pw-url">app.jayisaacai.com/search</div></div>
-            <div class="pw-body">
-              <div class="w-section-title">Search Results</div>
-              <div class="w-section-sub"><strong style="color:#111827">23,847 contacts</strong> match — HVAC &amp; Plumbing · Owner · North America · 1–50 staff</div>
-              <div class="w-card">
-                <div class="w-card-top"><div class="w-card-left"><div class="w-av">JD</div><div><div class="w-name">James Darvill</div><div class="w-title">Owner · Apex HVAC Solutions</div></div></div><div class="w-badge hi"><div class="dot"></div>High Intent</div></div>
-                <div class="w-meta"><div class="w-meta-item">Dallas, TX</div><div class="w-meta-item">8 employees</div></div>
-                <div class="w-signals"><div class="w-sig">Hiring 3 techs</div><div class="w-sig">New location</div></div>
-              </div>
-              <div class="w-card">
-                <div class="w-card-top"><div class="w-card-left"><div class="w-av">SR</div><div><div class="w-name">Sandra Reeves</div><div class="w-title">Founder · Prairie Air Systems</div></div></div><div class="w-badge hi"><div class="dot"></div>High Intent</div></div>
-                <div class="w-meta"><div class="w-meta-item">Calgary, AB</div><div class="w-meta-item">5 employees</div></div>
-                <div class="w-signals"><div class="w-sig">Raised seed funding</div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- CHIEF OF STAFF -->
-        <div class="ppanel" id="p1">
-          <div class="pp-head">
-            <div class="pp-tab-pos">02 / Chief of Staff</div>
-            <h3 class="pp-title">Everything that matters, before your first coffee.</h3>
-            <div class="pp-chips">
-              <span class="pp-chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Ready by 7am</span>
-              <span class="pp-chip"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Inbox · Calendar · Docs</span>
-            </div>
-            <ul class="pp-bullets">
-              <li>AI ranks your day by what's urgent and what needs a decision</li>
-              <li>Delegation tracking chases every open thread for you</li>
-              <li>Meeting prep and notes assembled automatically</li>
-              <li>Reports drafted from what actually happened</li>
-            </ul>
-            <div class="pp-btns">
-              <a href="/chief-of-staff/" class="pp-btn-or">Explore Chief of Staff</a>
-              <a href="/login.html" class="pp-btn-gh">Start free</a>
-            </div>
-          </div>
-          <div class="pp-window">
-            <div class="pw-bar"><div class="pw-dots"><span></span><span></span><span></span></div><div class="pw-url">app.jayisaacai.com/staff</div></div>
-            <div class="pw-body">
-              <div class="w-section-title">Tuesday — Morning Brief</div>
-              <div class="w-section-sub"><strong style="color:#111827">3 things need you today.</strong> AI handled 11 items overnight.</div>
-              <div class="w-card">
-                <div class="w-card-top"><div class="w-card-left"><div class="w-av">✱</div><div><div class="w-name">Sign off: Q3 vendor contract</div><div class="w-title">Legal flagged 1 clause · due today</div></div></div><div class="w-badge hi"><div class="dot"></div>Decision</div></div>
-                <div class="w-signals"><div class="w-sig">Summary ready</div><div class="w-sig dim">Clause highlighted</div></div>
-              </div>
-              <div class="w-card">
-                <div class="w-card-top"><div class="w-card-left"><div class="w-av">↺</div><div><div class="w-name">Follow up: Dana, hiring plan</div><div class="w-title">Quiet 5 days · draft ready</div></div></div><div class="w-badge med"><div class="dot"></div>Nudge</div></div>
-                <div class="w-card-footer"><button class="wf-btn primary">Send draft</button><button class="wf-btn secondary">Edit</button></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- CYBERSECURITY -->
-        <div class="ppanel" id="p2">
-          <div class="pp-head">
-            <div class="pp-tab-pos">03 / Cybersecurity</div>
-            <h3 class="pp-title">Threats caught and contained around the clock.</h3>
-            <div class="pp-chips">
-              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Real-time detection</span>
-              <span class="pp-chip"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Auto response</span>
-            </div>
-            <ul class="pp-bullets">
-              <li>Live threat detection across your whole stack</li>
-              <li>Response playbooks contain incidents automatically</li>
-              <li>Scheduled scans surface gaps before attackers do</li>
-              <li>Risk scored live — escalates only when it's real</li>
-            </ul>
-            <div class="pp-btns">
-              <a href="/cybersecurity/" class="pp-btn-or">Explore Cybersecurity</a>
-              <a href="/login.html" class="pp-btn-gh">Start free</a>
+              <a href="/login.html" class="pp-btn-or">Get started</a>
+              <a href="/pricing.html" class="pp-btn-gh">See pricing</a>
+              <div class="pp-btn-note">[ pricing note — fill in ]</div>
             </div>
           </div>
           <div class="pp-window">
             <div class="pw-bar"><div class="pw-dots"><span></span><span></span><span></span></div><div class="pw-url">app.jayisaacai.com/security</div></div>
             <div class="pw-body">
-              <div class="w-section-title">Threat Monitor</div>
-              <div class="w-section-sub"><strong style="color:#111827">2 events overnight.</strong> Both auto-contained — no action needed.</div>
-              <div class="w-company-card high">
-                <div class="w-company-top"><div><div class="w-company-name">Suspicious login blocked</div><div class="w-company-meta">02:14 UTC · unfamiliar location · admin account</div></div><div class="w-score"><div class="w-score-num" style="color:#16A34A">Low</div><div class="w-score-label">Risk</div></div></div>
-                <div class="w-company-sigs"><div class="w-csig">Auto-contained</div><div class="w-csig dim">MFA challenge sent</div></div>
-              </div>
-              <div class="w-company-card med">
-                <div class="w-company-top"><div><div class="w-company-name">Outdated dependency found</div><div class="w-company-meta">Weekly scan · 1 package · known CVE</div></div><div class="w-score"><div class="w-score-num" style="color:#CA8A04">Med</div><div class="w-score-label">Risk</div></div></div>
-                <div class="w-company-sigs"><div class="w-csig">Patch suggested</div></div>
-              </div>
+              <div class="w-section-title">[ Window title ]</div>
+              <div class="w-section-sub">[ Window subtitle / context ]</div>
+              <div class="w-card"><div class="w-card-top"><div class="w-card-left"><div class="w-av">—</div><div><div class="w-name">[ Row title ]</div><div class="w-title">[ Row detail ]</div></div></div><div class="w-badge hi"><div class="dot"></div>[ status ]</div></div></div>
+              <div class="w-card"><div class="w-card-top"><div class="w-card-left"><div class="w-av">—</div><div><div class="w-name">[ Row title ]</div><div class="w-title">[ Row detail ]</div></div></div><div class="w-badge med"><div class="dot"></div>[ status ]</div></div></div>
+              <div class="w-card"><div class="w-card-top"><div class="w-card-left"><div class="w-av">—</div><div><div class="w-name">[ Row title ]</div><div class="w-title">[ Row detail ]</div></div></div><div class="w-badge hi"><div class="dot"></div>[ status ]</div></div></div>
             </div>
           </div>
         </div>
-
+        <div class="ppanel" id="p1">
+          <div class="pp-head">
+            <div class="pp-tab-pos">02 / Incident Response</div>
+            <h3 class="pp-title">[ Incident Response — headline goes here ]</h3>
+            <div class="pp-chips">
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>[ chip ]</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>[ chip ]</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>[ chip ]</span>
+            </div>
+            <ul class="pp-bullets">
+              <li>[ Benefit bullet — fill in ]</li>
+              <li>[ Benefit bullet — fill in ]</li>
+              <li>[ Benefit bullet — fill in ]</li>
+              <li>[ Benefit bullet — fill in ]</li>
+            </ul>
+            <div class="pp-btns">
+              <a href="/login.html" class="pp-btn-or">Get started</a>
+              <a href="/pricing.html" class="pp-btn-gh">See pricing</a>
+              <div class="pp-btn-note">[ pricing note — fill in ]</div>
+            </div>
+          </div>
+          <div class="pp-window">
+            <div class="pw-bar"><div class="pw-dots"><span></span><span></span><span></span></div><div class="pw-url">app.jayisaacai.com/security</div></div>
+            <div class="pw-body">
+              <div class="w-section-title">[ Window title ]</div>
+              <div class="w-section-sub">[ Window subtitle / context ]</div>
+              <div class="w-card"><div class="w-card-top"><div class="w-card-left"><div class="w-av">—</div><div><div class="w-name">[ Row title ]</div><div class="w-title">[ Row detail ]</div></div></div><div class="w-badge hi"><div class="dot"></div>[ status ]</div></div></div>
+              <div class="w-card"><div class="w-card-top"><div class="w-card-left"><div class="w-av">—</div><div><div class="w-name">[ Row title ]</div><div class="w-title">[ Row detail ]</div></div></div><div class="w-badge med"><div class="dot"></div>[ status ]</div></div></div>
+              <div class="w-card"><div class="w-card-top"><div class="w-card-left"><div class="w-av">—</div><div><div class="w-name">[ Row title ]</div><div class="w-title">[ Row detail ]</div></div></div><div class="w-badge hi"><div class="dot"></div>[ status ]</div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="ppanel" id="p2">
+          <div class="pp-head">
+            <div class="pp-tab-pos">03 / Vulnerability Scans</div>
+            <h3 class="pp-title">[ Vulnerability Scans — headline goes here ]</h3>
+            <div class="pp-chips">
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>[ chip ]</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>[ chip ]</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>[ chip ]</span>
+            </div>
+            <ul class="pp-bullets">
+              <li>[ Benefit bullet — fill in ]</li>
+              <li>[ Benefit bullet — fill in ]</li>
+              <li>[ Benefit bullet — fill in ]</li>
+              <li>[ Benefit bullet — fill in ]</li>
+            </ul>
+            <div class="pp-btns">
+              <a href="/login.html" class="pp-btn-or">Get started</a>
+              <a href="/pricing.html" class="pp-btn-gh">See pricing</a>
+              <div class="pp-btn-note">[ pricing note — fill in ]</div>
+            </div>
+          </div>
+          <div class="pp-window">
+            <div class="pw-bar"><div class="pw-dots"><span></span><span></span><span></span></div><div class="pw-url">app.jayisaacai.com/security</div></div>
+            <div class="pw-body">
+              <div class="w-section-title">[ Window title ]</div>
+              <div class="w-section-sub">[ Window subtitle / context ]</div>
+              <div class="w-card"><div class="w-card-top"><div class="w-card-left"><div class="w-av">—</div><div><div class="w-name">[ Row title ]</div><div class="w-title">[ Row detail ]</div></div></div><div class="w-badge hi"><div class="dot"></div>[ status ]</div></div></div>
+              <div class="w-card"><div class="w-card-top"><div class="w-card-left"><div class="w-av">—</div><div><div class="w-name">[ Row title ]</div><div class="w-title">[ Row detail ]</div></div></div><div class="w-badge med"><div class="dot"></div>[ status ]</div></div></div>
+              <div class="w-card"><div class="w-card-top"><div class="w-card-left"><div class="w-av">—</div><div><div class="w-name">[ Row title ]</div><div class="w-title">[ Row detail ]</div></div></div><div class="w-badge hi"><div class="dot"></div>[ status ]</div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="ppanel" id="p3">
+          <div class="pp-head">
+            <div class="pp-tab-pos">04 / Risk Scoring</div>
+            <h3 class="pp-title">[ Risk Scoring — headline goes here ]</h3>
+            <div class="pp-chips">
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>[ chip ]</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>[ chip ]</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>[ chip ]</span>
+            </div>
+            <ul class="pp-bullets">
+              <li>[ Benefit bullet — fill in ]</li>
+              <li>[ Benefit bullet — fill in ]</li>
+              <li>[ Benefit bullet — fill in ]</li>
+              <li>[ Benefit bullet — fill in ]</li>
+            </ul>
+            <div class="pp-btns">
+              <a href="/login.html" class="pp-btn-or">Get started</a>
+              <a href="/pricing.html" class="pp-btn-gh">See pricing</a>
+              <div class="pp-btn-note">[ pricing note — fill in ]</div>
+            </div>
+          </div>
+          <div class="pp-window">
+            <div class="pw-bar"><div class="pw-dots"><span></span><span></span><span></span></div><div class="pw-url">app.jayisaacai.com/security</div></div>
+            <div class="pw-body">
+              <div class="w-section-title">[ Window title ]</div>
+              <div class="w-section-sub">[ Window subtitle / context ]</div>
+              <div class="w-card"><div class="w-card-top"><div class="w-card-left"><div class="w-av">—</div><div><div class="w-name">[ Row title ]</div><div class="w-title">[ Row detail ]</div></div></div><div class="w-badge hi"><div class="dot"></div>[ status ]</div></div></div>
+              <div class="w-card"><div class="w-card-top"><div class="w-card-left"><div class="w-av">—</div><div><div class="w-name">[ Row title ]</div><div class="w-title">[ Row detail ]</div></div></div><div class="w-badge med"><div class="dot"></div>[ status ]</div></div></div>
+              <div class="w-card"><div class="w-card-top"><div class="w-card-left"><div class="w-av">—</div><div><div class="w-name">[ Row title ]</div><div class="w-title">[ Row detail ]</div></div></div><div class="w-badge hi"><div class="dot"></div>[ status ]</div></div></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ WHO WE ARE ═══ -->
+<!-- ═══ SOLUTIONS ═══ -->
 <section class="solutions">
   <div class="sol-header">
     <div>
-      <div class="sec-eyebrow">Who We Are</div>
-      <h2 class="sec-title">Serious AI tools, built without the enterprise tax.</h2>
-      <p class="sec-sub">JAYISAAC AI builds production-grade AI products for the businesses the big vendors overcharge and overlook — sold at a flat, honest price.</p>
+      <div class="sec-eyebrow">Solutions</div>
+      <h2 class="sec-title">[ Solutions headline — fill in. ]</h2>
+      <p class="sec-sub">[ Solutions subheadline — fill in. ]</p>
     </div>
-    <img class="sol-art" src="/public/funnel-3d.jpg" alt="JAYISAAC AI platform illustration" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900" />
+    <img class="sol-art" src="/public/funnel-3d.jpg" alt="[ replace image ]" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900" />
   </div>
-  <div class="who-grid">
-    <div class="who-cell"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><b>Powered by Claude</b><p>The same frontier model behind Cursor, Notion AI, and Slack AI runs under every product.</p></div>
-    <div class="who-cell"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><b>Built in Canada</b><p>Made in Saskatoon, aligned to PIPEDA, GDPR, and CCPA. Your data stays yours — never sold.</p></div>
-    <div class="who-cell"><div class="ic"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><b>Flat, honest pricing</b><p>No per-seat fees, no credit traps, no annual lock-in. One price, cancel anytime.</p></div>
-    <div class="who-cell"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div><b>One platform</b><p>Three products, one login, one bill, shared data. Add what you need as you grow.</p></div>
+  <div class="sol-grid">
+    <div class="sol-card"><div class="sol-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><div class="sol-title">Detection</div><div class="sol-hook">Spot threats the moment they appear</div><p class="sol-desc">[ Short description — fill in. ]</p><a href="/login.html" class="sol-link">Learn more <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
+    <div class="sol-card"><div class="sol-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="sol-title">Response</div><div class="sol-hook">Contain incidents automatically</div><p class="sol-desc">[ Short description — fill in. ]</p><a href="/login.html" class="sol-link">Learn more <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
+    <div class="sol-card"><div class="sol-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><div class="sol-title">Posture</div><div class="sol-hook">Always-current risk visibility</div><p class="sol-desc">[ Short description — fill in. ]</p><a href="/login.html" class="sol-link">Learn more <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
   </div>
 </section>
 
-<!-- ═══ WHY ONE PLATFORM ═══ -->
+<!-- ═══ INTEGRATIONS ═══ -->
 <section class="int-section">
   <div class="int-inner">
-    <div class="sec-eyebrow" style="text-align:center;margin-bottom:.5rem">Why One Platform</div>
-    <div class="int-title">Three vendors' worth of tools, one account</div>
-    <div class="int-sub">Everything runs on the same login and the same data — no stitching tools together, no juggling bills.</div>
-    <div class="int-grid" style="grid-template-columns:repeat(4,1fr)">
-      <div class="int-pill">One Login</div>
-      <div class="int-pill">Shared Data</div>
-      <div class="int-pill">Flat Pricing</div>
-      <div class="int-pill">Cancel Anytime</div>
-      <div class="int-pill">Powered by Claude</div>
-      <div class="int-pill">PIPEDA</div>
-      <div class="int-pill">GDPR</div>
-      <div class="int-pill">CCPA</div>
+    <div class="sec-eyebrow" style="text-align:center;margin-bottom:.5rem">Integrations</div>
+    <div class="int-title">Works with your existing stack</div>
+    <div class="int-sub">[ Integrations subheadline — fill in. ]</div>
+    <div class="int-grid">
+      <div class="int-pill">[ Tool ]</div><div class="int-pill">[ Tool ]</div><div class="int-pill">[ Tool ]</div>
+      <div class="int-pill">[ Tool ]</div><div class="int-pill">[ Tool ]</div><div class="int-pill">[ Tool ]</div>
+      <div class="int-pill">[ Tool ]</div><div class="int-pill">[ Tool ]</div><div class="int-pill">[ Tool ]</div>
+      <div class="int-pill">[ Tool ]</div><div class="int-pill">[ Tool ]</div><div class="int-pill">[ Tool ]</div>
     </div>
+  </div>
+</section>
+
+<!-- ═══ ROLES ═══ -->
+<section class="roles">
+  <div class="sec-eyebrow">Built For Your Role</div>
+  <h2 class="sec-title">[ Roles headline — fill in. ]</h2>
+  <p class="sec-sub">[ Roles subheadline — fill in. ]</p>
+  <div class="roles-grid">
+    <a href="/login.html" class="role-card"><div class="role-tag">Security Teams</div><div class="role-title">[ Value headline for Security Teams ]</div><p class="role-desc">[ One-line description — fill in. ]</p></a>
+    <a href="/login.html" class="role-card"><div class="role-tag">IT Admins</div><div class="role-title">[ Value headline for IT Admins ]</div><p class="role-desc">[ One-line description — fill in. ]</p></a>
+    <a href="/login.html" class="role-card"><div class="role-tag">MSPs</div><div class="role-title">[ Value headline for MSPs ]</div><p class="role-desc">[ One-line description — fill in. ]</p></a>
+    <a href="/login.html" class="role-card"><div class="role-tag">CISOs</div><div class="role-title">[ Value headline for CISOs ]</div><p class="role-desc">[ One-line description — fill in. ]</p></a>
+    <a href="/login.html" class="role-card"><div class="role-tag">DevSecOps</div><div class="role-title">[ Value headline for DevSecOps ]</div><p class="role-desc">[ One-line description — fill in. ]</p></a>
+    <a href="/login.html" class="role-card"><div class="role-tag">Compliance</div><div class="role-title">[ Value headline for Compliance ]</div><p class="role-desc">[ One-line description — fill in. ]</p></a>
+  </div>
+</section>
+
+<!-- ═══ COMPARE ═══ -->
+<section class="compare">
+  <div class="sec-eyebrow">[ vs. competitor ]</div>
+  <h2 class="sec-title">[ Comparison headline ] <span class="g">[ gradient bit ]</span></h2>
+  <p class="sec-sub">[ Comparison subheadline — fill in. ]</p>
+  <div class="vs-cards">
+    <div class="vs-card vs-them">
+      <div class="vs-card-label">[ COMPETITOR ]</div>
+      <div class="vs-card-price"><span class="vs-amt">$—</span><span class="vs-per">[ /unit ]</span></div>
+      <div class="vs-card-note">[ note ]</div>
+      <ul class="vs-list">
+        <li><span class="vs-x">✕</span> [ Pain point — fill in ]</li>
+        <li><span class="vs-x">✕</span> [ Pain point — fill in ]</li>
+        <li><span class="vs-x">✕</span> [ Pain point — fill in ]</li>
+        <li><span class="vs-x">✕</span> [ Pain point — fill in ]</li>
+      </ul>
+      <div class="vs-card-foot">[ footer metric ]: <strong>$—</strong></div>
+    </div>
+    <div class="vs-card vs-us">
+      <div class="vs-card-tag">YOUR MOVE</div>
+      <div class="vs-card-label">JAYISAAC AI</div>
+      <div class="vs-card-price"><span class="vs-amt">$—</span><span class="vs-per">[ /unit ]</span></div>
+      <div class="vs-card-note">[ note ]</div>
+      <ul class="vs-list">
+        <li><span class="vs-check">✓</span> [ Advantage — fill in ]</li>
+        <li><span class="vs-check">✓</span> [ Advantage — fill in ]</li>
+        <li><span class="vs-check">✓</span> [ Advantage — fill in ]</li>
+        <li><span class="vs-check">✓</span> [ Advantage — fill in ]</li>
+      </ul>
+      <div class="vs-card-foot">[ footer metric ]: <strong>$—</strong></div>
+    </div>
+  </div>
+  <div class="vs-receipt">
+    <div class="vs-receipt-head">The math, in plain English</div>
+    <div class="vs-receipt-grid">
+      <div class="vs-receipt-row"><div class="vs-receipt-num">—</div><div class="vs-receipt-text">[ proof point — fill in ]</div></div>
+      <div class="vs-receipt-row"><div class="vs-receipt-num">—</div><div class="vs-receipt-text">[ proof point — fill in ]</div></div>
+      <div class="vs-receipt-row"><div class="vs-receipt-num">—</div><div class="vs-receipt-text">[ proof point — fill in ]</div></div>
+    </div>
+    <div class="vs-receipt-note">[ source / disclaimer — fill in. ]</div>
   </div>
 </section>
 
 <!-- ═══ FINAL CTA ═══ -->
 <section class="final-cta">
-  <h2>One platform.<br /><span>Every job that matters.</span></h2>
-  <p>Sell, run, and defend your business from a single account. Start free — no card required.</p>
+  <h2>[ Final CTA headline ]<br /><span>[ emphasis ]</span></h2>
+  <p>[ Final CTA subheadline — fill in. ]</p>
   <div class="final-form"><input id="ctaEmail" type="email" placeholder="Enter your work email" /><button onclick="goSignup('ctaEmail')">Get started</button></div>
   <div class="final-note">By signing up you agree to our <a href="/terms.html">Terms of Use</a> and <a href="/privacy.html">Privacy Policy</a></div>
 </section>
+
 
 <!-- footer injected by footer.js -->
 
@@ -1498,7 +1557,7 @@
 /* ── Email signup redirect ── */
 function goSignup(inputId){
   const v = document.getElementById(inputId)?.value || "";
-  window.location.href = "/login.html" + (v ? "?email="+encodeURIComponent(v) : "");
+  window.location.href = "./login.html" + (v ? "?email="+encodeURIComponent(v) : "");
 }
 </script>
 

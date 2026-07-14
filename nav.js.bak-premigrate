@@ -22,17 +22,17 @@ const LINKS = [
           heading: "Prospect",
           items: [
             { label: "Prospect Search",      sub: "Find decision-makers fast",  href: "/app.html"                 },
-            { label: "People Search",        sub: "Owners, GMs, buyers",        href: "/lead-generation/people-search.html"       },
-            { label: "Company Search",       sub: "Filter by industry & size",  href: "/lead-generation/company-search.html"      },
-            { label: "Cold Calling Lists",   sub: "Dial-ready exports",         href: "/lead-generation/cold-calling-lists.html"  },
+            { label: "People Search",        sub: "Owners, GMs, buyers",        href: "/people-search.html"       },
+            { label: "Company Search",       sub: "Filter by industry & size",  href: "/company-search.html"      },
+            { label: "Cold Calling Lists",   sub: "Dial-ready exports",         href: "/cold-calling-lists.html"  },
           ]
         },
         {
           heading: "Solutions",
           items: [
-            { label: "For Sales Teams",      sub: "Pipeline without grunt work",href: "/lead-generation/sales-teams.html"         },
-            { label: "For Agencies",         sub: "Multi-client campaigns",     href: "/lead-generation/agencies.html"            },
-            { label: "Verified Contacts",    sub: "Emails & phones that work",  href: "/lead-generation/data.html#verified"       },
+            { label: "For Sales Teams",      sub: "Pipeline without grunt work",href: "/sales-teams.html"         },
+            { label: "For Agencies",         sub: "Multi-client campaigns",     href: "/agencies.html"            },
+            { label: "Verified Contacts",    sub: "Emails & phones that work",  href: "/data.html#verified"       },
             { label: "Free Trial",           sub: "100 credits, no card",       href: "/login.html"               },
           ]
         }
@@ -41,29 +41,29 @@ const LINKS = [
   },
   {
     label: "Our Data",
-    href:  "/lead-generation/data.html",
+    href:  "/data.html",
     mega: {
       cols: [
         {
           heading: "Data Coverage",
           items: [
-            { label: "Data Overview",        sub: "What's in the database",     href: "/lead-generation/data.html"                },
-            { label: "North America-Wide",   sub: "Every province & state",     href: "/lead-generation/data.html#coverage"       },
-            { label: "Real-Time Updates",    sub: "Rolling re-verification",    href: "/lead-generation/data.html#updates"        },
-            { label: "Verified Contacts",    sub: "Validated emails & phones",  href: "/lead-generation/data.html#verified"       },
+            { label: "Data Overview",        sub: "What's in the database",     href: "/data.html"                },
+            { label: "North America-Wide",   sub: "Every province & state",     href: "/data.html#coverage"       },
+            { label: "Real-Time Updates",    sub: "Rolling re-verification",    href: "/data.html#updates"        },
+            { label: "Verified Contacts",    sub: "Validated emails & phones",  href: "/data.html#verified"       },
           ]
         },
         {
           heading: "For Developers",
           items: [
-            { label: "API Access",           sub: "Pull contact data",          href: "/lead-generation/api.html"                 },
-            { label: "Data as a Service",    sub: "Bulk exports & feeds",       href: "/lead-generation/api.html#daas"            },
+            { label: "API Access",           sub: "Pull contact data",          href: "/api.html"                 },
+            { label: "Data as a Service",    sub: "Bulk exports & feeds",       href: "/api.html#daas"            },
           ]
         }
       ]
     }
   },
-  { label: "Pricing",     href: "/lead-generation/pricing.html"       },
+  { label: "Pricing",     href: "/pricing.html"       },
   { label: "Resources",   href: "/support.html",
     mega: {
       cols: [
@@ -659,7 +659,7 @@ const MARKUP = `
             <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             My Account
           </a>
-          <a href="/lead-generation/pricing.html">
+          <a href="/pricing.html">
             <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
             Plans &amp; Credits
           </a>

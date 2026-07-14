@@ -12,8 +12,8 @@ const COLS = [
     heading: "Platform",
     links: [
       { label: "Prospect Search",       href: "/app.html"               },
-      { label: "People Search",        href: "/lead-generation/people-search.html"     },
-      { label: "Company Search",       href: "/lead-generation/company-search.html"    },
+      { label: "People Search",        href: "/people-search.html"     },
+      { label: "Company Search",       href: "/company-search.html"    },
       { label: "CSV Export",           href: "/app.html"               },
       { label: "Free Trial",           href: "/login.html"             },
       { label: "Log In",               href: "/login.html"             },
@@ -22,23 +22,23 @@ const COLS = [
   {
     heading: "Our Data",
     links: [
-      { label: "Data Overview",        href: "/lead-generation/data.html"              },
-      { label: "Coverage",             href: "/lead-generation/data.html#coverage"     },
-      { label: "Real-Time Updates",    href: "/lead-generation/data.html#updates"      },
-      { label: "Verified Contacts",    href: "/lead-generation/data.html#verified"     },
-      { label: "API Access",           href: "/lead-generation/api.html"               },
-      { label: "Data as a Service",    href: "/lead-generation/api.html#daas"          },
+      { label: "Data Overview",        href: "/data.html"              },
+      { label: "Coverage",             href: "/data.html#coverage"     },
+      { label: "Real-Time Updates",    href: "/data.html#updates"      },
+      { label: "Verified Contacts",    href: "/data.html#verified"     },
+      { label: "API Access",           href: "/api.html"               },
+      { label: "Data as a Service",    href: "/api.html#daas"          },
     ]
   },
   {
     heading: "Solutions",
     links: [
-      { label: "For Sales Teams",      href: "/lead-generation/sales-teams.html"       },
-      { label: "For Agencies",         href: "/lead-generation/agencies.html"          },
-      { label: "Cold Calling Lists",   href: "/lead-generation/cold-calling-lists.html"},
-      { label: "AI Enrichment",        href: "/lead-generation/data.html"              },
-      { label: "Lead Packages",        href: "/lead-generation/pricing.html#leads"     },
-      { label: "Pricing",              href: "/lead-generation/pricing.html"           },
+      { label: "For Sales Teams",      href: "/sales-teams.html"       },
+      { label: "For Agencies",         href: "/agencies.html"          },
+      { label: "Cold Calling Lists",   href: "/cold-calling-lists.html"},
+      { label: "AI Enrichment",        href: "/data.html"              },
+      { label: "Lead Packages",        href: "/pricing.html#leads"     },
+      { label: "Pricing",              href: "/pricing.html"           },
     ]
   },
   {

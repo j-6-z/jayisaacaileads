@@ -12,8 +12,7 @@
 <link rel="manifest" href="/my-favicon/site.webmanifest">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="JAYISAAC AI is one platform with three AI products: Lead Generation, Chief of Staff, and Cybersecurity. Built in Canada. Powered by Claude." />
-  <title>JAYISAAC AI — Sell, Run &amp; Defend Your Business with AI</title>
+  <title>JAYISAAC AI — AI Lead Generation | Apollo Alternative</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <script type="module" src="/nav.js"></script>
   <script type="module" src="/footer.js"></script>
@@ -719,7 +718,7 @@
     .role-title { font-size: .93rem; font-weight: 700; color: #111827; margin-bottom: .38rem; }
     .role-desc { font-size: .8rem; color: #6B7280; line-height: 1.55; }
 
-    /* ── COMPARE — comparison cards ── */
+    /* ── COMPARE — Apollo vs Us battle cards ── */
     .compare { padding: 100px 5vw 110px; max-width: 1200px; margin: 0 auto; }
     .compare .sec-eyebrow { display: inline-block; }
     .compare .sec-title .g {
@@ -953,51 +952,30 @@
   </style>
 </head>
 <body>
-<!-- hub-specific tweaks: 3-up product grid + cyan (cyber) accent -->
-<style>
-  .prod-grid { grid-template-columns: repeat(3, 1fr) !important; }
-  @media(max-width:1000px){ .prod-grid { grid-template-columns: 1fr !important; } }
-  .ai-card-cyber:hover { border-color: rgba(34,211,238,.4); box-shadow: 0 20px 50px rgba(34,211,238,.16); }
-  .ai-card-glow.ai-glow-cyber { background: radial-gradient(circle, rgba(34,211,238,.32), transparent 70%); }
-  .ai-icon-cyber { background: linear-gradient(135deg,#67E8F9,#22D3EE,#0891B2); box-shadow: 0 8px 20px rgba(34,211,238,.35); }
-  .ai-tag-cyber { color: #22D3EE; }
-  .ai-chip-cyber { background: rgba(34,211,238,.15); border: 1px solid rgba(34,211,238,.3); color: #A5F3FC; }
-  .ai-card-cyber .ai-card-features li::before { background: #22D3EE; box-shadow: 0 0 8px #22D3EE; }
-  .ai-cta-cyber { background: linear-gradient(135deg,#67E8F9,#0891B2); color: #052E33; box-shadow: 0 8px 24px rgba(34,211,238,.3); }
-  .ai-cta-cyber:hover { box-shadow: 0 12px 32px rgba(34,211,238,.5); }
-  .prod-card-cta-row { margin-top:auto; }
-  /* who-we-are value grid */
-  .who-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:#E5E7EB; border:1px solid #E5E7EB; border-radius:18px; overflow:hidden; margin-top:2.5rem; }
-  @media(max-width:900px){ .who-grid{ grid-template-columns:1fr 1fr; } }
-  @media(max-width:560px){ .who-grid{ grid-template-columns:1fr; } }
-  .who-cell { background:#fff; padding:1.8rem 1.6rem; }
-  .who-cell .ic { width:42px; height:42px; border-radius:11px; background:var(--ordim); border:1px solid var(--ore); display:flex; align-items:center; justify-content:center; margin-bottom:1rem; }
-  .who-cell .ic svg { width:19px; height:19px; stroke:var(--or); fill:none; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
-  .who-cell b { display:block; font-size:.98rem; font-weight:800; color:#111827; margin-bottom:.3rem; }
-  .who-cell p { font-size:.82rem; color:#6B7280; line-height:1.6; }
-</style>
 
 <!-- ═══ HERO ═══ -->
 <section class="hero">
   <canvas id="heroCanvas"></canvas>
-  <div class="hero-eyebrow"><span class="hero-dot"></span>One Platform · Three AI Products</div>
-  <h1>AI that sells, runs,<br><span class="g">and defends your business.</span></h1>
-  <p class="hero-sub">JAYISAAC AI is three products on one platform — find your next customer, run your operations, and lock down your security. Built in Canada. Powered by Claude.</p>
+  <!-- <div class="hero-eyebrow"><span class="hero-dot"></span>AI-Powered North American B2B Intelligence</div> -->
+  <h1>AI finds every decision-maker.<br><span class="g">Verified. Reachable. Yours.</span></h1>
+  <p class="hero-sub">AI finds your next customer. AI writes the cold email that gets them to reply. One flat price — no per-seat fees, no credit traps, no contracts.</p>
 
   <div class="hero-btns">
     <a class="hero-btn-primary" href="/login.html">Start Free Trial &rarr;</a>
-    <a class="hero-btn-ghost" href="#products">Explore Products</a>
+    <a class="hero-btn-ghost" href="/contact.html">Talk to Sales</a>
   </div>
 
+  <!-- honest tagline strip -->
   <div class="trust-section">
     <div class="trust-pill-row">
       <span class="trust-pill">Built in Canada</span>
-      <span class="trust-pill">One login, all three products</span>
-      <span class="trust-pill">Flat pricing</span>
-      <span class="trust-pill">Powered by Claude</span>
+      <span class="trust-pill">No per-seat fees</span>
+      <span class="trust-pill">No credit expiry</span>
+      <span class="trust-pill">No annual contract</span>
     </div>
   </div>
 
+  <!-- compliance badges -->
   <div class="compliance-row">
     <div class="compliance-badge"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>PIPEDA Compliant</div>
     <div class="compliance-badge"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>GDPR Ready</div>
@@ -1005,321 +983,486 @@
     <div class="compliance-badge"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>SOC 2 Framework</div>
     <div class="compliance-badge"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>99.9% Uptime</div>
   </div>
+
+  <!-- hero app mockup (dark themed) -->
+  <div class="hero-app-wrap">
+    <div class="hero-app">
+      <div class="app-topbar">
+        <div class="app-dots"><div class="app-dot"></div><div class="app-dot"></div><div class="app-dot"></div></div>
+        <div class="app-url">app.jayisaacai.com/search</div>
+      </div>
+      <div class="app-body">
+        <div class="app-nav">
+          <div class="app-nav-sec">Prospecting</div>
+          <div class="app-nav-item on"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Search</div>
+          <div class="app-nav-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Lists</div>
+          <div class="app-nav-sec">Outreach</div>
+          <div class="app-nav-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Sequences</div>
+          <div class="app-nav-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81"/></svg>Calls</div>
+          <div class="app-nav-sec">Intelligence</div>
+          <div class="app-nav-item"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Intent</div>
+          <div class="app-nav-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Enrich</div>
+        </div>
+        <div class="app-main">
+          <div class="app-search-row">
+            <input class="app-search-in" type="text" value="HVAC owners in Texas and Alberta, 1-50 employees" readonly />
+            <button class="app-search-go">Search</button>
+          </div>
+          <div class="app-chips">
+            <span class="app-chip on">HVAC &amp; Plumbing</span>
+            <span class="app-chip on">Owner / Founder</span>
+            <span class="app-chip on">North America</span>
+            <span class="app-chip on">1&ndash;50 employees</span>
+            <span class="app-chip">Intent: High</span>
+          </div>
+          <div class="app-thead"><div></div><div class="app-th">Contact</div><div class="app-th">Company</div><div class="app-th">Intent</div><div class="app-th">Actions</div></div>
+          <div class="app-row"><div class="app-av">JD</div><div><div class="app-nm">James Darvill</div><div class="app-sm">Owner &middot; Dallas, TX</div></div><div><div class="app-nm">Apex HVAC Solutions</div><div class="app-sm">8 employees</div></div><div><div class="app-intent-hi">High</div></div><div class="app-acts"><div class="app-act"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="app-act"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07"/></svg></div></div></div>
+          <div class="app-row"><div class="app-av">SR</div><div><div class="app-nm">Sandra Reeves</div><div class="app-sm">Founder &middot; Calgary, AB</div></div><div><div class="app-nm">Prairie Air Systems</div><div class="app-sm">5 employees</div></div><div><div class="app-intent-hi">High</div></div><div class="app-acts"><div class="app-act"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="app-act"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07"/></svg></div></div></div>
+          <div class="app-row"><div class="app-av">MK</div><div><div class="app-nm">Mike Kowalski</div><div class="app-sm">GM &middot; Denver, CO</div></div><div><div class="app-nm">Northstar Climate</div><div class="app-sm">22 employees</div></div><div><div class="app-intent-md">Medium</div></div><div class="app-acts"><div class="app-act"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="app-act"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07"/></svg></div></div></div>
+          <div class="app-row"><div class="app-av">TL</div><div><div class="app-nm">Tyler Leblanc</div><div class="app-sm">Owner &middot; Phoenix, AZ</div></div><div><div class="app-nm">Westside Heating</div><div class="app-sm">3 employees</div></div><div><div class="app-intent-hi">High</div></div><div class="app-acts"><div class="app-act"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="app-act"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07"/></svg></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ═══ STATS ═══ -->
 <div class="stats-band">
   <div class="stats-inner">
-    <div class="stat-item"><span class="stat-num">3<span></span></span><span class="stat-label">AI Products</span></div>
-    <div class="stat-item"><span class="stat-num">1<span></span></span><span class="stat-label">Login &amp; One Bill</span></div>
-    <div class="stat-item"><span class="stat-num">24/7<span></span></span><span class="stat-label">Always Working</span></div>
-    <div class="stat-item"><span class="stat-num">🍁<span></span></span><span class="stat-label">Built in Canada</span></div>
+    <div class="stat-item"><span class="stat-num">$26<span>.99</span></span><span class="stat-label">Flat Monthly Price</span></div>
+    <div class="stat-item"><span class="stat-num">500<span></span></span><span class="stat-label">Phone Numbers / Month</span></div>
+    <div class="stat-item"><span class="stat-num">Unlimited<span></span></span><span class="stat-label">Email Reveals</span></div>
+    <div class="stat-item"><span class="stat-num">2<span></span></span><span class="stat-label">AI Tools Built-In</span></div>
   </div>
 </div>
 
-<!-- ═══ THREE PRODUCTS ═══ -->
-<section class="ai-showcase" id="products">
+<!-- ═══ AI SHOWCASE — flagship features ═══ -->
+<section class="ai-showcase">
   <div class="ai-showcase-bg"></div>
   <div class="ai-showcase-inner">
     <div class="ai-showcase-head">
-      <div class="ai-eyebrow"><span class="ai-eyebrow-pip"></span>The Platform</div>
-      <h2>Three products. <span class="ai-grad-text">One login, one bill.</span></h2>
-      <p class="ai-showcase-sub">Start with the one you need today — run all three when you're ready. Shared account, shared data, one flat platform.</p>
+      <div class="ai-eyebrow"><span class="ai-eyebrow-pip"></span>AI-Native Platform</div>
+      <h2>Two AI tools that <span class="ai-grad-text">never stop working</span> for your pipeline.</h2>
+      <p class="ai-showcase-sub">Built into the platform, not bolted on. Powered by Claude — the same model behind Cursor, Notion AI, and Slack AI.</p>
     </div>
 
-    <div class="ai-showcase-grid prod-grid">
+    <div class="ai-showcase-grid">
 
-      <!-- LEAD GENERATION -->
+      <!-- AI Leads card -->
       <div class="ai-card ai-card-leads">
         <div class="ai-card-glow"></div>
         <div class="ai-card-header">
           <div class="ai-card-icon ai-icon-leads">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
           </div>
           <div class="ai-card-meta">
-            <div class="ai-card-tag ai-tag-leads">AI LEAD GENERATION</div>
-            <div class="ai-card-subtitle">Find your next customer</div>
+            <div class="ai-card-tag ai-tag-leads">AI LEADS</div>
+            <div class="ai-card-subtitle">Natural language search</div>
           </div>
         </div>
-        <h3>Find every decision-maker. Verified.</h3>
-        <p class="ai-card-desc">Natural-language prospect search, verified emails and direct dials, and AI-written cold outreach — the Apollo alternative built for North American teams.</p>
+        <h3>Find perfect prospects in plain English.</h3>
+        <p class="ai-card-desc">Describe your ideal customer the way you'd describe it to a teammate. AI parses your query into filters and returns matching verified contacts in seconds — no dropdowns, no clicking through 14 filter menus.</p>
+
         <div class="ai-demo ai-demo-leads">
           <div class="ai-demo-label">YOU TYPE</div>
-          <div class="ai-demo-input"><span class="ai-demo-caret">›</span><span class="ai-demo-text">HVAC owners in Alberta under 20 staff</span></div>
+          <div class="ai-demo-input">
+            <span class="ai-demo-caret">›</span>
+            <span class="ai-demo-text">HVAC owners in Alberta under 20 employees</span>
+          </div>
           <div class="ai-demo-arrow">↓</div>
-          <div class="ai-demo-chips"><span class="ai-chip ai-chip-leads">Verified emails</span><span class="ai-chip ai-chip-leads">Direct dials</span><span class="ai-chip ai-chip-leads">Instant export</span></div>
+          <div class="ai-demo-chips">
+            <span class="ai-chip ai-chip-leads">Industry: HVAC</span>
+            <span class="ai-chip ai-chip-leads">Role: Owner</span>
+            <span class="ai-chip ai-chip-leads">Region: AB</span>
+            <span class="ai-chip ai-chip-leads">Max emp: 20</span>
+          </div>
         </div>
+
         <ul class="ai-card-features">
-          <li>Plain-English search across the full database</li>
-          <li>Verified emails + direct dials on every reveal</li>
-          <li>AI Email Writer that gets replies</li>
-          <li>Flat price — no per-seat fees</li>
+          <li>Multi-filter parsing in one query</li>
+          <li>Handles umbrella terms: "trades," "home services," "contractors"</li>
+          <li>Instant matches across the full contact database</li>
+          <li>No dropdowns, no guesswork</li>
         </ul>
-        <a class="ai-card-cta ai-cta-leads" href="/lead-generation/">Explore Lead Generation <span>→</span></a>
+        <a class="ai-card-cta ai-cta-leads" href="/login.html">Try AI Leads <span>→</span></a>
       </div>
 
-      <!-- CHIEF OF STAFF -->
+      <!-- AI Email Writer card -->
       <div class="ai-card ai-card-email">
         <div class="ai-card-glow ai-glow-email"></div>
         <div class="ai-card-header">
           <div class="ai-card-icon ai-icon-email">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16v4H4z"/><path d="M4 12h10v8H4z"/><path d="M18 12h2v8h-2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
           </div>
           <div class="ai-card-meta">
-            <div class="ai-card-tag ai-tag-email">AI CHIEF OF STAFF</div>
-            <div class="ai-card-subtitle">Run the operation</div>
+            <div class="ai-card-tag ai-tag-email">AI EMAIL WRITER</div>
+            <div class="ai-card-subtitle">Personalized cold outreach</div>
           </div>
         </div>
-        <h3>The operator you can't afford, on duty 24/7.</h3>
-        <p class="ai-card-desc">AI reads your inbox, calendar, and docs — then briefs you, preps your meetings, and chases the follow-ups you'd otherwise forget. No headcount required.</p>
-        <div class="ai-demo ai-demo-email">
-          <div class="ai-demo-label">YOUR MORNING BRIEF</div>
-          <div class="ai-email-preview">
-            <div class="ai-email-subject">3 things need you today</div>
-            <div class="ai-email-divider"></div>
-            <div class="ai-email-body">Sign the Q3 contract (legal flagged 1 clause), prep for your 10am board sync (brief attached), and Dana's hiring reply is 5 days quiet — nudge drafted.</div>
-            <div class="ai-email-tone"><span>Ready 7:00am</span><span>90-sec read</span><span class="ai-credit">Auto</span></div>
-          </div>
-        </div>
-        <ul class="ai-card-features">
-          <li>A prioritized morning brief, every day</li>
-          <li>Delegation tracking that never drops a thread</li>
-          <li>Meeting prep and notes, handled</li>
-          <li>Reports that draft themselves</li>
-        </ul>
-        <a class="ai-card-cta ai-cta-email" href="/chief-of-staff/">Explore Chief of Staff <span>→</span></a>
-      </div>
+        <h3>Cold emails that don't sound like cold emails.</h3>
+        <p class="ai-card-desc">For every revealed contact, generate a personalized email tailored to their role, industry, and company. No "hope this finds you well." No "circle back." Just outreach that gets replies.</p>
 
-      <!-- CYBERSECURITY -->
-      <div class="ai-card ai-card-cyber">
-        <div class="ai-card-glow ai-glow-cyber"></div>
-        <div class="ai-card-header">
-          <div class="ai-card-icon ai-icon-cyber">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <div class="ai-card-meta">
-            <div class="ai-card-tag ai-tag-cyber">AI CYBERSECURITY</div>
-            <div class="ai-card-subtitle">Defend the business</div>
+        <div class="ai-demo ai-demo-email">
+          <div class="ai-demo-label">AI WRITES</div>
+          <div class="ai-email-preview">
+            <div class="ai-email-subject">Quick Q about your equipment rotation</div>
+            <div class="ai-email-divider"></div>
+            <div class="ai-email-body">Hey Mike — saw Eastside HVAC just hit your busy season. With 12 trucks on the road, you're probably feeling the parts lookup grind. Got 10 min next week to show you something?</div>
+            <div class="ai-email-tone">
+              <span>Tone: Direct</span><span>Length: Short</span><span class="ai-credit">5 credits</span>
+            </div>
           </div>
         </div>
-        <h3>Threats caught before they land.</h3>
-        <p class="ai-card-desc">AI-driven detection, response, and posture monitoring that watches your stack around the clock and escalates only what actually needs a human.</p>
-        <div class="ai-demo ai-demo-leads" style="border-color:rgba(34,211,238,.18)">
-          <div class="ai-demo-label">LIVE MONITOR</div>
-          <div class="ai-demo-input"><span class="ai-demo-caret" style="color:#22D3EE">›</span><span class="ai-demo-text">Suspicious login blocked · 02:14 UTC</span></div>
-          <div class="ai-demo-arrow" style="color:#22D3EE">↓</div>
-          <div class="ai-demo-chips"><span class="ai-chip ai-chip-cyber">Auto-contained</span><span class="ai-chip ai-chip-cyber">Risk: Low</span><span class="ai-chip ai-chip-cyber">No action needed</span></div>
-        </div>
+
         <ul class="ai-card-features">
-          <li>Real-time threat detection and alerting</li>
-          <li>Automated response playbooks</li>
-          <li>Vulnerability scans on a schedule</li>
-          <li>Always-current risk scoring</li>
+          <li>Personalized to role, company, and industry</li>
+          <li>Tone presets (direct, friendly, casual, formal)</li>
+          <li>Length presets (short, medium, long)</li>
+          <li>One-click copy or open in Gmail / Outlook</li>
         </ul>
-        <a class="ai-card-cta ai-cta-cyber" href="/cybersecurity/">Explore Cybersecurity <span>→</span></a>
+        <a class="ai-card-cta ai-cta-email" href="/login.html">Try AI Email Writer <span>→</span></a>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- ═══ WHAT WE DO — one row per product ═══ -->
+<!-- ═══ IMAGE FEATURE 1: CONTACT SEARCH ═══ -->
 <section class="imgfeat">
   <div class="imgfeat-inner">
     <div>
-      <div class="imgfeat-eyebrow"><span class="imgfeat-pip"></span>01 · Sell</div>
-      <h2>Find your next customer <span class="g">before your competitor does</span></h2>
-      <p class="imgfeat-desc">AI Lead Generation turns plain-English searches into verified contacts — real emails, real direct dials — then writes the cold outreach that actually gets a reply. The Apollo alternative, at a flat price.</p>
+      <div class="imgfeat-eyebrow"><span class="imgfeat-pip"></span>Prospect Search</div>
+      <h2>Search by industry, role, and city — <span class="g">get verified contacts instantly</span></h2>
+      <p class="imgfeat-desc">Filter verified contacts by vertical, job title, company size, and location. Every record comes with a verified email and direct dial — not a switchboard number or a generic info@ address.</p>
       <ul class="imgfeat-list">
-        <li>Natural-language prospect search</li>
-        <li>Verified emails and direct dials</li>
-        <li>AI-written outreach that lands</li>
-        <li>Deepest Canadian coverage on the market</li>
+        <li>Filter by 30+ industries, roles, and metros</li>
+        <li>Verified emails with 95% deliverability</li>
+        <li>Direct dials — the person actually picks up</li>
+        <li>Real-time results, export in one click</li>
       </ul>
-      <a class="imgfeat-link" href="/lead-generation/">Explore Lead Generation →</a>
+      <a class="imgfeat-link" href="/people-search.html">Explore People Search →</a>
     </div>
     <div class="imgfeat-img">
-      <img src="/public/feat-search.jpg" alt="AI Lead Generation search dashboard" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900">
+      <img src="/public/feat-search.jpg" alt="Contact search analytics dashboard" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900">
     </div>
   </div>
 </section>
 
+<!-- ═══ IMAGE FEATURE 2: VERIFIED DATA ═══ -->
 <section class="imgfeat dark">
   <div class="imgfeat-inner rev">
     <div>
-      <div class="imgfeat-eyebrow"><span class="imgfeat-pip"></span>02 · Run</div>
-      <h2>Run the business, <span class="g">not the busywork</span></h2>
-      <p class="imgfeat-desc">AI Chief of Staff reads your inbox, calendar, and docs, then hands you a prioritized brief every morning, preps your meetings, chases your follow-ups, and drafts your reports. The operator you couldn't otherwise afford.</p>
+      <div class="imgfeat-eyebrow"><span class="imgfeat-pip"></span>Verified Data</div>
+      <h2>Data you can actually <span class="g">trust</span></h2>
+      <p class="imgfeat-desc">Every contact runs through a multi-source verification pipeline before it reaches you. No stale records from 2019, no scraped junk, no mystery CSVs. When you reveal a contact, the data is current.</p>
       <ul class="imgfeat-list">
-        <li>A prioritized brief, every morning</li>
-        <li>Delegation that never drops a thread</li>
-        <li>Meeting prep and notes, automatic</li>
-        <li>Status reports that write themselves</li>
+        <li>Multi-source verification pipeline</li>
+        <li>Updated continuously, not once a year</li>
+        <li>Bounce-tested email addresses</li>
+        <li>PIPEDA, GDPR, and CCPA compliant</li>
       </ul>
-      <a class="imgfeat-link" href="/chief-of-staff/">Explore Chief of Staff →</a>
+      <a class="imgfeat-link" href="/data.html">See our data standards →</a>
     </div>
     <div class="imgfeat-img">
-      <img src="/public/feat-data.jpg" alt="AI Chief of Staff briefing dashboard" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900">
+      <img src="/public/feat-data.jpg" alt="Verified data pipeline and quality assurance" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900">
     </div>
   </div>
 </section>
 
+<!-- ═══ IMAGE FEATURE 3: EXPORT & INTEGRATE ═══ -->
 <section class="imgfeat">
   <div class="imgfeat-inner">
     <div>
-      <div class="imgfeat-eyebrow"><span class="imgfeat-pip"></span>03 · Defend</div>
-      <h2>Lock down what <span class="g">you've built</span></h2>
-      <p class="imgfeat-desc">AI Cybersecurity watches your stack around the clock — detecting threats, running response playbooks, and scoring your risk in real time. It handles the noise and escalates only what needs you.</p>
+      <div class="imgfeat-eyebrow"><span class="imgfeat-pip"></span>Export &amp; Integrate</div>
+      <h2>From search to <span class="g">outreach in 60 seconds</span></h2>
+      <p class="imgfeat-desc">Reveal contacts, then export to CSV, JSON, Excel, or branded PDF — or pick a CRM-ready format that imports straight into HubSpot, Salesforce, Pipedrive, or Outreach with zero column remapping.</p>
       <ul class="imgfeat-list">
-        <li>Real-time threat detection</li>
-        <li>Automated response playbooks</li>
-        <li>Scheduled vulnerability scans</li>
-        <li>Live, always-current risk posture</li>
+        <li>Export to CSV, JSON, XLSX, or branded PDF reports</li>
+        <li>One-click CRM imports: HubSpot, Salesforce, Pipedrive, Outreach</li>
+        <li>Per-client exports for agency workflows</li>
+        <li>API access on higher tiers</li>
       </ul>
-      <a class="imgfeat-link" href="/cybersecurity/">Explore Cybersecurity →</a>
+      <a class="imgfeat-link" href="/api.html">Learn about integrations →</a>
     </div>
     <div class="imgfeat-img">
-      <img src="/public/feat-export.jpg" alt="AI Cybersecurity monitoring dashboard" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900">
+      <img src="/public/feat-export.jpg" alt="Sales team workspace with CRM dashboards" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900">
     </div>
   </div>
 </section>
 
-<!-- ═══ SEE IT IN ACTION (tabbed) ═══ -->
+<!-- ═══ PLATFORM (white bg, scrollable window) ═══ -->
 <section class="platform">
   <div class="plat-inner">
     <div class="plat-header">
-      <div class="plat-eyebrow"><span class="plat-pip"></span>See It In Action</div>
-      <h2 class="plat-title">One platform.<br /><span class="g">Three jobs, done.</span></h2>
-      <p class="plat-sub">Every product lives in the same account, on the same data, under one flat bill. Flip through to see each one at work.</p>
+      <div class="plat-eyebrow"><span class="plat-pip"></span>The Platform</div>
+      <h2 class="plat-title">One platform.<br /><span class="g">Every stage of your pipeline.</span></h2>
+      <p class="plat-sub">From prospect to reply in minutes — not days. Natural language search, verified contact reveals, AI-personalized email writing, and live intent signals. All in one place. All for $26.99 a month.</p>
     </div>
 
     <div class="plat-layout">
+
+      <!-- left tabs -->
       <div class="plat-tabs">
         <div class="ptab on" onclick="sw(0)">
           <div class="ptab-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
-          <div><div class="ptab-name">Lead Generation</div><div class="ptab-sub">Plain English in. Verified contacts out.</div></div>
+          <div><div class="ptab-name">Prospecting</div><div class="ptab-sub">Plain English in. Verified contacts out.</div></div>
         </div>
         <div class="ptab" onclick="sw(1)">
-          <div class="ptab-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4zM4 12h10v8H4zM18 12h2v8h-2z"/></svg></div>
-          <div><div class="ptab-name">Chief of Staff</div><div class="ptab-sub">Your day, briefed and handled.</div></div>
+          <div class="ptab-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div><div class="ptab-name">Data Enrichment</div><div class="ptab-sub">Verified contacts. Direct dials. Always fresh.</div></div>
         </div>
         <div class="ptab" onclick="sw(2)">
-          <div class="ptab-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <div><div class="ptab-name">Cybersecurity</div><div class="ptab-sub">Threats caught around the clock.</div></div>
+          <div class="ptab-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><div class="ptab-name">AI Email Writer</div><div class="ptab-sub">Cold emails that actually get replies.</div></div>
+        </div>
+        <div class="ptab" onclick="sw(3)">
+          <div class="ptab-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+          <div><div class="ptab-name">Intent Signals</div><div class="ptab-sub">Hiring · Funding · Tech signals — live.</div></div>
         </div>
       </div>
 
+      <!-- right panels -->
       <div class="plat-panels">
 
-        <!-- LEAD GEN -->
+        <!-- PROSPECTING -->
         <div class="ppanel on" id="p0">
           <div class="pp-head">
-            <div class="pp-tab-pos">01 / Lead Generation</div>
-            <h3 class="pp-title">Find North American decision-makers in minutes.</h3>
+            <div class="pp-tab-pos">01 / Prospecting</div>
+            <h3 class="pp-title">Find North American decision-makers in minutes, not hours.</h3>
             <div class="pp-chips">
-              <span class="pp-chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Natural-language search</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>4-second AI parse</span>
               <span class="pp-chip"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Verified emails + dials</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>CSV · JSON · XLSX · PDF</span>
             </div>
             <ul class="pp-bullets">
-              <li>Type plain English — AI turns it into perfect filters</li>
-              <li>Verified email and direct dial on every contact</li>
-              <li>AI writes the outreach that gets a reply</li>
-              <li>One flat price — no per-seat fees</li>
+              <li>Type plain English — AI parses it into perfect filters in milliseconds</li>
+              <li>Verified emails and direct dial phone numbers on every revealed contact</li>
+              <li>Save any search — get notified the moment new matches appear</li>
+              <li>One-click export to CSV, JSON, XLSX, PDF, or straight into your CRM</li>
             </ul>
             <div class="pp-btns">
-              <a href="/lead-generation/" class="pp-btn-or">Explore Lead Generation</a>
-              <a href="/login.html" class="pp-btn-gh">Start free</a>
+              <a href="/login.html" class="pp-btn-or">Get started</a>
+              <a href="/pricing.html" class="pp-btn-gh">See pricing</a>
+              <div class="pp-btn-note">$26.99/month flat · No contracts · Cancel anytime</div>
             </div>
           </div>
           <div class="pp-window">
             <div class="pw-bar"><div class="pw-dots"><span></span><span></span><span></span></div><div class="pw-url">app.jayisaacai.com/search</div></div>
             <div class="pw-body">
               <div class="w-section-title">Search Results</div>
-              <div class="w-section-sub"><strong style="color:#111827">23,847 contacts</strong> match — HVAC &amp; Plumbing · Owner · North America · 1–50 staff</div>
+              <div class="w-section-sub"><strong style="color:#111827">23,847 contacts</strong> match your filters — HVAC &amp; Plumbing &middot; Owner / Founder &middot; North America &middot; 1–50 employees</div>
+
               <div class="w-card">
-                <div class="w-card-top"><div class="w-card-left"><div class="w-av">JD</div><div><div class="w-name">James Darvill</div><div class="w-title">Owner · Apex HVAC Solutions</div></div></div><div class="w-badge hi"><div class="dot"></div>High Intent</div></div>
-                <div class="w-meta"><div class="w-meta-item">Dallas, TX</div><div class="w-meta-item">8 employees</div></div>
+                <div class="w-card-top"><div class="w-card-left"><div class="w-av">JD</div><div><div class="w-name">James Darvill</div><div class="w-title">Owner &middot; Apex HVAC Solutions</div></div></div><div class="w-badge hi"><div class="dot"></div>High Intent</div></div>
+                <div class="w-meta"><div class="w-meta-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Dallas, TX</div><div class="w-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>8 employees</div><div class="w-meta-item"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>HVAC &amp; Plumbing</div></div>
                 <div class="w-signals"><div class="w-sig">Hiring 3 techs</div><div class="w-sig">New location</div></div>
+                <div class="w-card-footer"><button class="wf-btn primary"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Get Email</button><button class="wf-btn secondary"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>Get Phone</button><button class="wf-btn icon"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button></div>
               </div>
+
               <div class="w-card">
-                <div class="w-card-top"><div class="w-card-left"><div class="w-av">SR</div><div><div class="w-name">Sandra Reeves</div><div class="w-title">Founder · Prairie Air Systems</div></div></div><div class="w-badge hi"><div class="dot"></div>High Intent</div></div>
-                <div class="w-meta"><div class="w-meta-item">Calgary, AB</div><div class="w-meta-item">5 employees</div></div>
-                <div class="w-signals"><div class="w-sig">Raised seed funding</div></div>
+                <div class="w-card-top"><div class="w-card-left"><div class="w-av">SR</div><div><div class="w-name">Sandra Reeves</div><div class="w-title">Founder &middot; Prairie Air Systems</div></div></div><div class="w-badge hi"><div class="dot"></div>High Intent</div></div>
+                <div class="w-meta"><div class="w-meta-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Calgary, AB</div><div class="w-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>5 employees</div><div class="w-meta-item"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>HVAC &amp; Plumbing</div></div>
+                <div class="w-signals"><div class="w-sig">Raised seed funding</div><div class="w-sig dim">Researching tools</div></div>
+                <div class="w-card-footer"><button class="wf-btn primary"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Get Email</button><button class="wf-btn secondary"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>Get Phone</button><button class="wf-btn icon"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button></div>
               </div>
+
+              <div class="w-card">
+                <div class="w-card-top"><div class="w-card-left"><div class="w-av">MK</div><div><div class="w-name">Mike Kowalski</div><div class="w-title">General Manager &middot; Northstar Climate</div></div></div><div class="w-badge med"><div class="dot"></div>Medium Intent</div></div>
+                <div class="w-meta"><div class="w-meta-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Denver, CO</div><div class="w-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>22 employees</div><div class="w-meta-item"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>HVAC &amp; Plumbing</div></div>
+                <div class="w-card-footer"><button class="wf-btn primary"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Get Email</button><button class="wf-btn secondary"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>Get Phone</button><button class="wf-btn icon"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></button></div>
+              </div>
+
             </div>
           </div>
         </div>
 
-        <!-- CHIEF OF STAFF -->
+        <!-- DATA ENRICHMENT -->
         <div class="ppanel" id="p1">
           <div class="pp-head">
-            <div class="pp-tab-pos">02 / Chief of Staff</div>
-            <h3 class="pp-title">Everything that matters, before your first coffee.</h3>
+            <div class="pp-tab-pos">02 / Data Enrichment</div>
+            <h3 class="pp-title">Fuel smarter selling with always-fresh data.</h3>
             <div class="pp-chips">
-              <span class="pp-chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Ready by 7am</span>
-              <span class="pp-chip"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Inbox · Calendar · Docs</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 1 0-18 0"/><path d="M3 12c0-5 4-9 9-9"/></svg>Multi-source verification</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Direct dials only</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><line x1="8" y1="11" x2="8" y2="16"/><line x1="8" y1="8" x2="8" y2="8.01"/><line x1="12" y1="16" x2="12" y2="11"/><path d="M16 16v-3a2 2 0 0 0-4 0"/></svg>LinkedIn included</span>
             </div>
             <ul class="pp-bullets">
-              <li>AI ranks your day by what's urgent and what needs a decision</li>
-              <li>Delegation tracking chases every open thread for you</li>
-              <li>Meeting prep and notes assembled automatically</li>
-              <li>Reports drafted from what actually happened</li>
+              <li>Multi-source verification pipeline catches stale data before it reaches you</li>
+              <li>Direct dial mobile numbers — not switchboards, not generic info@ addresses</li>
+              <li>Firmographic depth: revenue band, headcount, tech stack, growth signals</li>
+              <li>Personal LinkedIn URLs so you walk into every call with full context</li>
             </ul>
             <div class="pp-btns">
-              <a href="/chief-of-staff/" class="pp-btn-or">Explore Chief of Staff</a>
-              <a href="/login.html" class="pp-btn-gh">Start free</a>
+              <a href="/login.html" class="pp-btn-or">Get started</a>
+              <a href="/pricing.html" class="pp-btn-gh">See pricing</a>
+              <div class="pp-btn-note">$26.99/month flat · No contracts · Cancel anytime</div>
             </div>
           </div>
           <div class="pp-window">
-            <div class="pw-bar"><div class="pw-dots"><span></span><span></span><span></span></div><div class="pw-url">app.jayisaacai.com/staff</div></div>
+            <div class="pw-bar"><div class="pw-dots"><span></span><span></span><span></span></div><div class="pw-url">app.jayisaacai.com/enrich</div></div>
             <div class="pw-body">
-              <div class="w-section-title">Tuesday — Morning Brief</div>
-              <div class="w-section-sub"><strong style="color:#111827">3 things need you today.</strong> AI handled 11 items overnight.</div>
-              <div class="w-card">
-                <div class="w-card-top"><div class="w-card-left"><div class="w-av">✱</div><div><div class="w-name">Sign off: Q3 vendor contract</div><div class="w-title">Legal flagged 1 clause · due today</div></div></div><div class="w-badge hi"><div class="dot"></div>Decision</div></div>
-                <div class="w-signals"><div class="w-sig">Summary ready</div><div class="w-sig dim">Clause highlighted</div></div>
+              <div class="w-section-title">Contact Enrichment</div>
+              <div class="w-section-sub">James Darvill &middot; Owner, Apex HVAC Solutions &middot; Dallas, TX</div>
+              <div class="w-data-grid">
+                <div class="w-data-item"><div class="w-data-label">Work Email</div><div class="w-data-val verified">james@apexhvactx.com</div><div class="w-data-note">95% confidence &middot; Verified</div></div>
+                <div class="w-data-item"><div class="w-data-label">Direct Phone</div><div class="w-data-val verified">+1 (214) 555-0182</div><div class="w-data-note">Direct dial &middot; Mobile</div></div>
+                <div class="w-data-item"><div class="w-data-label">Company Revenue</div><div class="w-data-val">$500K — $2M</div><div class="w-data-note">Annual estimate</div></div>
+                <div class="w-data-item"><div class="w-data-label">Headcount</div><div class="w-data-val">8 employees</div><div class="w-data-note">+2 YoY growth</div></div>
+                <div class="w-data-item"><div class="w-data-label">LinkedIn</div><div class="w-data-val">linkedin.com/in/j-darvill</div><div class="w-data-note">Active — posted 3d ago</div></div>
+                <div class="w-data-item"><div class="w-data-label">Founded</div><div class="w-data-val">2017</div><div class="w-data-note">7 years in business</div></div>
               </div>
-              <div class="w-card">
-                <div class="w-card-top"><div class="w-card-left"><div class="w-av">↺</div><div><div class="w-name">Follow up: Dana, hiring plan</div><div class="w-title">Quiet 5 days · draft ready</div></div></div><div class="w-badge med"><div class="dot"></div>Nudge</div></div>
-                <div class="w-card-footer"><button class="wf-btn primary">Send draft</button><button class="wf-btn secondary">Edit</button></div>
+              <div class="w-tech-box">
+                <div class="w-data-label">Technology Stack</div>
+                <div class="w-tech-pills">
+                  <span class="w-tech-pill">ServiceTitan</span>
+                  <span class="w-tech-pill">QuickBooks</span>
+                  <span class="w-tech-pill">Google Workspace</span>
+                  <span class="w-tech-pill">Jobber</span>
+                </div>
+              </div>
+              <div class="w-divider"></div>
+              <div class="w-section-title">Company Intelligence</div>
+              <div class="w-section-sub">Apex HVAC Solutions &middot; Dallas, TX</div>
+              <div class="w-data-grid">
+                <div class="w-data-item"><div class="w-data-label">Industry</div><div class="w-data-val">HVAC &amp; Plumbing</div></div>
+                <div class="w-data-item"><div class="w-data-label">Employees</div><div class="w-data-val">8 (growing)</div></div>
+                <div class="w-data-item"><div class="w-data-label">Location</div><div class="w-data-val">Dallas, TX</div></div>
+                <div class="w-data-item"><div class="w-data-label">Website</div><div class="w-data-val">apexhvactx.com</div></div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- CYBERSECURITY -->
+        <!-- OUTREACH SEQUENCES -->
         <div class="ppanel" id="p2">
           <div class="pp-head">
-            <div class="pp-tab-pos">03 / Cybersecurity</div>
-            <h3 class="pp-title">Threats caught and contained around the clock.</h3>
+            <div class="pp-tab-pos">03 / Outreach</div>
+            <h3 class="pp-title">Cold emails that don't sound like cold emails.</h3>
             <div class="pp-chips">
-              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Real-time detection</span>
-              <span class="pp-chip"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Auto response</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>AI-personalized per contact</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>5 credits per email</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Gmail · Outlook ready</span>
             </div>
             <ul class="pp-bullets">
-              <li>Live threat detection across your whole stack</li>
-              <li>Response playbooks contain incidents automatically</li>
-              <li>Scheduled scans surface gaps before attackers do</li>
-              <li>Risk scored live — escalates only when it's real</li>
+              <li>AI Email Writer personalizes every send — no "hope this finds you well"</li>
+              <li>Tone presets: direct, friendly, casual, formal — pick the voice for the prospect</li>
+              <li>Length presets: short (60w), medium (110w), or long (165w) — match the channel</li>
+              <li>One-click copy or open straight in Gmail or Outlook with subject pre-filled</li>
             </ul>
             <div class="pp-btns">
-              <a href="/cybersecurity/" class="pp-btn-or">Explore Cybersecurity</a>
-              <a href="/login.html" class="pp-btn-gh">Start free</a>
+              <a href="/login.html" class="pp-btn-or">Get started</a>
+              <a href="/pricing.html" class="pp-btn-gh">See pricing</a>
+              <div class="pp-btn-note">$26.99/month flat · No contracts · Cancel anytime</div>
             </div>
           </div>
           <div class="pp-window">
-            <div class="pw-bar"><div class="pw-dots"><span></span><span></span><span></span></div><div class="pw-url">app.jayisaacai.com/security</div></div>
+            <div class="pw-bar"><div class="pw-dots"><span></span><span></span><span></span></div><div class="pw-url">app.jayisaacai.com/sequences</div></div>
             <div class="pw-body">
-              <div class="w-section-title">Threat Monitor</div>
-              <div class="w-section-sub"><strong style="color:#111827">2 events overnight.</strong> Both auto-contained — no action needed.</div>
+              <div class="w-section-title">HVAC North America Q3 Outreach</div>
+              <div class="w-section-sub">4,812 contacts enrolled &middot; Active &middot; Started June 2026</div>
+              <div class="w-seq-stats">
+                <div class="w-seq-stat"><span class="w-seq-stat-num">42%</span><span class="w-seq-stat-label">Open Rate</span></div>
+                <div class="w-seq-stat"><span class="w-seq-stat-num">18%</span><span class="w-seq-stat-label">Reply Rate</span></div>
+                <div class="w-seq-stat"><span class="w-seq-stat-num">247</span><span class="w-seq-stat-label">Meetings</span></div>
+              </div>
+              <div class="w-divider"></div>
+              <div class="w-step email">
+                <div class="w-step-header"><div class="w-step-left"><div class="w-step-num">1</div><div class="w-step-type">Email</div></div><div class="w-step-day">Day 1</div></div>
+                <div class="w-step-title">Personalized intro — references industry + location</div>
+                <div class="w-step-desc">AI generates a unique opener for each contact based on their role, company, and location. No two emails are the same.</div>
+                <div class="w-step-metrics"><span class="w-step-m good">42% open rate</span><span class="w-step-m good">8% click rate</span><span class="w-step-m">2,024 sent</span></div>
+              </div>
+              <div class="w-step email">
+                <div class="w-step-header"><div class="w-step-left"><div class="w-step-num">2</div><div class="w-step-type">Email</div></div><div class="w-step-day">Day 4 — if no reply</div></div>
+                <div class="w-step-title">Value-add follow-up</div>
+                <div class="w-step-desc">Sends only to contacts who opened but didn't reply. Delivers relevant industry insight.</div>
+                <div class="w-step-metrics"><span class="w-step-m good">18% reply rate</span><span class="w-step-m">1,450 sent</span></div>
+              </div>
+              <div class="w-step call">
+                <div class="w-step-header"><div class="w-step-left"><div class="w-step-num">3</div><div class="w-step-type">Call Task</div></div><div class="w-step-day">Day 7</div></div>
+                <div class="w-step-title">Direct outreach — AI talking points provided</div>
+                <div class="w-step-desc">Task auto-assigned to your queue. AI generates a custom call script based on the contact's profile.</div>
+                <div class="w-step-metrics"><span class="w-step-m">Auto-assigned</span><span class="w-step-m">AI script ready</span></div>
+              </div>
+              <div class="w-step email">
+                <div class="w-step-header"><div class="w-step-left"><div class="w-step-num">4</div><div class="w-step-type">Email</div></div><div class="w-step-day">Day 14 — final</div></div>
+                <div class="w-step-title">Break-up email</div>
+                <div class="w-step-desc">Soft final CTA. Leaves the door open without burning the relationship.</div>
+                <div class="w-step-metrics"><span class="w-step-m">Final touch</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- INTENT SIGNALS -->
+        <div class="ppanel" id="p3">
+          <div class="pp-head">
+            <div class="pp-tab-pos">04 / Intent Signals</div>
+            <h3 class="pp-title">Reach buyers at exactly the right moment.</h3>
+            <div class="pp-chips">
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Hiring + funding signals</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="14 7 21 7 21 14"/></svg>Tech adoption tracked</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Live intent scoring</span>
+            </div>
+            <ul class="pp-bullets">
+              <li>Hiring signals — companies growing fast right now</li>
+              <li>Funding signals — fresh capital, new budgets unlocked</li>
+              <li>Tech adoption signals — switching tools, evaluating options</li>
+              <li>Intent score on every contact and company</li>
+            </ul>
+            <div class="pp-btns">
+              <a href="/login.html" class="pp-btn-or">Get started</a>
+              <a href="/pricing.html" class="pp-btn-gh">See pricing</a>
+              <div class="pp-btn-note">$26.99/month flat · No contracts · Cancel anytime</div>
+            </div>
+          </div>
+          <div class="pp-window">
+            <div class="pw-bar"><div class="pw-dots"><span></span><span></span><span></span></div><div class="pw-url">app.jayisaacai.com/intent</div></div>
+            <div class="pw-body">
+              <div class="w-intent-header">
+                <div><div class="w-section-title">High Intent Companies</div><div class="w-section-sub">47 new signals today &middot; Updated in real time</div></div>
+                <div class="w-intent-refresh">Refresh</div>
+              </div>
+
               <div class="w-company-card high">
-                <div class="w-company-top"><div><div class="w-company-name">Suspicious login blocked</div><div class="w-company-meta">02:14 UTC · unfamiliar location · admin account</div></div><div class="w-score"><div class="w-score-num" style="color:#16A34A">Low</div><div class="w-score-label">Risk</div></div></div>
-                <div class="w-company-sigs"><div class="w-csig">Auto-contained</div><div class="w-csig dim">MFA challenge sent</div></div>
+                <div class="w-company-top">
+                  <div><div class="w-company-name">Apex HVAC Solutions</div><div class="w-company-meta">Dallas, TX &middot; 8 employees &middot; HVAC &amp; Plumbing</div></div>
+                  <div class="w-score"><div class="w-score-num" style="color:#16A34A">94</div><div class="w-score-label">Intent Score</div></div>
+                </div>
+                <div class="w-company-sigs">
+                  <div class="w-csig"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Hiring 3 HVAC techs</div>
+                  <div class="w-csig"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Opening new location</div>
+                  <div class="w-csig dim"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Researching software</div>
+                </div>
+                <div class="w-contacts-label">Key Decision Makers</div>
+                <div class="w-mini-contact"><div class="w-mini-left"><div class="w-mini-av">JD</div><div><div class="w-mini-name">James Darvill</div><div class="w-mini-title">Owner</div></div></div><button class="w-reach-btn">Reach out</button></div>
               </div>
+
+              <div class="w-company-card high">
+                <div class="w-company-top">
+                  <div><div class="w-company-name">Northstar Climate Control</div><div class="w-company-meta">Denver, CO &middot; 22 employees &middot; HVAC &amp; Plumbing</div></div>
+                  <div class="w-score"><div class="w-score-num" style="color:#16A34A">88</div><div class="w-score-label">Intent Score</div></div>
+                </div>
+                <div class="w-company-sigs">
+                  <div class="w-csig"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Raised $2M seed round</div>
+                  <div class="w-csig"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Hiring SDRs &amp; ops roles</div>
+                </div>
+                <div class="w-contacts-label">Key Decision Makers</div>
+                <div class="w-mini-contact"><div class="w-mini-left"><div class="w-mini-av">MK</div><div><div class="w-mini-name">Mike Kowalski</div><div class="w-mini-title">General Manager</div></div></div><button class="w-reach-btn">Reach out</button></div>
+              </div>
+
               <div class="w-company-card med">
-                <div class="w-company-top"><div><div class="w-company-name">Outdated dependency found</div><div class="w-company-meta">Weekly scan · 1 package · known CVE</div></div><div class="w-score"><div class="w-score-num" style="color:#CA8A04">Med</div><div class="w-score-label">Risk</div></div></div>
-                <div class="w-company-sigs"><div class="w-csig">Patch suggested</div></div>
+                <div class="w-company-top">
+                  <div><div class="w-company-name">Prairie Air Systems</div><div class="w-company-meta">Calgary, AB &middot; 5 employees &middot; HVAC &amp; Plumbing</div></div>
+                  <div class="w-score"><div class="w-score-num" style="color:#CA8A04">61</div><div class="w-score-label">Intent Score</div></div>
+                </div>
+                <div class="w-company-sigs">
+                  <div class="w-csig dim"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>Researching tools</div>
+                </div>
+                <div class="w-contacts-label">Key Decision Makers</div>
+                <div class="w-mini-contact"><div class="w-mini-left"><div class="w-mini-av">SR</div><div><div class="w-mini-name">Sandra Reeves</div><div class="w-mini-title">Founder</div></div></div><button class="w-reach-btn">Reach out</button></div>
               </div>
+
             </div>
           </div>
         </div>
@@ -1329,47 +1472,118 @@
   </div>
 </section>
 
-<!-- ═══ WHO WE ARE ═══ -->
+<!-- ═══ SOLUTIONS ═══ -->
 <section class="solutions">
   <div class="sol-header">
     <div>
-      <div class="sec-eyebrow">Who We Are</div>
-      <h2 class="sec-title">Serious AI tools, built without the enterprise tax.</h2>
-      <p class="sec-sub">JAYISAAC AI builds production-grade AI products for the businesses the big vendors overcharge and overlook — sold at a flat, honest price.</p>
+      <div class="sec-eyebrow">Solutions</div>
+      <h2 class="sec-title">One platform. Every stage of your pipeline.</h2>
+      <p class="sec-sub">From finding leads to closing deals — JAYISAAC AI covers the entire revenue journey.</p>
     </div>
-    <img class="sol-art" src="/public/funnel-3d.jpg" alt="JAYISAAC AI platform illustration" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900" />
+    <img class="sol-art" src="/public/funnel-3d.jpg" alt="Lead prospecting funnel illustration" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900" />
   </div>
-  <div class="who-grid">
-    <div class="who-cell"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><b>Powered by Claude</b><p>The same frontier model behind Cursor, Notion AI, and Slack AI runs under every product.</p></div>
-    <div class="who-cell"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><b>Built in Canada</b><p>Made in Saskatoon, aligned to PIPEDA, GDPR, and CCPA. Your data stays yours — never sold.</p></div>
-    <div class="who-cell"><div class="ic"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><b>Flat, honest pricing</b><p>No per-seat fees, no credit traps, no annual lock-in. One price, cancel anytime.</p></div>
-    <div class="who-cell"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div><b>One platform</b><p>Three products, one login, one bill, shared data. Add what you need as you grow.</p></div>
+  <div class="sol-grid">
+    <div class="sol-card"><div class="sol-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><div class="sol-title">Outbound</div><div class="sol-hook">Turn hours of prospecting into minutes</div><p class="sol-desc">Find and reach your ideal North American buyers with verified contact data, advanced filters, and AI-powered sequences.</p><a href="/login.html" class="sol-link">Learn more <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
+    <div class="sol-card"><div class="sol-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="sol-title">Data Enrichment</div><div class="sol-hook">Always-fresh data that powers smarter selling</div><p class="sol-desc">Enrich any contact or company with verified emails, direct dials, and firmographic data. Bulk enrich your CRM in minutes.</p><a href="/login.html" class="sol-link">Learn more <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
+    <div class="sol-card"><div class="sol-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><div class="sol-title">AI Assistant</div><div class="sol-hook">Write, personalize, and automate at scale</div><p class="sol-desc">Generate personalized email copy, call scripts, and follow-up messages automatically. AI research on every contact.</p><a href="/login.html" class="sol-link">Learn more <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
   </div>
 </section>
 
-<!-- ═══ WHY ONE PLATFORM ═══ -->
+<!-- ═══ INTEGRATIONS ═══ -->
 <section class="int-section">
   <div class="int-inner">
-    <div class="sec-eyebrow" style="text-align:center;margin-bottom:.5rem">Why One Platform</div>
-    <div class="int-title">Three vendors' worth of tools, one account</div>
-    <div class="int-sub">Everything runs on the same login and the same data — no stitching tools together, no juggling bills.</div>
-    <div class="int-grid" style="grid-template-columns:repeat(4,1fr)">
-      <div class="int-pill">One Login</div>
-      <div class="int-pill">Shared Data</div>
-      <div class="int-pill">Flat Pricing</div>
-      <div class="int-pill">Cancel Anytime</div>
-      <div class="int-pill">Powered by Claude</div>
-      <div class="int-pill">PIPEDA</div>
-      <div class="int-pill">GDPR</div>
-      <div class="int-pill">CCPA</div>
+    <div class="sec-eyebrow" style="text-align:center;margin-bottom:.5rem">Integrations</div>
+    <div class="int-title">Works with your existing stack</div>
+    <div class="int-sub">Push contacts directly to the tools your team already uses.</div>
+    <div class="int-grid">
+      <div class="int-pill">Salesforce</div><div class="int-pill">HubSpot</div><div class="int-pill">Pipedrive</div>
+      <div class="int-pill">Outreach</div><div class="int-pill">SalesLoft</div><div class="int-pill">Zapier</div>
+      <div class="int-pill">Slack</div><div class="int-pill">Gmail</div><div class="int-pill">Outlook</div>
+      <div class="int-pill">LinkedIn</div><div class="int-pill">Zoho CRM</div><div class="int-pill">Monday.com</div>
     </div>
+  </div>
+</section>
+
+<!-- ═══ ROLES ═══ -->
+<section class="roles">
+  <div class="sec-eyebrow">Built For Your Role</div>
+  <h2 class="sec-title">Discover tools tailored to how you sell</h2>
+  <p class="sec-sub">JAYISAAC AI adapts to your workflow — whether you're closing enterprise accounts or finding your first hundred customers.</p>
+  <div class="roles-grid">
+    <a href="/login.html" class="role-card"><div class="role-tag">Sales Leaders</div><div class="role-title">Scale outbound without scaling headcount</div><p class="role-desc">Give your team a North American database they'll actually use. Real data, real pipeline, real results.</p></a>
+    <a href="/login.html" class="role-card"><div class="role-tag">Account Executives</div><div class="role-title">Research accounts and reach buyers faster</div><p class="role-desc">Spend less time digging through LinkedIn and more time in conversations that close.</p></a>
+    <a href="/login.html" class="role-card"><div class="role-tag">Sales Development</div><div class="role-title">Hit your meeting quota every single month</div><p class="role-desc">Sequences, verified contacts, and AI personalization — everything an SDR needs to crush quota.</p></a>
+    <a href="/login.html" class="role-card"><div class="role-tag">Recruiters</div><div class="role-title">Source talent before anyone else</div><p class="role-desc">Find candidates and hiring managers across every state, province, industry, and seniority level.</p></a>
+    <a href="/login.html" class="role-card"><div class="role-tag">Marketers</div><div class="role-title">Build precise segments for every campaign</div><p class="role-desc">Firmographic filters that let you target exactly who needs to see your message, every time.</p></a>
+    <a href="/login.html" class="role-card"><div class="role-tag">Founders</div><div class="role-title">Find your first 100 customers today</div><p class="role-desc">No sales team needed. Search, export, reach out — starting from $49/mo USD with a free plan.</p></a>
+  </div>
+</section>
+
+<!-- ═══ COMPARE ═══ -->
+<section class="compare">
+  <div class="sec-eyebrow">Apollo vs JAYISAAC AI</div>
+  <h2 class="sec-title">Half the price. <span class="g">55x more phone numbers.</span></h2>
+  <p class="sec-sub">We pulled Apollo's pricing page side-by-side with ours. The math is brutal — and the math is real. Every number on this page comes from each company's official pricing.</p>
+
+  <div class="vs-cards">
+    <!-- THEM -->
+    <div class="vs-card vs-them">
+      <div class="vs-card-label">APOLLO BASIC</div>
+      <div class="vs-card-price"><span class="vs-amt">$59</span><span class="vs-per">/user/month</span></div>
+      <div class="vs-card-note">$49/user if you commit to a full year upfront</div>
+      <ul class="vs-list">
+        <li><span class="vs-stat vs-stat-bad">~9</span> phone numbers per month <span class="vs-fine">(75 mobile credits ÷ 8 per reveal)</span></li>
+        <li><span class="vs-stat vs-stat-bad">1,000</span> export credits — and they expire monthly</li>
+        <li><span class="vs-x">✕</span> Charged per user (3-person team = $177/mo minimum)</li>
+        <li><span class="vs-x">✕</span> AI email writing locked behind $99/mo Professional plan</li>
+        <li><span class="vs-x">✕</span> Credit overages — <em>$0.20 each</em>, 250-credit minimum buy</li>
+        <li><span class="vs-x">✕</span> Active teams report real costs of $150–$400/user/mo</li>
+      </ul>
+      <div class="vs-card-foot">Per phone number: <strong>$6.56</strong></div>
+    </div>
+
+    <!-- US -->
+    <div class="vs-card vs-us">
+      <div class="vs-card-tag">YOUR MOVE</div>
+      <div class="vs-card-label">JAYISAAC AI</div>
+      <div class="vs-card-price"><span class="vs-amt">$26.99</span><span class="vs-per">/month</span></div>
+      <div class="vs-card-note">No per-user fees. No annual lock-in.</div>
+      <ul class="vs-list">
+        <li><span class="vs-stat vs-stat-good">500</span> phone numbers per month <span class="vs-fine">(55x more than Apollo Basic)</span></li>
+        <li><span class="vs-stat vs-stat-good">Unlimited</span> email reveals — and credits never expire</li>
+        <li><span class="vs-check">✓</span> One flat price for the whole team — no per-seat upcharge</li>
+        <li><span class="vs-check">✓</span> AI Email Writer included — not gated behind a higher plan</li>
+        <li><span class="vs-check">✓</span> AI Leads (natural language search) included</li>
+        <li><span class="vs-check">✓</span> Deepest Canadian coverage of any platform on the market</li>
+      </ul>
+      <div class="vs-card-foot">Per phone number: <strong>$0.054</strong></div>
+    </div>
+  </div>
+
+  <div class="vs-receipt">
+    <div class="vs-receipt-head">The math, in plain English</div>
+    <div class="vs-receipt-grid">
+      <div class="vs-receipt-row">
+        <div class="vs-receipt-num">$32</div>
+        <div class="vs-receipt-text">cheaper than Apollo Basic, every month</div>
+      </div>
+      <div class="vs-receipt-row">
+        <div class="vs-receipt-num">55x</div>
+        <div class="vs-receipt-text">more phone numbers per month</div>
+      </div>
+      <div class="vs-receipt-row">
+        <div class="vs-receipt-num">120x</div>
+        <div class="vs-receipt-text">lower cost per phone number revealed</div>
+      </div>
+    </div>
+    <div class="vs-receipt-note">All Apollo figures verified against Apollo's published 2026 pricing page. We're not making this up — they really do charge 8 credits per phone reveal.</div>
   </div>
 </section>
 
 <!-- ═══ FINAL CTA ═══ -->
 <section class="final-cta">
-  <h2>One platform.<br /><span>Every job that matters.</span></h2>
-  <p>Sell, run, and defend your business from a single account. Start free — no card required.</p>
+  <h2>Stop paying<br /><span>per seat.</span></h2>
+  <p>One flat price. AI-powered prospect search. AI-personalized cold emails. No contracts, no credit traps, no hidden fees — just the tools you actually need.</p>
   <div class="final-form"><input id="ctaEmail" type="email" placeholder="Enter your work email" /><button onclick="goSignup('ctaEmail')">Get started</button></div>
   <div class="final-note">By signing up you agree to our <a href="/terms.html">Terms of Use</a> and <a href="/privacy.html">Privacy Policy</a></div>
 </section>
@@ -1498,7 +1712,7 @@
 /* ── Email signup redirect ── */
 function goSignup(inputId){
   const v = document.getElementById(inputId)?.value || "";
-  window.location.href = "/login.html" + (v ? "?email="+encodeURIComponent(v) : "");
+  window.location.href = "./login.html" + (v ? "?email="+encodeURIComponent(v) : "");
 }
 </script>
 

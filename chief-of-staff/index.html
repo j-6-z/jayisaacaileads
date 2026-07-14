@@ -12,8 +12,7 @@
 <link rel="manifest" href="/my-favicon/site.webmanifest">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="JAYISAAC AI is one platform with three AI products: Lead Generation, Chief of Staff, and Cybersecurity. Built in Canada. Powered by Claude." />
-  <title>JAYISAAC AI — Sell, Run &amp; Defend Your Business with AI</title>
+  <title>JAYISAAC AI — AI Chief of Staff | Your Business, Run by AI</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <script type="module" src="/nav.js"></script>
   <script type="module" src="/footer.js"></script>
@@ -719,7 +718,7 @@
     .role-title { font-size: .93rem; font-weight: 700; color: #111827; margin-bottom: .38rem; }
     .role-desc { font-size: .8rem; color: #6B7280; line-height: 1.55; }
 
-    /* ── COMPARE — comparison cards ── */
+    /* ── COMPARE — value comparison cards ── */
     .compare { padding: 100px 5vw 110px; max-width: 1200px; margin: 0 auto; }
     .compare .sec-eyebrow { display: inline-block; }
     .compare .sec-title .g {
@@ -953,48 +952,24 @@
   </style>
 </head>
 <body>
-<!-- hub-specific tweaks: 3-up product grid + cyan (cyber) accent -->
-<style>
-  .prod-grid { grid-template-columns: repeat(3, 1fr) !important; }
-  @media(max-width:1000px){ .prod-grid { grid-template-columns: 1fr !important; } }
-  .ai-card-cyber:hover { border-color: rgba(34,211,238,.4); box-shadow: 0 20px 50px rgba(34,211,238,.16); }
-  .ai-card-glow.ai-glow-cyber { background: radial-gradient(circle, rgba(34,211,238,.32), transparent 70%); }
-  .ai-icon-cyber { background: linear-gradient(135deg,#67E8F9,#22D3EE,#0891B2); box-shadow: 0 8px 20px rgba(34,211,238,.35); }
-  .ai-tag-cyber { color: #22D3EE; }
-  .ai-chip-cyber { background: rgba(34,211,238,.15); border: 1px solid rgba(34,211,238,.3); color: #A5F3FC; }
-  .ai-card-cyber .ai-card-features li::before { background: #22D3EE; box-shadow: 0 0 8px #22D3EE; }
-  .ai-cta-cyber { background: linear-gradient(135deg,#67E8F9,#0891B2); color: #052E33; box-shadow: 0 8px 24px rgba(34,211,238,.3); }
-  .ai-cta-cyber:hover { box-shadow: 0 12px 32px rgba(34,211,238,.5); }
-  .prod-card-cta-row { margin-top:auto; }
-  /* who-we-are value grid */
-  .who-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:#E5E7EB; border:1px solid #E5E7EB; border-radius:18px; overflow:hidden; margin-top:2.5rem; }
-  @media(max-width:900px){ .who-grid{ grid-template-columns:1fr 1fr; } }
-  @media(max-width:560px){ .who-grid{ grid-template-columns:1fr; } }
-  .who-cell { background:#fff; padding:1.8rem 1.6rem; }
-  .who-cell .ic { width:42px; height:42px; border-radius:11px; background:var(--ordim); border:1px solid var(--ore); display:flex; align-items:center; justify-content:center; margin-bottom:1rem; }
-  .who-cell .ic svg { width:19px; height:19px; stroke:var(--or); fill:none; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
-  .who-cell b { display:block; font-size:.98rem; font-weight:800; color:#111827; margin-bottom:.3rem; }
-  .who-cell p { font-size:.82rem; color:#6B7280; line-height:1.6; }
-</style>
-
 <!-- ═══ HERO ═══ -->
 <section class="hero">
   <canvas id="heroCanvas"></canvas>
-  <div class="hero-eyebrow"><span class="hero-dot"></span>One Platform · Three AI Products</div>
-  <h1>AI that sells, runs,<br><span class="g">and defends your business.</span></h1>
-  <p class="hero-sub">JAYISAAC AI is three products on one platform — find your next customer, run your operations, and lock down your security. Built in Canada. Powered by Claude.</p>
+  <div class="hero-eyebrow"><span class="hero-dot"></span>AI Chief of Staff</div>
+  <h1>The operator you can't afford,<br><span class="g">running your day for you.</span></h1>
+  <p class="hero-sub">AI reads your inbox, calendar, and docs — then briefs you, preps your meetings, and chases the follow-ups you'd otherwise forget. One flat price. No headcount required.</p>
 
   <div class="hero-btns">
     <a class="hero-btn-primary" href="/login.html">Start Free Trial &rarr;</a>
-    <a class="hero-btn-ghost" href="#products">Explore Products</a>
+    <a class="hero-btn-ghost" href="/contact.html">Talk to Sales</a>
   </div>
 
   <div class="trust-section">
     <div class="trust-pill-row">
       <span class="trust-pill">Built in Canada</span>
-      <span class="trust-pill">One login, all three products</span>
-      <span class="trust-pill">Flat pricing</span>
-      <span class="trust-pill">Powered by Claude</span>
+      <span class="trust-pill">Your data stays yours</span>
+      <span class="trust-pill">No per-seat fees</span>
+      <span class="trust-pill">Cancel anytime</span>
     </div>
   </div>
 
@@ -1005,321 +980,465 @@
     <div class="compliance-badge"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>SOC 2 Framework</div>
     <div class="compliance-badge"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>99.9% Uptime</div>
   </div>
+
+  <!-- hero app mockup -->
+  <div class="hero-app-wrap">
+    <div class="hero-app">
+      <div class="app-topbar">
+        <div class="app-dots"><div class="app-dot"></div><div class="app-dot"></div><div class="app-dot"></div></div>
+        <div class="app-url">app.jayisaacai.com/staff</div>
+      </div>
+      <div class="app-body">
+        <div class="app-nav">
+          <div class="app-nav-sec">Today</div>
+          <div class="app-nav-item on"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4zM4 12h10v8H4zM18 12h2v8h-2z"/></svg>Briefing</div>
+          <div class="app-nav-item"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Tasks</div>
+          <div class="app-nav-item"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Calendar</div>
+          <div class="app-nav-sec">Execute</div>
+          <div class="app-nav-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Delegations</div>
+          <div class="app-nav-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07"/></svg>Follow-ups</div>
+          <div class="app-nav-sec">Intelligence</div>
+          <div class="app-nav-item"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Priorities</div>
+          <div class="app-nav-item"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Reports</div>
+        </div>
+        <div class="app-main">
+          <div class="app-search-row">
+            <input class="app-search-in" type="text" value="What needs my attention before my 10am?" readonly />
+            <button class="app-search-go">Ask</button>
+          </div>
+          <div class="app-chips">
+            <span class="app-chip on">Today</span>
+            <span class="app-chip on">Priority: High</span>
+            <span class="app-chip on">Needs decision</span>
+            <span class="app-chip">Delegated</span>
+          </div>
+          <div class="app-thead"><div></div><div class="app-th">Item</div><div class="app-th">Context</div><div class="app-th">Priority</div><div class="app-th">Actions</div></div>
+          <div class="app-row"><div class="app-av">✱</div><div><div class="app-nm">Sign off on Q3 vendor contract</div><div class="app-sm">Due today · legal flagged 1 clause</div></div><div><div class="app-nm">Finance thread</div><div class="app-sm">4 messages summarized</div></div><div><div class="app-intent-hi">High</div></div><div class="app-acts"><div class="app-act"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div><div class="app-act"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div></div></div>
+          <div class="app-row"><div class="app-av">◷</div><div><div class="app-nm">Prep: board sync</div><div class="app-sm">Agenda + last-meeting actions ready</div></div><div><div class="app-nm">3 attendees</div><div class="app-sm">Brief attached</div></div><div><div class="app-intent-hi">High</div></div><div class="app-acts"><div class="app-act"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div><div class="app-act"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div></div></div>
+          <div class="app-row"><div class="app-av">↺</div><div><div class="app-nm">Follow up: Dana re: hiring plan</div><div class="app-sm">No reply in 5 days — draft ready</div></div><div><div class="app-nm">Slack + email</div><div class="app-sm">Thread linked</div></div><div><div class="app-intent-md">Medium</div></div><div class="app-acts"><div class="app-act"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div><div class="app-act"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div></div></div>
+          <div class="app-row"><div class="app-av">◇</div><div><div class="app-nm">Weekly ops report</div><div class="app-sm">Auto-drafted from this week's data</div></div><div><div class="app-nm">Ready to review</div><div class="app-sm">6 sections</div></div><div><div class="app-intent-md">Medium</div></div><div class="app-acts"><div class="app-act"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div><div class="app-act"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ═══ STATS ═══ -->
 <div class="stats-band">
   <div class="stats-inner">
-    <div class="stat-item"><span class="stat-num">3<span></span></span><span class="stat-label">AI Products</span></div>
-    <div class="stat-item"><span class="stat-num">1<span></span></span><span class="stat-label">Login &amp; One Bill</span></div>
-    <div class="stat-item"><span class="stat-num">24/7<span></span></span><span class="stat-label">Always Working</span></div>
-    <div class="stat-item"><span class="stat-num">🍁<span></span></span><span class="stat-label">Built in Canada</span></div>
+    <div class="stat-item"><span class="stat-num">$49<span></span></span><span class="stat-label">Flat Monthly Price</span></div>
+    <div class="stat-item"><span class="stat-num">24/7<span></span></span><span class="stat-label">Always On Duty</span></div>
+    <div class="stat-item"><span class="stat-num">1<span></span></span><span class="stat-label">Inbox, Calendar &amp; Docs, Unified</span></div>
+    <div class="stat-item"><span class="stat-num">0<span></span></span><span class="stat-label">Extra Headcount</span></div>
   </div>
 </div>
 
-<!-- ═══ THREE PRODUCTS ═══ -->
-<section class="ai-showcase" id="products">
+<!-- ═══ AI SHOWCASE ═══ -->
+<section class="ai-showcase">
   <div class="ai-showcase-bg"></div>
   <div class="ai-showcase-inner">
     <div class="ai-showcase-head">
-      <div class="ai-eyebrow"><span class="ai-eyebrow-pip"></span>The Platform</div>
-      <h2>Three products. <span class="ai-grad-text">One login, one bill.</span></h2>
-      <p class="ai-showcase-sub">Start with the one you need today — run all three when you're ready. Shared account, shared data, one flat platform.</p>
+      <div class="ai-eyebrow"><span class="ai-eyebrow-pip"></span>AI-Native Operator</div>
+      <h2>Two AI tools that <span class="ai-grad-text">run point on your day</span> so you don't have to.</h2>
+      <p class="ai-showcase-sub">Built into the platform, not bolted on. Powered by Claude — the same model behind Cursor, Notion AI, and Slack AI.</p>
     </div>
+    <div class="ai-showcase-grid">
 
-    <div class="ai-showcase-grid prod-grid">
-
-      <!-- LEAD GENERATION -->
+      <!-- AI Briefings card -->
       <div class="ai-card ai-card-leads">
         <div class="ai-card-glow"></div>
         <div class="ai-card-header">
           <div class="ai-card-icon ai-icon-leads">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16v4H4z"/><path d="M4 12h10v8H4z"/><path d="M18 12h2v8h-2z"/></svg>
           </div>
           <div class="ai-card-meta">
-            <div class="ai-card-tag ai-tag-leads">AI LEAD GENERATION</div>
-            <div class="ai-card-subtitle">Find your next customer</div>
+            <div class="ai-card-tag ai-tag-leads">AI BRIEFINGS</div>
+            <div class="ai-card-subtitle">Your day, decided</div>
           </div>
         </div>
-        <h3>Find every decision-maker. Verified.</h3>
-        <p class="ai-card-desc">Natural-language prospect search, verified emails and direct dials, and AI-written cold outreach — the Apollo alternative built for North American teams.</p>
+        <h3>Wake up to a briefing, not a backlog.</h3>
+        <p class="ai-card-desc">Every morning, AI reads across your inbox, calendar, and threads and hands you one clear brief: what's urgent, what needs a decision, and what it already handled. No more opening five tabs to figure out where to start.</p>
+
         <div class="ai-demo ai-demo-leads">
-          <div class="ai-demo-label">YOU TYPE</div>
-          <div class="ai-demo-input"><span class="ai-demo-caret">›</span><span class="ai-demo-text">HVAC owners in Alberta under 20 staff</span></div>
+          <div class="ai-demo-label">YOU ASK</div>
+          <div class="ai-demo-input">
+            <span class="ai-demo-caret">›</span>
+            <span class="ai-demo-text">What actually matters today?</span>
+          </div>
           <div class="ai-demo-arrow">↓</div>
-          <div class="ai-demo-chips"><span class="ai-chip ai-chip-leads">Verified emails</span><span class="ai-chip ai-chip-leads">Direct dials</span><span class="ai-chip ai-chip-leads">Instant export</span></div>
+          <div class="ai-demo-chips">
+            <span class="ai-chip ai-chip-leads">1 contract to sign</span>
+            <span class="ai-chip ai-chip-leads">2 meetings prepped</span>
+            <span class="ai-chip ai-chip-leads">3 follow-ups drafted</span>
+            <span class="ai-chip ai-chip-leads">0 fires</span>
+          </div>
         </div>
+
         <ul class="ai-card-features">
-          <li>Plain-English search across the full database</li>
-          <li>Verified emails + direct dials on every reveal</li>
-          <li>AI Email Writer that gets replies</li>
-          <li>Flat price — no per-seat fees</li>
+          <li>Pulls from inbox, calendar, and connected docs</li>
+          <li>Ranks by urgency and what only you can decide</li>
+          <li>Surfaces what it already handled on your behalf</li>
+          <li>One brief, every morning — read it in 90 seconds</li>
         </ul>
-        <a class="ai-card-cta ai-cta-leads" href="/lead-generation/">Explore Lead Generation <span>→</span></a>
+        <a class="ai-card-cta ai-cta-leads" href="/login.html">Try AI Briefings <span>→</span></a>
       </div>
 
-      <!-- CHIEF OF STAFF -->
+      <!-- AI Delegation card -->
       <div class="ai-card ai-card-email">
         <div class="ai-card-glow ai-glow-email"></div>
         <div class="ai-card-header">
           <div class="ai-card-icon ai-icon-email">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16v4H4z"/><path d="M4 12h10v8H4z"/><path d="M18 12h2v8h-2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
           </div>
           <div class="ai-card-meta">
-            <div class="ai-card-tag ai-tag-email">AI CHIEF OF STAFF</div>
-            <div class="ai-card-subtitle">Run the operation</div>
+            <div class="ai-card-tag ai-tag-email">AI DELEGATION</div>
+            <div class="ai-card-subtitle">Nothing slips</div>
           </div>
         </div>
-        <h3>The operator you can't afford, on duty 24/7.</h3>
-        <p class="ai-card-desc">AI reads your inbox, calendar, and docs — then briefs you, preps your meetings, and chases the follow-ups you'd otherwise forget. No headcount required.</p>
-        <div class="ai-demo ai-demo-email">
-          <div class="ai-demo-label">YOUR MORNING BRIEF</div>
-          <div class="ai-email-preview">
-            <div class="ai-email-subject">3 things need you today</div>
-            <div class="ai-email-divider"></div>
-            <div class="ai-email-body">Sign the Q3 contract (legal flagged 1 clause), prep for your 10am board sync (brief attached), and Dana's hiring reply is 5 days quiet — nudge drafted.</div>
-            <div class="ai-email-tone"><span>Ready 7:00am</span><span>90-sec read</span><span class="ai-credit">Auto</span></div>
-          </div>
-        </div>
-        <ul class="ai-card-features">
-          <li>A prioritized morning brief, every day</li>
-          <li>Delegation tracking that never drops a thread</li>
-          <li>Meeting prep and notes, handled</li>
-          <li>Reports that draft themselves</li>
-        </ul>
-        <a class="ai-card-cta ai-cta-email" href="/chief-of-staff/">Explore Chief of Staff <span>→</span></a>
-      </div>
+        <h3>Hand it off once. It chases the rest.</h3>
+        <p class="ai-card-desc">Tell it who owns what, and AI tracks every open thread — nudging people, drafting the follow-up, and flagging what's gone quiet. The stuff that used to fall through the cracks now has a full-time owner.</p>
 
-      <!-- CYBERSECURITY -->
-      <div class="ai-card ai-card-cyber">
-        <div class="ai-card-glow ai-glow-cyber"></div>
-        <div class="ai-card-header">
-          <div class="ai-card-icon ai-icon-cyber">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <div class="ai-card-meta">
-            <div class="ai-card-tag ai-tag-cyber">AI CYBERSECURITY</div>
-            <div class="ai-card-subtitle">Defend the business</div>
+        <div class="ai-demo ai-demo-email">
+          <div class="ai-demo-label">AI DRAFTS</div>
+          <div class="ai-email-preview">
+            <div class="ai-email-subject">Quick nudge on the hiring plan</div>
+            <div class="ai-email-divider"></div>
+            <div class="ai-email-body">Hey Dana — circling back on the Q3 hiring plan. You mentioned Thursday; anything blocking sign-off? Happy to jump on 10 min if that's faster.</div>
+            <div class="ai-email-tone">
+              <span>Tone: Direct</span><span>Waited: 5 days</span><span class="ai-credit">Auto-drafted</span>
+            </div>
           </div>
         </div>
-        <h3>Threats caught before they land.</h3>
-        <p class="ai-card-desc">AI-driven detection, response, and posture monitoring that watches your stack around the clock and escalates only what actually needs a human.</p>
-        <div class="ai-demo ai-demo-leads" style="border-color:rgba(34,211,238,.18)">
-          <div class="ai-demo-label">LIVE MONITOR</div>
-          <div class="ai-demo-input"><span class="ai-demo-caret" style="color:#22D3EE">›</span><span class="ai-demo-text">Suspicious login blocked · 02:14 UTC</span></div>
-          <div class="ai-demo-arrow" style="color:#22D3EE">↓</div>
-          <div class="ai-demo-chips"><span class="ai-chip ai-chip-cyber">Auto-contained</span><span class="ai-chip ai-chip-cyber">Risk: Low</span><span class="ai-chip ai-chip-cyber">No action needed</span></div>
-        </div>
+
         <ul class="ai-card-features">
-          <li>Real-time threat detection and alerting</li>
-          <li>Automated response playbooks</li>
-          <li>Vulnerability scans on a schedule</li>
-          <li>Always-current risk scoring</li>
+          <li>Tracks every open loop across email and Slack</li>
+          <li>Drafts the follow-up in your voice, ready to send</li>
+          <li>Flags threads that have gone quiet before they die</li>
+          <li>One-click send, or let it nudge on a schedule</li>
         </ul>
-        <a class="ai-card-cta ai-cta-cyber" href="/cybersecurity/">Explore Cybersecurity <span>→</span></a>
+        <a class="ai-card-cta ai-cta-email" href="/login.html">Try AI Delegation <span>→</span></a>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- ═══ WHAT WE DO — one row per product ═══ -->
+<!-- ═══ IMAGE FEATURE 1: DAILY BRIEFING ═══ -->
 <section class="imgfeat">
   <div class="imgfeat-inner">
     <div>
-      <div class="imgfeat-eyebrow"><span class="imgfeat-pip"></span>01 · Sell</div>
-      <h2>Find your next customer <span class="g">before your competitor does</span></h2>
-      <p class="imgfeat-desc">AI Lead Generation turns plain-English searches into verified contacts — real emails, real direct dials — then writes the cold outreach that actually gets a reply. The Apollo alternative, at a flat price.</p>
+      <div class="imgfeat-eyebrow"><span class="imgfeat-pip"></span>Daily Briefing</div>
+      <h2>Start every day <span class="g">already caught up</span></h2>
+      <p class="imgfeat-desc">Instead of triaging your own inbox at 8am, read one brief that already did it for you. Urgent items first, decisions flagged, and a plain-English summary of every thread you were CC'd on overnight.</p>
       <ul class="imgfeat-list">
-        <li>Natural-language prospect search</li>
-        <li>Verified emails and direct dials</li>
-        <li>AI-written outreach that lands</li>
-        <li>Deepest Canadian coverage on the market</li>
+        <li>Overnight inbox and Slack, summarized</li>
+        <li>Calendar for the day with prep attached</li>
+        <li>Decisions that need you, pulled to the top</li>
+        <li>Delivered in-app, by email, or both</li>
       </ul>
-      <a class="imgfeat-link" href="/lead-generation/">Explore Lead Generation →</a>
+      <a class="imgfeat-link" href="/login.html">See a sample briefing →</a>
     </div>
     <div class="imgfeat-img">
-      <img src="/public/feat-search.jpg" alt="AI Lead Generation search dashboard" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900">
+      <img src="/public/feat-search.jpg" alt="Daily AI briefing dashboard" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900">
     </div>
   </div>
 </section>
 
+<!-- ═══ IMAGE FEATURE 2: MEETING PREP ═══ -->
 <section class="imgfeat dark">
   <div class="imgfeat-inner rev">
     <div>
-      <div class="imgfeat-eyebrow"><span class="imgfeat-pip"></span>02 · Run</div>
-      <h2>Run the business, <span class="g">not the busywork</span></h2>
-      <p class="imgfeat-desc">AI Chief of Staff reads your inbox, calendar, and docs, then hands you a prioritized brief every morning, preps your meetings, chases your follow-ups, and drafts your reports. The operator you couldn't otherwise afford.</p>
+      <div class="imgfeat-eyebrow"><span class="imgfeat-pip"></span>Meeting Prep</div>
+      <h2>Walk into every meeting <span class="g">fully briefed</span></h2>
+      <p class="imgfeat-desc">Before each meeting, AI assembles who's attending, what happened last time, the open action items, and a suggested agenda — so you're never the person asking "wait, where did we land on this?"</p>
       <ul class="imgfeat-list">
-        <li>A prioritized brief, every morning</li>
-        <li>Delegation that never drops a thread</li>
-        <li>Meeting prep and notes, automatic</li>
-        <li>Status reports that write themselves</li>
+        <li>Attendee context and recent history</li>
+        <li>Open action items from the last session</li>
+        <li>Suggested agenda you can edit in a click</li>
+        <li>Auto-notes and follow-ups after it ends</li>
       </ul>
-      <a class="imgfeat-link" href="/chief-of-staff/">Explore Chief of Staff →</a>
+      <a class="imgfeat-link" href="/login.html">See meeting prep →</a>
     </div>
     <div class="imgfeat-img">
-      <img src="/public/feat-data.jpg" alt="AI Chief of Staff briefing dashboard" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900">
+      <img src="/public/feat-data.jpg" alt="AI meeting prep and agenda" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900">
     </div>
   </div>
 </section>
 
+<!-- ═══ IMAGE FEATURE 3: REPORTS ═══ -->
 <section class="imgfeat">
   <div class="imgfeat-inner">
     <div>
-      <div class="imgfeat-eyebrow"><span class="imgfeat-pip"></span>03 · Defend</div>
-      <h2>Lock down what <span class="g">you've built</span></h2>
-      <p class="imgfeat-desc">AI Cybersecurity watches your stack around the clock — detecting threats, running response playbooks, and scoring your risk in real time. It handles the noise and escalates only what needs you.</p>
+      <div class="imgfeat-eyebrow"><span class="imgfeat-pip"></span>Reports &amp; Rollups</div>
+      <h2>Status reports that <span class="g">write themselves</span></h2>
+      <p class="imgfeat-desc">Weekly ops update, investor note, team status — AI drafts it from what actually happened across your tools, in your format. You review and send instead of starting from a blank page every Friday.</p>
       <ul class="imgfeat-list">
-        <li>Real-time threat detection</li>
-        <li>Automated response playbooks</li>
-        <li>Scheduled vulnerability scans</li>
-        <li>Live, always-current risk posture</li>
+        <li>Drafted from real activity, not manual input</li>
+        <li>Your recurring formats, saved and reused</li>
+        <li>Export to doc, email, or Slack in one click</li>
+        <li>Scheduled — it's ready before you ask</li>
       </ul>
-      <a class="imgfeat-link" href="/cybersecurity/">Explore Cybersecurity →</a>
+      <a class="imgfeat-link" href="/login.html">See auto-reports →</a>
     </div>
     <div class="imgfeat-img">
-      <img src="/public/feat-export.jpg" alt="AI Cybersecurity monitoring dashboard" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900">
+      <img src="/public/feat-export.jpg" alt="Automated status report workspace" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900">
     </div>
   </div>
 </section>
 
-<!-- ═══ SEE IT IN ACTION (tabbed) ═══ -->
+<!-- ═══ PLATFORM ═══ -->
 <section class="platform">
   <div class="plat-inner">
     <div class="plat-header">
-      <div class="plat-eyebrow"><span class="plat-pip"></span>See It In Action</div>
-      <h2 class="plat-title">One platform.<br /><span class="g">Three jobs, done.</span></h2>
-      <p class="plat-sub">Every product lives in the same account, on the same data, under one flat bill. Flip through to see each one at work.</p>
+      <div class="plat-eyebrow"><span class="plat-pip"></span>The Platform</div>
+      <h2 class="plat-title">One operator.<br /><span class="g">Every part of your day.</span></h2>
+      <p class="plat-sub">From your morning brief to your Friday report, your AI Chief of Staff runs the connective tissue of the business — briefings, tasks, meetings, and the decisions in between. All in one place. All for $49 a month.</p>
     </div>
 
     <div class="plat-layout">
+
+      <!-- left tabs -->
       <div class="plat-tabs">
         <div class="ptab on" onclick="sw(0)">
-          <div class="ptab-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
-          <div><div class="ptab-name">Lead Generation</div><div class="ptab-sub">Plain English in. Verified contacts out.</div></div>
+          <div class="ptab-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4zM4 12h10v8H4zM18 12h2v8h-2z"/></svg></div>
+          <div><div class="ptab-name">Briefings</div><div class="ptab-sub">Your day, summarized every morning.</div></div>
         </div>
         <div class="ptab" onclick="sw(1)">
-          <div class="ptab-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4zM4 12h10v8H4zM18 12h2v8h-2z"/></svg></div>
-          <div><div class="ptab-name">Chief of Staff</div><div class="ptab-sub">Your day, briefed and handled.</div></div>
+          <div class="ptab-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+          <div><div class="ptab-name">Task &amp; Delegation</div><div class="ptab-sub">Hand it off. Nothing slips.</div></div>
         </div>
         <div class="ptab" onclick="sw(2)">
-          <div class="ptab-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <div><div class="ptab-name">Cybersecurity</div><div class="ptab-sub">Threats caught around the clock.</div></div>
+          <div class="ptab-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+          <div><div class="ptab-name">Meeting Prep</div><div class="ptab-sub">Walk in ready. Every time.</div></div>
+        </div>
+        <div class="ptab" onclick="sw(3)">
+          <div class="ptab-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div><div class="ptab-name">Priorities</div><div class="ptab-sub">What needs you, ranked live.</div></div>
         </div>
       </div>
 
+      <!-- right panels -->
       <div class="plat-panels">
 
-        <!-- LEAD GEN -->
+        <!-- BRIEFINGS -->
         <div class="ppanel on" id="p0">
           <div class="pp-head">
-            <div class="pp-tab-pos">01 / Lead Generation</div>
-            <h3 class="pp-title">Find North American decision-makers in minutes.</h3>
-            <div class="pp-chips">
-              <span class="pp-chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Natural-language search</span>
-              <span class="pp-chip"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Verified emails + dials</span>
-            </div>
-            <ul class="pp-bullets">
-              <li>Type plain English — AI turns it into perfect filters</li>
-              <li>Verified email and direct dial on every contact</li>
-              <li>AI writes the outreach that gets a reply</li>
-              <li>One flat price — no per-seat fees</li>
-            </ul>
-            <div class="pp-btns">
-              <a href="/lead-generation/" class="pp-btn-or">Explore Lead Generation</a>
-              <a href="/login.html" class="pp-btn-gh">Start free</a>
-            </div>
-          </div>
-          <div class="pp-window">
-            <div class="pw-bar"><div class="pw-dots"><span></span><span></span><span></span></div><div class="pw-url">app.jayisaacai.com/search</div></div>
-            <div class="pw-body">
-              <div class="w-section-title">Search Results</div>
-              <div class="w-section-sub"><strong style="color:#111827">23,847 contacts</strong> match — HVAC &amp; Plumbing · Owner · North America · 1–50 staff</div>
-              <div class="w-card">
-                <div class="w-card-top"><div class="w-card-left"><div class="w-av">JD</div><div><div class="w-name">James Darvill</div><div class="w-title">Owner · Apex HVAC Solutions</div></div></div><div class="w-badge hi"><div class="dot"></div>High Intent</div></div>
-                <div class="w-meta"><div class="w-meta-item">Dallas, TX</div><div class="w-meta-item">8 employees</div></div>
-                <div class="w-signals"><div class="w-sig">Hiring 3 techs</div><div class="w-sig">New location</div></div>
-              </div>
-              <div class="w-card">
-                <div class="w-card-top"><div class="w-card-left"><div class="w-av">SR</div><div><div class="w-name">Sandra Reeves</div><div class="w-title">Founder · Prairie Air Systems</div></div></div><div class="w-badge hi"><div class="dot"></div>High Intent</div></div>
-                <div class="w-meta"><div class="w-meta-item">Calgary, AB</div><div class="w-meta-item">5 employees</div></div>
-                <div class="w-signals"><div class="w-sig">Raised seed funding</div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- CHIEF OF STAFF -->
-        <div class="ppanel" id="p1">
-          <div class="pp-head">
-            <div class="pp-tab-pos">02 / Chief of Staff</div>
+            <div class="pp-tab-pos">01 / Briefings</div>
             <h3 class="pp-title">Everything that matters, before your first coffee.</h3>
             <div class="pp-chips">
               <span class="pp-chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Ready by 7am</span>
               <span class="pp-chip"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Inbox · Calendar · Docs</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>90-second read</span>
             </div>
             <ul class="pp-bullets">
-              <li>AI ranks your day by what's urgent and what needs a decision</li>
-              <li>Delegation tracking chases every open thread for you</li>
-              <li>Meeting prep and notes assembled automatically</li>
-              <li>Reports drafted from what actually happened</li>
+              <li>AI reads overnight activity and ranks it by what's urgent</li>
+              <li>Decisions only you can make are pulled to the very top</li>
+              <li>Shows what it already handled so you can move on</li>
+              <li>Delivered in-app or straight to your inbox each morning</li>
             </ul>
             <div class="pp-btns">
-              <a href="/chief-of-staff/" class="pp-btn-or">Explore Chief of Staff</a>
-              <a href="/login.html" class="pp-btn-gh">Start free</a>
+              <a href="/login.html" class="pp-btn-or">Get started</a>
+              <a href="/pricing.html" class="pp-btn-gh">See pricing</a>
+              <div class="pp-btn-note">$49/month flat · No contracts · Cancel anytime</div>
             </div>
           </div>
           <div class="pp-window">
-            <div class="pw-bar"><div class="pw-dots"><span></span><span></span><span></span></div><div class="pw-url">app.jayisaacai.com/staff</div></div>
+            <div class="pw-bar"><div class="pw-dots"><span></span><span></span><span></span></div><div class="pw-url">app.jayisaacai.com/briefing</div></div>
             <div class="pw-body">
-              <div class="w-section-title">Tuesday — Morning Brief</div>
-              <div class="w-section-sub"><strong style="color:#111827">3 things need you today.</strong> AI handled 11 items overnight.</div>
+              <div class="w-section-title">Tuesday, July 14 — Morning Brief</div>
+              <div class="w-section-sub"><strong style="color:#111827">3 things need you today.</strong> AI handled 11 items overnight — summary below.</div>
+
               <div class="w-card">
-                <div class="w-card-top"><div class="w-card-left"><div class="w-av">✱</div><div><div class="w-name">Sign off: Q3 vendor contract</div><div class="w-title">Legal flagged 1 clause · due today</div></div></div><div class="w-badge hi"><div class="dot"></div>Decision</div></div>
+                <div class="w-card-top"><div class="w-card-left"><div class="w-av">✱</div><div><div class="w-name">Sign off: Q3 vendor contract</div><div class="w-title">Legal flagged one clause · due today</div></div></div><div class="w-badge hi"><div class="dot"></div>Decision</div></div>
+                <div class="w-meta"><div class="w-meta-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Finance thread · 4 msgs</div><div class="w-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>2 min to review</div></div>
                 <div class="w-signals"><div class="w-sig">Summary ready</div><div class="w-sig dim">Clause highlighted</div></div>
               </div>
+
               <div class="w-card">
-                <div class="w-card-top"><div class="w-card-left"><div class="w-av">↺</div><div><div class="w-name">Follow up: Dana, hiring plan</div><div class="w-title">Quiet 5 days · draft ready</div></div></div><div class="w-badge med"><div class="dot"></div>Nudge</div></div>
-                <div class="w-card-footer"><button class="wf-btn primary">Send draft</button><button class="wf-btn secondary">Edit</button></div>
+                <div class="w-card-top"><div class="w-card-left"><div class="w-av">◷</div><div><div class="w-name">Prep: board sync, 10:00am</div><div class="w-title">Agenda + last actions assembled</div></div></div><div class="w-badge hi"><div class="dot"></div>Meeting</div></div>
+                <div class="w-meta"><div class="w-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>3 attendees</div><div class="w-meta-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Brief attached</div></div>
+                <div class="w-signals"><div class="w-sig">2 open actions</div><div class="w-sig dim">Agenda drafted</div></div>
+              </div>
+
+              <div class="w-card">
+                <div class="w-card-top"><div class="w-card-left"><div class="w-av">↺</div><div><div class="w-name">Follow up: Dana, hiring plan</div><div class="w-title">Quiet 5 days · draft ready to send</div></div></div><div class="w-badge med"><div class="dot"></div>Nudge</div></div>
+                <div class="w-meta"><div class="w-meta-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Email + Slack</div></div>
+                <div class="w-card-footer"><button class="wf-btn primary"><svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>Send draft</button><button class="wf-btn secondary"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>Edit</button></div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- CYBERSECURITY -->
-        <div class="ppanel" id="p2">
+        <!-- TASK & DELEGATION -->
+        <div class="ppanel" id="p1">
           <div class="pp-head">
-            <div class="pp-tab-pos">03 / Cybersecurity</div>
-            <h3 class="pp-title">Threats caught and contained around the clock.</h3>
+            <div class="pp-tab-pos">02 / Task &amp; Delegation</div>
+            <h3 class="pp-title">Hand it off once. It owns the follow-through.</h3>
             <div class="pp-chips">
-              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Real-time detection</span>
-              <span class="pp-chip"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Auto response</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/></svg>Every loop tracked</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07"/></svg>Auto follow-ups</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>In your voice</span>
             </div>
             <ul class="pp-bullets">
-              <li>Live threat detection across your whole stack</li>
-              <li>Response playbooks contain incidents automatically</li>
-              <li>Scheduled scans surface gaps before attackers do</li>
-              <li>Risk scored live — escalates only when it's real</li>
+              <li>Assign an owner and a due date — AI watches the thread</li>
+              <li>Drafts the nudge automatically when something stalls</li>
+              <li>Escalates back to you only when it actually needs you</li>
+              <li>Every open item in one board, always current</li>
             </ul>
             <div class="pp-btns">
-              <a href="/cybersecurity/" class="pp-btn-or">Explore Cybersecurity</a>
-              <a href="/login.html" class="pp-btn-gh">Start free</a>
+              <a href="/login.html" class="pp-btn-or">Get started</a>
+              <a href="/pricing.html" class="pp-btn-gh">See pricing</a>
+              <div class="pp-btn-note">$49/month flat · No contracts · Cancel anytime</div>
             </div>
           </div>
           <div class="pp-window">
-            <div class="pw-bar"><div class="pw-dots"><span></span><span></span><span></span></div><div class="pw-url">app.jayisaacai.com/security</div></div>
+            <div class="pw-bar"><div class="pw-dots"><span></span><span></span><span></span></div><div class="pw-url">app.jayisaacai.com/delegations</div></div>
             <div class="pw-body">
-              <div class="w-section-title">Threat Monitor</div>
-              <div class="w-section-sub"><strong style="color:#111827">2 events overnight.</strong> Both auto-contained — no action needed.</div>
+              <div class="w-section-title">Open Delegations</div>
+              <div class="w-section-sub">14 active &middot; 3 stalled &middot; AI is chasing 5 automatically</div>
+              <div class="w-seq-stats">
+                <div class="w-seq-stat"><span class="w-seq-stat-num">14</span><span class="w-seq-stat-label">Active</span></div>
+                <div class="w-seq-stat"><span class="w-seq-stat-num">3</span><span class="w-seq-stat-label">Stalled</span></div>
+                <div class="w-seq-stat"><span class="w-seq-stat-num">9</span><span class="w-seq-stat-label">Closed this week</span></div>
+              </div>
+              <div class="w-divider"></div>
+              <div class="w-step email">
+                <div class="w-step-header"><div class="w-step-left"><div class="w-step-num">1</div><div class="w-step-type">Owner</div></div><div class="w-step-day">Dana · hiring plan</div></div>
+                <div class="w-step-title">Stalled 5 days — nudge drafted</div>
+                <div class="w-step-desc">No reply since last Thursday. AI wrote a short follow-up in your voice and is holding it for your one-click send.</div>
+                <div class="w-step-metrics"><span class="w-step-m good">Draft ready</span><span class="w-step-m">Email + Slack</span></div>
+              </div>
+              <div class="w-step call">
+                <div class="w-step-header"><div class="w-step-left"><div class="w-step-num">2</div><div class="w-step-type">Owner</div></div><div class="w-step-day">Marcus · vendor pricing</div></div>
+                <div class="w-step-title">Waiting on quote — chased twice</div>
+                <div class="w-step-desc">AI followed up on Mon and Wed. Escalated to you because it's now blocking the contract decision.</div>
+                <div class="w-step-metrics"><span class="w-step-m">2 nudges sent</span><span class="w-step-m good">Escalated</span></div>
+              </div>
+              <div class="w-step email">
+                <div class="w-step-header"><div class="w-step-left"><div class="w-step-num">3</div><div class="w-step-type">Owner</div></div><div class="w-step-day">Priya · deck review</div></div>
+                <div class="w-step-title">On track — due Friday</div>
+                <div class="w-step-desc">Confirmed receipt, no action needed. AI will re-check Thursday afternoon.</div>
+                <div class="w-step-metrics"><span class="w-step-m good">Confirmed</span><span class="w-step-m">Auto re-check</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MEETING PREP -->
+        <div class="ppanel" id="p2">
+          <div class="pp-head">
+            <div class="pp-tab-pos">03 / Meeting Prep</div>
+            <h3 class="pp-title">Never walk in cold again.</h3>
+            <div class="pp-chips">
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Auto-assembled</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Attendee context</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>Editable agenda</span>
+            </div>
+            <ul class="pp-bullets">
+              <li>Who's attending and what you last discussed with them</li>
+              <li>Open action items carried over from last time</li>
+              <li>A suggested agenda you can reorder in a click</li>
+              <li>Notes and follow-ups drafted the moment it ends</li>
+            </ul>
+            <div class="pp-btns">
+              <a href="/login.html" class="pp-btn-or">Get started</a>
+              <a href="/pricing.html" class="pp-btn-gh">See pricing</a>
+              <div class="pp-btn-note">$49/month flat · No contracts · Cancel anytime</div>
+            </div>
+          </div>
+          <div class="pp-window">
+            <div class="pw-bar"><div class="pw-dots"><span></span><span></span><span></span></div><div class="pw-url">app.jayisaacai.com/meeting</div></div>
+            <div class="pw-body">
+              <div class="w-section-title">Board Sync — 10:00am</div>
+              <div class="w-section-sub">3 attendees &middot; last met June 30 &middot; brief auto-generated</div>
+
+              <div class="w-card">
+                <div class="w-card-top"><div class="w-card-left"><div class="w-av">RL</div><div><div class="w-name">Recap: last session</div><div class="w-title">Where you left off, in 4 lines</div></div></div><div class="w-badge hi"><div class="dot"></div>Context</div></div>
+                <div class="w-signals"><div class="w-sig">Runway approved</div><div class="w-sig">Hiring paused</div><div class="w-sig dim">Pricing revisit</div></div>
+              </div>
+
+              <div class="w-card">
+                <div class="w-card-top"><div class="w-card-left"><div class="w-av">✓</div><div><div class="w-name">Open action items</div><div class="w-title">Carried over from June 30</div></div></div><div class="w-badge med"><div class="dot"></div>2 open</div></div>
+                <div class="w-meta"><div class="w-meta-item"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/></svg>Send updated model — you</div><div class="w-meta-item"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/></svg>Confirm Q3 targets — Priya</div></div>
+              </div>
+
+              <div class="w-card">
+                <div class="w-card-top"><div class="w-card-left"><div class="w-av">≡</div><div><div class="w-name">Suggested agenda</div><div class="w-title">Drag to reorder · edit inline</div></div></div><div class="w-badge hi"><div class="dot"></div>Ready</div></div>
+                <div class="w-card-footer"><button class="wf-btn primary"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Use agenda</button><button class="wf-btn secondary"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>Edit</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRIORITIES -->
+        <div class="ppanel" id="p3">
+          <div class="pp-head">
+            <div class="pp-tab-pos">04 / Priorities</div>
+            <h3 class="pp-title">Always know the one thing to do next.</h3>
+            <div class="pp-chips">
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Live ranking</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Deadline-aware</span>
+              <span class="pp-chip"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg>Impact-scored</span>
+            </div>
+            <ul class="pp-bullets">
+              <li>Every open item scored by urgency and impact</li>
+              <li>Re-ranks live as deadlines move and threads change</li>
+              <li>Separates "you decide" from "AI can handle"</li>
+              <li>One focused list instead of ten scattered ones</li>
+            </ul>
+            <div class="pp-btns">
+              <a href="/login.html" class="pp-btn-or">Get started</a>
+              <a href="/pricing.html" class="pp-btn-gh">See pricing</a>
+              <div class="pp-btn-note">$49/month flat · No contracts · Cancel anytime</div>
+            </div>
+          </div>
+          <div class="pp-window">
+            <div class="pw-bar"><div class="pw-dots"><span></span><span></span><span></span></div><div class="pw-url">app.jayisaacai.com/priorities</div></div>
+            <div class="pw-body">
+              <div class="w-intent-header">
+                <div><div class="w-section-title">Priority Queue</div><div class="w-section-sub">Ranked live &middot; updated 2 min ago</div></div>
+                <div class="w-intent-refresh">Refresh</div>
+              </div>
+
               <div class="w-company-card high">
-                <div class="w-company-top"><div><div class="w-company-name">Suspicious login blocked</div><div class="w-company-meta">02:14 UTC · unfamiliar location · admin account</div></div><div class="w-score"><div class="w-score-num" style="color:#16A34A">Low</div><div class="w-score-label">Risk</div></div></div>
-                <div class="w-company-sigs"><div class="w-csig">Auto-contained</div><div class="w-csig dim">MFA challenge sent</div></div>
+                <div class="w-company-top">
+                  <div><div class="w-company-name">Sign Q3 vendor contract</div><div class="w-company-meta">Due today &middot; blocks 2 downstream tasks</div></div>
+                  <div class="w-score"><div class="w-score-num" style="color:#16A34A">98</div><div class="w-score-label">Priority</div></div>
+                </div>
+                <div class="w-company-sigs">
+                  <div class="w-csig"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Deadline today</div>
+                  <div class="w-csig"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg>High impact</div>
+                  <div class="w-csig dim"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Only you can sign</div>
+                </div>
+                <div class="w-contacts-label">Recommended action</div>
+                <div class="w-mini-contact"><div class="w-mini-left"><div class="w-mini-av">✱</div><div><div class="w-mini-name">Review flagged clause, then sign</div><div class="w-mini-title">Summary ready · 2 min</div></div></div><button class="w-reach-btn">Open</button></div>
               </div>
+
+              <div class="w-company-card high">
+                <div class="w-company-top">
+                  <div><div class="w-company-name">Prep board sync</div><div class="w-company-meta">10:00am &middot; brief assembled</div></div>
+                  <div class="w-score"><div class="w-score-num" style="color:#16A34A">91</div><div class="w-score-label">Priority</div></div>
+                </div>
+                <div class="w-company-sigs">
+                  <div class="w-csig"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Starts in 40 min</div>
+                  <div class="w-csig"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>3 attendees</div>
+                </div>
+                <div class="w-contacts-label">Recommended action</div>
+                <div class="w-mini-contact"><div class="w-mini-left"><div class="w-mini-av">◷</div><div><div class="w-mini-name">Skim the 90-second brief</div><div class="w-mini-title">Agenda + open actions</div></div></div><button class="w-reach-btn">Open</button></div>
+              </div>
+
               <div class="w-company-card med">
-                <div class="w-company-top"><div><div class="w-company-name">Outdated dependency found</div><div class="w-company-meta">Weekly scan · 1 package · known CVE</div></div><div class="w-score"><div class="w-score-num" style="color:#CA8A04">Med</div><div class="w-score-label">Risk</div></div></div>
-                <div class="w-company-sigs"><div class="w-csig">Patch suggested</div></div>
+                <div class="w-company-top">
+                  <div><div class="w-company-name">Weekly ops report</div><div class="w-company-meta">Auto-drafted &middot; not urgent</div></div>
+                  <div class="w-score"><div class="w-score-num" style="color:#CA8A04">54</div><div class="w-score-label">Priority</div></div>
+                </div>
+                <div class="w-company-sigs">
+                  <div class="w-csig dim"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Draft ready to review</div>
+                </div>
+                <div class="w-contacts-label">Recommended action</div>
+                <div class="w-mini-contact"><div class="w-mini-left"><div class="w-mini-av">◇</div><div><div class="w-mini-name">Review + send when free</div><div class="w-mini-title">6 sections · pre-filled</div></div></div><button class="w-reach-btn">Open</button></div>
               </div>
+
             </div>
           </div>
         </div>
@@ -1329,47 +1448,116 @@
   </div>
 </section>
 
-<!-- ═══ WHO WE ARE ═══ -->
+<!-- ═══ SOLUTIONS ═══ -->
 <section class="solutions">
   <div class="sol-header">
     <div>
-      <div class="sec-eyebrow">Who We Are</div>
-      <h2 class="sec-title">Serious AI tools, built without the enterprise tax.</h2>
-      <p class="sec-sub">JAYISAAC AI builds production-grade AI products for the businesses the big vendors overcharge and overlook — sold at a flat, honest price.</p>
+      <div class="sec-eyebrow">Solutions</div>
+      <h2 class="sec-title">One operator. Every part of your day.</h2>
+      <p class="sec-sub">From the first brief to the final report — JAYISAAC AI runs the operational load so you can run the business.</p>
     </div>
-    <img class="sol-art" src="/public/funnel-3d.jpg" alt="JAYISAAC AI platform illustration" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900" />
+    <img class="sol-art" src="/public/funnel-3d.jpg" alt="AI chief of staff workflow illustration" loading="lazy" decoding="async" fetchpriority="low" width="1600" height="900" />
   </div>
-  <div class="who-grid">
-    <div class="who-cell"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><b>Powered by Claude</b><p>The same frontier model behind Cursor, Notion AI, and Slack AI runs under every product.</p></div>
-    <div class="who-cell"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><b>Built in Canada</b><p>Made in Saskatoon, aligned to PIPEDA, GDPR, and CCPA. Your data stays yours — never sold.</p></div>
-    <div class="who-cell"><div class="ic"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><b>Flat, honest pricing</b><p>No per-seat fees, no credit traps, no annual lock-in. One price, cancel anytime.</p></div>
-    <div class="who-cell"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div><b>One platform</b><p>Three products, one login, one bill, shared data. Add what you need as you grow.</p></div>
+  <div class="sol-grid">
+    <div class="sol-card"><div class="sol-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v4H4zM4 12h10v8H4zM18 12h2v8h-2z"/></svg></div><div class="sol-title">Briefings</div><div class="sol-hook">Start every day already caught up</div><p class="sol-desc">AI reads your inbox, calendar, and threads overnight and hands you one prioritized brief every morning.</p><a href="/login.html" class="sol-link">Learn more <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
+    <div class="sol-card"><div class="sol-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><div class="sol-title">Delegation</div><div class="sol-hook">Nothing falls through the cracks</div><p class="sol-desc">Assign owners and let AI track every open thread — nudging, drafting, and escalating only when it needs you.</p><a href="/login.html" class="sol-link">Learn more <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
+    <div class="sol-card"><div class="sol-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><div class="sol-title">Reporting</div><div class="sol-hook">Status updates that write themselves</div><p class="sol-desc">Weekly ops notes, investor updates, and team status — drafted from what actually happened, in your format.</p><a href="/login.html" class="sol-link">Learn more <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
   </div>
 </section>
 
-<!-- ═══ WHY ONE PLATFORM ═══ -->
+<!-- ═══ INTEGRATIONS ═══ -->
 <section class="int-section">
   <div class="int-inner">
-    <div class="sec-eyebrow" style="text-align:center;margin-bottom:.5rem">Why One Platform</div>
-    <div class="int-title">Three vendors' worth of tools, one account</div>
-    <div class="int-sub">Everything runs on the same login and the same data — no stitching tools together, no juggling bills.</div>
-    <div class="int-grid" style="grid-template-columns:repeat(4,1fr)">
-      <div class="int-pill">One Login</div>
-      <div class="int-pill">Shared Data</div>
-      <div class="int-pill">Flat Pricing</div>
-      <div class="int-pill">Cancel Anytime</div>
-      <div class="int-pill">Powered by Claude</div>
-      <div class="int-pill">PIPEDA</div>
-      <div class="int-pill">GDPR</div>
-      <div class="int-pill">CCPA</div>
+    <div class="sec-eyebrow" style="text-align:center;margin-bottom:.5rem">Integrations</div>
+    <div class="int-title">Plugs into the tools you already live in</div>
+    <div class="int-sub">Connect your stack and let your Chief of Staff work across all of it.</div>
+    <div class="int-grid">
+      <div class="int-pill">Gmail</div><div class="int-pill">Outlook</div><div class="int-pill">Google Calendar</div>
+      <div class="int-pill">Slack</div><div class="int-pill">Notion</div><div class="int-pill">Google Drive</div>
+      <div class="int-pill">Asana</div><div class="int-pill">Linear</div><div class="int-pill">Trello</div>
+      <div class="int-pill">Zoom</div><div class="int-pill">HubSpot</div><div class="int-pill">Zapier</div>
     </div>
+  </div>
+</section>
+
+<!-- ═══ ROLES ═══ -->
+<section class="roles">
+  <div class="sec-eyebrow">Built For Your Role</div>
+  <h2 class="sec-title">The right-hand you'd hire — if you could</h2>
+  <p class="sec-sub">JAYISAAC AI adapts to how you work, whether you're running a company solo or steering a team through its next stage.</p>
+  <div class="roles-grid">
+    <a href="/login.html" class="role-card"><div class="role-tag">Founders</div><div class="role-title">Buy back your mornings</div><p class="role-desc">Stop starting the day in your inbox. Get one brief, make the calls only you can make, and move.</p></a>
+    <a href="/login.html" class="role-card"><div class="role-tag">Operators</div><div class="role-title">Keep every thread moving</div><p class="role-desc">Delegation that actually follows through, so nothing dies in someone's inbox — including yours.</p></a>
+    <a href="/login.html" class="role-card"><div class="role-tag">Executives</div><div class="role-title">Walk into every room prepared</div><p class="role-desc">Auto-assembled meeting briefs and follow-ups so you're always the most on-top person in the meeting.</p></a>
+    <a href="/login.html" class="role-card"><div class="role-tag">Team Leads</div><div class="role-title">Status without the standup grind</div><p class="role-desc">Reports and rollups drafted from real activity — spend the time leading, not chasing updates.</p></a>
+    <a href="/login.html" class="role-card"><div class="role-tag">Chiefs of Staff</div><div class="role-title">Clone the parts you hate</div><p class="role-desc">Offload the tracking, nudging, and note-taking so you can focus on the judgment calls.</p></a>
+    <a href="/login.html" class="role-card"><div class="role-tag">Solo Businesses</div><div class="role-title">A back office of one</div><p class="role-desc">All the operational muscle of a bigger team, at the price of a software subscription.</p></a>
+  </div>
+</section>
+
+<!-- ═══ COMPARE ═══ -->
+<section class="compare">
+  <div class="sec-eyebrow">A hire vs JAYISAAC AI</div>
+  <h2 class="sec-title">The role, <span class="g">minus the six-figure salary.</span></h2>
+  <p class="sec-sub">A human Chief of Staff is one of the highest-leverage hires you can make — and one of the most expensive. Here's the honest trade-off.</p>
+
+  <div class="vs-cards">
+    <!-- THEM -->
+    <div class="vs-card vs-them">
+      <div class="vs-card-label">HUMAN CHIEF OF STAFF</div>
+      <div class="vs-card-price"><span class="vs-amt">$150K+</span><span class="vs-per">/year</span></div>
+      <div class="vs-card-note">Typical North American base salary, before benefits and equity</div>
+      <ul class="vs-list">
+        <li><span class="vs-check">✓</span> Deep judgment and real relationships</li>
+        <li><span class="vs-x">✕</span> Months to hire, onboard, and ramp</li>
+        <li><span class="vs-x">✕</span> Works one shift — not overnight or weekends</li>
+        <li><span class="vs-x">✕</span> One person's bandwidth has a hard ceiling</li>
+        <li><span class="vs-x">✕</span> Only realistic once you're already funded</li>
+      </ul>
+      <div class="vs-card-foot">Monthly cost: <strong>~$12,500</strong></div>
+    </div>
+
+    <!-- US -->
+    <div class="vs-card vs-us">
+      <div class="vs-card-tag">YOUR MOVE</div>
+      <div class="vs-card-label">JAYISAAC AI</div>
+      <div class="vs-card-price"><span class="vs-amt">$49</span><span class="vs-per">/month</span></div>
+      <div class="vs-card-note">Flat price. No per-seat fees. Cancel anytime.</div>
+      <ul class="vs-list">
+        <li><span class="vs-check">✓</span> Live in minutes, not months</li>
+        <li><span class="vs-check">✓</span> On duty 24/7 — briefs you before you wake up</li>
+        <li><span class="vs-check">✓</span> Tracks unlimited threads without dropping one</li>
+        <li><span class="vs-check">✓</span> Affordable from day one, at any stage</li>
+        <li><span class="vs-check">✓</span> Handles the operational load, escalates the judgment calls</li>
+      </ul>
+      <div class="vs-card-foot">Per day: <strong>~$1.60</strong></div>
+    </div>
+  </div>
+
+  <div class="vs-receipt">
+    <div class="vs-receipt-head">The math, in plain English</div>
+    <div class="vs-receipt-grid">
+      <div class="vs-receipt-row">
+        <div class="vs-receipt-num">255x</div>
+        <div class="vs-receipt-text">cheaper per month than a full-time hire</div>
+      </div>
+      <div class="vs-receipt-row">
+        <div class="vs-receipt-num">24/7</div>
+        <div class="vs-receipt-text">on duty, including the hours you're asleep</div>
+      </div>
+      <div class="vs-receipt-row">
+        <div class="vs-receipt-num">Day 1</div>
+        <div class="vs-receipt-text">productive immediately — no ramp, no onboarding</div>
+      </div>
+    </div>
+    <div class="vs-receipt-note">Salary figure reflects a typical North American Chief of Staff base and will vary by market and seniority. JAYISAAC AI complements a human operator — it doesn't replace human judgment.</div>
   </div>
 </section>
 
 <!-- ═══ FINAL CTA ═══ -->
 <section class="final-cta">
-  <h2>One platform.<br /><span>Every job that matters.</span></h2>
-  <p>Sell, run, and defend your business from a single account. Start free — no card required.</p>
+  <h2>Stop running<br /><span>on empty.</span></h2>
+  <p>Get the brief, hand off the follow-ups, and walk into every meeting ready. Your AI Chief of Staff is on duty the moment you sign up.</p>
   <div class="final-form"><input id="ctaEmail" type="email" placeholder="Enter your work email" /><button onclick="goSignup('ctaEmail')">Get started</button></div>
   <div class="final-note">By signing up you agree to our <a href="/terms.html">Terms of Use</a> and <a href="/privacy.html">Privacy Policy</a></div>
 </section>
@@ -1498,7 +1686,7 @@
 /* ── Email signup redirect ── */
 function goSignup(inputId){
   const v = document.getElementById(inputId)?.value || "";
-  window.location.href = "/login.html" + (v ? "?email="+encodeURIComponent(v) : "");
+  window.location.href = "./login.html" + (v ? "?email="+encodeURIComponent(v) : "");
 }
 </script>
 
