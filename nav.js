@@ -14,73 +14,108 @@ import { getAuth, signInWithPopup, GoogleAuthProvider,
 /* ── nav link config ─────────────────────────────────────── */
 const LINKS = [
   {
-    label: "Platform",
-    href:  "/app.html",
+    label: "Products",
+    href:  "/",
     mega: {
+      feature: {
+        eyebrow: "The Platform",
+        title:   "Three AI products,<br>one login.",
+        text:    "Sell, run, and defend your business from a single account — shared data, one flat bill.",
+        cta:     "Compare all products",
+        href:    "/"
+      },
       cols: [
         {
-          heading: "Prospect",
+          head: "AI Lead Generation", href: "/lead-generation/", accent: "lead",
+          sub:  "Find your next customer", icon: `<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
           items: [
-            { label: "Prospect Search",      sub: "Find decision-makers fast",  href: "/app.html"                 },
-            { label: "People Search",        sub: "Owners, GMs, buyers",        href: "/lead-generation/people-search.html"       },
-            { label: "Company Search",       sub: "Filter by industry & size",  href: "/lead-generation/company-search.html"      },
-            { label: "Cold Calling Lists",   sub: "Dial-ready exports",         href: "/lead-generation/cold-calling-lists.html"  },
+            { label: "Prospect Search",    sub: "Open the app",              href: "/app.html"                                },
+            { label: "People Search",      sub: "Owners, GMs, buyers",       href: "/lead-generation/people-search.html"      },
+            { label: "Company Search",     sub: "Filter by industry & size", href: "/lead-generation/company-search.html"     },
+            { label: "Cold Calling Lists", sub: "Dial-ready exports",        href: "/lead-generation/cold-calling-lists.html" },
+            { label: "Pricing",            sub: "Flat monthly plans",        href: "/lead-generation/pricing.html"            },
           ]
         },
         {
-          heading: "Solutions",
+          head: "AI Chief of Staff", href: "/chief-of-staff/", accent: "staff",
+          sub:  "Run the operation", icon: `<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>`,
           items: [
-            { label: "For Sales Teams",      sub: "Pipeline without grunt work",href: "/lead-generation/sales-teams.html"         },
-            { label: "For Agencies",         sub: "Multi-client campaigns",     href: "/lead-generation/agencies.html"            },
-            { label: "Verified Contacts",    sub: "Emails & phones that work",  href: "/lead-generation/data.html#verified"       },
-            { label: "Free Trial",           sub: "100 credits, no card",       href: "/login.html"               },
+            { label: "Briefings",    sub: "Your day, decided",  href: "/chief-of-staff/briefings.html"    },
+            { label: "Delegation",   sub: "Nothing slips",      href: "/chief-of-staff/delegation.html"   },
+            { label: "Meeting Prep", sub: "Walk in ready",      href: "/chief-of-staff/meeting-prep.html" },
+            { label: "Pricing",      sub: "Flat monthly plans", href: "/chief-of-staff/pricing.html"      },
+          ]
+        },
+        {
+          head: "AI Cybersecurity", href: "/cybersecurity/", accent: "cyber",
+          sub:  "Defend the business", icon: `<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+          items: [
+            { label: "Threat Detection",    sub: "Caught before it lands", href: "/cybersecurity/threat-detection.html"    },
+            { label: "Incident Response",   sub: "Contain & remediate",    href: "/cybersecurity/incident-response.html"   },
+            { label: "Vulnerability Scans", sub: "Know your gaps",         href: "/cybersecurity/vulnerability-scans.html" },
+            { label: "Pricing",             sub: "Flat monthly plans",     href: "/cybersecurity/pricing.html"             },
           ]
         }
       ]
     }
   },
   {
-    label: "Our Data",
-    href:  "/lead-generation/data.html",
+    label: "Pricing",
+    href:  "/lead-generation/pricing.html",
     mega: {
+      feature: {
+        eyebrow: "Pricing",
+        title:   "Flat, honest<br>pricing.",
+        text:    "No per-seat fees, no credit traps, no annual lock-in. Start free on any product.",
+        cta:     "Start free",
+        href:    "/login.html"
+      },
       cols: [
         {
-          heading: "Data Coverage",
-          items: [
-            { label: "Data Overview",        sub: "What's in the database",     href: "/lead-generation/data.html"                },
-            { label: "North America-Wide",   sub: "Every province & state",     href: "/lead-generation/data.html#coverage"       },
-            { label: "Real-Time Updates",    sub: "Rolling re-verification",    href: "/lead-generation/data.html#updates"        },
-            { label: "Verified Contacts",    sub: "Validated emails & phones",  href: "/lead-generation/data.html#verified"       },
-          ]
+          head: "Lead Generation", href: "/lead-generation/pricing.html", accent: "lead",
+          sub: "Prospecting plans", icon: `<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
+          items: [ { label: "See Lead Gen plans", sub: "Verified contacts & AI outreach", href: "/lead-generation/pricing.html" } ]
         },
         {
-          heading: "For Developers",
-          items: [
-            { label: "API Access",           sub: "Pull contact data",          href: "/lead-generation/api.html"                 },
-            { label: "Data as a Service",    sub: "Bulk exports & feeds",       href: "/lead-generation/api.html#daas"            },
-          ]
+          head: "Chief of Staff", href: "/chief-of-staff/pricing.html", accent: "staff",
+          sub: "Operations plans", icon: `<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>`,
+          items: [ { label: "See Chief of Staff plans", sub: "Briefings, delegation & more", href: "/chief-of-staff/pricing.html" } ]
+        },
+        {
+          head: "Cybersecurity", href: "/cybersecurity/pricing.html", accent: "cyber",
+          sub: "Security plans", icon: `<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+          items: [ { label: "See Cybersecurity plans", sub: "Detection, response & scans", href: "/cybersecurity/pricing.html" } ]
         }
       ]
     }
   },
-  { label: "Pricing",     href: "/lead-generation/pricing.html"       },
-  { label: "Resources",   href: "/support.html",
+  {
+    label: "Resources",
+    href:  "/support.html",
     mega: {
+      feature: {
+        eyebrow: "Built in Canada",
+        title:   "Serious AI,<br>honestly priced.",
+        text:    "Production-grade AI products for the businesses the big vendors overcharge and overlook.",
+        cta:     "About JAYISAAC AI",
+        href:    "/about.html"
+      },
       cols: [
         {
-          heading: "Learn",
+          head: "Learn",
           items: [
-            { label: "How It Works",         sub: "Step by step",               href: "/support.html"             },
-            { label: "Case Studies",         sub: "Real results",               href: "/case-studies.html"        },
-            { label: "Help Center",          sub: "FAQs & support docs",        href: "/support.html"             },
+            { label: "How It Works", sub: "Step by step",        href: "/support.html"      },
+            { label: "Case Studies", sub: "Real results",        href: "/case-studies.html" },
+            { label: "Help Center",  sub: "FAQs & support docs", href: "/support.html"      },
           ]
         },
         {
-          heading: "Company",
+          head: "Company",
           items: [
-            { label: "About Us",             sub: "Built in Saskatoon, SK",     href: "/about.html"               },
-            { label: "Contact",              sub: "Talk to the team",           href: "/contact.html"             },
-            { label: "Trust Center",         sub: "Security & privacy",         href: "/trust.html"               },
+            { label: "About Us",     sub: "Built in Saskatoon, SK", href: "/about.html"   },
+            { label: "Contact",      sub: "Talk to the team",       href: "/contact.html" },
+            { label: "Careers",      sub: "Join the team",          href: "/careers.html" },
+            { label: "Trust Center", sub: "Security & privacy",     href: "/trust.html"   },
           ]
         }
       ]
@@ -208,106 +243,61 @@ body { padding-top: var(--jia-h); }
 }
 .jia-links > li.has-mega.mega-open .jia-chev { transform:rotate(180deg); opacity:.9; }
 
-/* ── mega panel ── */
-/* left-anchored under its own trigger so neighbouring panels never overlap */
+/* ── full-width mega panel (immersive, itransition-style) ── */
+.jia-mega-wrap { position: static; }
 .jia-mega {
   position: absolute;
-  top: 100%;                    /* sit flush against the nav so no hover gap */
-  left: 0; transform: translateY(8px);
-  background: var(--jia-card);
-  border: 1px solid var(--jia-b);
-  border-radius: 16px;
-  box-shadow: 0 24px 64px rgba(0,0,0,.65), 0 1px 0 rgba(255,255,255,.04);
-  padding: 1.1rem;
-  display: flex; gap: .5rem;
-  opacity:0; visibility:hidden; pointer-events:none;
-  /* slow leave transition prevents the menu from disappearing if user briefly drifts off */
-  transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
-  transition-delay: .15s;       /* delay on close so user has time to reach the menu */
-  min-width: 520px;
-  margin-top: 12px;             /* visual gap kept via margin, not actual gap */
+  top: 100%; left: 0; right: 0;
+  background: linear-gradient(180deg, #141414 0%, #0E0E0E 100%);
+  border-top: 1px solid var(--jia-bl);
+  border-bottom: 1px solid var(--jia-b);
+  box-shadow: 0 30px 70px rgba(0,0,0,.6);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transform: translateY(-10px);
+  transition: opacity .2s ease, transform .24s cubic-bezier(.16,1,.3,1), visibility .2s;
+  z-index: 999;
 }
+.jia-mega.open { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
 
-/* invisible "bridge" between trigger link and dropdown — kills the hover gap.
-   Aligned to the panel's left edge (not centered) so it only covers
-   this trigger's own dropdown and never sits over the neighbour link. */
-.jia-links > li.has-mega::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 520px;                 /* matches .jia-mega min-width */
-  height: 24px;                 /* covers the 12px gap + 12px breathing room */
-  background: transparent;
-  pointer-events: none;
-}
-.jia-links > li.has-mega.mega-open::after {
-  pointer-events: auto;         /* only active while open, keeps the bridge alive */
-}
+.jia-mega-inner { max-width: 1380px; margin: 0 auto; padding: 2.25rem 2rem 2.6rem; }
+.jia-mega-inner.has-feature { display: grid; grid-template-columns: 300px 1fr; gap: 3rem; align-items: stretch; }
 
-.jia-links > li.has-mega.mega-open .jia-mega {
-  opacity:1; visibility:visible; pointer-events:auto;
-  transform: translateY(0);
-  transition-delay: 0s;         /* open instantly */
+.jia-mega-feature {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 1.7rem 1.6rem; border-radius: 16px; text-decoration: none;
+  background: linear-gradient(160deg, rgba(99,102,241,.18), rgba(168,85,247,.07));
+  border: 1px solid var(--jia-orange-edge);
+  transition: border-color .2s, transform .2s;
 }
+.jia-mega-feature:hover { border-color: rgba(129,140,248,.6); transform: translateY(-2px); }
+.jmf-eyebrow { font-size: .64rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; color: var(--jia-orange-h); margin-bottom: .7rem; }
+.jmf-title { font-size: 1.4rem; font-weight: 800; color: #fff; line-height: 1.15; letter-spacing: -.01em; margin-bottom: .65rem; }
+.jmf-text { font-size: .82rem; color: var(--jia-mute); line-height: 1.6; margin-bottom: 1.1rem; }
+.jmf-cta { display: inline-flex; align-items: center; gap: .45rem; font-size: .82rem; font-weight: 700; color: var(--jia-orange-h); }
+.jmf-cta svg { width: 14px; height: 14px; fill: none; stroke: currentColor; }
 
-/* arrow tip — sits over the trigger, not the panel centre */
-.jia-mega::before {
-  content:''; position:absolute;
-  top:-5px; left:32px; transform:rotate(45deg);
-  width:9px; height:9px;
-  background:var(--jia-card);
-  border-left:1px solid var(--jia-b);
-  border-top:1px solid var(--jia-b);
-}
+.jia-mega-cols { display: grid; gap: 2rem; }
+.jia-mega-col { min-width: 0; }
 
-/* rightmost mega (Resources) opens leftward so it never runs off-screen */
-.jia-links > li.has-mega:last-child .jia-mega {
-  left: auto; right: 0;
-}
-.jia-links > li.has-mega:last-child .jia-mega::before {
-  left: auto; right: 32px;
-}
-.jia-links > li.has-mega:last-child::after {
-  left: auto; right: 0;
-}
+.jia-mega-colhead { display: flex; align-items: center; gap: .7rem; padding: .3rem .35rem .85rem; margin-bottom: .5rem; border-bottom: 1px solid var(--jia-b); text-decoration: none; }
+.jmc-icon { width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.jmc-icon svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.jia-mega-colhead.lead  .jmc-icon { background: linear-gradient(135deg,#818CF8,#6366F1); box-shadow: 0 6px 16px rgba(99,102,241,.4); }
+.jia-mega-colhead.staff .jmc-icon { background: linear-gradient(135deg,#C084FC,#A855F7); box-shadow: 0 6px 16px rgba(168,85,247,.4); }
+.jia-mega-colhead.cyber .jmc-icon { background: linear-gradient(135deg,#67E8F9,#0891B2); box-shadow: 0 6px 16px rgba(34,211,238,.35); }
+.jmc-txt b { display: block; font-size: .88rem; font-weight: 800; color: #fff; }
+.jmc-txt i { display: block; font-size: .72rem; font-style: normal; color: var(--jia-mute); margin-top: .05rem; }
+.jia-mega-colhead:hover .jmc-txt b { color: var(--jia-orange-h); }
 
-/* single col */
-.jia-mega-col { flex:1; min-width:0; }
+.jia-mega-head { display: block; font-size: .68rem; font-weight: 700; color: var(--jia-orange); text-transform: uppercase; letter-spacing: .1em; padding: .3rem .35rem .95rem; border-bottom: 1px solid var(--jia-b); margin-bottom: .5rem; }
 
-/* col heading */
-.jia-mega-head {
-  font-size:.68rem; font-weight:700;
-  color: var(--jia-orange);
-  text-transform:uppercase; letter-spacing:.1em;
-  padding: .35rem .85rem .6rem;
-  display:block;
-}
+.jia-mega-row { display: block; padding: .5rem .5rem; border-radius: 8px; text-decoration: none; transition: background .12s; }
+.jia-mega-row:hover { background: rgba(255,255,255,.05); }
+.jia-ml { display: block; font-size: .845rem; font-weight: 600; color: rgba(242,242,242,.82); transition: color .15s; }
+.jia-mega-row:hover .jia-ml { color: var(--jia-orange-h); }
+.jia-ms { display: block; font-size: .72rem; color: var(--jia-mute); margin-top: .08rem; }
 
-/* mega row */
-.jia-mega-row {
-  display:flex; flex-direction:column; gap:.18rem;
-  padding: .65rem .85rem;
-  border-radius:9px; text-decoration:none;
-  transition: background .12s ease;  /* faster, snappier hover feedback */
-  cursor: pointer;
-}
-.jia-mega-row:hover { background:rgba(255,255,255,.05); }
-.jia-mega-row:hover .jia-ml { color:var(--jia-orange-h); }
-.jia-ml {
-  font-size:.855rem; font-weight:600;
-  color:var(--jia-white); transition:color .17s;
-  white-space:nowrap;
-}
-.jia-ms {
-  font-size:.74rem; color:var(--jia-mute); line-height:1.35;
-}
-
-/* col divider */
-.jia-mega-col + .jia-mega-col {
-  border-left: 1px solid var(--jia-b);
-  padding-left:.5rem;
-}
+@media(max-width:1100px){ .jia-mega { display: none !important; } }
 
 /* ── right buttons — Log In · Contact Sales · Free Trial ── */
 .jia-right {
@@ -563,41 +553,71 @@ function activePath(href) {
 }
 
 function buildDesktopLinks() {
+  let mi = -1;
   return LINKS.map(l => {
-    const active = activePath(l.href) ? " class=\"active\"" : "";
+    const active = activePath(l.href) ? ' class="active"' : '';
     if (l.mega) {
-      const cols = l.mega.cols.map(col => {
-        const rows = col.items.map(it => `
-          <a href="${it.href}" class="jia-mega-row">
-            <span class="jia-ml">${it.label}</span>
-            <span class="jia-ms">${it.sub}</span>
-          </a>`).join("");
-        return `<div class="jia-mega-col">
-          <span class="jia-mega-head">${col.heading}</span>
-          ${rows}
-        </div>`;
-      }).join("");
+      mi++;
       return `
-        <li class="has-mega">
+        <li class="has-mega" data-mega="${mi}">
           <a href="${l.href}"${active}>
             ${l.label}
             <svg class="jia-chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
           </a>
-          <div class="jia-mega">${cols}</div>
         </li>`;
     }
     return `<li><a href="${l.href}"${active}>${l.label}</a></li>`;
   }).join("");
 }
 
+function buildMega(l) {
+  const f = l.mega.feature;
+  const feat = f ? `
+    <a class="jia-mega-feature" href="${f.href}">
+      <span class="jmf-eyebrow">${f.eyebrow}</span>
+      <span class="jmf-title">${f.title}</span>
+      <span class="jmf-text">${f.text}</span>
+      <span class="jmf-cta">${f.cta}
+        <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </span>
+    </a>` : "";
+  const cols = l.mega.cols.map(col => {
+    const head = col.href
+      ? `<a class="jia-mega-colhead ${col.accent || ''}" href="${col.href}">
+           ${col.icon ? `<span class="jmc-icon">${col.icon}</span>` : ""}
+           <span class="jmc-txt"><b>${col.head}</b>${col.sub ? `<i>${col.sub}</i>` : ""}</span>
+         </a>`
+      : `<span class="jia-mega-head">${col.head}</span>`;
+    const rows = col.items.map(it => `
+      <a href="${it.href}" class="jia-mega-row">
+        <span class="jia-ml">${it.label}</span>
+        ${it.sub ? `<span class="jia-ms">${it.sub}</span>` : ""}
+      </a>`).join("");
+    return `<div class="jia-mega-col">${head}${rows}</div>`;
+  }).join("");
+  return `<div class="jia-mega-inner${f ? ' has-feature' : ''}">
+    ${feat}
+    <div class="jia-mega-cols" style="grid-template-columns:repeat(${l.mega.cols.length},minmax(0,1fr))">${cols}</div>
+  </div>`;
+}
+
+function buildMegaPanels() {
+  let mi = -1;
+  return LINKS.filter(l => l.mega).map(l => {
+    mi++;
+    return `<div class="jia-mega" data-mega="${mi}">${buildMega(l)}</div>`;
+  }).join("");
+}
+
 function buildMobileLinks() {
   return LINKS.map(l => {
     if (l.mega) {
-      const section = `<span class="jia-mob-section">${l.label}</span>`;
-      const items = l.mega.cols.flatMap(c => c.items).map(it =>
-        `<a href="${it.href}" class="jia-mob-link">${it.label}</a>`
-      ).join("");
-      return section + items;
+      return l.mega.cols.map(c => {
+        const section  = `<span class="jia-mob-section">${c.head}</span>`;
+        const overview = c.href ? `<a href="${c.href}" class="jia-mob-link">Overview</a>` : "";
+        const items    = c.items.map(it => `<a href="${it.href}" class="jia-mob-link">${it.label}</a>`).join("");
+        return section + overview + items;
+      }).join("");
     }
     return `<a href="${l.href}" class="jia-mob-link">${l.label}</a>`;
   }).join("");
@@ -659,7 +679,7 @@ const MARKUP = `
             <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             My Account
           </a>
-          <a href="/lead-generation/pricing.html">
+          <a href="/pricing.html">
             <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
             Plans &amp; Credits
           </a>
@@ -688,6 +708,7 @@ const MARKUP = `
     </div>
 
   </nav>
+  <div class="jia-mega-wrap">${buildMegaPanels()}</div>
 </header>
 
 <!-- mobile drawer -->
@@ -805,35 +826,33 @@ addEventListener("scroll", () =>
    other mega first, so exactly one can be open at a time.
    A 300ms close timer on leave lets the mouse cross the gap
    onto the panel without it snapping shut. */
+const megaPanels = hdr.querySelectorAll(".jia-mega");
+function closeAllMega() {
+  hdr.querySelectorAll(".jia-links > li.has-mega.mega-open").forEach(o => o.classList.remove("mega-open"));
+  megaPanels.forEach(p => p.classList.remove("open"));
+}
 hdr.querySelectorAll(".jia-links > li.has-mega").forEach(li => {
+  const idx = li.getAttribute("data-mega");
+  const panel = hdr.querySelector(`.jia-mega[data-mega="${idx}"]`);
+  if (!panel) return;
   let closeTimer = null;
   const open = () => {
-    clearTimeout(closeTimer);
-    closeTimer = null;
-    /* close every other mega before opening this one — only one open at a time */
-    hdr.querySelectorAll(".jia-links > li.has-mega.mega-open").forEach(other => {
-      if (other !== li) other.classList.remove("mega-open");
-    });
-    li.classList.add("mega-open");
+    clearTimeout(closeTimer); closeTimer = null;
+    hdr.querySelectorAll(".jia-links > li.has-mega.mega-open").forEach(o => { if (o !== li) o.classList.remove("mega-open"); });
+    megaPanels.forEach(p => { if (p !== panel) p.classList.remove("open"); });
+    li.classList.add("mega-open"); panel.classList.add("open");
   };
   const scheduleClose = () => {
     clearTimeout(closeTimer);
-    closeTimer = setTimeout(() => {
-      li.classList.remove("mega-open");
-      closeTimer = null;
-    }, 300);
+    closeTimer = setTimeout(() => { li.classList.remove("mega-open"); panel.classList.remove("open"); closeTimer = null; }, 220);
   };
-  /* mouseenter/leave do NOT bubble, so they fire correctly when
-     transitioning between the link and the mega panel inside the li */
   li.addEventListener("mouseenter", open);
   li.addEventListener("mouseleave", scheduleClose);
-  /* Also bind directly to the mega panel so quick mouse jumps work */
-  const mega = li.querySelector(".jia-mega");
-  if(mega){
-    mega.addEventListener("mouseenter", open);
-    mega.addEventListener("mouseleave", scheduleClose);
-  }
+  panel.addEventListener("mouseenter", open);
+  panel.addEventListener("mouseleave", scheduleClose);
 });
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeAllMega(); });
+addEventListener("scroll", closeAllMega, { passive: true });
 
 /* smooth scroll on homepage */
 if (isHome()) {

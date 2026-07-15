@@ -9,59 +9,57 @@
 /* ── link columns config ──────────────────────────────────── */
 const COLS = [
   {
-    heading: "Platform",
+    heading: "Lead Generation",
     links: [
-      { label: "Prospect Search",       href: "/app.html"               },
-      { label: "People Search",        href: "/lead-generation/people-search.html"     },
-      { label: "Company Search",       href: "/lead-generation/company-search.html"    },
-      { label: "CSV Export",           href: "/app.html"               },
-      { label: "Free Trial",           href: "/login.html"             },
-      { label: "Log In",               href: "/login.html"             },
+      { label: "Overview",           href: "/lead-generation/"                          },
+      { label: "People Search",      href: "/lead-generation/people-search.html"        },
+      { label: "Company Search",     href: "/lead-generation/company-search.html"       },
+      { label: "Cold Calling Lists", href: "/lead-generation/cold-calling-lists.html"   },
+      { label: "Pricing",            href: "/lead-generation/pricing.html"              },
     ]
   },
   {
-    heading: "Our Data",
+    heading: "Chief of Staff",
     links: [
-      { label: "Data Overview",        href: "/lead-generation/data.html"              },
-      { label: "Coverage",             href: "/lead-generation/data.html#coverage"     },
-      { label: "Real-Time Updates",    href: "/lead-generation/data.html#updates"      },
-      { label: "Verified Contacts",    href: "/lead-generation/data.html#verified"     },
-      { label: "API Access",           href: "/lead-generation/api.html"               },
-      { label: "Data as a Service",    href: "/lead-generation/api.html#daas"          },
+      { label: "Overview",     href: "/chief-of-staff/"                    },
+      { label: "Briefings",    href: "/chief-of-staff/briefings.html"      },
+      { label: "Delegation",   href: "/chief-of-staff/delegation.html"     },
+      { label: "Meeting Prep", href: "/chief-of-staff/meeting-prep.html"   },
+      { label: "Pricing",      href: "/chief-of-staff/pricing.html"        },
     ]
   },
   {
-    heading: "Solutions",
+    heading: "Cybersecurity",
     links: [
-      { label: "For Sales Teams",      href: "/lead-generation/sales-teams.html"       },
-      { label: "For Agencies",         href: "/lead-generation/agencies.html"          },
-      { label: "Cold Calling Lists",   href: "/lead-generation/cold-calling-lists.html"},
-      { label: "AI Enrichment",        href: "/lead-generation/data.html"              },
-      { label: "Lead Packages",        href: "/lead-generation/pricing.html#leads"     },
-      { label: "Pricing",              href: "/lead-generation/pricing.html"           },
+      { label: "Overview",            href: "/cybersecurity/"                          },
+      { label: "Threat Detection",    href: "/cybersecurity/threat-detection.html"     },
+      { label: "Incident Response",   href: "/cybersecurity/incident-response.html"    },
+      { label: "Vulnerability Scans", href: "/cybersecurity/vulnerability-scans.html"  },
+      { label: "Pricing",             href: "/cybersecurity/pricing.html"              },
     ]
   },
   {
     heading: "Resources",
     links: [
-      { label: "How It Works",         href: "/support.html"           },
-      { label: "Case Studies",         href: "/case-studies.html"      },
-      { label: "Help Center",          href: "/support.html"           },
-      { label: "Contact Support",      href: "/contact.html"           },
+      { label: "How It Works",    href: "/support.html"      },
+      { label: "Case Studies",    href: "/case-studies.html" },
+      { label: "Help Center",     href: "/support.html"      },
+      { label: "Contact Support", href: "/contact.html"      },
     ]
   },
   {
     heading: "Company",
     links: [
-      { label: "About Us",             href: "/about.html"             },
-      { label: "Careers",              href: "/careers.html"           },
-      { label: "Contact",              href: "/contact.html"           },
-      { label: "Trust Center",         href: "/trust.html"             },
-      { label: "Privacy Policy",       href: "/privacy.html"           },
-      { label: "Terms of Use",         href: "/terms.html"             },
+      { label: "About Us",       href: "/about.html"   },
+      { label: "Careers",        href: "/careers.html" },
+      { label: "Contact",        href: "/contact.html" },
+      { label: "Trust Center",   href: "/trust.html"   },
+      { label: "Privacy Policy", href: "/privacy.html" },
+      { label: "Terms of Use",   href: "/terms.html"   },
     ]
   },
 ];
+
 
 /* compliance badges — link into the Trust Center */
 const BADGES = [
@@ -79,7 +77,7 @@ const CSS = `
 html { background: #0C0C0C; }
 
 .jia-footer {
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background: #0C0C0C;
   border-top: 1px solid #2A2A2A;
   color: #F2F2F2;
@@ -91,31 +89,42 @@ html { background: #0C0C0C; }
 .jia-ft-cta {
   background: #141414;
   border-bottom: 1px solid #2A2A2A;
-  padding: 2.25rem 5vw;
+  padding: 4.5rem 5vw 4.75rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  gap: 1.75rem;
 }
 .jia-ft-cta-text {
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  font-weight: 700;
+  font-size: clamp(1.5rem, 3.4vw, 2.4rem);
+  font-weight: 600;
   color: #F2F2F2;
-  letter-spacing: -.02em;
+  letter-spacing: -.03em;
+  line-height: 1.15;
+  max-width: 720px;
 }
-.jia-ft-cta-text span { color: #6366F1; }
+.jia-ft-cta-text span { color: #818CF8; }
+.jia-ft-cta-sub {
+  font-size: .95rem;
+  color: rgba(242,242,242,.55);
+  max-width: 460px;
+  line-height: 1.7;
+  margin-top: -.75rem;
+}
 .jia-ft-cta-btns {
-  display: flex; gap: .75rem; flex-wrap: wrap;
+  display: flex; gap: .85rem; flex-wrap: wrap;
+  justify-content: center;
 }
 .jia-ft-btn-trial {
   background: #6366F1;
   color: #F2F2F2;
   text-decoration: none;
-  padding: .62rem 1.4rem;
-  border-radius: 8px;
-  font-size: .875rem;
-  font-weight: 700;
+  padding: .8rem 1.7rem;
+  border-radius: 9px;
+  font-size: .92rem;
+  font-weight: 600;
   transition: background .18s;
   white-space: nowrap;
   display: inline-block;
@@ -124,10 +133,10 @@ html { background: #0C0C0C; }
 .jia-ft-btn-sales {
   color: #F2F2F2;
   text-decoration: none;
-  padding: .62rem 1.4rem;
-  border-radius: 8px;
-  border: 1px solid #2A2A2A;
-  font-size: .875rem;
+  padding: .8rem 1.7rem;
+  border-radius: 9px;
+  border: 1px solid #3A3A3A;
+  font-size: .92rem;
   font-weight: 600;
   background: transparent;
   transition: border-color .18s, background .18s;
@@ -135,7 +144,7 @@ html { background: #0C0C0C; }
   display: inline-block;
 }
 .jia-ft-btn-sales:hover {
-  border-color: rgba(255,255,255,.25);
+  border-color: rgba(255,255,255,.35);
   background: rgba(255,255,255,.05);
 }
 
@@ -153,7 +162,7 @@ html { background: #0C0C0C; }
 .jia-ft-brand {}
 .jia-ft-logo {
   font-size: 1.05rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: .14em;
   color: #F2F2F2;
   text-decoration: none;
@@ -288,7 +297,6 @@ html { background: #0C0C0C; }
   }
   .jia-ft-tagline { max-width: 100%; }
   .jia-ft-cols { grid-template-columns: repeat(2, 1fr); }
-  .jia-ft-cta { flex-direction: column; align-items: flex-start; }
   .jia-ft-bottom { flex-direction: column; align-items: flex-start; }
 }
 @media(max-width:480px){
@@ -322,8 +330,10 @@ const FOOTER_HTML = `
   <!-- CTA band -->
   <div class="jia-ft-cta">
     <div class="jia-ft-cta-text">
-      JAYISAAC AI — Verified B2B contacts for teams that<br>
-      <span>sell to real businesses.</span>
+      One platform to sell, run, and <span>defend your business.</span>
+    </div>
+    <div class="jia-ft-cta-sub">
+      Three AI products, one account, one flat bill. Free trial, no card required.
     </div>
     <div class="jia-ft-cta-btns">
       <a href="/login.html" class="jia-ft-btn-trial">Free trial &rarr;</a>
@@ -341,7 +351,7 @@ const FOOTER_HTML = `
         JAYISAAC&nbsp;<span>AI</span>
       </a>
       <p class="jia-ft-tagline">
-        North American B2B contact intelligence. Find the decision-makers who actually pick up.
+        One platform, three AI products. Sell, run, and defend your business. Powered by Claude.
       </p>
 
       <div class="jia-ft-badges">${buildBadges()}</div>
@@ -356,7 +366,6 @@ const FOOTER_HTML = `
   <div class="jia-ft-bottom">
     <span class="jia-ft-copy">
       &copy; ${YEAR} <span>JAYISAAC AI</span>. All rights reserved.
-      Built in Saskatoon, SK.
     </span>
     <nav class="jia-ft-legal" aria-label="Legal links">
       <a href="/privacy.html">Privacy Policy</a>
