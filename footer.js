@@ -87,56 +87,80 @@ html { background: #0C0C0C; }
 
 /* ── CTA band above footer ── */
 .jia-ft-cta {
-  background: #141414;
+  position: relative;
+  overflow: hidden;
+  background: #121016;
   border-bottom: 1px solid #2A2A2A;
-  padding: 4.5rem 5vw 4.75rem;
+  padding: 5.5rem 5vw 6rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 1.75rem;
+  gap: 1.4rem;
+}
+.jia-ft-cta::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 65% at 50% 0%, rgba(99,102,241,.22), transparent 65%),
+    radial-gradient(ellipse 40% 50% at 12% 90%, rgba(124,58,237,.1), transparent 60%);
+}
+.jia-ft-cta > * { position: relative; z-index: 1; }
+.jia-ft-cta-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: .68rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: #A5B4FC;
+}
+.jia-ft-cta-eyebrow::before {
+  content: '';
+  width: 8px; height: 8px; border-radius: 2px;
+  background: #6366F1;
 }
 .jia-ft-cta-text {
-  font-size: clamp(1.5rem, 3.4vw, 2.4rem);
-  font-weight: 600;
-  color: #F2F2F2;
-  letter-spacing: -.03em;
-  line-height: 1.15;
-  max-width: 720px;
+  font-family: 'Newsreader', Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(1.9rem, 4.2vw, 3rem);
+  color: #F5F2EA;
+  letter-spacing: -.015em;
+  line-height: 1.12;
+  max-width: 640px;
 }
 .jia-ft-cta-text span { color: #818CF8; }
 .jia-ft-cta-sub {
   font-size: .95rem;
-  color: rgba(242,242,242,.55);
-  max-width: 460px;
+  color: rgba(242,242,242,.58);
+  max-width: 440px;
   line-height: 1.7;
-  margin-top: -.75rem;
+  margin-top: -.5rem;
 }
 .jia-ft-cta-btns {
   display: flex; gap: .85rem; flex-wrap: wrap;
   justify-content: center;
+  margin-top: .4rem;
 }
 .jia-ft-btn-trial {
   background: #6366F1;
-  color: #F2F2F2;
+  color: #FFFFFF;
   text-decoration: none;
-  padding: .8rem 1.7rem;
+  padding: .85rem 1.8rem;
   border-radius: 9px;
-  font-size: .92rem;
+  font-size: .93rem;
   font-weight: 600;
-  transition: background .18s;
+  transition: background .18s, transform .15s;
   white-space: nowrap;
   display: inline-block;
+  box-shadow: 0 10px 26px rgba(99,102,241,.35);
 }
-.jia-ft-btn-trial:hover { background: #818CF8; }
+.jia-ft-btn-trial:hover { background: #818CF8; transform: translateY(-2px); }
 .jia-ft-btn-sales {
   color: #F2F2F2;
   text-decoration: none;
-  padding: .8rem 1.7rem;
+  padding: .85rem 1.8rem;
   border-radius: 9px;
   border: 1px solid #3A3A3A;
-  font-size: .92rem;
+  font-size: .93rem;
   font-weight: 600;
   background: transparent;
   transition: border-color .18s, background .18s;
@@ -144,7 +168,7 @@ html { background: #0C0C0C; }
   display: inline-block;
 }
 .jia-ft-btn-sales:hover {
-  border-color: rgba(255,255,255,.35);
+  border-color: rgba(255,255,255,.4);
   background: rgba(255,255,255,.05);
 }
 
@@ -329,15 +353,16 @@ const FOOTER_HTML = `
 
   <!-- CTA band -->
   <div class="jia-ft-cta">
+    <div class="jia-ft-cta-eyebrow">Get Started</div>
     <div class="jia-ft-cta-text">
-      One platform to sell, run, and <span>defend your business.</span>
+      Put AI <span>on the payroll.</span>
     </div>
     <div class="jia-ft-cta-sub">
-      Three AI products, one account, one flat bill. Free trial, no card required.
+      Sales, operations, and security, handled from one account for one flat price. Working tonight.
     </div>
     <div class="jia-ft-cta-btns">
-      <a href="/login.html" class="jia-ft-btn-trial">Free trial &rarr;</a>
-      <a href="/contact.html"   class="jia-ft-btn-sales">Contact sales</a>
+      <a href="/login.html" class="jia-ft-btn-trial">Start free &rarr;</a>
+      <a href="/contact.html" class="jia-ft-btn-sales">Talk to sales</a>
     </div>
   </div>
 
@@ -380,6 +405,14 @@ const FOOTER_HTML = `
 `;
 
 /* ── inject ───────────────────────────────────────────────── */
+/* make sure the site fonts exist on every page this footer appears on */
+if (!document.querySelector('link[href*="Newsreader"]')) {
+  const fontEl = document.createElement("link");
+  fontEl.rel = "stylesheet";
+  fontEl.href = "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap";
+  document.head.appendChild(fontEl);
+}
+
 const styleEl = document.createElement("style");
 styleEl.textContent = CSS;
 document.head.appendChild(styleEl);

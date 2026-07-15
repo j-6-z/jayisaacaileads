@@ -14,18 +14,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="JAYISAAC AI is one platform with three AI products: Lead Generation, Chief of Staff, and Cybersecurity. One account, one flat bill. Powered by Claude." />
   <title>JAYISAAC AI — Sell, Run &amp; Defend Your Business with AI</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet" />
   <script type="module" src="/nav.js"></script>
   <script type="module" src="/footer.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --paper:      #FAFAFE;
-      --ink:        #13121F;
-      --ink-soft:   #4A4860;
-      --ink-faint:  #8B89A0;
-      --line:       #E6E5F0;
+      --paper:      #FAF7F1;
+      --ink:        #1C1822;
+      --ink-soft:   #4E4856;
+      --ink-faint:  #8E8896;
+      --line:       #E9E2D6;
       --card:       #FFFFFF;
 
       --blue:       #4F46E5;
@@ -46,14 +46,14 @@
       --amber-soft: #FDF3D7;
 
       --night:      #11101C;
-      --mono: 'Inter', sans-serif; /* unified: Zapier uses one face sitewide */
+      --mono: 'Plus Jakarta Sans', sans-serif; /* unified: Zapier uses one face sitewide */
     }
 
     html { scroll-behavior: smooth; }
     body {
       background: var(--paper);
       color: var(--ink);
-      font-family: 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 16px;
       line-height: 1.6;
       overflow-x: hidden;
@@ -98,18 +98,20 @@
       font-size: .7rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
       color: var(--blue);
     }
-    .kicker .pip { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); animation: pip 2s infinite; }
+    .kicker .pip { width: 8px; height: 8px; border-radius: 2px; background: var(--blue); animation: pip 2s infinite; }
     @keyframes pip { 0%,100%{opacity:1} 50%{opacity:.25} }
     .sec-h2 {
       font-size: clamp(1.9rem, 4.2vw, 3.2rem);
       font-weight: 600; letter-spacing: -.032em; line-height: 1.07;
       margin: 16px 0 16px;
     }
+    .sec-h2 .hl { color: var(--blue); }
+    .converge .sec-h2 .hl { color: #818CF8; }
     .sec-sub { font-size: 1.02rem; color: var(--ink-soft); max-width: 600px; line-height: 1.75; }
 
     /* ═══════════ HERO (Zapier) ═══════════ */
     .hero {
-      background: #fff;
+      background: #FFFCF6;
       padding: 148px 5vw 90px;
       text-align: center;
     }
@@ -175,7 +177,7 @@
 
     /* builder card ("Get started in seconds") */
     .builder {
-      background: #F6F5F1;
+      background: #F5F0E7;
       border-radius: 22px;
       max-width: 860px;
       margin: 0 auto;
@@ -188,7 +190,7 @@
     .builder h2 { font-size: 1.5rem; font-weight: 700; letter-spacing: -.02em; color: var(--ink); margin-bottom: 26px; }
     .seg {
       display: inline-flex; gap: 2px;
-      background: #ECEAE3; border-radius: 10px; padding: 4px;
+      background: #EAE3D5; border-radius: 10px; padding: 4px;
       margin-bottom: 34px;
     }
     .seg button {
@@ -212,7 +214,7 @@
     .bcard {
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
       width: 136px; min-height: 118px;
-      background: #fff; border: 1px solid #E5E3DB; border-radius: 12px;
+      background: #fff; border: 1px solid #E6DFD0; border-radius: 12px;
       padding: 20px 12px;
       text-decoration: none;
       transition: border-color .16s, transform .16s, box-shadow .16s;
@@ -290,141 +292,180 @@
     .pev-meta { font-size: .72rem; color: var(--ink-faint); margin-top: 2px; }
     .pev-time { flex-shrink: 0; font-family: var(--mono); font-size: .62rem; color: var(--ink-faint); margin-top: 5px; }
 
-    /* ═══════════ MARQUEE ═══════════ */
+    /* ═══════════ TRUST MARQUEE (rAF-driven, scroll-reactive) ═══════════ */
     .marq-band {
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
       background: var(--paper);
-      padding: 24px 0;
+      padding: 30px 0 34px;
       overflow: hidden;
     }
     .marq-label {
       text-align: center; font-size: .66rem; font-weight: 700;
       letter-spacing: .18em; text-transform: uppercase; color: var(--ink-faint);
-      margin-bottom: 16px;
+      margin-bottom: 22px;
     }
-    .marq { display: flex; width: max-content; animation: marq 34s linear infinite; }
-    .marq-band:hover .marq { animation-play-state: paused; }
-    @keyframes marq { to { transform: translateX(-50%); } }
-    .marq-set { display: flex; gap: 12px; padding-right: 12px; }
-    .marq-chip {
-      font-size: .82rem; font-weight: 700; color: var(--ink-soft);
-      background: #fff; border: 1.5px solid var(--line);
-      padding: 9px 20px; border-radius: 999px; white-space: nowrap;
+    .mq-viewport {
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+              mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
     }
-    .marq-chip.hot { color: var(--blue); border-color: var(--blue-line); background: var(--blue-soft); }
+    .mq-viewport + .mq-viewport { margin-top: 18px; }
+    .mq-track { display: flex; width: max-content; will-change: transform; }
+    .mq-set { display: flex; align-items: center; gap: 44px; padding-right: 44px; flex-shrink: 0; }
+    .mq-item {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 1rem; font-weight: 600; letter-spacing: -.01em;
+      color: var(--ink-soft); white-space: nowrap;
+      transition: color .2s;
+    }
+    .mq-item:hover { color: var(--ink); }
+    .mq-item.hot { color: var(--blue); font-weight: 700; }
+    .mq-item svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; opacity: .8; }
+    .mq-sep { width: 6px; height: 6px; border-radius: 2px; background: #D9D1C0; flex-shrink: 0; }
 
-    /* ═══════════ CONVERGE (dark) ═══════════ */
-    .converge {
-      background: var(--night);
-      color: #fff;
-      padding: 110px 0 120px;
-      position: relative; overflow: hidden;
+    /* ═══════════ SYSTEM BENTO (Zapier "Every team has AI") ═══════════ */
+    .sysb-sec { padding: 110px 0 60px; }
+    .sysb-head { text-align: center; max-width: 720px; margin: 0 auto 50px; }
+    .sysb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .sysb-card {
+      background: #F4EFE5;
+      border: 1px solid #EAE3D4;
+      border-radius: 8px;
+      padding: 28px 28px 28px;
     }
-    .converge::before {
-      content: ''; position: absolute; inset: 0; pointer-events: none;
+    .sysb-mark { width: 10px; height: 10px; margin-bottom: 20px; }
+    .sysb-mark.mk-blue { background: var(--blue); }
+    .sysb-mark.mk-pur  { background: var(--pur); }
+    .sysb-card h3 {
+      font-family: 'Newsreader', Georgia, serif;
+      font-weight: 500;
+      font-size: clamp(1.5rem, 2.4vw, 1.95rem);
+      letter-spacing: -.012em;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+    .sysb-card > p { font-size: .92rem; color: var(--ink-soft); line-height: 1.68; margin-bottom: 26px; max-width: 480px; }
+
+    /* the dreamy photo-gradient stage */
+    .sysb-stage {
+      position: relative;
+      border-radius: 6px;
+      overflow: hidden;
+      height: 460px;
+      isolation: isolate;
+    }
+    .sysb-stage::before {
+      content: ''; position: absolute; inset: -12%;
+      z-index: -1;
+      filter: blur(26px) saturate(1.05);
+      transform: scale(1.05);
+      animation: stageDrift 18s ease-in-out infinite alternate;
+    }
+    @keyframes stageDrift { to { transform: scale(1.12) translate(2%, -2%); } }
+    .stage-a::before {
       background:
-        radial-gradient(ellipse 55% 45% at 16% 16%, rgba(99,102,241,.2), transparent 62%),
-        radial-gradient(ellipse 50% 44% at 86% 80%, rgba(124,58,237,.16), transparent 62%),
-        radial-gradient(ellipse 42% 40% at 62% 6%, rgba(14,146,168,.1), transparent 62%);
+        radial-gradient(90% 70% at 18% 12%, #C4DBD4 0%, transparent 62%),
+        radial-gradient(80% 65% at 88% 92%, #DCC49A 0%, transparent 58%),
+        linear-gradient(168deg, #9CBEB7 0%, #BFC5AF 48%, #D8C49C 100%);
     }
-    .converge .wrap { position: relative; z-index: 1; }
-    .converge-head { text-align: center; max-width: 740px; margin: 0 auto 60px; }
-    .converge .kicker { color: var(--blue-lt); }
-    .converge .kicker .pip { background: var(--blue-lt); }
-    .converge .sec-sub { color: rgba(255,255,255,.62); margin: 0 auto; }
-
-    .flow { max-width: 860px; margin: 0 auto 66px; }
-    .flow-svg { width: 100%; height: auto; display: block; }
-    .flow-dash { stroke-dasharray: 6 8; animation: dash 1.4s linear infinite; }
-    @keyframes dash { to { stroke-dashoffset: -14; } }
-
-    .one-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 58px; }
-    .one-cell {
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 18px; padding: 26px 24px;
-      transition: border-color .2s, background .2s, transform .2s;
+    .stage-b::before {
+      background:
+        radial-gradient(90% 70% at 15% 12%, #C2C6A6 0%, transparent 60%),
+        radial-gradient(85% 70% at 88% 88%, #E7B14A 0%, transparent 60%),
+        linear-gradient(160deg, #97A583 0%, #C2A662 55%, #E0B14E 100%);
     }
-    .one-cell:hover { border-color: rgba(129,140,248,.5); background: rgba(99,102,241,.08); transform: translateY(-3px); }
-    .one-cell b { display: block; font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: #fff; }
-    .one-cell b i { font-style: normal; color: var(--blue-lt); }
-    .one-cell p { font-size: .84rem; color: rgba(255,255,255,.6); line-height: 1.6; }
-
-    /* ═══════════ TABBED SHOWCASE ═══════════ */
-    .show-sec { padding: 110px 0 120px; }
-    .show-head { text-align: center; max-width: 700px; margin: 0 auto 44px; }
-    .show-tabs { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 44px; }
-    .stab {
-      font-family: inherit; font-size: .88rem; font-weight: 700; cursor: pointer;
-      background: #fff; color: var(--ink-soft);
-      border: 1.5px solid var(--line); border-radius: 999px;
-      padding: 12px 26px;
-      transition: all .18s ease;
+    .sysb-stage::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(180deg, rgba(255,255,255,.08), transparent 25%, rgba(40,30,10,.14));
     }
-    .stab:hover { border-color: var(--ink-faint); color: var(--ink); transform: translateY(-1px); }
-    .stab.on-blue { background: var(--blue); border-color: var(--blue); color: #fff; box-shadow: 0 8px 20px rgba(79,70,229,.3); }
-    .stab.on-pur  { background: var(--pur); border-color: var(--pur); color: #fff; box-shadow: 0 8px 20px rgba(124,58,237,.3); }
-    .stab.on-cyan { background: var(--cyan); border-color: var(--cyan); color: #fff; box-shadow: 0 8px 20px rgba(14,146,168,.3); }
 
-    .spanel { display: none; }
-    .spanel.on { display: grid; grid-template-columns: 400px 1fr; gap: 48px; align-items: center; animation: fadeUp .4s ease; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
-
-    .sp-info h3 { font-size: clamp(1.5rem, 2.6vw, 2.05rem); font-weight: 600; letter-spacing: -.028em; line-height: 1.15; margin-bottom: 16px; }
-    .sp-eyebrow { font-size: .68rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 14px; display: block; }
-    .sp-blue .sp-eyebrow { color: var(--blue); } .sp-pur .sp-eyebrow { color: var(--pur); } .sp-cyan .sp-eyebrow { color: var(--cyan); }
-    .sp-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin: 22px 0 30px; }
-    .sp-list li { display: flex; gap: 11px; align-items: flex-start; font-size: .93rem; color: var(--ink-soft); line-height: 1.55; }
-    .sp-list li::before { content: ''; width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
-    .sp-blue .sp-list li::before { background: var(--blue); box-shadow: 0 0 0 3px var(--blue-soft); }
-    .sp-pur  .sp-list li::before { background: var(--pur); box-shadow: 0 0 0 3px var(--pur-soft); }
-    .sp-cyan .sp-list li::before { background: var(--cyan); box-shadow: 0 0 0 3px var(--cyan-soft); }
-    .sp-btns { display: flex; gap: 12px; flex-wrap: wrap; }
-
-    .sp-window {
-      background: #fff; border: 1.5px solid var(--line); border-radius: 18px;
-      overflow: hidden; box-shadow: 0 6px 10px rgba(19,18,31,.03), 0 30px 70px rgba(19,18,31,.1);
+    /* floating UI vignettes */
+    .fz-ghost {
+      position: absolute;
+      background: rgba(255,255,255,.36);
+      border: 1px solid rgba(255,255,255,.5);
+      border-radius: 12px;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
     }
-    .spw-bar { background: var(--paper); border-bottom: 1px solid var(--line); padding: 11px 16px; display: flex; align-items: center; gap: 12px; }
-    .spw-dots { display: flex; gap: 6px; }
-    .spw-dots span { width: 10px; height: 10px; border-radius: 50%; }
-    .spw-dots span:nth-child(1){background:#FF5F56} .spw-dots span:nth-child(2){background:#FFBD2E} .spw-dots span:nth-child(3){background:#27C93F}
-    .spw-url { font-size: .72rem; color: var(--ink-faint); background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 4px 14px; font-family: var(--mono); }
-    .spw-body { padding: 24px; }
-    .w-title { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
-    .w-sub { font-size: .78rem; color: var(--ink-faint); margin-bottom: 18px; }
-    .w-sub b { color: var(--ink); }
-    .w-card { background: var(--paper); border: 1.5px solid var(--line); border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; }
-    .w-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
-    .w-left { display: flex; align-items: center; gap: 12px; }
-    .w-av {
-      width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: .72rem; font-weight: 700;
+    .fz-card {
+      position: absolute;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 22px 48px rgba(35,28,12,.26), 0 4px 10px rgba(35,28,12,.1);
+      animation: fzFloat 8s ease-in-out infinite alternate;
     }
-    .av-blue { background: var(--blue-soft); border: 1.5px solid var(--blue-line); color: var(--blue); }
-    .av-pur  { background: var(--pur-soft); border: 1.5px solid var(--pur-line); color: var(--pur); }
-    .av-cyan { background: var(--cyan-soft); border: 1.5px solid var(--cyan-line); color: var(--cyan); }
-    .w-name { font-size: .88rem; font-weight: 700; }
-    .w-role { font-size: .72rem; color: var(--ink-faint); }
-    .w-badge {
-      display: inline-flex; align-items: center; gap: 5px;
-      font-size: .64rem; font-weight: 700; padding: 4px 11px; border-radius: 999px;
+    .fz-card.fz-d1 { animation-delay: 1.6s; }
+    @keyframes fzFloat { to { transform: translateY(-9px); } }
+
+    /* card A: product picker */
+    .fz-pick { width: min(272px, 74%); left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 16px 16px 10px; }
+    .fz-pick.fz-card { animation-name: fzFloatC; }
+    @keyframes fzFloatC { from { transform: translate(-50%, -50%); } to { transform: translate(-50%, calc(-50% - 9px)); } }
+    .fz-pick-label { font-size: .7rem; font-weight: 600; color: var(--ink); margin-bottom: 7px; border-bottom: 1px dashed var(--ink-faint); display: inline-block; padding-bottom: 1px; }
+    .fz-pick-label em { font-style: normal; color: var(--blue); }
+    .fz-pick-input {
+      display: flex; align-items: center; gap: 8px;
+      font-size: .82rem; font-weight: 600; color: var(--ink);
+      border: 1.5px solid var(--blue); border-radius: 7px;
+      padding: 8px 10px; margin-bottom: 8px;
+      box-shadow: 0 0 0 3px rgba(79,70,229,.12);
+    }
+    .fz-pick-input .car { margin-left: auto; color: var(--ink-faint); font-size: .7rem; }
+    .fz-pick-item {
+      display: flex; align-items: center; gap: 9px;
+      font-size: .8rem; font-weight: 500; color: var(--ink);
+      padding: 9px 8px; border-radius: 6px;
+    }
+    .fz-pick-item:hover { background: #F6F3EC; }
+    .fz-pick-item .car { margin-left: auto; color: var(--ink-faint); font-size: .72rem; }
+    .fz-ic {
+      width: 20px; height: 20px; border-radius: 6px; flex-shrink: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .fz-ic svg { width: 12px; height: 12px; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .fz-ic-blue { background: var(--blue-soft); } .fz-ic-blue svg { stroke: var(--blue); }
+    .fz-ic-pur  { background: var(--pur-soft); }  .fz-ic-pur svg  { stroke: var(--pur); }
+    .fz-ic-cyan { background: var(--cyan-soft); } .fz-ic-cyan svg { stroke: var(--cyan); }
+
+    /* card B: instruction + action stack */
+    .fz-note { left: 7%; top: 9%; width: 62%; background: rgba(250,247,240,.96); padding: 14px 14px 16px; }
+    .fz-note-label { font-size: .68rem; font-weight: 700; color: var(--ink); margin-bottom: 9px; }
+    .fz-note-quote {
+      background: #fff; border: 1px solid #EAE3D4; border-radius: 7px;
+      padding: 11px 12px;
+      font-size: .74rem; color: var(--ink-soft); line-height: 1.55;
+    }
+    .fz-acts { right: 6%; bottom: 8%; width: 56%; padding: 16px; display: flex; flex-direction: column; align-items: center; gap: 9px; }
+    .fz-chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: .74rem; font-weight: 600; color: var(--ink);
+      background: #fff; border: 1px solid #E3DCCD; border-radius: 7px;
+      padding: 7px 12px;
+      box-shadow: 0 2px 6px rgba(35,28,12,.06);
       white-space: nowrap;
     }
-    .w-badge .d { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
-    .wb-green { background: var(--green-soft); color: var(--green); }
-    .wb-amber { background: var(--amber-soft); color: var(--amber); }
-    .w-sigs { display: flex; gap: 6px; flex-wrap: wrap; }
-    .w-sig { font-size: .66rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--blue-soft); border: 1px solid var(--blue-line); color: var(--blue); }
-    .w-sig.mute { background: #fff; border-color: var(--line); color: var(--ink-faint); font-weight: 600; }
-    .w-sig.pu { background: var(--pur-soft); border-color: var(--pur-line); color: var(--pur); }
-    .w-sig.cy { background: var(--cyan-soft); border-color: var(--cyan-line); color: var(--cyan); }
-    .w-acts { display: flex; gap: 8px; padding-top: 12px; margin-top: 4px; border-top: 1px solid var(--line); }
-    .w-act { font-family: inherit; font-size: .74rem; font-weight: 700; cursor: default; padding: 8px 16px; border-radius: 999px; border: none; }
-    .wa-pur { background: var(--pur); color: #fff; }
-    .wa-mute { background: #fff; border: 1.5px solid var(--line); color: var(--ink-soft); }
+    .fz-chip svg { width: 12px; height: 12px; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+    .fz-go {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: .78rem; font-weight: 600; color: #fff;
+      background: var(--blue); border-radius: 7px;
+      padding: 9px 16px; margin-top: 4px;
+      box-shadow: 0 8px 18px rgba(79,70,229,.35);
+    }
+
+    @media (max-width: 1040px) {
+      .story-grid { grid-template-columns: 1fr; }
+      .sysb-grid { grid-template-columns: 1fr; }
+      .sysb-stage { height: 420px; }
+    }
+    @media (max-width: 620px) {
+      .sysb-stage { height: 380px; }
+      .fz-note { width: 78%; }
+      .fz-acts { width: 76%; right: 5%; }
+    }
 
     /* ═══════════ STORY SPOTLIGHTS (Zapier customer-story style) ═══════════ */
     .story-sec { padding: 110px 0 110px; }
@@ -436,140 +477,215 @@
     .story-head h2 .hl { color: var(--blue); }
     .story-head p { font-size: .92rem; color: var(--ink-soft); margin-top: 14px; }
 
+    .story-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: stretch; }
     .story {
-      display: grid; grid-template-columns: .95fr 1.05fr;
-      gap: 22px;
-      margin-bottom: 26px;
-    }
-    .story-card {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 6px;
+      background: #F4EFE5;
+      border: 1px solid #EAE3D4;
+      border-radius: 8px;
+      overflow: hidden;
       display: flex; flex-direction: column;
     }
+    .story-card { display: flex; flex-direction: column; flex: 1; }
     .story-brand {
       display: inline-flex; align-items: center; gap: 9px;
-      padding: 26px 30px 0;
-      font-size: .74rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      padding: 22px 24px 0;
+      font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
       color: var(--ink);
     }
-    .story-brand .bsq { width: 14px; height: 14px; border-radius: 4px; flex-shrink: 0; }
+    .story-brand .bsq { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
     .st-blue .story-brand .bsq { background: var(--blue); }
     .st-pur  .story-brand .bsq { background: var(--pur); }
     .st-cyan .story-brand .bsq { background: var(--cyan); }
 
-    .story-mark {
-      font-family: 'Newsreader', Georgia, serif;
-      font-size: 2.2rem; line-height: 0;
-      padding: 34px 30px 0;
-      color: var(--ink);
-    }
     .story-quote {
       font-family: 'Newsreader', Georgia, serif;
       font-weight: 400;
-      font-size: clamp(1.35rem, 2.3vw, 1.8rem);
-      line-height: 1.34;
-      letter-spacing: -.012em;
+      font-size: 1.16rem;
+      line-height: 1.42;
+      letter-spacing: -.008em;
       color: var(--ink);
-      padding: 14px 30px 26px;
+      padding: 12px 24px 20px;
       flex: 1;
     }
+    .story-quote::before { content: '\201C'; }
+    .story-quote::after { content: '\201D'; }
     .story-attr {
-      padding: 0 30px 28px;
-      font-size: .8rem; color: var(--ink-soft);
+      padding: 0 24px 20px;
+      font-size: .76rem; color: var(--ink-soft);
     }
     .story-stats {
       border-top: 1px solid var(--line);
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      padding: 24px 30px;
+      gap: 18px;
+      padding: 18px 24px;
     }
     .story-stat-num {
       display: block;
-      font-size: clamp(1.7rem, 2.6vw, 2.2rem);
+      font-size: 1.55rem;
       font-weight: 600; letter-spacing: -.02em; line-height: 1.1;
     }
     .st-blue .story-stat-num { color: var(--blue); }
     .st-pur  .story-stat-num { color: var(--pur); }
     .st-cyan .story-stat-num { color: var(--cyan); }
-    .story-stat-label { display: block; font-size: .74rem; color: var(--ink-soft); margin-top: 6px; line-height: 1.45; max-width: 200px; }
-
+    .story-stat-label { display: block; font-size: .72rem; color: var(--ink-faint); margin-top: 5px; line-height: 1.45; }
     .story-foot {
       border-top: 1px solid var(--line);
-      padding: 16px 30px;
+      padding: 16px 24px;
+      margin-top: auto;
     }
     .story-link {
-      display: inline-flex; align-items: center; gap: 12px;
-      font-size: .9rem; font-weight: 600; color: var(--ink);
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: .82rem; font-weight: 700; color: var(--ink);
       text-decoration: none;
+      transition: color .18s;
     }
     .story-link .circ {
-      width: 32px; height: 32px; border-radius: 50%;
+      width: 28px; height: 28px; border-radius: 50%;
       border: 1.5px solid var(--ink);
-      display: flex; align-items: center; justify-content: center;
-      transition: background .18s, transform .18s;
+      display: inline-flex; align-items: center; justify-content: center;
+      transition: all .18s;
     }
-    .story-link .circ svg { width: 14px; height: 14px; stroke: var(--ink); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: stroke .18s; }
-    .story-link:hover .circ { background: var(--ink); transform: translateX(3px); }
-    .story-link:hover .circ svg { stroke: #fff; }
+    .story-link .circ svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .st-blue .story-link:hover { color: var(--blue); } .st-blue .story-link:hover .circ { background: var(--blue); border-color: var(--blue); color: #fff; transform: translateX(3px); }
+    .st-pur  .story-link:hover { color: var(--pur); }  .st-pur .story-link:hover .circ { background: var(--pur); border-color: var(--pur); color: #fff; transform: translateX(3px); }
+    .st-cyan .story-link:hover { color: var(--cyan); } .st-cyan .story-link:hover .circ { background: var(--cyan); border-color: var(--cyan); color: #fff; transform: translateX(3px); }
 
-    /* right visual panel: soft gradient wordmark */
+    /* ── living vignette sequences (gif-style loops, pure CSS) ── */
+    .story-visual .fz-card { animation: none; }
+    /* lead gen: query types itself, then the contact card lands, chips pop */
+    .st-blue .sv-q .tw {
+      display: inline-block; overflow: hidden; white-space: nowrap;
+      vertical-align: bottom; max-width: 22ch;
+      border-right: 2px solid var(--blue);
+      animation: twType 10s steps(22) infinite;
+    }
+    @keyframes twType { 0%, 4% { width: 0; } 30%, 96% { width: 22ch; } 100% { width: 22ch; } }
+    .st-blue .fz-card.sv-br { animation: seqCard 10s cubic-bezier(.22,.8,.3,1) infinite; }
+    @keyframes seqCard {
+      0%, 34% { opacity: 0; transform: translateY(16px); }
+      40%, 94% { opacity: 1; transform: none; }
+      99%, 100% { opacity: 0; transform: translateY(16px); }
+    }
+    .st-blue .sv-chips > * { animation: chipSeq 10s ease infinite; }
+    .st-blue .sv-chips > *:nth-child(2) { animation-delay: -9.4s; }
+    .st-blue .sv-chips > *:nth-child(3) { animation-delay: -8.8s; }
+    @keyframes chipSeq {
+      0%, 46% { opacity: 0; transform: scale(.8); }
+      52%, 94% { opacity: 1; transform: none; }
+      99%, 100% { opacity: 0; }
+    }
+    /* chief of staff: brief lines check in one by one, then the button presses */
+    .st-pur .sv-line { animation: lineSeq 10s ease infinite; }
+    .st-pur .sv-line:nth-of-type(2) { animation-delay: -8.9s; }
+    .st-pur .sv-line:nth-of-type(3) { animation-delay: -7.8s; }
+    @keyframes lineSeq {
+      0%, 8% { opacity: 0; transform: translateX(-8px); }
+      14%, 95% { opacity: 1; transform: none; }
+      100% { opacity: 0; }
+    }
+    .st-pur .fz-card.sv-br { animation: seqCard 10s cubic-bezier(.22,.8,.3,1) infinite; animation-delay: -5.6s; }
+    .st-pur .fz-go { animation: pressSeq 10s ease infinite; }
+    @keyframes pressSeq {
+      0%, 66% { transform: none; }
+      69% { transform: scale(.9); }
+      72%, 100% { transform: none; }
+    }
+    /* cyber: alert lands, containment chips pop, all-clear card follows */
+    .st-cyan .fz-card.sv-tl { animation: alertSeq 10s cubic-bezier(.22,.8,.3,1) infinite; }
+    @keyframes alertSeq {
+      0%, 4% { opacity: 0; transform: translateY(-14px); }
+      10%, 95% { opacity: 1; transform: none; }
+      100% { opacity: 0; }
+    }
+    .st-cyan .sv-chips > * { animation: chipSeq 10s ease infinite; animation-delay: -8.2s; }
+    .st-cyan .sv-chips > *:nth-child(2) { animation-delay: -7.6s; }
+    .st-cyan .sv-chips > *:nth-child(3) { animation-delay: -7s; }
+    .st-cyan .fz-card.sv-br { animation: seqCard 10s cubic-bezier(.22,.8,.3,1) infinite; animation-delay: -4.4s; }
+    /* right visual panel: dreamy photo-gradient stage + floating UI */
     .story-visual {
       position: relative;
-      border-radius: 6px;
+      border-radius: 0;
       overflow: hidden;
-      min-height: 460px;
-      display: flex; align-items: center; justify-content: center;
+      min-height: 275px;
+      isolation: isolate;
+      flex-shrink: 0;
     }
     .story-visual::before {
-      content: '';
-      position: absolute; inset: -30%;
-      filter: blur(2px);
-      animation: drift 16s ease-in-out infinite alternate;
+      content: ''; position: absolute; inset: -12%;
+      z-index: -1;
+      filter: blur(26px) saturate(1.05);
+      transform: scale(1.05);
+      animation: stageDrift 18s ease-in-out infinite alternate;
     }
-    @keyframes drift { from { transform: translate3d(-2.5%, -2.5%, 0) scale(1); } to { transform: translate3d(2.5%, 2.5%, 0) scale(1.06); } }
     .st-blue .story-visual::before {
       background:
-        radial-gradient(ellipse 70% 55% at 25% 20%, #A5B4FC, transparent 65%),
-        radial-gradient(ellipse 65% 60% at 80% 85%, #312E81, transparent 70%),
-        linear-gradient(160deg, #6366F1 0%, #4F46E5 45%, #4338CA 100%);
+        radial-gradient(90% 70% at 18% 12%, #C3CBEE 0%, transparent 62%),
+        radial-gradient(80% 65% at 88% 90%, #DBC69E 0%, transparent 58%),
+        linear-gradient(165deg, #97A0D2 0%, #BEBCB4 50%, #DAC49E 100%);
     }
     .st-pur .story-visual::before {
       background:
-        radial-gradient(ellipse 70% 55% at 25% 20%, #D8B4FE, transparent 65%),
-        radial-gradient(ellipse 65% 60% at 80% 85%, #4C1D95, transparent 70%),
-        linear-gradient(160deg, #A855F7 0%, #7C3AED 45%, #6B21A8 100%);
+        radial-gradient(90% 70% at 15% 14%, #D9C6EE 0%, transparent 62%),
+        radial-gradient(82% 66% at 88% 88%, #E9C9A2 0%, transparent 58%),
+        linear-gradient(160deg, #AE9AD6 0%, #CDB6B4 52%, #E5C89E 100%);
     }
     .st-cyan .story-visual::before {
       background:
-        radial-gradient(ellipse 70% 55% at 25% 20%, #A5F3FC, transparent 65%),
-        radial-gradient(ellipse 65% 60% at 80% 85%, #164E63, transparent 70%),
-        linear-gradient(160deg, #22D3EE 0%, #0E92A8 45%, #0E7490 100%);
+        radial-gradient(90% 70% at 18% 12%, #AEDDE3 0%, transparent 62%),
+        radial-gradient(80% 65% at 88% 90%, #C8D6B2 0%, transparent 58%),
+        linear-gradient(165deg, #7FB4BE 0%, #A9C3B8 50%, #D3CDA9 100%);
     }
     .story-visual::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,.06), transparent 30%, rgba(0,0,0,.12));
-      pointer-events: none;
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(180deg, rgba(255,255,255,.08), transparent 25%, rgba(40,30,10,.14));
     }
-    .story-wordmark {
-      position: relative; z-index: 1;
-      display: flex; align-items: center; gap: 16px;
-      color: #fff;
-    }
-    .story-wordmark .wm-ic {
-      width: 44px; height: 44px; border-radius: 12px;
-      background: rgba(255,255,255,.16);
-      border: 1.5px solid rgba(255,255,255,.55);
+
+    /* vignette internals */
+    .sv-tl { left: 7%; top: 10%; }
+    .sv-br { right: 6%; bottom: 9%; }
+    .sv-pad { padding: 14px; }
+    .sv-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+    .sv-head b { font-size: .8rem; font-weight: 700; color: var(--ink); }
+    .sv-time { font-size: .66rem; font-weight: 600; color: var(--ink-faint); }
+    .sv-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .sv-av {
+      width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
-      backdrop-filter: blur(4px);
+      font-size: .62rem; font-weight: 700;
+      background: var(--blue-soft); border: 1.5px solid var(--blue-line); color: var(--blue);
     }
-    .story-wordmark .wm-ic svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .story-wordmark .wm-txt {
-      font-size: clamp(1.4rem, 3vw, 2.1rem);
-      font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-      text-shadow: 0 2px 24px rgba(0,0,0,.18);
-      white-space: nowrap;
+    .sv-nm { font-size: .8rem; font-weight: 700; color: var(--ink); line-height: 1.2; }
+    .sv-rl { font-size: .68rem; color: var(--ink-faint); }
+    .sv-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .sv-q {
+      display: flex; align-items: center; gap: 8px;
+      font-size: .76rem; font-weight: 600; color: var(--ink);
+      border: 1.5px solid var(--blue); border-radius: 7px;
+      padding: 8px 10px;
+      box-shadow: 0 0 0 3px rgba(79,70,229,.12);
+    }
+    .sv-q svg { width: 13px; height: 13px; stroke: var(--blue); fill: none; stroke-width: 2.2; stroke-linecap: round; }
+    .sv-line { display: flex; align-items: flex-start; gap: 8px; font-size: .73rem; color: var(--ink-soft); line-height: 1.45; padding: 4px 0; }
+    .sv-line::before {
+      content: '✓';
+      width: 15px; height: 15px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: .54rem; font-weight: 700; color: #fff;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .st-pur .sv-line::before { background: var(--pur); }
+    .st-cyan .sv-line::before { background: var(--cyan); }
+    .fz-go-pur { background: var(--pur); box-shadow: 0 8px 18px rgba(124,58,237,.35); }
+    .fz-go-cyan { background: var(--cyan); box-shadow: 0 8px 18px rgba(14,146,168,.35); }
+    .sv-tag {
+      position: absolute; left: 16px; bottom: 14px;
+      font-size: .6rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase;
+      color: rgba(255,255,255,.95);
+      background: rgba(255,255,255,.22);
+      border: 1px solid rgba(255,255,255,.45);
+      border-radius: 999px; padding: 5px 12px;
+      backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+      text-shadow: 0 1px 6px rgba(0,0,0,.15);
     }
 
     /* ═══════════ TRUST GRID ═══════════ */
@@ -590,43 +706,6 @@
     .trust-cell .ic svg { width: 19px; height: 19px; stroke: var(--blue); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     .trust-cell b { display: block; font-size: .96rem; font-weight: 700; margin-bottom: 5px; }
     .trust-cell p { font-size: .83rem; color: var(--ink-soft); line-height: 1.6; }
-
-    /* ═══════════ RESULTS BAND (Zapier "Go from experiments to results") ═══════════ */
-    .ctaband {
-      background: var(--night);
-      color: #fff;
-      padding: 96px 5vw;
-      text-align: center;
-      position: relative; overflow: hidden;
-    }
-    .ctaband::before {
-      content: ''; position: absolute; inset: 0; pointer-events: none;
-      background:
-        radial-gradient(ellipse 55% 60% at 22% 30%, rgba(99,102,241,.32), transparent 62%),
-        radial-gradient(ellipse 52% 55% at 80% 72%, rgba(124,58,237,.24), transparent 62%),
-        radial-gradient(ellipse 40% 40% at 55% 5%, rgba(14,146,168,.14), transparent 60%);
-    }
-    .ctaband > * { position: relative; z-index: 1; }
-    .ctaband h2 {
-      font-size: clamp(1.9rem, 4.4vw, 3.1rem);
-      font-weight: 600; letter-spacing: -.032em; line-height: 1.08;
-      margin-bottom: 16px;
-    }
-    .ctaband p {
-      color: rgba(255,255,255,.72); font-size: 1rem;
-      max-width: 520px; margin: 0 auto 32px; line-height: 1.7;
-    }
-    .ctaband-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-    .cbtn {
-      display: inline-flex; align-items: center; justify-content: center;
-      font-family: inherit; font-size: .95rem; font-weight: 600;
-      padding: 14px 28px; border-radius: 9px; text-decoration: none;
-      transition: background .16s, border-color .16s;
-    }
-    .cbtn-solid { background: var(--blue); color: #fff; }
-    .cbtn-solid:hover { background: var(--blue-h); }
-    .cbtn-ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.35); }
-    .cbtn-ghost:hover { border-color: #fff; }
 
     /* ═══════════ SIGNUP SPLIT (Zapier sign-up section) ═══════════ */
     .signup-sec { padding: 110px 0 130px; background: var(--paper); }
@@ -703,14 +782,332 @@
     .signup-login a { color: var(--blue); font-weight: 600; text-decoration: none; }
     .signup-login a:hover { text-decoration: underline; }
 
+    /* ═══════════ RESTORED: CONVERGE (dark) ═══════════ */
+    .converge {
+      background: #0F0D18;
+      color: #F2F1F7;
+      padding: 110px 0 120px;
+      position: relative; overflow: hidden;
+    }
+    .converge::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 55% 45% at 16% 16%, rgba(99,102,241,.22), transparent 62%),
+        radial-gradient(ellipse 50% 44% at 86% 80%, rgba(124,58,237,.17), transparent 62%),
+        radial-gradient(ellipse 42% 40% at 62% 6%, rgba(14,146,168,.1), transparent 62%);
+    }
+    .converge .wrap { position: relative; z-index: 1; }
+    .converge-head { text-align: center; max-width: 740px; margin: 0 auto 60px; }
+    .converge .sec-h2 { font-family: 'Newsreader', Georgia, serif; font-weight: 500; letter-spacing: -.015em; color: #F6F2E8; }
+    .converge .kicker { color: #A5B4FC; }
+    .converge .kicker .pip { background: #818CF8; }
+    .converge .sec-sub { color: rgba(255,255,255,.62); margin: 0 auto; }
+    .flow { max-width: 860px; margin: 0 auto 66px; }
+    .flow-svg { width: 100%; height: auto; display: block; }
+    .flow-dash { stroke-dasharray: 6 8; animation: dash 1.4s linear infinite; }
+    @keyframes dash { to { stroke-dashoffset: -14; } }
+    .one-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .one-cell {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 18px; padding: 26px 24px;
+      transition: border-color .2s, background .2s, transform .2s;
+    }
+    .one-cell:hover { border-color: rgba(129,140,248,.5); background: rgba(99,102,241,.08); transform: translateY(-3px); }
+    .one-cell b { display: block; font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: #fff; }
+    .one-cell b i { font-style: normal; color: #818CF8; }
+    .one-cell p { font-size: .84rem; color: rgba(255,255,255,.6); line-height: 1.6; }
+
+    /* ═══════════ RESTORED: TABBED SHOWCASE ═══════════ */
+    .show-sec {
+      padding: 110px 0 120px;
+      background:
+        radial-gradient(ellipse 60% 50% at 18% 12%, rgba(99,102,241,.16), transparent 62%),
+        radial-gradient(ellipse 55% 48% at 85% 85%, rgba(124,58,237,.12), transparent 62%),
+        #14121D;
+    }
+    .show-head { text-align: center; max-width: 720px; margin: 0 auto 40px; }
+    .show-sec .kicker { color: #A5B4FC; }
+    .show-sec .kicker .pip { background: #818CF8; }
+    .show-sec .sec-h2 {
+      font-family: 'Newsreader', Georgia, serif;
+      font-weight: 500; letter-spacing: -.015em; color: #F6F2E8;
+    }
+    .show-sec .sec-h2 .hl { color: #A5B4FC; }
+    .show-sec .sec-sub { color: rgba(246,242,232,.66); }
+    .show-tabs { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
+    .stab {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: inherit; font-size: .88rem; font-weight: 600; cursor: pointer;
+      background: transparent; color: rgba(255,255,255,.78);
+      border: 1.5px solid rgba(255,255,255,.24); border-radius: 999px;
+      padding: 12px 24px;
+      transition: all .18s ease;
+    }
+    .stab svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .stab:hover { border-color: rgba(255,255,255,.65); color: #fff; transform: translateY(-1px); }
+    .stab.on-blue { background: var(--blue); border-color: var(--blue); color: #fff; box-shadow: 0 8px 20px rgba(79,70,229,.4); }
+    .stab.on-pur  { background: var(--pur); border-color: var(--pur); color: #fff; box-shadow: 0 8px 20px rgba(124,58,237,.4); }
+    .stab.on-cyan { background: var(--cyan); border-color: var(--cyan); color: #fff; box-shadow: 0 8px 20px rgba(14,146,168,.4); }
+    .spanel { display: none; }
+    .spanel.on { display: block; animation: fadeUp .45s cubic-bezier(.22,.8,.3,1); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+    .sp-shell {
+      position: relative;
+      display: grid; grid-template-columns: .92fr 1.08fr;
+      gap: clamp(1.5rem, 3.5vw, 3.5rem);
+      align-items: stretch;
+      border-radius: 26px;
+      border: 1.5px solid;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .sp-blue .sp-shell { background: linear-gradient(135deg, #EEF0FF 0%, #FCFCFF 58%); border-color: var(--blue-line); }
+    .sp-pur  .sp-shell { background: linear-gradient(135deg, #F4EEFE 0%, #FDFCFF 58%); border-color: var(--pur-line); }
+    .sp-cyan .sp-shell { background: linear-gradient(135deg, #E6F7FA 0%, #FBFEFF 58%); border-color: var(--cyan-line); }
+    .show-sec .sp-shell { box-shadow: 0 46px 100px rgba(0,0,0,.38), 0 10px 26px rgba(0,0,0,.2); }
+    .sp-shell::before {
+      content: ''; position: absolute; z-index: -1;
+      right: -8%; top: -25%; width: 55%; height: 90%;
+      border-radius: 50%; filter: blur(60px); opacity: .5;
+    }
+    .sp-blue .sp-shell::before { background: radial-gradient(circle, rgba(99,102,241,.3), transparent 70%); }
+    .sp-pur  .sp-shell::before { background: radial-gradient(circle, rgba(168,85,247,.28), transparent 70%); }
+    .sp-cyan .sp-shell::before { background: radial-gradient(circle, rgba(34,211,238,.26), transparent 70%); }
+    .sp-shell::after {
+      content: ''; position: absolute; z-index: -1;
+      top: 0; right: 0; width: 260px; height: 180px;
+      background-image:
+        linear-gradient(rgba(19,18,31,.09) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(19,18,31,.09) 1px, transparent 1px);
+      background-size: 26px 26px;
+      -webkit-mask-image: radial-gradient(ellipse at 100% 0%, #000 25%, transparent 78%);
+              mask-image: radial-gradient(ellipse at 100% 0%, #000 25%, transparent 78%);
+    }
+    .sp-eyebrow { font-size: .68rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 14px; display: block; }
+    .sp-blue .sp-eyebrow { color: var(--blue); } .sp-pur .sp-eyebrow { color: var(--pur); } .sp-cyan .sp-eyebrow { color: var(--cyan); }
+    .sp-copy { padding: clamp(34px, 5vw, 60px) 0 clamp(34px, 5vw, 60px) clamp(28px, 4.5vw, 56px); align-self: center; }
+    .sp-copy h3 { font-size: clamp(1.5rem, 2.6vw, 2.05rem); font-weight: 600; letter-spacing: -.028em; line-height: 1.15; margin-bottom: 14px; }
+    .sp-desc { font-size: .95rem; color: var(--ink-soft); line-height: 1.7; margin-bottom: 24px; max-width: 420px; }
+    .sp-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin: 0 0 30px; }
+    .sp-list li { display: flex; gap: 12px; align-items: flex-start; font-size: .93rem; color: var(--ink-soft); line-height: 1.55; }
+    .sp-list li::before {
+      content: '✓';
+      width: 20px; height: 20px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: .66rem; font-weight: 700; color: #fff;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .sp-blue .sp-list li::before { background: var(--blue); }
+    .sp-pur  .sp-list li::before { background: var(--pur); }
+    .sp-cyan .sp-list li::before { background: var(--cyan); }
+    .sp-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* ═══════════ RESTORED: STAGE SYSTEM ═══════════ */
+    .sp-stage {
+      position: relative;
+      align-self: stretch;
+      min-height: 560px;
+      isolation: isolate;
+      overflow: hidden;
+    }
+    .sp-stage::before {
+      content: ''; position: absolute; inset: -12%;
+      z-index: -1;
+      filter: blur(26px) saturate(1.08);
+      transform: scale(1.05);
+      animation: stageDrift 18s ease-in-out infinite alternate;
+    }
+    .sp-blue .sp-stage::before {
+      background:
+        radial-gradient(85% 65% at 18% 12%, #8E9AF0 0%, transparent 60%),
+        radial-gradient(80% 65% at 88% 92%, #221E5E 0%, transparent 62%),
+        linear-gradient(162deg, #5B63D6 0%, #3F3B96 52%, #262158 100%);
+    }
+    .sp-pur .sp-stage::before {
+      background:
+        radial-gradient(85% 65% at 16% 12%, #C4A5F9 0%, transparent 60%),
+        radial-gradient(80% 65% at 88% 90%, #2E1065 0%, transparent 62%),
+        linear-gradient(160deg, #8B5CF6 0%, #5B21B6 52%, #3B0764 100%);
+    }
+    .sp-cyan .sp-stage::before {
+      background:
+        radial-gradient(85% 65% at 18% 12%, #7DE7F4 0%, transparent 60%),
+        radial-gradient(80% 65% at 88% 92%, #083344 0%, transparent 62%),
+        linear-gradient(162deg, #22B8CE 0%, #0E7490 52%, #0A3D4C 100%);
+    }
+    .sp-stage::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(180deg, rgba(255,255,255,.07), transparent 22%, rgba(5,5,20,.22));
+    }
+    .sp-flow { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .sp-stage .fz-card {
+      animation:
+        cardIn .55s var(--in, 0s) cubic-bezier(.22,.8,.3,1) both,
+        fzFloat 7s calc(var(--in, 0s) + .9s) ease-in-out infinite alternate;
+      box-shadow: 0 26px 56px rgba(5,5,25,.45), 0 6px 14px rgba(5,5,25,.25);
+    }
+    .sp-stage .fz-ghost { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.28); }
+    @keyframes cardIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    .sfc-head { display: flex; align-items: center; gap: 8px; margin-bottom: 9px; }
+    .sfc-head b { font-size: .78rem; font-weight: 700; color: var(--ink); }
+    .sfc-head .sv-time { margin-left: auto; }
+    .sfc-line {
+      display: flex; justify-content: space-between; gap: 10px;
+      font-size: .7rem; color: var(--ink-faint);
+      padding: 5px 0; border-bottom: 1px dashed var(--line);
+    }
+    .sfc-line b { color: var(--ink); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .sfc-body { font-size: .72rem; color: var(--ink-soft); line-height: 1.55; padding-top: 7px; }
+    .sp-blue .sv-line::before { background: var(--blue); }
+    .sp-pur  .sv-line::before { background: var(--pur); }
+    .sp-cyan .sv-line::before { background: var(--cyan); }
+    .aw-score {
+      width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+      background: conic-gradient(var(--c, var(--blue)) calc(var(--v) * 1%), #EBE4D6 0);
+      display: grid; place-items: center;
+    }
+    .aw-score span {
+      width: 22px; height: 22px; border-radius: 50%; background: #fff;
+      display: grid; place-items: center; font-size: .54rem; font-weight: 700; color: var(--ink);
+    }
+    .spanel.on .aw-score { animation: scorePop .5s cubic-bezier(.34,1.4,.5,1) both; animation-delay: calc(.4s + var(--d, 0s)); }
+    @keyframes scorePop { from { transform: scale(.4); opacity: 0; } to { transform: none; opacity: 1; } }
+
+    /* ═══════════ RESTORED: BADGES / CHIPS / MINI BUTTONS ═══════════ */
+    .w-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: .64rem; font-weight: 700; padding: 4px 11px; border-radius: 999px;
+      white-space: nowrap;
+    }
+    .w-badge .d { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+    .wb-green { background: var(--green-soft); color: var(--green); }
+    .wb-amber { background: var(--amber-soft); color: var(--amber); }
+    .w-sig { font-size: .66rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--blue-soft); border: 1px solid var(--blue-line); color: var(--blue); white-space: nowrap; }
+    .w-sig.mute { background: #fff; border-color: var(--line); color: var(--ink-faint); font-weight: 600; }
+    .w-sig.pu { background: var(--pur-soft); border-color: var(--pur-line); color: var(--pur); }
+    .w-sig.cy { background: var(--cyan-soft); border-color: var(--cyan-line); color: var(--cyan); }
+    .w-act { font-family: inherit; font-size: .74rem; font-weight: 600; cursor: default; padding: 8px 16px; border-radius: 999px; border: none; }
+    .wa-pur { background: var(--pur); color: #fff; }
+    .wa-mute { background: #fff; border: 1.5px solid var(--line); color: var(--ink-soft); }
+
+
+    /* ═══════════ LIVE DEMOS: ghost cursor + typing agent ═══════════ */
+    .ghost-cursor {
+      position: absolute; z-index: 5;
+      left: 68%; top: 78%;
+      width: 22px; height: 22px;
+      pointer-events: none;
+      filter: drop-shadow(0 3px 8px rgba(20,15,5,.35));
+      animation: ghostPath 12s cubic-bezier(.45,.05,.35,1) infinite;
+    }
+    .ghost-cursor svg { width: 100%; height: 100%; }
+    .ghost-cursor::after {
+      content: ''; position: absolute; left: -7px; top: -7px;
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 2px solid rgba(79,70,229,.65);
+      opacity: 0; transform: scale(.3);
+      animation: ghostClick 12s linear infinite;
+    }
+    @keyframes ghostPath {
+      0%, 8%   { left: 68%; top: 78%; }
+      16%, 22% { left: 52%; top: 26%; }
+      30%, 36% { left: 50%; top: 44%; }
+      52%, 60% { left: 51%; top: 56%; }
+      74%      { left: 76%; top: 72%; }
+      100%     { left: 68%; top: 78%; }
+    }
+    @keyframes ghostClick {
+      0%, 16.9% { opacity: 0; transform: scale(.3); }
+      17%       { opacity: .9; transform: scale(.4); }
+      21%       { opacity: 0; transform: scale(1.5); }
+      32.9%     { opacity: 0; transform: scale(.3); }
+      33%       { opacity: .9; transform: scale(.4); }
+      37%       { opacity: 0; transform: scale(1.5); }
+      57.9%     { opacity: 0; transform: scale(.3); }
+      58%       { opacity: .9; transform: scale(.4); }
+      62%       { opacity: 0; transform: scale(1.5); }
+      100%      { opacity: 0; }
+    }
+    /* synced UI reactions inside the picker */
+    .demo-live .fz-pick-input { animation: pickInputHl 12s linear infinite; }
+    @keyframes pickInputHl {
+      0%, 15%  { box-shadow: 0 0 0 3px rgba(79,70,229,.12); }
+      17%, 22% { box-shadow: 0 0 0 5px rgba(79,70,229,.3); }
+      26%,100% { box-shadow: 0 0 0 3px rgba(79,70,229,.12); }
+    }
+    .demo-live .fz-pick-item:nth-of-type(1) { animation: rowHl1 12s linear infinite; }
+    .demo-live .fz-pick-item:nth-of-type(2) { animation: rowHl2 12s linear infinite; }
+    @keyframes rowHl1 {
+      0%, 27% { background: transparent; }
+      30%, 37% { background: #F1EDFB; }
+      41%, 100% { background: transparent; }
+    }
+    @keyframes rowHl2 {
+      0%, 49% { background: transparent; }
+      52%, 61% { background: #E9F6F9; }
+      65%, 100% { background: transparent; }
+    }
+
+    /* typing agent demo (card B) */
+    .demo-live .fz-chip { opacity: 0; transform: translateY(8px) scale(.9); }
+    .demo-live .fz-chip.pop { opacity: 1; transform: none; transition: opacity .35s ease, transform .45s cubic-bezier(.34,1.5,.5,1); }
+    .demo-live .fz-go { transition: transform .15s ease, box-shadow .15s ease; }
+    .demo-live .fz-go.press { transform: scale(.92); box-shadow: 0 3px 8px rgba(79,70,229,.3); }
+    .type-caret {
+      display: inline-block; width: 2px; height: 12px;
+      background: var(--pur); vertical-align: -2px; margin-left: 2px;
+      animation: caretBlink 1s steps(1) infinite;
+    }
+    @keyframes caretBlink { 50% { opacity: 0; } }
+    .fz-toast {
+      position: absolute; left: 50%; bottom: 6%;
+      transform: translate(-50%, 20px);
+      background: #fff; color: var(--ink);
+      font-size: .76rem; font-weight: 700;
+      padding: 10px 18px; border-radius: 999px;
+      box-shadow: 0 16px 40px rgba(35,28,12,.3);
+      display: inline-flex; align-items: center; gap: 8px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .35s ease, transform .45s cubic-bezier(.22,.9,.3,1);
+      white-space: nowrap; z-index: 6;
+    }
+    .fz-toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .fz-toast .tick {
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--green); color: #fff;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: .56rem;
+    }
+
+    /* periodic press on stage CTA buttons */
+    .sp-stage .fz-go { animation: goPress 7s ease-in-out infinite; }
+    @keyframes goPress {
+      0%, 54% { transform: none; }
+      57% { transform: scale(.93); }
+      60%, 100% { transform: none; }
+    }
+
+    /* film grain on dark sections */
+    .show-sec, .converge { position: relative; }
+    .show-sec::after, .converge .grain {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      opacity: .05; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+    }
+    .show-sec > .wrap { position: relative; z-index: 1; }
+
     /* ═══════════ RESPONSIVE ═══════════ */
     @media (max-width: 1040px) {
       .pulse-grid { grid-template-columns: 1fr; gap: 2.6rem; }
       .pulse { max-width: 620px; }
-      .story { grid-template-columns: 1fr; }
       .story-visual { min-height: 300px; order: -1; }
       .one-grid { grid-template-columns: 1fr 1fr; }
-      .spanel.on { grid-template-columns: 1fr; gap: 34px; }
+      .sp-shell { grid-template-columns: 1fr; align-items: start; }
+      .sp-copy { padding: 34px 28px 0; }
+      .sp-stage { min-height: 470px; }
       .trust-grid { grid-template-columns: 1fr 1fr; }
       .signup-grid { grid-template-columns: 1fr; gap: 3rem; }
       .signup-card { max-width: 520px; }
@@ -733,6 +1130,7 @@
   </style>
 </head>
 <body>
+<!-- BUILD: v18-stories-live -->
 
 <!-- ═══ HERO ═══ -->
 <section class="hero">
@@ -800,32 +1198,63 @@
 <!-- ═══ STACK MARQUEE ═══ -->
 <div class="marq-band" aria-label="Platform foundations">
   <div class="marq-label">Built on infrastructure you already trust</div>
-  <div class="marq">
-    <div class="marq-set">
-      <span class="marq-chip hot">Powered by Claude</span>
-      <span class="marq-chip">Stripe Billing</span>
-      <span class="marq-chip">Firebase Auth</span>
-      <span class="marq-chip">Vercel Edge</span>
-      <span class="marq-chip">PIPEDA</span>
-      <span class="marq-chip">GDPR</span>
-      <span class="marq-chip">CCPA</span>
-      <span class="marq-chip hot">Flat Pricing</span>
-      <span class="marq-chip">99.9% Uptime</span>
-      <span class="marq-chip">Cancel Anytime</span>
-      <span class="marq-chip">One Login</span>
+  <div class="mq-viewport">
+    <div class="mq-track" data-marquee="fwd">
+      <div class="mq-set">
+          <span class="mq-item hot"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Powered by Claude</span><span class="mq-sep"></span>
+          <span class="mq-item">Stripe Billing</span><span class="mq-sep"></span>
+          <span class="mq-item">Firebase Auth</span><span class="mq-sep"></span>
+          <span class="mq-item">Vercel Edge</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>99.9% Uptime</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Encrypted at Rest</span><span class="mq-sep"></span>
+      </div>
+      <div class="mq-set" aria-hidden="true">
+          <span class="mq-item hot"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Powered by Claude</span><span class="mq-sep"></span>
+          <span class="mq-item">Stripe Billing</span><span class="mq-sep"></span>
+          <span class="mq-item">Firebase Auth</span><span class="mq-sep"></span>
+          <span class="mq-item">Vercel Edge</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>99.9% Uptime</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Encrypted at Rest</span><span class="mq-sep"></span>
+      </div>
+      <div class="mq-set" aria-hidden="true">
+          <span class="mq-item hot"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Powered by Claude</span><span class="mq-sep"></span>
+          <span class="mq-item">Stripe Billing</span><span class="mq-sep"></span>
+          <span class="mq-item">Firebase Auth</span><span class="mq-sep"></span>
+          <span class="mq-item">Vercel Edge</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>99.9% Uptime</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Encrypted at Rest</span><span class="mq-sep"></span>
+      </div>
     </div>
-    <div class="marq-set" aria-hidden="true">
-      <span class="marq-chip hot">Powered by Claude</span>
-      <span class="marq-chip">Stripe Billing</span>
-      <span class="marq-chip">Firebase Auth</span>
-      <span class="marq-chip">Vercel Edge</span>
-      <span class="marq-chip">PIPEDA</span>
-      <span class="marq-chip">GDPR</span>
-      <span class="marq-chip">CCPA</span>
-      <span class="marq-chip hot">Flat Pricing</span>
-      <span class="marq-chip">99.9% Uptime</span>
-      <span class="marq-chip">Cancel Anytime</span>
-      <span class="marq-chip">One Login</span>
+  </div>
+  <div class="mq-viewport">
+    <div class="mq-track" data-marquee="rev">
+      <div class="mq-set">
+          <span class="mq-item hot"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Flat Pricing</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>PIPEDA</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>GDPR</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>CCPA</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Cancel Anytime</span><span class="mq-sep"></span>
+          <span class="mq-item">One Login</span><span class="mq-sep"></span>
+          <span class="mq-item hot">No Per-Seat Fees</span><span class="mq-sep"></span>
+      </div>
+      <div class="mq-set" aria-hidden="true">
+          <span class="mq-item hot"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Flat Pricing</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>PIPEDA</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>GDPR</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>CCPA</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Cancel Anytime</span><span class="mq-sep"></span>
+          <span class="mq-item">One Login</span><span class="mq-sep"></span>
+          <span class="mq-item hot">No Per-Seat Fees</span><span class="mq-sep"></span>
+      </div>
+      <div class="mq-set" aria-hidden="true">
+          <span class="mq-item hot"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Flat Pricing</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>PIPEDA</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>GDPR</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>CCPA</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Cancel Anytime</span><span class="mq-sep"></span>
+          <span class="mq-item">One Login</span><span class="mq-sep"></span>
+          <span class="mq-item hot">No Per-Seat Fees</span><span class="mq-sep"></span>
+      </div>
     </div>
   </div>
 </div>
@@ -836,7 +1265,7 @@
     <div class="pulse-grid">
       <div data-rev>
         <span class="kicker"><span class="pip"></span>Always On</span>
-        <h2 class="sec-h2">This is your account<br>at 2:14am.</h2>
+        <h2 class="sec-h2">This is your account <span class="hl">at 2:14am.</span></h2>
         <p class="sec-sub">Three products, one feed. While you sleep, JAYISAAC AI is matching leads, drafting your morning, and watching your perimeter. Every event lands in one place.</p>
       </div>
       <div class="pulse" data-rev aria-label="Live platform activity example">
@@ -850,6 +1279,74 @@
   </div>
 </section>
 
+<!-- ═══ SYSTEM BENTO ═══ -->
+<section class="sysb-sec">
+  <div class="wrap">
+    <div class="sysb-head" data-rev>
+      <h2 class="sec-h2">Every job has an app. <span class="hl">You needed a system.</span></h2>
+      <p class="sec-sub" style="margin:14px auto 0">Sales tools, ops tools, security tools. Each one works great alone. JAYISAAC AI puts all three jobs on one account, one dataset, and one flat bill.</p>
+    </div>
+
+    <div class="sysb-grid">
+
+      <!-- CARD A: one account, three products -->
+      <div class="sysb-card" data-rev>
+        <div class="sysb-mark mk-blue"></div>
+        <h3>Three products, one account</h3>
+        <p>Pick the job you need done today. Add the rest when you're ready. Everything shares one login, one dataset, and one bill.</p>
+        <div class="sysb-stage stage-a" id="demoA" aria-hidden="true">
+          <div class="ghost-cursor"><svg viewBox="0 0 24 24"><path d="M5 3l14 8-6.5 1.5L9 19z" fill="#fff" stroke="#1C1822" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
+          <div class="fz-ghost" style="left:12%; top:14%; right:12%; bottom:14%;"></div>
+          <div class="fz-card fz-pick">
+            <div class="fz-pick-label">Product <em>*</em></div>
+            <div class="fz-pick-input">
+              <span class="fz-ic fz-ic-blue" id="pickIc"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></span>
+              <span id="pickLbl">Lead Generation</span>
+              <span class="car">▾</span>
+            </div>
+            <div class="fz-pick-item">
+              <span class="fz-ic fz-ic-pur"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+              Chief of Staff
+              <span class="car">›</span>
+            </div>
+            <div class="fz-pick-item">
+              <span class="fz-ic fz-ic-cyan"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+              Cybersecurity
+              <span class="car">›</span>
+            </div>
+            <div class="fz-pick-item">
+              <span class="fz-ic fz-ic-blue"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></span>
+              All three, one bill
+              <span class="car">›</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD B: AI that takes action -->
+      <div class="sysb-card" data-rev>
+        <div class="sysb-mark mk-pur"></div>
+        <h3>AI that takes action across your business</h3>
+        <p>Describe the job in plain English. AI finds the leads, drafts the brief, chases the thread, and watches the perimeter. Autonomously, 24/7.</p>
+        <div class="sysb-stage stage-b" id="demoB" aria-hidden="true">
+          <div class="fz-card fz-note">
+            <div class="fz-note-label">Instructions to follow:</div>
+            <div class="fz-note-quote"><span id="typeTarget"></span><span class="type-caret" id="typeCaret"></span></div>
+          </div>
+          <div class="fz-card fz-acts fz-d1">
+            <span class="fz-chip"><svg viewBox="0 0 24 24" style="stroke:var(--pur)"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Every day at 7:00am</span>
+            <span class="fz-chip"><svg viewBox="0 0 24 24" style="stroke:var(--blue)"><path d="M4 4h16v16H4z"/><path d="M4 7l8 6 8-6"/></svg>Summarize inbox + calendar</span>
+            <span class="fz-chip"><svg viewBox="0 0 24 24" style="stroke:var(--cyan)"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>Chase the quiet threads</span>
+            <span class="fz-go" id="demoGo">✦ Create brief</span>
+          </div>
+          <div class="fz-toast" id="demoToast"><span class="tick">✓</span>Brief scheduled · every day, 7:00am</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ═══ STORY SPOTLIGHTS ═══ -->
 <section class="story-sec" id="products">
   <div class="wrap">
@@ -858,12 +1355,30 @@
       <p>Three products doing real jobs, on job sites, in home offices, and anywhere AI earns its keep.</p>
     </div>
 
+    <div class="story-grid">
     <!-- LEAD GENERATION -->
     <div class="story st-blue" data-rev>
+      <div class="story-visual" aria-hidden="true">
+        <div class="fz-ghost" style="left:11%; top:13%; right:11%; bottom:15%;"></div>
+        <div class="fz-card sv-tl sv-pad" style="width:56%;">
+          <div class="sv-q"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg><span class="tw">HVAC owners in Alberta</span></div>
+        </div>
+        <div class="fz-card sv-br sv-pad fz-d1" style="width:62%;">
+          <div class="sv-row">
+            <div class="sv-av">JD</div>
+            <div><div class="sv-nm">James Darvill</div><div class="sv-rl">Owner · Apex HVAC Solutions</div></div>
+          </div>
+          <div class="sv-chips">
+            <span class="w-sig">✓ Verified email</span>
+            <span class="w-sig">✓ Direct dial</span>
+            <span class="w-badge wb-green"><span class="d"></span>High Intent</span>
+          </div>
+        </div>
+        <span class="sv-tag">Lead Generation</span>
+      </div>
       <div class="story-card">
         <div class="story-brand"><span class="bsq"></span>AI Lead Generation</div>
-        <div class="story-mark">&ldquo;</div>
-        <div class="story-quote">Type what you're looking for in plain English. Get back every decision-maker who matches, with a verified email and a direct dial. Then let AI write the outreach.</div>
+          <div class="story-quote">Type what you're looking for in plain English. Get back every decision-maker who matches, with a verified email and a direct dial. Then let AI write the outreach.</div>
         <div class="story-attr">AI Lead Generation, the Apollo alternative built for North American teams</div>
         <div class="story-stats">
           <div><span class="story-stat-num">$0</span><span class="story-stat-label">per-seat fees on any plan, flat pricing only</span></div>
@@ -873,20 +1388,29 @@
           <a class="story-link" href="/lead-generation/"><span class="circ"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>Explore Lead Generation</a>
         </div>
       </div>
-      <div class="story-visual">
-        <div class="story-wordmark">
-          <span class="wm-ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></span>
-          <span class="wm-txt">Lead Generation</span>
-        </div>
-      </div>
+
     </div>
 
     <!-- CHIEF OF STAFF -->
     <div class="story st-pur" data-rev>
+      <div class="story-visual" aria-hidden="true">
+        <div class="fz-ghost" style="left:11%; top:13%; right:11%; bottom:15%;"></div>
+        <div class="fz-card sv-tl sv-pad" style="width:60%;">
+          <div class="sv-head"><b>Morning brief</b><span class="sv-time">Tuesday · 7:00am</span></div>
+          <div class="sv-line">Sign Q3 contract, one clause flagged</div>
+          <div class="sv-line">Board sync prep attached</div>
+          <div class="sv-line">Nudge Dana, thread quiet 5 days</div>
+        </div>
+        <div class="fz-card sv-br sv-pad fz-d1" style="width:48%; display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <span class="w-sig pu">3 decisions</span>
+          <span class="w-sig mute">90-sec read</span>
+          <span class="fz-go fz-go-pur">✦ Open brief</span>
+        </div>
+        <span class="sv-tag">Chief of Staff</span>
+      </div>
       <div class="story-card">
         <div class="story-brand"><span class="bsq"></span>AI Chief of Staff</div>
-        <div class="story-mark">&ldquo;</div>
-        <div class="story-quote">Your day, ranked and ready by 7am. Every open thread chased, every meeting prepped, every report drafted. The operator you couldn't otherwise afford, on duty around the clock.</div>
+          <div class="story-quote">Your day, ranked and ready by 7am. Every open thread chased, every meeting prepped, every report drafted. The operator you couldn't otherwise afford, on duty around the clock.</div>
         <div class="story-attr">AI Chief of Staff, built for founders and operators who run lean</div>
         <div class="story-stats">
           <div><span class="story-stat-num">7:00am</span><span class="story-stat-label">your brief is ready before you are, every day</span></div>
@@ -896,20 +1420,31 @@
           <a class="story-link" href="/chief-of-staff/"><span class="circ"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>Explore Chief of Staff</a>
         </div>
       </div>
-      <div class="story-visual">
-        <div class="story-wordmark">
-          <span class="wm-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-          <span class="wm-txt">Chief of Staff</span>
-        </div>
-      </div>
+
     </div>
 
     <!-- CYBERSECURITY -->
     <div class="story st-cyan" data-rev>
+      <div class="story-visual" aria-hidden="true">
+        <div class="fz-ghost" style="left:11%; top:13%; right:11%; bottom:15%;"></div>
+        <div class="fz-card sv-tl sv-pad" style="width:62%;">
+          <div class="sv-head"><b>Suspicious login blocked</b><span class="sv-time">02:14 UTC</span></div>
+          <div class="sv-chips">
+            <span class="w-sig cy">Auto-contained</span>
+            <span class="w-sig mute">MFA challenge sent</span>
+            <span class="w-badge wb-green"><span class="d"></span>Risk: Low</span>
+          </div>
+        </div>
+        <div class="fz-card sv-br sv-pad fz-d1" style="width:50%; display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <span class="w-sig cy">Weekly scan complete</span>
+          <span class="w-sig mute">1 patch suggested</span>
+          <span class="fz-go fz-go-cyan">✦ View posture</span>
+        </div>
+        <span class="sv-tag">Cybersecurity</span>
+      </div>
       <div class="story-card">
         <div class="story-brand"><span class="bsq"></span>AI Cybersecurity</div>
-        <div class="story-mark">&ldquo;</div>
-        <div class="story-quote">Threats detected, contained, and logged while you sleep. It handles the noise, runs the playbooks, and only wakes a human when something actually needs one.</div>
+          <div class="story-quote">Threats detected, contained, and logged while you sleep. It handles the noise, runs the playbooks, and only wakes a human when something actually needs one.</div>
         <div class="story-attr">AI Cybersecurity, always-on defense for businesses without a security team</div>
         <div class="story-stats">
           <div><span class="story-stat-num">24/7</span><span class="story-stat-label">eyes on your stack, every hour of the year</span></div>
@@ -919,14 +1454,10 @@
           <a class="story-link" href="/cybersecurity/"><span class="circ"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>Explore Cybersecurity</a>
         </div>
       </div>
-      <div class="story-visual">
-        <div class="story-wordmark">
-          <span class="wm-ic"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-          <span class="wm-txt">Cybersecurity</span>
-        </div>
-      </div>
+
     </div>
 
+    </div>
   </div>
 </section>
 
@@ -935,21 +1466,23 @@
   <div class="wrap">
     <div class="show-head" data-rev>
       <span class="kicker"><span class="pip"></span>See It In Action</span>
-      <h2 class="sec-h2">One platform. Three jobs, done.</h2>
+      <h2 class="sec-h2">One platform. <span class="hl">Three jobs, done.</span></h2>
       <p class="sec-sub" style="margin:0 auto">Flip through to see each product at work. Same account, same data, same flat bill.</p>
     </div>
 
     <div class="show-tabs" role="tablist" data-rev>
-      <button class="stab on-blue" id="tab0" role="tab" aria-selected="true" onclick="sw(0)">Lead Generation</button>
-      <button class="stab" id="tab1" role="tab" aria-selected="false" onclick="sw(1)">Chief of Staff</button>
-      <button class="stab" id="tab2" role="tab" aria-selected="false" onclick="sw(2)">Cybersecurity</button>
+      <button class="stab on-blue" id="tab0" role="tab" aria-selected="true" onclick="sw(0)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>Lead Generation</button>
+      <button class="stab" id="tab1" role="tab" aria-selected="false" onclick="sw(1)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Chief of Staff</button>
+      <button class="stab" id="tab2" role="tab" aria-selected="false" onclick="sw(2)"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Cybersecurity</button>
     </div>
 
     <!-- LEAD GEN -->
     <div class="spanel sp-blue on" id="p0" role="tabpanel">
-      <div class="sp-info">
+      <div class="sp-shell">
+      <div class="sp-copy">
         <span class="sp-eyebrow">01 / Lead Generation</span>
         <h3>Find North American decision-makers in minutes.</h3>
+        <p class="sp-desc">Plain English in, verified contacts out. Search the database the way you'd describe your ideal customer to a friend.</p>
         <ul class="sp-list">
           <li>Type plain English and AI turns it into perfect filters</li>
           <li>Verified email and direct dial on every contact</li>
@@ -961,41 +1494,51 @@
           <a class="btn btn-sm btn-out" href="/login.html">Start free</a>
         </div>
       </div>
-      <div class="sp-window">
-        <div class="spw-bar"><div class="spw-dots"><span></span><span></span><span></span></div><div class="spw-url">app.jayisaacai.com/search</div></div>
-        <div class="spw-body">
-          <div class="w-title">Search Results</div>
-          <div class="w-sub"><b>23,847 contacts</b> match: HVAC &amp; Plumbing · Owner · North America · 1–50 staff</div>
-          <div class="w-card">
-            <div class="w-row">
-              <div class="w-left"><div class="w-av av-blue">JD</div><div><div class="w-name">James Darvill</div><div class="w-role">Owner · Apex HVAC Solutions</div></div></div>
-              <span class="w-badge wb-green"><span class="d"></span>High Intent</span>
-            </div>
-            <div class="w-sigs"><span class="w-sig">Hiring 3 techs</span><span class="w-sig">New location</span><span class="w-sig mute">Dallas, TX · 8 employees</span></div>
+      <div class="sp-stage" aria-hidden="true">
+        <svg class="sp-flow" viewBox="0 0 420 560" preserveAspectRatio="none" aria-hidden="true">
+          <path class="flow-dash" d="M150 105 C 250 130, 300 160, 310 215" stroke="rgba(255,255,255,.5)" stroke-width="2" fill="none"/>
+          <path class="flow-dash" d="M290 340 C 240 390, 180 400, 150 440" stroke="rgba(255,255,255,.5)" stroke-width="2" fill="none"/>
+          <circle r="4" fill="#fff" opacity=".95">
+            <animateMotion dur="2.8s" repeatCount="indefinite" path="M150 105 C 250 130, 300 160, 310 215"/>
+          </circle>
+          <circle r="4" fill="#fff" opacity=".95">
+            <animateMotion dur="2.8s" begin="1.4s" repeatCount="indefinite" path="M290 340 C 240 390, 180 400, 150 440"/>
+          </circle>
+        </svg>
+        <div class="fz-ghost" style="left:9%; top:6%; right:9%; bottom:6%;"></div>
+        <div class="fz-card sv-pad" style="left:7%; top:6%; width:56%; --in:0s;">
+          <div class="sv-q"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>HVAC owners in Alberta</div>
+        </div>
+        <div class="fz-card sv-pad" style="right:5%; top:35%; width:66%; --in:.14s;">
+          <div class="sv-row" style="margin-bottom:8px">
+            <div class="sv-av">JD</div>
+            <div style="min-width:0"><div class="sv-nm">James Darvill</div><div class="sv-rl">Owner · Apex HVAC Solutions</div></div>
+            <div class="aw-score" style="--v:92; margin-left:auto"><span>92</span></div>
           </div>
-          <div class="w-card">
-            <div class="w-row">
-              <div class="w-left"><div class="w-av av-blue">SR</div><div><div class="w-name">Sandra Reeves</div><div class="w-role">Founder · Prairie Air Systems</div></div></div>
-              <span class="w-badge wb-green"><span class="d"></span>High Intent</span>
-            </div>
-            <div class="w-sigs"><span class="w-sig">Raised seed funding</span><span class="w-sig mute">Calgary, AB · 5 employees</span></div>
-          </div>
-          <div class="w-card">
-            <div class="w-row">
-              <div class="w-left"><div class="w-av av-blue">MK</div><div><div class="w-name">Marcus Kowalski</div><div class="w-role">Owner · TrueNorth Plumbing</div></div></div>
-              <span class="w-badge wb-amber"><span class="d"></span>Warm</span>
-            </div>
-            <div class="w-sigs"><span class="w-sig">Site redesign</span><span class="w-sig mute">Saskatoon, SK · 12 employees</span></div>
+          <div class="sv-chips">
+            <span class="w-sig">✓ Verified email</span>
+            <span class="w-sig">✓ Direct dial</span>
+            <span class="w-badge wb-green"><span class="d"></span>High Intent</span>
           </div>
         </div>
+        <div class="fz-card sv-pad" style="left:8%; bottom:5%; width:64%; --in:.28s;">
+          <div class="sfc-head"><b>AI outreach draft</b><span class="sv-time">ready to review</span></div>
+          <div class="sfc-line"><span>To</span><b>james@apexhvac.com</b></div>
+          <div class="sfc-line"><span>Subject</span><b>Saw you're hiring 3 techs</b></div>
+          <div class="sfc-body" style="display:flex; justify-content:space-between; align-items:center; gap:10px;">Personalized from his buying signals<span class="fz-go" style="margin:0; padding:7px 13px;">Send</span></div>
+        </div>
+        <span class="sv-tag">Lead Generation</span>
+      </div>
       </div>
     </div>
 
     <!-- CHIEF OF STAFF -->
     <div class="spanel sp-pur" id="p1" role="tabpanel">
-      <div class="sp-info">
+      <div class="sp-shell">
+      <div class="sp-copy">
         <span class="sp-eyebrow">02 / Chief of Staff</span>
         <h3>Everything that matters, before your first coffee.</h3>
+        <p class="sp-desc">Your inbox, calendar, and docs read for you overnight. What matters lands on your desk, ranked and ready.</p>
         <ul class="sp-list">
           <li>AI ranks your day by what's urgent and what needs a decision</li>
           <li>Delegation tracking chases every open thread for you</li>
@@ -1007,40 +1550,45 @@
           <a class="btn btn-sm btn-out" href="/login.html">Start free</a>
         </div>
       </div>
-      <div class="sp-window">
-        <div class="spw-bar"><div class="spw-dots"><span></span><span></span><span></span></div><div class="spw-url">app.jayisaacai.com/staff</div></div>
-        <div class="spw-body">
-          <div class="w-title">Tuesday, Morning Brief</div>
-          <div class="w-sub"><b>3 things need you today.</b> AI handled 11 items overnight.</div>
-          <div class="w-card">
-            <div class="w-row">
-              <div class="w-left"><div class="w-av av-pur">✱</div><div><div class="w-name">Sign off: Q3 vendor contract</div><div class="w-role">Legal flagged 1 clause · due today</div></div></div>
-              <span class="w-badge wb-green"><span class="d"></span>Decision</span>
-            </div>
-            <div class="w-sigs"><span class="w-sig pu">Summary ready</span><span class="w-sig mute">Clause highlighted</span></div>
-          </div>
-          <div class="w-card">
-            <div class="w-row">
-              <div class="w-left"><div class="w-av av-pur">↺</div><div><div class="w-name">Follow up: Dana, hiring plan</div><div class="w-role">Quiet 5 days · draft ready</div></div></div>
-              <span class="w-badge wb-amber"><span class="d"></span>Nudge</span>
-            </div>
-            <div class="w-acts"><button class="w-act wa-pur">Send draft</button><button class="w-act wa-mute">Edit</button></div>
-          </div>
-          <div class="w-card">
-            <div class="w-row">
-              <div class="w-left"><div class="w-av av-pur">◷</div><div><div class="w-name">Prep: 10am board sync</div><div class="w-role">Agenda, numbers, and talking points assembled</div></div></div>
-              <span class="w-badge wb-green"><span class="d"></span>Ready</span>
-            </div>
-          </div>
+      <div class="sp-stage" aria-hidden="true">
+        <svg class="sp-flow" viewBox="0 0 420 560" preserveAspectRatio="none" aria-hidden="true">
+          <path class="flow-dash" d="M150 105 C 250 130, 300 160, 310 215" stroke="rgba(255,255,255,.5)" stroke-width="2" fill="none"/>
+          <path class="flow-dash" d="M290 340 C 240 390, 180 400, 150 440" stroke="rgba(255,255,255,.5)" stroke-width="2" fill="none"/>
+          <circle r="4" fill="#fff" opacity=".95">
+            <animateMotion dur="2.8s" repeatCount="indefinite" path="M150 105 C 250 130, 300 160, 310 215"/>
+          </circle>
+          <circle r="4" fill="#fff" opacity=".95">
+            <animateMotion dur="2.8s" begin="1.4s" repeatCount="indefinite" path="M290 340 C 240 390, 180 400, 150 440"/>
+          </circle>
+        </svg>
+        <div class="fz-ghost" style="left:9%; top:6%; right:9%; bottom:6%;"></div>
+        <div class="fz-card sv-pad" style="left:7%; top:6%; width:62%; --in:0s;">
+          <div class="sfc-head"><b>Standing instruction</b></div>
+          <div class="sfc-body">Read my inbox and calendar overnight. Rank what needs me. Flag anything going quiet.</div>
         </div>
+        <div class="fz-card sv-pad" style="right:5%; top:34%; width:64%; --in:.14s;">
+          <div class="sfc-head"><b>Morning brief</b><span class="sv-time">Tuesday · 7:00am</span></div>
+          <div class="sv-line">Sign Q3 contract, one clause flagged</div>
+          <div class="sv-line">Board sync prep attached</div>
+          <div class="sv-line">Dana quiet 5 days, nudge drafted</div>
+        </div>
+        <div class="fz-card sv-pad" style="left:8%; bottom:5%; width:60%; --in:.28s;">
+          <div class="sfc-head"><b>Follow-up nudge</b><span class="sv-time">draft</span></div>
+          <div class="sfc-line"><span>To</span><b>Dana · hiring plan</b></div>
+          <div class="sfc-body" style="display:flex; justify-content:space-between; align-items:center; gap:10px;">Friendly check-in, your tone<span class="fz-go fz-go-pur" style="margin:0; padding:7px 13px;">Send draft</span></div>
+        </div>
+        <span class="sv-tag">Chief of Staff</span>
+      </div>
       </div>
     </div>
 
     <!-- CYBERSECURITY -->
     <div class="spanel sp-cyan" id="p2" role="tabpanel">
-      <div class="sp-info">
+      <div class="sp-shell">
+      <div class="sp-copy">
         <span class="sp-eyebrow">03 / Cybersecurity</span>
         <h3>Threats caught and contained around the clock.</h3>
+        <p class="sp-desc">Detection, response, and posture watched every hour. Only what genuinely needs a human ever reaches one.</p>
         <ul class="sp-list">
           <li>Live threat detection across your whole stack</li>
           <li>Response playbooks contain incidents automatically</li>
@@ -1052,32 +1600,38 @@
           <a class="btn btn-sm btn-out" href="/login.html">Start free</a>
         </div>
       </div>
-      <div class="sp-window">
-        <div class="spw-bar"><div class="spw-dots"><span></span><span></span><span></span></div><div class="spw-url">app.jayisaacai.com/security</div></div>
-        <div class="spw-body">
-          <div class="w-title">Threat Monitor</div>
-          <div class="w-sub"><b>2 events overnight.</b> Both auto-contained, no action needed.</div>
-          <div class="w-card">
-            <div class="w-row">
-              <div class="w-left"><div class="w-av av-cyan">!</div><div><div class="w-name">Suspicious login blocked</div><div class="w-role">02:14 UTC · unfamiliar location · admin account</div></div></div>
-              <span class="w-badge wb-green"><span class="d"></span>Risk: Low</span>
-            </div>
-            <div class="w-sigs"><span class="w-sig cy">Auto-contained</span><span class="w-sig mute">MFA challenge sent</span></div>
-          </div>
-          <div class="w-card">
-            <div class="w-row">
-              <div class="w-left"><div class="w-av av-cyan">◈</div><div><div class="w-name">Outdated dependency found</div><div class="w-role">Weekly scan · 1 package · known CVE</div></div></div>
-              <span class="w-badge wb-amber"><span class="d"></span>Risk: Med</span>
-            </div>
-            <div class="w-sigs"><span class="w-sig cy">Patch suggested</span></div>
-          </div>
-          <div class="w-card">
-            <div class="w-row">
-              <div class="w-left"><div class="w-av av-cyan">✓</div><div><div class="w-name">Weekly posture report</div><div class="w-role">All systems scanned · risk score trending down</div></div></div>
-              <span class="w-badge wb-green"><span class="d"></span>Healthy</span>
-            </div>
+      <div class="sp-stage" aria-hidden="true">
+        <svg class="sp-flow" viewBox="0 0 420 560" preserveAspectRatio="none" aria-hidden="true">
+          <path class="flow-dash" d="M150 105 C 250 130, 300 160, 310 215" stroke="rgba(255,255,255,.5)" stroke-width="2" fill="none"/>
+          <path class="flow-dash" d="M290 340 C 240 390, 180 400, 150 440" stroke="rgba(255,255,255,.5)" stroke-width="2" fill="none"/>
+          <circle r="4" fill="#fff" opacity=".95">
+            <animateMotion dur="2.8s" repeatCount="indefinite" path="M150 105 C 250 130, 300 160, 310 215"/>
+          </circle>
+          <circle r="4" fill="#fff" opacity=".95">
+            <animateMotion dur="2.8s" begin="1.4s" repeatCount="indefinite" path="M290 340 C 240 390, 180 400, 150 440"/>
+          </circle>
+        </svg>
+        <div class="fz-ghost" style="left:9%; top:6%; right:9%; bottom:6%;"></div>
+        <div class="fz-card sv-pad" style="left:7%; top:6%; width:62%; --in:0s;">
+          <div class="sfc-head"><span class="aw-dot d-red" style="width:8px;height:8px;border-radius:50%;background:#EF4444;box-shadow:0 0 0 3px rgba(239,68,68,.15);flex-shrink:0"></span><b>Suspicious login detected</b><span class="sv-time">02:14 UTC</span></div>
+          <div class="sfc-body">Unfamiliar location · admin account</div>
+        </div>
+        <div class="fz-card sv-pad" style="right:5%; top:34%; width:64%; --in:.14s;">
+          <div class="sfc-head"><b>Playbook: contain</b><span class="sv-time">auto</span></div>
+          <div class="sv-line">Session revoked</div>
+          <div class="sv-line">MFA challenge sent</div>
+          <div class="sv-line">Event logged for review</div>
+        </div>
+        <div class="fz-card sv-pad" style="left:8%; bottom:5%; width:62%; --in:.28s;">
+          <div class="sfc-head"><b>All clear</b><span class="sv-time">02:15 UTC</span></div>
+          <div class="sfc-body" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <span class="w-badge wb-green"><span class="d"></span>Risk: Low</span>
+            <span class="w-sig cy">No action needed</span>
+            <span class="aw-score" style="--v:18; --c:#15803D; width:24px; height:24px; margin-left:auto"><span style="width:17px;height:17px;font-size:.48rem">18</span></span>
           </div>
         </div>
+        <span class="sv-tag">Cybersecurity</span>
+      </div>
       </div>
     </div>
 
@@ -1089,7 +1643,7 @@
   <div class="wrap">
     <div class="converge-head" data-rev>
       <span class="kicker"><span class="pip"></span>Why One Platform</span>
-      <h2 class="sec-h2">Three products.<br>One secure account.</h2>
+      <h2 class="sec-h2">Three products. <span class="hl">One secure account.</span></h2>
       <p class="sec-sub">Each product is a different door into the same building. Your data, your billing, and your login live in one place, and every product gets smarter from what the others know.</p>
     </div>
 
@@ -1113,6 +1667,20 @@
         <path class="flow-dash" d="M235 70 C 380 70, 420 150, 545 172" stroke="url(#fgBlue)" stroke-width="2.5" fill="none" opacity=".8"/>
         <path class="flow-dash" d="M235 180 C 360 180, 430 180, 545 180" stroke="url(#fgPur)" stroke-width="2.5" fill="none" opacity=".8"/>
         <path class="flow-dash" d="M235 290 C 380 290, 420 210, 545 188" stroke="url(#fgCyan)" stroke-width="2.5" fill="none" opacity=".8"/>
+
+        <!-- breathing halos on the product nodes -->
+        <circle cx="63" cy="70" r="5" fill="none" stroke="#818CF8" stroke-width="1.5">
+          <animate attributeName="r" values="5;15" dur="2.6s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values=".6;0" dur="2.6s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="63" cy="180" r="5" fill="none" stroke="#C084FC" stroke-width="1.5">
+          <animate attributeName="r" values="5;15" dur="2.6s" begin="0.9s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values=".6;0" dur="2.6s" begin="0.9s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="63" cy="290" r="5" fill="none" stroke="#67E8F9" stroke-width="1.5">
+          <animate attributeName="r" values="5;15" dur="2.6s" begin="1.7s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values=".6;0" dur="2.6s" begin="1.7s" repeatCount="indefinite"/>
+        </circle>
 
         <!-- traveling pulses -->
         <circle r="4.5" fill="#818CF8">
@@ -1169,7 +1737,7 @@
   <div class="wrap">
     <div class="trust-head" data-rev>
       <span class="kicker"><span class="pip"></span>Who We Are</span>
-      <h2 class="sec-h2">Serious AI tools, without the enterprise tax.</h2>
+      <h2 class="sec-h2">Serious AI tools. <span class="hl">No enterprise tax.</span></h2>
       <p class="sec-sub" style="margin:0 auto">Built for the businesses the big vendors overcharge and overlook, sold at a flat, honest price.</p>
     </div>
     <div class="trust-grid">
@@ -1180,16 +1748,6 @@
       <div class="trust-cell" data-rev><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div><b>One platform</b><p>Three products, one login, one bill, shared data. Add what you need as you grow.</p></div>
       <div class="trust-cell" data-rev><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><b>Always on</b><p>Every product works 24/7. Leads found, briefs drafted, and threats caught while you sleep.</p></div>
     </div>
-  </div>
-</section>
-
-<!-- ═══ RESULTS BAND ═══ -->
-<section class="ctaband">
-  <h2 data-rev>Go from busywork to real results</h2>
-  <p data-rev>Three AI products, one account, one flat bill. Minutes to set up, not months to negotiate.</p>
-  <div class="ctaband-btns" data-rev>
-    <a class="cbtn cbtn-solid" href="/login.html">Start free</a>
-    <a class="cbtn cbtn-ghost" href="/pricing.html">See pricing</a>
   </div>
 </section>
 
@@ -1244,6 +1802,7 @@
 
 <script>
 (function () {
+  console.log('%cJAYISAAC index build: v18-stories-live', 'color:#4F46E5;font-weight:bold');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ── scroll reveal ── */
@@ -1257,6 +1816,162 @@
   } else {
     document.querySelectorAll('[data-rev]').forEach(el => el.classList.add('vis'));
   }
+
+  /* ── rAF marquee: throttle-proof, scroll-reactive ── */
+  (function () {
+    const tracks = document.querySelectorAll('[data-marquee]');
+    if (!tracks.length || reduced) return;
+
+    const state = Array.from(tracks).map(el => ({
+      el,
+      x: 0,
+      dir: el.dataset.marquee === 'rev' ? 1 : -1,
+      base: 0.55,
+      w: 0,
+      hover: 1
+    }));
+
+    function measure() {
+      state.forEach(s => {
+        s.w = s.el.querySelector('.mq-set').getBoundingClientRect().width;
+        if (s.dir === 1 && s.x === 0 && s.w) s.x = -s.w;
+      });
+    }
+    measure();
+    window.addEventListener('resize', measure);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+
+    state.forEach(s => {
+      s.el.addEventListener('mouseenter', () => { s.hover = 0.22; });
+      s.el.addEventListener('mouseleave', () => { s.hover = 1; });
+    });
+
+    /* scroll velocity feeds the speed */
+    let boost = 0, lastY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      boost = Math.min(boost + Math.abs(window.scrollY - lastY) * 0.15, 26);
+      lastY = window.scrollY;
+    }, { passive: true });
+
+    /* only animate while on screen */
+    let visible = false;
+    const band = document.querySelector('.marq-band');
+    new IntersectionObserver(es => { visible = es[0].isIntersecting; }, { rootMargin: '100px' }).observe(band);
+
+    let last = performance.now();
+    (function tick(now) {
+      const dt = Math.min(now - last, 50);
+      last = now;
+      boost *= 0.93;
+      if (visible) {
+        state.forEach(s => {
+          if (!s.w) { measure(); return; }
+          const v = (s.base + boost * 0.12) * s.hover * (dt / 16.67);
+          s.x += s.dir * v;
+          if (s.x <= -s.w) s.x += s.w;
+          if (s.x > 0) s.x -= s.w;
+          s.el.style.transform = 'translate3d(' + s.x.toFixed(2) + 'px,0,0)';
+        });
+      }
+      requestAnimationFrame(tick);
+    })(last);
+  })();
+
+  /* ── living demos: ghost-cursor picker + typing agent ── */
+  (function () {
+    const ICONS = {
+      lead:  '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>',
+      staff: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+      cyber: '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'
+    };
+
+    /* card A: selection swaps synced to the 12s cursor loop */
+    const demoA = document.getElementById('demoA');
+    const pickIc = document.getElementById('pickIc');
+    const pickLbl = document.getElementById('pickLbl');
+    if (demoA && pickIc && pickLbl) {
+      if (reduced) {
+        /* static: leave default selection, no cursor */
+        const gc = demoA.querySelector('.ghost-cursor');
+        if (gc) gc.remove();
+      } else {
+        let timers = [];
+        function setPick(key, label, cls) {
+          pickIc.className = 'fz-ic ' + cls;
+          pickIc.innerHTML = ICONS[key];
+          pickLbl.textContent = label;
+        }
+        function cycle() {
+          timers.forEach(clearTimeout); timers = [];
+          setPick('lead', 'Lead Generation', 'fz-ic-blue');
+          timers.push(setTimeout(() => setPick('staff', 'Chief of Staff', 'fz-ic-pur'), 4000));
+          timers.push(setTimeout(() => setPick('cyber', 'Cybersecurity', 'fz-ic-cyan'), 7000));
+        }
+        const io = new IntersectionObserver(es => {
+          if (es[0].isIntersecting) {
+            demoA.classList.add('demo-live');
+            const cursor = demoA.querySelector('.ghost-cursor');
+            cycle();
+            if (cursor) cursor.addEventListener('animationiteration', cycle);
+            io.disconnect();
+          }
+        }, { threshold: .3 });
+        io.observe(demoA);
+      }
+    }
+
+    /* card B: instruction types itself → chips pop → button press → toast */
+    const demoB = document.getElementById('demoB');
+    const target = document.getElementById('typeTarget');
+    const caret = document.getElementById('typeCaret');
+    const goBtn = document.getElementById('demoGo');
+    const toast = document.getElementById('demoToast');
+    const SCRIPT = "Every morning around 7am, read my inbox and calendar, rank what actually needs me, flag anything going quiet, and drop it all into one brief I can read in 90 seconds.";
+    if (demoB && target) {
+      const chips = demoB.querySelectorAll('.fz-chip');
+      if (reduced) {
+        target.textContent = SCRIPT;
+        if (caret) caret.remove();
+      } else {
+        let alive = false;
+        function run() {
+          if (!alive) return;
+          target.textContent = '';
+          chips.forEach(c => c.classList.remove('pop'));
+          toast.classList.remove('show');
+          let i = 0;
+          (function type() {
+            if (!alive) return;
+            if (i < SCRIPT.length) {
+              i += 1 + (Math.random() < .3 ? 1 : 0);
+              target.textContent = SCRIPT.slice(0, i);
+              setTimeout(type, 26 + Math.random() * 30);
+            } else {
+              chips.forEach((c, j) => setTimeout(() => c.classList.add('pop'), 350 + j * 260));
+              setTimeout(() => {
+                goBtn.classList.add('press');
+                setTimeout(() => goBtn.classList.remove('press'), 180);
+                setTimeout(() => toast.classList.add('show'), 250);
+              }, 350 + chips.length * 260 + 500);
+              setTimeout(() => { toast.classList.remove('show'); setTimeout(run, 900); }, 350 + chips.length * 260 + 4200);
+            }
+          })();
+        }
+        const io2 = new IntersectionObserver(es => {
+          if (es[0].isIntersecting && !alive) {
+            demoB.classList.add('demo-live');
+            alive = true;
+            run();
+          } else if (!es[0].isIntersecting && alive) {
+            alive = false; /* pause off-screen; restarts on return */
+          } else if (es[0].isIntersecting && !alive) {
+            alive = true; run();
+          }
+        }, { threshold: .3 });
+        io2.observe(demoB);
+      }
+    }
+  })();
 
   /* ── hero builder segments handled by segSw below ── */
 
