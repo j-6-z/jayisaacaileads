@@ -8,11 +8,11 @@
 <link rel="manifest" href="/my-favicon/site.webmanifest">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>API Access — JAYISAAC AI</title>
-<meta name="description" content="Search, enrich, and pull verified North American B2B contacts programmatically — into your CRM, your dialer, your product.">
+<title>For Agencies — Client Prospecting at Scale | JAYISAAC AI</title>
+<meta name="description" content="Build per-client prospect lists across every market from one platform, with one verification standard and pay-per-use pricing that scales with billables.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
 <script type="module" src="/nav.js"></script>
 <script type="module" src="/footer.js"></script>
 <style>
@@ -33,8 +33,9 @@
   --blue-soft:  #EEF0FF;
   --blue-line:  #C9CDFA;
   --pur:        #7C3AED;
-
-  --code-bg:    #14121D;
+  --green:      #15803D;
+  --green-soft: #E7F6EC;
+  --red:        #DC2626;
 }
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box }
 html{ scroll-behavior:smooth }
@@ -47,36 +48,38 @@ body{
 }
 a{ color:var(--blue); text-decoration:none; font-weight:500 }
 a:hover{ text-decoration:underline }
-a:focus-visible{ outline:3px solid var(--blue); outline-offset:3px; border-radius:6px }
+button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit }
+a:focus-visible, button:focus-visible{ outline:3px solid var(--blue); outline-offset:3px; border-radius:6px }
 .wrap{ max-width:1080px; margin:0 auto; padding:0 24px }
 
-/* ── hero: text + the code window. no stock photo competing with the code. ── */
+/* ── hero ── */
 .page-hero{
   background:
     radial-gradient(760px 380px at 88% -25%, rgba(79,70,229,.12), transparent 62%),
     radial-gradient(600px 340px at 4% 120%, rgba(124,58,237,.07), transparent 58%),
     #FFFCF6;
   border-bottom:1px solid var(--line);
-  padding:80px 0 72px;
+  padding:80px 0 68px;
 }
-.hero-grid{
-  display:grid; grid-template-columns:.9fr 1.1fr;
-  gap:clamp(2.2rem, 4vw, 3.2rem); align-items:center;
+.page-hero .wrap{
+  display:grid; grid-template-columns:1.15fr 1fr;
+  gap:clamp(2.5rem, 5vw, 3.5rem); align-items:center;
 }
 .eyebrow{
   display:inline-flex; align-items:center; gap:8px;
   font-size:.7rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
   color:var(--blue); margin-bottom:16px;
 }
-.eyebrow::before{ content:''; width:8px; height:8px; border-radius:2px; background:var(--blue); flex-shrink:0; animation:pip 2s infinite }
+.eyebrow-dot{ width:8px; height:8px; border-radius:2px; background:var(--blue); flex-shrink:0; animation:pip 2s infinite }
 @keyframes pip{ 0%,100%{opacity:1} 50%{opacity:.25} }
 .page-hero h1{
   font-family:'Newsreader', Georgia, serif;
-  font-size:clamp(2.2rem, 4.6vw, 3.1rem);
+  font-size:clamp(2.2rem, 5vw, 3.2rem);
   font-weight:500; letter-spacing:-.015em; line-height:1.1;
   color:var(--ink);
 }
-.page-hero .sub{ color:var(--ink-soft); font-size:1rem; margin-top:14px; max-width:440px }
+.page-hero h1 span{ color:var(--blue) }
+.page-hero .sub{ color:var(--ink-soft); font-size:1rem; max-width:600px; margin-top:14px }
 .hero-btns{ display:flex; gap:12px; flex-wrap:wrap; margin-top:26px }
 
 /* ── buttons ── */
@@ -121,38 +124,18 @@ a:focus-visible{ outline:3px solid var(--blue); outline-offset:3px; border-radiu
 }
 .btn.ghost:active{ transform:translateY(0) scale(.985) }
 
-/* ── the code window: the page's one dark moment ── */
-.code-win{
-  background:var(--code-bg);
-  border:1px solid rgba(255,255,255,.09);
+/* ── hero stats ── */
+.stats{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px 26px; margin-top:32px; max-width:520px }
+.stat .n{ font-size:1.5rem; font-weight:600; color:var(--blue); letter-spacing:-.025em; line-height:1.1 }
+.stat .l{ font-size:.76rem; color:var(--ink-soft); margin-top:4px; line-height:1.5 }
+
+.page-hero-img{
   border-radius:14px; overflow:hidden;
-  box-shadow:0 10px 20px rgba(28,24,34,.06), 0 34px 70px rgba(28,24,34,.22);
-  min-width:0;
+  border:1px solid var(--line);
+  box-shadow:0 10px 20px rgba(28,24,34,.04), 0 34px 70px rgba(79,70,229,.12);
+  aspect-ratio:16/9; background:var(--cream);
 }
-.code-head{
-  display:flex; align-items:center; gap:7px;
-  padding:11px 14px;
-  background:rgba(255,255,255,.04);
-  border-bottom:1px solid rgba(255,255,255,.08);
-  font-family:'JetBrains Mono', ui-monospace, monospace;
-  font-size:.68rem; color:rgba(255,255,255,.42);
-}
-.code-head .d{ width:9px; height:9px; border-radius:50% }
-.code-head .d:nth-child(1){ background:#FF5F56 } .code-head .d:nth-child(2){ background:#FFBD2E } .code-head .d:nth-child(3){ background:#27C93F }
-.code-head span:last-child{ margin-left:6px }
-.code-win pre{
-  margin:0; padding:18px 20px;
-  font-family:'JetBrains Mono', ui-monospace, monospace;
-  font-size:.76rem; line-height:1.75;
-  color:rgba(255,255,255,.82);
-  overflow-x:auto; white-space:pre;
-}
-.code-win pre::-webkit-scrollbar{ height:5px }
-.code-win pre::-webkit-scrollbar-thumb{ background:rgba(255,255,255,.16); border-radius:3px }
-.c-m{ color:rgba(255,255,255,.34) }
-.c-k{ color:#A5B4FC; font-weight:500 }
-.c-s{ color:#FCD34D }
-.c-g{ color:#86EFAC }
+.page-hero-img img{ width:100%; height:100%; display:block; object-fit:cover }
 
 /* ── sections ── */
 section{ padding:74px 0 }
@@ -169,6 +152,7 @@ h2{
   color:var(--ink); margin-bottom:16px;
 }
 .lead{ font-size:1rem; color:var(--ink-soft); max-width:760px; line-height:1.75 }
+.lead em{ font-style:italic; color:var(--ink); font-weight:500 }
 
 /* ── cards ── */
 .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; margin-top:36px }
@@ -185,21 +169,82 @@ h2{
 .card .icon svg{ width:19px; height:19px; stroke:var(--blue); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round }
 .card h3{ font-size:.98rem; font-weight:700; letter-spacing:-.01em; margin-bottom:8px; color:var(--ink) }
 .card p{ font-size:.86rem; color:var(--ink-soft); line-height:1.7 }
-.card code{
-  font-family:'JetBrains Mono', ui-monospace, monospace;
-  font-size:.76rem; font-weight:500;
-  background:var(--blue-soft); border:1px solid var(--blue-line);
-  color:var(--blue); border-radius:5px; padding:2px 7px;
-  white-space:nowrap;
-}
 
-/* ── the honest callout ── */
-.honest{
-  background:var(--blue-soft); border:1px solid var(--blue-line);
-  border-radius:12px; padding:20px 24px; margin-top:36px;
-  font-size:.9rem; color:var(--ink-soft); line-height:1.75;
+/* ── steps ── */
+.steps{ display:grid; gap:14px; margin-top:36px }
+.step{
+  display:flex; gap:16px; align-items:flex-start;
+  background:#fff; border:1px solid var(--line); border-radius:14px; padding:22px 24px;
+  transition:border-color .2s, box-shadow .2s;
 }
-.honest strong{ color:var(--ink); font-weight:600 }
+.step:hover{ border-color:var(--blue-line); box-shadow:0 10px 26px rgba(79,70,229,.06) }
+.step .num{
+  flex-shrink:0;
+  font-size:.68rem; font-weight:700; letter-spacing:.06em;
+  color:var(--blue); background:var(--blue-soft);
+  border:1px solid var(--blue-line); border-radius:6px;
+  padding:3px 9px; margin-top:2px;
+}
+.step h3{ font-size:.98rem; font-weight:700; letter-spacing:-.01em; margin-bottom:6px; color:var(--ink) }
+.step p{ font-size:.88rem; color:var(--ink-soft); line-height:1.7 }
+
+/* ── comparison table ── */
+.cmp{
+  width:100%; border-collapse:collapse; margin-top:36px;
+  background:#fff; border:1px solid var(--line); border-radius:14px; overflow:hidden;
+}
+.cmp th{
+  text-align:left;
+  font-size:.66rem; font-weight:700; text-transform:uppercase; letter-spacing:.12em;
+  color:var(--ink-faint); background:var(--cream);
+  padding:13px 18px; border-bottom:1px solid var(--line);
+}
+.cmp th.feat{ color:var(--blue) }
+.cmp td{ padding:15px 18px; border-bottom:1px solid var(--line); font-size:.86rem; vertical-align:top; color:var(--ink-soft) }
+.cmp tr:last-child td{ border-bottom:none }
+.cmp td:first-child{ font-weight:700; color:var(--ink) }
+.cmp td.x, .cmp td.ok{ position:relative; padding-left:44px }
+.cmp td.x::before, .cmp td.ok::before{
+  content:''; position:absolute; left:18px; top:1.05em;
+  width:18px; height:18px; border-radius:50%;
+  background-repeat:no-repeat; background-position:center; background-size:9px;
+}
+.cmp td.x::before{
+  background-color:var(--ink);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 6L6 18M6 6l12 12'/%3E%3C/svg%3E");
+}
+.cmp td.ok::before{
+  background-color:var(--blue);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+}
+.cmp td.ok{ color:var(--ink) }
+
+/* ── faq ── */
+.faq-wrap{ max-width:760px; margin:36px auto 0; display:grid; gap:10px }
+.qa{
+  border:1px solid var(--cream-line); border-radius:10px;
+  background:var(--cream); overflow:hidden;
+  transition:border-color .18s, background .18s, box-shadow .18s;
+}
+.qa:hover{ border-color:var(--blue-line) }
+.qa.open{ background:#fff; border-color:var(--blue-line); box-shadow:0 6px 22px rgba(28,24,34,.06) }
+.qa-q{
+  width:100%; display:flex; align-items:center; justify-content:space-between; gap:14px;
+  padding:16px 20px; font-size:.92rem; font-weight:600; text-align:left; color:var(--ink);
+}
+.qa-q .chev{
+  width:14px; height:14px; flex-shrink:0;
+  stroke:var(--ink-faint); fill:none; stroke-linecap:round; stroke-linejoin:round;
+  transition:transform .24s cubic-bezier(.22,.8,.3,1), stroke .18s;
+}
+.qa.open .qa-q .chev{ transform:rotate(180deg); stroke:var(--blue) }
+.qa-a{
+  display:grid; grid-template-rows:0fr;
+  transition:grid-template-rows .28s cubic-bezier(.22,.8,.3,1);
+}
+.qa.open .qa-a{ grid-template-rows:1fr }
+.qa-a > div{ overflow:hidden }
+.qa-a p{ padding:0 20px 17px; font-size:.88rem; color:var(--ink-soft); line-height:1.7 }
 
 /* ── closing card (replaces the old dark band) ── */
 .cta-card{
@@ -213,16 +258,27 @@ h2{
   font-family:'Newsreader', Georgia, serif;
   font-size:1.5rem; font-weight:500; letter-spacing:-.012em; margin-bottom:5px;
 }
+.cta-card h2 span{ color:var(--blue) }
 .cta-card p{ font-size:.88rem; color:var(--ink-soft) }
 
 @media(max-width:900px){
-  .hero-grid{ grid-template-columns:1fr; gap:2.2rem }
-  .page-hero .sub{ max-width:600px }
+  .page-hero .wrap{ grid-template-columns:1fr; gap:2rem }
+  .page-hero-img{ max-width:540px; margin:0 auto; width:100% }
+}
+@media(max-width:760px){
+  .cmp, .cmp thead, .cmp tbody, .cmp tr, .cmp td{ display:block; width:100% }
+  .cmp thead{ display:none }
+  .cmp tr{ border-bottom:1px solid var(--line); padding:16px 18px }
+  .cmp tr:last-child{ border-bottom:none }
+  .cmp td{ border:none; padding:0 0 8px }
+  .cmp td.x, .cmp td.ok{ padding-left:26px }
+  .cmp td.x::before, .cmp td.ok::before{ left:0; top:.15em; width:16px; height:16px }
+  .cmp td:first-child{ font-size:.95rem; margin-bottom:6px }
 }
 @media(max-width:620px){
-  .page-hero{ padding:56px 0 52px }
+  .page-hero{ padding:56px 0 48px }
   section{ padding:54px 0 }
-  .code-win pre{ font-size:.7rem; padding:14px 16px }
+  .stats{ grid-template-columns:1fr 1fr; gap:14px 18px }
   .cta-card{ flex-direction:column; align-items:flex-start }
   .hero-btns .btn{ flex:1; justify-content:center }
 }
@@ -235,108 +291,114 @@ h2{
 </head>
 <body>
 
-<!-- nav/footer injected by JS -->
+<!-- nav injected by nav.js -->
 
 <header class="page-hero">
   <div class="wrap">
-    <div class="hero-grid">
-      <div>
-        <span class="eyebrow">For Developers · Early Access</span>
-        <h1>The database, in your stack</h1>
-        <p class="sub">Search, enrich, and pull verified North American B2B contacts programmatically — into your CRM, your dialer, your product.</p>
-        <div class="hero-btns">
-          <a class="btn" href="/contact.html">Request Early Access</a>
-          <a class="btn ghost" href="/data.html">Explore the Data</a>
-        </div>
+    <div>
+      <span class="eyebrow"><span class="eyebrow-dot"></span>Solutions &middot; Agencies</span>
+      <h1>Every client. Every market. <span>One data standard.</span></h1>
+      <p class="sub">Roofers in Denver, landscapers in Surrey, movers in Winnipeg &mdash; build per-client prospect lists from one platform instead of gambling on a different sketchy list vendor every campaign.</p>
+      <div class="hero-btns">
+        <a class="btn" href="/login.html">Start Free Trial</a>
+        <a class="btn ghost" href="/contact.html">Talk Agency Pricing</a>
       </div>
-      <div class="code-win">
-        <div class="code-head"><span class="d"></span><span class="d"></span><span class="d"></span><span>search.sh</span></div>
-<pre><span class="c-m"># Search plumbing companies in Alberta</span>
-<span class="c-k">curl</span> https://api.jayisaacai.com/v1/contacts/search \
-  -H <span class="c-s">"Authorization: Bearer $API_KEY"</span> \
-  -d <span class="c-s">'{
-    "industry": "plumbing",
-    "region": "AB",
-    "title": ["Owner", "GM"],
-    "limit": 25
-  }'</span>
-
-<span class="c-g">{ "results": 25, "credits_used": 0,
-  "contacts": [ { "name": "Mike Doherty",
-    "title": "Owner", "company": "Doherty
-    Plumbing &amp; Heating", ... } ] }</span></pre>
+      <div class="stats">
+        <div class="stat"><div class="n">1</div><div class="l">platform for every client &amp; vertical</div></div>
+        <div class="stat"><div class="n">7,500</div><div class="l">monthly credits on Agency</div></div>
+        <div class="stat"><div class="n">Multi-seat</div><div class="l">access for your whole team</div></div>
+        <div class="stat"><div class="n">$0.04</div><div class="l">per contact at volume</div></div>
       </div>
+    </div>
+    <div class="page-hero-img">
+      <img src="/public/feat-export.jpg" alt="Agency workspace with multi-client dashboards" loading="lazy" decoding="async">
     </div>
   </div>
 </header>
 
 <section>
   <div class="wrap">
-    <div class="sec-label">Capabilities</div>
-    <h2>What the API will do</h2>
-    <p class="lead">Same data as the platform, same credit system — programmatic instead of point-and-click.</p>
+    <div class="sec-label">Why Agencies Switch</div>
+    <h2>Stop reselling your clients mystery data</h2>
+    <p class="lead">Your campaign results are only as good as the list underneath them. When a client's outreach flops because a $200 scraped list was 40% dead, that's <em>your</em> reputation on the line &mdash; not the vendor's. One consistent, verified source fixes that.</p>
     <div class="grid">
       <div class="card">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
-        <h3>Contact Search</h3>
-        <p><code>POST /v1/contacts/search</code> — filter by industry, region, title, and company size. Searching is free; revealing emails and phones consumes credits, same as the app.</p>
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
+        <h3>One filter set per client</h3>
+        <p>Each client campaign is just a saved filter combination &mdash; vertical + city + company size. Re-run it every cycle for fresh records with zero rebuild work.</p>
       </div>
       <div class="card">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
-        <h3>Enrichment</h3>
-        <p><code>POST /v1/enrich</code> — send a domain or company name, get back the decision-maker, verified contact channels, and firmographics to fill gaps in your CRM.</p>
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h3>Consistent quality everywhere</h3>
+        <p>The same verification bar in Saskatoon as in Seattle. Pitch a six-city campaign knowing the data won't quietly fall apart in market number four.</p>
       </div>
       <div class="card">
-        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg></div>
-        <h3>Bulk Export</h3>
-        <p><code>POST /v1/exports</code> — generate large list pulls as CSV or JSON jobs, scoped to your plan's export limits, delivered by webhook when ready.</p>
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+        <h3>Margin-friendly economics</h3>
+        <p>Pay-per-use credits mean list costs scale with billable campaigns &mdash; and credit packs drop your per-contact cost as volume grows. Data becomes a line item you can mark up.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="alt" id="daas">
+<section class="alt">
   <div class="wrap">
-    <div class="sec-label">Data as a Service</div>
-    <h2>Don't want an API? Take the data itself.</h2>
-    <p class="lead">For teams that need volume — agencies, dialer platforms, market researchers — we deliver custom data feeds without you writing a line of code.</p>
-    <div class="grid">
-      <div class="card">
-        <h3>Custom list builds</h3>
-        <p>Tell us the industry, geography, and titles. We build, verify, and deliver the segment as a clean CSV — sized from a few hundred records to full-market pulls.</p>
-      </div>
-      <div class="card">
-        <h3>Recurring feeds</h3>
-        <p>Monthly or weekly refreshed datasets delivered to you automatically — new businesses in your territory, updated records, and removals applied.</p>
-      </div>
-      <div class="card">
-        <h3>Licensed for your use case</h3>
-        <p>DaaS agreements are scoped per use case with clear license terms — internal prospecting, CRM enrichment, or platform integration. No grey areas.</p>
-      </div>
-    </div>
-    <div class="honest">
-      <strong>Straight up: the API is in early access.</strong>
-      Endpoints above reflect what's being built, and early-access partners get input on the spec plus locked-in early pricing. DaaS custom list builds are available today. <a href="/contact.html">Contact us</a> with your use case and volume, and you'll get a real answer about timelines — not a marketing maybe.
+    <div class="sec-label">The Agency Workflow</div>
+    <h2>New client onboarding, data included</h2>
+    <div class="steps">
+      <div class="step"><div class="num">01</div><div><h3>Scope the market live on the sales call</h3><p>"There are 312 roofing companies over 10 staff in your metro" &mdash; said with the platform open in front of the prospect. Market sizing becomes a closing tool, at no extra cost.</p></div></div>
+      <div class="step"><div class="num">02</div><div><h3>Build the campaign segment</h3><p>Filter to the client's exact ICP, reveal the contacts the campaign needs, and export per-client lists in CSV, Excel, PDF, or push directly into the client's CRM (HubSpot, Salesforce, Pipedrive, Outreach) in minutes.</p></div></div>
+      <div class="step"><div class="num">03</div><div><h3>Run it through your stack</h3><p>Load into the client's outreach tools or your white-labeled system &mdash; cold email, dialers, direct mail, whatever the retainer covers.</p></div></div>
+      <div class="step"><div class="num">04</div><div><h3>Refresh every cycle</h3><p>Re-run the saved filters next month for new businesses and updated records. Recurring data for recurring retainers.</p></div></div>
     </div>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <div class="sec-label">Principles</div>
-    <h2>Built like an API should be</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Credit-metered, not surprise-billed</h3>
-        <p>API usage draws from the same credit balance as your platform account. You always know the cost of a call before you make it.</p>
+    <div class="sec-label">The Difference</div>
+    <h2>JAYISAAC AI vs. the usual list vendor</h2>
+    <table class="cmp">
+      <thead><tr><th>What you deal with</th><th>Typical list vendor</th><th class="feat">JAYISAAC AI</th></tr></thead>
+      <tbody>
+        <tr><td>Buying process</td><td class="x">New quote &amp; invoice every list</td><td class="ok">One account, run any segment anytime</td></tr>
+        <tr><td>Quality across markets</td><td class="x">Varies wildly per order</td><td class="ok">Same verification bar everywhere</td></tr>
+        <tr><td>Refreshing a campaign</td><td class="x">Re-order &amp; re-pay full price</td><td class="ok">Re-run a saved filter set</td></tr>
+        <tr><td>Pricing model</td><td class="x">Big upfront list buys</td><td class="ok">Pay-per-use credits, scales with billables</td></tr>
+        <tr><td>Multi-client management</td><td class="x">Separate vendors / spreadsheets</td><td class="ok">One dashboard, multi-seat team access</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-label">Scale Options</div>
+    <h2>When campaigns get big</h2>
+    <p class="lead">The Agency plan ships 7,500 monthly credits, multi-seat access, and custom list builds. Need more &mdash; full-market pulls, recurring data feeds, or volume above 10k contacts? <a href="/api.html#daas">Data as a Service</a> handles bulk delivery, and <a href="/api.html">API early access</a> is open for agencies wiring data straight into their own client tooling.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-label">FAQ</div>
+    <h2 style="text-align:center">Agency questions, answered straight</h2>
+    <div class="faq-wrap">
+      <div class="qa">
+        <button class="qa-q" aria-expanded="false">Can I manage data for multiple clients from one account?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a"><div><p>Yes &mdash; that's the whole point. Each client campaign is a saved filter set (vertical + market + size). Build them once, re-run them whenever the retainer calls for fresh records. The Agency plan also includes multi-seat access so your team works from the same platform.</p></div></div>
       </div>
-      <div class="card">
-        <h3>Keys you control</h3>
-        <p>Scoped API keys, revocable instantly, with per-key usage visibility. Compromised key? Kill it without touching your account.</p>
+      <div class="qa">
+        <button class="qa-q" aria-expanded="false">Can I mark this up and bill it to clients?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a"><div><p>Most agencies do. Because pricing is pay-per-use credits, your data cost maps cleanly to each billable campaign &mdash; making it a line item you can mark up or fold into a retainer. Credit packs lower your per-contact cost as volume grows, widening the margin.</p></div></div>
       </div>
-      <div class="card">
-        <h3>Suppression built in</h3>
-        <p>Opt-outs are enforced at the API layer — removed records never appear in responses or exports, so your compliance posture is protected automatically.</p>
+      <div class="qa">
+        <button class="qa-q" aria-expanded="false">What if a client needs a market you don't have data for?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a"><div><p>Custom list builds (Data as a Service) cover specialized verticals and full-market pulls beyond the standard database. Reach out via the <a href="/contact.html">contact form</a> with the market and we'll scope it.</p></div></div>
+      </div>
+      <div class="qa">
+        <button class="qa-q" aria-expanded="false">How do I know the data's any good before I pitch it?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="qa-a"><div><p>Start free &mdash; 100 credits, no card. Run a real segment in your hardest client market and judge the contacts yourself before you ever put your name on a campaign.</p></div></div>
       </div>
     </div>
   </div>
@@ -345,13 +407,22 @@ h2{
 <div class="cta-inner">
   <div class="cta-card">
     <div>
-      <h2>Want in early?</h2>
-      <p>Tell us what you're building and the volume you need. Early partners shape the spec.</p>
+      <h2>Test it on your <span>hardest client market</span></h2>
+      <p>100 free credits &mdash; run a real segment and judge the data before you pitch it.</p>
     </div>
-    <a class="btn" href="/contact.html">Request Early Access</a>
+    <a class="btn" href="/login.html">Start Free Trial</a>
   </div>
 </div>
 
-<!-- nav/footer injected by JS -->
+<!-- footer injected by footer.js -->
+
+<script>
+document.querySelectorAll(".qa-q").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const open = btn.parentElement.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open);
+  });
+});
+</script>
 </body>
 </html>

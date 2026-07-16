@@ -3,132 +3,348 @@
 <head>
   <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
   <script defer src="/_vercel/insights/script.js"></script>
+  <link rel="icon" href="/my-favicon/favicon.ico" sizes="any">
+  <link rel="icon" href="/my-favicon/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/my-favicon/favicon-96x96.png" type="image/png" sizes="96x96">
+  <link rel="apple-touch-icon" href="/my-favicon/apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="/my-favicon/site.webmanifest">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Incident Response — Cybersecurity | JAYISAAC AI</title>
-  <meta name="description" content="Contain, remediate, and move on. Automated response playbooks handle incidents the moment they're detected." />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <meta name="description" content="The moment a threat is confirmed, AI runs the playbook — isolating the risk, revoking access, and handing you a clean timeline of every action." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet" />
   <script type="module" src="/nav.js"></script>
   <script type="module" src="/footer.js"></script>
   <style>
     *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
-    :root{ --cy:#0891B2; --cyh:#06B6D4; --cyl:#22D3EE; --bg:#FFFFFF; --ink:#111827; --mute:#6B7280; --line:#E5E7EB; --dark:#0A0F14; }
-    html{ scroll-behavior:smooth; background:#0A0F14; }
-    body{ background:var(--bg); color:var(--ink); font-family:'Plus Jakarta Sans',sans-serif; font-size:16px; line-height:1.6; overflow-x:hidden; }
+
+    /* design system — matches index.html; cyan is the Cybersecurity accent */
+    :root{
+      --paper:      #FAF7F1;
+      --ink:        #1C1822;
+      --ink-soft:   #4E4856;
+      --ink-faint:  #8E8896;
+      --line:       #E9E2D6;
+      --field-line: #D9D8E3;
+      --cream:      #F4EFE5;
+      --cream-line: #EAE3D4;
+
+      --cy:         #0E92A8;
+      --cyh:        #0B7C8F;
+      --cy-soft:    #E6F7FA;
+      --cy-line:    #B6E6EF;
+
+      --blue:       #4F46E5;
+      --green:      #15803D;
+      --amber:      #A16207;
+      --red:        #DC2626;
+    }
+    html{ scroll-behavior:smooth; }
+    body{
+      background:var(--paper); color:var(--ink);
+      font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+      font-size:16px; line-height:1.6; overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+    }
     a{ color:inherit; text-decoration:none; }
+    a:focus-visible{ outline:3px solid var(--cy); outline-offset:3px; border-radius:6px; }
 
-    /* hero */
-    .ph{ position:relative; background:var(--dark); color:#EAF6F8; text-align:center; padding:96px 5vw 80px; overflow:hidden; }
-    .ph::after{ content:''; position:absolute; inset:0; pointer-events:none;
-      background:radial-gradient(ellipse 60% 55% at 70% 0%, rgba(34,211,238,.20), transparent 60%),
-                 radial-gradient(ellipse 50% 45% at 10% 100%, rgba(8,145,178,.16), transparent 55%),
-                 linear-gradient(to bottom, transparent 70%, #0A0F14 100%); }
-    .ph > *{ position:relative; z-index:1; }
-    .eyebrow{ display:inline-flex; align-items:center; gap:.5rem; font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:#22D3EE; border:1px solid rgba(34,211,238,.35); background:rgba(34,211,238,.1); padding:6px 16px; border-radius:100px; margin-bottom:22px; }
-    .eyebrow .pip{ width:6px; height:6px; background:#22D3EE; border-radius:50%; box-shadow:0 0 8px #22D3EE; }
-    .ph h1{ font-size:clamp(2.1rem,5vw,3.4rem); font-weight:800; letter-spacing:-1px; line-height:1.08; max-width:760px; margin:0 auto 1.1rem; }
-    .ph h1 .g{ background:linear-gradient(120deg,#0891B2,#22D3EE,#67E8F9); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .ph p{ color:#8FA3AB; font-size:1.05rem; max-width:540px; margin:0 auto 2rem; line-height:1.75; }
+    /* ── hero ── */
+    .ph{
+      position:relative; text-align:center; padding:96px 5vw 84px; overflow:hidden;
+      background:
+        radial-gradient(ellipse 60% 55% at 72% -5%, rgba(14,146,168,.12), transparent 62%),
+        radial-gradient(ellipse 50% 45% at 8% 105%, rgba(79,70,229,.07), transparent 58%),
+        #FFFCF6;
+      border-bottom:1px solid var(--line);
+    }
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.15em;
+      color:var(--cy); margin-bottom:20px;
+    }
+    .eyebrow .pip{ width:8px; height:8px; background:var(--cy); border-radius:2px; animation:pip 2s infinite; }
+    @keyframes pip{ 0%,100%{opacity:1} 50%{opacity:.25} }
+    .ph h1{
+      font-family:'Newsreader',Georgia,serif;
+      font-size:clamp(2.2rem,5vw,3.4rem); font-weight:500;
+      letter-spacing:-.018em; line-height:1.08;
+      max-width:780px; margin:0 auto 1.1rem; color:var(--ink);
+    }
+    .ph h1 .g{ color:var(--cy); }
+    .ph > p{ color:var(--ink-soft); font-size:1.02rem; max-width:560px; margin:0 auto 2rem; line-height:1.75; }
     .btns{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
-    .btn-p{ background:linear-gradient(135deg,#0891B2,#22D3EE); color:#04262B; font-weight:800; font-size:.9rem; padding:13px 28px; border-radius:10px; box-shadow:0 8px 28px rgba(34,211,238,.35); transition:.2s; }
-    .btn-p:hover{ transform:translateY(-2px); box-shadow:0 14px 36px rgba(34,211,238,.5); }
-    .btn-g{ color:#EAF6F8; font-weight:700; font-size:.9rem; padding:13px 28px; border-radius:10px; border:1px solid rgba(255,255,255,.2); transition:.2s; }
-    .btn-g:hover{ border-color:#22D3EE; color:#22D3EE; }
+    .btn-p{
+      display:inline-flex; align-items:center; gap:8px;
+      background:var(--cy); color:#fff; border:1px solid var(--cy);
+      font-weight:600; font-size:.93rem; padding:14px 28px; border-radius:9px;
+      box-shadow:0 8px 22px rgba(14,146,168,.26);
+      transition:background .16s, transform .12s, box-shadow .16s;
+    }
+    .btn-p:hover{ background:var(--cyh); border-color:var(--cyh); transform:translateY(-2px); box-shadow:0 12px 28px rgba(14,146,168,.34); }
+    .btn-p svg{ width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; transition:transform .15s; }
+    .btn-p:hover svg{ transform:translateX(3px); }
+    .btn-g{
+      display:inline-flex; align-items:center;
+      background:#fff; color:var(--ink); font-weight:600; font-size:.93rem;
+      padding:14px 28px; border-radius:9px; border:1px solid var(--field-line);
+      transition:border-color .16s;
+    }
+    .btn-g:hover{ border-color:var(--ink); }
 
-    /* generic section */
-    .sec{ padding:80px 5vw; }
-    .sec.alt{ background:#F7FAFB; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+    /* ── generic section ── */
+    .sec{ padding:84px 5vw; }
+    .sec.alt{ background:#FFFCF6; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
     .wrap{ max-width:1080px; margin:0 auto; }
-    .lead{ text-align:center; max-width:620px; margin:0 auto 52px; }
-    .lead .kick{ display:inline-flex; align-items:center; gap:.4rem; font-size:.68rem; font-weight:700; color:var(--cy); text-transform:uppercase; letter-spacing:.1em; margin-bottom:12px; }
-    .lead .kick .pip{ width:5px; height:5px; background:var(--cy); border-radius:50%; }
-    .lead h2{ font-size:clamp(1.7rem,3.4vw,2.4rem); font-weight:800; letter-spacing:-.5px; line-height:1.15; }
-    .lead h2 .g{ background:linear-gradient(120deg,#0891B2,#22D3EE,#67E8F9); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .lead p{ color:var(--mute); margin-top:12px; }
+    .lead{ text-align:center; max-width:640px; margin:0 auto 48px; }
+    .lead .kick, .row .kick{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:.7rem; font-weight:700; color:var(--cy);
+      text-transform:uppercase; letter-spacing:.15em; margin-bottom:14px;
+    }
+    .lead .kick .pip, .row .kick .pip{ width:8px; height:8px; background:var(--cy); border-radius:2px; flex-shrink:0; }
+    .lead h2{
+      font-size:clamp(1.7rem,3.4vw,2.4rem); font-weight:600;
+      letter-spacing:-.032em; line-height:1.12; color:var(--ink);
+    }
+    .lead h2 .g{ color:var(--cy); }
+    .lead > p{ color:var(--ink-soft); margin-top:14px; line-height:1.75; }
 
-    /* alternating feature rows */
-    .row{ display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; padding:36px 0; }
+    /* ── alternating feature rows ── */
+    .row{ display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; padding:38px 0; }
     .row.rev{ direction:rtl; } .row.rev>*{ direction:ltr; }
-    .row .kick{ display:inline-flex; align-items:center; gap:.4rem; font-size:.68rem; font-weight:700; color:var(--cy); text-transform:uppercase; letter-spacing:.1em; margin-bottom:12px; }
-    .row .kick .pip{ width:5px; height:5px; background:var(--cy); border-radius:50%; }
-    .row h3{ font-size:1.5rem; font-weight:800; letter-spacing:-.4px; margin-bottom:12px; }
-    .row p{ color:var(--mute); margin-bottom:16px; }
-    .row ul{ list-style:none; display:grid; gap:10px; }
-    .row ul li{ display:flex; gap:10px; font-size:.92rem; color:#374151; }
-    .row ul li::before{ content:'✓'; color:var(--cy); font-weight:800; flex-shrink:0; }
-    .panel{ border:1px solid var(--line); border-radius:16px; background:#0A0F14; min-height:280px; box-shadow:0 24px 60px rgba(8,145,178,.10); overflow:hidden; display:flex; align-items:center; justify-content:center; padding:18px; }
-    .mock{ width:100%; }
-    .mock-bar{ display:flex; gap:6px; padding:10px 12px; border-bottom:1px solid rgba(255,255,255,.08); }
+    .row h3{
+      font-size:1.5rem; font-weight:600; letter-spacing:-.028em;
+      line-height:1.2; margin-bottom:12px; color:var(--ink);
+    }
+    .row > div > p{ color:var(--ink-soft); margin-bottom:18px; line-height:1.75; font-size:.95rem; }
+    .row ul{ list-style:none; display:grid; gap:11px; }
+    .row ul li{
+      position:relative; padding-left:28px;
+      font-size:.9rem; color:var(--ink-soft); line-height:1.55;
+    }
+    .row ul li::before{
+      content:''; position:absolute; left:0; top:.15em;
+      width:18px; height:18px; border-radius:50%;
+      background-color:var(--cy);
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+      background-repeat:no-repeat; background-position:center; background-size:9px;
+    }
+
+    /* ── dark stage panels ── */
+    .panel{
+      position:relative; border-radius:14px; min-height:300px;
+      overflow:hidden; isolation:isolate;
+      display:flex; align-items:center; justify-content:center; padding:22px;
+      box-shadow:0 10px 20px rgba(28,24,34,.05), 0 30px 66px rgba(14,146,168,.16);
+    }
+    .panel::before{
+      content:''; position:absolute; inset:-12%; z-index:-1;
+      filter:blur(26px) saturate(1.08); transform:scale(1.05);
+      background:
+        radial-gradient(85% 65% at 18% 12%, #7DE7F4 0%, transparent 60%),
+        radial-gradient(80% 65% at 88% 92%, #083344 0%, transparent 62%),
+        linear-gradient(162deg, #22B8CE 0%, #0E7490 52%, #0A3D4C 100%);
+    }
+    .panel::after{
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background:linear-gradient(180deg, rgba(255,255,255,.07), transparent 22%, rgba(5,20,25,.2));
+    }
+    .mock{ width:100%; position:relative; z-index:1; background:#fff; border-radius:11px; overflow:hidden; box-shadow:0 22px 48px rgba(5,25,30,.32); }
+    .mock-bar{ display:flex; align-items:center; gap:6px; padding:10px 12px; border-bottom:1px solid var(--line); background:var(--cream); }
     .mock-bar span{ width:9px; height:9px; border-radius:50%; }
     .mock-bar span:nth-child(1){ background:#FF5F56; } .mock-bar span:nth-child(2){ background:#FFBD2E; } .mock-bar span:nth-child(3){ background:#27C93F; }
-    .mock-body{ padding:16px; display:grid; gap:10px; }
-    .mock-card{ background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:10px; padding:12px 14px; }
-    .mock-t{ font-size:.82rem; font-weight:700; color:#EAF6F8; margin-bottom:4px; }
-    .mock-s{ font-size:.72rem; color:#8FA3AB; }
-    .mock-badge{ float:right; font-size:.62rem; font-weight:700; padding:3px 9px; border-radius:100px; background:rgba(34,211,238,.16); color:#22D3EE; }
-    .mock-badge.warn{ background:rgba(202,138,4,.18); color:#FBBF24; }
-    .mock-badge.crit{ background:rgba(220,38,38,.18); color:#F87171; }
+    .mock-body{ padding:14px; display:grid; gap:9px; }
+    .mock-card{
+      background:#fff; border:1px solid var(--line); border-radius:9px;
+      padding:12px 14px; display:flex; align-items:flex-start; gap:10px;
+    }
+    .mock-dot{ width:8px; height:8px; border-radius:50%; flex-shrink:0; margin-top:5px; }
+    .mock-dot.ok{ background:var(--green); box-shadow:0 0 0 3px rgba(21,128,61,.15); }
+    .mock-dot.warn{ background:var(--amber); box-shadow:0 0 0 3px rgba(161,98,7,.15); }
+    .mock-dot.cy{ background:var(--cy); box-shadow:0 0 0 3px rgba(14,146,168,.15); }
+    .mock-dot.crit{ background:var(--red); box-shadow:0 0 0 3px rgba(220,38,38,.15); }
+    .mock-txt{ flex:1; min-width:0; }
+    .mock-t{ font-size:.8rem; font-weight:700; color:var(--ink); margin-bottom:3px; }
+    .mock-s{ font-size:.72rem; color:var(--ink-faint); line-height:1.5; }
+    .mock-badge{
+      flex-shrink:0; font-size:.62rem; font-weight:700; padding:3px 9px;
+      border-radius:999px; white-space:nowrap;
+      background:var(--cy-soft); color:var(--cy); border:1px solid var(--cy-line);
+    }
+    .mock-badge.warn{ background:#FDF3D7; color:var(--amber); border-color:#F2E2B0; }
+    .mock-badge.ok{ background:#E7F6EC; color:var(--green); border-color:#BFE3CD; }
 
-    /* steps */
-    .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
-    .step{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:26px; }
-    .step .n{ display:inline-flex; width:34px; height:34px; align-items:center; justify-content:center; border-radius:9px; background:rgba(8,145,178,.12); color:var(--cy); font-weight:800; margin-bottom:14px; }
-    .step h4{ font-size:1.05rem; margin-bottom:8px; }
-    .step p{ color:var(--mute); font-size:.9rem; }
+    /* ── steps ── */
+    .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .step{
+      background:#fff; border:1px solid var(--line); border-radius:14px; padding:26px;
+      transition:border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .step:hover{ border-color:var(--cy-line); transform:translateY(-3px); box-shadow:0 14px 32px rgba(14,146,168,.08); }
+    .step .n{
+      display:inline-block;
+      font-size:.68rem; font-weight:700; letter-spacing:.06em;
+      color:var(--cy); background:var(--cy-soft);
+      border:1px solid var(--cy-line); border-radius:6px;
+      padding:3px 9px; margin-bottom:14px;
+    }
+    .step h4{ font-size:1.02rem; font-weight:700; letter-spacing:-.012em; margin-bottom:8px; color:var(--ink); }
+    .step p{ color:var(--ink-soft); font-size:.88rem; line-height:1.7; }
 
-    /* pricing */
-    .plans{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; align-items:start; }
-    .plan{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:30px; display:flex; flex-direction:column; position:relative; }
-    .plan.hot{ border-color:rgba(8,145,178,.5); box-shadow:0 20px 50px rgba(8,145,178,.14); }
-    .plan .tag{ position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#0891B2,#22D3EE); color:#04262B; font-size:.68rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; padding:5px 14px; border-radius:100px; }
-    .plan .pname{ font-size:.78rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--mute); }
-    .plan .price{ font-size:2.6rem; font-weight:800; letter-spacing:-1px; margin:10px 0 2px; }
-    .plan .price small{ font-size:1rem; color:var(--mute); font-weight:500; }
-    .plan .pdesc{ color:var(--mute); font-size:.88rem; margin-bottom:22px; }
-    .plan ul{ list-style:none; display:grid; gap:11px; margin-bottom:26px; flex:1; font-size:.9rem; color:#374151; }
-    .plan ul li{ display:flex; gap:10px; } .plan ul li::before{ content:'✓'; color:var(--cy); font-weight:800; }
-    .plan .cta{ text-align:center; padding:12px; border-radius:10px; font-weight:800; font-size:.9rem; }
-    .plan .cta.p{ background:linear-gradient(135deg,#0891B2,#22D3EE); color:#04262B; }
-    .plan .cta.g{ border:1.5px solid var(--line); color:var(--ink); }
+    /* ── final cta ── */
+    .fcta{
+      padding:96px 5vw 104px; text-align:center; position:relative; overflow:hidden;
+      background:
+        radial-gradient(ellipse 60% 50% at 25% 25%, rgba(14,146,168,.12), transparent 62%),
+        radial-gradient(ellipse 55% 50% at 75% 75%, rgba(79,70,229,.07), transparent 62%),
+        #FFFCF6;
+      border-top:1px solid var(--line);
+    }
+    .fcta h2{
+      font-family:'Newsreader',Georgia,serif;
+      font-size:clamp(2rem,4.4vw,3rem); font-weight:500;
+      letter-spacing:-.018em; color:var(--ink); margin-bottom:.9rem; line-height:1.1;
+    }
+    .fcta h2 span{ color:var(--cy); }
+    .fcta > p{ color:var(--ink-soft); max-width:460px; margin:0 auto 1.9rem; line-height:1.75; }
 
-    /* faq */
-    .faq{ max-width:760px; margin:0 auto; display:grid; gap:12px; }
-    .qa{ border:1px solid var(--line); border-radius:12px; padding:20px 22px; background:#fff; }
-    .qa h4{ font-size:1rem; margin-bottom:6px; }
-    .qa p{ color:var(--mute); font-size:.92rem; }
-
-    /* value grid */
-    .vgrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
-    .vcard{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:28px; }
-    .vcard .ic{ width:46px; height:46px; border-radius:11px; background:rgba(8,145,178,.12); color:var(--cy); display:flex; align-items:center; justify-content:center; font-size:1.3rem; margin-bottom:16px; }
-    .vcard h4{ font-size:1.08rem; margin-bottom:8px; }
-    .vcard p{ color:var(--mute); font-size:.92rem; }
-
-    /* final cta */
-    .fcta{ padding:96px 5vw; text-align:center; position:relative; overflow:hidden;
-      background:radial-gradient(ellipse 60% 50% at 25% 30%, rgba(8,145,178,.3), transparent 65%),
-                 radial-gradient(ellipse 55% 50% at 75% 70%, rgba(34,211,238,.22), transparent 65%),
-                 linear-gradient(135deg,#0A0F14 0%,#10202A 100%); }
-    .fcta h2{ position:relative; font-size:clamp(1.9rem,4.4vw,3rem); font-weight:800; letter-spacing:-1px; color:#fff; margin-bottom:.8rem; }
-    .fcta h2 span{ color:#A5F3FC; }
-    .fcta p{ position:relative; color:rgba(234,246,248,.78); max-width:460px; margin:0 auto 1.8rem; }
-    .fcta .btn-p{ position:relative; }
-
-    @media(max-width:860px){ .row,.row.rev{ grid-template-columns:1fr; direction:ltr; gap:28px; } .steps,.plans,.vgrid{ grid-template-columns:1fr; } }
-    @media(prefers-reduced-motion:reduce){ *,*::before,*::after{ animation:none!important; transition:none!important; } }
-  </style>
-</head>
+    @media(max-width:860px){
+      .row,.row.rev{ grid-template-columns:1fr; direction:ltr; gap:28px; }
+      .steps{ grid-template-columns:1fr; }
+      .sec{ padding:58px 5vw; }
+      .ph{ padding:68px 5vw 62px; }
+    }
+    @media(prefers-reduced-motion:reduce){ *,*::before,*::after{ animation:none!important; transition:none!important; } html{ scroll-behavior:auto; } }
+  </style></head>
 <body>
+
+<!-- ═══ HERO ═══ -->
 <section class="ph">
   <div class="eyebrow"><span class="pip"></span>Feature · Incident Response</div>
   <h1>Contain, remediate, <span class="g">move on.</span></h1>
   <p>The moment a threat is confirmed, AI runs the playbook — isolating the risk, revoking access, and walking you through remediation while the clock still matters.</p>
   <div class="btns">
-    <a class="btn-p" href="/login.html">Start Free Trial &rarr;</a>
+    <a class="btn-p" href="/login.html">Start Free Trial <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     <a class="btn-g" href="/contact.html">Book a Demo</a>
   </div>
 </section>
-<section class="sec"><div class="wrap"><div class="row"><div><div class="kick"><span class="pip"></span>What you get</div><h3>Response that starts before you're even awake.</h3><p>Detection is only half the job. AI executes the containment steps automatically — killing sessions, quarantining devices, revoking tokens — then hands you a clean timeline of exactly what happened and what it did.</p><ul><li>Automated containment the instant a threat is confirmed</li><li>Playbooks for the common incident types, ready out of the box</li><li>A full, timestamped timeline of every action taken</li><li>Human-in-the-loop control for anything high-impact</li></ul></div><div class="panel"><div class="mock"><div class="mock-bar"><span></span><span></span><span></span></div><div class="mock-body"><div class="mock-card"><span class="mock-badge ">Done</span><div class="mock-t">Session revoked</div><div class="mock-s">Compromised token · 2s after detection</div></div><div class="mock-card"><span class="mock-badge crit">Contained</span><div class="mock-t">Device quarantined</div><div class="mock-s">Endpoint isolated from network</div></div><div class="mock-card"><span class="mock-badge ">Ready</span><div class="mock-t">Timeline exported</div><div class="mock-s">Full incident record ready</div></div></div></div></div></div><div class="row rev"><div class="panel"><div class="mock"><div class="mock-bar"><span></span><span></span><span></span></div><div class="mock-body"><div class="mock-card"><span class="mock-badge ">Enabled</span><div class="mock-t">Auto-run</div><div class="mock-s">Revoke tokens · isolate device</div></div><div class="mock-card"><span class="mock-badge warn">Pending</span><div class="mock-t">Needs approval</div><div class="mock-s">Disable user account</div></div><div class="mock-card"><span class="mock-badge ">Logged</span><div class="mock-t">Audit log</div><div class="mock-s">Every action recorded</div></div></div></div></div><div><div class="kick"><span class="pip"></span>Stay in control</div><h3>Automated where it's safe, manual where it counts.</h3><p>You decide which actions AI takes on its own and which need your sign-off. High-impact moves wait for a human; the routine containment happens instantly.</p><ul><li>Set which actions auto-run vs require approval</li><li>One-tap approve or reject on escalated actions</li><li>Every decision logged for audit and review</li><li>Roll back an action if it wasn't the right call</li></ul></div></div></div></section><section class="sec alt"><div class="wrap"><div class="lead"><div class="kick"><span class="pip"></span>How it works</div><h2>Detected, contained, documented</h2></div><div class="steps"><div class="step"><div class="n">1</div><h4>Threat confirmed</h4><p>AI validates the detection so playbooks don't fire on false alarms.</p></div><div class="step"><div class="n">2</div><h4>Playbook runs</h4><p>Containment steps execute automatically — or wait for your approval on big moves.</p></div><div class="step"><div class="n">3</div><h4>You get the record</h4><p>A clean, timestamped timeline of the incident and every action, ready to share.</p></div></div></div></section><section class="fcta"><h2>Respond in seconds, <span>not hours.</span></h2><p>Set your playbooks once and let AI handle the first move.</p><a class="btn-p" href="/login.html">Get started &rarr;</a></section>
+
+<!-- ═══ FEATURE ROWS ═══ -->
+<section class="sec">
+  <div class="wrap">
+
+    <div class="row">
+      <div>
+        <div class="kick"><span class="pip"></span>What you get</div>
+        <h3>Response that starts before you're even awake.</h3>
+        <p>Detection is only half the job. AI executes the containment steps automatically — killing sessions, quarantining devices, revoking tokens — then hands you a clean timeline of exactly what happened and what it did.</p>
+        <ul>
+          <li>Automated containment the instant a threat is confirmed</li>
+          <li>Playbooks for the common incident types, ready out of the box</li>
+          <li>A full, timestamped timeline of every action taken</li>
+          <li>Human-in-the-loop control for anything high-impact</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div class="mock">
+          <div class="mock-bar"><span></span><span></span><span></span></div>
+          <div class="mock-body">
+            <div class="mock-card">
+              <span class="mock-dot ok"></span>
+              <span class="mock-txt"><span class="mock-t">Session revoked</span><span class="mock-s">Compromised token · 2s after detection</span></span>
+              <span class="mock-badge ok">Done</span>
+            </div>
+            <div class="mock-card">
+              <span class="mock-dot ok"></span>
+              <span class="mock-txt"><span class="mock-t">Device quarantined</span><span class="mock-s">Endpoint isolated from network</span></span>
+              <span class="mock-badge ok">Contained</span>
+            </div>
+            <div class="mock-card">
+              <span class="mock-dot cy"></span>
+              <span class="mock-txt"><span class="mock-t">Timeline exported</span><span class="mock-s">Full incident record ready</span></span>
+              <span class="mock-badge">Ready</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row rev">
+      <div class="panel">
+        <div class="mock">
+          <div class="mock-bar"><span></span><span></span><span></span></div>
+          <div class="mock-body">
+            <div class="mock-card">
+              <span class="mock-dot ok"></span>
+              <span class="mock-txt"><span class="mock-t">Auto-run</span><span class="mock-s">Revoke tokens · isolate device</span></span>
+              <span class="mock-badge ok">Enabled</span>
+            </div>
+            <div class="mock-card">
+              <span class="mock-dot warn"></span>
+              <span class="mock-txt"><span class="mock-t">Needs approval</span><span class="mock-s">Disable user account</span></span>
+              <span class="mock-badge warn">Pending</span>
+            </div>
+            <div class="mock-card">
+              <span class="mock-dot cy"></span>
+              <span class="mock-txt"><span class="mock-t">Audit log</span><span class="mock-s">Every action recorded</span></span>
+              <span class="mock-badge">Logged</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="kick"><span class="pip"></span>Stay in control</div>
+        <h3>Automated where it's safe, manual where it counts.</h3>
+        <p>You decide which actions AI takes on its own and which need your sign-off. High-impact moves wait for a human; the routine containment happens instantly.</p>
+        <ul>
+          <li>Set which actions auto-run vs require approval</li>
+          <li>One-tap approve or reject on escalated actions</li>
+          <li>Every decision logged for audit and review</li>
+          <li>Roll back an action if it wasn't the right call</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<section class="sec alt">
+  <div class="wrap">
+    <div class="lead">
+      <div class="kick"><span class="pip"></span>How it works</div>
+      <h2>Detected, contained, documented</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="n">01</div>
+        <h4>Threat confirmed</h4>
+        <p>AI validates the detection so playbooks don't fire on false alarms.</p>
+      </div>
+      <div class="step">
+        <div class="n">02</div>
+        <h4>Playbook runs</h4>
+        <p>Containment steps execute automatically — or wait for your approval on big moves.</p>
+      </div>
+      <div class="step">
+        <div class="n">03</div>
+        <h4>You get the record</h4>
+        <p>A clean, timestamped timeline of the incident and every action, ready to share.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FINAL CTA ═══ -->
+<section class="fcta">
+  <h2>Respond in seconds, <span>not hours.</span></h2>
+  <p>Set your playbooks once and let AI handle the first move.</p>
+  <a class="btn-p" href="/login.html">Get started <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</section>
+
 <!-- footer injected by footer.js -->
 </body>
 </html>

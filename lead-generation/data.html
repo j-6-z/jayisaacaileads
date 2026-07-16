@@ -9,122 +9,240 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Data — JAYISAAC AI</title>
-<meta name="description" content="What's inside the JAYISAAC AI database — North American B2B contact coverage, update cadence, and verification process.">
+<meta name="description" content="Owners, operators, and decision-makers across North America — with the trades and local service coverage the big platforms skip.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<script type="module" src="/nav.js"></script>
+<script type="module" src="/footer.js"></script>
 <style>
+/* design system — matches index.html; indigo is the Lead Generation accent */
 :root{
-  --orange:#6366F1;--orange-bright:#818CF8;--orange-dark:#A84B12;--orange-soft:#FBEEE4;
-  --charcoal:#1C1F24;--charcoal-deep:#141619;
-  --ink:#1A2433;--slate:#5B6878;--mist:#8C97A6;
-  --line:#E5E9EF;--bg:#F7F8FA;--white:#fff;
-  --green:#1B8A5A;--green-soft:#E5F4EC;--blue:#2563EB;--blue-soft:#E9F0FE;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--ink);background:var(--white);font-size:15px;line-height:1.7}
-a{color:var(--orange);text-decoration:none}
-a:hover{text-decoration:underline}
-.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  --paper:      #FAF7F1;
+  --ink:        #1C1822;
+  --ink-soft:   #4E4856;
+  --ink-faint:  #8E8896;
+  --line:       #E9E2D6;
+  --field-line: #D9D8E3;
+  --cream:      #F4EFE5;
+  --cream-line: #EAE3D4;
 
+  --blue:       #4F46E5;
+  --blue-h:     #4338CA;
+  --blue-lt:    #818CF8;
+  --blue-soft:  #EEF0FF;
+  --blue-line:  #C9CDFA;
+  --pur:        #7C3AED;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box }
+html{ scroll-behavior:smooth }
+
+body{
+  font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color:var(--ink); background:var(--paper);
+  font-size:15.5px; line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+a{ color:var(--blue); text-decoration:none; font-weight:500 }
+a:hover{ text-decoration:underline }
+a:focus-visible{ outline:3px solid var(--blue); outline-offset:3px; border-radius:6px }
+.wrap{ max-width:1080px; margin:0 auto; padding:0 24px }
+
+/* ── hero (split: copy left, image right) ── */
 .page-hero{
   background:
-    radial-gradient(800px 400px at 90% -20%, rgba(99,102,241,.22), transparent 60%),
-    var(--charcoal-deep);
-  color:#fff;padding:84px 0 64px;
+    radial-gradient(760px 380px at 88% -25%, rgba(79,70,229,.12), transparent 62%),
+    radial-gradient(600px 340px at 4% 120%, rgba(124,58,237,.07), transparent 58%),
+    #FFFCF6;
+  border-bottom:1px solid var(--line);
+  padding:80px 0 68px;
+}
+.page-hero .wrap{
+  display:grid; grid-template-columns:1.15fr 1fr;
+  gap:clamp(2.5rem, 5vw, 3.5rem); align-items:center;
 }
 .eyebrow{
-  display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
-  color:var(--orange-bright);border:1px solid rgba(129,140,248,.35);background:rgba(129,140,248,.1);
-  padding:6px 14px;border-radius:20px;margin-bottom:18px;
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:.7rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--blue); margin-bottom:16px;
 }
-.page-hero h1{font-size:clamp(30px,5vw,44px);font-weight:800;letter-spacing:-.02em;max-width:760px}
-.page-hero p{color:#A8B0BB;font-size:17px;max-width:620px;margin-top:14px}
-.hero-stats{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
-.hstat{
-  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;
-  padding:16px 22px;min-width:150px;
+.eyebrow::before{ content:''; width:8px; height:8px; border-radius:2px; background:var(--blue); flex-shrink:0; animation:pip 2s infinite }
+@keyframes pip{ 0%,100%{opacity:1} 50%{opacity:.25} }
+.page-hero h1{
+  font-family:'Newsreader', Georgia, serif;
+  font-size:clamp(2.2rem, 5vw, 3.2rem);
+  font-weight:500; letter-spacing:-.015em; line-height:1.1;
+  color:var(--ink);
 }
-.hstat .n{font-size:26px;font-weight:800;color:var(--orange-bright);letter-spacing:-.02em}
-.hstat .l{font-size:12px;color:#A8B0BB;font-weight:600;margin-top:2px}
+.page-hero > .wrap > div > p{ color:var(--ink-soft); font-size:1rem; max-width:560px; margin-top:14px }
 
-section{padding:68px 0;scroll-margin-top:80px}
-section.alt{background:var(--bg)}
-.sec-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--orange);margin-bottom:10px}
-h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
-.lead{font-size:16px;color:var(--slate);max-width:720px}
+/* ── hero stats ── */
+.hero-stats{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px 26px; margin-top:30px; max-width:460px }
+.hstat .n{ font-size:1.5rem; font-weight:600; color:var(--blue); letter-spacing:-.025em; line-height:1.1 }
+.hstat .l{ font-size:.76rem; color:var(--ink-soft); margin-top:4px; line-height:1.5 }
 
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:32px}
-.card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:26px}
-.card .icon{
-  width:40px;height:40px;border-radius:10px;background:var(--orange-soft);
-  display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+.page-hero-img{
+  border-radius:14px; overflow:hidden;
+  border:1px solid var(--line);
+  box-shadow:0 10px 20px rgba(28,24,34,.04), 0 34px 70px rgba(79,70,229,.12);
+  aspect-ratio:16/9; background:var(--cream);
 }
-.card .icon svg{width:19px;height:19px;color:var(--orange)}
-.card h3{font-size:16px;font-weight:800;margin-bottom:8px}
-.card p{font-size:13.5px;color:var(--slate)}
+.page-hero-img img{ width:100%; height:100%; display:block; object-fit:cover }
 
-/* field chips */
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
-.chip{
-  font-size:12.5px;font-weight:700;border:1px solid var(--line);border-radius:8px;
-  padding:7px 13px;background:var(--white);color:var(--slate);
-}
-.chip.hot{background:var(--orange-soft);border-color:#F2D9C4;color:var(--orange)}
-
-/* industries */
-.ind-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:28px}
-.ind{
-  background:var(--white);border:1px solid var(--line);border-radius:12px;padding:16px 18px;
-  font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:10px;
-}
-.ind .dot{width:8px;height:8px;border-radius:50%;background:var(--orange);flex-shrink:0}
-
-/* verification steps */
-.steps{margin-top:32px;display:grid;gap:0}
-.step{
-  display:grid;grid-template-columns:52px 1fr;gap:18px;padding:22px 0;
-  border-bottom:1px solid var(--line);
-}
-.step:last-child{border-bottom:none}
-.step .num{
-  width:40px;height:40px;border-radius:50%;background:var(--charcoal);color:#fff;
-  font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;
-}
-.step h3{font-size:16px;font-weight:800;margin-bottom:5px}
-.step p{font-size:13.5px;color:var(--slate);max-width:640px}
-
-.honest{
-  background:var(--orange-soft);border:1px solid #F2D9C4;border-radius:14px;
-  padding:22px 26px;margin-top:32px;font-size:14px;
-}
-.honest strong{display:block;margin-bottom:6px;font-size:14.5px}
-.honest p{color:var(--ink)}
-
-.cta-band{
-  background:
-    radial-gradient(700px 350px at 10% 120%, rgba(99,102,241,.25), transparent 60%),
-    var(--charcoal);
-  color:#fff;text-align:center;padding:68px 24px;
-}
-.cta-band h2{margin-bottom:8px}
-.cta-band p{color:#A8B0BB;margin-bottom:24px}
+/* ── buttons ── */
 .btn{
-  display:inline-block;background:var(--orange);color:#fff;font-weight:800;font-size:14.5px;
-  padding:13px 28px;border-radius:10px;box-shadow:0 6px 20px rgba(99,102,241,.35);transition:.15s;
+  position:relative; overflow:hidden; isolation:isolate;
+  display:inline-flex; align-items:center; gap:9px;
+  background:var(--blue); color:#fff; border:1px solid var(--blue-h);
+  font-weight:600; font-size:.93rem; padding:14px 30px; border-radius:10px;
+  white-space:nowrap;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.22),
+    inset 0 -1px 0 rgba(0,0,0,.14),
+    0 1px 2px rgba(28,24,34,.16),
+    0 8px 22px rgba(79,70,229,.28);
+  transition:background .18s, transform .14s cubic-bezier(.22,.8,.3,1), box-shadow .18s;
 }
-.btn:hover{background:var(--orange-dark);text-decoration:none}
+.btn::after{
+  content:''; position:absolute; inset:0; z-index:-1;
+  background:linear-gradient(100deg, transparent 30%, rgba(255,255,255,.16) 50%, transparent 70%);
+  transform:translateX(-120%);
+  transition:transform .7s cubic-bezier(.22,.8,.3,1);
+}
+.btn:hover::after{ transform:translateX(120%) }
+.btn:hover{
+  background:#5B52EA; transform:translateY(-2px); text-decoration:none;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.26),
+    inset 0 -1px 0 rgba(0,0,0,.14),
+    0 2px 4px rgba(28,24,34,.14),
+    0 14px 32px rgba(79,70,229,.38);
+}
+.btn:active{ transform:translateY(0) scale(.985); box-shadow:inset 0 1px 3px rgba(0,0,0,.2), 0 2px 8px rgba(79,70,229,.3) }
 
-/* hero image layout — image right of text */
-.page-hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
-.page-hero-img{border-radius:18px;overflow:hidden;box-shadow:0 28px 80px rgba(99,102,241,.18),0 0 0 1px rgba(255,255,255,.08);transform:perspective(1200px) rotateY(-3deg);transition:transform .4s}
-.page-hero-img:hover{transform:perspective(1200px) rotateY(0deg)}
-.page-hero-img img{width:100%;display:block}
+/* ── sections ── */
+section{ padding:74px 0 }
+section.alt{ background:#FFFCF6; border-top:1px solid var(--line); border-bottom:1px solid var(--line) }
+.sec-label{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:.7rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--blue); margin-bottom:12px;
+}
+.sec-label::before{ content:''; width:8px; height:8px; border-radius:2px; background:var(--blue); flex-shrink:0 }
+h2{
+  font-size:clamp(1.6rem, 3.4vw, 2.15rem);
+  font-weight:600; letter-spacing:-.03em; line-height:1.12;
+  color:var(--ink); margin-bottom:16px;
+}
+.lead{ font-size:1rem; color:var(--ink-soft); max-width:760px; line-height:1.75 }
+
+/* ── industry grid ── */
+.ind-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:10px; margin-top:36px }
+.ind{
+  display:flex; align-items:center; gap:11px;
+  background:#fff; border:1px solid var(--line); border-radius:10px;
+  padding:13px 16px; font-size:.86rem; font-weight:500; color:var(--ink);
+  transition:border-color .18s, transform .18s;
+}
+.ind:hover{ border-color:var(--blue-line); transform:translateY(-2px) }
+.ind .dot{ width:8px; height:8px; border-radius:2px; background:var(--blue); flex-shrink:0 }
+.ind:last-child{ background:var(--cream); border-color:var(--cream-line); color:var(--ink-soft) }
+.ind:last-child .dot{ background:var(--ink-faint) }
+
+/* ── record chips ── */
+.sub-h2{ font-size:1.25rem; margin-top:52px }
+.chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:20px }
+.chip{
+  font-size:.8rem; font-weight:500;
+  background:#fff; border:1px solid var(--line); color:var(--ink-soft);
+  border-radius:999px; padding:7px 15px; white-space:nowrap;
+}
+.chip.hot{
+  background:var(--blue-soft); border-color:var(--blue-line); color:var(--blue);
+  font-weight:600;
+  padding-left:32px; position:relative;
+}
+.chip.hot::before{
+  content:''; position:absolute; left:12px; top:50%; transform:translateY(-50%);
+  width:14px; height:14px; border-radius:50%;
+  background-color:var(--blue);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:center; background-size:8px;
+}
+
+/* ── cards ── */
+.grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; margin-top:36px }
+.card{
+  background:#fff; border:1px solid var(--line); border-radius:14px; padding:26px;
+  transition:border-color .2s, transform .2s, box-shadow .2s;
+}
+.card:hover{ border-color:var(--blue-line); transform:translateY(-3px); box-shadow:0 16px 36px rgba(79,70,229,.08) }
+.card .icon{
+  width:42px; height:42px; border-radius:12px;
+  background:var(--blue-soft); border:1px solid var(--blue-line);
+  display:flex; align-items:center; justify-content:center; margin-bottom:15px;
+}
+.card .icon svg{ width:19px; height:19px; stroke:var(--blue); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round }
+.card h3{ font-size:.98rem; font-weight:700; letter-spacing:-.01em; margin-bottom:8px; color:var(--ink) }
+.card p{ font-size:.86rem; color:var(--ink-soft); line-height:1.7 }
+
+/* ── steps ── */
+.steps{ display:grid; gap:14px; margin-top:36px }
+.step{
+  display:flex; gap:16px; align-items:flex-start;
+  background:#fff; border:1px solid var(--line); border-radius:14px; padding:22px 24px;
+  transition:border-color .2s, box-shadow .2s;
+}
+.step:hover{ border-color:var(--blue-line); box-shadow:0 10px 26px rgba(79,70,229,.06) }
+.step .num{
+  flex-shrink:0;
+  font-size:.68rem; font-weight:700; letter-spacing:.06em;
+  color:var(--blue); background:var(--blue-soft);
+  border:1px solid var(--blue-line); border-radius:6px;
+  padding:3px 9px; margin-top:2px;
+}
+.step h3{ font-size:.98rem; font-weight:700; letter-spacing:-.01em; margin-bottom:6px; color:var(--ink) }
+.step p{ font-size:.88rem; color:var(--ink-soft); line-height:1.7 }
+
+/* ── the honest caveat: the best paragraph on the page, so it gets weight ── */
+.honest{
+  background:var(--cream); border:1px solid var(--cream-line);
+  border-left:3px solid var(--blue);
+  border-radius:8px; padding:22px 26px; margin-top:32px;
+}
+.honest strong{ display:block; font-size:.95rem; color:var(--ink); font-weight:600; margin-bottom:6px }
+.honest p{ font-size:.88rem; color:var(--ink-soft); line-height:1.75 }
+
+/* ── closing card (replaces the old dark band) ── */
+.cta-card{
+  max-width:1080px; margin:0 auto 90px;
+  background:var(--cream); border:1px solid var(--cream-line);
+  border-radius:12px; padding:34px 30px;
+  display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+}
+.cta-inner{ padding:0 24px }
+.cta-card h2{
+  font-family:'Newsreader', Georgia, serif;
+  font-size:1.5rem; font-weight:500; letter-spacing:-.012em; margin-bottom:5px;
+}
+.cta-card p{ font-size:.88rem; color:var(--ink-soft) }
+
 @media(max-width:900px){
-  .page-hero .wrap{grid-template-columns:1fr;gap:32px}
-  .page-hero-img{transform:none;max-width:540px;margin:0 auto}
+  .page-hero .wrap{ grid-template-columns:1fr; gap:2rem }
+  .page-hero-img{ max-width:540px; margin:0 auto; width:100% }
 }
-
+@media(max-width:620px){
+  .page-hero{ padding:56px 0 48px }
+  section{ padding:54px 0 }
+  .hero-stats{ gap:14px 18px }
+  .cta-card{ flex-direction:column; align-items:flex-start }
+  .cta-card .btn{ width:100%; justify-content:center }
+}
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto }
+  *, *::before, *::after{ animation:none !important; transition:none !important }
+  .btn::after{ display:none }
+}
 </style>
 </head>
 <body>
@@ -134,18 +252,18 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
 <header class="page-hero">
   <div class="wrap">
     <div>
-    <span class="eyebrow">Our Data</span>
-    <h1>The database built for people who sell to real businesses</h1>
-    <p>Owners, operators, and decision-makers across North America — with the trades and local service coverage the big platforms skip.</p>
-    <div class="hero-stats">
-      <div class="hstat"><div class="n">1M+</div><div class="l">Business contacts</div></div>
-      <div class="hstat"><div class="n">60+</div><div class="l">Industries covered</div></div>
-      <div class="hstat"><div class="n">CA + US</div><div class="l">Full coverage</div></div>
-      <div class="hstat"><div class="n">Monthly</div><div class="l">Refresh cycles</div></div>
+      <span class="eyebrow">Our Data</span>
+      <h1>The database built for people who sell to real businesses</h1>
+      <p>Owners, operators, and decision-makers across North America — with the trades and local service coverage the big platforms skip.</p>
+      <div class="hero-stats">
+        <div class="hstat"><div class="n">1M+</div><div class="l">Business contacts</div></div>
+        <div class="hstat"><div class="n">60+</div><div class="l">Industries covered</div></div>
+        <div class="hstat"><div class="n">CA + US</div><div class="l">Full coverage</div></div>
+        <div class="hstat"><div class="n">Monthly</div><div class="l">Refresh cycles</div></div>
+      </div>
     </div>
-  </div>
     <div class="page-hero-img">
-      <img src="/public/feat-data.jpg" alt="Data verification and quality pipeline" loading="lazy">
+      <img src="/public/feat-data.jpg" alt="Data verification and quality pipeline" loading="lazy" decoding="async">
     </div>
   </div>
 </header>
@@ -169,7 +287,8 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
       <div class="ind"><span class="dot"></span>Professional Services</div>
       <div class="ind"><span class="dot"></span>+ 50 more industries</div>
     </div>
-    <h2 style="margin-top:48px;font-size:20px">What's on every record</h2>
+
+    <h2 class="sub-h2">What's on every record</h2>
     <div class="chips">
       <span class="chip hot">Decision-maker name</span>
       <span class="chip hot">Job title</span>
@@ -216,28 +335,28 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
     <h2>How a record earns its place</h2>
     <div class="steps">
       <div class="step">
-        <div class="num">1</div>
+        <div class="num">01</div>
         <div>
           <h3>Sourcing</h3>
           <p>Records are compiled from public business sources — websites, registries, directories — plus licensed third-party data and businesses updating their own listings.</p>
         </div>
       </div>
       <div class="step">
-        <div class="num">2</div>
+        <div class="num">02</div>
         <div>
           <h3>Cross-referencing</h3>
           <p>Every record is matched across multiple sources. Conflicting data gets resolved or flagged; single-source records carry lower confidence until corroborated.</p>
         </div>
       </div>
       <div class="step">
-        <div class="num">3</div>
+        <div class="num">03</div>
         <div>
           <h3>Technical validation</h3>
           <p>Emails are checked against live mail servers for deliverability. Phone numbers are validated for format, region, and line status before a record is marked verified.</p>
         </div>
       </div>
       <div class="step">
-        <div class="num">4</div>
+        <div class="num">04</div>
         <div>
           <h3>Suppression screening</h3>
           <p>Records are screened against our opt-out suppression list. Anyone who has requested removal stays removed — permanently.</p>
@@ -251,14 +370,16 @@ h2{font-size:clamp(23px,3.2vw,30px);font-weight:800;letter-spacing:-.02em;margin
   </div>
 </section>
 
-<div class="cta-band">
-  <h2>Run a search and judge the data yourself</h2>
-  <p>100 free credits on signup. No card. See your market in the database in under two minutes.</p>
-  <a class="btn" href="/login.html">Start Free Trial</a>
+<div class="cta-inner">
+  <div class="cta-card">
+    <div>
+      <h2>Run a search and judge the data yourself</h2>
+      <p>100 free credits on signup. No card. See your market in the database in under two minutes.</p>
+    </div>
+    <a class="btn" href="/login.html">Start Free Trial</a>
+  </div>
 </div>
 
 <!-- nav/footer injected by JS -->
-<script type="module" src="/nav.js"></script>
-<script type="module" src="/footer.js"></script>
 </body>
 </html>
