@@ -12,48 +12,217 @@
 <meta name="description" content="Terms of Use for the JAYISAAC AI B2B contact intelligence platform — accounts, credits, acceptable use, and refunds.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
 <style>
+/* design system — matches index.html */
 :root{
-  --orange:#6366F1;--orange-bright:#818CF8;--orange-dark:#A84B12;--orange-soft:#FBEEE4;
-  --charcoal:#1C1F24;--charcoal-deep:#141619;
-  --ink:#1A2433;--slate:#5B6878;--mist:#8C97A6;
-  --line:#E5E9EF;--bg:#F7F8FA;--white:#fff;
+  --paper:      #FAF7F1;
+  --ink:        #1C1822;
+  --ink-soft:   #4E4856;
+  --ink-faint:  #8E8896;
+  --line:       #E9E2D6;
+  --cream:      #F4EFE5;
+  --cream-line: #EAE3D4;
+
+  --blue:       #4F46E5;
+  --blue-h:     #4338CA;
+  --blue-lt:    #818CF8;
+  --blue-soft:  #EEF0FF;
+  --blue-line:  #C9CDFA;
+  --pur:        #7C3AED;
 }
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--ink);background:var(--white);font-size:15px;line-height:1.75}
-a{color:var(--orange);text-decoration:none}
-a:hover{text-decoration:underline}
-.wrap{max-width:860px;margin:0 auto;padding:0 24px}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box }
+html{ scroll-behavior:smooth }
+
+body{
+  font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  font-size:15.5px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+a{ color:var(--blue); text-decoration:none; font-weight:500 }
+a:hover{ text-decoration:underline }
+a:focus-visible, button:focus-visible{ outline:3px solid var(--blue); outline-offset:3px; border-radius:4px }
+.wrap{ max-width:1140px; margin:0 auto; padding:0 24px }
+
+/* ── reading progress ── */
+.prog{
+  position:fixed; top:0; left:0; right:0; height:3px; z-index:1001;
+  background:linear-gradient(90deg, var(--blue), var(--pur), var(--blue-lt));
+  transform:scaleX(0); transform-origin:0 50%;
+  transition:transform .1s linear;
+}
+
+/* ── hero ── */
 .page-hero{
-  background:radial-gradient(800px 400px at 90% -20%, rgba(99,102,241,.2), transparent 60%),var(--charcoal-deep);
-  color:#fff;padding:72px 0 56px;
+  background:
+    radial-gradient(760px 380px at 88% -25%, rgba(79,70,229,.11), transparent 62%),
+    radial-gradient(600px 340px at 4% 120%, rgba(124,58,237,.07), transparent 58%),
+    #FFFCF6;
+  border-bottom:1px solid var(--line);
+  padding:74px 0 54px;
 }
 .eyebrow{
-  display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
-  color:var(--orange-bright);border:1px solid rgba(129,140,248,.35);background:rgba(129,140,248,.1);
-  padding:6px 14px;border-radius:20px;margin-bottom:18px;
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:.7rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--blue); margin-bottom:16px;
 }
-.page-hero h1{font-size:clamp(28px,4.5vw,40px);font-weight:800;letter-spacing:-.02em}
-.page-hero p{color:#A8B0BB;font-size:15px;margin-top:12px}
-.policy{padding:56px 0 80px}
-.policy h2{font-size:20px;font-weight:800;letter-spacing:-.01em;margin:38px 0 12px;scroll-margin-top:90px}
-.policy h2:first-of-type{margin-top:0}
-.policy p,.policy li{color:var(--slate)}
-.policy ul{padding-left:22px;margin:10px 0 16px}
-.policy li{margin-bottom:8px}
-.policy strong{color:var(--ink)}
+.eyebrow::before{
+  content:''; width:8px; height:8px; border-radius:2px;
+  background:var(--blue); flex-shrink:0;
+}
+.page-hero h1{
+  font-family:'Newsreader', Georgia, serif;
+  font-size:clamp(2.1rem, 5vw, 3.1rem);
+  font-weight:500; letter-spacing:-.015em; line-height:1.1;
+  color:var(--ink);
+  margin-bottom:20px;
+}
+.meta{ display:flex; gap:10px; flex-wrap:wrap }
+.pill{
+  display:inline-flex; align-items:center; gap:7px;
+  font-size:.74rem; font-weight:600;
+  color:var(--ink-soft);
+  background:#fff; border:1px solid var(--line);
+  border-radius:999px; padding:6px 13px;
+}
+.pill svg{
+  width:12px; height:12px; flex-shrink:0;
+  stroke:var(--blue); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;
+}
+
+/* ── layout: sticky rail + content ── */
+.policy{ padding:56px 0 100px }
+.policy-grid{
+  display:grid; grid-template-columns:236px 1fr;
+  gap:clamp(2.5rem, 6vw, 5.5rem);
+  align-items:start;
+}
+
+/* sticky scroll-spy rail */
+.toc{ position:sticky; top:98px }
+.toc h3{
+  font-size:.66rem; font-weight:700; text-transform:uppercase; letter-spacing:.14em;
+  color:var(--ink-faint); margin-bottom:14px; padding-left:15px;
+}
+.toc ol{ list-style:none; border-left:1.5px solid var(--line) }
+.toc a{
+  display:block;
+  font-size:.82rem; font-weight:500; line-height:1.45;
+  color:var(--ink-faint);
+  padding:8px 0 8px 15px;
+  border-left:1.5px solid transparent; margin-left:-1.5px;
+  transition:color .18s, border-color .18s;
+}
+.toc a:hover{ color:var(--ink); text-decoration:none }
+.toc a.active{ color:var(--blue); font-weight:600; border-left-color:var(--blue) }
+
+/* ── sections ── */
+.sec{ scroll-margin-top:98px; padding-bottom:14px }
+.sec + .sec{ border-top:1px solid var(--line); padding-top:38px; margin-top:38px }
+.sec h2{
+  display:flex; align-items:baseline; gap:14px;
+  font-size:1.35rem; font-weight:600; letter-spacing:-.02em;
+  color:var(--ink);
+  margin-bottom:14px;
+}
+.num{
+  flex-shrink:0;
+  font-size:.68rem; font-weight:700; letter-spacing:.06em;
+  color:var(--blue); background:var(--blue-soft);
+  border:1px solid var(--blue-line); border-radius:6px;
+  padding:3px 8px;
+  position:relative; top:-2px;
+}
+.sec p, .sec li{ color:var(--ink-soft) }
+.sec p + p{ margin-top:12px }
+.sec ul{ list-style:none; margin:14px 0 16px; display:flex; flex-direction:column; gap:11px }
+.sec li{ position:relative; padding-left:24px; line-height:1.65 }
+.sec li::before{
+  content:''; position:absolute; left:2px; top:.62em;
+  width:7px; height:7px; border-radius:2px;
+  background:var(--blue-line);
+}
+.sec strong{ color:var(--ink); font-weight:600 }
+
+/* prohibited list reads as prohibitions at a glance */
+.nots li{ padding-left:30px }
+.nots li::before{
+  content:'';
+  left:0; top:.32em;
+  width:18px; height:18px; border-radius:50%;
+  background-color:var(--ink);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 6L6 18M6 6l12 12'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:center; background-size:8px;
+}
+
+/* the all-caps statutory block, contained instead of shouting inline */
+.legalese{
+  background:var(--cream); border:1px solid var(--cream-line);
+  border-left:3px solid var(--ink-faint);
+  border-radius:8px;
+  padding:18px 20px; margin:16px 0;
+  font-size:.8rem; line-height:1.75; letter-spacing:.005em;
+  color:var(--ink-soft);
+}
+.legalese p + p{ margin-top:12px }
+
 .callout{
-  background:var(--orange-soft);border:1px solid #F2D9C4;border-radius:12px;
-  padding:18px 20px;margin:18px 0;font-size:14px;color:var(--ink);
+  display:flex; gap:13px; align-items:flex-start;
+  background:var(--blue-soft);
+  border:1px solid var(--blue-line);
+  border-radius:12px;
+  padding:18px 20px; margin:22px 0;
+  font-size:.9rem; color:var(--ink); line-height:1.7;
 }
-.toc{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-bottom:36px}
-.toc h3{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--mist);margin-bottom:10px}
-.toc ol{padding-left:20px;font-size:14px}
-.toc li{margin-bottom:5px}
+.callout .mark{
+  flex-shrink:0; width:8px; height:8px; border-radius:2px;
+  background:var(--blue); margin-top:.55em;
+}
+
+/* back to top */
+.totop{
+  position:fixed; right:26px; bottom:26px; z-index:60;
+  width:42px; height:42px; border-radius:50%;
+  background:#fff; border:1px solid var(--line);
+  box-shadow:0 8px 24px rgba(28,24,34,.12);
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  opacity:0; transform:translateY(8px); pointer-events:none;
+  transition:opacity .22s, transform .22s, border-color .18s;
+}
+.totop.show{ opacity:1; transform:none; pointer-events:auto }
+.totop:hover{ border-color:var(--ink) }
+.totop svg{ width:15px; height:15px; stroke:var(--ink); fill:none; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round }
+
+@media(max-width:980px){
+  .policy-grid{ grid-template-columns:1fr; gap:2.5rem }
+  .toc{
+    position:static;
+    background:var(--cream); border:1px solid var(--cream-line);
+    border-radius:8px; padding:20px 22px;
+  }
+  .toc h3{ padding-left:0 }
+  .toc ol{ border-left:none; columns:2; column-gap:22px }
+  .toc a{ padding:6px 0; border-left:none; margin-left:0 }
+  .toc a.active{ border-left:none }
+}
+@media(max-width:620px){
+  .page-hero{ padding:54px 0 42px }
+  .policy{ padding:40px 0 80px }
+  .toc ol{ columns:1 }
+  .totop{ right:16px; bottom:16px }
+}
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto }
+  *, *::before, *::after{ animation:none !important; transition:none !important }
+}
 </style>
 </head>
 <body>
+
+<div class="prog" id="prog"></div>
 
 <!-- nav/footer injected by JS -->
 
@@ -61,102 +230,195 @@ a:hover{text-decoration:underline}
   <div class="wrap">
     <span class="eyebrow">Legal</span>
     <h1>Terms of Use</h1>
-    <p>Last updated: June 9, 2026 · JAYISAAC AI, Saskatoon, Saskatchewan, Canada</p>
+    <div class="meta">
+      <span class="pill">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        Last updated: June 9, 2026
+      </span>
+      <span class="pill">
+        <svg viewBox="0 0 24 24"><path d="M12 3v18M5 7h14M7 7l-3 7h6zM17 7l-3 7h6z"/></svg>
+        Governed by the laws of Saskatchewan, Canada
+      </span>
+      <span class="pill">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        JAYISAAC AI, Saskatoon, Saskatchewan, Canada
+      </span>
+    </div>
   </div>
 </header>
 
 <div class="policy">
   <div class="wrap">
+    <div class="policy-grid">
 
-    <div class="toc">
-      <h3>Contents</h3>
-      <ol>
-        <li><a href="#agreement">The agreement</a></li>
-        <li><a href="#accounts">Accounts</a></li>
-        <li><a href="#plans">Plans, credits, and billing</a></li>
-        <li><a href="#acceptable">Acceptable use</a></li>
-        <li><a href="#data-use">Use of contact data</a></li>
-        <li><a href="#refunds">Cancellation and refunds</a></li>
-        <li><a href="#ip">Intellectual property</a></li>
-        <li><a href="#disclaimers">Disclaimers and limitation of liability</a></li>
-        <li><a href="#termination">Suspension and termination</a></li>
-        <li><a href="#general">General terms</a></li>
-      </ol>
+      <!-- sticky rail -->
+      <nav class="toc" aria-label="Contents">
+        <h3>Contents</h3>
+        <ol>
+          <li><a href="#agreement">The agreement</a></li>
+          <li><a href="#accounts">Accounts</a></li>
+          <li><a href="#plans">Plans, credits, and billing</a></li>
+          <li><a href="#acceptable">Acceptable use</a></li>
+          <li><a href="#data-use">Use of contact data</a></li>
+          <li><a href="#refunds">Cancellation and refunds</a></li>
+          <li><a href="#ip">Intellectual property</a></li>
+          <li><a href="#disclaimers">Disclaimers and limitation of liability</a></li>
+          <li><a href="#termination">Suspension and termination</a></li>
+          <li><a href="#general">General terms</a></li>
+        </ol>
+      </nav>
+
+      <!-- content -->
+      <main>
+
+        <section class="sec" id="agreement">
+          <h2><span class="num">01</span>The agreement</h2>
+          <p>These Terms of Use ("Terms") are a binding agreement between you and JAYISAAC AI ("we", "us") governing your use of the platform at jayisaacai.com, including the prospecting application, data exports, and related services (together, the "Service"). By creating an account or using the Service you agree to these Terms and to our <a href="/privacy.html">Privacy Policy</a>. If you use the Service on behalf of a company, you confirm you have authority to bind that company, and "you" means that company.</p>
+        </section>
+
+        <section class="sec" id="accounts">
+          <h2><span class="num">02</span>Accounts</h2>
+          <ul>
+            <li>You must be at least 18 and provide accurate account information.</li>
+            <li>You are responsible for activity under your account and for keeping your credentials secure.</li>
+            <li>One account is for one user. Sharing logins across a team requires a plan that permits multiple seats.</li>
+            <li>Tell us promptly at <a href="mailto:admin@jayisaacai.com">admin@jayisaacai.com</a> if you suspect unauthorized access.</li>
+          </ul>
+        </section>
+
+        <section class="sec" id="plans">
+          <h2><span class="num">03</span>Plans, credits, and billing</h2>
+          <ul>
+            <li><strong>Credits.</strong> Access to certain data (such as revealing contact details) consumes credits. Credits are allocated by your plan, may be supplemented by free-trial grants, and have no cash value.</li>
+            <li><strong>Free trial.</strong> Trial credits are a one-time grant per person/company. Creating multiple accounts to farm trial credits is prohibited.</li>
+            <li><strong>Subscriptions.</strong> Paid plans bill in advance on a recurring basis through our payment processor and renew automatically until cancelled.</li>
+            <li><strong>Credit expiry.</strong> Unless your plan says otherwise, unused monthly credits do not roll over.</li>
+            <li><strong>Price changes.</strong> We may change pricing with notice; changes apply from your next billing cycle.</li>
+            <li><strong>Taxes.</strong> Prices exclude applicable taxes (GST/HST/PST or local equivalents), which are added where required.</li>
+          </ul>
+        </section>
+
+        <section class="sec" id="acceptable">
+          <h2><span class="num">04</span>Acceptable use</h2>
+          <p>The Service exists for legitimate business-to-business prospecting. You agree NOT to:</p>
+          <ul class="nots">
+            <li>Send spam or any communications that violate anti-spam laws, including Canada's <strong>CASL</strong>, the U.S. <strong>CAN-SPAM Act</strong> and <strong>TCPA</strong>, or equivalent laws in your jurisdiction;</li>
+            <li>Use the data for harassment, stalking, discrimination, or any unlawful purpose;</li>
+            <li>Scrape, crawl, bulk-download, or systematically extract the database beyond your plan's export limits;</li>
+            <li>Resell, redistribute, sublicense, or publish our data, or use it to build or train a competing database or product;</li>
+            <li>Circumvent credit metering, rate limits, or access controls, or probe the Service for vulnerabilities without permission;</li>
+            <li>Share, sell, or transfer your account access to third parties.</li>
+          </ul>
+          <div class="callout">
+            <span class="mark"></span>
+            <span><strong>Plain English:</strong> use the data to do honest outreach to businesses. You — not us — are responsible for making sure your calls, emails, and texts comply with the laws that apply to you.</span>
+          </div>
+        </section>
+
+        <section class="sec" id="data-use">
+          <h2><span class="num">05</span>Use of contact data</h2>
+          <ul>
+            <li>We grant you a limited, non-exclusive, non-transferable license to use data accessed through the Service for your internal sales and marketing purposes while your account is in good standing.</li>
+            <li>Exported records remain subject to these Terms — exporting a CSV does not convert our data into your property.</li>
+            <li>Data is provided on an "as-available" basis. Business information changes constantly; we do not guarantee any individual record is accurate, current, or deliverable. See our <a href="/data.html#verified">verification process</a> for how records are validated.</li>
+            <li>If a person opts out of our database, you must stop using their record once we notify you or it is removed from the Service.</li>
+          </ul>
+        </section>
+
+        <section class="sec" id="refunds">
+          <h2><span class="num">06</span>Cancellation and refunds</h2>
+          <ul>
+            <li>You may cancel your subscription at any time; access continues until the end of the paid period.</li>
+            <li>Fees already paid are non-refundable, and consumed credits cannot be refunded, except where required by law or where we determine a refund is warranted (for example, a verified billing error or material service failure).</li>
+            <li>If you believe you were billed in error, contact us within 30 days of the charge and we'll review it in good faith.</li>
+          </ul>
+        </section>
+
+        <section class="sec" id="ip">
+          <h2><span class="num">07</span>Intellectual property</h2>
+          <p>The Service — including the software, design, database structure, and JAYISAAC AI brand — is owned by us or our licensors. These Terms grant you a right to use the Service, not ownership of any part of it. Feedback you send us may be used to improve the Service without obligation to you.</p>
+        </section>
+
+        <section class="sec" id="disclaimers">
+          <h2><span class="num">08</span>Disclaimers and limitation of liability</h2>
+          <div class="legalese">
+            <p>THE SERVICE AND ALL DATA ARE PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING ACCURACY, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. WE DO NOT WARRANT THAT THE SERVICE WILL BE UNINTERRUPTED OR ERROR-FREE.</p>
+            <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW: (a) WE ARE NOT LIABLE FOR INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR FOR LOST PROFITS, REVENUE, OR DATA; AND (b) OUR TOTAL LIABILITY FOR ALL CLAIMS RELATING TO THE SERVICE IS LIMITED TO THE AMOUNTS YOU PAID US IN THE TWELVE (12) MONTHS BEFORE THE CLAIM AROSE. Some jurisdictions do not allow certain limitations, so parts of this section may not apply to you.</p>
+          </div>
+          <p>You will indemnify us against claims arising from your use of the data in violation of these Terms or applicable law, including anti-spam and telemarketing laws.</p>
+        </section>
+
+        <section class="sec" id="termination">
+          <h2><span class="num">09</span>Suspension and termination</h2>
+          <p>We may suspend or terminate accounts that violate these Terms — including acceptable-use violations, credit-farming, payment failure, or activity that threatens the Service or other users. Where reasonable, we'll warn you first. Sections 5, 7, 8, and 10 survive termination.</p>
+        </section>
+
+        <section class="sec" id="general">
+          <h2><span class="num">10</span>General terms</h2>
+          <ul>
+            <li><strong>Governing law.</strong> These Terms are governed by the laws of the Province of Saskatchewan and the federal laws of Canada applicable therein. Courts located in Saskatchewan have exclusive jurisdiction, and you consent to venue there.</li>
+            <li><strong>Changes.</strong> We may update these Terms; material changes will be reflected in the "Last updated" date and, for significant changes, notified by email or in-app. Continued use after changes means acceptance.</li>
+            <li><strong>Entire agreement.</strong> These Terms plus the Privacy Policy are the entire agreement between us regarding the Service.</li>
+            <li><strong>Severability &amp; waiver.</strong> If a provision is unenforceable, the rest remains in effect. Failure to enforce a provision is not a waiver.</li>
+            <li><strong>Contact.</strong> Questions about these Terms: <a href="mailto:admin@jayisaacai.com">admin@jayisaacai.com</a>.</li>
+          </ul>
+        </section>
+
+      </main>
     </div>
-
-    <h2 id="agreement">1. The agreement</h2>
-    <p>These Terms of Use ("Terms") are a binding agreement between you and JAYISAAC AI ("we", "us") governing your use of the platform at jayisaacai.com, including the prospecting application, data exports, and related services (together, the "Service"). By creating an account or using the Service you agree to these Terms and to our <a href="privacy.html">Privacy Policy</a>. If you use the Service on behalf of a company, you confirm you have authority to bind that company, and "you" means that company.</p>
-
-    <h2 id="accounts">2. Accounts</h2>
-    <ul>
-      <li>You must be at least 18 and provide accurate account information.</li>
-      <li>You are responsible for activity under your account and for keeping your credentials secure.</li>
-      <li>One account is for one user. Sharing logins across a team requires a plan that permits multiple seats.</li>
-      <li>Tell us promptly at <a href="mailto:admin@jayisaacai.com">admin@jayisaacai.com</a> if you suspect unauthorized access.</li>
-    </ul>
-
-    <h2 id="plans">3. Plans, credits, and billing</h2>
-    <ul>
-      <li><strong>Credits.</strong> Access to certain data (such as revealing contact details) consumes credits. Credits are allocated by your plan, may be supplemented by free-trial grants, and have no cash value.</li>
-      <li><strong>Free trial.</strong> Trial credits are a one-time grant per person/company. Creating multiple accounts to farm trial credits is prohibited.</li>
-      <li><strong>Subscriptions.</strong> Paid plans bill in advance on a recurring basis through our payment processor and renew automatically until cancelled.</li>
-      <li><strong>Credit expiry.</strong> Unless your plan says otherwise, unused monthly credits do not roll over.</li>
-      <li><strong>Price changes.</strong> We may change pricing with notice; changes apply from your next billing cycle.</li>
-      <li><strong>Taxes.</strong> Prices exclude applicable taxes (GST/HST/PST or local equivalents), which are added where required.</li>
-    </ul>
-
-    <h2 id="acceptable">4. Acceptable use</h2>
-    <p>The Service exists for legitimate business-to-business prospecting. You agree NOT to:</p>
-    <ul>
-      <li>Send spam or any communications that violate anti-spam laws, including Canada's <strong>CASL</strong>, the U.S. <strong>CAN-SPAM Act</strong> and <strong>TCPA</strong>, or equivalent laws in your jurisdiction;</li>
-      <li>Use the data for harassment, stalking, discrimination, or any unlawful purpose;</li>
-      <li>Scrape, crawl, bulk-download, or systematically extract the database beyond your plan's export limits;</li>
-      <li>Resell, redistribute, sublicense, or publish our data, or use it to build or train a competing database or product;</li>
-      <li>Circumvent credit metering, rate limits, or access controls, or probe the Service for vulnerabilities without permission;</li>
-      <li>Share, sell, or transfer your account access to third parties.</li>
-    </ul>
-    <div class="callout"><strong>Plain English:</strong> use the data to do honest outreach to businesses. You — not us — are responsible for making sure your calls, emails, and texts comply with the laws that apply to you.</div>
-
-    <h2 id="data-use">5. Use of contact data</h2>
-    <ul>
-      <li>We grant you a limited, non-exclusive, non-transferable license to use data accessed through the Service for your internal sales and marketing purposes while your account is in good standing.</li>
-      <li>Exported records remain subject to these Terms — exporting a CSV does not convert our data into your property.</li>
-      <li>Data is provided on an "as-available" basis. Business information changes constantly; we do not guarantee any individual record is accurate, current, or deliverable. See our <a href="data.html#verified">verification process</a> for how records are validated.</li>
-      <li>If a person opts out of our database, you must stop using their record once we notify you or it is removed from the Service.</li>
-    </ul>
-
-    <h2 id="refunds">6. Cancellation and refunds</h2>
-    <ul>
-      <li>You may cancel your subscription at any time; access continues until the end of the paid period.</li>
-      <li>Fees already paid are non-refundable, and consumed credits cannot be refunded, except where required by law or where we determine a refund is warranted (for example, a verified billing error or material service failure).</li>
-      <li>If you believe you were billed in error, contact us within 30 days of the charge and we'll review it in good faith.</li>
-    </ul>
-
-    <h2 id="ip">7. Intellectual property</h2>
-    <p>The Service — including the software, design, database structure, and JAYISAAC AI brand — is owned by us or our licensors. These Terms grant you a right to use the Service, not ownership of any part of it. Feedback you send us may be used to improve the Service without obligation to you.</p>
-
-    <h2 id="disclaimers">8. Disclaimers and limitation of liability</h2>
-    <p>THE SERVICE AND ALL DATA ARE PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING ACCURACY, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. WE DO NOT WARRANT THAT THE SERVICE WILL BE UNINTERRUPTED OR ERROR-FREE.</p>
-    <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW: (a) WE ARE NOT LIABLE FOR INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR FOR LOST PROFITS, REVENUE, OR DATA; AND (b) OUR TOTAL LIABILITY FOR ALL CLAIMS RELATING TO THE SERVICE IS LIMITED TO THE AMOUNTS YOU PAID US IN THE TWELVE (12) MONTHS BEFORE THE CLAIM AROSE. Some jurisdictions do not allow certain limitations, so parts of this section may not apply to you.</p>
-    <p>You will indemnify us against claims arising from your use of the data in violation of these Terms or applicable law, including anti-spam and telemarketing laws.</p>
-
-    <h2 id="termination">9. Suspension and termination</h2>
-    <p>We may suspend or terminate accounts that violate these Terms — including acceptable-use violations, credit-farming, payment failure, or activity that threatens the Service or other users. Where reasonable, we'll warn you first. Sections 5, 7, 8, and 10 survive termination.</p>
-
-    <h2 id="general">10. General terms</h2>
-    <ul>
-      <li><strong>Governing law.</strong> These Terms are governed by the laws of the Province of Saskatchewan and the federal laws of Canada applicable therein. Courts located in Saskatchewan have exclusive jurisdiction, and you consent to venue there.</li>
-      <li><strong>Changes.</strong> We may update these Terms; material changes will be reflected in the "Last updated" date and, for significant changes, notified by email or in-app. Continued use after changes means acceptance.</li>
-      <li><strong>Entire agreement.</strong> These Terms plus the Privacy Policy are the entire agreement between us regarding the Service.</li>
-      <li><strong>Severability &amp; waiver.</strong> If a provision is unenforceable, the rest remains in effect. Failure to enforce a provision is not a waiver.</li>
-      <li><strong>Contact.</strong> Questions about these Terms: <a href="mailto:admin@jayisaacai.com">admin@jayisaacai.com</a>.</li>
-    </ul>
-
   </div>
 </div>
 
+<button class="totop" id="totop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
 <!-- nav/footer injected by JS -->
-<script type="module" src="./nav.js"></script>
-<script type="module" src="./footer.js"></script>
+<script type="module" src="/nav.js"></script>
+<script type="module" src="/footer.js"></script>
+
+<script>
+(function () {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const bar   = document.getElementById('prog');
+  const top   = document.getElementById('totop');
+  const secs  = Array.from(document.querySelectorAll('.sec'));
+  const links = Array.from(document.querySelectorAll('.toc a'));
+  const map   = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+
+  let ticking = false;
+  function update() {
+    const doc = document.documentElement;
+
+    /* reading progress */
+    const max = doc.scrollHeight - doc.clientHeight;
+    bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(doc.scrollTop / max, 1) : 0) + ')';
+
+    /* back to top */
+    top.classList.toggle('show', doc.scrollTop > 600);
+
+    /* scroll spy: last section whose top has passed the reading line */
+    let current = secs[0];
+    for (const s of secs) {
+      if (s.getBoundingClientRect().top <= 140) current = s;
+    }
+    links.forEach(a => a.classList.remove('active'));
+    const active = map.get(current.id);
+    if (active) active.classList.add('active');
+
+    ticking = false;
+  }
+
+  addEventListener('scroll', () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }, { passive: true });
+  addEventListener('resize', update, { passive: true });
+  update();
+
+  top.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+  });
+})();
+</script>
 </body>
 </html>

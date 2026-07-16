@@ -12,95 +12,203 @@
 <meta name="description" content="How sales teams use JAYISAAC AI to build pipeline — territory cold calling, agency prospecting, and CRM enrichment workflows.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
 <style>
+/* design system — matches index.html */
 :root{
-  --orange:#6366F1;--orange-bright:#818CF8;--orange-dark:#A84B12;--orange-soft:#FBEEE4;
-  --charcoal:#1C1F24;--charcoal-deep:#141619;
-  --ink:#1A2433;--slate:#5B6878;--mist:#8C97A6;
-  --line:#E5E9EF;--bg:#F7F8FA;--white:#fff;
-  --blue:#2563EB;--blue-soft:#E9F0FE;--green:#1B8A5A;--green-soft:#E5F4EC;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--ink);background:var(--white);font-size:15px;line-height:1.7}
-a{color:var(--orange);text-decoration:none}
-a:hover{text-decoration:underline}
-.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  --paper:      #FAF7F1;
+  --ink:        #1C1822;
+  --ink-soft:   #4E4856;
+  --ink-faint:  #8E8896;
+  --line:       #E9E2D6;
+  --field-line: #D9D8E3;
+  --cream:      #F4EFE5;
+  --cream-line: #EAE3D4;
 
+  --blue:       #4F46E5;
+  --blue-h:     #4338CA;
+  --blue-lt:    #818CF8;
+  --blue-soft:  #EEF0FF;
+  --blue-line:  #C9CDFA;
+
+  --pur:        #7C3AED;
+  --pur-soft:   #F4EEFE;
+  --pur-line:   #DDCEFA;
+
+  --cyan:       #0E92A8;
+  --cyan-soft:  #E6F7FA;
+  --cyan-line:  #B6E6EF;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box }
+
+body{
+  font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color:var(--ink); background:var(--paper);
+  font-size:15.5px; line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+a{ color:var(--blue); text-decoration:none; font-weight:500 }
+a:hover{ text-decoration:underline }
+a:focus-visible{ outline:3px solid var(--blue); outline-offset:3px; border-radius:6px }
+.wrap{ max-width:1080px; margin:0 auto; padding:0 24px }
+
+/* ── hero ── */
 .page-hero{
-  background:radial-gradient(800px 400px at 90% -20%, rgba(99,102,241,.22), transparent 60%),var(--charcoal-deep);
-  color:#fff;padding:84px 0 64px;
+  background:
+    radial-gradient(760px 380px at 88% -25%, rgba(79,70,229,.11), transparent 62%),
+    radial-gradient(600px 340px at 4% 120%, rgba(124,58,237,.07), transparent 58%),
+    #FFFCF6;
+  border-bottom:1px solid var(--line);
+  padding:80px 0 64px;
+}
+.page-hero .wrap{
+  display:grid; grid-template-columns:1.15fr 1fr;
+  gap:clamp(2.5rem, 5vw, 3.5rem);
+  align-items:center;
 }
 .eyebrow{
-  display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
-  color:var(--orange-bright);border:1px solid rgba(129,140,248,.35);background:rgba(129,140,248,.1);
-  padding:6px 14px;border-radius:20px;margin-bottom:18px;
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:.7rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--blue); margin-bottom:16px;
 }
-.page-hero h1{font-size:clamp(30px,5vw,44px);font-weight:800;letter-spacing:-.02em;max-width:720px}
-.page-hero p{color:#A8B0BB;font-size:17px;max-width:600px;margin-top:14px}
+.eyebrow::before{
+  content:''; width:8px; height:8px; border-radius:2px;
+  background:var(--blue); flex-shrink:0;
+}
+.page-hero h1{
+  font-family:'Newsreader', Georgia, serif;
+  font-size:clamp(2.2rem, 5vw, 3.2rem);
+  font-weight:500; letter-spacing:-.015em; line-height:1.1;
+  color:var(--ink); max-width:720px;
+}
+.page-hero p{ color:var(--ink-soft); font-size:1rem; max-width:600px; margin-top:14px }
+.page-hero-img{
+  border-radius:14px; overflow:hidden;
+  border:1px solid var(--line);
+  box-shadow:0 10px 20px rgba(28,24,34,.04), 0 34px 70px rgba(79,70,229,.12);
+  background:var(--cream);
+}
+.page-hero-img img{ width:100%; display:block }
 
-.studies{padding:64px 0 24px}
+/* ── studies ── */
+.studies{ padding:66px 0 24px }
 .study{
-  display:grid;grid-template-columns:1fr 300px;gap:32px;
-  background:var(--white);border:1px solid var(--line);border-radius:18px;
-  padding:36px;margin-bottom:24px;align-items:start;
+  display:grid; grid-template-columns:1fr 300px; gap:32px;
+  background:#fff; border:1px solid var(--line); border-radius:14px;
+  padding:34px; margin-bottom:22px; align-items:start;
+  transition:border-color .2s, box-shadow .2s;
 }
-@media(max-width:820px){.study{grid-template-columns:1fr}}
+.s-blue:hover{ border-color:var(--blue-line); box-shadow:0 16px 40px rgba(79,70,229,.07) }
+.s-pur:hover{ border-color:var(--pur-line); box-shadow:0 16px 40px rgba(124,58,237,.07) }
+.s-cyan:hover{ border-color:var(--cyan-line); box-shadow:0 16px 40px rgba(14,146,168,.07) }
+
 .tag{
-  display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;
-  padding:5px 12px;border-radius:7px;margin-bottom:14px;
+  display:inline-block;
+  font-size:.66rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em;
+  padding:5px 12px; border-radius:999px; margin-bottom:14px;
 }
-.tag.t1{background:var(--orange-soft);color:var(--orange)}
-.tag.t2{background:var(--blue-soft);color:var(--blue)}
-.tag.t3{background:var(--green-soft);color:var(--green)}
-.study h2{font-size:clamp(20px,2.8vw,26px);font-weight:800;letter-spacing:-.01em;margin-bottom:14px}
-.study .body p{font-size:14.5px;color:var(--slate);margin-bottom:13px}
-.study .body strong{color:var(--ink)}
+.s-blue .tag{ background:var(--blue-soft); color:var(--blue); border:1px solid var(--blue-line) }
+.s-pur  .tag{ background:var(--pur-soft);  color:var(--pur);  border:1px solid var(--pur-line) }
+.s-cyan .tag{ background:var(--cyan-soft); color:var(--cyan); border:1px solid var(--cyan-line) }
+
+.study h2{
+  font-size:clamp(1.25rem, 2.8vw, 1.6rem);
+  font-weight:600; letter-spacing:-.025em; line-height:1.2;
+  color:var(--ink); margin-bottom:14px;
+}
+.study .body p{ font-size:.9rem; color:var(--ink-soft); margin-bottom:13px; line-height:1.75 }
+.study .body strong{ color:var(--ink); font-weight:600 }
+
+/* metrics rail */
 .metrics{
-  background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:22px;
-  display:flex;flex-direction:column;gap:18px;
+  background:var(--cream); border:1px solid var(--cream-line); border-radius:12px;
+  padding:22px; display:flex; flex-direction:column; gap:18px;
 }
-.metric .n{font-size:27px;font-weight:800;color:var(--orange);letter-spacing:-.02em;line-height:1.1}
-.metric .l{font-size:12px;font-weight:600;color:var(--slate);margin-top:3px}
-.workflow{
-  margin-top:6px;padding-top:16px;border-top:1px solid var(--line);
-}
-.workflow h4{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--mist);margin-bottom:8px}
-.workflow ol{padding-left:18px}
-.workflow li{font-size:12.5px;color:var(--slate);margin-bottom:5px}
+.metric .n{ font-size:1.6rem; font-weight:600; letter-spacing:-.025em; line-height:1.15 }
+.s-blue .metric .n{ color:var(--blue) }
+.s-pur  .metric .n{ color:var(--pur) }
+.s-cyan .metric .n{ color:var(--cyan) }
+.metric .l{ font-size:.75rem; font-weight:500; color:var(--ink-soft); margin-top:4px; line-height:1.5 }
 
-.disclosure{
-  max-width:1080px;margin:0 auto;padding:0 24px 56px;
+/* workflow */
+.workflow{ margin-top:6px; padding-top:16px; border-top:1px solid var(--line) }
+.workflow h4{
+  font-size:.66rem; font-weight:700; text-transform:uppercase; letter-spacing:.12em;
+  color:var(--ink-faint); margin-bottom:10px;
 }
+.workflow ol{ list-style:none; counter-reset:step; display:flex; flex-direction:column; gap:8px }
+.workflow li{
+  counter-increment:step;
+  position:relative; padding-left:26px;
+  font-size:.82rem; color:var(--ink-soft); line-height:1.55;
+}
+.workflow li::before{
+  content:counter(step);
+  position:absolute; left:0; top:.05em;
+  width:17px; height:17px; border-radius:5px;
+  display:inline-flex; align-items:center; justify-content:center;
+  font-size:.6rem; font-weight:700;
+}
+.s-blue .workflow li::before{ background:var(--blue-soft); color:var(--blue); border:1px solid var(--blue-line) }
+.s-pur  .workflow li::before{ background:var(--pur-soft);  color:var(--pur);  border:1px solid var(--pur-line) }
+.s-cyan .workflow li::before{ background:var(--cyan-soft); color:var(--cyan); border:1px solid var(--cyan-line) }
+
+/* ── disclosure ── */
+.disclosure{ max-width:1080px; margin:0 auto; padding:0 24px 20px }
 .disclosure .box{
-  background:var(--bg);border:1px solid var(--line);border-radius:12px;
-  padding:16px 20px;font-size:12.5px;color:var(--slate);
+  background:var(--cream); border:1px solid var(--cream-line);
+  border-left:3px solid var(--ink-faint);
+  border-radius:8px;
+  padding:17px 20px; font-size:.8rem; color:var(--ink-soft); line-height:1.7;
 }
 
-.cta-band{
-  background:radial-gradient(700px 350px at 10% 120%, rgba(99,102,241,.25), transparent 60%),var(--charcoal);
-  color:#fff;text-align:center;padding:68px 24px;
+/* ── closing card (replaces the old dark band) ── */
+.cs-card{
+  max-width:1080px; margin:0 auto 90px;
+  background:var(--cream); border:1px solid var(--cream-line);
+  border-radius:12px;
+  padding:34px 30px;
+  display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
 }
-.cta-band h2{font-size:clamp(22px,3vw,30px);font-weight:800;margin-bottom:8px}
-.cta-band p{color:#A8B0BB;margin-bottom:24px}
+.cs-inner{ padding:0 24px }
+.cs-card h2{
+  font-family:'Newsreader', Georgia, serif;
+  font-size:1.5rem; font-weight:500; letter-spacing:-.012em; color:var(--ink);
+  margin-bottom:5px;
+}
+.cs-card p{ font-size:.88rem; color:var(--ink-soft) }
+.cs-btns{ display:flex; gap:10px; flex-wrap:wrap }
 .btn{
-  display:inline-block;background:var(--orange);color:#fff;font-weight:800;font-size:14.5px;
-  padding:13px 28px;border-radius:10px;box-shadow:0 6px 20px rgba(99,102,241,.35);transition:.15s;
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:.92rem; font-weight:600;
+  padding:13px 26px; border-radius:9px;
+  white-space:nowrap;
+  transition:background .16s, border-color .16s, transform .12s, box-shadow .16s;
 }
-.btn:hover{background:var(--orange-dark);text-decoration:none}
-.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.25);box-shadow:none;margin-left:10px}
-.btn.ghost:hover{border-color:var(--orange-bright);color:var(--orange-bright)}
+.btn.solid{
+  background:var(--blue); color:#fff; border:1px solid var(--blue);
+  box-shadow:0 8px 20px rgba(79,70,229,.26);
+}
+.btn.solid:hover{ background:var(--blue-h); border-color:var(--blue-h); text-decoration:none; transform:translateY(-1px); box-shadow:0 10px 24px rgba(79,70,229,.32) }
+.btn.ghost{ background:#fff; color:var(--ink); border:1px solid var(--field-line) }
+.btn.ghost:hover{ border-color:var(--ink); text-decoration:none }
 
-/* hero image layout — image right of text */
-.page-hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
-.page-hero-img{border-radius:18px;overflow:hidden;box-shadow:0 28px 80px rgba(99,102,241,.18),0 0 0 1px rgba(255,255,255,.08);transform:perspective(1200px) rotateY(-3deg);transition:transform .4s}
-.page-hero-img:hover{transform:perspective(1200px) rotateY(0deg)}
-.page-hero-img img{width:100%;display:block}
 @media(max-width:900px){
-  .page-hero .wrap{grid-template-columns:1fr;gap:32px}
-  .page-hero-img{transform:none;max-width:540px;margin:0 auto}
+  .page-hero .wrap{ grid-template-columns:1fr; gap:2rem }
+  .page-hero-img{ max-width:540px; margin:0 auto; width:100% }
 }
-
+@media(max-width:820px){ .study{ grid-template-columns:1fr } }
+@media(max-width:620px){
+  .page-hero{ padding:56px 0 48px }
+  .studies{ padding:46px 0 20px }
+  .study{ padding:24px 22px }
+  .cs-card{ flex-direction:column; align-items:flex-start }
+  .cs-btns{ width:100% }
+  .btn{ flex:1; justify-content:center }
+}
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{ animation:none !important; transition:none !important }
+}
 </style>
 </head>
 <body>
@@ -110,12 +218,12 @@ a:hover{text-decoration:underline}
 <header class="page-hero">
   <div class="wrap">
     <div>
-    <span class="eyebrow">Case Studies</span>
-    <h1>How teams turn the database into pipeline</h1>
-    <p>Three workflows our platform is built around — from solo cold callers to agencies running multi-market campaigns.</p>
-  </div>
+      <span class="eyebrow">Case Studies</span>
+      <h1>How teams turn the database into pipeline</h1>
+      <p>Three workflows our platform is built around — from solo cold callers to agencies running multi-market campaigns.</p>
+    </div>
     <div class="page-hero-img">
-      <img src="/public/funnel-3d.jpg" alt="Customer success funnel" loading="lazy">
+      <img src="/public/funnel-3d.jpg" alt="Customer success funnel" loading="lazy" decoding="async">
     </div>
   </div>
 </header>
@@ -123,9 +231,9 @@ a:hover{text-decoration:underline}
 <div class="studies">
   <div class="wrap">
 
-    <div class="study">
+    <div class="study s-blue">
       <div class="body">
-        <span class="tag t1">Cold Calling · SaaS Sales</span>
+        <span class="tag">Cold Calling · SaaS Sales</span>
         <h2>Building a trades cold-call machine across Western Canada</h2>
         <p>A small SaaS team selling software to trades businesses needed call lists for Alberta and Saskatchewan — owners and GMs of plumbing, HVAC, and electrical companies, not info@ inboxes and dead numbers.</p>
         <p><strong>The old way:</strong> reps spent the first hour of every day scraping directories and guessing at decision-makers — burning selling time on data entry, with numbers that rang to nowhere.</p>
@@ -147,9 +255,9 @@ a:hover{text-decoration:underline}
       </div>
     </div>
 
-    <div class="study">
+    <div class="study s-pur">
       <div class="body">
-        <span class="tag t2">Agency · Multi-Market</span>
+        <span class="tag">Agency · Multi-Market</span>
         <h2>An agency running outreach for clients in six cities at once</h2>
         <p>A marketing agency selling local SEO and ads packages needed separate prospect lists per client vertical, per city — roofing in Denver, landscaping in Surrey, movers in Winnipeg — refreshed every campaign cycle.</p>
         <p><strong>The old way:</strong> buying one-off scraped lists of wildly inconsistent quality from freelancers, with no idea what was verified and no recourse when half a list bounced.</p>
@@ -171,9 +279,9 @@ a:hover{text-decoration:underline}
       </div>
     </div>
 
-    <div class="study">
+    <div class="study s-cyan">
       <div class="body">
-        <span class="tag t3">CRM Enrichment · Local Services</span>
+        <span class="tag">CRM Enrichment · Local Services</span>
         <h2>Turning a dusty CRM into a working pipeline</h2>
         <p>A commercial services company had years of half-filled CRM entries — company names with no contact person, generic emails, disconnected numbers. Their "pipeline" was an archaeology site.</p>
         <p><strong>The old way:</strong> reps googled each account one at a time before calling, often reaching nobody and logging nothing.</p>
@@ -204,15 +312,21 @@ a:hover{text-decoration:underline}
   </div>
 </div>
 
-<div class="cta-band">
-  <h2>Run your own case study</h2>
-  <p>100 free credits. Search your territory and judge the data on your own market.</p>
-  <a class="btn" href="login.html">Start Free Trial</a>
-  <a class="btn ghost" href="contact.html">Talk to Us</a>
+<div class="cs-inner">
+  <div class="cs-card">
+    <div>
+      <h2>Run your own case study</h2>
+      <p>100 free credits. Search your territory and judge the data on your own market.</p>
+    </div>
+    <div class="cs-btns">
+      <a class="btn solid" href="/login.html">Start Free Trial</a>
+      <a class="btn ghost" href="/contact.html">Talk to Us</a>
+    </div>
+  </div>
 </div>
 
 <!-- nav/footer injected by JS -->
-<script type="module" src="./nav.js"></script>
-<script type="module" src="./footer.js"></script>
+<script type="module" src="/nav.js"></script>
+<script type="module" src="/footer.js"></script>
 </body>
 </html>

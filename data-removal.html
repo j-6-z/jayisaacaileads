@@ -12,78 +12,187 @@
 <link rel="manifest" href="/my-favicon/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script type="module" src="./nav.js"></script>
-<script type="module" src="./footer.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<script type="module" src="/nav.js"></script>
+<script type="module" src="/footer.js"></script>
 <style>
+/* design system — matches index.html */
 :root{
-  --orange:#6366F1;--ob:#818CF8;--od:#A84B12;--os:#FBEEE4;
-  --charcoal:#1C1F24;--charcoal-deep:#141619;
-  --ink:#1A2433;--slate:#5B6878;--mist:#8C97A6;
-  --line:#E5E9EF;--bg:#F7F8FA;--white:#fff;
-  --green:#1B8A5A;--green-soft:#E5F4EC;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--ink);background:var(--white);font-size:15px;line-height:1.7}
-a{color:var(--orange);text-decoration:none}
-a:hover{text-decoration:underline}
-.wrap{max-width:680px;margin:0 auto;padding:0 24px}
+  --paper:      #FAF7F1;
+  --ink:        #1C1822;
+  --ink-soft:   #4E4856;
+  --ink-faint:  #8E8896;
+  --line:       #E9E2D6;
+  --field-line: #D9D8E3;
+  --cream:      #F4EFE5;
+  --cream-line: #EAE3D4;
 
+  --blue:       #4F46E5;
+  --blue-h:     #4338CA;
+  --blue-lt:    #818CF8;
+  --blue-soft:  #EEF0FF;
+  --blue-line:  #C9CDFA;
+  --pur:        #7C3AED;
+
+  --green:      #15803D;
+  --green-soft: #E7F6EC;
+  --green-line: #BFE3CD;
+  --red:        #DC2626;
+  --red-soft:   #FEE2E2;
+  --red-line:   #FECACA;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box }
+
+body{
+  font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color:var(--ink); background:var(--paper);
+  font-size:15.5px; line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+a{ color:var(--blue); text-decoration:none; font-weight:500 }
+a:hover{ text-decoration:underline }
+button{ font-family:inherit; cursor:pointer }
+input, textarea{ font-family:inherit }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+  outline:3px solid var(--blue); outline-offset:3px; border-radius:6px;
+}
+.wrap{ max-width:680px; margin:0 auto; padding:0 24px }
+
+/* ── hero ── */
 .page-hero{
-  background:radial-gradient(600px 300px at 80% -20%,rgba(99,102,241,.18),transparent 60%),var(--charcoal-deep);
-  color:#fff;padding:80px 0 68px;
+  background:
+    radial-gradient(660px 340px at 84% -24%, rgba(79,70,229,.11), transparent 62%),
+    radial-gradient(540px 300px at 4% 120%, rgba(124,58,237,.07), transparent 58%),
+    #FFFCF6;
+  border-bottom:1px solid var(--line);
+  padding:76px 0 60px;
 }
-.page-hero h1{font-size:clamp(26px,4vw,36px);font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
-.page-hero p{color:#A8B0BB;font-size:16px;max-width:540px}
-
-section{padding:48px 0 64px}
-
-/* info block */
-.info-block{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:20px 24px;margin-bottom:28px;font-size:14px;color:var(--slate)}
-.info-block strong{color:var(--ink)}
-
-/* form */
-.form-card{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:28px;box-shadow:0 8px 30px rgba(14,27,44,.06)}
-.field{margin-bottom:16px}
-.field label{display:block;font-size:.78rem;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px}
-.field input,.field textarea{
-  width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:9px;
-  font-size:14px;font-family:inherit;background:var(--bg);outline:none;transition:.15s;color:var(--ink)
+.eyebrow{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:.7rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--blue); margin-bottom:16px;
 }
-.field input:focus,.field textarea:focus{border-color:var(--orange);box-shadow:0 0 0 3px var(--os);background:#fff}
-.field textarea{min-height:100px;resize:vertical}
-.field .hint{font-size:.72rem;color:var(--mist);margin-top:4px}
+.eyebrow::before{
+  content:''; width:8px; height:8px; border-radius:2px;
+  background:var(--blue); flex-shrink:0;
+}
+.page-hero h1{
+  font-family:'Newsreader', Georgia, serif;
+  font-size:clamp(2rem, 4.6vw, 2.9rem);
+  font-weight:500; letter-spacing:-.015em; line-height:1.1;
+  color:var(--ink); margin-bottom:12px;
+}
+.page-hero p{ color:var(--ink-soft); font-size:.98rem; max-width:540px }
+
+section{ padding:50px 0 74px }
+
+/* ── info block ── */
+.info-block{
+  background:var(--cream); border:1px solid var(--cream-line);
+  border-left:3px solid var(--blue);
+  border-radius:8px;
+  padding:18px 22px; margin-bottom:26px;
+  font-size:.88rem; color:var(--ink-soft); line-height:1.75;
+}
+.info-block strong{ color:var(--ink); font-weight:600 }
+
+/* ── form ── */
+.form-card{
+  background:#fff; border:1px solid var(--line); border-radius:14px;
+  padding:28px;
+  box-shadow:0 6px 12px rgba(19,18,31,.03), 0 24px 60px rgba(19,18,31,.07);
+}
+.field{ margin-bottom:17px }
+.field label{
+  display:block; font-size:.8rem; font-weight:600; color:var(--ink); margin-bottom:6px;
+}
+.field label em{ font-style:normal; color:var(--blue) }
+.field input, .field textarea{
+  width:100%; padding:12px 14px;
+  border:1px solid var(--field-line); border-radius:9px;
+  font-size:.92rem; background:#fff; color:var(--ink);
+  outline:none; transition:border-color .15s, box-shadow .15s;
+}
+.field input:focus, .field textarea:focus{
+  border-color:var(--blue); box-shadow:0 0 0 3px var(--blue-soft);
+}
+.field input::placeholder, .field textarea::placeholder{ color:var(--ink-faint) }
+.field textarea{ min-height:100px; resize:vertical; line-height:1.6 }
+.field .hint{ font-size:.74rem; color:var(--ink-faint); margin-top:6px; line-height:1.5 }
 
 .submit-btn{
-  width:100%;background:var(--orange);color:#fff;border:none;padding:14px;border-radius:10px;
-  font-size:15px;font-weight:800;font-family:inherit;cursor:pointer;
-  box-shadow:0 6px 20px rgba(99,102,241,.3);transition:.15s;
+  width:100%;
+  background:var(--blue); color:#fff; border:1px solid var(--blue);
+  padding:14px; border-radius:9px;
+  font-size:.95rem; font-weight:600; font-family:inherit;
+  box-shadow:0 8px 20px rgba(79,70,229,.26);
+  transition:background .16s, transform .12s, box-shadow .16s;
 }
-.submit-btn:hover{background:var(--od)}
-.submit-btn:disabled{opacity:.6;cursor:not-allowed}
+.submit-btn:hover{ background:var(--blue-h); border-color:var(--blue-h); transform:translateY(-1px); box-shadow:0 10px 24px rgba(79,70,229,.32) }
+.submit-btn:active{ transform:translateY(0) }
+.submit-btn:disabled{ opacity:.6; cursor:wait; transform:none }
 
-/* success state */
+/* ── success ── */
 .success-card{
-  background:var(--green-soft);border:1px solid rgba(27,138,90,.2);border-radius:16px;
-  padding:36px 28px;text-align:center;display:none;
+  background:var(--green-soft); border:1px solid var(--green-line);
+  border-radius:14px;
+  padding:36px 28px; text-align:center; display:none;
 }
-.success-card.show{display:block}
-.success-card svg{width:48px;height:48px;stroke:var(--green);margin-bottom:12px}
-.success-card h2{font-size:1.2rem;font-weight:800;color:var(--green);margin-bottom:8px}
-.success-card p{font-size:.9rem;color:var(--slate)}
+.success-card.show{ display:block }
+.success-card .tick{
+  width:52px; height:52px; border-radius:50%; margin:0 auto 14px;
+  background:#fff; border:1.5px solid var(--green-line);
+  display:flex; align-items:center; justify-content:center;
+}
+.success-card .tick svg{
+  width:24px; height:24px; stroke:var(--green); fill:none;
+  stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round;
+}
+.success-card h2{ font-size:1.15rem; font-weight:700; letter-spacing:-.015em; color:var(--green); margin-bottom:8px }
+.success-card p{ font-size:.88rem; color:var(--ink-soft); line-height:1.7 }
+.success-card strong{ color:var(--ink); font-weight:600 }
 
-/* error */
-.error-msg{background:#FCEBEA;border:1px solid #F0C5C0;color:#C0392B;border-radius:9px;padding:10px 14px;font-size:.85rem;margin-bottom:14px;display:none}
-.error-msg.show{display:block}
+/* ── error ── */
+.error-msg{
+  background:var(--red-soft); border:1px solid var(--red-line); color:var(--red);
+  border-radius:9px; padding:11px 14px;
+  font-size:.84rem; font-weight:600; line-height:1.6;
+  margin-bottom:16px; display:none;
+}
+.error-msg.show{ display:block }
 
-/* rights list */
-.rights{margin-top:28px}
-.rights h3{font-size:.9rem;font-weight:800;margin-bottom:12px}
-.rights-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.right-item{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px;font-size:.82rem}
-.right-item strong{display:block;margin-bottom:2px;color:var(--ink)}
-.right-item span{color:var(--slate)}
-@media(max-width:600px){.rights-grid{grid-template-columns:1fr}}
+/* ── rights ── */
+.rights{ margin-top:30px }
+.rights h3{ font-size:.95rem; font-weight:700; letter-spacing:-.01em; margin-bottom:14px; color:var(--ink) }
+.rights-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px }
+.right-item{
+  position:relative;
+  background:#fff; border:1px solid var(--line); border-radius:10px;
+  padding:14px 14px 14px 38px;
+  font-size:.82rem; line-height:1.55;
+  transition:border-color .2s;
+}
+.right-item:hover{ border-color:var(--blue-line) }
+.right-item::before{
+  content:''; position:absolute; left:14px; top:16px;
+  width:16px; height:16px; border-radius:50%;
+  background-color:var(--blue);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:center; background-size:8px;
+}
+.right-item strong{ display:block; margin-bottom:3px; color:var(--ink); font-weight:600 }
+.right-item span{ color:var(--ink-soft) }
+.rights-note{ margin-top:18px; font-size:.8rem; color:var(--ink-faint); line-height:1.7 }
+
+@media(max-width:600px){
+  .rights-grid{ grid-template-columns:1fr }
+  .page-hero{ padding:56px 0 46px }
+  section{ padding:38px 0 62px }
+  .form-card{ padding:24px 20px }
+}
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{ animation:none !important; transition:none !important }
+}
 </style>
 </head>
 <body>
@@ -92,6 +201,7 @@ section{padding:48px 0 64px}
 
 <header class="page-hero">
   <div class="wrap">
+    <span class="eyebrow">Privacy</span>
     <h1>Remove My Data</h1>
     <p>Request removal of your personal or business information from the JAYISAAC AI database. No account needed, no hoops.</p>
   </div>
@@ -107,16 +217,16 @@ section{padding:48px 0 64px}
     <div class="form-card" id="formCard">
       <div class="error-msg" id="errorMsg"></div>
       <div class="field">
-        <label>Email Address <span style="color:var(--orange)">*</span></label>
-        <input type="email" id="drEmail" placeholder="The email associated with your data" required>
+        <label for="drEmail">Email Address <em>*</em></label>
+        <input type="email" id="drEmail" placeholder="The email associated with your data" autocomplete="email" required>
         <div class="hint">We'll search our database for records matching this email.</div>
       </div>
       <div class="field">
-        <label>Full Name</label>
-        <input type="text" id="drName" placeholder="Your name (optional, helps us locate records faster)">
+        <label for="drName">Full Name</label>
+        <input type="text" id="drName" placeholder="Your name (optional, helps us locate records faster)" autocomplete="name">
       </div>
       <div class="field">
-        <label>Additional Details</label>
+        <label for="drReason">Additional Details</label>
         <textarea id="drReason" placeholder="Any additional context — e.g. specific data you want removed, your company name, etc. (optional)"></textarea>
       </div>
       <button class="submit-btn" id="submitBtn" onclick="submitRemoval()">Submit Removal Request</button>
@@ -124,7 +234,7 @@ section{padding:48px 0 64px}
 
     <!-- success state (hidden until submission) -->
     <div class="success-card" id="successCard">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+      <div class="tick"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
       <h2>Request Received</h2>
       <p>We've logged your data removal request. You'll receive a confirmation email at <strong id="confirmEmail"></strong> once your data has been removed. Most requests are processed within 5 business days.</p>
     </div>
@@ -138,7 +248,7 @@ section{padding:48px 0 64px}
         <div class="right-item"><strong>Right to Correction</strong><span>Request corrections to inaccurate data.</span></div>
         <div class="right-item"><strong>Right to Opt-Out</strong><span>Opt out of having your data included in our B2B database.</span></div>
       </div>
-      <p style="margin-top:16px;font-size:.82rem;color:var(--mist)">Protected under PIPEDA (Canada), GDPR (EU), CCPA (California), and applicable provincial privacy legislation. For any questions, email <a href="mailto:admin@jayisaacai.com">admin@jayisaacai.com</a>.</p>
+      <p class="rights-note">Protected under PIPEDA (Canada), GDPR (EU), CCPA (California), and applicable provincial privacy legislation. For any questions, email <a href="mailto:admin@jayisaacai.com">admin@jayisaacai.com</a>.</p>
     </div>
   </div>
 </section>

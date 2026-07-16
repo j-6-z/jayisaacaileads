@@ -3,132 +3,513 @@
 <head>
   <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
   <script defer src="/_vercel/insights/script.js"></script>
+  <link rel="icon" href="/my-favicon/favicon.ico" sizes="any">
+  <link rel="icon" href="/my-favicon/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/my-favicon/favicon-96x96.png" type="image/png" sizes="96x96">
+  <link rel="apple-touch-icon" href="/my-favicon/apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="/my-favicon/site.webmanifest">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>For Security Teams — Cybersecurity | JAYISAAC AI</title>
   <meta name="description" content="Force-multiply your security team. AI handles monitoring, triage, and first response so your people focus on what matters." />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet" />
   <script type="module" src="/nav.js"></script>
   <script type="module" src="/footer.js"></script>
   <style>
     *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
-    :root{ --cy:#0891B2; --cyh:#06B6D4; --cyl:#22D3EE; --bg:#FFFFFF; --ink:#111827; --mute:#6B7280; --line:#E5E7EB; --dark:#0A0F14; }
-    html{ scroll-behavior:smooth; background:#0A0F14; }
-    body{ background:var(--bg); color:var(--ink); font-family:'Plus Jakarta Sans',sans-serif; font-size:16px; line-height:1.6; overflow-x:hidden; }
+
+    /* design system — matches index.html; cyan is the Cybersecurity accent */
+    :root{
+      --paper:      #FAF7F1;
+      --ink:        #1C1822;
+      --ink-soft:   #4E4856;
+      --ink-faint:  #8E8896;
+      --line:       #E9E2D6;
+      --field-line: #D9D8E3;
+      --cream:      #F4EFE5;
+      --cream-line: #EAE3D4;
+
+      --cy:         #0E92A8;
+      --cyh:        #0B7C8F;
+      --cy-soft:    #E6F7FA;
+      --cy-line:    #B6E6EF;
+
+      --blue:       #4F46E5;
+      --pur:        #7C3AED;
+      --green:      #15803D;
+      --amber:      #A16207;
+      --red:        #DC2626;
+    }
+    html{ scroll-behavior:smooth; }
+    body{
+      background:var(--paper); color:var(--ink);
+      font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+      font-size:16px; line-height:1.6; overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+    }
     a{ color:inherit; text-decoration:none; }
+    a:focus-visible{ outline:3px solid var(--cy); outline-offset:3px; border-radius:6px; }
 
-    /* hero */
-    .ph{ position:relative; background:var(--dark); color:#EAF6F8; text-align:center; padding:96px 5vw 80px; overflow:hidden; }
-    .ph::after{ content:''; position:absolute; inset:0; pointer-events:none;
-      background:radial-gradient(ellipse 60% 55% at 70% 0%, rgba(34,211,238,.20), transparent 60%),
-                 radial-gradient(ellipse 50% 45% at 10% 100%, rgba(8,145,178,.16), transparent 55%),
-                 linear-gradient(to bottom, transparent 70%, #0A0F14 100%); }
-    .ph > *{ position:relative; z-index:1; }
-    .eyebrow{ display:inline-flex; align-items:center; gap:.5rem; font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:#22D3EE; border:1px solid rgba(34,211,238,.35); background:rgba(34,211,238,.1); padding:6px 16px; border-radius:100px; margin-bottom:22px; }
-    .eyebrow .pip{ width:6px; height:6px; background:#22D3EE; border-radius:50%; box-shadow:0 0 8px #22D3EE; }
-    .ph h1{ font-size:clamp(2.1rem,5vw,3.4rem); font-weight:800; letter-spacing:-1px; line-height:1.08; max-width:760px; margin:0 auto 1.1rem; }
-    .ph h1 .g{ background:linear-gradient(120deg,#0891B2,#22D3EE,#67E8F9); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .ph p{ color:#8FA3AB; font-size:1.05rem; max-width:540px; margin:0 auto 2rem; line-height:1.75; }
+    /* ── hero ── */
+    .ph{
+      position:relative; text-align:center; padding:96px 5vw 84px; overflow:hidden;
+      background:
+        radial-gradient(ellipse 60% 55% at 72% -5%, rgba(14,146,168,.12), transparent 62%),
+        radial-gradient(ellipse 50% 45% at 8% 105%, rgba(79,70,229,.07), transparent 58%),
+        #FFFCF6;
+      border-bottom:1px solid var(--line);
+    }
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.15em;
+      color:var(--cy); margin-bottom:20px;
+    }
+    .eyebrow .pip{ width:8px; height:8px; background:var(--cy); border-radius:2px; animation:pip 2s infinite; }
+    @keyframes pip{ 0%,100%{opacity:1} 50%{opacity:.25} }
+    .ph h1{
+      font-family:'Newsreader',Georgia,serif;
+      font-size:clamp(2.2rem,5vw,3.4rem); font-weight:500;
+      letter-spacing:-.018em; line-height:1.08;
+      max-width:780px; margin:0 auto 1.1rem; color:var(--ink);
+    }
+    .ph h1 .g{ color:var(--cy); }
+    .ph > p{ color:var(--ink-soft); font-size:1.02rem; max-width:560px; margin:0 auto 2rem; line-height:1.75; }
     .btns{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
-    .btn-p{ background:linear-gradient(135deg,#0891B2,#22D3EE); color:#04262B; font-weight:800; font-size:.9rem; padding:13px 28px; border-radius:10px; box-shadow:0 8px 28px rgba(34,211,238,.35); transition:.2s; }
-    .btn-p:hover{ transform:translateY(-2px); box-shadow:0 14px 36px rgba(34,211,238,.5); }
-    .btn-g{ color:#EAF6F8; font-weight:700; font-size:.9rem; padding:13px 28px; border-radius:10px; border:1px solid rgba(255,255,255,.2); transition:.2s; }
-    .btn-g:hover{ border-color:#22D3EE; color:#22D3EE; }
+    .btn-p{
+      display:inline-flex; align-items:center; gap:8px;
+      background:var(--cy); color:#fff; border:1px solid var(--cy);
+      font-weight:600; font-size:.93rem; padding:14px 28px; border-radius:9px;
+      box-shadow:0 8px 22px rgba(14,146,168,.26);
+      transition:background .16s, transform .12s, box-shadow .16s;
+    }
+    .btn-p:hover{ background:var(--cyh); border-color:var(--cyh); transform:translateY(-2px); box-shadow:0 12px 28px rgba(14,146,168,.34); }
+    .btn-p svg{ width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; transition:transform .15s; }
+    .btn-p:hover svg{ transform:translateX(3px); }
+    .btn-g{
+      display:inline-flex; align-items:center;
+      background:#fff; color:var(--ink); font-weight:600; font-size:.93rem;
+      padding:14px 28px; border-radius:9px; border:1px solid var(--field-line);
+      transition:border-color .16s;
+    }
+    .btn-g:hover{ border-color:var(--ink); }
 
-    /* generic section */
-    .sec{ padding:80px 5vw; }
-    .sec.alt{ background:#F7FAFB; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+    /* ── generic section ── */
+    .sec{ padding:84px 5vw; }
+    .sec.alt{ background:#FFFCF6; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
     .wrap{ max-width:1080px; margin:0 auto; }
-    .lead{ text-align:center; max-width:620px; margin:0 auto 52px; }
-    .lead .kick{ display:inline-flex; align-items:center; gap:.4rem; font-size:.68rem; font-weight:700; color:var(--cy); text-transform:uppercase; letter-spacing:.1em; margin-bottom:12px; }
-    .lead .kick .pip{ width:5px; height:5px; background:var(--cy); border-radius:50%; }
-    .lead h2{ font-size:clamp(1.7rem,3.4vw,2.4rem); font-weight:800; letter-spacing:-.5px; line-height:1.15; }
-    .lead h2 .g{ background:linear-gradient(120deg,#0891B2,#22D3EE,#67E8F9); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .lead p{ color:var(--mute); margin-top:12px; }
+    .lead{ text-align:center; max-width:640px; margin:0 auto 52px; }
+    .lead .kick, .row .kick{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:.7rem; font-weight:700; color:var(--cy);
+      text-transform:uppercase; letter-spacing:.15em; margin-bottom:14px;
+    }
+    .lead .kick .pip, .row .kick .pip{ width:8px; height:8px; background:var(--cy); border-radius:2px; flex-shrink:0; }
+    .lead h2{
+      font-size:clamp(1.7rem,3.4vw,2.4rem); font-weight:600;
+      letter-spacing:-.032em; line-height:1.12; color:var(--ink);
+    }
+    .lead h2 .g{ color:var(--cy); }
+    .lead > p{ color:var(--ink-soft); margin-top:14px; line-height:1.75; }
 
-    /* alternating feature rows */
-    .row{ display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; padding:36px 0; }
+    /* ── alternating feature rows ── */
+    .row{ display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; padding:38px 0; }
     .row.rev{ direction:rtl; } .row.rev>*{ direction:ltr; }
-    .row .kick{ display:inline-flex; align-items:center; gap:.4rem; font-size:.68rem; font-weight:700; color:var(--cy); text-transform:uppercase; letter-spacing:.1em; margin-bottom:12px; }
-    .row .kick .pip{ width:5px; height:5px; background:var(--cy); border-radius:50%; }
-    .row h3{ font-size:1.5rem; font-weight:800; letter-spacing:-.4px; margin-bottom:12px; }
-    .row p{ color:var(--mute); margin-bottom:16px; }
-    .row ul{ list-style:none; display:grid; gap:10px; }
-    .row ul li{ display:flex; gap:10px; font-size:.92rem; color:#374151; }
-    .row ul li::before{ content:'✓'; color:var(--cy); font-weight:800; flex-shrink:0; }
-    .panel{ border:1px solid var(--line); border-radius:16px; background:#0A0F14; min-height:280px; box-shadow:0 24px 60px rgba(8,145,178,.10); overflow:hidden; display:flex; align-items:center; justify-content:center; padding:18px; }
-    .mock{ width:100%; }
-    .mock-bar{ display:flex; gap:6px; padding:10px 12px; border-bottom:1px solid rgba(255,255,255,.08); }
+    .row h3{
+      font-size:1.5rem; font-weight:600; letter-spacing:-.028em;
+      line-height:1.2; margin-bottom:12px; color:var(--ink);
+    }
+    .row > div > p{ color:var(--ink-soft); margin-bottom:18px; line-height:1.75; font-size:.95rem; }
+    .row ul{ list-style:none; display:grid; gap:11px; }
+    .row ul li{
+      position:relative; padding-left:28px;
+      font-size:.9rem; color:var(--ink-soft); line-height:1.55;
+    }
+    .row ul li::before{
+      content:''; position:absolute; left:0; top:.15em;
+      width:18px; height:18px; border-radius:50%;
+      background-color:var(--cy);
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+      background-repeat:no-repeat; background-position:center; background-size:9px;
+    }
+
+    /* ── the dark stage panels (the page's contrast moments) ── */
+    .panel{
+      position:relative; border-radius:14px; min-height:300px;
+      overflow:hidden; isolation:isolate;
+      display:flex; align-items:center; justify-content:center; padding:22px;
+      box-shadow:0 10px 20px rgba(28,24,34,.05), 0 30px 66px rgba(14,146,168,.16);
+    }
+    .panel::before{
+      content:''; position:absolute; inset:-12%; z-index:-1;
+      filter:blur(26px) saturate(1.08); transform:scale(1.05);
+      background:
+        radial-gradient(85% 65% at 18% 12%, #7DE7F4 0%, transparent 60%),
+        radial-gradient(80% 65% at 88% 92%, #083344 0%, transparent 62%),
+        linear-gradient(162deg, #22B8CE 0%, #0E7490 52%, #0A3D4C 100%);
+    }
+    .panel::after{
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background:linear-gradient(180deg, rgba(255,255,255,.07), transparent 22%, rgba(5,20,25,.2));
+    }
+    .mock{ width:100%; position:relative; z-index:1; background:#fff; border-radius:11px; overflow:hidden; box-shadow:0 22px 48px rgba(5,25,30,.32); }
+    .mock-bar{ display:flex; align-items:center; gap:6px; padding:10px 12px; border-bottom:1px solid var(--line); background:var(--cream); }
     .mock-bar span{ width:9px; height:9px; border-radius:50%; }
     .mock-bar span:nth-child(1){ background:#FF5F56; } .mock-bar span:nth-child(2){ background:#FFBD2E; } .mock-bar span:nth-child(3){ background:#27C93F; }
-    .mock-body{ padding:16px; display:grid; gap:10px; }
-    .mock-card{ background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:10px; padding:12px 14px; }
-    .mock-t{ font-size:.82rem; font-weight:700; color:#EAF6F8; margin-bottom:4px; }
-    .mock-s{ font-size:.72rem; color:#8FA3AB; }
-    .mock-badge{ float:right; font-size:.62rem; font-weight:700; padding:3px 9px; border-radius:100px; background:rgba(34,211,238,.16); color:#22D3EE; }
-    .mock-badge.warn{ background:rgba(202,138,4,.18); color:#FBBF24; }
-    .mock-badge.crit{ background:rgba(220,38,38,.18); color:#F87171; }
+    .mock-body{ padding:14px; display:grid; gap:9px; }
+    .mock-card{
+      background:#fff; border:1px solid var(--line); border-radius:9px;
+      padding:12px 14px; display:flex; align-items:flex-start; gap:10px;
+    }
+    .mock-dot{ width:8px; height:8px; border-radius:50%; flex-shrink:0; margin-top:5px; }
+    .mock-dot.crit{ background:var(--red); box-shadow:0 0 0 3px rgba(220,38,38,.15); }
+    .mock-dot.warn{ background:var(--amber); box-shadow:0 0 0 3px rgba(161,98,7,.15); }
+    .mock-dot.ok{ background:var(--green); box-shadow:0 0 0 3px rgba(21,128,61,.15); }
+    .mock-txt{ flex:1; min-width:0; }
+    .mock-t{ font-size:.8rem; font-weight:700; color:var(--ink); margin-bottom:3px; }
+    .mock-s{ font-size:.72rem; color:var(--ink-faint); line-height:1.5; }
+    .mock-badge{
+      flex-shrink:0; font-size:.62rem; font-weight:700; padding:3px 9px;
+      border-radius:999px; white-space:nowrap;
+      background:var(--cy-soft); color:var(--cy); border:1px solid var(--cy-line);
+    }
+    .mock-badge.warn{ background:#FDF3D7; color:var(--amber); border-color:#F2E2B0; }
+    .mock-badge.crit{ background:#FEE2E2; color:var(--red); border-color:#FECACA; }
+    .mock-badge.ok{ background:#E7F6EC; color:var(--green); border-color:#BFE3CD; }
 
-    /* steps */
-    .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
-    .step{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:26px; }
-    .step .n{ display:inline-flex; width:34px; height:34px; align-items:center; justify-content:center; border-radius:9px; background:rgba(8,145,178,.12); color:var(--cy); font-weight:800; margin-bottom:14px; }
-    .step h4{ font-size:1.05rem; margin-bottom:8px; }
-    .step p{ color:var(--mute); font-size:.9rem; }
+    /* ── steps ── */
+    .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .step{
+      background:#fff; border:1px solid var(--line); border-radius:14px; padding:26px;
+      transition:border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .step:hover{ border-color:var(--cy-line); transform:translateY(-3px); box-shadow:0 14px 32px rgba(14,146,168,.08); }
+    .step .n{
+      display:inline-block;
+      font-size:.68rem; font-weight:700; letter-spacing:.06em;
+      color:var(--cy); background:var(--cy-soft);
+      border:1px solid var(--cy-line); border-radius:6px;
+      padding:3px 9px; margin-bottom:14px;
+    }
+    .step h4{ font-size:1.02rem; font-weight:700; letter-spacing:-.012em; margin-bottom:8px; color:var(--ink); }
+    .step p{ color:var(--ink-soft); font-size:.88rem; line-height:1.7; }
 
-    /* pricing */
-    .plans{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; align-items:start; }
-    .plan{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:30px; display:flex; flex-direction:column; position:relative; }
-    .plan.hot{ border-color:rgba(8,145,178,.5); box-shadow:0 20px 50px rgba(8,145,178,.14); }
-    .plan .tag{ position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#0891B2,#22D3EE); color:#04262B; font-size:.68rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; padding:5px 14px; border-radius:100px; }
-    .plan .pname{ font-size:.78rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--mute); }
-    .plan .price{ font-size:2.6rem; font-weight:800; letter-spacing:-1px; margin:10px 0 2px; }
-    .plan .price small{ font-size:1rem; color:var(--mute); font-weight:500; }
-    .plan .pdesc{ color:var(--mute); font-size:.88rem; margin-bottom:22px; }
-    .plan ul{ list-style:none; display:grid; gap:11px; margin-bottom:26px; flex:1; font-size:.9rem; color:#374151; }
-    .plan ul li{ display:flex; gap:10px; } .plan ul li::before{ content:'✓'; color:var(--cy); font-weight:800; }
-    .plan .cta{ text-align:center; padding:12px; border-radius:10px; font-weight:800; font-size:.9rem; }
-    .plan .cta.p{ background:linear-gradient(135deg,#0891B2,#22D3EE); color:#04262B; }
-    .plan .cta.g{ border:1.5px solid var(--line); color:var(--ink); }
+    /* ── value grid ── */
+    .vgrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .vcard{
+      background:#fff; border:1px solid var(--line); border-radius:14px; padding:26px;
+      transition:border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .vcard:hover{ border-color:var(--cy-line); transform:translateY(-3px); box-shadow:0 16px 36px rgba(14,146,168,.08); }
+    .vcard .ic{
+      width:42px; height:42px; border-radius:12px;
+      background:var(--cy-soft); border:1px solid var(--cy-line);
+      display:flex; align-items:center; justify-content:center; margin-bottom:15px;
+    }
+    .vcard .ic svg{ width:19px; height:19px; stroke:var(--cy); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+    .vcard h4{ font-size:1rem; font-weight:700; letter-spacing:-.012em; margin-bottom:8px; color:var(--ink); }
+    .vcard p{ color:var(--ink-soft); font-size:.88rem; line-height:1.7; }
 
-    /* faq */
-    .faq{ max-width:760px; margin:0 auto; display:grid; gap:12px; }
-    .qa{ border:1px solid var(--line); border-radius:12px; padding:20px 22px; background:#fff; }
-    .qa h4{ font-size:1rem; margin-bottom:6px; }
-    .qa p{ color:var(--mute); font-size:.92rem; }
+    /* ── faq ── */
+    .faq{ max-width:760px; margin:0 auto; display:grid; gap:11px; }
+    .qa{
+      border:1px solid var(--cream-line); border-radius:10px;
+      padding:20px 22px; background:var(--cream);
+      transition:border-color .2s;
+    }
+    .qa:hover{ border-color:var(--cy-line); }
+    .qa h4{ font-size:.98rem; font-weight:700; letter-spacing:-.012em; margin-bottom:7px; color:var(--ink); }
+    .qa p{ color:var(--ink-soft); font-size:.9rem; line-height:1.7; }
+    .qa a{ color:var(--cy); font-weight:600; }
+    .qa a:hover{ text-decoration:underline; }
 
-    /* value grid */
-    .vgrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
-    .vcard{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:28px; }
-    .vcard .ic{ width:46px; height:46px; border-radius:11px; background:rgba(8,145,178,.12); color:var(--cy); display:flex; align-items:center; justify-content:center; font-size:1.3rem; margin-bottom:16px; }
-    .vcard h4{ font-size:1.08rem; margin-bottom:8px; }
-    .vcard p{ color:var(--mute); font-size:.92rem; }
+    /* ── final cta ── */
+    .fcta{
+      padding:96px 5vw 104px; text-align:center; position:relative; overflow:hidden;
+      background:
+        radial-gradient(ellipse 60% 50% at 25% 25%, rgba(14,146,168,.12), transparent 62%),
+        radial-gradient(ellipse 55% 50% at 75% 75%, rgba(79,70,229,.07), transparent 62%),
+        #FFFCF6;
+      border-top:1px solid var(--line);
+    }
+    .fcta h2{
+      font-family:'Newsreader',Georgia,serif;
+      font-size:clamp(2rem,4.4vw,3rem); font-weight:500;
+      letter-spacing:-.018em; color:var(--ink); margin-bottom:.9rem; line-height:1.1;
+    }
+    .fcta h2 span{ color:var(--cy); }
+    .fcta > p{ color:var(--ink-soft); max-width:460px; margin:0 auto 1.9rem; line-height:1.75; }
 
-    /* final cta */
-    .fcta{ padding:96px 5vw; text-align:center; position:relative; overflow:hidden;
-      background:radial-gradient(ellipse 60% 50% at 25% 30%, rgba(8,145,178,.3), transparent 65%),
-                 radial-gradient(ellipse 55% 50% at 75% 70%, rgba(34,211,238,.22), transparent 65%),
-                 linear-gradient(135deg,#0A0F14 0%,#10202A 100%); }
-    .fcta h2{ position:relative; font-size:clamp(1.9rem,4.4vw,3rem); font-weight:800; letter-spacing:-1px; color:#fff; margin-bottom:.8rem; }
-    .fcta h2 span{ color:#A5F3FC; }
-    .fcta p{ position:relative; color:rgba(234,246,248,.78); max-width:460px; margin:0 auto 1.8rem; }
-    .fcta .btn-p{ position:relative; }
-
-    @media(max-width:860px){ .row,.row.rev{ grid-template-columns:1fr; direction:ltr; gap:28px; } .steps,.plans,.vgrid{ grid-template-columns:1fr; } }
-    @media(prefers-reduced-motion:reduce){ *,*::before,*::after{ animation:none!important; transition:none!important; } }
+    @media(max-width:860px){
+      .row,.row.rev{ grid-template-columns:1fr; direction:ltr; gap:28px; }
+      .steps,.vgrid{ grid-template-columns:1fr; }
+      .sec{ padding:58px 5vw; }
+      .ph{ padding:68px 5vw 62px; }
+    }
+    @media(prefers-reduced-motion:reduce){ *,*::before,*::after{ animation:none!important; transition:none!important; } html{ scroll-behavior:auto; } }
   </style>
 </head>
 <body>
+
+<!-- ═══ HERO ═══ -->
 <section class="ph">
   <div class="eyebrow"><span class="pip"></span>For Security Teams</div>
   <h1>A force-multiplier for <span class="g">the team you already have.</span></h1>
   <p>You can't hire your way out of alert fatigue. AI handles the monitoring, triage, and first response — so your team spends its hours on the decisions that actually need a human.</p>
   <div class="btns">
-    <a class="btn-p" href="/login.html">Start Free Trial &rarr;</a>
+    <a class="btn-p" href="/login.html">Start Free Trial <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     <a class="btn-g" href="/contact.html">Book a Demo</a>
   </div>
 </section>
-<section class="sec"><div class="wrap"><div class="lead"><div class="kick"><span class="pip"></span>Who it's for</div><h2>Built for the people <span class="g">holding the line.</span></h2><p>Whether you're a one-person security function or an MSP covering dozens of clients, this takes the grind off your plate.</p></div><div class="vgrid"><div class="vcard"><div class="ic">⛨</div><h4>Lean security teams</h4><p>Cover more ground without more headcount. AI does the 3am monitoring so you don't have to.</p></div><div class="vcard"><div class="ic">⛨</div><h4>IT admins wearing the security hat</h4><p>Get real detection and response even if security isn't your full-time job.</p></div><div class="vcard"><div class="ic">⛨</div><h4>MSPs &amp; MSSPs</h4><p>Deliver monitoring and response across every client from one place, with per-client posture scores.</p></div><div class="vcard"><div class="ic">⛨</div><h4>Founders &amp; ops leads</h4><p>Get a serious security baseline in place before you can justify a full security hire.</p></div><div class="vcard"><div class="ic">⛨</div><h4>Compliance-driven teams</h4><p>Posture scoring and audit-ready records that make SOC 2 and reviews far less painful.</p></div><div class="vcard"><div class="ic">⛨</div><h4>DevSecOps</h4><p>Catch vulnerable dependencies and misconfigurations before they ship, not after.</p></div></div></div></section><section class="sec alt"><div class="wrap"><div class="lead"><div class="kick"><span class="pip"></span>The point</div><h2>It doesn't replace your team. It gives them time back.</h2><p>AI handles the relentless, repetitive work — monitoring, triage, first containment — and escalates the judgment calls to the humans who should be making them. Fewer 3am pages, more time on the work that matters.</p></div></div></section><section class="fcta"><h2>Give your team <span>their nights back.</span></h2><p>Start free and put AI on watch this week.</p><a class="btn-p" href="/login.html">Get started &rarr;</a></section>
+
+<!-- ═══ WHO IT'S FOR ═══ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="lead">
+      <div class="kick"><span class="pip"></span>Who it's for</div>
+      <h2>Built for the people <span class="g">holding the line.</span></h2>
+      <p>Whether you're a one-person security function or an MSP covering dozens of clients, this takes the grind off your plate.</p>
+    </div>
+    <div class="vgrid">
+      <div class="vcard">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h4>Lean security teams</h4>
+        <p>Cover more ground without more headcount. AI does the 3am monitoring so you don't have to.</p>
+      </div>
+      <div class="vcard">
+        <div class="ic"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="7" rx="2"/><rect x="2" y="14" width="20" height="7" rx="2"/><path d="M6 6.5h.01M6 17.5h.01"/></svg></div>
+        <h4>IT admins wearing the security hat</h4>
+        <p>Get real detection and response even if security isn't your full-time job.</p>
+      </div>
+      <div class="vcard">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        <h4>MSPs &amp; MSSPs</h4>
+        <p>Deliver monitoring and response across every client from one place, with per-client posture scores.</p>
+      </div>
+      <div class="vcard">
+        <div class="ic"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <h4>Founders &amp; ops leads</h4>
+        <p>Get a serious security baseline in place before you can justify a full security hire.</p>
+      </div>
+      <div class="vcard">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <h4>Compliance-driven teams</h4>
+        <p>Posture scoring and audit-ready records that make SOC 2 and reviews far less painful.</p>
+      </div>
+      <div class="vcard">
+        <div class="ic"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <h4>DevSecOps</h4>
+        <p>Catch vulnerable dependencies and misconfigurations before they ship, not after.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT IT ACTUALLY DOES ═══ -->
+<section class="sec alt">
+  <div class="wrap">
+    <div class="lead">
+      <div class="kick"><span class="pip"></span>What it does</div>
+      <h2>Three jobs your team shouldn't <span class="g">be doing by hand.</span></h2>
+      <p>Monitoring, response, and posture. The parts of the work that never sleep, never end, and never should have needed a person on a chair at 3am.</p>
+    </div>
+
+    <!-- ROW 1 — monitoring -->
+    <div class="row">
+      <div>
+        <div class="kick"><span class="pip"></span>Monitoring &amp; triage</div>
+        <h3>The 3am shift, covered.</h3>
+        <p>Every hour of every day, AI watches your logins, endpoints, and cloud accounts. Suspicious activity gets caught, correlated, and ranked before anyone has to reach for their phone.</p>
+        <ul>
+          <li>Continuous monitoring across your stack, not sampled snapshots</li>
+          <li>Related alerts correlated into one incident instead of forty lines</li>
+          <li>Noise filtered out before it ever reaches a human</li>
+          <li>A full timeline kept on every event, ready for review</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div class="mock">
+          <div class="mock-bar"><span></span><span></span><span></span></div>
+          <div class="mock-body">
+            <div class="mock-card">
+              <span class="mock-dot crit"></span>
+              <span class="mock-txt"><span class="mock-t">Suspicious login blocked</span><span class="mock-s">02:14 UTC · unfamiliar location · admin account</span></span>
+              <span class="mock-badge crit">Critical</span>
+            </div>
+            <div class="mock-card">
+              <span class="mock-dot warn"></span>
+              <span class="mock-txt"><span class="mock-t">Impossible travel detected</span><span class="mock-s">Two sessions, 6,400 km apart, 40 minutes</span></span>
+              <span class="mock-badge warn">Review</span>
+            </div>
+            <div class="mock-card">
+              <span class="mock-dot ok"></span>
+              <span class="mock-txt"><span class="mock-t">42 alerts correlated</span><span class="mock-s">Grouped into 3 incidents · 39 auto-dismissed</span></span>
+              <span class="mock-badge">Triaged</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 2 — response -->
+    <div class="row rev">
+      <div>
+        <div class="kick"><span class="pip"></span>Response</div>
+        <h3>Contained first. Explained second.</h3>
+        <p>When something real happens, the playbook runs immediately: sessions revoked, MFA challenged, access frozen, everything written down. Your team walks in to a contained incident and a clean record, not a mystery.</p>
+        <ul>
+          <li>Playbooks contain incidents the moment they're confirmed</li>
+          <li>Every action logged with a timestamp and a reason</li>
+          <li>Humans paged only when a decision actually needs one</li>
+          <li>Review and roll back from a single timeline</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div class="mock">
+          <div class="mock-bar"><span></span><span></span><span></span></div>
+          <div class="mock-body">
+            <div class="mock-card">
+              <span class="mock-dot ok"></span>
+              <span class="mock-txt"><span class="mock-t">Session revoked</span><span class="mock-s">02:14:06 · playbook: contain-credential-abuse</span></span>
+              <span class="mock-badge ok">Done</span>
+            </div>
+            <div class="mock-card">
+              <span class="mock-dot ok"></span>
+              <span class="mock-txt"><span class="mock-t">MFA challenge sent</span><span class="mock-s">02:14:09 · account owner notified</span></span>
+              <span class="mock-badge ok">Done</span>
+            </div>
+            <div class="mock-card">
+              <span class="mock-dot ok"></span>
+              <span class="mock-txt"><span class="mock-t">All clear</span><span class="mock-s">02:15:41 · no human paged · logged for review</span></span>
+              <span class="mock-badge ok">Resolved</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 3 — posture -->
+    <div class="row">
+      <div>
+        <div class="kick"><span class="pip"></span>Posture</div>
+        <h3>Know where you stand, without the quarterly scramble.</h3>
+        <p>Scheduled scans surface vulnerable dependencies, misconfigurations, and stale access before an attacker finds them. Your posture updates as your environment changes, so audit season stops being an archaeology dig.</p>
+        <ul>
+          <li>Scheduled scans across dependencies, config, and access</li>
+          <li>A live posture score that moves when your environment moves</li>
+          <li>Findings ranked by what's actually exploitable, not by CVE count</li>
+          <li>Audit-ready records generated as you go, not reconstructed later</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div class="mock">
+          <div class="mock-bar"><span></span><span></span><span></span></div>
+          <div class="mock-body">
+            <div class="mock-card">
+              <span class="mock-dot warn"></span>
+              <span class="mock-txt"><span class="mock-t">Outdated dependency</span><span class="mock-s">Weekly scan · known CVE · patch suggested</span></span>
+              <span class="mock-badge warn">Medium</span>
+            </div>
+            <div class="mock-card">
+              <span class="mock-dot warn"></span>
+              <span class="mock-txt"><span class="mock-t">Stale admin access</span><span class="mock-s">2 accounts unused 90+ days · still privileged</span></span>
+              <span class="mock-badge warn">Medium</span>
+            </div>
+            <div class="mock-card">
+              <span class="mock-dot ok"></span>
+              <span class="mock-txt"><span class="mock-t">Posture score updated</span><span class="mock-s">42/42 systems reporting · trending down</span></span>
+              <span class="mock-badge ok">Low risk</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="lead">
+      <div class="kick"><span class="pip"></span>How it works</div>
+      <h2>Live this week, not <span class="g">next quarter.</span></h2>
+      <p>No services engagement, no six-week onboarding, no consultant. Connect it, watch it, then hand it the keys when you trust it.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="n">01</div>
+        <h4>Connect</h4>
+        <p>Point it at your identity provider, cloud accounts, and endpoints. Read-only to start. Setup is measured in minutes, and you can stop there for as long as you like.</p>
+      </div>
+      <div class="step">
+        <div class="n">02</div>
+        <h4>Watch</h4>
+        <p>AI learns what normal looks like for your business, then monitors continuously. You see exactly what it sees from day one, including what it chose to ignore and why.</p>
+      </div>
+      <div class="step">
+        <div class="n">03</div>
+        <h4>Respond</h4>
+        <p>Turn on playbooks when you're ready. Start alert-only, graduate to auto-containment one playbook at a time. You decide how much rope it gets.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE POINT ═══ -->
+<section class="sec alt">
+  <div class="wrap">
+    <div class="lead" style="margin-bottom:0">
+      <div class="kick"><span class="pip"></span>The point</div>
+      <h2>It doesn't replace your team. It gives them time back.</h2>
+      <p>AI handles the relentless, repetitive work — monitoring, triage, first containment — and escalates the judgment calls to the humans who should be making them. Fewer 3am pages, more time on the work that matters.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="lead">
+      <div class="kick"><span class="pip"></span>Straight answers</div>
+      <h2>The questions security people <span class="g">actually ask.</span></h2>
+    </div>
+    <div class="faq">
+      <div class="qa">
+        <h4>Is this replacing my security team?</h4>
+        <p>No, and anyone selling you that is lying. It replaces the parts of the job nobody wants: watching a dashboard at 3am, triaging the same duplicate alert forty times, and writing up an incident you've already written up. The judgment calls stay with your people.</p>
+      </div>
+      <div class="qa">
+        <h4>What happens when it isn't sure?</h4>
+        <p>It escalates. AI contains what it's confident about and pages a human for anything ambiguous. We'd rather wake you for a real question than quietly auto-remediate something we read wrong.</p>
+      </div>
+      <div class="qa">
+        <h4>Can I run it without letting it touch anything?</h4>
+        <p>Yes. Start in read-only. It monitors, correlates, and alerts, and takes zero action until you switch playbooks on — one at a time, on your schedule.</p>
+      </div>
+      <div class="qa">
+        <h4>Do I need a security background to run it?</h4>
+        <p>No. Findings come in plain English with the recommended action attached, ranked by what's actually exploitable. If you can read your inbox, you can run this.</p>
+      </div>
+      <div class="qa">
+        <h4>What does it cost?</h4>
+        <p>Flat monthly pricing. No per-seat fees, no per-alert billing, no annual lock-in, and no "contact sales" wall to find out the number. <a href="/pricing.html">See pricing</a>.</p>
+      </div>
+      <div class="qa">
+        <h4>What if it misses something?</h4>
+        <p>No tool catches everything, and we won't claim otherwise. What we will do is keep a full timeline of every event and decision, so when you review an incident you get the actual record instead of a shrug.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FINAL CTA ═══ -->
+<section class="fcta">
+  <h2>Give your team <span>their nights back.</span></h2>
+  <p>Start free and put AI on watch this week.</p>
+  <a class="btn-p" href="/login.html">Get started <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</section>
+
 <!-- footer injected by footer.js -->
 </body>
 </html>
