@@ -64,6 +64,46 @@ const db = admin.firestore();
 const CREDIT_COST   = 2;
 const MAX_EMAILS    = 30;   // cap tokens + latency
 const MAX_EVENTS    = 12;
+const DEFAULT_TZ    = "America/Regina";  // Saskatchewan: UTC-6 year round, no DST
+
+/* ── Timezone helpers ──────────────────────────────────────────
+   Vercel functions run in UTC. Without this, "today" is the SERVER'S
+   today: at 6pm Monday in Saskatoon it is already Tuesday 00:10 UTC,
+   so the brief says "Tuesday" and the calendar window covers Monday
+   6pm -> Tuesday 6pm, missing the actual working day entirely.
+   Everything below is computed in the USER'S timezone.            */
+
+function tzOffsetMs(date, tz) {
+  /* how far tz is from UTC at this instant, in ms */
+  const utc   = new Date(date.toLocaleString("en-US", { timeZone: "UTC" }));
+  const local = new Date(date.toLocaleString("en-US", { timeZone: tz }));
+  return utc - local;
+}
+
+function localDayBounds(tz) {
+  const now = new Date();
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: tz, year: "numeric", month: "2-digit", day: "2-digit",
+  }).format(now).split("-").map(Number);
+  const [y, m, d] = parts;
+  const off = tzOffsetMs(now, tz);
+  return {
+    start: new Date(Date.UTC(y, m - 1, d, 0, 0, 0, 0) + off),
+    end:   new Date(Date.UTC(y, m - 1, d, 23, 59, 59, 999) + off),
+  };
+}
+
+function localDayLabel(tz) {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: tz, weekday: "long", month: "long", day: "numeric",
+  }).format(new Date());
+}
+
+function localHour(tz) {
+  return Number(new Intl.DateTimeFormat("en-US", {
+    timeZone: tz, hour: "numeric", hour12: false,
+  }).format(new Date()));
+}
 
 /* ── Mint a fresh Google access token from the stored refresh token ── */
 async function getAccessToken(refreshToken) {
@@ -123,10 +163,8 @@ async function fetchGmail(accessToken) {
 }
 
 /* ── Calendar: today's events ── */
-async function fetchCalendar(accessToken) {
-  const now = new Date();
-  const start = new Date(now); start.setHours(0, 0, 0, 0);
-  const end   = new Date(now); end.setHours(23, 59, 59, 999);
+async function fetchCalendar(accessToken, tz) {
+  const { start, end } = localDayBounds(tz);
 
   const u =
     "https://www.googleapis.com/calendar/v3/calendars/primary/events" +
@@ -141,6 +179,7 @@ async function fetchCalendar(accessToken) {
   return (j.items || []).map((e) => ({
     title:     (e.summary || "(untitled)").slice(0, 140),
     start:     e.start?.dateTime || e.start?.date || "",
+    tz,
     end:       e.end?.dateTime || e.end?.date || "",
     attendees: (e.attendees || []).slice(0, 8).map((a) => a.email).join(", ").slice(0, 200),
     location:  (e.location || "").slice(0, 120),
@@ -156,7 +195,14 @@ export default async function handler(req, res) {
   if (req.method !== "POST")    return res.status(405).json({ ok: false, error: "Method not allowed" });
 
   try {
-    const { idToken } = req.body || {};
+    const { idToken, tz: tzRaw } = req.body || {};
+
+    /* user's IANA timezone, e.g. "America/Regina". Validated, safe fallback. */
+    let tz = DEFAULT_TZ;
+    if (typeof tzRaw === "string" && tzRaw.length < 64) {
+      try { new Intl.DateTimeFormat("en-CA", { timeZone: tzRaw }); tz = tzRaw; }
+      catch (e) { tz = DEFAULT_TZ; }
+    }
     if (!idToken) return res.status(401).json({ ok: false, error: "Missing auth token" });
 
     /* ── 1. Verify user ── */
@@ -202,7 +248,7 @@ export default async function handler(req, res) {
     try {
       [emails, events] = await Promise.all([
         fetchGmail(accessToken),
-        fetchCalendar(accessToken),
+        fetchCalendar(accessToken, tz),
       ]);
     } catch (e) {
       console.error("Google data fetch failed:", e.message);
@@ -216,16 +262,16 @@ export default async function handler(req, res) {
       return res.status(500).json({ ok: false, error: "Server not configured" });
     }
 
-    const today = new Date().toLocaleDateString("en-CA", {
-      weekday: "long", month: "long", day: "numeric",
-    });
+    const today     = localDayLabel(tz);
+    const hour      = localHour(tz);
+    const partOfDay = hour < 12 ? "morning" : hour < 18 ? "afternoon" : "evening";
 
     const systemPrompt = `You are an elite chief of staff writing your executive's morning brief. You are ruthless about what deserves their attention and what does not.
 
 Output ONLY a JSON object with this exact schema. No markdown, no code fences, no preamble:
 
 {
-  "greeting": "string - e.g. 'Good morning. Here's Tuesday.'",
+  "greeting": "string - a time-appropriate greeting followed by the ACTUAL weekday from TODAY below. Never copy an example verbatim.",
   "summary": "string - one line, e.g. '3 need a decision · 2 meetings · 6 handled'",
   "decisions": [{ "title": "string", "why": "string - one short sentence on why it needs them", "source": "string - who/where it came from", "urgency": "high" | "medium" }],
   "meetings": [{ "time": "string - e.g. '9:00 AM'", "title": "string", "with": "string", "prep": "string - one line of what to know walking in" }],
@@ -241,13 +287,14 @@ RULES:
 5. Tone: direct, calm, competent. No filler, no hype, no "I hope this helps".
 6. If there is little data, say so honestly in the summary rather than padding.
 
-TODAY: ${today}`;
+TODAY: ${today}
+TIME OF DAY: ${partOfDay} — greet with "Good ${partOfDay}" and use the real weekday from TODAY above. The user's timezone is ${tz}.`;
 
     const userContent = `Here is the raw data for today's brief.
 
 CALENDAR (${events.length} events today):
 ${events.length ? events.map((e, i) =>
-  `${i + 1}. ${e.allDay ? "All day" : new Date(e.start).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })} — ${e.title}${e.attendees ? ` | with: ${e.attendees}` : ""}${e.location ? ` | ${e.location}` : ""}`
+  `${i + 1}. ${e.allDay ? "All day" : new Date(e.start).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", timeZone: tz })} — ${e.title}${e.attendees ? ` | with: ${e.attendees}` : ""}${e.location ? ` | ${e.location}` : ""}`
 ).join("\n") : "(no events today)"}
 
 EMAIL — last 24 hours (${emails.length} messages, metadata only):
