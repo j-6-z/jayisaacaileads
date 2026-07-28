@@ -384,6 +384,80 @@ input,select,textarea{font-family:inherit}
   .mobile-gate .gate-foot{margin-top:24px;font-size:11px;color:var(--steel);opacity:.6;border-top:1px solid var(--hair);padding-top:18px;width:100%;max-width:320px}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}}
+
+/* ═══════════ IMPACT LAYER — same palette, way more punch ═══════════ */
+@keyframes heroSheen{0%{transform:translateX(-120%) skewX(-18deg)}100%{transform:translateX(240%) skewX(-18deg)}}
+@keyframes floatGlow{0%,100%{opacity:.55;transform:translate(0,0) scale(1)}50%{opacity:.9;transform:translate(14px,-10px) scale(1.12)}}
+@keyframes cardIn{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 var(--o-glow)}50%{box-shadow:0 0 0 5px rgba(129,140,248,0)}}
+
+/* hero: aurora depth + moving sheen */
+.brief-hero{border:1px solid transparent;background:
+  linear-gradient(135deg,var(--p2),var(--p0)) padding-box,
+  linear-gradient(120deg,rgba(129,140,248,.55),rgba(168,85,247,.28),rgba(129,140,248,.12)) border-box;
+  box-shadow:0 24px 70px -30px rgba(0,0,0,.65),0 0 42px -18px var(--o-glow),inset 0 1px 0 rgba(255,255,255,.05)}
+.brief-hero::before{content:"";position:absolute;inset:-40%;pointer-events:none;
+  background:radial-gradient(420px 300px at 82% -10%,rgba(168,85,247,.16),transparent 60%),
+             radial-gradient(360px 260px at -6% 110%,rgba(129,140,248,.14),transparent 60%);
+  animation:floatGlow 9s ease-in-out infinite}
+.brief-hero::after{content:"";position:absolute;top:0;bottom:0;width:38%;left:0;pointer-events:none;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.05) 45%,transparent 80%);
+  animation:heroSheen 6.5s var(--ease) infinite}
+.brief-hero h2{letter-spacing:-.5px;text-shadow:0 2px 22px rgba(129,140,248,.22)}
+.brief-hero .greet{background:linear-gradient(100deg,var(--o-hot),var(--o-vio));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 14px rgba(129,140,248,.35))}
+
+/* cards: staggered entrance, lift, edge-light on hover */
+.brief-card{animation:cardIn .5s var(--ease) backwards;position:relative}
+.brief-card:nth-child(2){animation-delay:.05s}.brief-card:nth-child(3){animation-delay:.1s}
+.brief-card:nth-child(4){animation-delay:.15s}.brief-card:nth-child(5){animation-delay:.2s}
+.brief-card:nth-child(6){animation-delay:.25s}.brief-card:nth-child(7){animation-delay:.3s}
+.brief-card:hover{transform:translateY(-3px);border-color:rgba(129,140,248,.38);
+  box-shadow:0 18px 46px -20px rgba(0,0,0,.6),0 0 30px -12px var(--o-glow)}
+.brief-card.open{border-color:rgba(129,140,248,.45);
+  box-shadow:0 22px 54px -22px rgba(0,0,0,.65),0 0 36px -12px var(--o-glow)}
+.brief-card.prio-decision{border-left:3px solid var(--o-hot)}
+.brief-card.prio-nudge{border-left:3px solid #F59E0B}
+.brief-card.prio-decision:hover{box-shadow:0 18px 46px -20px rgba(0,0,0,.6),0 0 34px -10px var(--o-glow)}
+
+/* buttons: gradient sweep + lift */
+.regen-btn{position:relative;overflow:hidden;background-size:180% 180%;background-position:0% 50%;
+  transition:transform .18s var(--ease),box-shadow .18s var(--ease),background-position .5s var(--ease)}
+.regen-btn:hover{transform:translateY(-2px) scale(1.02);background-position:100% 50%;
+  box-shadow:0 10px 30px -8px var(--o-glow),0 0 24px var(--o-glow)}
+.regen-btn:active{transform:scale(.97)}
+.gen-btn:hover,.da:hover{transform:translateY(-1px);box-shadow:0 6px 20px -8px var(--o-glow)}
+
+/* topbar + banner: glass */
+.topbar{backdrop-filter:blur(14px);background:color-mix(in srgb,var(--p0) 82%,transparent)}
+.alert-banner{backdrop-filter:blur(10px);border-bottom:1px solid rgba(129,140,248,.22);
+  background:linear-gradient(90deg,color-mix(in srgb,var(--p0) 88%,transparent),color-mix(in srgb,var(--p2) 82%,transparent))}
+.ab-cta{transition:.18s var(--ease)}.ab-cta:hover{transform:translateY(-1px);box-shadow:0 6px 18px -6px var(--o-glow)}
+
+/* credits + status: alive */
+.credits{position:relative;animation:badgePulse 3.2s ease-in-out infinite}
+.credits:hover{border-color:rgba(129,140,248,.4)}
+.st-label{text-shadow:0 0 10px rgba(52,211,153,.35)}
+
+/* rail: active item glows */
+.rail .nav-item.active,.rail .ritem.active{box-shadow:inset 0 0 22px rgba(129,140,248,.12),0 0 18px -8px var(--o-glow)}
+
+/* handled pill: breathing */
+.bh-handled{transition:.2s var(--ease)}.bh-handled:hover{transform:translateY(-1px);box-shadow:0 0 22px -8px rgba(52,211,153,.5)}
+
+/* toast: punchier */
+.toast{backdrop-filter:blur(12px);box-shadow:0 16px 44px -16px rgba(0,0,0,.7),0 0 28px -10px var(--o-glow)}
+
+/* light theme: soften glows so it stays clean */
+.light .brief-hero{box-shadow:0 20px 55px -28px rgba(30,35,80,.28),0 0 30px -16px rgba(129,140,248,.25)}
+.light .brief-hero::after{background:linear-gradient(105deg,transparent,rgba(255,255,255,.5) 45%,transparent 80%)}
+.light .brief-card:hover{box-shadow:0 16px 40px -20px rgba(30,35,80,.3),0 0 24px -12px rgba(129,140,248,.3)}
+.light .topbar{background:color-mix(in srgb,#FFFFFF 78%,transparent)}
+
+@media (prefers-reduced-motion:reduce){
+  .brief-hero::before,.brief-hero::after,.credits{animation:none}
+  .brief-card{animation:none}
+}
+
 </style>
 </head>
 <body>
@@ -418,8 +492,8 @@ function copyGateLink(){
 <!-- ALERT BANNER -->
 <div class="alert-banner" id="alertBanner">
   <svg class="ab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-  <span class="ab-text"><strong>Trial mode active.</strong> Your brief runs on demo data. Connect your inbox and calendar to go live.</span>
-  <a class="ab-cta" href="/chief-of-staff/pricing.html">Upgrade</a>
+  <span class="ab-text" id="abText"><strong>Trial mode active.</strong> Your brief runs on demo data. Connect your inbox and calendar to go live.</span>
+  <a class="ab-cta" id="abCta" href="javascript:void(0)" onclick="connectGoogle()">Connect Google</a>
   <button class="ab-close" onclick="document.getElementById('alertBanner').classList.add('hide')" aria-label="Dismiss">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
   </button>
@@ -511,7 +585,7 @@ let state = {
 };
 
 /* ---------- DEMO DATA ---------- */
-const BRIEF = [
+let BRIEF = [
   {id:"b1",prio:"decision",badge:"Decision",icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>`,
    title:"Sign off on the Q3 vendor contract",meta:"Legal flagged 1 clause · due today",
    context:"Legal reviewed the renewal and is comfortable except for the auto-renewal clause in section 7.2, which locks in a 12-month term with a 90-day cancellation window. They recommend negotiating it down to 30 days before you sign. Everything else is standard.",
@@ -549,6 +623,73 @@ const MEETINGS = [
   {id:"m3",hr:"3:00",ap:"PM",name:"Acme customer call",with:"2 attendees · renewal",
    prep:{recap:["Acme is up for renewal in 6 weeks","Raised concerns about onboarding speed last call"],open:["Address the onboarding feedback directly","Float the multi-year discount option"],bring:["Their usage stats (up 40% QoQ)","The security questionnaire status"]}},
 ];
+
+/* ---------- LIVE BRIEF (real Gmail + Calendar) ---------- */
+const ICONS={
+ decision:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>`,
+ nudge:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>`,
+ fyi:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>`,
+ meet:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>`};
+function escS(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+state.live=null; /* {greeting,summary,handled:[],counts} when a real brief is loaded */
+
+function mapLiveBrief(b){
+  const cards=[]; let i=0;
+  (b.decisions||[]).forEach(d=>{cards.push({id:"L"+(++i),prio:d.urgency==="high"?"decision":"nudge",
+    badge:d.urgency==="high"?"Decision":"Review",icon:ICONS.decision,
+    title:escS(d.title),meta:escS((d.source||"")+(d.why?" · "+d.why:"")),
+    context:escS(d.why||""),draftable:false});});
+  (b.quiet||[]).forEach(q=>{cards.push({id:"L"+(++i),prio:"nudge",badge:"Nudge",icon:ICONS.nudge,
+    title:escS("Follow up with "+(q.who||"them")),
+    meta:escS((q.subject||"thread")+" · quiet "+(q.daysQuiet??"?")+" days"),
+    context:escS("This thread has gone quiet. A short nudge keeps it moving."),draftable:false});});
+  (b.meetings||[]).forEach(m=>{cards.push({id:"L"+(++i),prio:"fyi",badge:"Meeting",icon:ICONS.meet,
+    title:escS((m.time?m.time+" — ":"")+(m.title||"Meeting")),
+    meta:escS(m.with||""),context:escS(m.prep||""),draftable:false});});
+  if((b.handled||[]).length){cards.push({id:"L"+(++i),prio:"fyi",badge:"FYI",icon:ICONS.fyi,
+    title:"Handled without you",meta:escS(b.handled.length+" items dealt with automatically"),
+    context:b.handled.map(escS).join(" · "),draftable:false});}
+  return cards;
+}
+function applyLiveBrief(data){
+  state.live={greeting:escS(data.brief.greeting||""),summary:escS(data.brief.summary||""),
+    handledCount:(data.brief.handled||[]).length,counts:data.counts||{}};
+  BRIEF=mapLiveBrief(data.brief);
+  state.briefOpen=new Set();
+  try{sessionStorage.setItem("jia_last_brief",JSON.stringify(data));}catch(e){}
+  setGoogleConnected(true);
+}
+function setGoogleConnected(on){
+  const b=document.getElementById("alertBanner"),tx=document.getElementById("abText"),cta=document.getElementById("abCta");
+  if(!b)return;
+  if(on){try{localStorage.setItem("jia_g_connected","1");}catch(e){}
+    if(tx)tx.innerHTML="<strong>Live mode.</strong> Connected to your inbox and calendar.";
+    if(cta){cta.textContent="Rebuild brief";cta.onclick=()=>regenBrief();}
+    setTimeout(()=>b.classList.add("hide"),2600);}
+}
+async function connectGoogle(){
+  try{
+    const u=window.auth&&window.auth.currentUser; if(!u){location.href="/login.html";return;}
+    const idToken=await u.getIdToken();
+    const r=await fetch("/api/google-connect",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({idToken})});
+    const j=await r.json();
+    if(j&&j.url){location.href=j.url;}else{toast("Could not start Google connect");}
+  }catch(e){toast("Connect failed — try again");}
+}
+window.connectGoogle=connectGoogle;
+(function(){ /* OAuth return + cached brief restore */
+  const q=new URLSearchParams(location.search); const g=q.get("google");
+  if(g){history.replaceState({},"",location.pathname);
+    if(g==="connected"){toast("Google connected — building your first brief is 2 credits");setGoogleConnected(true);}
+    else if(g==="denied"){toast("Google connection cancelled");}
+    else if(g==="no_refresh_token"){toast("Remove app access at myaccount.google.com, then reconnect");}
+    else{toast("Google connection failed — try again");}}
+  try{
+    if(localStorage.getItem("jia_g_connected")==="1")setGoogleConnected(true);
+    const c=sessionStorage.getItem("jia_last_brief");
+    if(c){const d=JSON.parse(c); if(d&&d.brief){state.live={greeting:escS(d.brief.greeting||""),summary:escS(d.brief.summary||""),handledCount:(d.brief.handled||[]).length,counts:d.counts||{}};BRIEF=mapLiveBrief(d.brief);}}
+  }catch(e){}
+})();
 
 /* ---------- HELPERS ---------- */
 let toastTimer;
@@ -605,9 +746,9 @@ function renderBrief(){
     <div class="brief-hero">
       <div class="brief-hero-main">
         <div class="bh-date">${todayStr()}</div>
-        <h2><span class="greet">${greeting()}.</span> ${needsYou} thing${needsYou===1?"":"s"} need you today.</h2>
-        <p>AI read your inbox, calendar, and threads overnight and pulled out what actually needs a decision. The rest it handled or is tracking for you.</p>
-        <span class="bh-handled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>11 items handled automatically overnight</span>
+        <h2>${state.live?`<span class="greet">${state.live.greeting}</span>`:`<span class="greet">${greeting()}.</span> ${needsYou} thing${needsYou===1?"":"s"} need you today.`}</h2>
+        <p>${state.live?state.live.summary+" · built from your real inbox and calendar":"AI read your inbox, calendar, and threads overnight and pulled out what actually needs a decision. The rest it handled or is tracking for you."}</p>
+        <span class="bh-handled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>${state.live?state.live.handledCount+" items handled automatically":"11 items handled automatically overnight"}</span>
       </div>
       <div class="regen">
         <button class="regen-btn" id="regenBtn" onclick="regenBrief()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.5 9a9 9 0 0114.9-3.4L23 10M1 14l4.6 4.4A9 9 0 0020.5 15"/></svg>Rebuild brief</button>
@@ -708,12 +849,26 @@ async function regenBrief(){
   state.briefLoading=true;
   const btn=document.getElementById("regenBtn");
   if(btn){btn.disabled=true;btn.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin .8s linear infinite"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4"/></svg>Rebuilding…`;}
-  await new Promise(r=>setTimeout(r,1100));
-  const res=await window.spendCredits(COST.brief,"staff_brief",{});
-  state.briefLoading=false;
-  if(!res.ok){toast(res.message||"Rebuild failed — no credits charged");if(btn){btn.disabled=false;renderBrief();}return;}
-  toast("Brief rebuilt · re-prioritized");
-  renderBrief();
+  try{
+    const u=window.auth&&window.auth.currentUser;
+    if(!u){state.briefLoading=false;location.href="/login.html";return;}
+    const idToken=await u.getIdToken();
+    const r=await fetch("/api/staff-brief",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({idToken,tz:Intl.DateTimeFormat().resolvedOptions().timeZone})});
+    const d=await r.json();
+    state.briefLoading=false;
+    if(!d.ok){
+      if(d.error==="google_not_connected"||d.error==="google_reauth_required"){toast("Connect your Google account first");if(btn){btn.disabled=false;renderBrief();}connectGoogle();return;}
+      if(d.error==="insufficient_credits"){toast(d.message||"Not enough credits");}
+      else{toast("Brief failed — no credits charged");}
+      if(btn){btn.disabled=false;renderBrief();}return;
+    }
+    applyLiveBrief(d);
+    if(typeof d.credits_remaining==="number"&&window.syncCredits)window.syncCredits(d.credits_remaining);
+    else if(typeof d.credits_remaining==="number"){state.credits=d.credits_remaining;}
+    toast("Brief rebuilt from your real inbox");
+    renderBrief();
+  }catch(e){state.briefLoading=false;toast("Network error — try again");if(btn){btn.disabled=false;renderBrief();}}
 }
 
 /* ---------- DELEGATION (lighter) ---------- */
