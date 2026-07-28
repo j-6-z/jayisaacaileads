@@ -29,7 +29,7 @@ const LINKS = [
           head: "AI Lead Generation", href: "/lead-generation/", accent: "lead",
           sub:  "Find your next customer", icon: `<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
           items: [
-            { label: "Prospect Search",    sub: "Open the app",              href: "/app.html"                                },
+            { label: "Prospect Search",    sub: "Open the app",              href: "/app/search.html"                         },
             { label: "People Search",      sub: "Owners, GMs, buyers",       href: "/lead-generation/people-search.html"      },
             { label: "Company Search",     sub: "Filter by industry & size", href: "/lead-generation/company-search.html"     },
             { label: "Cold Calling Lists", sub: "Dial-ready exports",        href: "/lead-generation/cold-calling-lists.html" },
@@ -40,6 +40,7 @@ const LINKS = [
           head: "AI Chief of Staff", href: "/chief-of-staff/", accent: "staff",
           sub:  "Run the operation", icon: `<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>`,
           items: [
+            { label: "Chief of Staff",sub: "Open the app",       href: "/app/chief-of-staff.html"          },
             { label: "Briefings",    sub: "Your day, decided",  href: "/chief-of-staff/briefings.html"    },
             { label: "Delegation",   sub: "Nothing slips",      href: "/chief-of-staff/delegation.html"   },
             { label: "Meeting Prep", sub: "Walk in ready",      href: "/chief-of-staff/meeting-prep.html" },
@@ -50,6 +51,7 @@ const LINKS = [
           head: "AI Cybersecurity", href: "/cybersecurity/", accent: "cyber",
           sub:  "Defend the business", icon: `<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
           items: [
+            { label: "Security Console",    sub: "Open the app",           href: "/app/security.html"                      },
             { label: "Threat Detection",    sub: "Caught before it lands", href: "/cybersecurity/threat-detection.html"    },
             { label: "Incident Response",   sub: "Contain & remediate",    href: "/cybersecurity/incident-response.html"   },
             { label: "Vulnerability Scans", sub: "Know your gaps",         href: "/cybersecurity/vulnerability-scans.html" },
@@ -766,7 +768,7 @@ const MARKUP = `
               <span class="em"></span>
             </span>
           </div>
-          <a href="/app.html" class="jia-app-link">
+          <a href="/app/search.html" class="jia-app-link">
             <span class="jia-app-ic ic-lead"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
             Prospect Search
             <svg class="jia-app-go" viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
