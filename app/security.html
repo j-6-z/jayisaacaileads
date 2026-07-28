@@ -408,6 +408,137 @@ input,select{font-family:inherit}
   .mobile-gate .gate-foot{margin-top:24px;font-size:11px;color:var(--steel);opacity:.6;border-top:1px solid var(--hair);padding-top:18px;width:100%;max-width:320px}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}}
+
+/* ═══════════ IMPACT LAYER — cyan command console ═══════════ */
+@keyframes radarSweep{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes scanPulse{0%,100%{opacity:.35}50%{opacity:.9}}
+@keyframes findIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+@keyframes gridDrift{0%{background-position:0 0}100%{background-position:44px 44px}}
+@keyframes barStripe{0%{background-position:0 0}100%{background-position:34px 0}}
+@keyframes glowBreathe{0%,100%{box-shadow:0 0 22px -6px var(--o-glow)}50%{box-shadow:0 0 40px -4px var(--o-glow)}}
+@keyframes numRise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* view header: living radar behind the icon */
+.vhead{position:relative}
+.vhead h1{position:relative;z-index:1}
+.vh-glow{position:relative;filter:drop-shadow(0 0 10px var(--o-glow))}
+.vh-glow::after{content:"";position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;
+  border-radius:50%;pointer-events:none;
+  background:conic-gradient(from 0deg,transparent 0deg,var(--o-glow) 40deg,transparent 80deg);
+  opacity:.5;animation:radarSweep 3.6s linear infinite}
+
+/* scan box: grid floor + charged border while running */
+.scan-box{position:relative;overflow:hidden;
+  box-shadow:0 20px 60px -28px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.04)}
+.scan-box::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(var(--hair) 1px,transparent 1px),linear-gradient(90deg,var(--hair) 1px,transparent 1px);
+  background-size:44px 44px;animation:gridDrift 24s linear infinite;
+  -webkit-mask-image:radial-gradient(ellipse at 50% 0%,#000,transparent 78%);
+          mask-image:radial-gradient(ellipse at 50% 0%,#000,transparent 78%)}
+.scan-box > *{position:relative;z-index:1}
+.scan-box:has(.scan-progress.on){border-color:rgba(34,211,238,.42);animation:glowBreathe 1.8s ease-in-out infinite}
+
+/* input + go button */
+.scan-input:focus{border-color:var(--o-hot);box-shadow:0 0 0 3px rgba(34,211,238,.14),inset 0 0 22px rgba(34,211,238,.05);outline:none}
+.scan-go{position:relative;overflow:hidden;background-size:190% 190%;background-position:0% 50%;
+  transition:transform .18s var(--ease),box-shadow .18s var(--ease),background-position .5s var(--ease)}
+.scan-go:hover:not(:disabled){transform:translateY(-2px) scale(1.02);background-position:100% 50%;
+  box-shadow:0 12px 34px -8px var(--o-glow),0 0 26px var(--o-glow)}
+.scan-go:active:not(:disabled){transform:scale(.97)}
+.scan-go:disabled{opacity:.6;cursor:not-allowed}
+
+/* progress: striped, alive */
+.scan-progress-fill{position:relative;overflow:hidden;
+  box-shadow:0 0 14px var(--o-glow),0 0 4px var(--o-hot)}
+.scan-progress-fill::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(115deg,rgba(255,255,255,.22) 0 8px,transparent 8px 17px);
+  animation:barStripe .7s linear infinite}
+.scan-status{font-family:var(--mono);letter-spacing:.02em}
+.scan-status.on{animation:scanPulse 1.6s ease-in-out infinite}
+
+/* metrics: glowing figures */
+.metric{position:relative;overflow:hidden}
+.metric::after{content:"";position:absolute;right:-30%;top:-60%;width:120px;height:120px;border-radius:50%;
+  background:radial-gradient(circle,var(--o-glow),transparent 68%);opacity:.16;pointer-events:none}
+.metric:hover{transform:translateY(-3px);border-color:rgba(34,211,238,.34);
+  box-shadow:0 16px 40px -18px rgba(0,0,0,.6),0 0 26px -10px var(--o-glow)}
+.m-value{animation:numRise .5s var(--ease) backwards;text-shadow:0 0 18px currentColor}
+.metric:nth-child(2) .m-value{animation-delay:.06s}
+.metric:nth-child(3) .m-value{animation-delay:.12s}
+.metric:nth-child(4) .m-value{animation-delay:.18s}
+
+/* panels: depth */
+.panel{box-shadow:0 18px 50px -26px rgba(0,0,0,.65)}
+.panel-head{position:relative}
+.panel-head::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;
+  background:linear-gradient(90deg,var(--o-hot),transparent 55%);opacity:.5}
+
+/* findings: severity spine, stagger, hover slide */
+.finding{position:relative;animation:findIn .4s var(--ease) backwards;transition:.18s var(--ease);
+  border-left:3px solid transparent}
+.finding:nth-child(3){animation-delay:.04s}.finding:nth-child(4){animation-delay:.08s}
+.finding:nth-child(5){animation-delay:.12s}.finding:nth-child(6){animation-delay:.16s}
+.finding:nth-child(7){animation-delay:.2s}.finding:nth-child(8){animation-delay:.24s}
+.finding:hover{background:rgba(34,211,238,.045);border-left-color:var(--o-hot);transform:translateX(3px)}
+.finding:has(.finding-sev.crit){border-left-color:rgba(248,113,113,.55)}
+.finding:has(.finding-sev.high){border-left-color:rgba(251,146,60,.5)}
+.finding:has(.finding-sev.med){border-left-color:rgba(251,191,36,.45)}
+.finding-sev{text-shadow:0 0 16px currentColor;font-variant-numeric:tabular-nums}
+.finding-fix{transition:.16s var(--ease)}
+.finding-fix:hover{transform:translateY(-1px);box-shadow:0 6px 18px -6px var(--o-glow);border-color:var(--o-hot)}
+
+/* grade badge */
+.grade-badge{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;
+  border-radius:9px;font-weight:900;font-size:15px;font-family:var(--mono);margin-right:10px;
+  border:1.5px solid currentColor;text-shadow:0 0 14px currentColor}
+.grade-badge.g-A{color:var(--ok);background:rgba(52,229,160,.1)}
+.grade-badge.g-B{color:var(--o-hot);background:rgba(34,211,238,.1)}
+.grade-badge.g-C{color:var(--warn);background:rgba(251,191,36,.1)}
+.grade-badge.g-D{color:#FB923C;background:rgba(251,146,60,.1)}
+.grade-badge.g-F{color:var(--crit);background:rgba(248,113,113,.12)}
+
+/* link check verdict cards */
+.panel.verdict-safe{border-color:rgba(52,229,160,.4);box-shadow:0 18px 50px -26px rgba(0,0,0,.65),0 0 34px -14px rgba(52,229,160,.5)}
+.panel.verdict-safe .panel-head::after{background:linear-gradient(90deg,var(--ok),transparent 55%)}
+.panel.verdict-safe .ph-tag{color:var(--ok);border-color:rgba(52,229,160,.4)}
+.panel.verdict-caution{border-color:rgba(251,191,36,.42);box-shadow:0 18px 50px -26px rgba(0,0,0,.65),0 0 34px -14px rgba(251,191,36,.45)}
+.panel.verdict-caution .panel-head::after{background:linear-gradient(90deg,var(--warn),transparent 55%)}
+.panel.verdict-caution .ph-tag{color:var(--warn);border-color:rgba(251,191,36,.42)}
+.panel.verdict-dangerous{border-color:rgba(248,113,113,.5);
+  box-shadow:0 18px 50px -26px rgba(0,0,0,.7),0 0 42px -12px rgba(248,113,113,.55);
+  animation:glowBreathe 2.4s ease-in-out infinite}
+.panel.verdict-dangerous .panel-head::after{background:linear-gradient(90deg,var(--crit),transparent 55%)}
+.panel.verdict-dangerous .ph-tag{color:var(--crit);border-color:rgba(248,113,113,.5)}
+.panel.verdict-dangerous .panel-head h3{color:var(--crit);text-shadow:0 0 20px rgba(248,113,113,.35)}
+
+/* rail active glow */
+.rail-btn.active{box-shadow:inset 0 0 26px rgba(34,211,238,.11),0 0 20px -9px var(--o-glow)}
+.rail-btn:hover:not(.active){background:rgba(34,211,238,.05)}
+
+/* topbar glass + credits pulse */
+.topbar{backdrop-filter:blur(14px)}
+.credits{transition:.18s var(--ease)}
+.credits:hover{border-color:rgba(34,211,238,.42);box-shadow:0 0 22px -8px var(--o-glow)}
+.toast{backdrop-filter:blur(12px);box-shadow:0 18px 46px -16px rgba(0,0,0,.75),0 0 30px -12px var(--o-glow)}
+
+/* empty state */
+.empty h3{text-shadow:0 0 20px var(--o-glow)}
+
+/* light theme: dial the glow back so it stays readable */
+.light .scan-box{box-shadow:0 16px 44px -28px rgba(15,40,55,.3)}
+.light .scan-box::before{opacity:.35}
+.light .panel{box-shadow:0 14px 40px -26px rgba(15,40,55,.28)}
+.light .finding:hover{background:rgba(34,211,238,.07)}
+.light .m-value,.light .finding-sev,.light .empty h3{text-shadow:none}
+.light .grade-badge{text-shadow:none}
+.light .panel.verdict-dangerous{animation:none}
+
+@media (prefers-reduced-motion:reduce){
+  .vh-glow::after,.scan-box::before,.scan-progress-fill::after,.scan-status.on,
+  .panel.verdict-dangerous,.scan-box:has(.scan-progress.on){animation:none}
+  .finding,.m-value{animation:none}
+}
+
 </style>
 </head>
 <body>
@@ -462,6 +593,7 @@ function copyGateLink(){
     <button class="rail-btn" onclick="location.href='/cybersecurity/'" title="Back to site"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg><span class="rlabel">Home</span><span class="tip">Home</span></button>
     <button class="rail-btn active" data-view="monitor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span class="rlabel">Threat Monitor</span><span class="tip">Threat Monitor</span></button>
     <button class="rail-btn" data-view="scanner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg><span class="rlabel">Vuln Scanner</span><span class="tip">Vulnerability Scanner</span></button>
+    <button class="rail-btn" data-view="linkcheck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.5.5l3-3a5 5 0 00-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 00-7.5-.5l-3 3a5 5 0 007 7l1.7-1.7"/></svg><span class="rlabel">Link Check</span><span class="tip">Is this link safe?</span></button>
     <button class="rail-btn" data-view="posture"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg><span class="rlabel">Posture</span><span class="tip">Security Posture</span></button>
     <div class="rail-spacer"></div>
     <div class="rail-divider"></div>
@@ -504,6 +636,8 @@ function copyGateLink(){
     <!-- SCANNER -->
     <div class="view" id="view-scanner"></div>
     <!-- POSTURE -->
+    <div class="view" id="view-linkcheck"></div>
+
     <div class="view" id="view-posture"></div>
   </main>
 </div>
@@ -527,7 +661,7 @@ function copyGateLink(){
    ============================================================ */
 
 /* ---------- COST TABLE (client hint; server re-checks) ---------- */
-const COST = { scan: 10, contain: 2 };
+const COST = { scan: 10, contain: 2, link: 3 };
 
 /* ---------- STATE ---------- */
 let state = {
@@ -536,7 +670,11 @@ let state = {
   contained: new Set(),
   scanning: false,
   findings: [],
+  scanMeta: null,
+  linkChecking: false,
+  linkResult: null,
 };
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 
 /* ---------- DEMO THREAT FEED ---------- */
 const THREATS = [
@@ -599,7 +737,7 @@ window.__renderCredits = function(n){
 };
 
 /* ---------- VIEW ROUTER ---------- */
-const VIEW_NAMES = { monitor:"Threat Monitor", scanner:"Vulnerability Scanner", posture:"Security Posture" };
+const VIEW_NAMES = { monitor:"Threat Monitor", scanner:"Vulnerability Scanner", linkcheck:"Link Check", posture:"Security Posture" };
 let currentView="monitor";
 function switchView(v){
   if(!VIEW_NAMES[v])return;
@@ -611,6 +749,7 @@ function switchView(v){
   document.title="JAYISAAC AI — "+VIEW_NAMES[v];
   if(v==="monitor")renderMonitor();
   if(v==="scanner")renderScanner();
+  if(v==="linkcheck")renderLinkCheck();
   if(v==="posture")renderPosture();
 }
 document.querySelectorAll(".rail-btn[data-view]").forEach(b=>b.addEventListener("click",()=>switchView(b.dataset.view)));
@@ -759,7 +898,7 @@ function renderScanner(){
       <div class="metric"><div class="m-label">Low</div><div class="m-value">${counts.low}</div></div>
     </div>
     <div class="panel">
-      <div class="panel-head"><h3>Findings</h3><span class="ph-tag">${f.length} issue${f.length===1?'':'s'} · ranked by risk</span></div>
+      <div class="panel-head"><h3>Findings</h3>${state.scanMeta?`<span class="grade-badge g-${state.scanMeta.grade}">${state.scanMeta.grade}</span><span class="ph-tag">${state.scanMeta.score}/100 · ${f.length} issue${f.length===1?"":"s"}</span>`:`<span class="ph-tag">${f.length} issue${f.length===1?"":"s"} · ranked by risk</span>`}</div>
       ${f.map(x=>`
         <div class="finding">
           <div class="finding-sev ${x.sev}">${x.n}</div>
@@ -777,35 +916,133 @@ function renderScanner(){
 async function runScan(){
   if(state.scanning)return;
   const target=(document.getElementById("scanTarget").value||"").trim();
-  if(!target){toast("Enter a target first");return;}
+  if(!target){toast("Enter a domain first");return;}
   if(state.credits < COST.scan){ toast(`Need ${COST.scan} credits to run a scan`); return; }
+  const u=window.auth&&window.auth.currentUser;
+  if(!u){location.href="/login.html";return;}
   state.scanning=true;
   const go=document.getElementById("scanGo"), prog=document.getElementById("scanProgress"),
         fill=document.getElementById("scanFill"), status=document.getElementById("scanStatus");
   go.disabled=true; prog.classList.add("on"); status.classList.add("on");
-  const stages=["Resolving target…","Enumerating services…","Fingerprinting stack…","Checking known CVEs…","Ranking by exploitability…"];
-  let p=0;
-  for(let i=0;i<stages.length;i++){
-    status.textContent="› "+stages[i];
-    p=Math.round(((i+1)/stages.length)*90);
-    fill.style.width=p+"%";
-    await new Promise(r=>setTimeout(r,480));
+  const stages=["Resolving DNS\u2026","Reading security headers\u2026","Inspecting TLS certificate\u2026","Checking SPF / DMARC / DKIM\u2026","Ranking by exploitability\u2026"];
+  let si=0,pct=8; fill.style.width="8%"; status.textContent="\u203a "+stages[0];
+  const ticker=setInterval(()=>{si=Math.min(si+1,stages.length-1);pct=Math.min(pct+18,88);
+    status.textContent="\u203a "+stages[si];fill.style.width=pct+"%";},1400);
+  try{
+    const idToken=await u.getIdToken();
+    const r=await fetch("/api/cyber-scan",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({idToken,domain:target})});
+    const d=await r.json();
+    clearInterval(ticker); state.scanning=false; go.disabled=false;
+    if(!d.ok){
+      const msg=d.error==="insufficient_credits"?(d.message||"Not enough credits")
+        :d.error==="domain_not_found"?"That domain does not resolve"
+        :d.error==="blocked_host"?"That address is a private network"
+        :d.error==="invalid_domain"?"Enter a valid domain, like acme.co"
+        :"Scan failed \u2014 no credits charged";
+      status.textContent="\u2715 "+msg; toast(msg);
+      setTimeout(()=>{prog.classList.remove("on");status.classList.remove("on");fill.style.width="0";},2200);
+      return;
+    }
+    fill.style.width="100%"; status.textContent=`\u2713 Scan complete \u00b7 grade ${d.grade} (${d.score}/100)`;
+    const SEV={critical:{c:"crit",n:"9.5"},high:{c:"high",n:"8.0"},medium:{c:"med",n:"6.0"},low:{c:"low",n:"3.0"}};
+    state.findings=(d.findings||[]).map(f=>{const s=SEV[f.severity]||SEV.low;
+      return {sev:s.c,n:s.n,title:esc(f.title),desc:esc(f.why),
+        cve:esc((f.category||"Finding")+" \u00b7 "+String(f.severity||"").toUpperCase()),fix:esc(f.fix||"")};});
+    state.scanMeta={domain:esc(d.domain),score:d.score,grade:esc(d.grade),
+      headline:esc(d.headline||""),summary:esc(d.summary||""),passed:(d.passed||[]).map(esc)};
+    if(typeof d.credits_remaining==="number"&&window.syncCredits)window.syncCredits(d.credits_remaining);
+    toast(`Grade ${d.grade} \u00b7 ${state.findings.length} issue${state.findings.length===1?"":"s"} found`);
+    setTimeout(()=>renderScanner(),450);
+  }catch(e){
+    clearInterval(ticker); state.scanning=false; go.disabled=false;
+    status.textContent="\u2715 Network error"; toast("Network error \u2014 try again");
+    setTimeout(()=>{prog.classList.remove("on");status.classList.remove("on");fill.style.width="0";},2200);
   }
-  /* charge credits — server is the enforcement point */
-  const res=await window.spendCredits(COST.scan,"cyber_scan",{target});
-  if(!res.ok){
-    status.textContent="✕ "+(res.message||"Scan failed — no credits charged");
-    go.disabled=false; state.scanning=false;
-    setTimeout(()=>{prog.classList.remove("on");status.classList.remove("on");fill.style.width="0";},1800);
-    return;
+}
+
+/* ---------- LINK CHECK (real /api/link-check) ---------- */
+function renderLinkCheck(){
+  const el=document.getElementById("view-linkcheck");
+  const r=state.linkResult;
+  el.innerHTML=`<div class="view-scroll">
+    <div class="vhead">
+      <h1><span class="vh-glow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.5.5l3-3a5 5 0 00-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 00-7.5-.5l-3 3a5 5 0 007 7l1.7-1.7"/></svg></span>Is this link safe?</h1>
+      <p>Paste any link before you click it. We follow every redirect to the real destination, check how old the domain is, and look for the tricks phishing pages use.</p>
+    </div>
+    <div class="scan-box">
+      <div class="scan-row">
+        <input class="scan-input" id="linkTarget" placeholder="paste a link, e.g. bit.ly/xyz" value="">
+        <button class="scan-go" id="linkGo" onclick="runLinkCheck()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>Check link</button>
+      </div>
+      <div class="scan-cost">Cost: <strong>${COST.link} credits</strong> per check \u00b7 nothing is clicked or downloaded</div>
+      <div class="scan-progress" id="linkProgress"><div class="scan-progress-fill" id="linkFill"></div></div>
+      <div class="scan-status" id="linkStatus"></div>
+    </div>
+    ${r?`
+    <div class="panel verdict-${r.verdict}">
+      <div class="panel-head"><h3>${r.headline}</h3><span class="ph-tag">${r.verdict.toUpperCase()} \u00b7 ${r.score}/100</span></div>
+      ${r.summary?`<div style="padding:14px 18px;color:var(--steel);font-size:13.5px;line-height:1.65">${r.summary}</div>`:""}
+      ${r.chain&&r.chain.length>1?`<div style="padding:0 18px 14px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--steel);margin-bottom:8px">Redirect chain</div>
+        ${r.chain.map((c,i)=>`<div style="font-family:var(--mono);font-size:11.5px;color:${i===r.chain.length-1?"var(--o-hot)":"var(--steel)"};padding:3px 0;word-break:break-all">${i>0?"\u21b3 ":""}${c}</div>`).join("")}
+      </div>`:""}
+      ${r.signals.map(s=>`
+        <div class="finding">
+          <div class="finding-sev ${s.level==="bad"?"crit":s.level==="warn"?"med":"low"}">${s.level==="bad"?"!":s.level==="warn"?"?":"\u2713"}</div>
+          <div class="finding-main">
+            <div class="finding-title">${s.label}</div>
+            <div class="finding-desc">${s.detail}</div>
+          </div>
+        </div>`).join("")}
+      <div style="padding:16px 18px;border-top:1px solid var(--hair);color:var(--ink);font-size:13.5px;font-weight:600">${r.advice}</div>
+    </div>`:`
+    <div class="panel"><div class="empty"><h3>No link checked yet</h3>Paste a suspicious link above. Worth testing: shortened links, anything from an unexpected invoice email, or a login page you did not navigate to yourself.</div></div>`}
+  </div>`;
+}
+async function runLinkCheck(){
+  if(state.linkChecking)return;
+  const url=(document.getElementById("linkTarget").value||"").trim();
+  if(!url){toast("Paste a link first");return;}
+  if(state.credits < COST.link){ toast(`Need ${COST.link} credits to check a link`); return; }
+  const u=window.auth&&window.auth.currentUser;
+  if(!u){location.href="/login.html";return;}
+  state.linkChecking=true;
+  const go=document.getElementById("linkGo"), prog=document.getElementById("linkProgress"),
+        fill=document.getElementById("linkFill"), status=document.getElementById("linkStatus");
+  go.disabled=true; prog.classList.add("on"); status.classList.add("on");
+  const stages=["Following redirects\u2026","Checking domain age\u2026","Looking for lookalike tricks\u2026","Writing the verdict\u2026"];
+  let si=0,pct=12; fill.style.width="12%"; status.textContent="\u203a "+stages[0];
+  const ticker=setInterval(()=>{si=Math.min(si+1,stages.length-1);pct=Math.min(pct+22,86);
+    status.textContent="\u203a "+stages[si];fill.style.width=pct+"%";},1100);
+  try{
+    const idToken=await u.getIdToken();
+    const rr=await fetch("/api/link-check",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({idToken,url})});
+    const d=await rr.json();
+    clearInterval(ticker); state.linkChecking=false; go.disabled=false;
+    if(!d.ok){
+      const msg=d.error==="insufficient_credits"?(d.message||"Not enough credits")
+        :d.error==="blocked_host"?(d.message||"That address points to a private network")
+        :d.error==="invalid_url"?"That does not look like a valid link"
+        :"Check failed \u2014 no credits charged";
+      status.textContent="\u2715 "+msg; toast(msg);
+      setTimeout(()=>{prog.classList.remove("on");status.classList.remove("on");fill.style.width="0";},2200);
+      return;
+    }
+    fill.style.width="100%";
+    status.textContent=`\u2713 ${d.verdict==="safe"?"Looks safe":d.verdict==="caution"?"Be careful":"Dangerous"} \u00b7 ${d.score}/100`;
+    state.linkResult={verdict:esc(d.verdict),score:d.score,headline:esc(d.headline||""),
+      summary:esc(d.summary||""),advice:esc(d.advice||""),chain:(d.chain||[]).map(esc),
+      signals:(d.signals||[]).map(s=>({label:esc(s.label),detail:esc(s.detail),level:esc(s.level)}))};
+    if(typeof d.credits_remaining==="number"&&window.syncCredits)window.syncCredits(d.credits_remaining);
+    if(d.verdict==="dangerous")toast("Dangerous link \u2014 do not enter anything on it");
+    setTimeout(()=>renderLinkCheck(),450);
+  }catch(e){
+    clearInterval(ticker); state.linkChecking=false; go.disabled=false;
+    status.textContent="\u2715 Network error"; toast("Network error \u2014 try again");
+    setTimeout(()=>{prog.classList.remove("on");status.classList.remove("on");fill.style.width="0";},2200);
   }
-  fill.style.width="100%"; status.textContent="✓ Scan complete";
-  /* build a believable finding set from the pool */
-  const n=3+Math.floor(Math.random()*3);
-  state.findings=FINDINGS_POOL.slice(0,n).sort((a,b)=>parseFloat(b.n)-parseFloat(a.n));
-  state.scanning=false;
-  toast(`Scan complete · ${state.findings.length} findings · ${COST.scan} credits used`);
-  setTimeout(()=>renderScanner(),500);
 }
 
 /* ---------- POSTURE (lighter) ---------- */
