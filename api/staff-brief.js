@@ -336,6 +336,10 @@ Write the brief now. Return only the JSON object.`;
       return res.status(502).json({ ok: false, error: "AI returned invalid format" });
     }
 
+    /* Greeting is computed here, not trusted to the model. Whatever it
+       returns is overwritten with the real weekday and time of day. */
+    brief.greeting = `Good ${partOfDay}. Here's ${localDayLabel(tz).split(",")[0]}.`;
+
     /* shape guard */
     brief.decisions = Array.isArray(brief.decisions) ? brief.decisions.slice(0, 4) : [];
     brief.meetings  = Array.isArray(brief.meetings)  ? brief.meetings.slice(0, 8)  : [];
