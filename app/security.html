@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JAYISAAC AI — Cyber Command</title>
+<link rel="icon" href="/my-favicon/favicon.ico" sizes="any">
+<link rel="icon" href="/my-favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/my-favicon/favicon-96x96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/my-favicon/apple-touch-icon.png" sizes="180x180">
+<link rel="manifest" href="/my-favicon/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   JAYISAAC AI — CYBER COMMAND  ·  MIDNIGHT CYAN
+   deep indigo-black glass · electric cyan accents · defensive
+   Matches search.html shell; retinted to the cybersecurity brand.
+   ============================================================ */
+:root{
+  --o:#0891B2;            /* cyan-700 — readable primary on dark */
+  --o-hot:#22D3EE;        /* cyan-400 highlight */
+  --o-deep:#0E7490;       /* cyan-800 */
+  --o-glow:rgba(34,211,238,.5);
+  --o-dim:rgba(34,211,238,.12);
+  --o-line:rgba(34,211,238,.3);
+
+  --rail-w:70px;
+  --rail-w-open:224px;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --ease:cubic-bezier(.4,0,.2,1);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+
+  --crit:#F87171;  --crit-bg:rgba(220,38,38,.14); --crit-line:rgba(220,38,38,.3);
+  --warn:#FBBF24;  --warn-bg:rgba(202,138,4,.16); --warn-line:rgba(202,138,4,.32);
+  --ok:#34E5A0;    --ok-bg:rgba(52,229,160,.1);   --ok-line:rgba(52,229,160,.28);
+  --ok-glow:rgba(52,229,160,.4);
+}
+
+/* ===== DARK (Midnight Cyan) — default ===== */
+[data-theme="dark"]{
+  --black:#0A0F14;
+  --p0:#0E141B;
+  --p1:#131B24;
+  --p2:#1A242F;
+  --p3:#24313E;
+  --hair:rgba(140,200,230,.09);
+  --hair-2:rgba(140,200,230,.05);
+  --ice:#E4F4F8;
+  --steel:#88A0AD;
+  --dim:#4C6270;
+  --data:#7DE3F2;
+  --scroll:rgba(140,200,230,.12);
+  --hover:rgba(140,200,230,.05);
+  --hover-2:rgba(140,200,230,.025);
+}
+/* ===== LIGHT (Crisp Cyan) ===== */
+[data-theme="light"]{
+  --black:#F4F8FA;
+  --p0:#FFFFFF;
+  --p1:#FFFFFF;
+  --p2:#EEF4F7;
+  --p3:#E3EDF1;
+  --hair:rgba(15,40,55,.10);
+  --hair-2:rgba(15,40,55,.06);
+  --ice:#0A1B22;
+  --steel:#436170;
+  --dim:#8FA6B0;
+  --data:#0E7490;
+  --scroll:rgba(15,40,55,.14);
+  --hover:rgba(15,40,55,.05);
+  --hover-2:rgba(15,40,55,.03);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family:'Plus Jakarta Sans',-apple-system,sans-serif;
+  background:var(--black);color:var(--ice);font-size:13px;overflow:hidden;
+  -webkit-font-smoothing:antialiased;display:flex;flex-direction:column;height:100vh;
+  transition:background .3s var(--ease),color .3s var(--ease);
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select{font-family:inherit}
+::placeholder{color:var(--dim)}
+::selection{background:var(--o-dim);color:var(--o-hot)}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--scroll);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:var(--o-line)}
+
+/* ============ ALERT BANNER ============ */
+.alert-banner{
+  display:flex;align-items:center;gap:12px;flex-shrink:0;padding:11px 20px;
+  background:linear-gradient(90deg,var(--o-dim),rgba(34,211,238,.04));
+  border-bottom:1px solid var(--o-line);position:relative;z-index:30;
+}
+.alert-banner.hide{display:none}
+.alert-banner .ab-icon{width:17px;height:17px;color:var(--o-hot);flex-shrink:0}
+.alert-banner .ab-text{font-size:12.5px;color:var(--ice);font-weight:500}
+.alert-banner .ab-text strong{font-weight:700}
+.alert-banner .ab-cta{margin-left:auto;flex-shrink:0;background:var(--o);color:#04262B;font-size:11.5px;font-weight:800;padding:6px 15px;border-radius:8px;transition:.15s var(--ease)}
+.alert-banner .ab-cta:hover{background:var(--o-hot);box-shadow:0 0 16px var(--o-glow)}
+.alert-banner .ab-close{flex-shrink:0;width:26px;height:26px;border-radius:7px;color:var(--steel);display:flex;align-items:center;justify-content:center;transition:.15s}
+.alert-banner .ab-close:hover{background:var(--hover);color:var(--ice)}
+.alert-banner .ab-close svg{width:14px;height:14px}
+
+/* ============ APP SHELL ============ */
+.app{
+  display:grid;grid-template-columns:var(--rail-w-open) 1fr;flex:1;min-height:0;
+  transition:grid-template-columns .28s var(--ease);
+  background:radial-gradient(1200px 600px at 78% -10%, rgba(34,211,238,.05), transparent 60%),var(--black);
+}
+.app.rail-collapsed{grid-template-columns:var(--rail-w) 1fr}
+
+/* ============ RAIL ============ */
+.rail{
+  background:linear-gradient(180deg,var(--p1),var(--black));
+  border-right:1px solid var(--hair);display:flex;flex-direction:column;
+  padding:16px 14px;gap:4px;position:relative;z-index:20;overflow:hidden;
+}
+.rail-top{display:flex;align-items:center;gap:12px;margin-bottom:12px;height:42px}
+.rail-logo{
+  width:42px;height:42px;border-radius:13px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--o-hot),var(--o-deep));
+  display:flex;align-items:center;justify-content:center;position:relative;
+  box-shadow:0 0 24px var(--o-glow),inset 0 1px 0 rgba(255,255,255,.25);
+}
+.rail-logo::after{content:'';position:absolute;inset:-4px;border-radius:16px;z-index:-1;background:var(--o-hot);opacity:.35;filter:blur(12px);animation:pulse-glow 3s ease-in-out infinite}
+@keyframes pulse-glow{0%,100%{opacity:.25}50%{opacity:.5}}
+.rail-logo svg{width:22px;height:22px;color:#04262B}
+.rail-wordmark{font-size:15px;font-weight:800;letter-spacing:-.01em;color:var(--ice);white-space:nowrap;flex:1;overflow:hidden;transition:opacity .2s var(--ease)}
+.rail-wordmark .wm-ai{color:var(--o-hot)}
+.rail-collapse{
+  width:30px;height:30px;border-radius:9px;flex-shrink:0;color:var(--steel);
+  display:flex;align-items:center;justify-content:center;background:var(--p2);
+  border:1px solid var(--hair);transition:.18s var(--ease);margin:0 auto 12px;
+}
+.rail-collapse:hover{background:var(--o-dim);border-color:var(--o-line);color:var(--o-hot);transform:scale(1.05)}
+.rail-collapse svg{width:16px;height:16px;transition:transform .3s var(--ease)}
+.app.rail-collapsed .rail-collapse svg{transform:rotate(180deg)}
+
+.rail-btn{height:44px;border-radius:11px;display:flex;align-items:center;gap:13px;padding:0 11px;color:var(--steel);position:relative;transition:color .15s var(--ease),background .15s var(--ease);width:100%}
+.rail-btn:hover{color:var(--ice);background:var(--hover)}
+.rail-btn.active{color:var(--o-hot);background:var(--o-dim)}
+.rail-btn.active::before{content:'';position:absolute;left:-14px;top:11px;bottom:11px;width:3px;border-radius:0 4px 4px 0;background:var(--o-hot);box-shadow:0 0 12px var(--o-glow),0 0 4px var(--o-hot)}
+.rail-btn svg{width:21px;height:21px;flex-shrink:0}
+.rail-btn .rlabel{font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;transition:opacity .2s var(--ease)}
+.rail-btn .tip{position:absolute;left:56px;top:50%;transform:translateY(-50%) translateX(-4px);background:var(--p2);color:var(--ice);padding:7px 12px;border-radius:9px;font-size:11.5px;font-weight:600;white-space:nowrap;opacity:0;pointer-events:none;transition:.18s var(--ease);z-index:50;border:1px solid var(--hair);box-shadow:0 10px 30px rgba(0,0,0,.4);display:none}
+.app.rail-collapsed .rail-btn .tip{display:block}
+.app.rail-collapsed .rail-btn:hover .tip{opacity:1;transform:translateY(-50%) translateX(0)}
+.app.rail-collapsed .rail-wordmark{opacity:0;width:0;flex:0;margin:0}
+.app.rail-collapsed .rail-btn .rlabel{opacity:0;width:0}
+.app.rail-collapsed .rail-btn{justify-content:center;padding:0;gap:0}
+.app.rail-collapsed .rail-top{justify-content:center}
+.rail-spacer{flex:1;min-height:8px}
+.rail-divider{height:1px;background:var(--hair);margin:8px 4px}
+.rail-theme{height:44px;border-radius:11px;display:flex;align-items:center;gap:13px;padding:0 11px;width:100%;color:var(--steel);transition:.15s}
+.rail-theme:hover{background:var(--hover);color:var(--ice)}
+.rail-theme .tt-track{width:38px;height:21px;border-radius:11px;background:var(--p3);border:1px solid var(--hair);flex-shrink:0;position:relative;transition:.2s}
+.rail-theme .tt-knob{position:absolute;top:2px;left:2px;width:15px;height:15px;border-radius:50%;background:var(--o-hot);box-shadow:0 0 8px var(--o-glow);transition:.25s var(--spring)}
+[data-theme="light"] .rail-theme .tt-knob{transform:translateX(17px)}
+.rail-theme .rlabel{font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;transition:opacity .2s}
+.app.rail-collapsed .rail-theme{justify-content:center;padding:0;gap:0}
+.app.rail-collapsed .rail-theme .rlabel{opacity:0;width:0}
+
+/* ============ MAIN ============ */
+.main{display:flex;flex-direction:column;overflow:hidden;background:var(--black)}
+.topbar{background:var(--p0);border-bottom:1px solid var(--hair);display:flex;align-items:center;gap:12px;padding:0 22px;height:60px;flex-shrink:0}
+.topbar-title{font-size:15px;font-weight:800;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.topbar-title .status-dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok-glow);animation:livepulse 2s infinite}
+@keyframes livepulse{0%,100%{opacity:1}50%{opacity:.35}}
+.topbar-title .st-label{font-size:11px;font-weight:700;font-family:var(--mono);color:var(--ok);text-transform:uppercase;letter-spacing:.08em}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.credits{display:flex;align-items:center;gap:8px;background:var(--p2);border:1px solid var(--o-line);border-radius:11px;padding:8px 14px;font-size:12.5px;font-weight:700;color:var(--o-hot);white-space:nowrap;box-shadow:inset 0 0 16px rgba(34,211,238,.06)}
+.credits #creditCount{font-family:var(--mono);font-weight:700;text-shadow:0 0 12px var(--o-glow)}
+.credits svg{width:14px;height:14px;filter:drop-shadow(0 0 4px var(--o-glow))}
+.upgrade{display:inline-block;text-decoration:none;background:linear-gradient(135deg,var(--o-hot),var(--o-deep));color:#04262B;font-size:12.5px;font-weight:800;padding:9px 18px;border-radius:11px;transition:.18s var(--ease);white-space:nowrap;box-shadow:0 0 20px var(--o-glow),inset 0 1px 0 rgba(255,255,255,.2)}
+.upgrade:hover{transform:translateY(-1px);box-shadow:0 0 32px var(--o-glow)}
+.avatar-wrap{position:relative}
+.rail-avatar{width:38px;height:38px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--o-hot),var(--o-deep));color:#04262B;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1.5px solid var(--o-line);box-shadow:0 0 16px var(--o-glow);transition:transform .2s var(--spring)}
+.rail-avatar:hover{transform:scale(1.08)}
+.avatar-menu{position:absolute;top:48px;right:0;width:248px;z-index:120;background:var(--p1);border:1px solid var(--hair);border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.5);padding:8px;opacity:0;transform:translateY(-8px) scale(.97);pointer-events:none;transition:.18s var(--ease)}
+.avatar-menu.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.am-head{display:flex;align-items:center;gap:11px;padding:10px 10px 12px}
+.am-avatar{width:38px;height:38px;border-radius:10px;flex-shrink:0;background:#2A3742;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;border:1px solid var(--hair)}
+.am-name{font-size:13.5px;font-weight:700;color:var(--ice)}
+.am-email{font-size:11.5px;color:var(--steel);margin-top:1px}
+.am-credits{display:flex;align-items:center;justify-content:space-between;padding:9px 11px;margin:0 2px 6px;border-radius:9px;background:var(--o-dim);border:1px solid var(--o-line);font-size:12px;color:var(--steel);font-weight:600}
+.am-credits strong{font-family:var(--mono);font-size:14px;color:var(--o-hot)}
+.am-item{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:10px 11px;border-radius:9px;font-size:13px;font-weight:600;color:var(--ice);transition:.12s}
+.am-item:hover{background:var(--hover)}
+.am-item svg{width:16px;height:16px;color:var(--steel);flex-shrink:0}
+.am-item.am-danger{color:#FF6B6B}
+.am-item.am-danger svg{color:#FF6B6B}
+.am-item.am-danger:hover{background:rgba(255,107,107,.1)}
+.am-divider{height:1px;background:var(--hair);margin:6px 4px}
+
+/* ============ VIEW SYSTEM ============ */
+.view{display:none;flex-direction:column;overflow:hidden;flex:1;animation:viewIn .3s var(--ease)}
+.view.active{display:flex}
+@keyframes viewIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.view-scroll{flex:1;overflow-y:auto;padding:24px 28px 40px}
+.vhead{margin-bottom:24px}
+.vhead h1{font-size:24px;font-weight:800;letter-spacing:-.02em;color:var(--ice);display:flex;align-items:center;gap:12px}
+.vhead h1 .vh-glow{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:var(--o-dim);border:1px solid var(--o-line)}
+.vhead h1 .vh-glow svg{width:19px;height:19px;color:var(--o-hot);filter:drop-shadow(0 0 6px var(--o-glow))}
+.vhead p{font-size:13.5px;color:var(--steel);margin-top:8px;max-width:620px;line-height:1.6}
+.vstate-badge{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-family:var(--mono);color:var(--o-hot);border:1px solid var(--o-line);background:var(--o-dim);padding:5px 12px;border-radius:20px;margin-left:6px}
+
+/* metric tiles */
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:24px}
+.metric{background:linear-gradient(160deg,var(--p2),var(--p0));border:1px solid var(--hair);border-radius:15px;padding:20px;position:relative;overflow:hidden;transition:.2s var(--ease)}
+.metric:hover{border-color:var(--o-line);transform:translateY(-2px)}
+.metric::before{content:'';position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle at 70% 30%,var(--o-dim),transparent 70%);opacity:.6}
+.metric .m-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dim)}
+.metric .m-value{font-size:30px;font-weight:800;font-family:var(--mono);color:var(--ice);margin-top:8px;letter-spacing:-.02em}
+.metric .m-value.glow{color:var(--o-hot);text-shadow:0 0 20px var(--o-glow)}
+.metric .m-value.crit{color:var(--crit)}
+.metric .m-value.warn{color:var(--warn)}
+.metric .m-value.ok{color:var(--ok)}
+.metric .m-sub{font-size:11.5px;color:var(--steel);margin-top:6px;font-weight:600;display:flex;align-items:center;gap:4px}
+
+/* panels */
+.panel{background:var(--p0);border:1px solid var(--hair);border-radius:16px;overflow:hidden;margin-bottom:18px}
+.panel-head{padding:16px 20px;border-bottom:1px solid var(--hair);display:flex;align-items:center;gap:12px}
+.panel-head h3{font-size:14px;font-weight:800;color:var(--ice)}
+.panel-head .ph-tag{margin-left:auto;font-size:10.5px;font-family:var(--mono);color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+.panel-head .ph-live{margin-left:auto;display:flex;align-items:center;gap:7px;font-size:10.5px;font-family:var(--mono);color:var(--ok);text-transform:uppercase;letter-spacing:.08em}
+.panel-head .ph-live::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok-glow);animation:livepulse 2s infinite}
+
+/* toolbar */
+.toolbar{display:flex;align-items:center;gap:10px;padding:0 0 16px;flex-wrap:wrap}
+.tbtn{display:flex;align-items:center;gap:7px;background:var(--p2);border:1px solid var(--hair);border-radius:10px;padding:9px 15px;font-size:12px;font-weight:700;color:var(--ice);transition:.15s var(--ease)}
+.tbtn:hover{border-color:var(--o-line);background:var(--p3);transform:translateY(-1px)}
+.tbtn svg{width:14px;height:14px;color:var(--steel)}
+.tbtn:hover svg{color:var(--o-hot)}
+.tbtn.primary{background:linear-gradient(135deg,var(--o-hot),var(--o-deep));color:#04262B;border-color:transparent;box-shadow:0 0 18px var(--o-glow)}
+.tbtn.primary svg{color:#04262B}
+.tbtn.primary:hover{transform:translateY(-1px);box-shadow:0 0 28px var(--o-glow)}
+.seg{display:flex;gap:4px;background:var(--p2);border:1px solid var(--hair);border-radius:10px;padding:3px}
+.seg button{padding:6px 13px;border-radius:7px;font-size:11.5px;font-weight:700;color:var(--steel);transition:.14s}
+.seg button.on{background:var(--o-dim);color:var(--o-hot)}
+
+/* ============ THREAT FEED ============ */
+.threat-list{display:flex;flex-direction:column}
+.threat-row{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--hair-2);cursor:pointer;transition:background .12s;position:relative;animation:rowIn .35s var(--ease) backwards}
+@keyframes rowIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.threat-row:last-child{border-bottom:none}
+.threat-row:hover{background:var(--hover-2)}
+.threat-row.sev-crit:hover{box-shadow:inset 3px 0 0 var(--crit)}
+.threat-row.sev-warn:hover{box-shadow:inset 3px 0 0 var(--warn)}
+.threat-row.sev-ok:hover{box-shadow:inset 3px 0 0 var(--ok)}
+.threat-ic{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid var(--hair)}
+.threat-ic svg{width:18px;height:18px}
+.sev-crit .threat-ic{background:var(--crit-bg);border-color:var(--crit-line)}
+.sev-crit .threat-ic svg{color:var(--crit)}
+.sev-warn .threat-ic{background:var(--warn-bg);border-color:var(--warn-line)}
+.sev-warn .threat-ic svg{color:var(--warn)}
+.sev-ok .threat-ic{background:var(--ok-bg);border-color:var(--ok-line)}
+.sev-ok .threat-ic svg{color:var(--ok)}
+.threat-main{min-width:0}
+.threat-title{font-size:13.5px;font-weight:700;color:var(--ice);display:flex;align-items:center;gap:9px}
+.threat-title .src{font-size:10px;font-family:var(--mono);color:var(--dim);font-weight:600;background:var(--p2);border:1px solid var(--hair);padding:1px 7px;border-radius:5px;text-transform:uppercase;letter-spacing:.04em}
+.threat-meta{font-size:11.5px;color:var(--steel);margin-top:3px;font-family:var(--mono)}
+.threat-right{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.sev-badge{font-size:10px;font-weight:800;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;padding:4px 10px;border-radius:7px;white-space:nowrap}
+.sev-badge.crit{background:var(--crit-bg);color:var(--crit);border:1px solid var(--crit-line)}
+.sev-badge.warn{background:var(--warn-bg);color:var(--warn);border:1px solid var(--warn-line)}
+.sev-badge.ok{background:var(--ok-bg);color:var(--ok);border:1px solid var(--ok-line)}
+.threat-state{font-size:11px;font-weight:700;font-family:var(--mono);color:var(--steel);min-width:96px;text-align:right}
+.threat-state.contained{color:var(--ok)}
+.threat-state.review{color:var(--warn)}
+
+/* drawer */
+.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:60;backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .22s}
+.drawer-overlay.show{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:440px;max-width:92vw;z-index:61;background:var(--p1);border-left:1px solid var(--o-line);transform:translateX(100%);transition:transform .3s var(--ease);display:flex;flex-direction:column;overflow:hidden}
+.drawer.show{transform:translateX(0);box-shadow:-30px 0 80px rgba(0,0,0,.4)}
+.drawer-head{display:flex;align-items:flex-start;gap:15px;padding:24px 24px 20px;border-bottom:1px solid var(--hair);background:radial-gradient(400px 200px at 100% 0%,rgba(34,211,238,.08),transparent 70%)}
+.drawer-head .d-ic{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid var(--hair)}
+.drawer-head .d-ic svg{width:22px;height:22px}
+.drawer-close{margin-left:auto;width:34px;height:34px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--dim);transition:.15s;border:1px solid var(--hair)}
+.drawer-close:hover{background:var(--p3);color:var(--ice)}
+.drawer-close svg{width:15px;height:15px}
+.drawer-name{font-size:17px;font-weight:800;line-height:1.25;color:var(--ice)}
+.drawer-sub{font-size:12px;color:var(--steel);margin-top:4px;font-family:var(--mono)}
+.drawer-body{flex:1;overflow-y:auto;padding:22px 24px 28px}
+.d-sec{margin-bottom:22px}
+.d-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--dim);margin-bottom:11px}
+.d-card{background:var(--p0);border:1px solid var(--hair);border-radius:14px;padding:16px 18px}
+.d-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;font-size:13px}
+.d-row+.d-row{border-top:1px solid var(--hair-2)}
+.d-row .k{color:var(--steel);flex-shrink:0}
+.d-row .v{font-weight:700;text-align:right;color:var(--ice)}
+.d-timeline{list-style:none;position:relative;padding-left:22px}
+.d-timeline::before{content:'';position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:var(--hair)}
+.d-tl{position:relative;padding:8px 0}
+.d-tl::before{content:'';position:absolute;left:-19px;top:12px;width:11px;height:11px;border-radius:50%;background:var(--p0);border:2px solid var(--o-hot);box-shadow:0 0 10px var(--o-glow)}
+.d-tl-t{font-size:12.5px;font-weight:700;color:var(--ice)}
+.d-tl-s{font-size:11px;color:var(--steel);font-family:var(--mono);margin-top:2px}
+.d-actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.d-btn{flex:1;min-width:120px;padding:12px;border-radius:11px;font-size:12.5px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px;transition:.16s var(--ease)}
+.d-btn svg{width:14px;height:14px}
+.d-btn.primary{background:linear-gradient(135deg,var(--o-hot),var(--o-deep));color:#04262B;box-shadow:0 0 20px var(--o-glow)}
+.d-btn.primary:hover{transform:translateY(-1px);box-shadow:0 0 30px var(--o-glow)}
+.d-btn.ghost{background:var(--p2);border:1px solid var(--hair);color:var(--ice)}
+.d-btn.ghost:hover{border-color:var(--o-line);color:var(--o-hot)}
+.d-btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+
+/* ============ SCANNER ============ */
+.scan-box{background:linear-gradient(160deg,var(--p2),var(--p0));border:1px solid var(--hair);border-radius:16px;padding:22px 24px;margin-bottom:22px}
+.scan-row{display:flex;gap:10px;flex-wrap:wrap}
+.scan-input{flex:1;min-width:240px;background:var(--p0);border:1px solid var(--hair);border-radius:11px;padding:13px 16px;color:var(--ice);font-size:14px;font-family:var(--mono);outline:none;transition:.15s}
+.scan-input:focus{border-color:var(--o-line);box-shadow:0 0 0 3px var(--o-dim)}
+.scan-go{background:linear-gradient(135deg,var(--o-hot),var(--o-deep));color:#04262B;font-size:13.5px;font-weight:800;padding:13px 26px;border-radius:11px;display:flex;align-items:center;gap:9px;transition:.18s var(--ease);box-shadow:0 0 20px var(--o-glow);white-space:nowrap}
+.scan-go:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 0 32px var(--o-glow)}
+.scan-go:disabled{opacity:.6;cursor:not-allowed}
+.scan-go svg{width:15px;height:15px}
+.scan-cost{font-size:11.5px;color:var(--steel);margin-top:12px;font-family:var(--mono)}
+.scan-cost strong{color:var(--o-hot)}
+.scan-progress{height:6px;border-radius:4px;background:var(--p3);overflow:hidden;margin-top:16px;display:none}
+.scan-progress.on{display:block}
+.scan-progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--o-deep),var(--o-hot));box-shadow:0 0 14px var(--o-glow);transition:width .3s var(--ease)}
+.scan-status{font-size:12px;font-family:var(--mono);color:var(--o-hot);margin-top:10px;display:none}
+.scan-status.on{display:block}
+
+.finding{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--hair-2)}
+.finding:last-child{border-bottom:none}
+.finding-sev{width:56px;text-align:center;font-family:var(--mono);font-size:15px;font-weight:800}
+.finding-sev.crit{color:var(--crit)}
+.finding-sev.high{color:#FB923C}
+.finding-sev.med{color:var(--warn)}
+.finding-sev.low{color:var(--steel)}
+.finding-main{min-width:0}
+.finding-title{font-size:13px;font-weight:700;color:var(--ice)}
+.finding-desc{font-size:11.5px;color:var(--steel);margin-top:3px;line-height:1.5}
+.finding-cve{font-size:10.5px;font-family:var(--mono);color:var(--o-hot);margin-top:5px}
+.finding-fix{background:var(--p2);border:1px solid var(--hair);border-radius:8px;padding:7px 12px;font-size:11px;font-weight:700;color:var(--ice);white-space:nowrap;transition:.15s}
+.finding-fix:hover{border-color:var(--o-line);color:var(--o-hot)}
+
+/* ============ POSTURE ============ */
+.posture-hero{display:flex;align-items:center;gap:30px;background:linear-gradient(135deg,var(--p2),var(--p0));border:1px solid var(--hair);border-radius:18px;padding:28px 30px;margin-bottom:22px;position:relative;overflow:hidden}
+.posture-hero::before{content:'';position:absolute;top:-40%;right:-5%;width:340px;height:340px;background:radial-gradient(circle,rgba(34,211,238,.12),transparent 65%);pointer-events:none}
+.posture-ring{width:132px;height:132px;flex-shrink:0;position:relative;z-index:1}
+.posture-ring svg{transform:rotate(-90deg)}
+.posture-ring .pr-num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.posture-ring .pr-val{font-size:34px;font-weight:800;font-family:var(--mono);color:var(--o-hot);text-shadow:0 0 20px var(--o-glow);line-height:1}
+.posture-ring .pr-max{font-size:11px;color:var(--dim);font-family:var(--mono);margin-top:2px}
+.posture-info{flex:1;position:relative;z-index:1}
+.posture-info h2{font-size:20px;font-weight:800;color:var(--ice);letter-spacing:-.01em}
+.posture-info p{font-size:13px;color:var(--steel);margin-top:6px;max-width:440px;line-height:1.55}
+.posture-trend{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;font-weight:700;font-family:var(--mono);color:var(--ok);background:var(--ok-bg);border:1px solid var(--ok-line);padding:5px 12px;border-radius:8px}
+.domain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:22px}
+.domain{background:var(--p0);border:1px solid var(--hair);border-radius:14px;padding:18px 20px;transition:.2s var(--ease)}
+.domain:hover{border-color:var(--o-line);transform:translateY(-2px)}
+.domain-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.domain-name{font-size:13px;font-weight:700;color:var(--ice)}
+.domain-score{font-size:15px;font-weight:800;font-family:var(--mono)}
+.domain-score.good{color:var(--ok)}
+.domain-score.mid{color:var(--warn)}
+.domain-score.bad{color:var(--crit)}
+.domain-track{height:7px;border-radius:5px;background:var(--p3);overflow:hidden}
+.domain-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--o-deep),var(--o-hot));box-shadow:0 0 10px var(--o-dim);animation:fillIn .8s var(--ease) backwards}
+.domain-fill.mid{background:linear-gradient(90deg,#B45309,var(--warn))}
+.domain-fill.bad{background:linear-gradient(90deg,#991B1B,var(--crit))}
+@keyframes fillIn{from{width:0!important}}
+.domain-note{font-size:11px;color:var(--steel);margin-top:10px;font-family:var(--mono)}
+.fix-list{display:flex;flex-direction:column}
+.fix{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--hair-2)}
+.fix:last-child{border-bottom:none}
+.fix-main{min-width:0}
+.fix-title{font-size:13px;font-weight:700;color:var(--ice)}
+.fix-meta{font-size:11.5px;color:var(--steel);margin-top:3px}
+.fix-lift{font-size:13px;font-weight:800;font-family:var(--mono);color:var(--ok);background:var(--ok-bg);border:1px solid var(--ok-line);padding:6px 12px;border-radius:8px;white-space:nowrap}
+
+/* empty */
+.empty{padding:60px 20px;text-align:center;color:var(--steel)}
+.empty h3{font-size:15px;font-weight:700;color:var(--ice);margin-bottom:6px}
+
+/* ============ AUTH VEIL ============ */
+.veil{position:fixed;inset:0;background:var(--black);z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity .3s}
+.veil.hide{opacity:0;pointer-events:none}
+.veil .spinner{width:36px;height:36px;border-radius:50%;border:3px solid var(--o-dim);border-top-color:var(--o-hot);animation:spin .8s linear infinite;box-shadow:0 0 24px var(--o-glow)}
+.veil span{color:var(--steel);font-size:12.5px;font-weight:600;font-family:var(--mono)}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ============ TOAST ============ */
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(90px);background:var(--p2);color:var(--ice);font-size:12.5px;font-weight:600;padding:12px 20px;border-radius:12px;border:1px solid var(--o-line);box-shadow:0 16px 50px rgba(0,0,0,.7),0 0 24px rgba(34,211,238,.15);transition:.3s var(--spring);z-index:100;display:flex;align-items:center;gap:9px}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast svg{width:15px;height:15px;color:var(--ok);filter:drop-shadow(0 0 5px var(--ok-glow))}
+
+/* ============ DESKTOP GATE ============ */
+.mobile-gate{display:none}
+@media(max-width:1024px){
+  .app,.alert-banner,.veil{display:none!important}
+  .mobile-gate{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:32px 24px;text-align:center;gap:18px;background:var(--black);color:var(--ice)}
+  .mobile-gate .gate-logo{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--o-hot),var(--o-deep));display:flex;align-items:center;justify-content:center;box-shadow:0 0 32px var(--o-glow);margin-bottom:6px}
+  .mobile-gate .gate-logo svg{width:32px;height:32px;color:#04262B}
+  .mobile-gate h1{font-size:22px;font-weight:800;letter-spacing:-.02em;max-width:340px;line-height:1.25}
+  .mobile-gate p{font-size:14px;line-height:1.6;color:var(--steel);max-width:360px}
+  .mobile-gate .gate-pill{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--o-hot);border:1px solid var(--o-line);background:var(--o-dim);padding:6px 14px;border-radius:20px}
+  .mobile-gate .gate-btns{display:flex;flex-direction:column;gap:10px;width:100%;max-width:280px;margin-top:8px}
+  .mobile-gate .gate-btn-primary{background:linear-gradient(135deg,var(--o-hot),var(--o-deep));color:#04262B;padding:12px 20px;border:none;border-radius:10px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:800;letter-spacing:.3px;box-shadow:0 0 18px var(--o-glow);transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px}
+  .mobile-gate .gate-btn-primary.copied{background:linear-gradient(135deg,#16A34A,#15803D)}
+  .mobile-gate .gate-link{color:var(--steel);font-weight:600;font-size:12.5px;text-decoration:none;padding:10px}
+  .mobile-gate .gate-foot{margin-top:24px;font-size:11px;color:var(--steel);opacity:.6;border-top:1px solid var(--hair);padding-top:18px;width:100%;max-width:320px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<!-- AUTH VEIL -->
+<div class="veil" id="authVeil"><div class="spinner"></div><span>Securing your session…</span></div>
+
+<!-- DESKTOP GATE -->
+<div class="mobile-gate">
+  <div class="gate-logo"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L4 5.5V11c0 5 3.4 9.4 8 10.5 4.6-1.1 8-5.5 8-10.5V5.5L12 2z" fill="currentColor"/></svg></div>
+  <span class="gate-pill">Desktop Required</span>
+  <h1>Cyber Command needs a big screen</h1>
+  <p>Threat monitoring, scans, and posture dashboards need real estate. Open this on your laptop or desktop.</p>
+  <div class="gate-btns">
+    <button class="gate-btn-primary" id="gateCopyBtn" type="button" onclick="copyGateLink()">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+      <span id="gateCopyLabel">Copy link to my computer</span>
+    </button>
+    <a class="gate-link" href="/cybersecurity/">&larr; Back to Cybersecurity</a>
+  </div>
+  <div class="gate-foot">Minimum resolution: 1024px wide</div>
+</div>
+<script>
+function copyGateLink(){
+  const url=window.location.href, btn=document.getElementById('gateCopyBtn'), label=document.getElementById('gateCopyLabel');
+  const ok=()=>{btn.classList.add('copied');label.textContent='✓ Link copied!';setTimeout(()=>{btn.classList.remove('copied');label.textContent='Copy link to my computer';},2200);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(ok).catch(()=>fb(url,ok));}else fb(url,ok);
+  function fb(t,cb){const a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy');cb();}catch(_){}document.body.removeChild(a);}
+}
+</script>
+
+<!-- ALERT BANNER -->
+<div class="alert-banner" id="alertBanner">
+  <svg class="ab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+  <span class="ab-text"><strong>Trial mode active.</strong> Live monitoring is simulated on demo data. Upgrade to connect your real stack.</span>
+  <a class="ab-cta" href="/cybersecurity/pricing.html">Upgrade</a>
+  <button class="ab-close" onclick="document.getElementById('alertBanner').classList.add('hide')" aria-label="Dismiss">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+</div>
+
+<div class="app" id="app">
+  <!-- RAIL -->
+  <nav class="rail">
+    <div class="rail-top">
+      <div class="rail-logo" title="JAYISAAC AI"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L4 5.5V11c0 5 3.4 9.4 8 10.5 4.6-1.1 8-5.5 8-10.5V5.5L12 2z" fill="currentColor"/></svg></div>
+      <span class="rail-wordmark">JAYISAAC <span class="wm-ai">CYBER</span></span>
+    </div>
+    <button class="rail-collapse" id="railCollapse" onclick="toggleRail()" title="Collapse menu" aria-label="Toggle menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="rail-btn" onclick="location.href='/cybersecurity/'" title="Back to site"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg><span class="rlabel">Home</span><span class="tip">Home</span></button>
+    <button class="rail-btn active" data-view="monitor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span class="rlabel">Threat Monitor</span><span class="tip">Threat Monitor</span></button>
+    <button class="rail-btn" data-view="scanner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg><span class="rlabel">Vuln Scanner</span><span class="tip">Vulnerability Scanner</span></button>
+    <button class="rail-btn" data-view="posture"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg><span class="rlabel">Posture</span><span class="tip">Security Posture</span></button>
+    <div class="rail-spacer"></div>
+    <div class="rail-divider"></div>
+    <button class="rail-theme" onclick="toggleTheme()" title="Toggle theme">
+      <span class="tt-track"><span class="tt-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="5"/></svg></span></span>
+      <span class="rlabel" id="themeLabel">Dark mode</span>
+    </button>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-title">
+        <span class="status-dot"></span>
+        <span id="topbarViewName">Threat Monitor</span>
+        <span class="st-label" id="topbarStatus">All systems nominal</span>
+      </div>
+      <div class="topbar-right">
+        <div class="credits">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span id="creditCount">—</span> credits
+        </div>
+        <a class="upgrade" href="/cybersecurity/pricing.html">Upgrade</a>
+        <div class="avatar-wrap">
+          <div class="rail-avatar" id="railAvatar" title="Account" onclick="toggleAvatarMenu(event)">JT</div>
+          <div class="avatar-menu" id="avatarMenu">
+            <div class="am-head"><div class="am-avatar" id="amAvatar">JT</div><div><div class="am-name" id="amName">Account</div><div class="am-email" id="amEmail"></div></div></div>
+            <div class="am-credits"><span>Credits</span><strong id="amCredits">—</strong></div>
+            <a class="am-item" href="/account.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>My Account</a>
+            <a class="am-item" href="/cybersecurity/pricing.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Plans &amp; Credits</a>
+            <div class="am-divider"></div>
+            <button class="am-item am-danger" onclick="closeAvatarMenu();(window.__signOut?window.__signOut():toast('Dev mode — sign-out disabled'))"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg>Sign out</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THREAT MONITOR (deep) -->
+    <div class="view active" id="view-monitor"></div>
+    <!-- SCANNER -->
+    <div class="view" id="view-scanner"></div>
+    <!-- POSTURE -->
+    <div class="view" id="view-posture"></div>
+  </main>
+</div>
+
+<!-- DRAWER -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<aside class="drawer" id="drawer" aria-label="Threat details">
+  <div class="drawer-head" id="drawerHead"></div>
+  <div class="drawer-body" id="drawerBody"></div>
+</aside>
+
+<div class="toast" id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span id="toastMsg"></span></div>
+
+<script>
+/* ============================================================
+   CYBER COMMAND — app logic (non-module)
+   Credits are Firestore-backed (see module script at bottom):
+   - window.__credits mirrors users/{uid}.credits via onSnapshot
+   - window.spendCredits(cost, action, meta) calls /api and
+     returns the new balance (server is the enforcement point)
+   ============================================================ */
+
+/* ---------- COST TABLE (client hint; server re-checks) ---------- */
+const COST = { scan: 10, contain: 2 };
+
+/* ---------- STATE ---------- */
+let state = {
+  credits: 0,          /* mirror of window.__credits */
+  containing: new Set(),
+  contained: new Set(),
+  scanning: false,
+  findings: [],
+};
+
+/* ---------- DEMO THREAT FEED ---------- */
+const THREATS = [
+  {id:"t1",sev:"crit",src:"identity",title:"Suspicious admin login blocked",meta:"02:14 UTC · unfamiliar geo (Kyiv, UA) · admin@acme.co",state:"contained",
+   detail:"A sign-in to a privileged account originated from an unrecognized location and device fingerprint. Impossible-travel heuristic fired (previous session 41 min earlier from Saskatoon, CA).",
+   tl:[["Anomalous login detected","02:14:03 UTC"],["Session challenged with MFA","02:14:04 UTC"],["Challenge failed ×3 — session revoked","02:14:39 UTC"],["Account temporarily locked","02:14:40 UTC"]]},
+  {id:"t2",sev:"crit",src:"endpoint",title:"Ransomware behavior on WKSTN-07",meta:"01:52 UTC · rapid file entropy change · 1 host",state:"contained",
+   detail:"Endpoint agent observed rapid mass-rename and high-entropy writes consistent with encryption. Host was auto-isolated from the network before lateral movement.",
+   tl:[["Mass file modification detected","01:52:11 UTC"],["Process tree snapshotted","01:52:12 UTC"],["Host quarantined from network","01:52:13 UTC"],["Forensic capture queued","01:52:20 UTC"]]},
+  {id:"t3",sev:"warn",src:"cloud",title:"Public S3 bucket exposed",meta:"00:30 UTC · misconfig · bucket: acme-backups",state:"review",
+   detail:"A storage bucket policy was changed to allow public read. No downloads observed yet. Recommended: revert policy and enable block-public-access at the account level.",
+   tl:[["Bucket ACL changed to public-read","00:30:02 UTC"],["Config drift alert raised","00:30:05 UTC"],["Awaiting your approval to auto-revert","—"]]},
+  {id:"t4",sev:"warn",src:"identity",title:"Privilege escalation flagged",meta:"Yesterday 23:10 UTC · svc-account · unusual scope",state:"review",
+   detail:"A service account was granted an unusually broad IAM role outside its normal change window. Flagged for human review before any automated rollback.",
+   tl:[["Role binding added","23:10:44 UTC"],["Outside change window — flagged","23:10:45 UTC"]]},
+  {id:"t5",sev:"ok",src:"network",title:"Port scan absorbed",meta:"Yesterday 19:02 UTC · edge · no action needed",state:"contained",
+   detail:"External host swept a range of ports on the edge firewall. All probes dropped by default-deny. No open services exposed. Logged for baseline.",
+   tl:[["Inbound scan pattern detected","19:02:33 UTC"],["Traffic dropped by policy","19:02:33 UTC"],["Source added to watch list","19:03:00 UTC"]]},
+  {id:"t6",sev:"ok",src:"endpoint",title:"Outdated agent auto-updated",meta:"Yesterday 06:00 UTC · 3 hosts · patched",state:"contained",
+   detail:"Three endpoints were running an agent version behind the fleet baseline. Auto-update rolled them forward during the maintenance window.",
+   tl:[["Version drift detected","06:00:01 UTC"],["Update pushed to 3 hosts","06:00:30 UTC"],["All hosts on baseline","06:04:12 UTC"]]},
+];
+
+/* demo scanner findings pool */
+const FINDINGS_POOL = [
+  {sev:"crit",n:"9.8",title:"Outdated OpenSSL on internet-facing host",desc:"Remote code execution possible via a known vulnerability in the TLS handshake path.",cve:"CVE-2024-XXXX · CVSS 9.8"},
+  {sev:"high",n:"8.1",title:"Public admin panel without MFA",desc:"An administrative login page is reachable from the public internet and does not enforce multi-factor auth.",cve:"Exposure · CWE-306"},
+  {sev:"high",n:"7.5",title:"Vulnerable dependency in production build",desc:"A transitive npm dependency has a published prototype-pollution advisory.",cve:"GHSA-xxxx-xxxx · CVSS 7.5"},
+  {sev:"med",n:"6.4",title:"Missing security headers",desc:"Responses lack Content-Security-Policy and Strict-Transport-Security headers.",cve:"Hardening · OWASP A05"},
+  {sev:"med",n:"5.9",title:"TLS 1.0/1.1 still enabled",desc:"Legacy TLS versions are accepted by the load balancer and should be disabled.",cve:"Config · PCI 4.1"},
+  {sev:"low",n:"3.1",title:"Verbose server banner",desc:"HTTP responses disclose exact server software and version.",cve:"Info leak · CWE-200"},
+];
+
+/* ---------- HELPERS ---------- */
+let toastTimer;
+function toast(msg){
+  const el=document.getElementById("toast");
+  document.getElementById("toastMsg").textContent=msg;
+  el.classList.add("show");clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>el.classList.remove("show"),2600);
+}
+function toggleRail(){
+  const c=document.getElementById("app").classList.toggle("rail-collapsed");
+  const b=document.getElementById("railCollapse");if(b)b.title=c?"Expand menu":"Collapse menu";
+}
+function toggleTheme(){
+  const r=document.documentElement,n=r.getAttribute("data-theme")==="light"?"dark":"light";
+  r.setAttribute("data-theme",n);
+  const l=document.getElementById("themeLabel");if(l)l.textContent=n==="dark"?"Dark mode":"Light mode";
+}
+function toggleAvatarMenu(e){if(e)e.stopPropagation();const m=document.getElementById("avatarMenu");m.classList.toggle("show");}
+function closeAvatarMenu(){document.getElementById("avatarMenu").classList.remove("show");}
+document.addEventListener("click",e=>{if(!e.target.closest(".avatar-wrap"))closeAvatarMenu();});
+
+/* credits UI sync — called by the module script whenever the snapshot changes */
+window.__renderCredits = function(n){
+  state.credits = (typeof n==="number") ? n : 0;
+  const set=(id)=>{const el=document.getElementById(id);if(el)el.textContent=state.credits.toLocaleString();};
+  set("creditCount"); set("amCredits");
+};
+
+/* ---------- VIEW ROUTER ---------- */
+const VIEW_NAMES = { monitor:"Threat Monitor", scanner:"Vulnerability Scanner", posture:"Security Posture" };
+let currentView="monitor";
+function switchView(v){
+  if(!VIEW_NAMES[v])return;
+  currentView=v; window.currentView=v;
+  document.querySelectorAll(".rail-btn[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===v));
+  document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));
+  document.getElementById("view-"+v).classList.add("active");
+  document.getElementById("topbarViewName").textContent=VIEW_NAMES[v];
+  document.title="JAYISAAC AI — "+VIEW_NAMES[v];
+  if(v==="monitor")renderMonitor();
+  if(v==="scanner")renderScanner();
+  if(v==="posture")renderPosture();
+}
+document.querySelectorAll(".rail-btn[data-view]").forEach(b=>b.addEventListener("click",()=>switchView(b.dataset.view)));
+
+/* ---------- THREAT MONITOR (deep) ---------- */
+let monitorFilter="all";
+function setMonitorFilter(f){monitorFilter=f;renderMonitor();}
+function sevIcon(sev){
+  if(sev==="crit")return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>`;
+  if(sev==="warn")return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>`;
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>`;
+}
+function threatStateLabel(t){
+  if(state.contained.has(t.id))return `<span class="threat-state contained">Contained</span>`;
+  if(t.state==="review")return `<span class="threat-state review">Needs review</span>`;
+  return `<span class="threat-state contained">${t.state==="contained"?"Contained":"Cleared"}</span>`;
+}
+function renderMonitor(){
+  const el=document.getElementById("view-monitor");
+  const crit=THREATS.filter(t=>t.sev==="crit").length;
+  const review=THREATS.filter(t=>t.state==="review"&&!state.contained.has(t.id)).length;
+  const contained=THREATS.filter(t=>t.state==="contained"||state.contained.has(t.id)).length;
+  let feed=THREATS.slice();
+  if(monitorFilter!=="all")feed=feed.filter(t=>t.sev===monitorFilter);
+  el.innerHTML=`<div class="view-scroll">
+    <div class="vhead">
+      <h1><span class="vh-glow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span>Threat Monitor</h1>
+      <p>Live view across identity, endpoint, cloud, and network. AI triages and contains automatically — you only step in when something needs a human.</p>
+    </div>
+    <div class="metrics">
+      <div class="metric"><div class="m-label">Open Critical</div><div class="m-value ${crit?'crit':'ok'}">${crit}</div><div class="m-sub">${crit?'needs attention':'all clear'}</div></div>
+      <div class="metric"><div class="m-label">Needs Review</div><div class="m-value ${review?'warn':'ok'}">${review}</div><div class="m-sub">awaiting approval</div></div>
+      <div class="metric"><div class="m-label">Auto-Contained</div><div class="m-value ok">${contained}</div><div class="m-sub">last 24h</div></div>
+      <div class="metric"><div class="m-label">Assets Watched</div><div class="m-value glow">2,481</div><div class="m-sub">across 4 domains</div></div>
+    </div>
+    <div class="toolbar">
+      <div class="seg">
+        <button class="${monitorFilter==='all'?'on':''}" onclick="setMonitorFilter('all')">All</button>
+        <button class="${monitorFilter==='crit'?'on':''}" onclick="setMonitorFilter('crit')">Critical</button>
+        <button class="${monitorFilter==='warn'?'on':''}" onclick="setMonitorFilter('warn')">Warning</button>
+        <button class="${monitorFilter==='ok'?'on':''}" onclick="setMonitorFilter('ok')">Info</button>
+      </div>
+      <button class="tbtn" onclick="toast('Feed refreshed — no new events')" style="margin-left:auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.5 9a9 9 0 0114.9-3.4L23 10M1 14l4.6 4.4A9 9 0 0020.5 15"/></svg>Refresh</button>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h3>Event Feed</h3><span class="ph-live">Live</span></div>
+      <div class="threat-list">
+        ${feed.map((t,i)=>`
+          <div class="threat-row sev-${t.sev}" style="animation-delay:${i*.04}s" onclick="openThreat('${t.id}')">
+            <div class="threat-ic">${sevIcon(t.sev)}</div>
+            <div class="threat-main">
+              <div class="threat-title">${t.title}<span class="src">${t.src}</span></div>
+              <div class="threat-meta">${t.meta}</div>
+            </div>
+            <div class="threat-right">
+              <span class="sev-badge ${t.sev}">${t.sev==='crit'?'Critical':t.sev==='warn'?'Warning':'Info'}</span>
+              ${threatStateLabel(t)}
+            </div>
+          </div>`).join("")}
+      </div>
+    </div>
+  </div>`;
+}
+function openThreat(id){
+  const t=THREATS.find(x=>x.id===id);if(!t)return;
+  const iconWrap = t.sev==='crit'?'crit-bg':(t.sev==='warn'?'warn-bg':'ok-bg');
+  const iconCol  = t.sev==='crit'?'var(--crit)':(t.sev==='warn'?'var(--warn)':'var(--ok)');
+  const isContained = state.contained.has(t.id) || t.state==="contained";
+  const canContain = t.state==="review" && !state.contained.has(t.id);
+  document.getElementById("drawerHead").innerHTML=`
+    <div class="d-ic" style="background:${t.sev==='crit'?'var(--crit-bg)':t.sev==='warn'?'var(--warn-bg)':'var(--ok-bg)'}">
+      <span style="color:${iconCol};display:flex">${sevIcon(t.sev)}</span>
+    </div>
+    <div><div class="drawer-name">${t.title}</div><div class="drawer-sub">${t.src.toUpperCase()} · ${t.meta.split('·')[0].trim()}</div></div>
+    <button class="drawer-close" onclick="closeDrawer()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg></button>`;
+  document.getElementById("drawerBody").innerHTML=`
+    <div class="d-sec"><div class="d-label">What happened</div>
+      <div class="d-card" style="font-size:13px;line-height:1.6;color:var(--ice)">${t.detail}</div></div>
+    <div class="d-sec"><div class="d-label">Signal</div>
+      <div class="d-card">
+        <div class="d-row"><span class="k">Severity</span><span class="v" style="color:${iconCol}">${t.sev==='crit'?'Critical':t.sev==='warn'?'Warning':'Informational'}</span></div>
+        <div class="d-row"><span class="k">Source</span><span class="v">${t.src}</span></div>
+        <div class="d-row"><span class="k">Status</span><span class="v" style="color:${isContained?'var(--ok)':'var(--warn)'}">${isContained?'Contained':'Needs review'}</span></div>
+      </div></div>
+    <div class="d-sec"><div class="d-label">Timeline</div>
+      <div class="d-card"><ul class="d-timeline">
+        ${t.tl.map(([a,b])=>`<li class="d-tl"><div class="d-tl-t">${a}</div><div class="d-tl-s">${b}</div></li>`).join("")}
+      </ul></div></div>
+    <div class="d-sec">
+      <div class="d-actions">
+        ${canContain
+          ? `<button class="d-btn primary" id="containBtn" onclick="containThreat('${t.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Contain now · ${COST.contain} cr</button>`
+          : `<button class="d-btn ghost" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>${isContained?'Already contained':'No action needed'}</button>`}
+        <button class="d-btn ghost" onclick="toast('Timeline exported')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>Export</button>
+      </div>
+    </div>`;
+  document.getElementById("drawer").classList.add("show");
+  document.getElementById("drawerOverlay").classList.add("show");
+}
+function closeDrawer(){document.getElementById("drawer").classList.remove("show");document.getElementById("drawerOverlay").classList.remove("show");}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDrawer();});
+
+async function containThreat(id){
+  const t=THREATS.find(x=>x.id===id);if(!t)return;
+  if(state.containing.has(id))return;
+  if(state.credits < COST.contain){ toast(`Need ${COST.contain} credits to run containment`); return; }
+  const btn=document.getElementById("containBtn");
+  if(btn){btn.disabled=true;btn.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin .8s linear infinite"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4"/></svg>Containing…`;}
+  const res = await window.spendCredits(COST.contain, "cyber_contain", { threatId:id, title:t.title });
+  if(!res.ok){
+    toast(res.message || "Containment failed — no credits charged");
+    if(btn){btn.disabled=false;openThreat(id);}
+    return;
+  }
+  state.contained.add(id);
+  toast("Threat contained · playbook executed");
+  openThreat(id);   /* re-render drawer with contained state */
+  renderMonitor();
+}
+
+/* ---------- SCANNER (lighter) ---------- */
+function renderScanner(){
+  const el=document.getElementById("view-scanner");
+  const f=state.findings;
+  const counts={crit:0,high:0,med:0,low:0};
+  f.forEach(x=>counts[x.sev]!==undefined&&counts[x.sev]++);
+  el.innerHTML=`<div class="view-scroll">
+    <div class="vhead">
+      <h1><span class="vh-glow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg></span>Vulnerability Scanner</h1>
+      <p>Point it at a host, domain, or IP. Findings come back ranked by real-world exploitability, with the fix for each one spelled out.</p>
+    </div>
+    <div class="scan-box">
+      <div class="scan-row">
+        <input class="scan-input" id="scanTarget" placeholder="acme.co  ·  10.0.0.0/24  ·  api.acme.co" value="acme.co">
+        <button class="scan-go" id="scanGo" onclick="runScan()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>Run scan</button>
+      </div>
+      <div class="scan-cost">Cost: <strong>${COST.scan} credits</strong> per scan · server-verified · results below</div>
+      <div class="scan-progress" id="scanProgress"><div class="scan-progress-fill" id="scanFill"></div></div>
+      <div class="scan-status" id="scanStatus"></div>
+    </div>
+    ${f.length?`
+    <div class="metrics">
+      <div class="metric"><div class="m-label">Critical</div><div class="m-value crit">${counts.crit}</div></div>
+      <div class="metric"><div class="m-label">High</div><div class="m-value" style="color:#FB923C">${counts.high}</div></div>
+      <div class="metric"><div class="m-label">Medium</div><div class="m-value warn">${counts.med}</div></div>
+      <div class="metric"><div class="m-label">Low</div><div class="m-value">${counts.low}</div></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h3>Findings</h3><span class="ph-tag">${f.length} issue${f.length===1?'':'s'} · ranked by risk</span></div>
+      ${f.map(x=>`
+        <div class="finding">
+          <div class="finding-sev ${x.sev}">${x.n}</div>
+          <div class="finding-main">
+            <div class="finding-title">${x.title}</div>
+            <div class="finding-desc">${x.desc}</div>
+            <div class="finding-cve">${x.cve}</div>
+          </div>
+          <button class="finding-fix" onclick="toast('Remediation steps copied')">View fix</button>
+        </div>`).join("")}
+    </div>`:`
+    <div class="panel"><div class="empty"><h3>No scan yet</h3>Enter a target above and run your first scan to see ranked findings here.</div></div>`}
+  </div>`;
+}
+async function runScan(){
+  if(state.scanning)return;
+  const target=(document.getElementById("scanTarget").value||"").trim();
+  if(!target){toast("Enter a target first");return;}
+  if(state.credits < COST.scan){ toast(`Need ${COST.scan} credits to run a scan`); return; }
+  state.scanning=true;
+  const go=document.getElementById("scanGo"), prog=document.getElementById("scanProgress"),
+        fill=document.getElementById("scanFill"), status=document.getElementById("scanStatus");
+  go.disabled=true; prog.classList.add("on"); status.classList.add("on");
+  const stages=["Resolving target…","Enumerating services…","Fingerprinting stack…","Checking known CVEs…","Ranking by exploitability…"];
+  let p=0;
+  for(let i=0;i<stages.length;i++){
+    status.textContent="› "+stages[i];
+    p=Math.round(((i+1)/stages.length)*90);
+    fill.style.width=p+"%";
+    await new Promise(r=>setTimeout(r,480));
+  }
+  /* charge credits — server is the enforcement point */
+  const res=await window.spendCredits(COST.scan,"cyber_scan",{target});
+  if(!res.ok){
+    status.textContent="✕ "+(res.message||"Scan failed — no credits charged");
+    go.disabled=false; state.scanning=false;
+    setTimeout(()=>{prog.classList.remove("on");status.classList.remove("on");fill.style.width="0";},1800);
+    return;
+  }
+  fill.style.width="100%"; status.textContent="✓ Scan complete";
+  /* build a believable finding set from the pool */
+  const n=3+Math.floor(Math.random()*3);
+  state.findings=FINDINGS_POOL.slice(0,n).sort((a,b)=>parseFloat(b.n)-parseFloat(a.n));
+  state.scanning=false;
+  toast(`Scan complete · ${state.findings.length} findings · ${COST.scan} credits used`);
+  setTimeout(()=>renderScanner(),500);
+}
+
+/* ---------- POSTURE (lighter) ---------- */
+function renderPosture(){
+  const el=document.getElementById("view-posture");
+  const score=72;
+  const circ=2*Math.PI*58, off=circ*(1-score/100);
+  const domains=[
+    {name:"Identity & Access",score:81,cls:"good",note:"MFA on 92% of accounts"},
+    {name:"Endpoints",score:88,cls:"good",note:"Fleet on current baseline"},
+    {name:"Cloud Config",score:63,cls:"mid",note:"1 public bucket open"},
+    {name:"Data Protection",score:54,cls:"bad",note:"Backups unencrypted at rest"},
+  ];
+  const fixes=[
+    {title:"Enforce MFA on 4 remaining admin accounts",meta:"Identity · ~10 min",lift:"+9"},
+    {title:"Revert the public S3 bucket policy",meta:"Cloud · ~5 min",lift:"+7"},
+    {title:"Enable encryption at rest on backups",meta:"Data · ~15 min",lift:"+6"},
+    {title:"Disable legacy TLS 1.0/1.1 at the LB",meta:"Cloud · ~10 min",lift:"+4"},
+  ];
+  el.innerHTML=`<div class="view-scroll">
+    <div class="vhead">
+      <h1><span class="vh-glow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></span>Security Posture</h1>
+      <p>One live score that rolls up your threats, gaps, and exposures — with the fixes that raise it most, ranked.</p>
+    </div>
+    <div class="posture-hero">
+      <div class="posture-ring">
+        <svg width="132" height="132" viewBox="0 0 132 132">
+          <circle cx="66" cy="66" r="58" fill="none" stroke="var(--p3)" stroke-width="10"/>
+          <circle cx="66" cy="66" r="58" fill="none" stroke="url(#pg)" stroke-width="10" stroke-linecap="round" stroke-dasharray="${circ.toFixed(1)}" stroke-dashoffset="${off.toFixed(1)}"/>
+          <defs><linearGradient id="pg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--o-deep)"/><stop offset="1" stop-color="var(--o-hot)"/></linearGradient></defs>
+        </svg>
+        <div class="pr-num"><div class="pr-val">${score}</div><div class="pr-max">/ 100</div></div>
+      </div>
+      <div class="posture-info">
+        <h2>Posture is holding — with room to improve</h2>
+        <p>Your identity and endpoint domains are strong. Cloud config and data protection are dragging the score. Clear the ranked fixes to push above 85.</p>
+        <span class="posture-trend"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg>+6 this week</span>
+      </div>
+    </div>
+    <div class="domain-grid">
+      ${domains.map(d=>`
+        <div class="domain">
+          <div class="domain-top"><span class="domain-name">${d.name}</span><span class="domain-score ${d.cls}">${d.score}</span></div>
+          <div class="domain-track"><div class="domain-fill ${d.cls==='good'?'':d.cls}" style="width:${d.score}%"></div></div>
+          <div class="domain-note">${d.note}</div>
+        </div>`).join("")}
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h3>Ranked fixes</h3><span class="ph-tag">biggest score lift first</span></div>
+      <div class="fix-list">
+        ${fixes.map(fx=>`
+          <div class="fix">
+            <div class="fix-main"><div class="fix-title">${fx.title}</div><div class="fix-meta">${fx.meta}</div></div>
+            <div class="fix-lift">${fx.lift} pts</div>
+          </div>`).join("")}
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ---------- BOOT (render first view; credits fill in via snapshot) ---------- */
+renderMonitor();
+</script>
+
+<script type="module">
+/* ============================================================
+   FIREBASE — auth gate + LIVE credits (onSnapshot) + spend API
+   Mirrors search.html, upgraded to a real-time balance so a
+   Stripe purchase or a spend in another tab updates instantly.
+   ============================================================ */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDHs92C3ariQ285KUkodOHV04sEVKr_dQ8",
+  authDomain: "jayisaac-ai.firebaseapp.com",
+  projectId: "jayisaac-ai",
+  storageBucket: "jayisaac-ai.firebasestorage.app",
+  messagingSenderId: "967801239356",
+  appId: "1:967801239356:web:0df3f35af72ce6e79b9039",
+  measurementId: "G-V91DS21PGE"
+};
+
+/* ⚠️ DEV BYPASS — set to false before deploying (same as search.html).
+   true = no login wall, fake credits for styling/dev.
+   false = real auth gate + real Firestore credits. */
+const DEV_BYPASS = false;
+
+const STARTING_CREDITS = 100;
+
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+window.auth = auth;
+
+let userRef = null;
+let creditsUnsub = null;
+
+/* veil safety timeout */
+const veilFallback = setTimeout(() => {
+  const v=document.getElementById("authVeil");
+  if(v && !v.classList.contains("hide")){ v.classList.add("hide"); }
+}, 6000);
+
+if (DEV_BYPASS) {
+  document.getElementById("authVeil").classList.add("hide");
+  window.__credits = 999;
+  window.__renderCredits(999);
+  console.warn("⚠️ DEV_BYPASS on — auth disabled, fake credits.");
+}
+
+onAuthStateChanged(auth, async (user) => {
+  if (DEV_BYPASS) return;
+  if (!user) { clearTimeout(veilFallback); location.replace("/login.html"); return; }
+
+  /* identity in the header */
+  const label = user.displayName || user.email || "U";
+  const initials = label.split(/[\s@.]+/).filter(Boolean).slice(0,2).map(w=>w[0].toUpperCase()).join("");
+  const niceName = user.displayName || (user.email ? user.email.split("@")[0] : "Account");
+  window.__profile = { name:user.displayName||"", email:user.email||"" };
+  document.getElementById("railAvatar").textContent = initials;
+  const amAvatar=document.getElementById("amAvatar"); if(amAvatar)amAvatar.textContent=initials;
+  const amName=document.getElementById("amName"); if(amName)amName.textContent=niceName;
+  const amEmail=document.getElementById("amEmail"); if(amEmail)amEmail.textContent=user.email||"";
+
+  userRef = doc(db, "users", user.uid);
+
+  /* ensure the user doc exists (shared across all apps on the site) */
+  try {
+    const snap = await getDoc(userRef);
+    if (!snap.exists()) {
+      await setDoc(userRef, {
+        email: user.email || null,
+        name: user.displayName || null,
+        credits: STARTING_CREDITS,
+        revealed: [],
+        createdAt: serverTimestamp(),
+      });
+    }
+  } catch(e){ console.error("user doc init failed:", e); }
+
+  /* LIVE credits — the single source of truth for every app on the site.
+     Any Stripe webhook increment or spend in another tab lands here instantly. */
+  creditsUnsub = onSnapshot(userRef, (docSnap) => {
+    if (!docSnap.exists()) return;
+    const c = docSnap.data().credits;
+    window.__credits = (typeof c === "number") ? c : 0;
+    window.__renderCredits(window.__credits);
+  }, (err) => {
+    console.warn("credits snapshot error:", err?.message);
+  });
+
+  clearTimeout(veilFallback);
+  document.getElementById("authVeil").classList.add("hide");
+});
+
+/* ─────────────────────────────────────────────────────────────
+   spendCredits(cost, action, meta)
+   The ONE place any cyber feature burns credits. Never decrements
+   Firestore from the client — hits a backend endpoint that:
+     1. verifies the Firebase ID token
+     2. re-checks the balance server-side
+     3. decrements with increment(-cost)
+     4. returns { ok, credits_remaining }
+   The onSnapshot listener above then updates the UI automatically.
+   Endpoint suggestion: /api/app-charge  (mirror /api/generate-email)
+   ───────────────────────────────────────────────────────────── */
+window.spendCredits = async (cost, action, meta = {}) => {
+  if (DEV_BYPASS) {
+    window.__credits = Math.max(0, (window.__credits||0) - cost);
+    window.__renderCredits(window.__credits);
+    return { ok:true, credits_remaining: window.__credits };
+  }
+  if (!auth.currentUser) return { ok:false, message:"Not signed in" };
+  if ((window.__credits||0) < cost) return { ok:false, message:"Not enough credits" };
+
+  try {
+    const idToken = await auth.currentUser.getIdToken();
+    const resp = await fetch("/api/app-charge", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ idToken, action, cost, meta }),
+    });
+
+    if (!resp.ok) {
+      const err = await resp.json().catch(()=> ({}));
+      if (err.error === "insufficient_credits")
+        return { ok:false, message:`Not enough credits (need ${cost}).` };
+      return { ok:false, message: err.message || "Charge failed" };
+    }
+    const data = await resp.json();
+    if (!data.ok) return { ok:false, message: data.message || "Charge rejected" };
+    /* onSnapshot will push the new balance; set optimistically too */
+    if (typeof data.credits_remaining === "number") {
+      window.__credits = data.credits_remaining;
+      window.__renderCredits(window.__credits);
+    }
+    return { ok:true, credits_remaining: data.credits_remaining };
+  } catch (e) {
+    console.error("spendCredits failed:", e);
+    return { ok:false, message:"Network error — no credits charged" };
+  }
+};
+
+/* guarded sign-out for the avatar menu */
+window.__signOut = async () => {
+  if (DEV_BYPASS) { window.toast?.("Dev mode — sign-out disabled"); return; }
+  if (confirm("Sign out of JAYISAAC AI?")) {
+    if (creditsUnsub) creditsUnsub();
+    await signOut(auth);
+    location.replace("/login.html");
+  }
+};
+</script>
+</body>
+</html>

@@ -33,7 +33,7 @@ const LINKS = [
             { label: "People Search",      sub: "Owners, GMs, buyers",       href: "/lead-generation/people-search.html"      },
             { label: "Company Search",     sub: "Filter by industry & size", href: "/lead-generation/company-search.html"     },
             { label: "Cold Calling Lists", sub: "Dial-ready exports",        href: "/lead-generation/cold-calling-lists.html" },
-            { label: "Pricing",            sub: "Flat monthly plans",        href: "/lead-generation/pricing.html"            },
+            { label: "Pricing",            sub: "Flat monthly plans",        href: "/pricing.html"            },
           ]
         },
         {
@@ -43,7 +43,7 @@ const LINKS = [
             { label: "Briefings",    sub: "Your day, decided",  href: "/chief-of-staff/briefings.html"    },
             { label: "Delegation",   sub: "Nothing slips",      href: "/chief-of-staff/delegation.html"   },
             { label: "Meeting Prep", sub: "Walk in ready",      href: "/chief-of-staff/meeting-prep.html" },
-            { label: "Pricing",      sub: "Flat monthly plans", href: "/chief-of-staff/pricing.html"      },
+            { label: "Pricing",      sub: "Flat monthly plans", href: "/pricing.html"      },
           ]
         },
         {
@@ -53,7 +53,7 @@ const LINKS = [
             { label: "Threat Detection",    sub: "Caught before it lands", href: "/cybersecurity/threat-detection.html"    },
             { label: "Incident Response",   sub: "Contain & remediate",    href: "/cybersecurity/incident-response.html"   },
             { label: "Vulnerability Scans", sub: "Know your gaps",         href: "/cybersecurity/vulnerability-scans.html" },
-            { label: "Pricing",             sub: "Flat monthly plans",     href: "/cybersecurity/pricing.html"             },
+            { label: "Pricing",             sub: "Flat monthly plans",     href: "/pricing.html"             },
           ]
         }
       ]
@@ -61,7 +61,7 @@ const LINKS = [
   },
   {
     label: "Pricing",
-    href:  "/lead-generation/pricing.html",
+    href:  "/pricing.html",
     mega: {
       feature: {
         eyebrow: "Pricing",
@@ -72,19 +72,19 @@ const LINKS = [
       },
       cols: [
         {
-          head: "Lead Generation", href: "/lead-generation/pricing.html", accent: "lead",
+          head: "Lead Generation", href: "/pricing.html", accent: "lead",
           sub: "Prospecting plans", icon: `<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
-          items: [ { label: "See Lead Gen plans", sub: "Verified contacts & AI outreach", href: "/lead-generation/pricing.html" } ]
+          items: [ { label: "See Lead Gen plans", sub: "Verified contacts & AI outreach", href: "/pricing.html" } ]
         },
         {
-          head: "Chief of Staff", href: "/chief-of-staff/pricing.html", accent: "staff",
+          head: "Chief of Staff", href: "/pricing.html", accent: "staff",
           sub: "Operations plans", icon: `<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>`,
-          items: [ { label: "See Chief of Staff plans", sub: "Briefings, delegation & more", href: "/chief-of-staff/pricing.html" } ]
+          items: [ { label: "See Chief of Staff plans", sub: "Briefings, delegation & more", href: "/pricing.html" } ]
         },
         {
-          head: "Cybersecurity", href: "/cybersecurity/pricing.html", accent: "cyber",
+          head: "Cybersecurity", href: "/pricing.html", accent: "cyber",
           sub: "Security plans", icon: `<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
-          items: [ { label: "See Cybersecurity plans", sub: "Detection, response & scans", href: "/cybersecurity/pricing.html" } ]
+          items: [ { label: "See Cybersecurity plans", sub: "Detection, response & scans", href: "/pricing.html" } ]
         }
       ]
     }
@@ -408,40 +408,103 @@ body { padding-top: var(--jia-h); }
 .jia-acct.open .jia-acct-arr { transform:rotate(180deg); }
 
 .jia-acct-menu {
-  position:absolute; top:calc(100% + .75rem); right:0;
+  position:absolute; top:calc(100% + .6rem); right:0;
   background:#fff; border:1px solid var(--jia-line);
-  border-radius:14px; box-shadow:0 24px 60px rgba(28,24,34,.16);
-  min-width:220px; overflow:hidden;
-  opacity:0; visibility:hidden; transform:translateY(6px);
-  transition:opacity .2s, transform .2s, visibility .2s;
+  border-radius:16px;
+  box-shadow:0 1px 2px rgba(28,24,34,.06), 0 28px 60px rgba(28,24,34,.18);
+  min-width:264px; padding:6px;
+  max-height:calc(100vh - 100px); overflow-y:auto; overscroll-behavior:contain;
+  opacity:0; visibility:hidden; transform:translateY(6px) scale(.98);
+  transform-origin:top right;
+  transition:opacity .18s ease, transform .22s cubic-bezier(.22,.8,.3,1), visibility .18s;
 }
-.jia-acct.open .jia-acct-menu { opacity:1; visibility:visible; transform:translateY(0); }
+.jia-acct.open .jia-acct-menu { opacity:1; visibility:visible; transform:translateY(0) scale(1); }
 
-.jia-acct-head { padding:.9rem 1.15rem; border-bottom:1px solid var(--jia-line); }
-.jia-acct-head .nm { font-size:.88rem; font-weight:700; color:var(--jia-ink); display:block; margin-bottom:.12rem; }
-.jia-acct-head .em { font-size:.74rem; color:var(--jia-faint); word-break:break-all; }
+/* identity block */
+.jia-acct-head {
+  display:flex; align-items:center; gap:.65rem;
+  padding:.7rem .65rem .8rem;
+  margin-bottom:.25rem;
+  border-bottom:1px solid var(--jia-line);
+}
+.jia-head-photo {
+  width:34px; height:34px; border-radius:50%; flex-shrink:0;
+  object-fit:cover; border:1.5px solid var(--jia-blue-line);
+}
+.jia-acct-head .who { min-width:0 }
+.jia-acct-head .nm {
+  font-size:.85rem; font-weight:700; color:var(--jia-ink);
+  display:block; line-height:1.25;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.jia-acct-head .em {
+  font-size:.72rem; color:var(--jia-faint);
+  display:block; line-height:1.3;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
 
+
+/* rows — spacing and rounded hovers, not table borders */
 .jia-acct-menu a,
 .jia-acct-menu button {
-  display:flex; align-items:center; gap:.7rem;
-  padding:.78rem 1.15rem;
-  color:var(--jia-soft); text-decoration:none;
+  position:relative;
+  display:flex; align-items:center; gap:.65rem;
+  padding:.55rem .65rem;
   border:none; background:none; width:100%;
-  font-size:.845rem; cursor:pointer;
-  border-bottom:1px solid var(--jia-line);
+  border-radius:9px;
+  color:var(--jia-soft); text-decoration:none;
+  font-size:.845rem; font-weight:500; cursor:pointer;
   font-family:inherit; text-align:left;
-  transition:background .17s, color .17s;
+  transition:background .15s, color .15s;
 }
-.jia-acct-menu a:last-child,
-.jia-acct-menu button:last-child { border-bottom:none; }
 .jia-acct-menu a:hover,
-.jia-acct-menu button:hover { background:var(--jia-cream); color:var(--jia-blue); }
+.jia-acct-menu button:hover { background:var(--jia-cream); color:var(--jia-ink); text-decoration:none; }
 .jia-acct-menu svg {
   width:15px; height:15px; stroke:currentColor; fill:none;
-  stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0;
+  stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0;
 }
-.jia-signout { color:#DC2626!important; }
-.jia-signout:hover { background:#FEF2F2!important; color:#B91C1C!important; }
+
+/* account rows: one quiet icon treatment, uniform across all of them */
+.jia-acct-row > svg { color:var(--jia-faint); transition:color .15s; }
+.jia-acct-row:hover > svg { color:var(--jia-blue); }
+
+/* app rows: the products carry their colour, and only they do */
+.jia-app-link { font-weight:600; color:var(--jia-ink); }
+.jia-app-ic {
+  width:26px; height:26px; border-radius:8px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  transition:transform .18s cubic-bezier(.22,.8,.3,1), box-shadow .18s;
+}
+.jia-app-ic svg { width:13px; height:13px; stroke:#fff; stroke-width:2.2; }
+.jia-app-ic.ic-lead  { background:linear-gradient(135deg,#818CF8,#4F46E5); box-shadow:0 3px 8px rgba(79,70,229,.3); }
+.jia-app-ic.ic-staff { background:linear-gradient(135deg,#C084FC,#7C3AED); box-shadow:0 3px 8px rgba(124,58,237,.28); }
+.jia-app-ic.ic-cyber { background:linear-gradient(135deg,#67E8F9,#0E92A8); box-shadow:0 3px 8px rgba(14,146,168,.26); }
+.jia-app-link:hover .jia-app-ic { transform:scale(1.06); }
+/* the arrow only shows up on the row you're pointing at */
+.jia-app-go {
+  margin-left:auto; width:13px !important; height:13px !important;
+  color:var(--jia-faint);
+  opacity:0; transform:translateX(-4px);
+  transition:opacity .16s, transform .18s cubic-bezier(.22,.8,.3,1);
+}
+.jia-app-link:hover .jia-app-go { opacity:1; transform:translateX(0); }
+
+/* sign out sits below an inset divider */
+.jia-signout {
+  color:#DC2626 !important;
+  margin-top:.3rem;
+}
+.jia-signout::before {
+  content:''; position:absolute; left:.35rem; right:.35rem; top:-.15rem;
+  height:1px; background:var(--jia-line);
+}
+.jia-signout:hover { background:#FEF2F2 !important; color:#B91C1C !important; }
+
+/* ── the mobile drawer cannot exist on desktop, period.
+   every .jia-mob* style lives in the 1100px media query, so if this ever
+   renders above that width it dumps as unstyled links in the page flow.
+   !important beats the inline display JS sets on it. ── */
+.jia-mob { display:none !important; }
 
 /* ── burger ── */
 .jia-burger {
@@ -476,7 +539,7 @@ body { padding-top: var(--jia-h); }
     overflow-y:auto;
     box-shadow:0 24px 50px rgba(28,24,34,.12);
   }
-  .jia-mob.open { display:flex; animation: jia-mob-in .28s cubic-bezier(.22,.8,.3,1); }
+  .jia-mob.open { display:flex !important; animation: jia-mob-in .28s cubic-bezier(.22,.8,.3,1); }
   @keyframes jia-mob-in { from { opacity: 0; transform: translateY(-10px); } }
 
   /* accordion sections */
@@ -696,22 +759,27 @@ const MARKUP = `
         </button>
         <div class="jia-acct-menu">
           <div class="jia-acct-head">
-            <span class="nm">Account</span>
-            <span class="em"></span>
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
+              alt="" class="jia-acct-photo jia-head-photo">
+            <span class="who">
+              <span class="nm">Account</span>
+              <span class="em"></span>
+            </span>
           </div>
-          <a href="/app.html">
-            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <a href="/app.html" class="jia-app-link">
+            <span class="jia-app-ic ic-lead"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
             Prospect Search
+            <svg class="jia-app-go" viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
           </a>
-          <a href="/account.html">
+          <a href="/account.html" class="jia-acct-row">
             <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             My Account
           </a>
-          <a href="/pricing.html">
-            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-            Plans &amp; Credits
+          <a href="/account.html" class="jia-acct-row">
+            <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            Billing &amp; Credits
           </a>
-          <a href="/support.html">
+          <a href="/support.html" class="jia-acct-row">
             <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
             Support
           </a>
@@ -850,6 +918,11 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") closeAll(); 
 
 /* close on mobile link tap */
 mobEl.querySelectorAll("a").forEach(a => a.addEventListener("click", closeAll));
+
+/* crossing back to desktop closes the drawer instead of stranding it open */
+addEventListener("resize", () => {
+  if (window.innerWidth > 1100 && mobEl.classList.contains("open")) closeAll();
+}, { passive: true });
 
 /* scroll shadow */
 addEventListener("scroll", () =>
@@ -1013,8 +1086,7 @@ window.firebaseAuth = {
   getCurrentUser: () => auth.currentUser
 };
 
-const photoEl   = hdr.querySelector(".jia-acct-photo");
-const nameEls   = hdr.querySelectorAll(".jia-acct-name, .jia-acct-head .nm");
+const photoEls  = hdr.querySelectorAll(".jia-acct-photo");
 const emailEl   = hdr.querySelector(".jia-acct-head .em");
 
 signout.addEventListener("click", () => { window.firebaseAuth.signOut(); closeAll(); });
@@ -1024,12 +1096,15 @@ onAuthStateChanged(auth, user => {
     /* hide the three public buttons, show account pill */
     loginShow.forEach(el => el.style.display = "none");
     acct.style.display = "flex";
-    nameEls.forEach(el =>
-      el.textContent = user.displayName ? user.displayName.split(" ")[0] : "Account");
-    photoEl.src = user.photoURL ||
+    const pill = hdr.querySelector(".jia-acct-name");
+    const full = hdr.querySelector(".jia-acct-head .nm");
+    if (pill) pill.textContent = user.displayName ? user.displayName.split(" ")[0] : "Account";
+    if (full) full.textContent = user.displayName || "Account";
+    const photoSrc = user.photoURL ||
       "https://ui-avatars.com/api/?name=" +
       encodeURIComponent(user.displayName || "User") +
       "&background=4F46E5&color=fff&size=80";
+    photoEls.forEach(el => el.src = photoSrc);
     if (emailEl) emailEl.textContent = user.email || "";
   } else {
     /* show the three public buttons, hide account pill */

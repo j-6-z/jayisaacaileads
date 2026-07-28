@@ -15,7 +15,7 @@ const COLS = [
       { label: "People Search",      href: "/lead-generation/people-search.html"        },
       { label: "Company Search",     href: "/lead-generation/company-search.html"       },
       { label: "Cold Calling Lists", href: "/lead-generation/cold-calling-lists.html"   },
-      { label: "Pricing",            href: "/lead-generation/pricing.html"              },
+      { label: "Pricing",            href: "/pricing.html"              },
     ]
   },
   {
@@ -25,7 +25,7 @@ const COLS = [
       { label: "Briefings",    href: "/chief-of-staff/briefings.html"      },
       { label: "Delegation",   href: "/chief-of-staff/delegation.html"     },
       { label: "Meeting Prep", href: "/chief-of-staff/meeting-prep.html"   },
-      { label: "Pricing",      href: "/chief-of-staff/pricing.html"        },
+      { label: "Pricing",      href: "/pricing.html"        },
     ]
   },
   {
@@ -35,7 +35,7 @@ const COLS = [
       { label: "Threat Detection",    href: "/cybersecurity/threat-detection.html"     },
       { label: "Incident Response",   href: "/cybersecurity/incident-response.html"    },
       { label: "Vulnerability Scans", href: "/cybersecurity/vulnerability-scans.html"  },
-      { label: "Pricing",             href: "/cybersecurity/pricing.html"              },
+      { label: "Pricing",             href: "/pricing.html"              },
     ]
   },
   {

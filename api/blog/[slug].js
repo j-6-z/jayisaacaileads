@@ -48,7 +48,7 @@ function renderPage(post) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${escapeHtml(post.title)}</title>
   <meta name="description" content="${escapeHtml(post.meta_description)}">
-  <link rel="canonical" href="https://jayisaacai.com/blog/${escapeHtml(post.slug)}">
+  <link rel="canonical" href="https://jayisaac.io/blog/${escapeHtml(post.slug)}">
   <meta property="og:title" content="${escapeHtml(post.title)}">
   <meta property="og:description" content="${escapeHtml(post.meta_description)}">
   <meta property="og:type" content="article">
@@ -73,7 +73,7 @@ function renderPage(post) {
   ${faqHtml}
   <div class="cta">
     <p>${escapeHtml(post.cta_text)}</p>
-    <a href="https://jayisaacai.com">Try JAYISAAC AI</a>
+    <a href="https://jayisaac.io">Try JAYISAAC AI</a>
   </div>
 </body>
 </html>`;

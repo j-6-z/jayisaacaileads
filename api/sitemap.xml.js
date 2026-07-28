@@ -11,7 +11,7 @@ export default async function handler(req, res) {
       .map((d) => {
         const p = d.data();
         const lastmod = p.published_at?.toDate?.().toISOString?.() || new Date().toISOString();
-        return `  <url>\n    <loc>https://jayisaacai.com/blog/${p.slug}</loc>\n    <lastmod>${lastmod}</lastmod>\n  </url>`;
+        return `  <url>\n    <loc>https://jayisaac.io/blog/${p.slug}</loc>\n    <lastmod>${lastmod}</lastmod>\n  </url>`;
       })
       .join('\n');
 

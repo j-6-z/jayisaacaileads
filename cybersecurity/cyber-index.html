@@ -1,0 +1,2076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<link rel="icon" href="/my-favicon/favicon.ico" sizes="any">
+<link rel="icon" href="/my-favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/my-favicon/favicon-96x96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/my-favicon/apple-touch-icon.png" sizes="180x180">
+<link rel="manifest" href="/my-favicon/site.webmanifest">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI Cybersecurity watches your identities, endpoints, and cloud 24/7 — detecting what static rules miss, running the response playbook, and waking a human only when it matters. Powered by Claude." />
+  <title>AI Cybersecurity — JAYISAAC AI | Threats Caught While You Sleep</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet" />
+  <script type="module" src="/nav.js"></script>
+  <script type="module" src="/footer.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper:      #FAF7F1;
+      --ink:        #1C1822;
+      --ink-soft:   #4E4856;
+      --ink-faint:  #8E8896;
+      --line:       #E9E2D6;
+      --card:       #FFFFFF;
+
+      --blue:       #0E92A8;
+      --blue-h:     #0B7C8F;
+      --blue-lt:    #4FC3D6;
+      --blue-soft:  #E6F7FA;
+      --blue-line:  #B6E6EF;
+
+      --pur:        #7C3AED;
+      --pur-soft:   #F4EEFE;
+      --pur-line:   #DDCEFA;
+      --cyan:       #0E92A8;
+      --cyan-soft:  #E6F7FA;
+      --cyan-line:  #B6E6EF;
+      --green:      #15803D;
+      --green-soft: #E7F6EC;
+      --amber:      #A16207;
+      --amber-soft: #FDF3D7;
+
+      --night:      #11101C;
+      --mono: 'Plus Jakarta Sans', sans-serif; /* unified: Zapier uses one face sitewide */
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: var(--blue); color: #fff; }
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 3px solid var(--blue);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    .wrap { max-width: 1220px; margin: 0 auto; padding: 0 5vw; }
+
+    /* ── scroll reveal ── */
+    [data-rev] { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s cubic-bezier(.22,.8,.3,1); }
+    [data-rev].vis { opacity: 1; transform: none; }
+
+    /* ── buttons ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      font-family: inherit; font-weight: 700; font-size: .93rem;
+      padding: 14px 26px; border-radius: 10px;
+      text-decoration: none; cursor: pointer; border: 1.5px solid transparent;
+      transition: transform .15s ease, background .16s ease, border-color .16s ease, box-shadow .16s ease;
+      white-space: nowrap;
+    }
+    .btn:active { transform: scale(.98); }
+    .btn-blue { background: var(--blue); color: #fff; box-shadow: 0 8px 22px rgba(14,146,168,.26); }
+    .btn-blue:hover { background: var(--blue-h); transform: translateY(-2px); box-shadow: 0 12px 28px rgba(14,146,168,.36); }
+    .btn-out { background: #fff; color: var(--ink); border-color: var(--line); }
+    .btn-out:hover { border-color: var(--ink); transform: translateY(-2px); }
+    .btn-pur { background: var(--pur); color: #fff; box-shadow: 0 8px 22px rgba(124,58,237,.24); }
+    .btn-pur:hover { background: #6B2FD6; transform: translateY(-2px); }
+    .btn-cyan { background: var(--cyan); color: #fff; box-shadow: 0 8px 22px rgba(14,146,168,.24); }
+    .btn-cyan:hover { background: #0B7C8F; transform: translateY(-2px); }
+    .btn-sm { font-size: .87rem; padding: 12px 22px; }
+
+    /* ── kicker + section heads ── */
+    .kicker {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .7rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--blue);
+    }
+    .kicker .pip { width: 8px; height: 8px; border-radius: 2px; background: var(--blue); animation: pip 2s infinite; }
+    @keyframes pip { 0%,100%{opacity:1} 50%{opacity:.25} }
+    .sec-h2 {
+      font-size: clamp(1.9rem, 4.2vw, 3.2rem);
+      font-weight: 600; letter-spacing: -.032em; line-height: 1.07;
+      margin: 16px 0 16px;
+    }
+    .sec-h2 .hl { color: var(--blue); }
+    .converge .sec-h2 .hl { color: #818CF8; }
+    .sec-sub { font-size: 1.02rem; color: var(--ink-soft); max-width: 600px; line-height: 1.75; }
+
+    /* ═══════════ HERO (Zapier) ═══════════ */
+    .hero {
+      background: #FFFCF6;
+      padding: 148px 5vw 90px;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      display: block;
+      font-size: .74rem; font-weight: 600;
+      letter-spacing: .17em; text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 26px;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 5.6vw, 4.3rem);
+      font-weight: 600;
+      letter-spacing: -.031em;
+      line-height: 1.08;
+      max-width: 880px;
+      margin: 0 auto 24px;
+      color: var(--ink);
+    }
+    .hero-sub {
+      font-size: clamp(.95rem, 1.4vw, 1.06rem);
+      color: var(--ink-soft);
+      max-width: 620px; margin: 0 auto 34px; line-height: 1.75;
+    }
+    .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 58px; }
+    .hbtn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      font-family: inherit; font-size: .95rem; font-weight: 600;
+      padding: 14px 26px; border-radius: 9px;
+      text-decoration: none; cursor: pointer;
+      transition: background .16s ease, border-color .16s ease;
+      white-space: nowrap;
+    }
+    .hbtn-solid { background: var(--blue); color: #fff; border: 1px solid var(--blue); }
+    .hbtn-solid:hover { background: var(--blue-h); border-color: var(--blue-h); }
+    .hbtn-outline { background: #fff; color: var(--ink); border: 1px solid #D9D8E3; }
+    .hbtn-outline:hover { border-color: var(--ink); }
+    .hbtn-outline svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+    .hero-stats {
+      display: flex; justify-content: center; align-items: flex-start;
+      gap: clamp(2.4rem, 7vw, 6.5rem);
+      flex-wrap: wrap; margin-bottom: 42px;
+    }
+    .hstat { text-align: center; max-width: 190px; }
+    .hstat-num {
+      display: block; font-size: clamp(1.55rem, 2.6vw, 2rem);
+      font-weight: 600; letter-spacing: -.02em; line-height: 1.15;
+      color: var(--blue);
+    }
+    .hstat-label { display: block; font-size: .8rem; color: var(--ink-soft); margin-top: 6px; line-height: 1.45; }
+
+    .hero-compliance {
+      display: flex; gap: 26px; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 62px;
+    }
+    .hcomp {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: .7rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .hcomp svg { width: 13px; height: 13px; stroke: var(--ink-soft); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* builder card ("Get started in seconds") */
+    .builder {
+      background: #F5F0E7;
+      border-radius: 22px;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 34px 52px;
+    }
+    .builder-eyebrow {
+      font-size: .7rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--ink-soft); margin-bottom: 12px;
+    }
+    .builder h2 { font-size: 1.5rem; font-weight: 700; letter-spacing: -.02em; color: var(--ink); margin-bottom: 26px; }
+    .seg {
+      display: inline-flex; gap: 2px;
+      background: #EAE3D5; border-radius: 10px; padding: 4px;
+      margin-bottom: 34px;
+    }
+    .seg button {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: inherit; font-size: .85rem; font-weight: 600;
+      color: var(--ink-soft); background: transparent;
+      border: none; border-radius: 8px; padding: 8px 18px; cursor: pointer;
+      transition: background .15s, color .15s, box-shadow .15s;
+    }
+    .seg button svg {
+      width: 14px; height: 14px; flex-shrink: 0;
+      stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+      transition: stroke .15s;
+    }
+    .seg button:hover { color: var(--ink); }
+    .seg button.on { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(19,18,31,.12); }
+    #seg0.on svg { stroke: var(--blue); }
+    #seg1.on svg { stroke: var(--pur); }
+    #seg2.on svg { stroke: var(--cyan); }
+    .builder-cards { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .bcard {
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+      width: 136px; min-height: 118px;
+      background: #fff; border: 1px solid #E6DFD0; border-radius: 12px;
+      padding: 20px 12px;
+      text-decoration: none;
+      transition: border-color .16s, transform .16s, box-shadow .16s;
+    }
+    .bcard:hover { border-color: var(--ink-faint); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(19,18,31,.07); }
+    .bcard svg { width: 34px; height: 34px; fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+    .bcard span { font-size: .82rem; font-weight: 600; color: var(--ink); line-height: 1.3; text-align: center; }
+    .bc-blue svg { stroke: var(--blue); }
+    .bc-pur svg  { stroke: var(--pur); }
+    .bc-cyan svg { stroke: var(--cyan); }
+
+    /* load-in stagger */
+    .hload { opacity: 0; transform: translateY(16px); animation: hload .8s cubic-bezier(.22,.8,.3,1) forwards; }
+    .hd1 { animation-delay: .05s } .hd2 { animation-delay: .14s } .hd3 { animation-delay: .23s }
+    .hd4 { animation-delay: .32s } .hd5 { animation-delay: .41s } .hd6 { animation-delay: .5s }
+    .hd7 { animation-delay: .6s }
+    @keyframes hload { to { opacity: 1; transform: none; } }
+
+    /* ═══════════ PULSE SECTION ═══════════ */
+    .pulse-sec { padding: 110px 0; background: var(--paper); overflow: hidden; }
+    .pulse-grid {
+      display: grid; grid-template-columns: .92fr 1.08fr;
+      gap: clamp(2.5rem, 5vw, 5rem); align-items: center;
+    }
+
+    /* ── LIVE PULSE FEED (signature) ── */
+    .pulse {
+      background: #fff;
+      border: 1.5px solid var(--line);
+      border-radius: 20px;
+      box-shadow: 0 8px 14px rgba(19,18,31,.04), 0 34px 80px rgba(14,146,168,.13);
+      overflow: hidden;
+    }
+    .pulse-top {
+      display: flex; align-items: center; gap: 10px;
+      padding: 15px 20px;
+      border-bottom: 1.5px solid var(--line);
+      background: linear-gradient(180deg, #FDFDFF, #F7F7FD);
+    }
+    .pulse-live {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: var(--mono);
+      font-size: .66rem; font-weight: 700; letter-spacing: .14em;
+      color: var(--blue);
+    }
+    .pulse-live .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 0 0 rgba(14,146,168,.5);
+      animation: ping 1.8s cubic-bezier(0,0,.2,1) infinite;
+    }
+    @keyframes ping { 0%{box-shadow:0 0 0 0 rgba(14,146,168,.45)} 70%{box-shadow:0 0 0 9px rgba(14,146,168,0)} 100%{box-shadow:0 0 0 0 rgba(14,146,168,0)} }
+    .pulse-title { font-size: .8rem; font-weight: 700; color: var(--ink); margin-left: auto; letter-spacing: .01em; }
+    .pulse-feed { padding: 10px 12px 14px; min-height: 372px; }
+
+    .pev {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 10px;
+      border-radius: 12px;
+      animation: pevIn .5s cubic-bezier(.22,.9,.3,1);
+    }
+    .pev + .pev { border-top: 1px dashed var(--line); border-radius: 0 0 12px 12px; }
+    @keyframes pevIn { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
+    .pev-tag {
+      flex-shrink: 0;
+      font-family: var(--mono);
+      font-size: .58rem; font-weight: 700; letter-spacing: .1em;
+      padding: 4px 9px; border-radius: 999px; margin-top: 2px;
+    }
+    .pt-sell   { background: var(--blue-soft); color: var(--blue); border: 1px solid var(--blue-line); }
+    .pt-run    { background: var(--pur-soft);  color: var(--pur);  border: 1px solid var(--pur-line); }
+    .pt-defend { background: var(--cyan-soft); color: var(--cyan); border: 1px solid var(--cyan-line); }
+    .pev-body { flex: 1; min-width: 0; }
+    .pev-main { font-size: .84rem; font-weight: 700; color: var(--ink); line-height: 1.35; }
+    .pev-meta { font-size: .72rem; color: var(--ink-faint); margin-top: 2px; }
+    .pev-time { flex-shrink: 0; font-family: var(--mono); font-size: .62rem; color: var(--ink-faint); margin-top: 5px; }
+
+    /* ═══════════ TRUST MARQUEE (rAF-driven, scroll-reactive) ═══════════ */
+    .marq-band {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+      padding: 30px 0 34px;
+      overflow: hidden;
+    }
+    .marq-label {
+      text-align: center; font-size: .66rem; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase; color: var(--ink-faint);
+      margin-bottom: 22px;
+    }
+    .mq-viewport {
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+              mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    }
+    .mq-viewport + .mq-viewport { margin-top: 18px; }
+    .mq-track { display: flex; width: max-content; will-change: transform; }
+    .mq-set { display: flex; align-items: center; gap: 44px; padding-right: 44px; flex-shrink: 0; }
+    .mq-item {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 1rem; font-weight: 600; letter-spacing: -.01em;
+      color: var(--ink-soft); white-space: nowrap;
+      transition: color .2s;
+    }
+    .mq-item:hover { color: var(--ink); }
+    .mq-item.hot { color: var(--blue); font-weight: 700; }
+    .mq-item svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; opacity: .8; }
+    .mq-sep { width: 6px; height: 6px; border-radius: 2px; background: #D9D1C0; flex-shrink: 0; }
+
+    /* ═══════════ SYSTEM BENTO (Zapier "Every team has AI") ═══════════ */
+    .sysb-sec { padding: 110px 0 60px; }
+    .sysb-head { text-align: center; max-width: 720px; margin: 0 auto 50px; }
+    .sysb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .sysb-card {
+      background: #F4EFE5;
+      border: 1px solid #EAE3D4;
+      border-radius: 8px;
+      padding: 28px 28px 28px;
+    }
+    .sysb-mark { width: 10px; height: 10px; margin-bottom: 20px; }
+    .sysb-mark.mk-blue { background: var(--blue); }
+    .sysb-mark.mk-pur  { background: var(--pur); }
+    .sysb-card h3 {
+      font-family: 'Newsreader', Georgia, serif;
+      font-weight: 500;
+      font-size: clamp(1.5rem, 2.4vw, 1.95rem);
+      letter-spacing: -.012em;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+    .sysb-card > p { font-size: .92rem; color: var(--ink-soft); line-height: 1.68; margin-bottom: 26px; max-width: 480px; }
+
+    /* the dreamy photo-gradient stage */
+    .sysb-stage {
+      position: relative;
+      border-radius: 6px;
+      overflow: hidden;
+      height: 460px;
+      isolation: isolate;
+    }
+    .sysb-stage::before {
+      content: ''; position: absolute; inset: -12%;
+      z-index: -1;
+      filter: blur(26px) saturate(1.05);
+      transform: scale(1.05);
+      animation: stageDrift 18s ease-in-out infinite alternate;
+    }
+    @keyframes stageDrift { to { transform: scale(1.12) translate(2%, -2%); } }
+    .stage-a::before {
+      background:
+        radial-gradient(90% 70% at 18% 12%, #C4DBD4 0%, transparent 62%),
+        radial-gradient(80% 65% at 88% 92%, #DCC49A 0%, transparent 58%),
+        linear-gradient(168deg, #9CBEB7 0%, #BFC5AF 48%, #D8C49C 100%);
+    }
+    .stage-b::before {
+      background:
+        radial-gradient(90% 70% at 15% 12%, #C2C6A6 0%, transparent 60%),
+        radial-gradient(85% 70% at 88% 88%, #E7B14A 0%, transparent 60%),
+        linear-gradient(160deg, #97A583 0%, #C2A662 55%, #E0B14E 100%);
+    }
+    .sysb-stage::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(180deg, rgba(255,255,255,.08), transparent 25%, rgba(40,30,10,.14));
+    }
+
+    /* floating UI vignettes */
+    .fz-ghost {
+      position: absolute;
+      background: rgba(255,255,255,.36);
+      border: 1px solid rgba(255,255,255,.5);
+      border-radius: 12px;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+    .fz-card {
+      position: absolute;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 22px 48px rgba(35,28,12,.26), 0 4px 10px rgba(35,28,12,.1);
+      animation: fzFloat 8s ease-in-out infinite alternate;
+    }
+    .fz-card.fz-d1 { animation-delay: 1.6s; }
+    @keyframes fzFloat { to { transform: translateY(-9px); } }
+
+    /* card A: product picker */
+    .fz-pick { width: min(272px, 74%); left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 16px 16px 10px; }
+    .fz-pick.fz-card { animation-name: fzFloatC; }
+    @keyframes fzFloatC { from { transform: translate(-50%, -50%); } to { transform: translate(-50%, calc(-50% - 9px)); } }
+    .fz-pick-label { font-size: .7rem; font-weight: 600; color: var(--ink); margin-bottom: 7px; border-bottom: 1px dashed var(--ink-faint); display: inline-block; padding-bottom: 1px; }
+    .fz-pick-label em { font-style: normal; color: var(--blue); }
+    .fz-pick-input {
+      display: flex; align-items: center; gap: 8px;
+      font-size: .82rem; font-weight: 600; color: var(--ink);
+      border: 1.5px solid var(--blue); border-radius: 7px;
+      padding: 8px 10px; margin-bottom: 8px;
+      box-shadow: 0 0 0 3px rgba(14,146,168,.12);
+    }
+    .fz-pick-input .car { margin-left: auto; color: var(--ink-faint); font-size: .7rem; }
+    .fz-pick-item {
+      display: flex; align-items: center; gap: 9px;
+      font-size: .8rem; font-weight: 500; color: var(--ink);
+      padding: 9px 8px; border-radius: 6px;
+    }
+    .fz-pick-item:hover { background: #F6F3EC; }
+    .fz-pick-item .car { margin-left: auto; color: var(--ink-faint); font-size: .72rem; }
+    .fz-ic {
+      width: 20px; height: 20px; border-radius: 6px; flex-shrink: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .fz-ic svg { width: 12px; height: 12px; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .fz-ic-blue { background: var(--blue-soft); } .fz-ic-blue svg { stroke: var(--blue); }
+    .fz-ic-pur  { background: var(--pur-soft); }  .fz-ic-pur svg  { stroke: var(--pur); }
+    .fz-ic-cyan { background: var(--cyan-soft); } .fz-ic-cyan svg { stroke: var(--cyan); }
+
+    /* card B: instruction + action stack */
+    .fz-note { left: 7%; top: 9%; width: 62%; background: rgba(250,247,240,.96); padding: 14px 14px 16px; }
+    .fz-note-label { font-size: .68rem; font-weight: 700; color: var(--ink); margin-bottom: 9px; }
+    .fz-note-quote {
+      background: #fff; border: 1px solid #EAE3D4; border-radius: 7px;
+      padding: 11px 12px;
+      font-size: .74rem; color: var(--ink-soft); line-height: 1.55;
+    }
+    .fz-acts { right: 6%; bottom: 8%; width: 56%; padding: 16px; display: flex; flex-direction: column; align-items: center; gap: 9px; }
+    .fz-chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: .74rem; font-weight: 600; color: var(--ink);
+      background: #fff; border: 1px solid #E3DCCD; border-radius: 7px;
+      padding: 7px 12px;
+      box-shadow: 0 2px 6px rgba(35,28,12,.06);
+      white-space: nowrap;
+    }
+    .fz-chip svg { width: 12px; height: 12px; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+    .fz-go {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: .78rem; font-weight: 600; color: #fff;
+      background: var(--blue); border-radius: 7px;
+      padding: 9px 16px; margin-top: 4px;
+      box-shadow: 0 8px 18px rgba(14,146,168,.35);
+    }
+
+    @media (max-width: 1040px) {
+      .sysb-grid { grid-template-columns: 1fr; }
+      .sysb-stage { height: 420px; }
+    }
+    @media (max-width: 620px) {
+      .sysb-stage { height: 380px; }
+      .fz-note { width: 78%; }
+      .fz-acts { width: 76%; right: 5%; }
+    }
+
+    /* ═══════════ STORY SPOTLIGHTS (Zapier customer-story style) ═══════════ */
+    .story-sec { padding: 110px 0 110px; }
+    .story-head { text-align: center; max-width: 760px; margin: 0 auto 56px; }
+    .story-head h2 {
+      font-size: clamp(1.9rem, 4.2vw, 3rem);
+      font-weight: 600; letter-spacing: -.03em; line-height: 1.12;
+    }
+    .story-head h2 .hl { color: var(--blue); }
+    .story-head p { font-size: .92rem; color: var(--ink-soft); margin-top: 14px; }
+
+    .story-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: stretch; }
+    .story {
+      background: #F4EFE5;
+      border: 1px solid #EAE3D4;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    .story-card { display: flex; flex-direction: column; flex: 1; }
+    .story-brand {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 22px 24px 0;
+      font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink);
+    }
+    .story-brand .bsq { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+    .st-blue .story-brand .bsq { background: var(--blue); }
+    .st-pur  .story-brand .bsq { background: var(--pur); }
+    .st-cyan .story-brand .bsq { background: var(--cyan); }
+
+    .story-quote {
+      font-family: 'Newsreader', Georgia, serif;
+      font-weight: 400;
+      font-size: 1.16rem;
+      line-height: 1.42;
+      letter-spacing: -.008em;
+      color: var(--ink);
+      padding: 12px 24px 20px;
+      flex: 1;
+    }
+    .story-quote::before { content: '\201C'; }
+    .story-quote::after { content: '\201D'; }
+    .story-attr {
+      padding: 0 24px 20px;
+      font-size: .76rem; color: var(--ink-soft);
+    }
+    .story-stats {
+      border-top: 1px solid var(--line);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      padding: 18px 24px;
+    }
+    .story-stat-num {
+      display: block;
+      font-size: 1.55rem;
+      font-weight: 600; letter-spacing: -.02em; line-height: 1.1;
+    }
+    .st-blue .story-stat-num { color: var(--blue); }
+    .st-pur  .story-stat-num { color: var(--pur); }
+    .st-cyan .story-stat-num { color: var(--cyan); }
+    .story-stat-label { display: block; font-size: .72rem; color: var(--ink-faint); margin-top: 5px; line-height: 1.45; }
+    .story-foot {
+      border-top: 1px solid var(--line);
+      padding: 16px 24px;
+      margin-top: auto;
+    }
+    .story-link {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: .82rem; font-weight: 700; color: var(--ink);
+      text-decoration: none;
+      transition: color .18s;
+    }
+    .story-link .circ {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 1.5px solid var(--ink);
+      display: inline-flex; align-items: center; justify-content: center;
+      transition: all .18s;
+    }
+    .story-link .circ svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .st-blue .story-link:hover { color: var(--blue); } .st-blue .story-link:hover .circ { background: var(--blue); border-color: var(--blue); color: #fff; transform: translateX(3px); }
+    .st-pur  .story-link:hover { color: var(--pur); }  .st-pur .story-link:hover .circ { background: var(--pur); border-color: var(--pur); color: #fff; transform: translateX(3px); }
+    .st-cyan .story-link:hover { color: var(--cyan); } .st-cyan .story-link:hover .circ { background: var(--cyan); border-color: var(--cyan); color: #fff; transform: translateX(3px); }
+
+    /* ── living vignette sequences (gif-style loops, pure CSS) ── */
+    .story-visual .fz-card { animation: none; }
+    /* lead gen: query types itself, then the contact card lands, chips pop */
+    .st-blue .sv-q .tw {
+      display: inline-block; overflow: hidden; white-space: nowrap;
+      vertical-align: bottom; max-width: 22ch;
+      border-right: 2px solid var(--blue);
+      animation: twType 10s steps(22) infinite;
+    }
+    @keyframes twType { 0%, 4% { width: 0; } 30%, 96% { width: 22ch; } 100% { width: 22ch; } }
+    .st-blue .fz-card.sv-br { animation: seqCard 10s cubic-bezier(.22,.8,.3,1) infinite; }
+    @keyframes seqCard {
+      0%, 34% { opacity: 0; transform: translateY(16px); }
+      40%, 94% { opacity: 1; transform: none; }
+      99%, 100% { opacity: 0; transform: translateY(16px); }
+    }
+    .st-blue .sv-chips > * { animation: chipSeq 10s ease infinite; }
+    .st-blue .sv-chips > *:nth-child(2) { animation-delay: -9.4s; }
+    .st-blue .sv-chips > *:nth-child(3) { animation-delay: -8.8s; }
+    @keyframes chipSeq {
+      0%, 46% { opacity: 0; transform: scale(.8); }
+      52%, 94% { opacity: 1; transform: none; }
+      99%, 100% { opacity: 0; }
+    }
+    /* chief of staff: brief lines check in one by one, then the button presses */
+    .st-pur .sv-line { animation: lineSeq 10s ease infinite; }
+    .st-pur .sv-line:nth-of-type(2) { animation-delay: -8.9s; }
+    .st-pur .sv-line:nth-of-type(3) { animation-delay: -7.8s; }
+    @keyframes lineSeq {
+      0%, 8% { opacity: 0; transform: translateX(-8px); }
+      14%, 95% { opacity: 1; transform: none; }
+      100% { opacity: 0; }
+    }
+    .st-pur .fz-card.sv-br { animation: seqCard 10s cubic-bezier(.22,.8,.3,1) infinite; animation-delay: -5.6s; }
+    .st-pur .fz-go { animation: pressSeq 10s ease infinite; }
+    @keyframes pressSeq {
+      0%, 66% { transform: none; }
+      69% { transform: scale(.9); }
+      72%, 100% { transform: none; }
+    }
+    /* cyber: alert lands, containment chips pop, all-clear card follows */
+    .st-cyan .fz-card.sv-tl { animation: alertSeq 10s cubic-bezier(.22,.8,.3,1) infinite; }
+    @keyframes alertSeq {
+      0%, 4% { opacity: 0; transform: translateY(-14px); }
+      10%, 95% { opacity: 1; transform: none; }
+      100% { opacity: 0; }
+    }
+    .st-cyan .sv-chips > * { animation: chipSeq 10s ease infinite; animation-delay: -8.2s; }
+    .st-cyan .sv-chips > *:nth-child(2) { animation-delay: -7.6s; }
+    .st-cyan .sv-chips > *:nth-child(3) { animation-delay: -7s; }
+    .st-cyan .fz-card.sv-br { animation: seqCard 10s cubic-bezier(.22,.8,.3,1) infinite; animation-delay: -4.4s; }
+    /* right visual panel: dreamy photo-gradient stage + floating UI */
+    .story-visual {
+      position: relative;
+      border-radius: 0;
+      overflow: hidden;
+      min-height: 275px;
+      isolation: isolate;
+      flex-shrink: 0;
+    }
+    .story-visual::before {
+      content: ''; position: absolute; inset: -12%;
+      z-index: -1;
+      filter: blur(26px) saturate(1.05);
+      transform: scale(1.05);
+      animation: stageDrift 18s ease-in-out infinite alternate;
+    }
+    .st-blue .story-visual::before {
+      background:
+        radial-gradient(90% 70% at 18% 12%, #C3CBEE 0%, transparent 62%),
+        radial-gradient(80% 65% at 88% 90%, #DBC69E 0%, transparent 58%),
+        linear-gradient(165deg, #97A0D2 0%, #BEBCB4 50%, #DAC49E 100%);
+    }
+    .st-pur .story-visual::before {
+      background:
+        radial-gradient(90% 70% at 15% 14%, #D9C6EE 0%, transparent 62%),
+        radial-gradient(82% 66% at 88% 88%, #E9C9A2 0%, transparent 58%),
+        linear-gradient(160deg, #AE9AD6 0%, #CDB6B4 52%, #E5C89E 100%);
+    }
+    .st-cyan .story-visual::before {
+      background:
+        radial-gradient(90% 70% at 18% 12%, #AEDDE3 0%, transparent 62%),
+        radial-gradient(80% 65% at 88% 90%, #C8D6B2 0%, transparent 58%),
+        linear-gradient(165deg, #7FB4BE 0%, #A9C3B8 50%, #D3CDA9 100%);
+    }
+    .story-visual::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(180deg, rgba(255,255,255,.08), transparent 25%, rgba(40,30,10,.14));
+    }
+
+    /* vignette internals */
+    .sv-tl { left: 7%; top: 10%; }
+    .sv-br { right: 6%; bottom: 9%; }
+    .sv-pad { padding: 14px; }
+    .sv-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+    .sv-head b { font-size: .8rem; font-weight: 700; color: var(--ink); }
+    .sv-time { font-size: .66rem; font-weight: 600; color: var(--ink-faint); }
+    .sv-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .sv-av {
+      width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .62rem; font-weight: 700;
+      background: var(--blue-soft); border: 1.5px solid var(--blue-line); color: var(--blue);
+    }
+    .sv-nm { font-size: .8rem; font-weight: 700; color: var(--ink); line-height: 1.2; }
+    .sv-rl { font-size: .68rem; color: var(--ink-faint); }
+    .sv-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .sv-q {
+      display: flex; align-items: center; gap: 8px;
+      font-size: .76rem; font-weight: 600; color: var(--ink);
+      border: 1.5px solid var(--blue); border-radius: 7px;
+      padding: 8px 10px;
+      box-shadow: 0 0 0 3px rgba(14,146,168,.12);
+    }
+    .sv-q svg { width: 13px; height: 13px; stroke: var(--blue); fill: none; stroke-width: 2.2; stroke-linecap: round; }
+    .sv-line { display: flex; align-items: flex-start; gap: 8px; font-size: .73rem; color: var(--ink-soft); line-height: 1.45; padding: 4px 0; }
+    .sv-line::before {
+      content: '✓';
+      width: 15px; height: 15px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: .54rem; font-weight: 700; color: #fff;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .st-pur .sv-line::before { background: var(--pur); }
+    .st-cyan .sv-line::before { background: var(--cyan); }
+    .fz-go-pur { background: var(--pur); box-shadow: 0 8px 18px rgba(124,58,237,.35); }
+    .fz-go-cyan { background: var(--cyan); box-shadow: 0 8px 18px rgba(14,146,168,.35); }
+    .sv-tag {
+      position: absolute; left: 16px; bottom: 14px;
+      font-size: .6rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase;
+      color: rgba(255,255,255,.95);
+      background: rgba(255,255,255,.22);
+      border: 1px solid rgba(255,255,255,.45);
+      border-radius: 999px; padding: 5px 12px;
+      backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+      text-shadow: 0 1px 6px rgba(0,0,0,.15);
+    }
+
+    /* ═══════════ TRUST GRID ═══════════ */
+    .trust-sec { padding: 110px 0 120px; }
+    .trust-head { text-align: center; max-width: 660px; margin: 0 auto 48px; }
+    .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .trust-cell {
+      background: #fff; border: 1.5px solid var(--line); border-radius: 18px;
+      padding: 26px;
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .trust-cell:hover { border-color: var(--blue-line); transform: translateY(-3px); box-shadow: 0 16px 36px rgba(14,146,168,.09); }
+    .trust-cell .ic {
+      width: 42px; height: 42px; border-radius: 12px;
+      background: var(--blue-soft); border: 1px solid var(--blue-line);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 16px;
+    }
+    .trust-cell .ic svg { width: 19px; height: 19px; stroke: var(--blue); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .trust-cell b { display: block; font-size: .96rem; font-weight: 700; margin-bottom: 5px; }
+    .trust-cell p { font-size: .83rem; color: var(--ink-soft); line-height: 1.6; }
+
+    /* ═══════════ SIGNUP SPLIT (Zapier sign-up section) ═══════════ */
+    .signup-sec { padding: 110px 0 130px; background: var(--paper); }
+    .signup-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(2.5rem, 6vw, 6rem);
+      align-items: center;
+    }
+    .signup-copy .kicker { margin-bottom: 4px; }
+    .signup-copy h2 {
+      font-size: clamp(1.9rem, 4vw, 2.9rem);
+      font-weight: 600; letter-spacing: -.03em; line-height: 1.1;
+      margin: 14px 0 16px;
+    }
+    .signup-copy > p { font-size: 1rem; color: var(--ink-soft); line-height: 1.75; margin-bottom: 26px; max-width: 460px; }
+    .signup-points { list-style: none; display: flex; flex-direction: column; gap: 13px; }
+    .signup-points li { display: flex; gap: 12px; align-items: flex-start; font-size: .95rem; color: var(--ink-soft); line-height: 1.55; }
+    .signup-points li svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px; stroke: var(--blue); fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .signup-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 34px 32px 30px;
+      box-shadow: 0 6px 12px rgba(19,18,31,.03), 0 28px 70px rgba(19,18,31,.08);
+    }
+    .signup-card h3 { font-size: 1.25rem; font-weight: 700; letter-spacing: -.015em; margin-bottom: 22px; }
+    .g-btn {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%;
+      font-family: inherit; font-size: .93rem; font-weight: 600; color: var(--ink);
+      background: #fff; border: 1px solid #D9D8E3; border-radius: 9px;
+      padding: 13px; text-decoration: none; cursor: pointer;
+      transition: border-color .16s, background .16s;
+    }
+    .g-btn:hover { border-color: var(--ink); }
+    .g-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .or-divider {
+      display: flex; align-items: center; gap: 14px;
+      margin: 22px 0;
+      font-size: .72rem; font-weight: 600; letter-spacing: .1em; color: var(--ink-faint);
+    }
+    .or-divider::before, .or-divider::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+    .field { margin-bottom: 16px; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .field label {
+      display: block; font-size: .8rem; font-weight: 600; color: var(--ink);
+      margin-bottom: 6px;
+    }
+    .field label em { font-style: normal; color: var(--blue); }
+    .field input {
+      width: 100%;
+      font-family: inherit; font-size: .92rem; color: var(--ink);
+      background: #fff; border: 1px solid #D9D8E3; border-radius: 9px;
+      padding: 12px 14px; outline: none;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .field input::placeholder { color: var(--ink-faint); }
+    .field input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-soft); }
+    .field input.err { border-color: #DC2626; box-shadow: 0 0 0 3px #FEE2E2; }
+    .field-msg { display: none; font-size: .74rem; color: #DC2626; margin-top: 6px; }
+    .field-msg.show { display: block; }
+    .signup-submit {
+      width: 100%;
+      font-family: inherit; font-size: .95rem; font-weight: 600; color: #fff;
+      background: var(--blue); border: none; border-radius: 9px;
+      padding: 14px; cursor: pointer; margin-top: 6px;
+      transition: background .16s, opacity .16s;
+    }
+    .signup-submit:hover { background: var(--blue-h); }
+    .signup-terms { font-size: .74rem; color: var(--ink-faint); margin-top: 14px; line-height: 1.6; }
+    .signup-terms a { color: var(--ink-soft); }
+    .signup-login { font-size: .84rem; color: var(--ink-soft); margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--line); text-align: center; }
+    .signup-login a { color: var(--blue); font-weight: 600; text-decoration: none; }
+    .signup-login a:hover { text-decoration: underline; }
+
+    /* ═══════════ RESTORED: CONVERGE (dark) ═══════════ */
+    .converge {
+      background: #0F0D18;
+      color: #F2F1F7;
+      padding: 110px 0 120px;
+      position: relative; overflow: hidden;
+    }
+    .converge::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 55% 45% at 16% 16%, rgba(99,102,241,.22), transparent 62%),
+        radial-gradient(ellipse 50% 44% at 86% 80%, rgba(124,58,237,.17), transparent 62%),
+        radial-gradient(ellipse 42% 40% at 62% 6%, rgba(14,146,168,.1), transparent 62%);
+    }
+    .converge .wrap { position: relative; z-index: 1; }
+    .converge-head { text-align: center; max-width: 740px; margin: 0 auto 60px; }
+    .converge .sec-h2 { font-family: 'Newsreader', Georgia, serif; font-weight: 500; letter-spacing: -.015em; color: #F6F2E8; }
+    .converge .kicker { color: #A5B4FC; }
+    .converge .kicker .pip { background: #818CF8; }
+    .converge .sec-sub { color: rgba(255,255,255,.62); margin: 0 auto; }
+    .flow { max-width: 860px; margin: 0 auto 66px; }
+    .flow-svg { width: 100%; height: auto; display: block; }
+    .flow-dash { stroke-dasharray: 6 8; animation: dash 1.4s linear infinite; }
+    @keyframes dash { to { stroke-dashoffset: -14; } }
+    .one-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .one-cell {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 18px; padding: 26px 24px;
+      transition: border-color .2s, background .2s, transform .2s;
+    }
+    .one-cell:hover { border-color: rgba(129,140,248,.5); background: rgba(99,102,241,.08); transform: translateY(-3px); }
+    .one-cell b { display: block; font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: #fff; }
+    .one-cell b i { font-style: normal; color: #818CF8; }
+    .one-cell p { font-size: .84rem; color: rgba(255,255,255,.6); line-height: 1.6; }
+
+    /* ═══════════ RESTORED: TABBED SHOWCASE ═══════════ */
+    .show-sec {
+      padding: 110px 0 120px;
+      background:
+        radial-gradient(ellipse 60% 50% at 18% 12%, rgba(99,102,241,.16), transparent 62%),
+        radial-gradient(ellipse 55% 48% at 85% 85%, rgba(124,58,237,.12), transparent 62%),
+        #14121D;
+    }
+    .show-head { text-align: center; max-width: 720px; margin: 0 auto 40px; }
+    .show-sec .kicker { color: #A5B4FC; }
+    .show-sec .kicker .pip { background: #818CF8; }
+    .show-sec .sec-h2 {
+      font-family: 'Newsreader', Georgia, serif;
+      font-weight: 500; letter-spacing: -.015em; color: #F6F2E8;
+    }
+    .show-sec .sec-h2 .hl { color: #A5B4FC; }
+    .show-sec .sec-sub { color: rgba(246,242,232,.66); }
+    .show-tabs { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
+    .stab {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: inherit; font-size: .88rem; font-weight: 600; cursor: pointer;
+      background: transparent; color: rgba(255,255,255,.78);
+      border: 1.5px solid rgba(255,255,255,.24); border-radius: 999px;
+      padding: 12px 24px;
+      transition: all .18s ease;
+    }
+    .stab svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .stab:hover { border-color: rgba(255,255,255,.65); color: #fff; transform: translateY(-1px); }
+    .stab.on-blue { background: var(--blue); border-color: var(--blue); color: #fff; box-shadow: 0 8px 20px rgba(14,146,168,.4); }
+    .stab.on-pur  { background: var(--pur); border-color: var(--pur); color: #fff; box-shadow: 0 8px 20px rgba(124,58,237,.4); }
+    .stab.on-cyan { background: var(--cyan); border-color: var(--cyan); color: #fff; box-shadow: 0 8px 20px rgba(14,146,168,.4); }
+    .spanel { display: none; }
+    .spanel.on { display: block; animation: fadeUp .45s cubic-bezier(.22,.8,.3,1); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+    .sp-shell {
+      position: relative;
+      display: grid; grid-template-columns: .92fr 1.08fr;
+      gap: clamp(1.5rem, 3.5vw, 3.5rem);
+      align-items: stretch;
+      border-radius: 26px;
+      border: 1.5px solid;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .sp-blue .sp-shell { background: linear-gradient(135deg, #EEF0FF 0%, #FCFCFF 58%); border-color: var(--blue-line); }
+    .sp-pur  .sp-shell { background: linear-gradient(135deg, #F4EEFE 0%, #FDFCFF 58%); border-color: var(--pur-line); }
+    .sp-cyan .sp-shell { background: linear-gradient(135deg, #E6F7FA 0%, #FBFEFF 58%); border-color: var(--cyan-line); }
+    .show-sec .sp-shell { box-shadow: 0 46px 100px rgba(0,0,0,.38), 0 10px 26px rgba(0,0,0,.2); }
+    .sp-shell::before {
+      content: ''; position: absolute; z-index: -1;
+      right: -8%; top: -25%; width: 55%; height: 90%;
+      border-radius: 50%; filter: blur(60px); opacity: .5;
+    }
+    .sp-blue .sp-shell::before { background: radial-gradient(circle, rgba(99,102,241,.3), transparent 70%); }
+    .sp-pur  .sp-shell::before { background: radial-gradient(circle, rgba(168,85,247,.28), transparent 70%); }
+    .sp-cyan .sp-shell::before { background: radial-gradient(circle, rgba(34,211,238,.26), transparent 70%); }
+    .sp-shell::after {
+      content: ''; position: absolute; z-index: -1;
+      top: 0; right: 0; width: 260px; height: 180px;
+      background-image:
+        linear-gradient(rgba(19,18,31,.09) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(19,18,31,.09) 1px, transparent 1px);
+      background-size: 26px 26px;
+      -webkit-mask-image: radial-gradient(ellipse at 100% 0%, #000 25%, transparent 78%);
+              mask-image: radial-gradient(ellipse at 100% 0%, #000 25%, transparent 78%);
+    }
+    .sp-eyebrow { font-size: .68rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 14px; display: block; }
+    .sp-blue .sp-eyebrow { color: var(--blue); } .sp-pur .sp-eyebrow { color: var(--pur); } .sp-cyan .sp-eyebrow { color: var(--cyan); }
+    .sp-copy { padding: clamp(34px, 5vw, 60px) 0 clamp(34px, 5vw, 60px) clamp(28px, 4.5vw, 56px); align-self: center; }
+    .sp-copy h3 { font-size: clamp(1.5rem, 2.6vw, 2.05rem); font-weight: 600; letter-spacing: -.028em; line-height: 1.15; margin-bottom: 14px; }
+    .sp-desc { font-size: .95rem; color: var(--ink-soft); line-height: 1.7; margin-bottom: 24px; max-width: 420px; }
+    .sp-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin: 0 0 30px; }
+    .sp-list li { display: flex; gap: 12px; align-items: flex-start; font-size: .93rem; color: var(--ink-soft); line-height: 1.55; }
+    .sp-list li::before {
+      content: '✓';
+      width: 20px; height: 20px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: .66rem; font-weight: 700; color: #fff;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .sp-blue .sp-list li::before { background: var(--blue); }
+    .sp-pur  .sp-list li::before { background: var(--pur); }
+    .sp-cyan .sp-list li::before { background: var(--cyan); }
+    .sp-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* ═══════════ RESTORED: STAGE SYSTEM ═══════════ */
+    .sp-stage {
+      position: relative;
+      align-self: stretch;
+      min-height: 560px;
+      isolation: isolate;
+      overflow: hidden;
+    }
+    .sp-stage::before {
+      content: ''; position: absolute; inset: -12%;
+      z-index: -1;
+      filter: blur(26px) saturate(1.08);
+      transform: scale(1.05);
+      animation: stageDrift 18s ease-in-out infinite alternate;
+    }
+    .sp-blue .sp-stage::before {
+      background:
+        radial-gradient(85% 65% at 18% 12%, #8E9AF0 0%, transparent 60%),
+        radial-gradient(80% 65% at 88% 92%, #221E5E 0%, transparent 62%),
+        linear-gradient(162deg, #5B63D6 0%, #3F3B96 52%, #262158 100%);
+    }
+    .sp-pur .sp-stage::before {
+      background:
+        radial-gradient(85% 65% at 16% 12%, #C4A5F9 0%, transparent 60%),
+        radial-gradient(80% 65% at 88% 90%, #2E1065 0%, transparent 62%),
+        linear-gradient(160deg, #8B5CF6 0%, #5B21B6 52%, #3B0764 100%);
+    }
+    .sp-cyan .sp-stage::before {
+      background:
+        radial-gradient(85% 65% at 18% 12%, #7DE7F4 0%, transparent 60%),
+        radial-gradient(80% 65% at 88% 92%, #083344 0%, transparent 62%),
+        linear-gradient(162deg, #22B8CE 0%, #0E7490 52%, #0A3D4C 100%);
+    }
+    .sp-stage::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(180deg, rgba(255,255,255,.07), transparent 22%, rgba(5,5,20,.22));
+    }
+    .sp-flow { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .sp-stage .fz-card {
+      animation:
+        cardIn .55s var(--in, 0s) cubic-bezier(.22,.8,.3,1) both,
+        fzFloat 7s calc(var(--in, 0s) + .9s) ease-in-out infinite alternate;
+      box-shadow: 0 26px 56px rgba(5,5,25,.45), 0 6px 14px rgba(5,5,25,.25);
+    }
+    .sp-stage .fz-ghost { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.28); }
+    @keyframes cardIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    .sfc-head { display: flex; align-items: center; gap: 8px; margin-bottom: 9px; }
+    .sfc-head b { font-size: .78rem; font-weight: 700; color: var(--ink); }
+    .sfc-head .sv-time { margin-left: auto; }
+    .sfc-line {
+      display: flex; justify-content: space-between; gap: 10px;
+      font-size: .7rem; color: var(--ink-faint);
+      padding: 5px 0; border-bottom: 1px dashed var(--line);
+    }
+    .sfc-line b { color: var(--ink); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .sfc-body { font-size: .72rem; color: var(--ink-soft); line-height: 1.55; padding-top: 7px; }
+    .sp-blue .sv-line::before { background: var(--blue); }
+    .sp-pur  .sv-line::before { background: var(--pur); }
+    .sp-cyan .sv-line::before { background: var(--cyan); }
+    .aw-score {
+      width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+      background: conic-gradient(var(--c, var(--blue)) calc(var(--v) * 1%), #EBE4D6 0);
+      display: grid; place-items: center;
+    }
+    .aw-score span {
+      width: 22px; height: 22px; border-radius: 50%; background: #fff;
+      display: grid; place-items: center; font-size: .54rem; font-weight: 700; color: var(--ink);
+    }
+    .spanel.on .aw-score { animation: scorePop .5s cubic-bezier(.34,1.4,.5,1) both; animation-delay: calc(.4s + var(--d, 0s)); }
+    @keyframes scorePop { from { transform: scale(.4); opacity: 0; } to { transform: none; opacity: 1; } }
+
+    /* ═══════════ RESTORED: BADGES / CHIPS / MINI BUTTONS ═══════════ */
+    .w-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: .64rem; font-weight: 700; padding: 4px 11px; border-radius: 999px;
+      white-space: nowrap;
+    }
+    .w-badge .d { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+    .wb-green { background: var(--green-soft); color: var(--green); }
+    .wb-amber { background: var(--amber-soft); color: var(--amber); }
+    .w-sig { font-size: .66rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--blue-soft); border: 1px solid var(--blue-line); color: var(--blue); white-space: nowrap; }
+    .w-sig.mute { background: #fff; border-color: var(--line); color: var(--ink-faint); font-weight: 600; }
+    .w-sig.pu { background: var(--pur-soft); border-color: var(--pur-line); color: var(--pur); }
+    .w-sig.cy { background: var(--cyan-soft); border-color: var(--cyan-line); color: var(--cyan); }
+    .w-act { font-family: inherit; font-size: .74rem; font-weight: 600; cursor: default; padding: 8px 16px; border-radius: 999px; border: none; }
+    .wa-pur { background: var(--pur); color: #fff; }
+    .wa-mute { background: #fff; border: 1.5px solid var(--line); color: var(--ink-soft); }
+
+
+    /* ═══════════ LIVE DEMOS: ghost cursor + typing agent ═══════════ */
+    .ghost-cursor {
+      position: absolute; z-index: 5;
+      left: 68%; top: 78%;
+      width: 22px; height: 22px;
+      pointer-events: none;
+      filter: drop-shadow(0 3px 8px rgba(20,15,5,.35));
+      animation: ghostPath 12s cubic-bezier(.45,.05,.35,1) infinite;
+    }
+    .ghost-cursor svg { width: 100%; height: 100%; }
+    .ghost-cursor::after {
+      content: ''; position: absolute; left: -7px; top: -7px;
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 2px solid rgba(14,146,168,.65);
+      opacity: 0; transform: scale(.3);
+      animation: ghostClick 12s linear infinite;
+    }
+    @keyframes ghostPath {
+      0%, 8%   { left: 68%; top: 78%; }
+      16%, 22% { left: 52%; top: 26%; }
+      30%, 36% { left: 50%; top: 44%; }
+      52%, 60% { left: 51%; top: 56%; }
+      74%      { left: 76%; top: 72%; }
+      100%     { left: 68%; top: 78%; }
+    }
+    @keyframes ghostClick {
+      0%, 16.9% { opacity: 0; transform: scale(.3); }
+      17%       { opacity: .9; transform: scale(.4); }
+      21%       { opacity: 0; transform: scale(1.5); }
+      32.9%     { opacity: 0; transform: scale(.3); }
+      33%       { opacity: .9; transform: scale(.4); }
+      37%       { opacity: 0; transform: scale(1.5); }
+      57.9%     { opacity: 0; transform: scale(.3); }
+      58%       { opacity: .9; transform: scale(.4); }
+      62%       { opacity: 0; transform: scale(1.5); }
+      100%      { opacity: 0; }
+    }
+    /* synced UI reactions inside the picker */
+    .demo-live .fz-pick-input { animation: pickInputHl 12s linear infinite; }
+    @keyframes pickInputHl {
+      0%, 15%  { box-shadow: 0 0 0 3px rgba(14,146,168,.12); }
+      17%, 22% { box-shadow: 0 0 0 5px rgba(14,146,168,.3); }
+      26%,100% { box-shadow: 0 0 0 3px rgba(14,146,168,.12); }
+    }
+    .demo-live .fz-pick-item:nth-of-type(1) { animation: rowHl1 12s linear infinite; }
+    .demo-live .fz-pick-item:nth-of-type(2) { animation: rowHl2 12s linear infinite; }
+    @keyframes rowHl1 {
+      0%, 27% { background: transparent; }
+      30%, 37% { background: #F1EDFB; }
+      41%, 100% { background: transparent; }
+    }
+    @keyframes rowHl2 {
+      0%, 49% { background: transparent; }
+      52%, 61% { background: #E9F6F9; }
+      65%, 100% { background: transparent; }
+    }
+
+    /* typing agent demo (card B) */
+    .demo-live .fz-chip { opacity: 0; transform: translateY(8px) scale(.9); }
+    .demo-live .fz-chip.pop { opacity: 1; transform: none; transition: opacity .35s ease, transform .45s cubic-bezier(.34,1.5,.5,1); }
+    .demo-live .fz-go { transition: transform .15s ease, box-shadow .15s ease; }
+    .demo-live .fz-go.press { transform: scale(.92); box-shadow: 0 3px 8px rgba(14,146,168,.3); }
+    .type-caret {
+      display: inline-block; width: 2px; height: 12px;
+      background: var(--pur); vertical-align: -2px; margin-left: 2px;
+      animation: caretBlink 1s steps(1) infinite;
+    }
+    @keyframes caretBlink { 50% { opacity: 0; } }
+    .fz-toast {
+      position: absolute; left: 50%; bottom: 6%;
+      transform: translate(-50%, 20px);
+      background: #fff; color: var(--ink);
+      font-size: .76rem; font-weight: 700;
+      padding: 10px 18px; border-radius: 999px;
+      box-shadow: 0 16px 40px rgba(35,28,12,.3);
+      display: inline-flex; align-items: center; gap: 8px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .35s ease, transform .45s cubic-bezier(.22,.9,.3,1);
+      white-space: nowrap; z-index: 6;
+    }
+    .fz-toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .fz-toast .tick {
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--green); color: #fff;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: .56rem;
+    }
+
+    /* periodic press on stage CTA buttons */
+    .sp-stage .fz-go { animation: goPress 7s ease-in-out infinite; }
+    @keyframes goPress {
+      0%, 54% { transform: none; }
+      57% { transform: scale(.93); }
+      60%, 100% { transform: none; }
+    }
+
+    /* film grain on dark sections */
+    .show-sec, .converge { position: relative; }
+    .show-sec::after, .converge .grain {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      opacity: .05; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+    }
+    .show-sec > .wrap { position: relative; z-index: 1; }
+
+    /* ═══════════ RESPONSIVE ═══════════ */
+    @media (max-width: 1040px) {
+      .story-grid { grid-template-columns: 1fr; }
+      .pulse-grid { grid-template-columns: 1fr; gap: 2.6rem; }
+      .pulse { max-width: 620px; }
+      .story-visual { min-height: 300px; order: -1; }
+      .one-grid { grid-template-columns: 1fr 1fr; }
+      .sp-shell { grid-template-columns: 1fr; align-items: start; }
+      .sp-copy { padding: 34px 28px 0; }
+      .sp-stage { min-height: 470px; }
+      .trust-grid { grid-template-columns: 1fr 1fr; }
+      .signup-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .signup-card { max-width: 520px; }
+    }
+    @media (max-width: 620px) {
+      .hero { padding-top: 128px; padding-bottom: 64px; }
+      .builder { padding: 36px 20px 40px; }
+      .one-grid { grid-template-columns: 1fr; }
+      .trust-grid { grid-template-columns: 1fr; }
+      .pulse-feed { min-height: 340px; }
+      .signup-card { padding: 26px 20px 24px; }
+      .field-row { grid-template-columns: 1fr; gap: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      html { scroll-behavior: auto; }
+      [data-rev] { opacity: 1; transform: none; }
+      .hload { opacity: 1; transform: none; }
+    }
+  
+    /* ═══════════ CYBER-UNIQUE SECTIONS ═══════════ */
+    .cy-sec { padding: 100px 0; }
+    .cy-sec.alt { background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .cy-head { max-width: 720px; margin: 0 auto 56px; text-align: center; }
+
+    /* ── 1 · LIVE ATTACK TIMELINE ── */
+    .atk { max-width: 860px; margin: 0 auto; background: #0F1620; border-radius: 22px; overflow: hidden; box-shadow: 0 40px 90px -34px rgba(7,20,30,.6); border: 1px solid #1E2A38; }
+    .atk-top { display: flex; align-items: center; gap: 11px; padding: 15px 22px; border-bottom: 1px solid #1E2A38; background: #0B1119; }
+    .atk-dots { display: flex; gap: 6px; }
+    .atk-dots span { width: 10px; height: 10px; border-radius: 50%; background: #2A3947; }
+    .atk-title { font-size: .76rem; font-weight: 700; color: #7C8CA0; letter-spacing: .04em; }
+    .atk-live { margin-left: auto; display: inline-flex; align-items: center; gap: 7px; font-size: .64rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #F87171; }
+    .atk-live .d { width: 7px; height: 7px; border-radius: 50%; background: #F87171; animation: cyPing 1.4s infinite; }
+    @keyframes cyPing { 0%,100%{opacity:1} 50%{opacity:.3} }
+    .atk-body { padding: 8px 0 14px; }
+    .atk-row { display: grid; grid-template-columns: 108px 30px 1fr; gap: 0; align-items: start; padding: 12px 22px; position: relative; }
+    .atk-row::before { content: ''; position: absolute; left: 137px; top: 26px; bottom: -12px; width: 2px; background: #1E2A38; }
+    .atk-row:last-child::before { display: none; }
+    .atk-time { font-family: 'Plus Jakarta Sans', sans-serif; font-size: .74rem; font-weight: 700; color: #5D6E80; letter-spacing: .02em; padding-top: 3px; }
+    .atk-node { width: 16px; height: 16px; border-radius: 50%; margin-top: 2px; position: relative; z-index: 1; }
+    .an-red { background: #F87171; box-shadow: 0 0 0 4px rgba(248,113,113,.18); }
+    .an-cy { background: var(--blue); box-shadow: 0 0 0 4px rgba(14,146,168,.22); }
+    .an-green { background: #34D399; box-shadow: 0 0 0 4px rgba(52,211,153,.18); }
+    .atk-what b { display: block; font-size: .9rem; font-weight: 700; color: #E6ECF3; line-height: 1.3; }
+    .atk-what span { font-size: .76rem; color: #7C8CA0; margin-top: 2px; display: block; }
+    .atk-badge { display: inline-block; font-size: .58rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 3px 9px; border-radius: 100px; margin-top: 7px; }
+    .ab-auto { background: rgba(14,146,168,.16); color: #4FC3D6; border: 1px solid rgba(14,146,168,.4); }
+    .ab-clear { background: rgba(52,211,153,.14); color: #34D399; border: 1px solid rgba(52,211,153,.35); }
+    .atk-foot { padding: 16px 22px; border-top: 1px solid #1E2A38; display: flex; align-items: center; justify-content: space-between; background: #0B1119; }
+    .atk-foot .l { font-size: .82rem; color: #9BA9BA; } .atk-foot .l b { color: #34D399; font-weight: 800; }
+    .atk-foot .r { font-size: .72rem; color: #5D6E80; font-weight: 600; }
+
+    /* ── 2 · POSTURE DASHBOARD ── */
+    .post-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1120px; margin: 0 auto; }
+    .post-copy h2 { font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(1.9rem, 3.6vw, 2.7rem); letter-spacing: -.018em; line-height: 1.12; margin: 16px 0 18px; }
+    .post-copy h2 .hl { color: var(--blue); }
+    .post-copy p { color: var(--ink-soft); line-height: 1.8; margin-bottom: 20px; max-width: 460px; }
+    .post-copy ul { list-style: none; display: grid; gap: 11px; }
+    .post-copy li { display: flex; gap: 11px; font-size: .93rem; align-items: flex-start; }
+    .post-copy li svg { width: 17px; height: 17px; flex-shrink: 0; margin-top: 3px; stroke: var(--blue); fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+
+    .post { background: #fff; border: 1.5px solid var(--line); border-radius: 20px; overflow: hidden; box-shadow: 0 30px 70px -28px rgba(28,24,34,.24); }
+    .post-top { display: flex; align-items: center; gap: 14px; padding: 22px 24px; border-bottom: 1px solid var(--line); background: var(--blue-soft); }
+    .post-ring { position: relative; width: 88px; height: 88px; flex-shrink: 0; }
+    .post-ring svg { transform: rotate(-90deg); }
+    .post-ring .rt { stroke: #D3EEF3; } .post-ring .rf { stroke: var(--blue); stroke-linecap: round; }
+    .post-ring .num { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .post-ring .num b { font-size: 1.7rem; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+    .post-ring .num i { font-style: normal; font-size: .56rem; color: var(--ink-faint); font-weight: 700; }
+    .post-top-txt b { font-size: 1.02rem; font-weight: 800; display: block; }
+    .post-top-txt span { font-size: .8rem; color: var(--ink-soft); }
+    .post-trend { display: inline-flex; align-items: center; gap: 5px; font-size: .74rem; font-weight: 800; color: #199C68; margin-top: 5px; }
+    .post-trend svg { width: 13px; height: 13px; stroke: #199C68; fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+    .post-body { padding: 20px 24px 24px; }
+    .post-dom { margin-bottom: 16px; }
+    .post-dom:last-child { margin-bottom: 0; }
+    .post-dom-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 7px; }
+    .post-dom-top .k { font-size: .84rem; font-weight: 700; }
+    .post-dom-top .v { font-size: .84rem; font-weight: 800; }
+    .pv-good { color: #199C68; } .pv-mid { color: #B47A08; } .pv-bad { color: #C2372E; }
+    .post-track { height: 9px; border-radius: 6px; background: var(--paper); border: 1px solid var(--line); overflow: hidden; }
+    .post-fill { height: 100%; border-radius: 6px; width: 0; transition: width 1.3s cubic-bezier(.22,.8,.3,1); }
+    .pf-good { background: linear-gradient(90deg, #0B7C8F, var(--blue)); }
+    .pf-mid { background: linear-gradient(90deg, #8a5d05, #B47A08); }
+    .pf-bad { background: linear-gradient(90deg, #8f2820, #C2372E); }
+    .post-dom-note { font-size: .72rem; color: var(--ink-faint); margin-top: 5px; }
+
+    /* ── 3 · ABSORBED vs ESCALATED ── */
+    .csplit { display: grid; grid-template-columns: 1fr 88px 1fr; align-items: stretch; max-width: 1060px; margin: 0 auto; }
+    .csplit-col { border: 1.5px solid var(--line); border-radius: 20px; padding: 30px 28px; background: #fff; }
+    .csplit-col.abs { background: var(--paper-hi, #FFFCF6); }
+    .csplit-col.esc { border-color: var(--blue-line); background: var(--blue-soft); box-shadow: 0 20px 50px -22px rgba(14,146,168,.3); }
+    .csplit-num { font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: 3rem; letter-spacing: -.03em; line-height: 1; margin-bottom: 6px; }
+    .csplit-col.abs .csplit-num { color: var(--ink-faint); }
+    .csplit-col.esc .csplit-num { color: var(--blue); }
+    .csplit-label { font-size: .7rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 20px; }
+    .csplit-list { list-style: none; display: grid; gap: 9px; }
+    .csplit-list li { display: flex; gap: 10px; font-size: .86rem; color: var(--ink-soft); align-items: flex-start; line-height: 1.45; }
+    .csplit-list li svg { width: 15px; height: 15px; flex-shrink: 0; margin-top: 2px; fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+    .csplit-col.abs .csplit-list li svg { stroke: var(--ink-faint); }
+    .csplit-col.esc .csplit-list li svg { stroke: var(--blue); }
+    .csplit-mid { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+    .csplit-arrow { width: 44px; height: 44px; border-radius: 50%; background: #fff; border: 1.5px solid var(--blue-line); display: flex; align-items: center; justify-content: center; }
+    .csplit-arrow svg { width: 20px; height: 20px; stroke: var(--blue); fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .csplit-mid-label { font-size: .58rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-faint); text-align: center; line-height: 1.4; }
+
+    /* ── 4 · KILL CHAIN ── */
+    .kc { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+    .kc::before { content: ''; position: absolute; top: 27px; left: 12%; right: 12%; height: 2px; background: repeating-linear-gradient(90deg, var(--blue-line) 0 8px, transparent 8px 16px); }
+    .kc-step { padding: 0 22px; position: relative; }
+    .kc-n { position: relative; z-index: 1; width: 54px; height: 54px; border-radius: 16px; margin-bottom: 20px; background: var(--blue-soft); border: 1.5px solid var(--blue-line); display: flex; align-items: center; justify-content: center; transition: transform .2s ease, box-shadow .2s ease; }
+    .kc-step:hover .kc-n { transform: translateY(-3px) rotate(-3deg); box-shadow: 0 10px 24px rgba(14,146,168,.24); }
+    .kc-n svg { width: 24px; height: 24px; stroke: var(--blue); fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+    .kc-step .t { display: inline-block; font-size: .64rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+    .kc-step h3 { font-size: 1.04rem; font-weight: 800; letter-spacing: -.01em; margin-bottom: 8px; }
+    .kc-step p { font-size: .88rem; color: var(--ink-soft); line-height: 1.7; }
+
+    /* ── 5 · vs ENTERPRISE SIEM ── */
+    .siem { display: grid; grid-template-columns: 1fr 74px 1fr; align-items: stretch; max-width: 1000px; margin: 0 auto; }
+    .siem-col { border: 1.5px solid var(--line); border-radius: 22px; padding: 34px 30px; background: #fff; }
+    .siem-col.win { border-color: var(--blue-line); background: linear-gradient(180deg, var(--blue-soft), #fff 60%); box-shadow: 0 24px 60px -26px rgba(14,146,168,.32); }
+    .siem-eyebrow { font-size: .66rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 12px; }
+    .siem-col.win .siem-eyebrow { color: var(--blue); }
+    .siem-price { font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(1.9rem, 3.6vw, 2.7rem); letter-spacing: -.03em; line-height: 1; margin-bottom: 4px; }
+    .siem-price span { font-size: .86rem; color: var(--ink-faint); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; }
+    .siem-note { font-size: .78rem; color: var(--ink-faint); margin-bottom: 22px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+    .siem-list { list-style: none; display: grid; gap: 13px; }
+    .siem-list li { display: flex; gap: 11px; font-size: .88rem; line-height: 1.5; align-items: flex-start; }
+    .siem-list li svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+    .siem-col.lose .siem-list li { color: var(--ink-soft); } .siem-col.lose .siem-list li svg { stroke: var(--ink-faint); }
+    .siem-col.win .siem-list li { color: var(--ink); } .siem-col.win .siem-list li svg { stroke: var(--blue); }
+    .siem-mid { display: flex; align-items: center; justify-content: center; }
+    .siem-mid span { font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: 1.1rem; color: var(--ink-faint); }
+    .siem-math { display: flex; justify-content: center; gap: clamp(28px, 6vw, 70px); flex-wrap: wrap; max-width: 1000px; margin: 44px auto 0; text-align: center; }
+    .siem-math-item .n { font-family: 'Newsreader', Georgia, serif; font-weight: 500; font-size: clamp(2rem, 3.6vw, 2.8rem); letter-spacing: -.03em; color: var(--blue); line-height: 1; }
+    .siem-math-item .l { font-size: .82rem; color: var(--ink-soft); margin-top: 8px; max-width: 210px; line-height: 1.5; }
+    .siem-src { text-align: center; font-size: .76rem; color: var(--ink-faint); max-width: 680px; margin: 30px auto 0; line-height: 1.6; }
+
+    @media (max-width: 940px) {
+      .post-wrap { grid-template-columns: 1fr; gap: 40px; }
+      .csplit, .siem { grid-template-columns: 1fr; }
+      .csplit-mid, .siem-mid { flex-direction: row; padding: 8px 0; }
+      .kc { grid-template-columns: 1fr 1fr; gap: 40px 0; }
+      .kc::before { display: none; }
+    }
+    @media (max-width: 560px) {
+      .kc { grid-template-columns: 1fr; }
+      .atk-row { grid-template-columns: 88px 26px 1fr; padding-left: 16px; padding-right: 16px; }
+      .atk-row::before { left: 116px; }
+    }
+
+  </style>
+</head>
+<body>
+<!-- BUILD: v18-stories-live -->
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-eyebrow hload hd1">AI Cybersecurity</div>
+  <h1 class="hload hd2">Detect it. Contain it. Prove it.</h1>
+  <p class="hero-sub hload hd3">AI Cybersecurity watches your identities, endpoints, and cloud around the clock — catching what static rules miss, running the response playbook automatically, and waking you only when a human call is needed. One flat price. Powered by Claude.</p>
+
+  <div class="hero-btns hload hd4">
+    <a class="hbtn hbtn-solid" href="/login.html">Start free with email</a>
+    <a class="hbtn hbtn-outline" href="/login.html">
+      <svg viewBox="0 0 24 24"><path fill="#4285F4" stroke="none" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" stroke="none" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" stroke="none" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" stroke="none" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Start free with Google
+    </a>
+  </div>
+
+  <div class="hero-stats hload hd5">
+    <div class="hstat"><span class="hstat-num">24/7</span><span class="hstat-label">eyes on your stack, every hour of the year</span></div>
+    <div class="hstat"><span class="hstat-num">&lt;2s</span><span class="hstat-label">from confirmed threat to first containment</span></div>
+    <div class="hstat"><span class="hstat-num">$0</span><span class="hstat-label">per-seat fees — flat pricing, no SIEM tax</span></div>
+  </div>
+
+  <div class="hero-compliance hload hd6">
+    <span class="hcomp"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>SOC 2 Framework</span>
+    <span class="hcomp"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18"/></svg>PIPEDA + GDPR + CCPA Compliant</span>
+  </div>
+
+  <div class="builder hload hd7">
+    <div class="builder-eyebrow">For Your Business</div>
+    <h2>Get started in seconds</h2>
+    <div class="seg" role="tablist" aria-label="Choose a product">
+      <button class="on" id="seg0" onclick="segSw(0)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>Sell</button>
+      <button id="seg1" onclick="segSw(1)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Run</button>
+      <button id="seg2" onclick="segSw(2)"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Defend</button>
+    </div>
+
+    <!-- SELL cards -->
+    <div class="builder-cards" id="bc0">
+      <a class="bcard bc-blue" href="/lead-generation/"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg><span>Prospect Search</span></a>
+      <a class="bcard bc-blue" href="/lead-generation/"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/><circle cx="12" cy="12" r="10"/></svg><span>Verified Emails</span></a>
+      <a class="bcard bc-blue" href="/lead-generation/"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg><span>Direct Dials</span></a>
+      <a class="bcard bc-blue" href="/lead-generation/"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 7l8 6 8-6"/></svg><span>AI Outreach</span></a>
+      <a class="bcard bc-blue" href="/lead-generation/"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span>Instant Export</span></a>
+    </div>
+
+    <!-- RUN cards -->
+    <div class="builder-cards" id="bc1" style="display:none">
+      <a class="bcard bc-pur" href="/chief-of-staff/"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Morning Brief</span></a>
+      <a class="bcard bc-pur" href="/chief-of-staff/"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><span>Meeting Prep</span></a>
+      <a class="bcard bc-pur" href="/chief-of-staff/"><svg viewBox="0 0 24 24"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg><span>Follow-ups</span></a>
+      <a class="bcard bc-pur" href="/chief-of-staff/"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg><span>Auto Reports</span></a>
+      <a class="bcard bc-pur" href="/chief-of-staff/"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span>Delegation</span></a>
+    </div>
+
+    <!-- DEFEND cards -->
+    <div class="builder-cards" id="bc2" style="display:none">
+      <a class="bcard bc-cyan" href="/cybersecurity/"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Threat Monitor</span></a>
+      <a class="bcard bc-cyan" href="/cybersecurity/"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span>Auto Response</span></a>
+      <a class="bcard bc-cyan" href="/cybersecurity/"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l6 3"/></svg><span>Scheduled Scans</span></a>
+      <a class="bcard bc-cyan" href="/cybersecurity/"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg><span>Risk Scoring</span></a>
+      <a class="bcard bc-cyan" href="/cybersecurity/"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg><span>Smart Alerts</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STACK MARQUEE ═══ -->
+<div class="marq-band" aria-label="Platform foundations">
+  <div class="marq-label">Built on infrastructure you already trust</div>
+  <div class="mq-viewport">
+    <div class="mq-track" data-marquee="fwd">
+      <div class="mq-set">
+          <span class="mq-item hot"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Powered by Claude</span><span class="mq-sep"></span>
+          <span class="mq-item">Stripe Billing</span><span class="mq-sep"></span>
+          <span class="mq-item">Firebase Auth</span><span class="mq-sep"></span>
+          <span class="mq-item">Vercel Edge</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>99.9% Uptime</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Encrypted at Rest</span><span class="mq-sep"></span>
+      </div>
+      <div class="mq-set" aria-hidden="true">
+          <span class="mq-item hot"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Powered by Claude</span><span class="mq-sep"></span>
+          <span class="mq-item">Stripe Billing</span><span class="mq-sep"></span>
+          <span class="mq-item">Firebase Auth</span><span class="mq-sep"></span>
+          <span class="mq-item">Vercel Edge</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>99.9% Uptime</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Encrypted at Rest</span><span class="mq-sep"></span>
+      </div>
+      <div class="mq-set" aria-hidden="true">
+          <span class="mq-item hot"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Powered by Claude</span><span class="mq-sep"></span>
+          <span class="mq-item">Stripe Billing</span><span class="mq-sep"></span>
+          <span class="mq-item">Firebase Auth</span><span class="mq-sep"></span>
+          <span class="mq-item">Vercel Edge</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>99.9% Uptime</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Encrypted at Rest</span><span class="mq-sep"></span>
+      </div>
+    </div>
+  </div>
+  <div class="mq-viewport">
+    <div class="mq-track" data-marquee="rev">
+      <div class="mq-set">
+          <span class="mq-item hot"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Flat Pricing</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>PIPEDA</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>GDPR</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>CCPA</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Cancel Anytime</span><span class="mq-sep"></span>
+          <span class="mq-item">One Login</span><span class="mq-sep"></span>
+          <span class="mq-item hot">No Per-Seat Fees</span><span class="mq-sep"></span>
+      </div>
+      <div class="mq-set" aria-hidden="true">
+          <span class="mq-item hot"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Flat Pricing</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>PIPEDA</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>GDPR</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>CCPA</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Cancel Anytime</span><span class="mq-sep"></span>
+          <span class="mq-item">One Login</span><span class="mq-sep"></span>
+          <span class="mq-item hot">No Per-Seat Fees</span><span class="mq-sep"></span>
+      </div>
+      <div class="mq-set" aria-hidden="true">
+          <span class="mq-item hot"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Flat Pricing</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>PIPEDA</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>GDPR</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>CCPA</span><span class="mq-sep"></span>
+          <span class="mq-item"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Cancel Anytime</span><span class="mq-sep"></span>
+          <span class="mq-item">One Login</span><span class="mq-sep"></span>
+          <span class="mq-item hot">No Per-Seat Fees</span><span class="mq-sep"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PLATFORM PULSE ═══ -->
+<section class="pulse-sec">
+  <div class="wrap">
+    <div class="pulse-grid">
+      <div data-rev>
+        <span class="kicker"><span class="pip"></span>Always Watching</span>
+        <h2 class="sec-h2">The 3am shift, <span class="hl">covered.</span></h2>
+        <p class="sec-sub">While you sleep, AI is watching identities, endpoints, and cloud — catching anomalies, running containment, and logging every action. The whole feed in one place.</p>
+      </div>
+      <div class="pulse" data-rev aria-label="Live platform activity example">
+        <div class="pulse-top">
+          <span class="pulse-live"><span class="dot"></span>LIVE</span>
+          <span class="pulse-title">Platform Pulse</span>
+        </div>
+        <div class="pulse-feed" id="pulseFeed"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 1 · LIVE ATTACK TIMELINE ═══ -->
+<section class="cy-sec">
+  <div class="wrap">
+    <div class="cy-head" data-rev>
+      <span class="kicker"><span class="pip"></span>Anatomy of a save</span>
+      <h2 class="sec-h2">A real intrusion,<br><span class="hl">contained in 98 seconds.</span></h2>
+      <p class="sec-sub" style="margin:0 auto">Here's what happened the last time someone tried an admin account at 2am. Nobody got paged. You read about it in the morning.</p>
+    </div>
+    <div class="atk" data-rev>
+      <div class="atk-top">
+        <div class="atk-dots"><span></span><span></span><span></span></div>
+        <span class="atk-title">incident #4821 · admin credential misuse</span>
+        <span class="atk-live"><span class="d"></span>Resolved</span>
+      </div>
+      <div class="atk-body">
+        <div class="atk-row">
+          <div class="atk-time">02:14:03</div>
+          <div class="atk-node an-red"></div>
+          <div class="atk-what"><b>Impossible-travel login detected</b><span>admin account · Lagos, NG · new device · 4,100km in 9 min</span></div>
+        </div>
+        <div class="atk-row">
+          <div class="atk-time">02:14:04</div>
+          <div class="atk-node an-cy"></div>
+          <div class="atk-what"><b>Correlated with 11 related events</b><span>failed MFA ×3 · unusual API calls · off-hours</span><span class="atk-badge ab-auto">Auto · one incident, not 40 alerts</span></div>
+        </div>
+        <div class="atk-row">
+          <div class="atk-time">02:14:06</div>
+          <div class="atk-node an-cy"></div>
+          <div class="atk-what"><b>Session revoked, account frozen</b><span>+3s from detection · playbook ran itself</span><span class="atk-badge ab-auto">Auto</span></div>
+        </div>
+        <div class="atk-row">
+          <div class="atk-time">02:14:09</div>
+          <div class="atk-node an-cy"></div>
+          <div class="atk-what"><b>MFA re-challenge sent to real owner</b><span>device fingerprint logged · source watch-listed</span><span class="atk-badge ab-auto">Auto</span></div>
+        </div>
+        <div class="atk-row">
+          <div class="atk-time">02:15:41</div>
+          <div class="atk-node an-green"></div>
+          <div class="atk-what"><b>Marked all-clear</b><span>no further activity · full timeline written to the record</span><span class="atk-badge ab-clear">Contained · 0 pages sent</span></div>
+        </div>
+      </div>
+      <div class="atk-foot">
+        <span class="l">Your involvement: <b>read the summary at 7am.</b></span>
+        <span class="r">total time to contain · 98s</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 2 · POSTURE DASHBOARD ═══ -->
+<section class="cy-sec alt">
+  <div class="wrap">
+    <div class="post-wrap">
+      <div class="post-copy" data-rev>
+        <span class="kicker"><span class="pip"></span>Know where you stand</span>
+        <h2>One number leadership<br>actually <span class="hl">understands.</span></h2>
+        <p>Threats, gaps, and hygiene rolled into a single live score — broken down by domain, trending over time, and paired with the ranked fixes that move it most. Board-ready without a 90-slide deck.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Updates the moment your environment changes</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Findings ranked by real exploitability, not CVE count</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Shows exactly which fix lifts the score most</li>
+        </ul>
+      </div>
+      <div class="post" data-rev data-d="1">
+        <div class="post-top">
+          <div class="post-ring">
+            <svg width="88" height="88" viewBox="0 0 88 88">
+              <circle class="rt" cx="44" cy="44" r="38" fill="none" stroke-width="8"/>
+              <circle class="rf" id="postRing" cx="44" cy="44" r="38" fill="none" stroke-width="8" stroke-dasharray="238.8" stroke-dashoffset="238.8"/>
+            </svg>
+            <div class="num"><b id="postNum">0</b><i>/ 100</i></div>
+          </div>
+          <div class="post-top-txt">
+            <b>Security posture</b>
+            <span>live · all domains</span>
+            <span class="post-trend"><svg viewBox="0 0 24 24"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg>+6 this week</span>
+          </div>
+        </div>
+        <div class="post-body">
+          <div class="post-dom">
+            <div class="post-dom-top"><span class="k">Identity &amp; Access</span><span class="v pv-good">81</span></div>
+            <div class="post-track"><div class="post-fill pf-good" data-w="81%"></div></div>
+            <div class="post-dom-note">MFA on 92% of accounts · 4 admins remaining</div>
+          </div>
+          <div class="post-dom">
+            <div class="post-dom-top"><span class="k">Endpoints</span><span class="v pv-good">88</span></div>
+            <div class="post-track"><div class="post-fill pf-good" data-w="88%"></div></div>
+            <div class="post-dom-note">Fleet on current baseline</div>
+          </div>
+          <div class="post-dom">
+            <div class="post-dom-top"><span class="k">Cloud Config</span><span class="v pv-mid">63</span></div>
+            <div class="post-track"><div class="post-fill pf-mid" data-w="63%"></div></div>
+            <div class="post-dom-note">1 public bucket · auto-revert awaiting approval</div>
+          </div>
+          <div class="post-dom">
+            <div class="post-dom-top"><span class="k">Data Protection</span><span class="v pv-bad">54</span></div>
+            <div class="post-track"><div class="post-fill pf-bad" data-w="54%"></div></div>
+            <div class="post-dom-note">Backups unencrypted at rest · +6 pts if fixed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 3 · ABSORBED vs ESCALATED ═══ -->
+<section class="cy-sec">
+  <div class="wrap">
+    <div class="cy-head" data-rev>
+      <span class="kicker"><span class="pip"></span>Signal, not noise</span>
+      <h2 class="sec-h2">It absorbed 218 events.<br>It woke you for <span class="hl">2.</span></h2>
+      <p class="sec-sub" style="margin:0 auto">A SOC that forwards you everything is just a louder alarm. This one knows the difference between noise and a 3am phone call.</p>
+    </div>
+    <div class="csplit" data-rev>
+      <div class="csplit-col abs">
+        <div class="csplit-num">218</div>
+        <div class="csplit-label">Absorbed silently</div>
+        <ul class="csplit-list">
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Port scans and probes deflected at the edge</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Brute-force bursts rate-limited automatically</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Expired tokens revoked, no impact</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Behavior baselines re-learned as hosts drift</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Routine alerts correlated and closed</li>
+        </ul>
+      </div>
+      <div class="csplit-mid">
+        <div class="csplit-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        <div class="csplit-mid-label">only<br>what's<br>real</div>
+      </div>
+      <div class="csplit-col esc">
+        <div class="csplit-num">2</div>
+        <div class="csplit-label">Escalated to you</div>
+        <ul class="csplit-list">
+          <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>A public storage bucket needing your sign-off to revert</li>
+          <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>An OAuth grant with unusually broad scope</li>
+        </ul>
+        <p style="font-size:.82rem;color:var(--ink-soft);margin-top:18px;line-height:1.6;">You set what auto-runs and what needs a human. It never guesses on the high-impact calls.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 4 · KILL CHAIN ═══ -->
+<section class="cy-sec alt">
+  <div class="wrap">
+    <div class="cy-head" data-rev>
+      <span class="kicker"><span class="pip"></span>How it defends</span>
+      <h2 class="sec-h2">The discipline of a security team,<br><span class="hl">executed in seconds.</span></h2>
+      <p class="sec-sub" style="margin:0 auto">The same four moves a world-class SOC runs on every incident — automated end to end, documented in plain English.</p>
+    </div>
+    <div class="kc">
+      <div class="kc-step" data-rev>
+        <div class="kc-n"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+        <span class="t">01 · Detect</span>
+        <h3>See what rules miss</h3>
+        <p>Behavioral baselines across identity, endpoints, and cloud catch the anomalies static rules never will.</p>
+      </div>
+      <div class="kc-step" data-rev data-d="1">
+        <div class="kc-n"><svg viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.2 2.2M16.2 16.2l2.2 2.2M5.6 18.4l2.2-2.2M16.2 7.8l2.2-2.2"/><circle cx="12" cy="12" r="3.5"/></svg></div>
+        <span class="t">02 · Triage</span>
+        <h3>Correlate, don't spam</h3>
+        <p>Forty raw events become one incident with a plain-English reason it fired and how bad it is. Noise suppressed.</p>
+      </div>
+      <div class="kc-step" data-rev data-d="2">
+        <div class="kc-n"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <span class="t">03 · Contain</span>
+        <h3>Act in seconds</h3>
+        <p>Sessions revoked, devices quarantined, tokens killed — automatically for routine, held for your approval on high-impact.</p>
+      </div>
+      <div class="kc-step" data-rev data-d="3">
+        <div class="kc-n"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></div>
+        <span class="t">04 · Prove</span>
+        <h3>Document everything</h3>
+        <p>Every action lands on a timestamped timeline — audit-ready for compliance, board-ready for leadership.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 5 · vs ENTERPRISE SIEM ═══ -->
+<section class="cy-sec">
+  <div class="wrap">
+    <div class="cy-head" data-rev>
+      <span class="kicker"><span class="pip"></span>The honest trade-off</span>
+      <h2 class="sec-h2">Enterprise security tooling,<br><span class="hl">without the enterprise tax.</span></h2>
+      <p class="sec-sub" style="margin:0 auto">The big platforms are priced for companies that already have a security department. You need the outcome, not the org chart.</p>
+    </div>
+    <div class="siem" data-rev>
+      <div class="siem-col lose">
+        <div class="siem-eyebrow">Typical Enterprise SIEM</div>
+        <div class="siem-price">Per seat<span> · per GB</span></div>
+        <div class="siem-note">The bill grows with every person and every log you send</div>
+        <ul class="siem-list">
+          <li><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>Priced per seat and per gigabyte — cost scales as you do</li>
+          <li><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>Annual contract and a procurement cycle before you see a dashboard</li>
+          <li><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>Tuning and rule-writing are your problem, or a consultant's invoice</li>
+          <li><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>Alerts fire — but triage is still a human in a chair</li>
+        </ul>
+      </div>
+      <div class="siem-mid"><span>vs</span></div>
+      <div class="siem-col win">
+        <div class="siem-eyebrow">JAYISAAC AI</div>
+        <div class="siem-price">Flat<span> · monthly</span></div>
+        <div class="siem-note">No per-seat fees, no per-GB billing, no overage surprise</div>
+        <ul class="siem-list">
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Flat monthly — add your whole team, the bill doesn't move</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Live this week, read-only, no procurement cycle to sit through</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Baselines learned from your environment — no rules to write</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>AI triages and contains — humans get only the real decisions</li>
+        </ul>
+      </div>
+    </div>
+    <div class="siem-math" data-rev>
+      <div class="siem-math-item"><div class="n">$0</div><div class="l">per-seat fees — add the whole team, bill doesn't move</div></div>
+      <div class="siem-math-item"><div class="n">0</div><div class="l">procurement cycles — connect read-only, watch it work today</div></div>
+      <div class="siem-math-item"><div class="n">24/7</div><div class="l">coverage on one flat price, not a rotation you staff</div></div>
+    </div>
+    <p class="siem-src">What you pay elsewhere depends on seat count and data volume, so we don't publish competitor numbers we can't source. Ours are on the pricing page, in public, with no call required.</p>
+  </div>
+</section>
+
+
+<!-- ═══ CONVERGE (dark) ═══ -->
+<section class="converge">
+  <div class="wrap">
+    <div class="converge-head" data-rev>
+      <span class="kicker"><span class="pip"></span>Why One Platform</span>
+      <h2 class="sec-h2">Three products. <span class="hl">One secure account.</span></h2>
+      <p class="sec-sub">Each product is a different door into the same building. Your data, your billing, and your login live in one place, and every product gets smarter from what the others know.</p>
+    </div>
+
+    <div class="flow" data-rev aria-hidden="true">
+      <svg class="flow-svg" viewBox="0 0 860 360" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="fgBlue" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#818CF8"/><stop offset="1" stop-color="#4F46E5"/>
+          </linearGradient>
+          <linearGradient id="fgPur" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#C084FC"/><stop offset="1" stop-color="#7C3AED"/>
+          </linearGradient>
+          <linearGradient id="fgCyan" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#67E8F9"/><stop offset="1" stop-color="#0E92A8"/>
+          </linearGradient>
+          <linearGradient id="fgHub" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#818CF8"/><stop offset=".55" stop-color="#6366F1"/><stop offset="1" stop-color="#A855F7"/>
+          </linearGradient>
+        </defs>
+
+        <path class="flow-dash" d="M235 70 C 380 70, 420 150, 545 172" stroke="url(#fgBlue)" stroke-width="2.5" fill="none" opacity=".8"/>
+        <path class="flow-dash" d="M235 180 C 360 180, 430 180, 545 180" stroke="url(#fgPur)" stroke-width="2.5" fill="none" opacity=".8"/>
+        <path class="flow-dash" d="M235 290 C 380 290, 420 210, 545 188" stroke="url(#fgCyan)" stroke-width="2.5" fill="none" opacity=".8"/>
+
+        <!-- breathing halos on the product nodes -->
+        <circle cx="63" cy="70" r="5" fill="none" stroke="#818CF8" stroke-width="1.5">
+          <animate attributeName="r" values="5;15" dur="2.6s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values=".6;0" dur="2.6s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="63" cy="180" r="5" fill="none" stroke="#C084FC" stroke-width="1.5">
+          <animate attributeName="r" values="5;15" dur="2.6s" begin="0.9s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values=".6;0" dur="2.6s" begin="0.9s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="63" cy="290" r="5" fill="none" stroke="#67E8F9" stroke-width="1.5">
+          <animate attributeName="r" values="5;15" dur="2.6s" begin="1.7s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values=".6;0" dur="2.6s" begin="1.7s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- traveling pulses -->
+        <circle r="4.5" fill="#818CF8">
+          <animateMotion dur="2.6s" repeatCount="indefinite" path="M235 70 C 380 70, 420 150, 545 172"/>
+        </circle>
+        <circle r="4.5" fill="#C084FC">
+          <animateMotion dur="2.6s" begin="0.9s" repeatCount="indefinite" path="M235 180 C 360 180, 430 180, 545 180"/>
+        </circle>
+        <circle r="4.5" fill="#67E8F9">
+          <animateMotion dur="2.6s" begin="1.7s" repeatCount="indefinite" path="M235 290 C 380 290, 420 210, 545 188"/>
+        </circle>
+
+        <g>
+          <rect x="35" y="40" width="200" height="60" rx="16" fill="rgba(99,102,241,.1)" stroke="rgba(129,140,248,.45)" stroke-width="1.5"/>
+          <circle cx="63" cy="70" r="5" fill="#818CF8"/>
+          <text x="80" y="66" fill="#C7D2FE" font-family="Inter, sans-serif" font-size="14" font-weight="700">Lead Generation</text>
+          <text x="80" y="84" fill="rgba(255,255,255,.45)" font-family="Inter, sans-serif" font-size="10.5">Find your next customer</text>
+        </g>
+        <g>
+          <rect x="35" y="150" width="200" height="60" rx="16" fill="rgba(124,58,237,.1)" stroke="rgba(192,132,252,.45)" stroke-width="1.5"/>
+          <circle cx="63" cy="180" r="5" fill="#C084FC"/>
+          <text x="80" y="176" fill="#E9D5FF" font-family="Inter, sans-serif" font-size="14" font-weight="700">Chief of Staff</text>
+          <text x="80" y="194" fill="rgba(255,255,255,.45)" font-family="Inter, sans-serif" font-size="10.5">Run the operation</text>
+        </g>
+        <g>
+          <rect x="35" y="260" width="200" height="60" rx="16" fill="rgba(14,146,168,.12)" stroke="rgba(103,232,249,.4)" stroke-width="1.5"/>
+          <circle cx="63" cy="290" r="5" fill="#67E8F9"/>
+          <text x="80" y="286" fill="#A5F3FC" font-family="Inter, sans-serif" font-size="14" font-weight="700">Cybersecurity</text>
+          <text x="80" y="304" fill="rgba(255,255,255,.45)" font-family="Inter, sans-serif" font-size="10.5">Defend the business</text>
+        </g>
+
+        <g>
+          <rect x="545" y="115" width="280" height="130" rx="22" fill="rgba(255,255,255,.04)" stroke="url(#fgHub)" stroke-width="2"/>
+          <text x="685" y="163" text-anchor="middle" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="19" font-weight="700">JAYISAAC AI</text>
+          <text x="685" y="186" text-anchor="middle" fill="rgba(255,255,255,.55)" font-family="Inter, sans-serif" font-size="11.5">One login · One bill · One dataset</text>
+          <rect x="609" y="203" width="152" height="24" rx="12" fill="rgba(99,102,241,.16)" stroke="rgba(129,140,248,.4)" stroke-width="1"/>
+          <text x="685" y="219" text-anchor="middle" fill="#A5B4FC" font-family="Inter, sans-serif" font-size="10.5" font-weight="700">POWERED BY CLAUDE</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="one-grid" data-rev>
+      <div class="one-cell"><b>One <i>login</i></b><p>Every product lives under the same account. Sign in once and everything is already there.</p></div>
+      <div class="one-cell"><b>One <i>bill</i></b><p>Flat pricing across the platform. No per-seat fees, no credit traps, no annual lock-in.</p></div>
+      <div class="one-cell"><b>One <i>dataset</i></b><p>Your contacts, your calendar, your alerts. Shared context that makes every product sharper.</p></div>
+      <div class="one-cell"><b>One <i>AI engine</i></b><p>Claude runs under every product. The same frontier model behind Cursor, Notion AI, and Slack AI.</p></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ TRUST GRID ═══ -->
+<section class="trust-sec">
+  <div class="wrap">
+    <div class="trust-head" data-rev>
+      <span class="kicker"><span class="pip"></span>Who We Are</span>
+      <h2 class="sec-h2">Serious AI tools. <span class="hl">No enterprise tax.</span></h2>
+      <p class="sec-sub" style="margin:0 auto">Built for the businesses the big vendors overcharge and overlook, sold at a flat, honest price.</p>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-cell" data-rev><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><b>Powered by Claude</b><p>The same frontier model behind Cursor, Notion AI, and Slack AI runs under every product.</p></div>
+      <div class="trust-cell" data-rev><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><b>Private by design</b><p>Aligned to PIPEDA, GDPR, and CCPA. Your data stays yours, never sold or shared.</p></div>
+      <div class="trust-cell" data-rev><div class="ic"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><b>Flat, honest pricing</b><p>No per-seat fees, no credit traps, no annual lock-in. One price, cancel anytime.</p></div>
+      <div class="trust-cell" data-rev><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><b>Security first</b><p>SOC 2 framework practices, encrypted at rest and in transit, 99.9% uptime.</p></div>
+      <div class="trust-cell" data-rev><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div><b>One platform</b><p>Three products, one login, one bill, shared data. Add what you need as you grow.</p></div>
+      <div class="trust-cell" data-rev><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><b>Always on</b><p>Every product works 24/7. Leads found, briefs drafted, and threats caught while you sleep.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SIGNUP SPLIT ═══ -->
+<section class="signup-sec">
+  <div class="wrap">
+    <div class="signup-grid">
+      <div class="signup-copy" data-rev>
+        <span class="kicker"><span class="pip"></span>Sign Up</span>
+        <h2>Your business starts and scales with JAYISAAC AI</h2>
+        <p>Put AI on sales, operations, and security today, and let it grow with you. Start with one product, add the rest when you're ready.</p>
+        <ul class="signup-points">
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Three AI products on one flat bill, no per-seat fees</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Set up in minutes, working for you 24/7</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Free trial with no card required, cancel anytime</li>
+        </ul>
+      </div>
+
+      <div class="signup-card" data-rev>
+        <h3>Get started for free</h3>
+        <a class="g-btn" href="/login.html">
+          <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          Sign up with Google
+        </a>
+        <div class="or-divider">OR</div>
+
+        <div class="field">
+          <label for="suEmail">Work email <em>*</em></label>
+          <input id="suEmail" type="email" autocomplete="email" placeholder="you@company.com" />
+          <div class="field-msg" id="suEmailMsg">Enter a valid email address</div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="suFirst">First name</label>
+            <input id="suFirst" type="text" autocomplete="given-name" placeholder="Jay" />
+          </div>
+          <div class="field">
+            <label for="suLast">Last name</label>
+            <input id="suLast" type="text" autocomplete="family-name" placeholder="Turner" />
+          </div>
+        </div>
+
+        <button class="signup-submit" onclick="signupSubmit()">Get started for free</button>
+        <p class="signup-terms">By signing up, you agree to our <a href="/terms.html">Terms of Use</a> and <a href="/privacy.html">Privacy Policy</a>. You'll set your password on the next step.</p>
+        <p class="signup-login">Already have an account? <a href="/login.html">Log in</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- footer injected by footer.js -->
+
+<script>
+(function () {
+  console.log('%cJAYISAAC index build: v18-stories-live', 'color:#4F46E5;font-weight:bold');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── scroll reveal ── */
+  if (!reduced && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); }
+      });
+    }, { threshold: .12, rootMargin: '0px 0px -6% 0px' });
+    document.querySelectorAll('[data-rev]').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('[data-rev]').forEach(el => el.classList.add('vis'));
+  }
+
+  /* ── rAF marquee: throttle-proof, scroll-reactive ── */
+  (function () {
+    const tracks = document.querySelectorAll('[data-marquee]');
+    if (!tracks.length || reduced) return;
+
+    const state = Array.from(tracks).map(el => ({
+      el,
+      x: 0,
+      dir: el.dataset.marquee === 'rev' ? 1 : -1,
+      base: 0.55,
+      w: 0,
+      hover: 1
+    }));
+
+    function measure() {
+      state.forEach(s => {
+        s.w = s.el.querySelector('.mq-set').getBoundingClientRect().width;
+        if (s.dir === 1 && s.x === 0 && s.w) s.x = -s.w;
+      });
+    }
+    measure();
+    window.addEventListener('resize', measure);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+
+    state.forEach(s => {
+      s.el.addEventListener('mouseenter', () => { s.hover = 0.22; });
+      s.el.addEventListener('mouseleave', () => { s.hover = 1; });
+    });
+
+    /* scroll velocity feeds the speed */
+    let boost = 0, lastY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      boost = Math.min(boost + Math.abs(window.scrollY - lastY) * 0.15, 26);
+      lastY = window.scrollY;
+    }, { passive: true });
+
+    /* only animate while on screen */
+    let visible = false;
+    const band = document.querySelector('.marq-band');
+    new IntersectionObserver(es => { visible = es[0].isIntersecting; }, { rootMargin: '100px' }).observe(band);
+
+    let last = performance.now();
+    (function tick(now) {
+      const dt = Math.min(now - last, 50);
+      last = now;
+      boost *= 0.93;
+      if (visible) {
+        state.forEach(s => {
+          if (!s.w) { measure(); return; }
+          const v = (s.base + boost * 0.12) * s.hover * (dt / 16.67);
+          s.x += s.dir * v;
+          if (s.x <= -s.w) s.x += s.w;
+          if (s.x > 0) s.x -= s.w;
+          s.el.style.transform = 'translate3d(' + s.x.toFixed(2) + 'px,0,0)';
+        });
+      }
+      requestAnimationFrame(tick);
+    })(last);
+  })();
+
+  /* ── living demos: ghost-cursor picker + typing agent ── */
+  (function () {
+    const ICONS = {
+      lead:  '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>',
+      staff: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+      cyber: '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'
+    };
+
+    /* card A: selection swaps synced to the 12s cursor loop */
+    const demoA = document.getElementById('demoA');
+    const pickIc = document.getElementById('pickIc');
+    const pickLbl = document.getElementById('pickLbl');
+    if (demoA && pickIc && pickLbl) {
+      if (reduced) {
+        /* static: leave default selection, no cursor */
+        const gc = demoA.querySelector('.ghost-cursor');
+        if (gc) gc.remove();
+      } else {
+        let timers = [];
+        function setPick(key, label, cls) {
+          pickIc.className = 'fz-ic ' + cls;
+          pickIc.innerHTML = ICONS[key];
+          pickLbl.textContent = label;
+        }
+        function cycle() {
+          timers.forEach(clearTimeout); timers = [];
+          setPick('lead', 'Lead Generation', 'fz-ic-blue');
+          timers.push(setTimeout(() => setPick('staff', 'Chief of Staff', 'fz-ic-pur'), 4000));
+          timers.push(setTimeout(() => setPick('cyber', 'Cybersecurity', 'fz-ic-cyan'), 7000));
+        }
+        const io = new IntersectionObserver(es => {
+          if (es[0].isIntersecting) {
+            demoA.classList.add('demo-live');
+            const cursor = demoA.querySelector('.ghost-cursor');
+            cycle();
+            if (cursor) cursor.addEventListener('animationiteration', cycle);
+            io.disconnect();
+          }
+        }, { threshold: .3 });
+        io.observe(demoA);
+      }
+    }
+
+    /* card B: instruction types itself → chips pop → button press → toast */
+    const demoB = document.getElementById('demoB');
+    const target = document.getElementById('typeTarget');
+    const caret = document.getElementById('typeCaret');
+    const goBtn = document.getElementById('demoGo');
+    const toast = document.getElementById('demoToast');
+    const SCRIPT = "Every morning around 7am, read my inbox and calendar, rank what actually needs me, flag anything going quiet, and drop it all into one brief I can read in 90 seconds.";
+    if (demoB && target) {
+      const chips = demoB.querySelectorAll('.fz-chip');
+      if (reduced) {
+        target.textContent = SCRIPT;
+        if (caret) caret.remove();
+      } else {
+        let alive = false;
+        function run() {
+          if (!alive) return;
+          target.textContent = '';
+          chips.forEach(c => c.classList.remove('pop'));
+          toast.classList.remove('show');
+          let i = 0;
+          (function type() {
+            if (!alive) return;
+            if (i < SCRIPT.length) {
+              i += 1 + (Math.random() < .3 ? 1 : 0);
+              target.textContent = SCRIPT.slice(0, i);
+              setTimeout(type, 26 + Math.random() * 30);
+            } else {
+              chips.forEach((c, j) => setTimeout(() => c.classList.add('pop'), 350 + j * 260));
+              setTimeout(() => {
+                goBtn.classList.add('press');
+                setTimeout(() => goBtn.classList.remove('press'), 180);
+                setTimeout(() => toast.classList.add('show'), 250);
+              }, 350 + chips.length * 260 + 500);
+              setTimeout(() => { toast.classList.remove('show'); setTimeout(run, 900); }, 350 + chips.length * 260 + 4200);
+            }
+          })();
+        }
+        const io2 = new IntersectionObserver(es => {
+          if (es[0].isIntersecting && !alive) {
+            demoB.classList.add('demo-live');
+            alive = true;
+            run();
+          } else if (!es[0].isIntersecting && alive) {
+            alive = false; /* pause off-screen; restarts on return */
+          } else if (es[0].isIntersecting && !alive) {
+            alive = true; run();
+          }
+        }, { threshold: .3 });
+        io2.observe(demoB);
+      }
+    }
+  })();
+
+  /* ── hero builder segments handled by segSw below ── */
+
+  /* ── live platform pulse feed ── */
+  const feed = document.getElementById('pulseFeed');
+  if (feed) {
+    const EVENTS = [
+      { t: 'defend', tag: 'BLOCK',   main: 'Suspicious admin login blocked', meta: '02:14 UTC · impossible travel · MFA failed ×3' },
+      { t: 'defend', tag: 'CONTAIN', main: 'Host quarantined from network', meta: 'ransomware behavior · +2s to isolation' },
+      { t: 'defend', tag: 'SCAN',    main: 'Weekly scan complete', meta: '4 findings · ranked by exploitability' },
+      { t: 'defend', tag: 'REVOKE',  main: 'Expired token auto-revoked', meta: 'service account · zero impact' },
+      { t: 'defend', tag: 'FLAG',    main: 'Public storage bucket flagged', meta: 'config drift · auto-revert ready' },
+      { t: 'defend', tag: 'PATCH',   main: 'Dependency patch suggested', meta: 'known CVE · one-click fix' },
+      { t: 'defend', tag: 'SCORE',   main: 'Posture score updated: 72 (+6)', meta: 'identity & endpoints trending up' },
+      { t: 'defend', tag: 'ABSORB',  main: 'Port scan absorbed at the edge', meta: 'default-deny held · source watch-listed' },
+      { t: 'defend', tag: 'BASELINE',main: 'Baseline re-learned for 12 hosts', meta: 'behavior drift absorbed automatically' },
+      { t: 'defend', tag: 'LIMIT',   main: 'Brute-force burst rate-limited', meta: 'login endpoint · source blocked' }
+    ];
+    const TIMES = ['just now', '8s ago', '31s ago', '1m ago', '2m ago', '4m ago'];
+    const MAX = 6;
+    let idx = 0;
+
+    function render(ev, timeLabel) {
+      const row = document.createElement('div');
+      row.className = 'pev';
+      row.innerHTML =
+        '<span class="pev-tag pt-' + ev.t + '">' + ev.tag + '</span>' +
+        '<span class="pev-body"><span class="pev-main">' + ev.main + '</span>' +
+        '<span class="pev-meta" style="display:block">' + ev.meta + '</span></span>' +
+        '<span class="pev-time">' + timeLabel + '</span>';
+      return row;
+    }
+
+    function retime() {
+      feed.querySelectorAll('.pev-time').forEach((el, i) => { el.textContent = TIMES[Math.min(i, TIMES.length - 1)]; });
+    }
+
+    /* seed */
+    for (let s = 0; s < 4; s++) {
+      feed.appendChild(render(EVENTS[idx % EVENTS.length], TIMES[s]));
+      idx++;
+    }
+
+    if (!reduced) {
+      setInterval(() => {
+        const row = render(EVENTS[idx % EVENTS.length], TIMES[0]);
+        idx++;
+        feed.insertBefore(row, feed.firstChild);
+        while (feed.children.length > MAX) feed.removeChild(feed.lastChild);
+        retime();
+      }, 3000);
+    }
+  }
+
+})();
+
+/* ── hero builder segments ── */
+function segSw(i) {
+  for (let j = 0; j < 3; j++) {
+    document.getElementById('seg' + j).classList.toggle('on', j === i);
+    document.getElementById('bc' + j).style.display = j === i ? 'flex' : 'none';
+  }
+}
+
+/* ── tabbed showcase ── */
+const tabColors = ['on-blue', 'on-pur', 'on-cyan'];
+function sw(i) {
+  document.querySelectorAll('.stab').forEach((t, j) => {
+    t.classList.remove('on-blue', 'on-pur', 'on-cyan');
+    t.setAttribute('aria-selected', j === i ? 'true' : 'false');
+    if (j === i) t.classList.add(tabColors[i]);
+  });
+  document.querySelectorAll('.spanel').forEach((p, j) => p.classList.toggle('on', j === i));
+}
+
+/* ── signup form: validate + route into the real funnel ── */
+function signupSubmit() {
+  const email = document.getElementById('suEmail');
+  const msg = document.getElementById('suEmailMsg');
+  const v = email.value.trim();
+  const ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  email.classList.toggle('err', !ok);
+  msg.classList.toggle('show', !ok);
+  if (!ok) { email.focus(); return; }
+  const p = new URLSearchParams({ email: v });
+  const f = document.getElementById('suFirst').value.trim();
+  const l = document.getElementById('suLast').value.trim();
+  if (f) p.set('fname', f);
+  if (l) p.set('lname', l);
+  window.location.href = '/login.html?' + p.toString();
+}
+document.querySelectorAll('.signup-card input').forEach(el => {
+  el.addEventListener('keydown', e => { if (e.key === 'Enter') signupSubmit(); });
+});
+document.getElementById('suEmail')?.addEventListener('input', function () {
+  this.classList.remove('err');
+  document.getElementById('suEmailMsg').classList.remove('show');
+});
+
+/* posture ring + domain bars */
+(function(){var ring=document.getElementById('postRing'),num=document.getElementById('postNum'),CIRC=238.8,SCORE=72;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){if(ring)ring.style.strokeDashoffset=(CIRC*(1-SCORE/100)).toFixed(1);if(num){var t0=performance.now();(function tk(t){var pr=Math.min((t-t0)/1400,1);num.textContent=Math.round(SCORE*(1-Math.pow(1-pr,3)));if(pr<1)requestAnimationFrame(tk);})(t0);}io.disconnect();}});},{threshold:.4});var host=document.querySelector('.post');if(host)io.observe(host);var bars=document.querySelectorAll('.post-fill');var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.style.width=e.target.dataset.w;io2.unobserve(e.target);}});},{threshold:.5});bars.forEach(function(b){io2.observe(b);});})();
+</script>
+
+
+
+</body>
+</html>

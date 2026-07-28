@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JAYISAAC AI — Chief of Staff</title>
+<link rel="icon" href="/my-favicon/favicon.ico" sizes="any">
+<link rel="icon" href="/my-favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/my-favicon/favicon-96x96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/my-favicon/apple-touch-icon.png" sizes="180x180">
+<link rel="manifest" href="/my-favicon/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   JAYISAAC AI — CHIEF OF STAFF  ·  MIDNIGHT INDIGO
+   deep indigo-black glass · indigo→violet accents · operator
+   Matches search.html / cyber-app shell; indigo product tint.
+   ============================================================ */
+:root{
+  --o:#6366F1;            /* indigo primary */
+  --o-hot:#818CF8;        /* indigo-400 highlight */
+  --o-deep:#4F46E5;       /* indigo-600 */
+  --o-vio:#A855F7;        /* violet accent */
+  --o-glow:rgba(129,140,248,.5);
+  --o-dim:rgba(99,102,241,.12);
+  --o-line:rgba(99,102,241,.32);
+
+  --rail-w:70px;
+  --rail-w-open:224px;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --ease:cubic-bezier(.4,0,.2,1);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+
+  --crit:#F87171;  --crit-bg:rgba(220,38,38,.14); --crit-line:rgba(220,38,38,.3);
+  --warn:#FBBF24;  --warn-bg:rgba(202,138,4,.16); --warn-line:rgba(202,138,4,.32);
+  --ok:#34E5A0;    --ok-bg:rgba(52,229,160,.1);   --ok-line:rgba(52,229,160,.28);
+  --ok-glow:rgba(52,229,160,.4);
+}
+
+/* ===== DARK (Midnight Indigo) — default ===== */
+[data-theme="dark"]{
+  --black:#0B0E13;
+  --p0:#0E1219;
+  --p1:#131824;
+  --p2:#1A2130;
+  --p3:#242C3E;
+  --hair:rgba(160,170,230,.09);
+  --hair-2:rgba(160,170,230,.05);
+  --ice:#ECEEF7;
+  --steel:#9098B5;
+  --dim:#585F7D;
+  --data:#B8C0F0;
+  --scroll:rgba(160,170,230,.12);
+  --hover:rgba(160,170,230,.05);
+  --hover-2:rgba(160,170,230,.025);
+}
+/* ===== LIGHT (Crisp Indigo) ===== */
+[data-theme="light"]{
+  --black:#F5F6FB;
+  --p0:#FFFFFF;
+  --p1:#FFFFFF;
+  --p2:#EFF1F9;
+  --p3:#E4E7F4;
+  --hair:rgba(30,35,80,.10);
+  --hair-2:rgba(30,35,80,.06);
+  --ice:#141833;
+  --steel:#5B6284;
+  --dim:#9AA0BE;
+  --data:#4F46E5;
+  --scroll:rgba(30,35,80,.14);
+  --hover:rgba(30,35,80,.05);
+  --hover-2:rgba(30,35,80,.03);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family:'Plus Jakarta Sans',-apple-system,sans-serif;
+  background:var(--black);color:var(--ice);font-size:13px;overflow:hidden;
+  -webkit-font-smoothing:antialiased;display:flex;flex-direction:column;height:100vh;
+  transition:background .3s var(--ease),color .3s var(--ease);
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select,textarea{font-family:inherit}
+::placeholder{color:var(--dim)}
+::selection{background:var(--o-dim);color:var(--o-hot)}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--scroll);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:var(--o-line)}
+
+/* ============ ALERT BANNER ============ */
+.alert-banner{
+  display:flex;align-items:center;gap:12px;flex-shrink:0;padding:11px 20px;
+  background:linear-gradient(90deg,var(--o-dim),rgba(168,85,247,.05));
+  border-bottom:1px solid var(--o-line);position:relative;z-index:30;
+}
+.alert-banner.hide{display:none}
+.alert-banner .ab-icon{width:17px;height:17px;color:var(--o-hot);flex-shrink:0}
+.alert-banner .ab-text{font-size:12.5px;color:var(--ice);font-weight:500}
+.alert-banner .ab-text strong{font-weight:700}
+.alert-banner .ab-cta{margin-left:auto;flex-shrink:0;background:var(--o);color:#fff;font-size:11.5px;font-weight:800;padding:6px 15px;border-radius:8px;transition:.15s var(--ease)}
+.alert-banner .ab-cta:hover{background:var(--o-hot);box-shadow:0 0 16px var(--o-glow)}
+.alert-banner .ab-close{flex-shrink:0;width:26px;height:26px;border-radius:7px;color:var(--steel);display:flex;align-items:center;justify-content:center;transition:.15s}
+.alert-banner .ab-close:hover{background:var(--hover);color:var(--ice)}
+.alert-banner .ab-close svg{width:14px;height:14px}
+
+/* ============ APP SHELL ============ */
+.app{
+  display:grid;grid-template-columns:var(--rail-w-open) 1fr;flex:1;min-height:0;
+  transition:grid-template-columns .28s var(--ease);
+  background:radial-gradient(1200px 600px at 78% -10%, rgba(99,102,241,.06), transparent 60%),var(--black);
+}
+.app.rail-collapsed{grid-template-columns:var(--rail-w) 1fr}
+
+/* ============ RAIL ============ */
+.rail{
+  background:linear-gradient(180deg,var(--p1),var(--black));
+  border-right:1px solid var(--hair);display:flex;flex-direction:column;
+  padding:16px 14px;gap:4px;position:relative;z-index:20;overflow:hidden;
+}
+.rail-top{display:flex;align-items:center;gap:12px;margin-bottom:12px;height:42px}
+.rail-logo{
+  width:42px;height:42px;border-radius:13px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--o-hot),var(--o-vio));
+  display:flex;align-items:center;justify-content:center;position:relative;
+  box-shadow:0 0 24px var(--o-glow),inset 0 1px 0 rgba(255,255,255,.25);
+}
+.rail-logo::after{content:'';position:absolute;inset:-4px;border-radius:16px;z-index:-1;background:var(--o-hot);opacity:.35;filter:blur(12px);animation:pulse-glow 3s ease-in-out infinite}
+@keyframes pulse-glow{0%,100%{opacity:.25}50%{opacity:.5}}
+.rail-logo svg{width:22px;height:22px;color:#fff}
+.rail-wordmark{font-size:15px;font-weight:800;letter-spacing:-.01em;color:var(--ice);white-space:nowrap;flex:1;overflow:hidden;transition:opacity .2s var(--ease)}
+.rail-wordmark .wm-ai{color:var(--o-hot)}
+.rail-collapse{
+  width:30px;height:30px;border-radius:9px;flex-shrink:0;color:var(--steel);
+  display:flex;align-items:center;justify-content:center;background:var(--p2);
+  border:1px solid var(--hair);transition:.18s var(--ease);margin:0 auto 12px;
+}
+.rail-collapse:hover{background:var(--o-dim);border-color:var(--o-line);color:var(--o-hot);transform:scale(1.05)}
+.rail-collapse svg{width:16px;height:16px;transition:transform .3s var(--ease)}
+.app.rail-collapsed .rail-collapse svg{transform:rotate(180deg)}
+
+.rail-btn{height:44px;border-radius:11px;display:flex;align-items:center;gap:13px;padding:0 11px;color:var(--steel);position:relative;transition:color .15s var(--ease),background .15s var(--ease);width:100%}
+.rail-btn:hover{color:var(--ice);background:var(--hover)}
+.rail-btn.active{color:var(--o-hot);background:var(--o-dim)}
+.rail-btn.active::before{content:'';position:absolute;left:-14px;top:11px;bottom:11px;width:3px;border-radius:0 4px 4px 0;background:var(--o-hot);box-shadow:0 0 12px var(--o-glow),0 0 4px var(--o-hot)}
+.rail-btn svg{width:21px;height:21px;flex-shrink:0}
+.rail-btn .rlabel{font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;transition:opacity .2s var(--ease)}
+.rail-btn .tip{position:absolute;left:56px;top:50%;transform:translateY(-50%) translateX(-4px);background:var(--p2);color:var(--ice);padding:7px 12px;border-radius:9px;font-size:11.5px;font-weight:600;white-space:nowrap;opacity:0;pointer-events:none;transition:.18s var(--ease);z-index:50;border:1px solid var(--hair);box-shadow:0 10px 30px rgba(0,0,0,.4);display:none}
+.app.rail-collapsed .rail-btn .tip{display:block}
+.app.rail-collapsed .rail-btn:hover .tip{opacity:1;transform:translateY(-50%) translateX(0)}
+.app.rail-collapsed .rail-wordmark{opacity:0;width:0;flex:0;margin:0}
+.app.rail-collapsed .rail-btn .rlabel{opacity:0;width:0}
+.app.rail-collapsed .rail-btn{justify-content:center;padding:0;gap:0}
+.app.rail-collapsed .rail-top{justify-content:center}
+.rail-spacer{flex:1;min-height:8px}
+.rail-divider{height:1px;background:var(--hair);margin:8px 4px}
+.rail-theme{height:44px;border-radius:11px;display:flex;align-items:center;gap:13px;padding:0 11px;width:100%;color:var(--steel);transition:.15s}
+.rail-theme:hover{background:var(--hover);color:var(--ice)}
+.rail-theme .tt-track{width:38px;height:21px;border-radius:11px;background:var(--p3);border:1px solid var(--hair);flex-shrink:0;position:relative;transition:.2s}
+.rail-theme .tt-knob{position:absolute;top:2px;left:2px;width:15px;height:15px;border-radius:50%;background:var(--o-hot);box-shadow:0 0 8px var(--o-glow);transition:.25s var(--spring)}
+[data-theme="light"] .rail-theme .tt-knob{transform:translateX(17px)}
+.rail-theme .rlabel{font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;transition:opacity .2s}
+.app.rail-collapsed .rail-theme{justify-content:center;padding:0;gap:0}
+.app.rail-collapsed .rail-theme .rlabel{opacity:0;width:0}
+
+/* ============ MAIN ============ */
+.main{display:flex;flex-direction:column;overflow:hidden;background:var(--black)}
+.topbar{background:var(--p0);border-bottom:1px solid var(--hair);display:flex;align-items:center;gap:12px;padding:0 22px;height:60px;flex-shrink:0}
+.topbar-title{font-size:15px;font-weight:800;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.topbar-title .status-dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok-glow);animation:livepulse 2s infinite}
+@keyframes livepulse{0%,100%{opacity:1}50%{opacity:.35}}
+.topbar-title .st-label{font-size:11px;font-weight:700;font-family:var(--mono);color:var(--ok);text-transform:uppercase;letter-spacing:.08em}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.credits{display:flex;align-items:center;gap:8px;background:var(--p2);border:1px solid var(--o-line);border-radius:11px;padding:8px 14px;font-size:12.5px;font-weight:700;color:var(--o-hot);white-space:nowrap;box-shadow:inset 0 0 16px rgba(99,102,241,.06)}
+.credits #creditCount{font-family:var(--mono);font-weight:700;text-shadow:0 0 12px var(--o-glow)}
+.credits svg{width:14px;height:14px;filter:drop-shadow(0 0 4px var(--o-glow))}
+.upgrade{display:inline-block;text-decoration:none;background:linear-gradient(135deg,var(--o-hot),var(--o-vio));color:#fff;font-size:12.5px;font-weight:800;padding:9px 18px;border-radius:11px;transition:.18s var(--ease);white-space:nowrap;box-shadow:0 0 20px var(--o-glow),inset 0 1px 0 rgba(255,255,255,.2)}
+.upgrade:hover{transform:translateY(-1px);box-shadow:0 0 32px var(--o-glow)}
+.avatar-wrap{position:relative}
+.rail-avatar{width:38px;height:38px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--o-hot),var(--o-vio));color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1.5px solid var(--o-line);box-shadow:0 0 16px var(--o-glow);transition:transform .2s var(--spring)}
+.rail-avatar:hover{transform:scale(1.08)}
+.avatar-menu{position:absolute;top:48px;right:0;width:248px;z-index:120;background:var(--p1);border:1px solid var(--hair);border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.5);padding:8px;opacity:0;transform:translateY(-8px) scale(.97);pointer-events:none;transition:.18s var(--ease)}
+.avatar-menu.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.am-head{display:flex;align-items:center;gap:11px;padding:10px 10px 12px}
+.am-avatar{width:38px;height:38px;border-radius:10px;flex-shrink:0;background:#2A3145;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;border:1px solid var(--hair)}
+.am-name{font-size:13.5px;font-weight:700;color:var(--ice)}
+.am-email{font-size:11.5px;color:var(--steel);margin-top:1px}
+.am-credits{display:flex;align-items:center;justify-content:space-between;padding:9px 11px;margin:0 2px 6px;border-radius:9px;background:var(--o-dim);border:1px solid var(--o-line);font-size:12px;color:var(--steel);font-weight:600}
+.am-credits strong{font-family:var(--mono);font-size:14px;color:var(--o-hot)}
+.am-item{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:10px 11px;border-radius:9px;font-size:13px;font-weight:600;color:var(--ice);transition:.12s}
+.am-item:hover{background:var(--hover)}
+.am-item svg{width:16px;height:16px;color:var(--steel);flex-shrink:0}
+.am-item.am-danger{color:#FF6B6B}
+.am-item.am-danger svg{color:#FF6B6B}
+.am-item.am-danger:hover{background:rgba(255,107,107,.1)}
+.am-divider{height:1px;background:var(--hair);margin:6px 4px}
+
+/* ============ VIEW SYSTEM ============ */
+.view{display:none;flex-direction:column;overflow:hidden;flex:1;animation:viewIn .3s var(--ease)}
+.view.active{display:flex}
+@keyframes viewIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.view-scroll{flex:1;overflow-y:auto;padding:24px 28px 40px}
+.vhead{margin-bottom:24px}
+.vhead h1{font-size:24px;font-weight:800;letter-spacing:-.02em;color:var(--ice);display:flex;align-items:center;gap:12px}
+.vhead h1 .vh-glow{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:var(--o-dim);border:1px solid var(--o-line)}
+.vhead h1 .vh-glow svg{width:19px;height:19px;color:var(--o-hot);filter:drop-shadow(0 0 6px var(--o-glow))}
+.vhead p{font-size:13.5px;color:var(--steel);margin-top:8px;max-width:640px;line-height:1.6}
+.vhead .greet{color:var(--o-hot)}
+
+/* metric tiles */
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:24px}
+.metric{background:linear-gradient(160deg,var(--p2),var(--p0));border:1px solid var(--hair);border-radius:15px;padding:20px;position:relative;overflow:hidden;transition:.2s var(--ease)}
+.metric:hover{border-color:var(--o-line);transform:translateY(-2px)}
+.metric::before{content:'';position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle at 70% 30%,var(--o-dim),transparent 70%);opacity:.6}
+.metric .m-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dim)}
+.metric .m-value{font-size:30px;font-weight:800;font-family:var(--mono);color:var(--ice);margin-top:8px;letter-spacing:-.02em}
+.metric .m-value.glow{color:var(--o-hot);text-shadow:0 0 20px var(--o-glow)}
+.metric .m-value.warn{color:var(--warn)}
+.metric .m-value.ok{color:var(--ok)}
+.metric .m-sub{font-size:11.5px;color:var(--steel);margin-top:6px;font-weight:600}
+
+/* panels */
+.panel{background:var(--p0);border:1px solid var(--hair);border-radius:16px;overflow:hidden;margin-bottom:18px}
+.panel-head{padding:16px 20px;border-bottom:1px solid var(--hair);display:flex;align-items:center;gap:12px}
+.panel-head h3{font-size:14px;font-weight:800;color:var(--ice)}
+.panel-head .ph-tag{margin-left:auto;font-size:10.5px;font-family:var(--mono);color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+.panel-head .ph-live{margin-left:auto;display:flex;align-items:center;gap:7px;font-size:10.5px;font-family:var(--mono);color:var(--ok);text-transform:uppercase;letter-spacing:.08em}
+.panel-head .ph-live::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok-glow);animation:livepulse 2s infinite}
+
+.toolbar{display:flex;align-items:center;gap:10px;padding:0 0 16px;flex-wrap:wrap}
+.tbtn{display:flex;align-items:center;gap:7px;background:var(--p2);border:1px solid var(--hair);border-radius:10px;padding:9px 15px;font-size:12px;font-weight:700;color:var(--ice);transition:.15s var(--ease)}
+.tbtn:hover{border-color:var(--o-line);background:var(--p3);transform:translateY(-1px)}
+.tbtn svg{width:14px;height:14px;color:var(--steel)}
+.tbtn:hover svg{color:var(--o-hot)}
+.tbtn.primary{background:linear-gradient(135deg,var(--o-hot),var(--o-vio));color:#fff;border-color:transparent;box-shadow:0 0 18px var(--o-glow)}
+.tbtn.primary svg{color:#fff}
+.tbtn.primary:hover{transform:translateY(-1px);box-shadow:0 0 28px var(--o-glow)}
+.seg{display:flex;gap:4px;background:var(--p2);border:1px solid var(--hair);border-radius:10px;padding:3px}
+.seg button{padding:6px 13px;border-radius:7px;font-size:11.5px;font-weight:700;color:var(--steel);transition:.14s}
+.seg button.on{background:var(--o-dim);color:var(--o-hot)}
+
+/* ============ DAILY BRIEF (deep) ============ */
+.brief-hero{display:flex;align-items:center;gap:24px;background:linear-gradient(135deg,var(--p2),var(--p0));border:1px solid var(--hair);border-radius:18px;padding:24px 28px;margin-bottom:22px;position:relative;overflow:hidden}
+.brief-hero::before{content:'';position:absolute;top:-40%;right:-2%;width:360px;height:360px;background:radial-gradient(circle,rgba(129,140,248,.14),transparent 65%);pointer-events:none}
+.brief-hero-main{flex:1;position:relative;z-index:1}
+.brief-hero .bh-date{font-size:11.5px;font-weight:700;font-family:var(--mono);color:var(--o-hot);text-transform:uppercase;letter-spacing:.08em}
+.brief-hero h2{font-size:22px;font-weight:800;color:var(--ice);margin-top:8px;letter-spacing:-.01em}
+.brief-hero p{font-size:13px;color:var(--steel);margin-top:8px;max-width:520px;line-height:1.6}
+.brief-hero .bh-handled{display:inline-flex;align-items:center;gap:7px;margin-top:14px;font-size:12px;font-weight:700;font-family:var(--mono);color:var(--ok);background:var(--ok-bg);border:1px solid var(--ok-line);padding:6px 13px;border-radius:9px}
+.brief-hero .bh-handled svg{width:13px;height:13px}
+.regen{position:relative;z-index:1;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.regen-btn{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--o-hot),var(--o-vio));color:#fff;font-size:12.5px;font-weight:800;padding:11px 18px;border-radius:11px;box-shadow:0 0 20px var(--o-glow);transition:.18s var(--ease)}
+.regen-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 0 30px var(--o-glow)}
+.regen-btn:disabled{opacity:.6;cursor:not-allowed}
+.regen-btn svg{width:14px;height:14px}
+.regen .cost-hint{font-size:10.5px;font-family:var(--mono);color:var(--dim)}
+.regen .cost-hint strong{color:var(--o-hot)}
+
+/* brief cards */
+.brief-card{background:var(--p0);border:1px solid var(--hair);border-radius:16px;margin-bottom:14px;overflow:hidden;transition:.2s var(--ease)}
+.brief-card:hover{border-color:var(--o-line)}
+.brief-card.prio-decision{border-left:3px solid var(--o-hot)}
+.brief-card.prio-nudge{border-left:3px solid var(--warn)}
+.brief-card.prio-fyi{border-left:3px solid var(--steel)}
+.bc-head{display:flex;align-items:center;gap:14px;padding:16px 20px;cursor:pointer}
+.bc-ic{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid var(--hair)}
+.bc-ic svg{width:18px;height:18px}
+.prio-decision .bc-ic{background:var(--o-dim);border-color:var(--o-line)}
+.prio-decision .bc-ic svg{color:var(--o-hot)}
+.prio-nudge .bc-ic{background:var(--warn-bg);border-color:var(--warn-line)}
+.prio-nudge .bc-ic svg{color:var(--warn)}
+.prio-fyi .bc-ic{background:var(--hover);border-color:var(--hair)}
+.prio-fyi .bc-ic svg{color:var(--steel)}
+.bc-main{flex:1;min-width:0}
+.bc-title{font-size:14px;font-weight:700;color:var(--ice)}
+.bc-meta{font-size:11.5px;color:var(--steel);margin-top:3px;font-family:var(--mono)}
+.bc-badge{font-size:10px;font-weight:800;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;padding:4px 10px;border-radius:7px;white-space:nowrap;flex-shrink:0}
+.bc-badge.decision{background:var(--o-dim);color:var(--o-hot);border:1px solid var(--o-line)}
+.bc-badge.nudge{background:var(--warn-bg);color:var(--warn);border:1px solid var(--warn-line)}
+.bc-badge.fyi{background:var(--hover);color:var(--steel);border:1px solid var(--hair)}
+.bc-chev{width:18px;height:18px;color:var(--dim);flex-shrink:0;transition:transform .25s var(--ease)}
+.brief-card.open .bc-chev{transform:rotate(180deg)}
+.bc-body{max-height:0;overflow:hidden;transition:max-height .3s var(--ease)}
+.brief-card.open .bc-body{max-height:640px}
+.bc-body-inner{padding:0 20px 20px;border-top:1px solid var(--hair-2)}
+.bc-context{font-size:13px;line-height:1.65;color:var(--ice);background:var(--p1);border:1px solid var(--hair);border-radius:12px;padding:15px 17px;margin-top:16px}
+.bc-context .ctx-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);margin-bottom:8px;display:block}
+
+/* drafted action block */
+.draft-block{margin-top:14px}
+.draft-empty{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--p1);border:1px dashed var(--o-line);border-radius:12px;padding:15px 17px;flex-wrap:wrap}
+.draft-empty .de-text{font-size:12.5px;color:var(--steel);font-weight:600}
+.gen-btn{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--o-hot),var(--o-vio));color:#fff;font-size:12px;font-weight:800;padding:10px 16px;border-radius:10px;box-shadow:0 0 16px var(--o-glow);transition:.16s var(--ease);white-space:nowrap}
+.gen-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 0 26px var(--o-glow)}
+.gen-btn:disabled{opacity:.55;cursor:not-allowed}
+.gen-btn svg{width:14px;height:14px}
+.draft-out{background:var(--p1);border:1px solid var(--o-line);border-radius:12px;padding:16px 18px;animation:viewIn .3s var(--ease)}
+.draft-out .do-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--o-hot);margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.draft-out .do-label svg{width:13px;height:13px}
+.draft-text{font-size:13px;line-height:1.7;color:var(--ice);white-space:pre-wrap;font-family:'Plus Jakarta Sans',sans-serif}
+.draft-actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.draft-actions .da{flex:1;min-width:110px;padding:11px;border-radius:10px;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:7px;transition:.15s var(--ease)}
+.draft-actions .da svg{width:13px;height:13px}
+.da.send{background:linear-gradient(135deg,var(--o-hot),var(--o-vio));color:#fff;box-shadow:0 0 16px var(--o-glow)}
+.da.send:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 0 26px var(--o-glow)}
+.da.send:disabled{opacity:.5;cursor:not-allowed}
+.da.ghost{background:var(--p2);border:1px solid var(--hair);color:var(--ice)}
+.da.ghost:hover{border-color:var(--o-line);color:var(--o-hot)}
+.da.sent{background:var(--ok-bg);border:1px solid var(--ok-line);color:var(--ok);cursor:default}
+
+/* ============ DELEGATION (lighter) ============ */
+.deleg-row{display:grid;grid-template-columns:44px 1fr auto auto;gap:14px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--hair-2)}
+.deleg-row:last-child{border-bottom:none}
+.deleg-av{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--o-deep),var(--o-vio))}
+.deleg-main{min-width:0}
+.deleg-title{font-size:13.5px;font-weight:700;color:var(--ice)}
+.deleg-meta{font-size:11.5px;color:var(--steel);margin-top:3px;font-family:var(--mono)}
+.deleg-status{font-size:10px;font-weight:800;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;padding:4px 10px;border-radius:7px;white-space:nowrap}
+.deleg-status.ontrack{background:var(--ok-bg);color:var(--ok);border:1px solid var(--ok-line)}
+.deleg-status.stalled{background:var(--warn-bg);color:var(--warn);border:1px solid var(--warn-line)}
+.deleg-status.escalated{background:var(--crit-bg);color:var(--crit);border:1px solid var(--crit-line)}
+.deleg-nudge{background:var(--p2);border:1px solid var(--hair);border-radius:9px;padding:8px 14px;font-size:11.5px;font-weight:800;color:var(--ice);display:flex;align-items:center;gap:7px;white-space:nowrap;transition:.15s}
+.deleg-nudge:hover:not(:disabled){border-color:var(--o-line);color:var(--o-hot)}
+.deleg-nudge:disabled{opacity:.5;cursor:not-allowed}
+.deleg-nudge.done{background:var(--ok-bg);border-color:var(--ok-line);color:var(--ok)}
+.deleg-nudge svg{width:13px;height:13px}
+
+/* ============ MEETING PREP (lighter) ============ */
+.meet-card{background:var(--p0);border:1px solid var(--hair);border-radius:15px;padding:18px 20px;margin-bottom:14px;transition:.2s var(--ease)}
+.meet-card:hover{border-color:var(--o-line)}
+.meet-top{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.meet-time{width:64px;flex-shrink:0;text-align:center;background:var(--o-dim);border:1px solid var(--o-line);border-radius:11px;padding:8px 4px}
+.meet-time .mt-hr{font-size:15px;font-weight:800;font-family:var(--mono);color:var(--o-hot);line-height:1}
+.meet-time .mt-ap{font-size:9.5px;font-weight:700;color:var(--steel);margin-top:2px}
+.meet-info{flex:1;min-width:0}
+.meet-name{font-size:14px;font-weight:700;color:var(--ice)}
+.meet-with{font-size:11.5px;color:var(--steel);margin-top:3px;font-family:var(--mono)}
+.meet-prepbtn{background:var(--p2);border:1px solid var(--hair);border-radius:10px;padding:9px 15px;font-size:11.5px;font-weight:800;color:var(--ice);display:flex;align-items:center;gap:7px;white-space:nowrap;transition:.15s;flex-shrink:0}
+.meet-prepbtn:hover:not(:disabled){border-color:var(--o-line);color:var(--o-hot)}
+.meet-prepbtn:disabled{opacity:.55;cursor:not-allowed}
+.meet-prepbtn svg{width:13px;height:13px}
+.meet-prep{border-top:1px solid var(--hair-2);padding-top:14px;animation:viewIn .3s var(--ease)}
+.prep-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--o-hot);margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.prep-label svg{width:13px;height:13px}
+.prep-sec{margin-bottom:13px}
+.prep-sec .ps-h{font-size:11px;font-weight:800;color:var(--steel);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.prep-sec ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.prep-sec li{font-size:12.5px;color:var(--ice);line-height:1.5;padding-left:18px;position:relative}
+.prep-sec li::before{content:'';position:absolute;left:2px;top:7px;width:6px;height:6px;border-radius:50%;background:var(--o-hot);box-shadow:0 0 6px var(--o-glow)}
+
+/* empty */
+.empty{padding:60px 20px;text-align:center;color:var(--steel)}
+.empty h3{font-size:15px;font-weight:700;color:var(--ice);margin-bottom:6px}
+
+/* ============ AUTH VEIL ============ */
+.veil{position:fixed;inset:0;background:var(--black);z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity .3s}
+.veil.hide{opacity:0;pointer-events:none}
+.veil .spinner{width:36px;height:36px;border-radius:50%;border:3px solid var(--o-dim);border-top-color:var(--o-hot);animation:spin .8s linear infinite;box-shadow:0 0 24px var(--o-glow)}
+.veil span{color:var(--steel);font-size:12.5px;font-weight:600;font-family:var(--mono)}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ============ TOAST ============ */
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(90px);background:var(--p2);color:var(--ice);font-size:12.5px;font-weight:600;padding:12px 20px;border-radius:12px;border:1px solid var(--o-line);box-shadow:0 16px 50px rgba(0,0,0,.7),0 0 24px rgba(99,102,241,.15);transition:.3s var(--spring);z-index:100;display:flex;align-items:center;gap:9px}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast svg{width:15px;height:15px;color:var(--ok);filter:drop-shadow(0 0 5px var(--ok-glow))}
+
+/* ============ DESKTOP GATE ============ */
+.mobile-gate{display:none}
+@media(max-width:1024px){
+  .app,.alert-banner,.veil{display:none!important}
+  .mobile-gate{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:32px 24px;text-align:center;gap:18px;background:var(--black);color:var(--ice)}
+  .mobile-gate .gate-logo{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--o-hot),var(--o-vio));display:flex;align-items:center;justify-content:center;box-shadow:0 0 32px var(--o-glow);margin-bottom:6px}
+  .mobile-gate .gate-logo svg{width:32px;height:32px;color:#fff}
+  .mobile-gate h1{font-size:22px;font-weight:800;letter-spacing:-.02em;max-width:340px;line-height:1.25}
+  .mobile-gate p{font-size:14px;line-height:1.6;color:var(--steel);max-width:360px}
+  .mobile-gate .gate-pill{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--o-hot);border:1px solid var(--o-line);background:var(--o-dim);padding:6px 14px;border-radius:20px}
+  .mobile-gate .gate-btns{display:flex;flex-direction:column;gap:10px;width:100%;max-width:280px;margin-top:8px}
+  .mobile-gate .gate-btn-primary{background:linear-gradient(135deg,var(--o-hot),var(--o-vio));color:#fff;padding:12px 20px;border:none;border-radius:10px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:800;letter-spacing:.3px;box-shadow:0 0 18px var(--o-glow);transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px}
+  .mobile-gate .gate-btn-primary.copied{background:linear-gradient(135deg,#16A34A,#15803D)}
+  .mobile-gate .gate-link{color:var(--steel);font-weight:600;font-size:12.5px;text-decoration:none;padding:10px}
+  .mobile-gate .gate-foot{margin-top:24px;font-size:11px;color:var(--steel);opacity:.6;border-top:1px solid var(--hair);padding-top:18px;width:100%;max-width:320px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<!-- AUTH VEIL -->
+<div class="veil" id="authVeil"><div class="spinner"></div><span>Loading your day…</span></div>
+
+<!-- DESKTOP GATE -->
+<div class="mobile-gate">
+  <div class="gate-logo"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="14" y="3" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="3" y="14" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="14" y="14" width="7" height="7" rx="1.5" fill="currentColor"/></svg></div>
+  <span class="gate-pill">Desktop Required</span>
+  <h1>Your Chief of Staff needs a big screen</h1>
+  <p>Briefings, delegation, and meeting prep work best with room to move. Open this on your laptop or desktop.</p>
+  <div class="gate-btns">
+    <button class="gate-btn-primary" id="gateCopyBtn" type="button" onclick="copyGateLink()">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+      <span id="gateCopyLabel">Copy link to my computer</span>
+    </button>
+    <a class="gate-link" href="/chief-of-staff/">&larr; Back to Chief of Staff</a>
+  </div>
+  <div class="gate-foot">Minimum resolution: 1024px wide</div>
+</div>
+<script>
+function copyGateLink(){
+  const url=window.location.href, btn=document.getElementById('gateCopyBtn'), label=document.getElementById('gateCopyLabel');
+  const ok=()=>{btn.classList.add('copied');label.textContent='✓ Link copied!';setTimeout(()=>{btn.classList.remove('copied');label.textContent='Copy link to my computer';},2200);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(ok).catch(()=>fb(url,ok));}else fb(url,ok);
+  function fb(t,cb){const a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy');cb();}catch(_){}document.body.removeChild(a);}
+}
+</script>
+
+<!-- ALERT BANNER -->
+<div class="alert-banner" id="alertBanner">
+  <svg class="ab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+  <span class="ab-text"><strong>Trial mode active.</strong> Your brief runs on demo data. Connect your inbox and calendar to go live.</span>
+  <a class="ab-cta" href="/chief-of-staff/pricing.html">Upgrade</a>
+  <button class="ab-close" onclick="document.getElementById('alertBanner').classList.add('hide')" aria-label="Dismiss">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+</div>
+
+<div class="app" id="app">
+  <!-- RAIL -->
+  <nav class="rail">
+    <div class="rail-top">
+      <div class="rail-logo" title="JAYISAAC AI"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="14" y="3" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="3" y="14" width="7" height="7" rx="1.5" fill="currentColor"/><rect x="14" y="14" width="7" height="7" rx="1.5" fill="currentColor"/></svg></div>
+      <span class="rail-wordmark">JAYISAAC <span class="wm-ai">STAFF</span></span>
+    </div>
+    <button class="rail-collapse" id="railCollapse" onclick="toggleRail()" title="Collapse menu" aria-label="Toggle menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="rail-btn" onclick="location.href='/chief-of-staff/'" title="Back to site"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg><span class="rlabel">Home</span><span class="tip">Home</span></button>
+    <button class="rail-btn active" data-view="brief"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg><span class="rlabel">Daily Brief</span><span class="tip">Daily Brief</span></button>
+    <button class="rail-btn" data-view="delegation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span class="rlabel">Delegation</span><span class="tip">Delegation</span></button>
+    <button class="rail-btn" data-view="meetings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="rlabel">Meeting Prep</span><span class="tip">Meeting Prep</span></button>
+    <div class="rail-spacer"></div>
+    <div class="rail-divider"></div>
+    <button class="rail-theme" onclick="toggleTheme()" title="Toggle theme">
+      <span class="tt-track"><span class="tt-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="5"/></svg></span></span>
+      <span class="rlabel" id="themeLabel">Dark mode</span>
+    </button>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-title">
+        <span class="status-dot"></span>
+        <span id="topbarViewName">Daily Brief</span>
+        <span class="st-label" id="topbarStatus">Caught up</span>
+      </div>
+      <div class="topbar-right">
+        <div class="credits">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <span id="creditCount">—</span> credits
+        </div>
+        <a class="upgrade" href="/chief-of-staff/pricing.html">Upgrade</a>
+        <div class="avatar-wrap">
+          <div class="rail-avatar" id="railAvatar" title="Account" onclick="toggleAvatarMenu(event)">JT</div>
+          <div class="avatar-menu" id="avatarMenu">
+            <div class="am-head"><div class="am-avatar" id="amAvatar">JT</div><div><div class="am-name" id="amName">Account</div><div class="am-email" id="amEmail"></div></div></div>
+            <div class="am-credits"><span>Credits</span><strong id="amCredits">—</strong></div>
+            <a class="am-item" href="/account.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>My Account</a>
+            <a class="am-item" href="/chief-of-staff/pricing.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Plans &amp; Credits</a>
+            <div class="am-divider"></div>
+            <button class="am-item am-danger" onclick="closeAvatarMenu();(window.__signOut?window.__signOut():toast('Dev mode — sign-out disabled'))"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg>Sign out</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAILY BRIEF (deep) -->
+    <div class="view active" id="view-brief"></div>
+    <!-- DELEGATION -->
+    <div class="view" id="view-delegation"></div>
+    <!-- MEETING PREP -->
+    <div class="view" id="view-meetings"></div>
+  </main>
+</div>
+
+<div class="toast" id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span id="toastMsg"></span></div>
+
+<script>
+/* ============================================================
+   CHIEF OF STAFF — app logic (non-module)
+   Viewing is FREE. Credits burn only on generative/send actions:
+     - generate a follow-up draft  (COST.draft)
+     - send a drafted follow-up    (COST.send)
+     - regenerate the whole brief  (COST.brief)
+     - generate a meeting prep     (COST.prep)
+   All routed through window.spendCredits(cost, action, meta),
+   which POSTs to the shared /api/app-charge endpoint.
+   ============================================================ */
+
+const COST = { draft: 1, send: 1, brief: 2, prep: 1 };
+
+let state = {
+  credits: 0,
+  briefOpen: new Set(),        /* which brief cards are expanded */
+  drafts: {},                  /* id -> drafted text */
+  sent: new Set(),             /* ids already sent */
+  nudged: new Set(),           /* delegation ids nudged */
+  preps: {},                   /* meeting id -> true once generated */
+  briefLoading: false,
+};
+
+/* ---------- DEMO DATA ---------- */
+const BRIEF = [
+  {id:"b1",prio:"decision",badge:"Decision",icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>`,
+   title:"Sign off on the Q3 vendor contract",meta:"Legal flagged 1 clause · due today",
+   context:"Legal reviewed the renewal and is comfortable except for the auto-renewal clause in section 7.2, which locks in a 12-month term with a 90-day cancellation window. They recommend negotiating it down to 30 days before you sign. Everything else is standard.",
+   draftable:true,draftKind:"reply to Legal",
+   draftText:"Hi team,\n\nThanks for the fast turnaround. I'm good to proceed on the Q3 renewal with one change: let's push back on the 7.2 auto-renewal clause and ask for a 30-day cancellation window instead of 90. If they hold firm, flag me before we sign.\n\nEverything else looks fine to me.\n\nThanks"},
+  {id:"b2",prio:"nudge",badge:"Nudge",icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>`,
+   title:"Follow up with Dana on the hiring plan",meta:"Thread quiet 5 days · you're waiting on her",
+   context:"You asked Dana for the finalized headcount plan for Q3 five days ago. She acknowledged but hasn't sent it. This is blocking the budget review on Thursday, so it's worth a gentle nudge today.",
+   draftable:true,draftKind:"nudge to Dana",
+   draftText:"Hey Dana,\n\nCircling back on the Q3 headcount plan — no rush beyond that I need it to close out the budget review Thursday. If it's mostly there, even a rough draft works and we can refine live.\n\nThanks!"},
+  {id:"b3",prio:"decision",badge:"Decision",icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>`,
+   title:"Approve the marketing spend increase",meta:"Requested by Marcus · +18% for Q3",
+   context:"Marcus is requesting an 18% bump to the paid acquisition budget for Q3, citing a drop in cost-per-lead on the new campaigns. The data supports it, but it pushes total marketing spend past the threshold that needs your explicit sign-off.",
+   draftable:true,draftKind:"reply to Marcus",
+   draftText:"Marcus,\n\nApproved — the CPL trend justifies it. One condition: let's set a checkpoint at the halfway mark so we can pull back fast if the efficiency doesn't hold at the higher spend. Send me a one-line update every Friday.\n\nGo for it."},
+  {id:"b4",prio:"fyi",badge:"FYI",icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>`,
+   title:"Priya shipped the dashboard redesign",meta:"No action needed · handled overnight",
+   context:"Priya merged and deployed the analytics dashboard redesign last night. Positive early feedback from the two beta customers who've seen it. Nothing needed from you — flagging so you're aware before your 2pm.",
+   draftable:false},
+];
+
+const DELEGATIONS = [
+  {id:"d1",who:"Dana R.",init:"DR",task:"Q3 headcount plan",meta:"Assigned 6 days ago · due Thu",status:"stalled"},
+  {id:"d2",who:"Marcus L.",init:"ML",task:"Vendor pricing comparison",meta:"Chased twice · now overdue",status:"escalated"},
+  {id:"d3",who:"Priya S.",init:"PS",task:"Dashboard redesign review",meta:"On track · due Friday",status:"ontrack"},
+  {id:"d4",who:"Tom B.",init:"TB",task:"Security questionnaire for Acme",meta:"Assigned 2 days ago · in progress",status:"ontrack"},
+  {id:"d5",who:"Nadia K.",init:"NK",task:"Board deck first draft",meta:"Quiet 4 days · you're blocked",status:"stalled"},
+];
+
+const MEETINGS = [
+  {id:"m1",hr:"10:00",ap:"AM",name:"Board sync",with:"3 attendees · monthly",
+   prep:{recap:["Last month: runway approved through Q1 2027","Hiring pause lifted for 2 eng roles"],open:["Follow up on the revised burn model","Confirm the Q3 marketing spend increase"],bring:["Updated MRR chart","One-line status on each OKR"]}},
+  {id:"m2",hr:"1:30",ap:"PM",name:"1:1 with Dana",with:"Dana R. · weekly",
+   prep:{recap:["Last week: agreed on the hiring plan structure","Dana flagged bandwidth concerns on recruiting"],open:["The Q3 headcount plan (still outstanding)","Whether to bring in a contract recruiter"],bring:["Budget review timeline","Your take on the recruiter question"]}},
+  {id:"m3",hr:"3:00",ap:"PM",name:"Acme customer call",with:"2 attendees · renewal",
+   prep:{recap:["Acme is up for renewal in 6 weeks","Raised concerns about onboarding speed last call"],open:["Address the onboarding feedback directly","Float the multi-year discount option"],bring:["Their usage stats (up 40% QoQ)","The security questionnaire status"]}},
+];
+
+/* ---------- HELPERS ---------- */
+let toastTimer;
+function toast(msg){
+  const el=document.getElementById("toast");
+  document.getElementById("toastMsg").textContent=msg;
+  el.classList.add("show");clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>el.classList.remove("show"),2600);
+}
+function toggleRail(){
+  const c=document.getElementById("app").classList.toggle("rail-collapsed");
+  const b=document.getElementById("railCollapse");if(b)b.title=c?"Expand menu":"Collapse menu";
+}
+function toggleTheme(){
+  const r=document.documentElement,n=r.getAttribute("data-theme")==="light"?"dark":"light";
+  r.setAttribute("data-theme",n);
+  const l=document.getElementById("themeLabel");if(l)l.textContent=n==="dark"?"Dark mode":"Light mode";
+}
+function toggleAvatarMenu(e){if(e)e.stopPropagation();document.getElementById("avatarMenu").classList.toggle("show");}
+function closeAvatarMenu(){document.getElementById("avatarMenu").classList.remove("show");}
+document.addEventListener("click",e=>{if(!e.target.closest(".avatar-wrap"))closeAvatarMenu();});
+
+window.__renderCredits = function(n){
+  state.credits = (typeof n==="number") ? n : 0;
+  const set=(id)=>{const el=document.getElementById(id);if(el)el.textContent=state.credits.toLocaleString();};
+  set("creditCount"); set("amCredits");
+};
+
+/* ---------- VIEW ROUTER ---------- */
+const VIEW_NAMES = { brief:"Daily Brief", delegation:"Delegation", meetings:"Meeting Prep" };
+let currentView="brief";
+function switchView(v){
+  if(!VIEW_NAMES[v])return;
+  currentView=v; window.currentView=v;
+  document.querySelectorAll(".rail-btn[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===v));
+  document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));
+  document.getElementById("view-"+v).classList.add("active");
+  document.getElementById("topbarViewName").textContent=VIEW_NAMES[v];
+  document.title="JAYISAAC AI — "+VIEW_NAMES[v];
+  if(v==="brief")renderBrief();
+  if(v==="delegation")renderDelegation();
+  if(v==="meetings")renderMeetings();
+}
+document.querySelectorAll(".rail-btn[data-view]").forEach(b=>b.addEventListener("click",()=>switchView(b.dataset.view)));
+
+/* ---------- DAILY BRIEF (deep) ---------- */
+function greeting(){const h=new Date().getHours();return h<12?"Good morning":h<18?"Good afternoon":"Good evening";}
+function todayStr(){return new Date().toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"});}
+
+function renderBrief(){
+  const el=document.getElementById("view-brief");
+  const needsYou=BRIEF.filter(b=>b.prio!=="fyi").length;
+  el.innerHTML=`<div class="view-scroll">
+    <div class="brief-hero">
+      <div class="brief-hero-main">
+        <div class="bh-date">${todayStr()}</div>
+        <h2><span class="greet">${greeting()}.</span> ${needsYou} thing${needsYou===1?"":"s"} need you today.</h2>
+        <p>AI read your inbox, calendar, and threads overnight and pulled out what actually needs a decision. The rest it handled or is tracking for you.</p>
+        <span class="bh-handled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>11 items handled automatically overnight</span>
+      </div>
+      <div class="regen">
+        <button class="regen-btn" id="regenBtn" onclick="regenBrief()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.5 9a9 9 0 0114.9-3.4L23 10M1 14l4.6 4.4A9 9 0 0020.5 15"/></svg>Rebuild brief</button>
+        <span class="cost-hint">costs <strong>${COST.brief} credits</strong></span>
+      </div>
+    </div>
+    ${BRIEF.map(b=>briefCardHTML(b)).join("")}
+  </div>`;
+}
+function briefCardHTML(b){
+  const open=state.briefOpen.has(b.id);
+  return `<div class="brief-card prio-${b.prio} ${open?"open":""}" id="card-${b.id}">
+    <div class="bc-head" onclick="toggleBrief('${b.id}')">
+      <div class="bc-ic">${b.icon}</div>
+      <div class="bc-main"><div class="bc-title">${b.title}</div><div class="bc-meta">${b.meta}</div></div>
+      <span class="bc-badge ${b.prio}">${b.badge}</span>
+      <svg class="bc-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+    <div class="bc-body"><div class="bc-body-inner">
+      <div class="bc-context"><span class="ctx-label">Context</span>${b.context}</div>
+      ${b.draftable?draftBlockHTML(b):""}
+    </div></div>
+  </div>`;
+}
+function draftBlockHTML(b){
+  const draft=state.drafts[b.id];
+  const sent=state.sent.has(b.id);
+  if(!draft){
+    return `<div class="draft-block" id="draft-${b.id}">
+      <div class="draft-empty">
+        <span class="de-text">Want AI to draft a ${b.draftKind}? Viewing's free — you only spend to generate.</span>
+        <button class="gen-btn" id="gen-${b.id}" onclick="genDraft('${b.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4-6.3-4.6L5.7 21 8 14 2 9.4h7.6z"/></svg>Draft it · ${COST.draft} cr</button>
+      </div></div>`;
+  }
+  return `<div class="draft-block" id="draft-${b.id}">
+    <div class="draft-out">
+      <div class="do-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4-6.3-4.6L5.7 21 8 14 2 9.4h7.6z"/></svg>Drafted ${b.draftKind} · in your voice</div>
+      <div class="draft-text">${draft}</div>
+      <div class="draft-actions">
+        ${sent
+          ? `<span class="da sent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Sent</span>`
+          : `<button class="da send" id="send-${b.id}" onclick="sendDraft('${b.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>Send · ${COST.send} cr</button>`}
+        ${sent?"":`<button class="da ghost" onclick="regenDraft('${b.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.5 9a9 9 0 0114.9-3.4L23 10M1 14l4.6 4.4A9 9 0 0020.5 15"/></svg>Redraft · ${COST.draft} cr</button>`}
+        <button class="da ghost" onclick="copyDraft('${b.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button>
+      </div>
+    </div></div>`;
+}
+function toggleBrief(id){
+  if(state.briefOpen.has(id))state.briefOpen.delete(id);else state.briefOpen.add(id);
+  document.getElementById("card-"+id).classList.toggle("open");
+}
+function redrawDraft(id){
+  const b=BRIEF.find(x=>x.id===id);const wrap=document.getElementById("draft-"+id);
+  if(b&&wrap)wrap.outerHTML=draftBlockHTML(b);
+}
+
+async function genDraft(id){
+  const b=BRIEF.find(x=>x.id===id);if(!b)return;
+  if(state.credits<COST.draft){toast(`Need ${COST.draft} credit to draft`);return;}
+  const btn=document.getElementById("gen-"+id);
+  if(btn){btn.disabled=true;btn.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin .8s linear infinite"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4"/></svg>Drafting…`;}
+  await new Promise(r=>setTimeout(r,900)); /* feel of generation */
+  const res=await window.spendCredits(COST.draft,"staff_draft",{cardId:id,kind:b.draftKind});
+  if(!res.ok){toast(res.message||"Draft failed — no credits charged");if(btn){btn.disabled=false;redrawDraft(id);}return;}
+  state.drafts[id]=b.draftText;
+  toast("Draft ready · in your voice");
+  redrawDraft(id);
+}
+async function regenDraft(id){
+  const b=BRIEF.find(x=>x.id===id);if(!b)return;
+  if(state.credits<COST.draft){toast(`Need ${COST.draft} credit to redraft`);return;}
+  const res=await window.spendCredits(COST.draft,"staff_draft",{cardId:id,kind:b.draftKind,regen:true});
+  if(!res.ok){toast(res.message||"Redraft failed");return;}
+  toast("Redrafted");
+  redrawDraft(id);
+}
+async function sendDraft(id){
+  const b=BRIEF.find(x=>x.id===id);if(!b)return;
+  if(state.sent.has(id))return;
+  if(state.credits<COST.send){toast(`Need ${COST.send} credit to send`);return;}
+  const btn=document.getElementById("send-"+id);
+  if(btn){btn.disabled=true;btn.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin .8s linear infinite"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4"/></svg>Sending…`;}
+  const res=await window.spendCredits(COST.send,"staff_send",{cardId:id});
+  if(!res.ok){toast(res.message||"Send failed — no credits charged");if(btn){btn.disabled=false;redrawDraft(id);}return;}
+  state.sent.add(id);
+  toast("Sent · thread updated");
+  redrawDraft(id);
+}
+function copyDraft(id){
+  const t=state.drafts[id];if(!t)return;
+  const done=()=>toast("Copied to clipboard");
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(done).catch(done);
+  else done();
+}
+async function regenBrief(){
+  if(state.briefLoading)return;
+  if(state.credits<COST.brief){toast(`Need ${COST.brief} credits to rebuild the brief`);return;}
+  state.briefLoading=true;
+  const btn=document.getElementById("regenBtn");
+  if(btn){btn.disabled=true;btn.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin .8s linear infinite"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4"/></svg>Rebuilding…`;}
+  await new Promise(r=>setTimeout(r,1100));
+  const res=await window.spendCredits(COST.brief,"staff_brief",{});
+  state.briefLoading=false;
+  if(!res.ok){toast(res.message||"Rebuild failed — no credits charged");if(btn){btn.disabled=false;renderBrief();}return;}
+  toast("Brief rebuilt · re-prioritized");
+  renderBrief();
+}
+
+/* ---------- DELEGATION (lighter) ---------- */
+function renderDelegation(){
+  const el=document.getElementById("view-delegation");
+  const stalled=DELEGATIONS.filter(d=>d.status!=="ontrack").length;
+  el.innerHTML=`<div class="view-scroll">
+    <div class="vhead">
+      <h1><span class="vh-glow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></span>Delegation</h1>
+      <p>Every open thread you've handed off, with an owner and a status. AI drafts the nudge when something stalls — you approve the send.</p>
+    </div>
+    <div class="metrics">
+      <div class="metric"><div class="m-label">Open Threads</div><div class="m-value glow">${DELEGATIONS.length}</div><div class="m-sub">being tracked</div></div>
+      <div class="metric"><div class="m-label">Need a Nudge</div><div class="m-value ${stalled?"warn":"ok"}">${stalled}</div><div class="m-sub">stalled or overdue</div></div>
+      <div class="metric"><div class="m-label">On Track</div><div class="m-value ok">${DELEGATIONS.length-stalled}</div><div class="m-sub">no action needed</div></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h3>Open Delegations</h3><span class="ph-tag">nudge costs ${COST.draft} cr</span></div>
+      ${DELEGATIONS.map(d=>{
+        const nudged=state.nudged.has(d.id);
+        const label=d.status==="ontrack"?"On track":d.status==="stalled"?"Stalled":"Escalated";
+        return `<div class="deleg-row">
+          <div class="deleg-av">${d.init}</div>
+          <div class="deleg-main"><div class="deleg-title">${d.task}</div><div class="deleg-meta">${d.who} · ${d.meta}</div></div>
+          <span class="deleg-status ${d.status}">${label}</span>
+          ${d.status==="ontrack"
+            ? `<button class="deleg-nudge" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>No nudge needed</button>`
+            : (nudged
+              ? `<button class="deleg-nudge done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Nudge sent</button>`
+              : `<button class="deleg-nudge" id="nudge-${d.id}" onclick="nudge('${d.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/></svg>Draft &amp; send nudge</button>`)}
+        </div>`;
+      }).join("")}
+    </div>
+  </div>`;
+}
+async function nudge(id){
+  const d=DELEGATIONS.find(x=>x.id===id);if(!d)return;
+  if(state.nudged.has(id))return;
+  if(state.credits<COST.draft){toast(`Need ${COST.draft} credit to nudge`);return;}
+  const btn=document.getElementById("nudge-"+id);
+  if(btn){btn.disabled=true;btn.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin .8s linear infinite"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4"/></svg>Sending…`;}
+  await new Promise(r=>setTimeout(r,800));
+  const res=await window.spendCredits(COST.draft,"staff_nudge",{delegationId:id,who:d.who});
+  if(!res.ok){toast(res.message||"Nudge failed — no credits charged");renderDelegation();return;}
+  state.nudged.add(id);
+  toast(`Nudge sent to ${d.who}`);
+  renderDelegation();
+}
+
+/* ---------- MEETING PREP (lighter) ---------- */
+function renderMeetings(){
+  const el=document.getElementById("view-meetings");
+  el.innerHTML=`<div class="view-scroll">
+    <div class="vhead">
+      <h1><span class="vh-glow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>Meeting Prep</h1>
+      <p>Your day's meetings. Generate a prep sheet for any of them — attendee history, open items, and what to bring, assembled from your threads.</p>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h3>Today's Meetings</h3><span class="ph-tag">prep costs ${COST.prep} cr each</span></div>
+      <div style="padding:16px 20px">
+        ${MEETINGS.map(m=>meetingHTML(m)).join("")}
+      </div>
+    </div>
+  </div>`;
+}
+function meetingHTML(m){
+  const prepped=state.preps[m.id];
+  return `<div class="meet-card" id="meet-${m.id}">
+    <div class="meet-top">
+      <div class="meet-time"><div class="mt-hr">${m.hr}</div><div class="mt-ap">${m.ap}</div></div>
+      <div class="meet-info"><div class="meet-name">${m.name}</div><div class="meet-with">${m.with}</div></div>
+      ${prepped
+        ? `<button class="meet-prepbtn" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>Prepped</button>`
+        : `<button class="meet-prepbtn" id="prep-${m.id}" onclick="genPrep('${m.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4-6.3-4.6L5.7 21 8 14 2 9.4h7.6z"/></svg>Prep me · ${COST.prep} cr</button>`}
+    </div>
+    ${prepped?prepHTML(m):""}
+  </div>`;
+}
+function prepHTML(m){
+  return `<div class="meet-prep">
+    <div class="prep-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4-6.3-4.6L5.7 21 8 14 2 9.4h7.6z"/></svg>Prep sheet · auto-assembled</div>
+    <div class="prep-sec"><div class="ps-h">Where you left off</div><ul>${m.prep.recap.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+    <div class="prep-sec"><div class="ps-h">Open items to raise</div><ul>${m.prep.open.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+    <div class="prep-sec"><div class="ps-h">Bring with you</div><ul>${m.prep.bring.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+  </div>`;
+}
+async function genPrep(id){
+  const m=MEETINGS.find(x=>x.id===id);if(!m)return;
+  if(state.preps[id])return;
+  if(state.credits<COST.prep){toast(`Need ${COST.prep} credit to prep`);return;}
+  const btn=document.getElementById("prep-"+id);
+  if(btn){btn.disabled=true;btn.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin .8s linear infinite"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4"/></svg>Prepping…`;}
+  await new Promise(r=>setTimeout(r,950));
+  const res=await window.spendCredits(COST.prep,"staff_prep",{meetingId:id,name:m.name});
+  if(!res.ok){toast(res.message||"Prep failed — no credits charged");renderMeetings();return;}
+  state.preps[id]=true;
+  toast("Prep sheet ready");
+  renderMeetings();
+}
+
+/* ---------- BOOT ---------- */
+renderBrief();
+</script>
+
+<script type="module">
+/* ============================================================
+   FIREBASE — auth gate + LIVE credits (onSnapshot) + spend API
+   Identical rails to the cyber app. Viewing is free; only the
+   generate/send actions call spendCredits -> /api/app-charge.
+   ============================================================ */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDHs92C3ariQ285KUkodOHV04sEVKr_dQ8",
+  authDomain: "jayisaac-ai.firebaseapp.com",
+  projectId: "jayisaac-ai",
+  storageBucket: "jayisaac-ai.firebasestorage.app",
+  messagingSenderId: "967801239356",
+  appId: "1:967801239356:web:0df3f35af72ce6e79b9039",
+  measurementId: "G-V91DS21PGE"
+};
+
+/* ⚠️ DEV BYPASS — set to false before deploying (same as search.html). */
+const DEV_BYPASS = false;
+const STARTING_CREDITS = 100;
+
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+window.auth = auth;
+
+let userRef = null;
+let creditsUnsub = null;
+
+const veilFallback = setTimeout(() => {
+  const v=document.getElementById("authVeil");
+  if(v && !v.classList.contains("hide")) v.classList.add("hide");
+}, 6000);
+
+if (DEV_BYPASS) {
+  document.getElementById("authVeil").classList.add("hide");
+  window.__credits = 999;
+  window.__renderCredits(999);
+  console.warn("⚠️ DEV_BYPASS on — auth disabled, fake credits.");
+}
+
+onAuthStateChanged(auth, async (user) => {
+  if (DEV_BYPASS) return;
+  if (!user) { clearTimeout(veilFallback); location.replace("/login.html"); return; }
+
+  const label = user.displayName || user.email || "U";
+  const initials = label.split(/[\s@.]+/).filter(Boolean).slice(0,2).map(w=>w[0].toUpperCase()).join("");
+  const niceName = user.displayName || (user.email ? user.email.split("@")[0] : "Account");
+  window.__profile = { name:user.displayName||"", email:user.email||"" };
+  document.getElementById("railAvatar").textContent = initials;
+  const amAvatar=document.getElementById("amAvatar"); if(amAvatar)amAvatar.textContent=initials;
+  const amName=document.getElementById("amName"); if(amName)amName.textContent=niceName;
+  const amEmail=document.getElementById("amEmail"); if(amEmail)amEmail.textContent=user.email||"";
+
+  userRef = doc(db, "users", user.uid);
+
+  try {
+    const snap = await getDoc(userRef);
+    if (!snap.exists()) {
+      await setDoc(userRef, {
+        email: user.email || null,
+        name: user.displayName || null,
+        credits: STARTING_CREDITS,
+        revealed: [],
+        createdAt: serverTimestamp(),
+      });
+    }
+  } catch(e){ console.error("user doc init failed:", e); }
+
+  /* LIVE credits — shared users/{uid}.credits doc, same as every app */
+  creditsUnsub = onSnapshot(userRef, (docSnap) => {
+    if (!docSnap.exists()) return;
+    const c = docSnap.data().credits;
+    window.__credits = (typeof c === "number") ? c : 0;
+    window.__renderCredits(window.__credits);
+  }, (err) => console.warn("credits snapshot error:", err?.message));
+
+  clearTimeout(veilFallback);
+  document.getElementById("authVeil").classList.add("hide");
+});
+
+/* ─────────────────────────────────────────────────────────────
+   spendCredits(cost, action, meta) — the ONE credit choke point.
+   POSTs to the SHARED /api/app-charge endpoint (used by cyber too):
+     1. verify the Firebase ID token
+     2. re-check balance server-side
+     3. increment(-cost)
+     4. return { ok, credits_remaining }
+   Server must treat `action` as the source of truth for cost.
+   ───────────────────────────────────────────────────────────── */
+window.spendCredits = async (cost, action, meta = {}) => {
+  if (DEV_BYPASS) {
+    window.__credits = Math.max(0, (window.__credits||0) - cost);
+    window.__renderCredits(window.__credits);
+    return { ok:true, credits_remaining: window.__credits };
+  }
+  if (!auth.currentUser) return { ok:false, message:"Not signed in" };
+  if ((window.__credits||0) < cost) return { ok:false, message:"Not enough credits" };
+
+  try {
+    const idToken = await auth.currentUser.getIdToken();
+    const resp = await fetch("/api/app-charge", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ idToken, app:"chief-of-staff", action, cost, meta }),
+    });
+    if (!resp.ok) {
+      const err = await resp.json().catch(()=> ({}));
+      if (err.error === "insufficient_credits")
+        return { ok:false, message:`Not enough credits (need ${cost}).` };
+      return { ok:false, message: err.message || "Charge failed" };
+    }
+    const data = await resp.json();
+    if (!data.ok) return { ok:false, message: data.message || "Charge rejected" };
+    if (typeof data.credits_remaining === "number") {
+      window.__credits = data.credits_remaining;
+      window.__renderCredits(window.__credits);
+    }
+    return { ok:true, credits_remaining: data.credits_remaining };
+  } catch (e) {
+    console.error("spendCredits failed:", e);
+    return { ok:false, message:"Network error — no credits charged" };
+  }
+};
+
+window.__signOut = async () => {
+  if (DEV_BYPASS) { window.toast?.("Dev mode — sign-out disabled"); return; }
+  if (confirm("Sign out of JAYISAAC AI?")) {
+    if (creditsUnsub) creditsUnsub();
+    await signOut(auth);
+    location.replace("/login.html");
+  }
+};
+</script>
+</body>
+</html>

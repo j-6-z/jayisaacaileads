@@ -22,7 +22,7 @@
 
    HOW CREDITS ARE DETERMINED:
      Each Stripe Product carries metadata you set:
-       credits = 500 | 2000 | 7500 | 250 | 1000 | 3500
+       credits = 250 | 1000 | 3500
        plan    = starter_monthly | pro_annual | pack_1000 | ...
      The webhook reads `credits` off the purchased line item's product.
      No hardcoded price-ID map to maintain — add a product, set its
@@ -90,9 +90,9 @@ function readRawBody(req) {
    credits from the plan key. This is a safety net so a missing metadata
    field never silently grants 0 credits to a paying customer. */
 const PLAN_CREDITS = {
-  starter_monthly: 500,  starter_annual: 500,
-  pro_monthly:     2000, pro_annual:     2000,
-  agency_monthly:  7500, agency_annual:  7500,
+  starter_monthly: 250,  starter_annual: 250,
+  pro_monthly:     1000, pro_annual:     1000,
+  agency_monthly:  3500, agency_annual:  3500,
   pack_250:        250,
   pack_1000:       1000,
   pack_3500:       3500,
