@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  sitemap.xml  —  muskeglakepostsec.ca
+
+  Root of the site, beside index.html. Referenced from robots.txt.
+
+  Only pages a member should be able to FIND are listed. Left out on
+  purpose, and each for its own reason:
+
+    login, account, admin   the office's tools and one person's account
+    selftest                a test harness, not content
+    news                    nothing posted on it yet
+    terms                   an unapproved draft of enforceable text
+    store, shipping         no store is trading yet
+    404                     by definition
+
+  URLs use the clean form (/apply, not /apply.html) because
+  vercel.json sets cleanUrls, and the canonical tag on each page has
+  to agree with what is listed here. If those two ever disagree,
+  Google picks one at random and it is usually the wrong one.
+
+  lastmod is a real claim, not decoration. Update the date on a page
+  when its CONTENT changes, not when a style is tweaked. A sitemap
+  that says everything changed today, every day, gets ignored.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- The program. The page everything else points back to. -->
+  <url>
+    <loc>https://muskeglakepostsec.ca/</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- What a member is actually here to do. -->
+  <url>
+    <loc>https://muskeglakepostsec.ca/apply</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Dates change more often than anything else on the site. -->
+  <url>
+    <loc>https://muskeglakepostsec.ca/deadlines</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://muskeglakepostsec.ca/checklist</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://muskeglakepostsec.ca/resources</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://muskeglakepostsec.ca/policy</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://muskeglakepostsec.ca/contact</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://muskeglakepostsec.ca/about</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://muskeglakepostsec.ca/privacy</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://muskeglakepostsec.ca/accessibility</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://muskeglakepostsec.ca/deletedata</loc>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>

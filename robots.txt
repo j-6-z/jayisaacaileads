@@ -1,11 +1,60 @@
+# Muskeg Lake Cree Nation Post-Secondary Sub-Office
+# muskeglakepostsec.ca
+#
+# This file belongs at the ROOT of the site, not in public/.
+# It is served at https://muskeglakepostsec.ca/robots.txt
+#
+# What is blocked below is blocked from being LISTED IN SEARCH, not
+# from being reached. robots.txt is a request to crawlers, and it is
+# public: anyone can read it. It is not a security control, and it
+# must never be treated as one. What actually protects the admin
+# panel and member records is firestore.rules, which refuses the data
+# regardless of who asks.
+#
+# Note the reverse risk too: a page blocked here cannot be read by
+# Google, so a noindex tag on that page never gets seen. The pages
+# below rely on this file, and the ones that carry their own noindex
+# (news, terms, selftest) are listed anyway because they should not
+# be crawled at all.
+
 User-agent: *
 Allow: /
 
-# Private / gated pages — no need to index these
-Disallow: /app.html
-Disallow: /login.html
+# ---- the office's own tools ----
+# Nothing here is useful to a search result, and several are one
+# person's account.
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /account
 Disallow: /account.html
-Disallow: /thank-you.html
-Disallow: /api/
+Disallow: /login
+Disallow: /login.html
 
-Sitemap: https://jayisaacai.com/sitemap.xml
+# ---- not for the open web ----
+Disallow: /selftest
+Disallow: /selftest.html
+
+# ---- drafts and placeholders ----
+# News has nothing on it, and the terms of sale are an unapproved
+# draft. Both carry noindex of their own; this keeps them out of the
+# crawl in the first place.
+Disallow: /news
+Disallow: /news.html
+Disallow: /terms
+Disallow: /terms.html
+
+# ---- query strings that duplicate a real page ----
+# apply.html?track=new and ?track=continuing are the same page with
+# different copy. Letting both be indexed splits the ranking of the
+# page members actually need to find.
+Disallow: /apply?*
+Disallow: /apply.html?*
+
+# The calendar and account pages need Firebase to render at all. If a
+# crawler is going to look at any of this, it should be able to load
+# the scripts rather than judging the site on an empty shell.
+User-agent: Googlebot
+Allow: /*.js
+Allow: /*.css
+
+Sitemap: https://muskeglakepostsec.ca/sitemap.xml
